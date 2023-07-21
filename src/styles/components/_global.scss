@@ -1,0 +1,213 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+input{
+    &[type=number]{
+        -moz-appearance:textfield;
+        &::-webkit-inner-spin-button,&::-webkit-outer-spin-button{
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    }
+}
+
+
+//input[type=checkbox] {
+//   cursor: pointer;
+//}
+
+#{$body},body,p,ul{
+    margin: 0;
+}
+
+#{$body}{
+    *{
+        color: #{$g-color};
+    }
+    font-family: $g-font;
+    font-size: $g-font-size;
+    background-color: $bgc-body;
+    .btn{
+        @extend %button;
+        //for modal
+        &.close {
+            width: #{$g-font-size + 4};
+            height: #{$g-font-size + 4};
+            background: transparent;
+            padding: 0;
+            background-image: url("#{$close}");
+            background-repeat: no-repeat;
+        }
+        &.eye{
+            @include bgIconCenter($eye);   
+        }
+        &.no-eye{
+            @include bgIconCenter($no-eye);
+        }
+    }
+    .slc{
+        @extend %select;
+    }
+    .ipt{
+        @extend %input;
+    }
+    .link{
+        @extend %link;
+    }
+
+    // a, link, input, button, select, textarea e iframe. / cuando has visto aun ciego jugar casino ?xdd, por eso esto es valido
+    :focus, :focus-visible{
+        outline: 0;
+    }
+
+
+        //.header{
+    //    background-color: $bgc-header;
+    //}
+}
+
+
+
+/*h6, h5, h4, h3, h2, h1{
+    margin: 0;
+    font-weight: 500;
+}*/
+
+
+//select{
+//    font-size: inherit;
+//}
+
+// input, select, button ; en caso sean bg claros o oscuros cambiar el color que tiene el disabled
+
+// para cualquier elemento, evita el evento click
+//.disabled{
+//    pointer-events: none;
+//
+//}
+
+
+
+
+
+//input[type=date] {
+//    min-width: 100%;
+//    -webkit-appearance: none;
+//    -moz-appearance: none;
+//    appearance: none;
+//    position: relative
+//}
+//  
+//input[type=date]::-webkit-calendar-picker-indicator {
+//  filter: invert(68%) sepia(11%) saturate(12%) hue-rotate(322deg) brightness(87%) contrast(91%)
+//}
+//
+//
+//@media (min-width: $size-web) {
+//    input[type=date]::-webkit-calendar-picker-indicator {
+//        background:0 0
+//    }
+//  
+//    input[type=date]:before {
+//        font-family: "font awesome 5 free";
+//        content: "\f133";
+//        position: absolute;
+//        right: .5rem;
+//        color: #999
+//    }
+//}
+
+//MODAL GLOBAL
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+      &-open{
+        overflow: hidden;
+        padding-right: 15px;
+      }
+      &-dialog {
+          position: relative;
+          max-width: 100%;
+          margin: $height-header auto;
+          pointer-events: none;
+      }
+      & .centered{
+        min-height: calc(100% - #{$height-header * 2});
+        display: flex;
+        align-items: center;
+        align-items: center;
+        justify-content: center;
+      }
+      &-content {
+          pointer-events: auto;
+          background: $bg-modal;
+          border-radius: 0.3rem;
+          width: 100%;
+          pointer-events: auto;
+          display: grid;
+          grid-template-rows: 3rem 1fr;
+          overflow: auto;
+      }
+      &-header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        text-transform: uppercase;
+        padding: 0 1rem;
+        font-size: #{$g-font-size + 4};
+        font-weight: 700;
+      }
+      &-body{
+          display: grid;
+          gap: $gap-form;
+          align-content: center;
+          margin: 0 auto;
+      }
+      .btn{
+        height: $ipt-height;
+      }
+}
+  
+
+
+//DROPDOWN - UNO PUEDE PERSONZALIZAR EL COLO OJITO- PERO FALTA HACER ESTO
+.dropdown{
+    position: relative;
+    &-menu {
+        position: absolute;
+        z-index: 1056;
+        min-width: 100%;
+        margin: 0;
+        text-align: left;
+        list-style: none;
+        background: $bg-dropdown;
+        background-clip: padding-box;
+        border-radius: 0.25rem;
+        & .btn {
+            text-align: left;
+        }
+    }
+    &-item {
+        display: block;
+        width: 100%;
+        padding: 0.25rem 1rem;
+        clear: both;
+        font-weight: 400;
+        color: #212529;
+        text-align: inherit;
+        text-decoration: none;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+    }
+}

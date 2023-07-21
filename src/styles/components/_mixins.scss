@@ -1,0 +1,324 @@
+//strucures
+//menu de hambuerguesa
+@mixin dropdown-menu($design-menubar){
+    &{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 40px;
+        height: 38px;
+        padding: 10px;
+        background-color: transparent;
+    }
+    & span{
+        width: 100%;
+        height: 2px;
+        position: relative;
+        background: transparent;
+    }
+     &:after, &:before, & span:after, & span:before {
+        content: "";
+        display: block;
+        @if($design-menubar == "normal"){
+            width: 100%;
+        }@else if($design-menubar == "bitstarz"){
+            width: 14px;
+        }
+        height: 2px;
+        border-radius: 4px;
+        background: #fff;
+        transition: opacity .2s ease-in-out,transform .25s ease-in-out;
+    }
+     & span:after,   & span:before {
+        position: absolute;
+        width: 100%;
+    }
+    &.is-open span:before {
+        transform: rotate(45deg);
+    }
+    &.is-open span:after {
+        transform: rotate(-45deg);
+    }
+    &.is-open:before,&.is-open:after {
+        opacity: 0;
+    }
+}
+
+@mixin structureHeader($page,$widht-logo){
+    display: grid;
+    @if($page == "coliseosport"){ 
+        grid-template-columns: 1fr 7rem 7rem; 
+    }
+    @else if($page == "latinosbet"){ 
+        grid-template-columns: auto 1fr 7rem 7rem;
+    }
+    @else if($page == "bitstarz"){ 
+        grid-template-columns: 40px $widht-logo 1fr 7rem 7rem;
+    }
+    @else if($page == "babieca"){ 
+        grid-template-columns: 40px $widht-logo 1fr 6rem 6rem;
+    }
+    align-items: center;
+    height: $height-header;
+    padding: 0 0.5rem;
+    gap: 0.5rem;
+    background-color: $bgc-header;
+    &__logo{
+        cursor: pointer;
+        width: $widht-logo;
+        @if($page == "babieca"){
+            @media (min-width: $size-web) {
+                width:  $widht-logo + 4;
+            }
+        }
+    }
+    //estrucutura css de pagina -- de momento no lo colocaremos
+    //@if($page == "latinosbet"){
+    //    &__games{
+    //        display: flex;
+    //        gap: 1rem;
+    //        font-size: 1rem;
+    //        font-weight: 500;
+    //    }
+    //}
+}
+@mixin searchHeader($bgc,$color, $widht-ipt){//, $icon-color- au  no creo
+    &.search{
+        background-color: $bgc;
+        max-width: $widht-ipt;
+        color: $color;
+        background-image: url("#{$lens}");
+        background-repeat: no-repeat;
+        background-size: #{$g-font-size + 4} #{$g-font-size + 4};
+        padding-right: 2rem;
+        background-position: right 0.5rem center;
+        &:focus{
+              box-shadow: 0 0 0 0.1rem lighten($bgc, 13%);
+        }
+    }
+}
+
+//animations
+@mixin borderSquareAnimated($b-color1,$b-color2,$bg-color, $b-witdth){
+    background-color: transparent;
+    overflow: hidden;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to left, $b-color1, $b-color2);
+    border-image-width: $b-witdth; 
+    &:hover{
+        border: 1px solid transparent;
+        & span{
+            position: absolute;
+            display: block;
+            &:nth-child(1){
+                filter: hue-rotate(0deg);
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                background: linear-gradient(90deg,transparent,$bg-color);
+                animation: borderTop 1s linear infinite;
+            }
+            &:nth-child(2){
+                filter: hue-rotate(60deg);
+                top: -100%;
+                right: 0;
+                width: 3px;
+                height: 100%;
+                background: linear-gradient(180deg,transparent,$bg-color);
+                animation: borderRight 1s linear infinite;
+                animation-delay: .25s;
+            }
+            &:nth-child(3){
+                filter: hue-rotate(120deg);
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                background: linear-gradient(270deg,transparent,$bg-color);
+                animation: borderBottom 1s linear infinite;
+                animation-delay: .5s
+            }
+            &:nth-child(4){
+                filter: hue-rotate(300deg);
+                bottom: -100%;
+                left: 0;
+                width: 3px;
+                height: 100%;
+                background: linear-gradient(360deg,transparent,$bg-color);
+                animation: borderLeft 1s linear infinite;
+                animation-delay: .75s
+            }
+        }
+    }
+}
+@mixin animation-borderSquare{
+    @keyframes borderTop {
+        0% {
+            left: -100%
+        }
+        50%,to {
+            left: 100%
+        }
+    }
+    @keyframes borderRight {
+        0% {
+            top: -100%
+        }
+    
+        50%,to {
+            top: 100%
+        }
+    }
+    @keyframes borderBottom {
+        0% {
+            right: -100%;
+            height: 3px
+        }
+        50%,to {
+            height: 2px;
+            right: 100%
+        }
+    }
+    @keyframes borderLeft {
+        0% {
+            bottom: -100%
+        }
+        50%,to {
+            bottom: 100%
+        }
+    }
+}
+
+//animation checkbox
+@mixin animateCheckBox_1($checked-color,$unchecked-color, $checkbox-height,$duration){
+    /* Made by Jimmy Gillam */
+
+    /* Checkmark style starts */
+    @-moz-keyframes dothabottomcheck{
+        0% { height: 0; }
+        100% { height: calc($checkbox-height/2); }
+    }
+
+    @-webkit-keyframes dothabottomcheck{
+        0% { height: 0; }
+        100% { height: calc($checkbox-height/2); }
+    }
+
+    @keyframes dothabottomcheck{
+        0% { height: 0; }
+        100% { height: calc($checkbox-height/2);  }
+    }
+
+    @keyframes dothatopcheck{
+        0% { height: 0; }
+        50% { height: 0; }
+        100% { height: $checkbox-height * 1; }
+    }
+    @-webkit-keyframes dothatopcheck{
+        0% { height: 0; }
+        50% { height: 0; }
+        100% { height: $checkbox-height * 1; }
+    }
+    @-moz-keyframes dothatopcheck{
+        0% { height: 0; }
+        50% { height: 0; }
+        100% { height: $checkbox-height * 1; }
+    }
+
+    input[type=checkbox]{
+        display:none;
+    }
+
+    label {
+        height: $checkbox-height;
+        width: $checkbox-height;
+        background-color: transparent;
+        border: $checkbox-height * .1 solid $unchecked-color;
+        border-radius: 5px;
+        position: relative;
+        display: inline-block;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -moz-transition: border-color ease calc($duration/2);
+        -o-transition: border-color ease calc($duration/2);
+        -webkit-transition: border-color ease calc($duration/2);
+        transition: border-color ease calc($duration/2);
+        cursor:pointer;
+
+        &::before, &::after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            position: absolute;
+            height: 0;
+            width: $checkbox-height * .2;
+            background-color: $checked-color;
+            display: inline-block;
+            -moz-transform-origin: left top;
+            -ms-transform-origin: left top;
+            -o-transform-origin: left top;
+            -webkit-transform-origin: left top;
+            transform-origin: left top;
+            border-radius: 5px;
+            content: ' ';
+            -webkit-transition: opacity ease .5;
+            -moz-transition: opacity ease .5;
+            transition: opacity ease .5;
+        }
+
+        &::before {
+            top:$checkbox-height * .72;
+            left: $checkbox-height * .41;
+    
+            -moz-transform: rotate(-135deg);
+            -ms-transform: rotate(-135deg);
+            -o-transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+        }
+
+        &::after {
+            top: $checkbox-height * .37;
+            left: $checkbox-height * .05;
+            -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+    }
+
+    input[type=checkbox]:checked + label,
+    label.checked{
+        border-color:$checked-color;
+        
+        &::after{
+            height: $checkbox-height * .5;
+            -moz-animation: dothabottomcheck calc($duration/2) ease 0s forwards;
+            -o-animation: dothabottomcheck calc($duration/2) ease 0s forwards;
+            -webkit-animation: dothabottomcheck calc($duration/2) ease 0s forwards;
+            animation: dothabottomcheck calc($duration/2) ease 0s forwards;
+        }
+        
+        &::before{
+            height: $checkbox-height * 1.2;
+            -moz-animation: dothatopcheck $duration ease 0s forwards;
+            -o-animation: dothatopcheck $duration ease 0s forwards;
+            -webkit-animation: dothatopcheck $duration ease 0s forwards;
+            animation: dothatopcheck $duration ease 0s forwards;
+        }
+    }
+}
+
+//icon eye pass o otrer bg incons
+@mixin bgIconCenter($type-icon){
+    @extend %button;
+    background-image: url("#{$type-icon}");
+    color: $color-ipt;
+    height: $ipt-height;
+    text-align: start;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: #{$g-font-size + 2} ; 
+}

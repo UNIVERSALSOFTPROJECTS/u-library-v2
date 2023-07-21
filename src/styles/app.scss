@@ -1,0 +1,43 @@
+$body  : ".babieca"; //nombre de la pagina
+$page : "babieca";//default-light || default-dark
+$bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep8v.jpg";
+@import './components/variables';
+@import "./components/mixins";
+@import './components/global';
+@import './components/placeholder-selectors';
+@import './components/functions';
+//@import SELECCIONAS EL TIPO DE THEMA DE LOGIN QUE QUIERES AQUI
+
+
+#{$body}{
+    //@extend "EL TIPO DE LOGIN QUE TENDRA QUI SE AGREGA"
+    .header{
+        @include structureHeader($page,6rem);
+        &__menu{
+            @include dropdown-menu("bitstarz");
+        }
+    }
+    .btn{
+        &.login,&.singup{
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        &.login{
+            background-color: #423b62;
+        }
+        &.singup{
+            background-color: $color-primary;
+            box-shadow: 0 0 6px $color-primary, 
+            inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0,0%,100%,.45), 
+            inset 0 0 11px $color-primary;
+        }
+    }
+    .modal{
+        &.login{
+            @extend %login__goldenbet;
+        }
+        &.singup{
+            @extend %singup__apuestatotal;
+        }
+    }
+}
