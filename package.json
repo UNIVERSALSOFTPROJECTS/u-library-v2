@@ -3,10 +3,14 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "svelte": "src/index.js",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build",
+    "test": "jest test",
+    "test:watch": "yarn test -- --watch",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -21,14 +25,19 @@
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "rollup": "^2.68.0",
     "sass": "^1.63.6",
     "storybook": "^7.1.0",
     "svelte": "^4.0.3",
-    "svelte-preprocess": "^5.0.4",
-    "vite": "^4.4.0"
+    "svelte-preprocess": "^5.0.4"
   },
   "dependencies": {
+    "@rollup/plugin-commonjs": "^25.0.3",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
     "axios": "^1.4.0",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "rollup-plugin-svelte": "^7.1.6",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }
