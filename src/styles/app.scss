@@ -1,5 +1,5 @@
-$body  : ".babieca"; //nombre de la pagina
-$page : "babieca";//default-light || default-dark
+$body  : ".Babieca"; //nombre de la pagina
+$page : "Babieca";//default-light || default-dark
 $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep8v.jpg";
 @import './components/variables';
 @import "./components/mixins";
@@ -8,13 +8,17 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
 @import './components/functions';
 //@import SELECCIONAS EL TIPO DE THEMA DE LOGIN QUE QUIERES AQUI
 
-
+//Notas
+//El mixxin del notifier, no es igual al de del modal, el modal cuando se llga al body se desliga de este y toma las clases del padre
+//en cambio el notifier , todas la estructura nunca varia mas que para cambiar el color y el icono, por lo que seria al contrario del modal
 #{$body}{
+    position: relative;
+    @include notifier("top-end",#008939,#d9534f);
     //@extend "EL TIPO DE LOGIN QUE TENDRA QUI SE AGREGA"
     .header{
-        @include structureHeader($page,6rem);
+        @include structureHeader('babieca',6rem);
         &__menu{
-            @include dropdown-menu("bitstarz");
+            @include dropdown-menu("normal");
         }
     }
     .btn{
@@ -31,13 +35,109 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0,0%,100%,.45), 
             inset 0 0 11px $color-primary;
         }
+        //se mandara a otra lugar esta wea
+        &.payment{
+            background-color: #423b62;
+            &.active{
+                background-color: $color-primary;
+            }
+        }
+        &.deposit{
+            background: #37ae3c;
+        }
+        &.mount{
+            background: #fff;
+            color: #000;
+            border: 1.5px solid #FFC107;
+        }
+        &.return{
+            width: 5rem;
+            background-color: #d90000;
+        }
     }
     .modal{
         &.login{
-            @extend %login__goldenbet;
+            @extend %login__model_1;
+            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
         }
         &.singup{
-            @extend %singup__apuestatotal;
+            @extend %singup__model_1;
+            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
+        }
+
+    }
+    .deposit{
+        & img{
+            border-radius: $borderR-btn;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+        &__types{
+            display: grid;
+            grid-template-columns: repeat(2,10rem);
+        }
+        &__bank{
+            display: grid;
+            align-items: center;
+            grid-template-columns: 8rem 1fr;
+            gap: 0.5rem;
+            border: 1px solid #fff;
+            padding: 0.75rem;
+            border-radius: $borderR-btn;
+        }
+        &__form{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        &__ipt{
+            display: grid;
+            grid-template-columns: 2rem 1fr 6rem;
+            gap: 0.25rem;
+            align-items: center;
+            justify-items: center;
+            & .ipt{
+                font-size: $g-font-size + 6;
+            }
+        }
+        &__mounts{
+            display: flex;
+            justify-content: center;
+            gap: 0.35rem;
+        }
+        &__gateway{
+            display: grid;
+            gap: 0.75rem;
+            align-items: center;
+            max-width: 350px;
+            align-content: center;
+            &--deposit{
+                display: grid;
+                gap: 0.75rem;
+            }
+        }
+        &__limits{
+            text-align: center;
+        }
+        & .modal{
+            &-body{
+                padding: 2rem 1rem;
+                align-content: normal;
+            }
+            &-dialog{
+                max-width: 500px;
+            }
+            &-header{
+                background: #dbb919;
+            }
+            @include modalFullScreen("mobile");
         }
     }
 }
+//.loading{
+//   
+//}
+//@include animatedLoad_3linesOrbit();
+// circule
+// 3arcos
+// orbtiando

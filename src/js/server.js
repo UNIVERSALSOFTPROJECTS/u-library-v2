@@ -65,11 +65,11 @@ const ServerConnection = (() => {
             let payload = {username,password}
             return axios.post(conf.API+"/login",payload,{headers});
         },
-        register: (username, name,country, phone, email, password, date, operatorId,smscode,usertype, platform, currency)=>{
+        register: (username, name,country, phone, email, password, date, operatorId,smscode,usertype, platform, currency,doctype="",document="")=>{
             if(!currency) throw "CURRENCY_MANDATORY";
             if(!conf.domain) throw "DOMAIN_MANDATORY";
             var url=conf.API+"/user";
-            var payload = {username, name, phone, email, currency, password, date, smscode,country, operatorId, doctype:"", document:"", birthday:date, domain:conf.domain, usertype, platform, org:conf.org}
+            var payload = {username, name, phone, email, currency, password, date, smscode,country, operatorId, doctype:doctype, document:document, birthday:date, domain:conf.domain, usertype, platform, org:conf.org}
             return axios.post( url,payload,{headers} );
         }
     }

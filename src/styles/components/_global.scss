@@ -151,9 +151,8 @@ input{
       &-content {
           pointer-events: auto;
           background: $bg-modal;
-          border-radius: 0.3rem;
+          border-radius: $borderR-btn;
           width: 100%;
-          pointer-events: auto;
           display: grid;
           grid-template-rows: 3rem 1fr;
           overflow: auto;

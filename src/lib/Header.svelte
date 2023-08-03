@@ -1,52 +1,76 @@
 <script>
-    
+    import Notifier from './Notifier.svelte';
     import Login from './modals/Login.svelte';
     import Modal from '../lib/Modal.svelte';
-    import Singup from './modals/Singup.svelte';
+    import Singup from './modals/SingupX.svelte';
+    import PaymentGateway from './payments/PaymentGatewayV1.svelte';
     import "../styles/app.scss";
+    import utils from '../js/util';
+    import { onMount } from 'svelte';
     export let user;
     export let assetsUrl;
-    export let platformClass="";//usado para storybook
+    export let platform = "Babieca";//usado para storybook
+    export let usertype = "X"
     //export let ASSETS_GLOBAL;
-    let loginModalOpen=false;
-    let signupModalOpen=false;
+    let loginModalOpen = false;
+    let signupModalOpen = false;
+    let depositModalOpen = false;
     let modalOpened;
     let isToggleOn = false;
-      
-    const onLoginClick = () => { loginModalOpen=true;  modalOpened = "login" } 
-    const onOpenSingup = () => { signupModalOpen=true; modalOpened = "singup" }
-    const toggleMenuBar = () => ( isToggleOn=!isToggleOn )
+    //Deposit Modal
+    let notify={};
+
+    const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
+    const onOpenSingup = () => { signupModalOpen = true; modalOpened = "singup" }
+    const onOpenDeposit = () => { depositModalOpen = true; modalOpened = "deposit" }
+    const toggleMenuBar = () => ( isToggleOn =! isToggleOn )
 
     const onLoginOk = (user_)=>{
         user = user_;
-        alert("Bienvenido a Babieca");
+        notify = utils.showNotify("success","Bienvenido a "+platform);
+        loginModalOpen = false;
     }
-    const onLoginError=(error)=>{
-        alert("Error al procesar login "+error.response.data.message);
+    const onLoginError = (error)=>{
+        notify = utils.showNotify("error",error);
     }
     const onSignupOk = (user_)=>{
-        user = user_;
-        alert("Registro exitoso, bienvenido a Babieca")//en automatico al registrarse deberia iniciar sesion solo por 1ra vez
+        if (typeof user_ === 'string') {
+            notify = utils.showNotify("success",user_);
+        }else{
+            user = user_;
+            notify = utils.showNotify("success","Registro exitoso, bienvenido a "+platform);
+            signupModalOpen = false;
+        }
     }
-    const onSingupError=(error)=>{
-        alert("Error al procesar registro "+error.response.data.message);
+    const onSingupError = (error)=>{
+        notify = utils.showNotify("error",error);
     }
 </script>
 
-<div class="{platformClass}">
+<div class="{platform}">
     <header class="header">
         <button class="btn header__menu" on:click={toggleMenuBar} class:is-open={isToggleOn}><span></span></button>
-        <img class="header__logo" src="{assetsUrl}/logo4.png" alt="">
+        <img class="header__logo" src="{assetsUrl}/logo.png" alt="logo-main">
         <div></div>
-        <button class="btn login" on:click={onLoginClick}>Acceso</button>
+        <button class="btn login" on:click={onOpenLogin}>Acceso</button>
         <button class="btn singup" on:click={onOpenSingup}>Registro</button>
-         <!-- Aqui agegaria los campos Pendientes que faltan agregar en caso ya este logueado -->
+        <!-- Aqui agegaria los campos Pendientes que faltan agregar en caso ya este logueado -->
     </header>
-    <Modal bind:open={loginModalOpen} clazz={modalOpened} >
-        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} />
+    <button class="btn singup" on:click={onOpenDeposit}>Despositow</button>
+
+    <Modal bind:open={loginModalOpen} bind:modalOpened>
+        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl}/>
     </Modal>
     
-    <Modal bind:open={signupModalOpen} clazz={modalOpened} title="Registrate Aquí">
-        <Singup  onOk={onSignupOk} onError={onSingupError} platform={platformClass} usertype={"X"}/>
+    <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
+        <Singup bind:platform bind:usertype onOk={onSignupOk} onError={onSingupError}/>
     </Modal>
+    <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
+        <PaymentGateway />
+    </Modal>
+
+
+    <Notifier bind:open={notify.open} bind:message={notify.message} bind:type={notify.type}/>
 </div>
+
+

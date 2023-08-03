@@ -8,7 +8,6 @@
         filter: #{$g-disabled};
     }
 }
-
 %button{
     cursor: pointer;
     font-size: inherit;
@@ -21,7 +20,6 @@
     @extend %hover;
     @extend %disabled;
 }
-
 %select{
     @extend %button;
     background-image: url("#{$arrow-down}");
@@ -31,14 +29,13 @@
     background-repeat: no-repeat;
     background-position: right 0.5rem center;
     background-size: #{$g-font-size - 2}; 
-    -webkit-appearance: none; // Quita la apariencia predeterminada en Safari 
-    -moz-appearance: none; //  Quita la apariencia predeterminada en Firefox 
-    appearance: none; //  Quita la apariencia predeterminada en otros navegadores
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     & > *{
         color: $color-ipt;
     }
 }
-
 %input{
     font-size: inherit;
     border: none;
@@ -51,9 +48,7 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     &:focus{
         @extend %input;
-        //box-shadow: 0 0 0 0.1rem lighten($bgc-ipt, 12%);//esto cambia por color primarui
-        //border: 1px solid transparent;
-        box-shadow: 0 0 0 0.1rem lighten($color-primary, 20%);//esto cambia por color primarui
+        box-shadow: 0 0 0 0.1rem lighten($color-primary, 20%);
         border: 1px solid lighten($color-primary, 20%);
     }   
     &::placeholder {
@@ -66,7 +61,7 @@
     cursor: pointer;
     //text-decoration: none;
     &:hover, &.active{
-        color: $color-primary;//esto cambia por color primarui
+        color: $color-primary;
     }
 }
 
@@ -74,14 +69,19 @@
 @mixin modalFullScreen($screen){
     @if($screen == "mobile"){
         @media (max-width: $size-web) {
-            &-dialog{
+            &-dialog {
                 margin: 0;
+                grid-template-columns: auto;
                 max-width: 100%;
             }
             &-content{
+                border-radius: 0;
                 height: 100vh;
+                max-width: 100%;
             }
         }
+
+
     }@else if($screen == "tablet"){
 
     }@else if($screen == "pc"){
@@ -91,37 +91,24 @@
     }
     
 }
-
-//esto se debe eliminar
-%modal_full_screen{
-    //Mobile
-    //Tablet 
-    //PC
-    &-dialog{
-        margin: 0;
-        max-width: 100%;
+%containerPassword{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr $ipt-height;
+    & .ipt{
+        border-radius: $borderR-btn  0 0 $borderR-btn;
     }
-    &-content{
-        height: 100vh;
+    & .btn{
+        border-radius: 0 $borderR-btn $borderR-btn 0;
     }
 }
+
 //COMPENENTES
 //- contenedor -- marcar el max-width con $mx-wiht_modal_login;
-%containerPassord{ //PROBABLEMTE LO HAGA MIXIN PARA VARIAL EN T AMO ENTR EL LOGIN Y SOGUN DE COMO SE VERIA
+//REGLAS
+//1.- el media queri siemre ABAJOOOOO
 
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr $ipt-height;
-        & .ipt{
-            border-radius: $borderR-btn  0 0 $borderR-btn;
-        }
-        & .btn{
-            border-radius: 0 $borderR-btn $borderR-btn 0;
-        }
-    
-}
-
-%login__goldenbet{
+%login__model_1{
     & .modal{
         &-dialog{
             max-width: 360px;
@@ -133,13 +120,12 @@
             width: 260px;
             padding-bottom: 3rem;
         }
-        //el media queri siemre ABAJOOOOO
         @include modalFullScreen("mobile");
     }
     & .login{
         &__ipt{    
             &--pass{
-                @extend %containerPassord;
+                @extend %containerPassword;
             }
         }
         &__logo{
@@ -160,25 +146,15 @@
     }
 }
 
-%singup__apuestatotal{
-    &.modal{
-        //background: url(#{$bgi-signup}) 0% 0% / cover no-repeat;
-        //background-color: #000;
-    }
+
+%singup__model_1{
     & .modal{
-        &-dialog {
-            //max-width: 100%;
-            //margin: 0;
-            //height: 100%;
-            //display: grid;
-            //grid-template-columns: 1fr 1fr;
-            //justify-items: center;
-            //align-items: center;
-        }
         &-body{
             height: fit-content;
             padding: 1rem;
             max-width: 430px;
+            // esto puede ser un mixin, como un strucutre content division2
+            // $landscape_size_mobile: "(orientation: landscape) and (max-width: 1000px)";
             @media (max-width: $size-web) and (orientation: landscape) {
                 grid-template-columns: 1fr 1fr;
                 align-items: end;
@@ -192,21 +168,9 @@
         &-content{
             max-width: 480px;
         }
-        //@include "modall mobile"
-        @media (max-width: $size-web) {
-            &-dialog {
-                margin: 0;
-                grid-template-columns: auto;
-                max-width: 100%;
-            }
-            //@include "modall mobile fullscreen"
-            &-content{
-                border-radius: 0;
-                height: 100vh;
-                max-width: 100%;
-            }
-        }
 
+        @include modalFullScreen("mobile");
+        // este caso aun esta aprueba, no hemos revisado su viabilidad en otras vistas que no sean el registro
         @media #{$portrait_size_tablet} {
             &-header{
                 background: #4a4a4a;
@@ -215,6 +179,7 @@
                 width: 600px;
             }
         }
+        //
     }
     & .dropdown{
         &-menu > *{
@@ -233,7 +198,6 @@
                     display: flex;
                     align-items: center;
                     background-color: #e9e9e9;
-                    //background-color: lighten($color-primary, 25%);
                     color: #000;
                     border-radius: 0.25rem 0 0 0.25rem;
                     padding: 0.5rem;
@@ -241,7 +205,7 @@
                 } 
             }
             &--pass{
-                @extend %containerPassord;
+                @extend %containerPassword;
             }
         }
         &__date{
@@ -289,6 +253,7 @@
     & .btn{
         &.validsms{
             background: #2783ff;
+            min-width: 150px;
         }
     }
 }

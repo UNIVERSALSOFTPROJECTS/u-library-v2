@@ -1,13 +1,15 @@
-import Header from '../src/lib/Header.svelte';
+import Payments from '../src/lib/payments/PaymentGateway.svelte';
 import init from "./init.js";
 let user=null;
 let assetsUrl="https://assets.apiusoft.com";
 
+
+
 init.start();
 
 export default {
-  title: 'Header',
-  component: Header,
+  title: 'Payments',
+  component: Payments,
   //parameters: {  layout: 'fullscreen',},
 };
 
@@ -25,12 +27,9 @@ export default {
 //export const LoggedOut = {};
 
 export const showHeaderBabieca = ()=>({
-  Component:Header,
-  props:{user, assetsUrl:assetsUrl+"/babieca", platform:'Babieca'}
+  Component:Payments,
+  //props:{user, assetsUrl:assetsUrl+"/babieca", platformClass:'babieca'}
 })
 
-export const showHeaderGoldenbet = ()=>({
-  Component:Header,
-  props:{user, assetsUrl, platform:'GoldenBet'}
-})
+
 

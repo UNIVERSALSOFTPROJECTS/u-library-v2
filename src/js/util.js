@@ -1,9 +1,8 @@
 const utils = (() => {
-  const getNotify = (type, message,time=4000) => {
-    let notify = { display: true, type, message };
-    setTimeout(() => {
-      notify.display = false;
-    }, time);
+
+  
+  const showNotify = (type, message) => {
+    let notify = { open: true, type, message };
     return notify
   }
     const sleep=(seconds)=>{
@@ -24,7 +23,7 @@ const utils = (() => {
         let url = gameapi_url +`/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}`;
         return url;
     }
-    const isMobile= () => {
+    const isMobile= () => {//tengo una manera mas reducida de hacer esto
         let check = false;
         (function (a) {
           if (
@@ -86,6 +85,6 @@ const utils = (() => {
       return isDropdownOpen;
     }
 
-    return { isJson,initDropdown, getNotify,sleep,checkSetIsFav,getImgUrl,getProviderImgUrl,getGameURL,isMobile,dateDiffInDays,getAge,setUrlPage,categoryAllowedChange} ;
+    return { isJson,initDropdown, showNotify,sleep,checkSetIsFav,getImgUrl,getProviderImgUrl,getGameURL,isMobile,dateDiffInDays,getAge,setUrlPage,categoryAllowedChange} ;
 })()
 export default utils

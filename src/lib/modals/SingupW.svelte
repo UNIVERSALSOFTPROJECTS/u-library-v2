@@ -10,6 +10,7 @@
     export let onError;
     export let platform;
     export let usertype;
+
     //contador de 2 min
     let activeSMS = false;
     let minutes;
@@ -28,18 +29,17 @@
     let term_conditions;
 
     let countries  = [
-      {prefix:"+57",flag:"col"},
-      {prefix:"+58",flag:"ven"}
+      {prefix:"+51",flag:"pe"}
     ];
-    //operatorId = code agent
+    //operatorId BO  = code agent - type W
     let currencies  = [
-      {name:"Peso colombiano", code:8 , agent:"4113"},
-      {name:"Dólar venezuela", code:17, agent:"5762"}
+      {name:"Nuevo sol peruano", code:9 , agent:5263},//este codigo se toma como el id_operado en caso el tipo sea W
     ];
     
     //validations imput -utils JS
     const justTextValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\p{L}\s]/gu, "") }
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
+    const notWhiteSpace = (e) =>{ e.target.value = e.target.value.replace(/[^\S+$]/g, "") }
 
     function counterResendSms() {
         activeSMS = true;
@@ -93,7 +93,7 @@
     </div>
 
     <input type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" bind:value={email}>
-    <input type="text" class="ipt" placeholder="Nombre de usuario" autocomplete="off" bind:value={username}>
+    <input type="text" class="ipt" placeholder="Nombre de usuario" autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
     <div class="singup__form--pass"><!-- {classname}__form--pass" -->
         <InputPassword bind:password/>
     </div>
@@ -104,16 +104,16 @@
     </div>
     <div class="singup__sms">
         {#if !activeSMS}
-        <button type="button" class="btn validsms" on:click={preRegisterClick}>Generar código SMS</button>
+        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={activeSMS}>Generar código SMS</button>
         {:else}
         <button type="button" class="btn validsms"> Nuevo código en: <b>{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</b></button>
         {/if}
         <input type="number" class="ipt" min="0" placeholder="Código" autocomplete="off" bind:value={smscode} on:input={justNumbersValidate}>
     </div>
-    <div class="singup__conditions">   
+    <div class="singup__conditions">
         <input type="checkbox" id="chk_conditions" bind:checked={term_conditions}/>
         <label for="chk_conditions"></label> 
-        <div>Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de Babieca.</div>
+        <div>Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de {platform}.</div>
     </div>
     <button type="button" class="btn singup" on:click={registerClick}>Registrar</button>
 </form>
