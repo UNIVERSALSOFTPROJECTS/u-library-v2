@@ -21,7 +21,8 @@
 			sessionStorage.setItem("agregatorToken",data.agregatorToken);
 			onOk(data);
 		} catch (error) {
-			if(error.response.data.message == "NECO_LOGIN_FAILED") error = "Usuario o contraseña incorrecto";
+			if(error.message == "Network Error" || error.response.data.message.includes("Connection refused")) error = "Página en mantenimiento, espere unos minutos";
+			else if(error.response.data.message == "NECO_LOGIN_FAILED") error = "Usuario o contraseña incorrecto";
 			else error = "Error desconocido, contacte con soporte";
 			onError(error);
 			loadLogin = false;

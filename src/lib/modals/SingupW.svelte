@@ -11,11 +11,15 @@
     export let platform;
     export let usertype;
 
+    //loading
+    let loadSms;
+    let loadSingup;
     //contador de 2 min
-    let activeSMS = false;
+    let activeSMS;
     let minutes;
     let seconds;
     //registro
+    let codeAgent;//solo si se validara cuando se ingrese el mismo y se igualara    
     let country;
     let name;
     let username;
@@ -26,14 +30,15 @@
     let currency;
     let phone;
     let smscode;
+    let doctype;
+    let document;
     let term_conditions;
-
     let countries  = [
-      {prefix:"+51",flag:"pe"}
+      {prefix:"+56",flag:"chl"}
     ];
     //operatorId BO  = code agent - type W
     let currencies  = [
-      {name:"Nuevo sol peruano", code:9 , agent:5263},//este codigo se toma como el id_operado en caso el tipo sea W
+      {name:"Peso chileno", code:7 , agent:4675},//este codigo se toma como el id_operado en caso el tipo sea W
     ];
     
     //validations imput -utils JS
@@ -59,26 +64,39 @@
     }
 
     async function preRegisterClick(){
-        if(!name || !date || !email || !username || !password || !phone || !currency) return alert("Todos los campos son obligatorios");
+        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");
         try {
+            loadSms = true;
             await ServerConnection.users.preRegister(username, email, country+phone, platform);
-            alert("SMS enviado!, verifique su celular")//este capaz debe estar en onOK tambien
+            onOk("SMS enviado!, verifique su celular");
             counterResendSms();
         } catch (error) {
+            if(error.response.data.message == 'El telefono ya existe') error = 'El teléfono ya esta registrado';
+            else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = 'Formato de teléfono incorrecto';
+            else if(error.response.data.message == 'El usuario  ya existe') error = 'El nombre de usuario ya esta registrado';
+            else if(error.response.data.message == 'El usuario u correo ya existe') error = 'El e-mail ya esta registrado';
+            else error = "Error desconocido, contacte con soporte";
             onError(error);
+            loadSms = false;
         }
     }
 
     async function registerClick(){
-        if(!name || !date || !email || !username || !password || !phone || !currency) return alert("Todos los campos son obligatorios");
-        if (password.length <= 5) return alert("La contraseña debe tener 6 caracteres como mínimo");
-        if(!smscode) return alert("Ingrese el código de verificación");
-        if(!term_conditions) return alert("Debe aceptar los términos y condiciones");
+        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");
+        if (password.length <= 5) return onError("La contraseña debe tener 6 caracteres como mínimo");
+        if(!smscode) return onError("Ingrese el código de verificación");
+        if(!term_conditions) return onError("Debe aceptar los términos y condiciones");
         try {
-        const {data} = await ServerConnection.users.register(username,name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency);
-        onOk(data);
+            loadSingup = true;
+            if (codeAgent !== '') operatorId = codeAgent.slice(0, 4);
+            const {data} = await ServerConnection.users.register(username,name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
+            onOk(data);
         } catch (error) {
+            if(error.response.data.message == 'SMS invalid') error = 'El código SMS es incorrecto';
+            else if(error.response.data.message == '{resp=Err, Id=2, Msg=El correo o el Usuario ya Exite}') error = 'El e-mail ya esta registrado';
+            else error = "Error desconocido, contacte con soporte";
             onError(error);
+            loadSingup = false;
         }
     }
 </script>
@@ -94,26 +112,39 @@
 
     <input type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" bind:value={email}>
     <input type="text" class="ipt" placeholder="Nombre de usuario" autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
-    <div class="singup__form--pass"><!-- {classname}__form--pass" -->
+    <div class="singup__form--pass">
         <InputPassword bind:password/>
     </div>
     <DropdownCurrencies {currencies} bind:operatorId bind:currency/>
+    <input type="number" class="ipt" min="0" placeholder="Código de agente (opcional)" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>
     <div class="singup__phone">
         <DropdowPrefix {countries} bind:country/>
         <input type="number" class="ipt" min="0" placeholder="Teléfono" autocomplete="off" bind:value={phone}>
     </div>
     <div class="singup__sms">
-        {#if !activeSMS}
-        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={activeSMS}>Generar código SMS</button>
-        {:else}
-        <button type="button" class="btn validsms"> Nuevo código en: <b>{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</b></button>
-        {/if}
+        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
+            {#if !activeSMS}
+                {#if loadSms}
+                    <div class="loading"><p></p><p></p><p></p></div>
+                    {:else}
+                    Generar código SMS
+                {/if}
+            {:else}
+                Nuevo código en: <b>{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</b>
+            {/if}
+        </button>
         <input type="number" class="ipt" min="0" placeholder="Código" autocomplete="off" bind:value={smscode} on:input={justNumbersValidate}>
     </div>
-    <div class="singup__conditions">
+   <div class="singup__conditions">
         <input type="checkbox" id="chk_conditions" bind:checked={term_conditions}/>
         <label for="chk_conditions"></label> 
         <div>Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de {platform}.</div>
     </div>
-    <button type="button" class="btn singup" on:click={registerClick}>Registrar</button>
+    <button type="button" class="btn singup" on:click={registerClick} disabled={loadSingup}>
+        {#if loadSingup}
+            <div class="loading"><p></p><p></p><p></p></div>
+            {:else}
+            Registrar
+        {/if}
+    </button>
 </form>

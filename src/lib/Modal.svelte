@@ -1,21 +1,30 @@
 <script>
-  import { fly } from 'svelte/transition';
-  export let open;
-  export let modalOpened="";
-  export let title="";
+    import { onDestroy, onMount } from 'svelte';
+    import { fly } from 'svelte/transition';
+    export let open;
+    export let modalOpened="";
+    export let title="";
+  //Hay un conflicto con los dropdow XDDDD ptmr, f
+   // const handleClickOutside = (e) => { console.log(e.target);
+   //    if(!e.target.closest('.modal-content') || e.target.closest('.dropdown-menu button') ) open = false;
+   //   }
 
-  function statusModal(isActive) {
-    const body = document.body.classList;
-    isActive?body.add('modal__open'):body.remove('modal__open');
-  }
-  $: statusModal(open);
+    function statusModal(isActive) {
+        const body = document.body.classList;
+        if(isActive){
+          body.add('modal__open');
+          //document.addEventListener('click', handleClickOutside);
+        }else{
+          body.remove('modal__open');
+          //document.removeEventListener('click', handleClickOutside)
+        }
+    }
+    $: statusModal(open);
 </script>
 
 {#if open}
   <div class="modal {modalOpened}">
     <div class="modal-dialog centered" transition:fly={{ y: -50, duration: 500 }}>
-      <div>
-      </div>
       <div class="modal-content">
           <div class="modal-header">
               <div></div>
@@ -26,19 +35,4 @@
       </div>
     </div>
   </div>
-
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!--div class="modal-backdrop"  on:click={()=>open=false}></div-->
 {/if}
-<style>
-  .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1050;
-    width: 100vw;
-    height: 100vh;
-    opacity: .5;
-    background-color: #000;
-}
-</style>

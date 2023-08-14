@@ -10,6 +10,7 @@
     export let onError;
     export let platform;
     export let usertype;
+
     //loading
     let loadSms;
     let loadSingup;
@@ -134,7 +135,7 @@
     <div class="singup__conditions">   
         <input type="checkbox" id="chk_conditions" bind:checked={term_conditions}/>
         <label for="chk_conditions"></label> 
-        <div>Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de Babieca.</div>
+        <div>Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de {platform}.</div>
     </div>
     <button type="button" class="btn singup" on:click={registerClick} disabled={loadSingup}>
         {#if loadSingup}

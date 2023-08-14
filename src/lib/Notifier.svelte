@@ -1,23 +1,24 @@
 <script>
-    export let open;
-    export let message;
-    export let type;
-
+    import { fade } from 'svelte/transition';
+    export let notify;
+    let timer;
     const statusNotifier = (isActive) => {
-        if(isActive === true) setTimeout(() => { open = false; }, 3000);
+        clearTimeout(timer);
+        if(isActive === true) timer = setTimeout(() => { notify.open = false; }, 3000); 
     }
-    $: statusNotifier(open);
+    $: statusNotifier(notify.open);
 </script>
 
-{#if open}
-    <button class="notify {type}" on:mouseenter={()=>open = false}>
+{#if notify.open}
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <div class="notify {notify.type}" on:mouseover={()=> notify.open = false} on:focus={()=> notify.open = false} transition:fade={{ delay: 75, duration: 150 }}>
         <div class="notify__message">
             <div class="notify__icon"></div>
-            <div>{message}</div>
+            <div class="notify__text">{notify.message}</div>
         </div>
         <div class="notify__timer">
-            <div class="notify__progress-bar"></div>
+            <div class="notify__progress-bar" transition:fade={{ delay: 0, duration: 0 }}></div>
         </div>
-    </button>
+    </div>
 {/if}
 

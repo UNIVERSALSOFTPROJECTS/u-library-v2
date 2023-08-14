@@ -119,3 +119,74 @@
         <button class="btn payment active">Depositar</button>
     {/if}
 </div>
+
+<style>
+    /*
+    .deposit{
+        & img{
+            border-radius: $borderR-btn;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+        &__types{
+            display: grid;
+            grid-template-columns: repeat(2,10rem);
+        }
+        &__bank{
+            display: grid;
+            align-items: center;
+            grid-template-columns: 8rem 1fr;
+            gap: 0.5rem;
+            border: 1px solid #fff;
+            padding: 0.75rem;
+            border-radius: $borderR-btn;
+        }
+        &__form{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        &__ipt{
+            display: grid;
+            grid-template-columns: 2rem 1fr 6rem;
+            gap: 0.25rem;
+            align-items: center;
+            justify-items: center;
+            & .ipt{
+                font-size: $g-font-size + 6;
+            }
+        }
+        &__mounts{
+            display: flex;
+            justify-content: center;
+            gap: 0.35rem;
+        }
+        &__gateway{
+            display: grid;
+            gap: 0.75rem;
+            align-items: center;
+            max-width: 350px;
+            align-content: center;
+            &--deposit{
+                display: grid;
+                gap: 0.75rem;
+            }
+        }
+        &__limits{
+            text-align: center;
+        }
+        & .modal{
+            &-body{
+                padding: 2rem 1rem;
+                align-content: normal;
+            }
+            &-dialog{
+                max-width: 500px;
+            }
+            &-header{
+                background: #dbb919;
+            }
+            @include modalFullScreen("mobile");
+        }
+    }*/
+</style>

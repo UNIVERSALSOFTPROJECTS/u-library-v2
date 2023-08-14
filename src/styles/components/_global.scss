@@ -29,7 +29,7 @@ input{
     }
     font-family: $g-font;
     font-size: $g-font-size;
-    background-color: $bgc-body;
+    background: $bgc-body;
     .btn{
         @extend %button;
         //for modal
@@ -65,7 +65,7 @@ input{
 
 
         //.header{
-    //    background-color: $bgc-header;
+    //    background: $bgc-header;
     //}
 }
 
@@ -130,7 +130,7 @@ input{
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
       &-open{
         overflow: hidden;
         padding-right: 15px;
@@ -149,6 +149,7 @@ input{
         justify-content: center;
       }
       &-content {
+          position: relative;
           pointer-events: auto;
           background: $bg-modal;
           border-radius: $borderR-btn;
@@ -157,6 +158,16 @@ input{
           grid-template-rows: 3rem 1fr;
           overflow: auto;
       }
+    //  &-backdrop {
+    //    position: fixed;
+    //    top: 0;
+    //    left: 0;
+    //    z-index: 1050 ;
+    //    width: 100vw;
+    //    height: 100vh;
+    //    opacity: .5;
+    //    background: #000;
+    //}
       &-header {
         display: grid;
         grid-template-columns: auto 1fr auto;
@@ -175,6 +186,7 @@ input{
       .btn{
         height: $ipt-height;
       }
+
 }
   
 
@@ -206,7 +218,7 @@ input{
         text-align: inherit;
         text-decoration: none;
         white-space: nowrap;
-        background-color: transparent;
+        background: transparent;
         border: 0;
     }
 }

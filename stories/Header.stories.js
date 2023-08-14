@@ -28,9 +28,12 @@ export const showHeaderBabieca = ()=>({
   Component:Header,
   props:{user, assetsUrl:assetsUrl+"/babieca", platform:'Babieca'}
 })
-
 export const showHeaderGoldenbet = ()=>({
   Component:Header,
   props:{user, assetsUrl, platform:'GoldenBet'}
+})
+export const showHeaderColisosport = ()=>({
+  Component:Header,
+  props:{user, assetsUrl:assetsUrl+"/coliseosport", platform:'Coliseosport'}
 })
 

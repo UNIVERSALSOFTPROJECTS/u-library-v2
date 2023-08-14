@@ -2,7 +2,9 @@
     import ServerConnection from "../../js/server";
     import "../../styles/app.scss";
 
-    let TokenPayments = '5fbad17b25bfd4d0babf98e62322b48b1bb2a40aaee8f59ab3185af543e19ad9';
+    let url_global = "https://d2zzz5z45zl95g.cloudfront.net/generic_imgs";
+
+    let TokenPayments = 'c352ba50396dcc8c399273c134599a57f598c31773ff2982ca86be5c66a4e887';
     let user = {"token":TokenPayments}
     let bankPayments = [];
     let gatewayPayments = [];
@@ -57,7 +59,7 @@
         {#if !iframeGateway}
             {#each gatewayPayments as payment}
                 <div class="deposit__gateway">
-                    <img src="https://d2zzz5z45zl95g.cloudfront.net/payment_methods/{payment.cta}.png" alt="">
+                    <img src="{url_global}/payments/{payment.cta}.png" alt="">
                     <div>
                     <div class="deposit__gateway--deposit">
                             <div>Monto a depositar :</div>

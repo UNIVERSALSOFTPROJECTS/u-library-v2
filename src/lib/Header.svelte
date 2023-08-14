@@ -2,15 +2,16 @@
     import Notifier from './Notifier.svelte';
     import Login from './modals/Login.svelte';
     import Modal from '../lib/Modal.svelte';
-    import Singup from './modals/SingupX.svelte';
-    import PaymentGateway from './payments/PaymentGatewayV1.svelte';
+    import Singup from './modals/SingupW.svelte';
+    import PaymentGateway from './payments/Payments.svelte';
     import "../styles/app.scss";
     import utils from '../js/util';
     import { onMount } from 'svelte';
-    export let user;
+    export let user = {};
     export let assetsUrl;
-    export let platform = "Babieca";//usado para storybook
-    export let usertype = "X"
+   // export let platform = "Babieca";//usado para storybook
+    export let platform = "Colisesport";//usado para storybook
+    export let usertype = "W"
     //export let ASSETS_GLOBAL;
     let loginModalOpen = false;
     let signupModalOpen = false;
@@ -25,25 +26,31 @@
     const onOpenDeposit = () => { depositModalOpen = true; modalOpened = "deposit" }
     const toggleMenuBar = () => ( isToggleOn =! isToggleOn )
 
-    const onLoginOk = (user_)=>{
+    const onLoginOk = async (user_)=>{
         user = user_;
-        notify = utils.showNotify("success","Bienvenido a "+platform);
+        notify = await utils.showNotify("success","Bienvenido a "+platform);
         loginModalOpen = false;
     }
-    const onLoginError = (error)=>{
-        notify = utils.showNotify("error",error);
+    const onLoginError = async (error)=>{
+        notify = {};
+        notify = await utils.showNotify("error",error);
     }
-    const onSignupOk = (user_)=>{
+    const onSignupOk = async (user_)=>{
         if (typeof user_ === 'string') {
-            notify = utils.showNotify("success",user_);
+            notify = await utils.showNotify("success",user_);
         }else{
             user = user_;
-            notify = utils.showNotify("success","Registro exitoso, bienvenido a "+platform);
+            notify = await utils.showNotify("success","Registro exitoso, bienvenido a "+platform);
             signupModalOpen = false;
         }
     }
-    const onSingupError = (error)=>{
-        notify = utils.showNotify("error",error);
+    const onSingupError = async (error)=>{
+        notify = {};
+        notify = await utils.showNotify("error",error);
+    }
+    const onDepositError = async (error)=>{
+        notify = {};
+        notify = await utils.showNotify("error",error);
     }
 </script>
 
@@ -54,7 +61,9 @@
         <div></div>
         <button class="btn login" on:click={onOpenLogin}>Acceso</button>
         <button class="btn singup" on:click={onOpenSingup}>Registro</button>
-        <!-- Aqui agegaria los campos Pendientes que faltan agregar en caso ya este logueado -->
+        <!-- Aqui agegaria los campos Pendientes que faltan agregar en caso ya este logueado 
+            Notas: on:click|stopPropagation={onOpenLogin}, esto er apara los modale s pero el bug de los dropdow hizo que se descartara momentaneamente
+        -->
     </header>
     <button class="btn singup" on:click={onOpenDeposit}>Despositow</button>
 
@@ -66,11 +75,9 @@
         <Singup bind:platform bind:usertype onOk={onSignupOk} onError={onSingupError}/>
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
-        <PaymentGateway />
+        <PaymentGateway bind:user onError={onDepositError}/>
     </Modal>
 
 
-    <Notifier bind:open={notify.open} bind:message={notify.message} bind:type={notify.type}/>
+    <Notifier bind:notify/>
 </div>
-
-
