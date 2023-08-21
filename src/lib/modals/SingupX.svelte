@@ -1,13 +1,10 @@
 <script>
-<<<<<<< HEAD
-=======
 
     //ESTE CAJERO ES OPERACION PROPIA
     // EL MISMO CLIENTE MANEJA X CANTIDAD DE CAJAS A CON DISTINTAS MONEDA , por lo que el codigo de agente esta dentro de la moneda y no afuera
 
 
 
->>>>>>> a2dc001 (modal de depoosito listo)
     import { onMount } from 'svelte';
     import ServerConnection from "../../js/server";
     import DropdowPrefix from '../dropdown/DropdowPrefix.svelte';
@@ -84,11 +81,7 @@
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = 'Formato de teléfono incorrecto';
             else if(error.response.data.message == 'El usuario  ya existe') error = 'El nombre de usuario ya esta registrado';
             else if(error.response.data.message == 'El usuario u correo ya existe') error = 'El e-mail ya esta registrado';
-<<<<<<< HEAD
-            else error = "Error desconocido, contacte con soporte";
-=======
             else error = "Ocurrio un error, contactese con soporte";
->>>>>>> a2dc001 (modal de depoosito listo)
             onError(error);
             loadSms = false;
         }
@@ -105,11 +98,7 @@
             onOk(data);
         } catch (error) {
             if(error.response.data.message == 'SMS invalid') error = 'El código SMS es incorrecto';
-<<<<<<< HEAD
-            else error = "Error desconocido, contacte con soporte";
-=======
             else error = "Ocurrio un error, contactese con soporte";
->>>>>>> a2dc001 (modal de depoosito listo)
             onError(error);
             loadSingup = false;
         }

@@ -3,7 +3,7 @@
     import Login from './modals/Login.svelte';
     import Modal from '../lib/Modal.svelte';
     import Singup from './modals/SingupXg.svelte';
-    import Deposit from './payments/Depositv3.svelte';
+    import Deposit from './payments/Deposit.svelte';
     import "../styles/app.scss";
     import utils from '../js/util';
     import { onMount } from 'svelte';
