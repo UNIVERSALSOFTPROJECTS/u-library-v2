@@ -8,20 +8,39 @@
         filter: #{$g-disabled};
     }
 }
+<<<<<<< HEAD
 %button{
+=======
+
+%configBtn{
+>>>>>>> a2dc001 (modal de depoosito listo)
     cursor: pointer;
     font-size: inherit;
     width: 100%;
     padding: 0.5rem;
     border: #{$border-btn}; 
+<<<<<<< HEAD
     background-color: #{$bgc-btn};
     border-radius: #{$borderR-btn};
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+=======
+    border-radius: #{$borderR-btn};
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+%button{
+    @extend %configBtn;
+    background-color: #{$bgc-btn};
+>>>>>>> a2dc001 (modal de depoosito listo)
     @extend %hover;
     @extend %disabled;
 }
 %select{
+<<<<<<< HEAD
     @extend %button;
+=======
+    @extend %configBtn;
+>>>>>>> a2dc001 (modal de depoosito listo)
     background-image: url("#{$arrow-down}");
     color: $color-ipt;
     height: $ipt-height;
@@ -37,6 +56,10 @@
     }
 }
 %input{
+<<<<<<< HEAD
+=======
+    font-family: inherit;
+>>>>>>> a2dc001 (modal de depoosito listo)
     font-size: inherit;
     border: none;
     background-color: $bgc-ipt;
@@ -108,7 +131,11 @@
 //REGLAS
 //1.- el media queri siemre ABAJOOOOO
 
+<<<<<<< HEAD
 %login__model_1{
+=======
+@mixin login__model_1($width-image){
+>>>>>>> a2dc001 (modal de depoosito listo)
     & .modal{
         &-dialog{
             max-width: 360px;
@@ -129,7 +156,11 @@
             }
         }
         &__logo{
+<<<<<<< HEAD
             width: auto;
+=======
+            width: $width-image;
+>>>>>>> a2dc001 (modal de depoosito listo)
             margin: 0 auto;
         }
         &__form{
@@ -175,9 +206,12 @@
             &-header{
                 background: #4a4a4a;
             }
+<<<<<<< HEAD
             &-body{
                 width: 600px;
             }
+=======
+>>>>>>> a2dc001 (modal de depoosito listo)
         }
         //
     }

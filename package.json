@@ -22,7 +22,11 @@
     "@storybook/svelte": "^7.1.0",
     "@storybook/svelte-vite": "^7.1.0",
     "@storybook/testing-library": "^0.2.0",
+<<<<<<< HEAD
     "@sveltejs/vite-plugin-svelte": "^2.4.2",
+=======
+    "@sveltejs/vite-plugin-svelte": "^2.4.5",
+>>>>>>> a2dc001 (modal de depoosito listo)
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^2.68.0",

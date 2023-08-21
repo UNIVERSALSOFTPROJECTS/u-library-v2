@@ -1,13 +1,10 @@
 <script>
-<<<<<<< HEAD
-=======
 
-    //ESTE CAJERO ES OPERACION PROPIA
-    // EL MISMO CLIENTE MANEJA X CANTIDAD DE CAJAS A CON DISTINTAS MONEDA , por lo que el codigo de agente esta dentro de la moneda y no afuera
+    //ESTE CAJERO ES OPERACION genereica
+    // EL MISMO CLIENTE , les da cajas a otrod clientes suyo para que cada uno de manera independiente se maneje por codigo de agente, aqui se mustra el codigo de agente
 
 
 
->>>>>>> a2dc001 (modal de depoosito listo)
     import { onMount } from 'svelte';
     import ServerConnection from "../../js/server";
     import DropdowPrefix from '../dropdown/DropdowPrefix.svelte';
@@ -28,6 +25,7 @@
     let minutes;
     let seconds;
     //registro
+    let codeAgent;//solo si se validara cuando se ingrese el mismo y se igualara    
     let country;
     let name;
     let username;
@@ -35,21 +33,17 @@
     let email;
     let password;
     let operatorId;
-    let currency;
+    let currency = 8;//colombia
     let phone;
     let smscode;
     let doctype;
     let document;
     let term_conditions;
     let countries  = [
-      {prefix:"+57",flag:"col"},
-      {prefix:"+58",flag:"ven"}
+      {prefix:"+57",flag:"col"},    
     ];
     //operatorId = code agent, in usertype
-    let currencies  = [
-      {name:"Peso colombiano", code:8 , agent:"4113"},
-      {name:"Dólar venezuela", code:17, agent:"5762"}
-    ];
+
     //validations imput -utils JS
     const justTextValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\p{L}\s]/gu, "") }
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
@@ -73,10 +67,10 @@
     }
 
     async function preRegisterClick(){
-        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");
+        if(!name || !date || !email || !username || !password || !phone || !codeAgent) return onError("Todos los campos son obligatorios");
         try {
             loadSms = true;
-            await ServerConnection.users.preRegister(username, email, country+phone, platform);
+            await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
             onOk("SMS enviado!, verifique su celular");
             counterResendSms();
         } catch (error) {
@@ -84,32 +78,29 @@
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = 'Formato de teléfono incorrecto';
             else if(error.response.data.message == 'El usuario  ya existe') error = 'El nombre de usuario ya esta registrado';
             else if(error.response.data.message == 'El usuario u correo ya existe') error = 'El e-mail ya esta registrado';
-<<<<<<< HEAD
-            else error = "Error desconocido, contacte con soporte";
-=======
             else error = "Ocurrio un error, contactese con soporte";
->>>>>>> a2dc001 (modal de depoosito listo)
             onError(error);
             loadSms = false;
         }
     }
 
     async function registerClick(){
-        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");
+        if(!name || !date || !email || !username || !password || !phone || !codeAgent) return onError("Todos los campos son obligatorios");
         if (password.length <= 5) return onError("La contraseña debe tener 6 caracteres como mínimo");
         if(!smscode) return onError("Ingrese el código de verificación");
         if(!term_conditions) return onError("Debe aceptar los términos y condiciones");
         try {
-            loadSingup = true;
-            const {data} = await ServerConnection.users.register(username,name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
+  
+            //operatorId = codeAgent.slice(0, 4); // esto es para texto XD
+            operatorId = Math.floor(codeAgent / 1000);
+
+        
+            const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
             onOk(data);
         } catch (error) {
+            console.log(error);
             if(error.response.data.message == 'SMS invalid') error = 'El código SMS es incorrecto';
-<<<<<<< HEAD
-            else error = "Error desconocido, contacte con soporte";
-=======
             else error = "Ocurrio un error, contactese con soporte";
->>>>>>> a2dc001 (modal de depoosito listo)
             onError(error);
             loadSingup = false;
         }
@@ -130,15 +121,15 @@
     <div class="singup__form--pass">
         <InputPassword bind:password/>
     </div>
-    <DropdownCurrencies {currencies} bind:operatorId bind:currency/>
+    <input type="number" class="ipt" min="0" placeholder="Código de agente" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>
     <div class="singup__phone">
         <DropdowPrefix {countries} bind:country/>
         <input type="number" class="ipt" min="0" placeholder="Teléfono" autocomplete="off" bind:value={phone}>
     </div>
     <div class="singup__sms">
-        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
+        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={activeSMS}>
             {#if !activeSMS}
-                {#if loadSms}
+                {#if activeSMS}
                     <div class="loading"><p></p><p></p><p></p></div>
                     {:else}
                     Generar código SMS

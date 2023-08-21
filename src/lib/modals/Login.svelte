@@ -23,7 +23,11 @@
 		} catch (error) {
 			if(error.message == "Network Error" || error.response.data.message.includes("Connection refused")) error = "Página en mantenimiento, espere unos minutos";
 			else if(error.response.data.message == "NECO_LOGIN_FAILED") error = "Usuario o contraseña incorrecto";
+<<<<<<< HEAD
 			else error = "Error desconocido, contacte con soporte";
+=======
+			else error = "Ocurrio un error, contactese con soporte";
+>>>>>>> a2dc001 (modal de depoosito listo)
 			onError(error);
 			loadLogin = false;
 		}
@@ -39,7 +43,11 @@
 		<div class="login__ipt--pass">
 			<InputPassword bind:password/>
 		</div>
+<<<<<<< HEAD
 		<button type="button" class="btn singup" on:click={loginClick} disabled="{loadLogin}">
+=======
+		<button type="button" class="btn singup" disabled="{loadLogin}" on:click={loginClick}>
+>>>>>>> a2dc001 (modal de depoosito listo)
 			{#if loadLogin}
 				<div class="loading"><p></p><p></p><p></p></div>
 				{:else}
