@@ -12,7 +12,7 @@
     let iframeGateway;
     let sizeIframeGateway = '';//Pasarelas pueden variar de tamaño
     let paySelected;
-    let payMethods;
+    let payMethods; 
     let bankPayments = [];
     let amountDeposit;
     let typeTranference;
@@ -21,7 +21,7 @@
     let bankDeposit = {
         reference:"",
         amount:"",
-        account:"",//este paramentro nunca se usa
+        account:"",// este paramentro nunca se usa
         aditional:"",
         originBank:undefined,
         targetBankId:undefined,

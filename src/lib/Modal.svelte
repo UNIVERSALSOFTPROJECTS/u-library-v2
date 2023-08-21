@@ -4,10 +4,6 @@
     export let open;
     export let modalOpened="";
     export let title="";
-<<<<<<< HEAD
-=======
-
->>>>>>> a2dc001 (modal de depoosito listo)
   //Hay un conflicto con los dropdow XDDDD ptmr, f
    // const handleClickOutside = (e) => { console.log(e.target);
    //    if(!e.target.closest('.modal-content') || e.target.closest('.dropdown-menu button') ) open = false;
@@ -33,11 +29,7 @@
           <div class="modal-header">
               <div></div>
               <div>{title}</div>
-<<<<<<< HEAD
-              <button class="btn close" on:click={()=> open=false}></button>
-=======
               <button class="btn close" on:click={()=> open = false}></button>
->>>>>>> a2dc001 (modal de depoosito listo)
           </div>
           <slot></slot>
       </div>

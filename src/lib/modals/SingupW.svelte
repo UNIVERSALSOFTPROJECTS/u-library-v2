@@ -75,11 +75,7 @@
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = 'Formato de teléfono incorrecto';
             else if(error.response.data.message == 'El usuario  ya existe') error = 'El nombre de usuario ya esta registrado';
             else if(error.response.data.message == 'El usuario u correo ya existe') error = 'El e-mail ya esta registrado';
-<<<<<<< HEAD
-            else error = "Error desconocido, contacte con soporte";
-=======
             else error = "Ocurrio un error, contactese con soporte";
->>>>>>> a2dc001 (modal de depoosito listo)
             onError(error);
             loadSms = false;
         }
@@ -98,11 +94,7 @@
         } catch (error) {
             if(error.response.data.message == 'SMS invalid') error = 'El código SMS es incorrecto';
             else if(error.response.data.message == '{resp=Err, Id=2, Msg=El correo o el Usuario ya Exite}') error = 'El e-mail ya esta registrado';
-<<<<<<< HEAD
-            else error = "Error desconocido, contacte con soporte";
-=======
             else error = "Ocurrio un error, contactese con soporte";
->>>>>>> a2dc001 (modal de depoosito listo)
             onError(error);
             loadSingup = false;
         }

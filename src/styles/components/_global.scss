@@ -13,8 +13,6 @@ input{
         }
     }
 }
-<<<<<<< HEAD
-=======
 input[type=date] {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -28,7 +26,6 @@ input[type=date] {
         background:0 0;
     }
 }
->>>>>>> a2dc001 (modal de depoosito listo)
 
 
 //input[type=checkbox] {
@@ -40,10 +37,7 @@ input[type=date] {
 }
 
 #{$body}{
-<<<<<<< HEAD
-=======
     overscroll-behavior: none; /*eliminar el efecto scroll extendido fuera del body en safari*/
->>>>>>> a2dc001 (modal de depoosito listo)
     *{
         color: #{$g-color};
     }
@@ -151,35 +145,6 @@ input[type=date] {
     overflow-x: hidden;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.5);
-<<<<<<< HEAD
-      &-open{
-        overflow: hidden;
-        padding-right: 15px;
-      }
-      &-dialog {
-          position: relative;
-          max-width: 100%;
-          margin: $height-header auto;
-          pointer-events: none;
-      }
-      & .centered{
-        min-height: calc(100% - #{$height-header * 2});
-        display: flex;
-        align-items: center;
-        align-items: center;
-        justify-content: center;
-      }
-      &-content {
-          position: relative;
-          pointer-events: auto;
-          background: $bg-modal;
-          border-radius: $borderR-btn;
-          width: 100%;
-          display: grid;
-          grid-template-rows: 3rem 1fr;
-          overflow: auto;
-      }
-=======
     &-open{
       overflow: hidden;
       padding-right: 15px;
@@ -207,7 +172,6 @@ input[type=date] {
         grid-template-rows: 3rem 1fr;
         overflow: auto;
     }
->>>>>>> a2dc001 (modal de depoosito listo)
     //  &-backdrop {
     //    position: fixed;
     //    top: 0;
@@ -218,26 +182,6 @@ input[type=date] {
     //    opacity: .5;
     //    background: #000;
     //}
-<<<<<<< HEAD
-      &-header {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-        text-transform: uppercase;
-        padding: 0 1rem;
-        font-size: #{$g-font-size + 4};
-        font-weight: 700;
-      }
-      &-body{
-          display: grid;
-          gap: $gap-form;
-          align-content: center;
-          margin: 0 auto;
-      }
-      .btn{
-        height: $ipt-height;
-      }
-=======
     &-header {
       display: grid;
       grid-template-columns: auto 1fr auto;
@@ -261,7 +205,6 @@ input[type=date] {
     .btn{
       height: $ipt-height;
     }
->>>>>>> a2dc001 (modal de depoosito listo)
 
 }
   

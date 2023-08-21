@@ -30,21 +30,14 @@ export const showHeaderBabieca = ()=>({
 })
 export const showHeaderGoldenbet = ()=>({
   Component:Header,
-<<<<<<< HEAD
-  props:{user, assetsUrl, platform:'GoldenBet'}
-=======
   props:{user, assetsUrl:assetsUrl+"/goldenbet", platform:'Goldenbet'}
->>>>>>> a2dc001 (modal de depoosito listo)
 })
 export const showHeaderColisosport = ()=>({
   Component:Header,
   props:{user, assetsUrl:assetsUrl+"/coliseosport", platform:'Coliseosport'}
 })
 
-<<<<<<< HEAD
-=======
 export const showHeaderSuperderby = ()=>({
   Component:Header,
   props:{user, assetsUrl:assetsUrl+"/superderby", platform:'Superderby'}
 })
->>>>>>> a2dc001 (modal de depoosito listo)

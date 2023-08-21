@@ -49,11 +49,7 @@
 }
 
 
-<<<<<<< HEAD
-@mixin structureHeader($page,$widht-web,$widht-mobile){
-=======
 @mixin structureHeader($page,$width-web,$widht-mobile){
->>>>>>> a2dc001 (modal de depoosito listo)
     display: grid;
     @if($page == "latinosbet"){ 
         grid-template-columns: auto 1fr 7rem 7rem;
@@ -67,30 +63,18 @@
     align-items: center;
     height: $height-header;
     padding: 0 0.5rem;
-<<<<<<< HEAD
-    gap: 0.5rem;
-    background: $bgc-header;
-    &__logo{
-        cursor: pointer;
-        width: $widht-web;
-=======
     gap: 0.35rem;
     background: $bgc-header;
     &__logo{
         cursor: pointer;
         width: $width-web;
->>>>>>> a2dc001 (modal de depoosito listo)
             @media (max-width: $size-web) {
                 width:  $widht-mobile;
             }
     }
     //estrucutura css de pagina -- de momento no lo colocaremos
     //@if($page == "latinosbet"){
-<<<<<<< HEAD
-    //    &__games{
-=======
     //    &__games
->>>>>>> a2dc001 (modal de depoosito listo)
     //        display: flex;
     //        gap: 1rem;
     //        font-size: 1rem;
@@ -105,11 +89,7 @@
         color: $color;
         background-image: url("#{$lens}");
         background-repeat: no-repeat;
-<<<<<<< HEAD
-        background-size: #{$g-font-size + 4} #{$g-font-size + 4};
-=======
         background-size: #{$g-font-size + 4};
->>>>>>> a2dc001 (modal de depoosito listo)
         padding-right: 2rem;
         background-position: right 0.5rem center;
         &:focus{
@@ -444,8 +424,6 @@
     }
 }
 
-<<<<<<< HEAD
-=======
 
 @mixin arrowPosition($position,$size){
     @if($position == 'left'){
@@ -462,4 +440,3 @@
     background-position: center;
     height: -webkit-fill-available;
 }
->>>>>>> a2dc001 (modal de depoosito listo)

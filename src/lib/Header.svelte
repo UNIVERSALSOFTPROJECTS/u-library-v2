@@ -2,29 +2,19 @@
     import Notifier from './Notifier.svelte';
     import Login from './modals/Login.svelte';
     import Modal from '../lib/Modal.svelte';
-<<<<<<< HEAD
-    import Singup from './modals/SingupW.svelte';
-    import PaymentGateway from './payments/Payments.svelte';
-=======
     import Singup from './modals/SingupXg.svelte';
     import Deposit from './payments/Depositv3.svelte';
->>>>>>> a2dc001 (modal de depoosito listo)
     import "../styles/app.scss";
     import utils from '../js/util';
     import { onMount } from 'svelte';
     export let user = {};
     export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
-<<<<<<< HEAD
-    export let platform = "Colisesport";//usado para storybook
-    export let usertype = "W"
-=======
     export let platform;//usado para storybook
     export let usertype = "X"
     //DEPOSITOS MONTOS FAVORITOS
     //export let amountsFav = [5000, 10000, 30000, s50000];
     export let amountsFav = [50, 100, 300, 500];
->>>>>>> a2dc001 (modal de depoosito listo)
     //export let ASSETS_GLOBAL;
     let loginModalOpen = false;
     let signupModalOpen = false;
@@ -65,13 +55,10 @@
         notify = {};
         notify = await utils.showNotify("error",error);
     }
-<<<<<<< HEAD
-=======
     const onDepositOk = async (data)=>{
         notify = await utils.showNotify("success",data);
         depositModalOpen = true;
     }
->>>>>>> a2dc001 (modal de depoosito listo)
 </script>
 
 <div class="{platform}">
@@ -85,15 +72,9 @@
             Notas: on:click|stopPropagation={onOpenLogin}, esto er apara los modale s pero el bug de los dropdow hizo que se descartara momentaneamente
         -->
     </header>
-<<<<<<< HEAD
-    <button class="btn singup" on:click={onOpenDeposit}>Despositow</button>
-
-    <Modal bind:open={loginModalOpen} bind:modalOpened>
-=======
     <button class="btn singup" on:click={onOpenDeposit}>Depositow</button>
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
->>>>>>> a2dc001 (modal de depoosito listo)
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl}/>
     </Modal>
     
@@ -101,15 +82,8 @@
         <Singup bind:platform bind:usertype onOk={onSignupOk} onError={onSingupError}/>
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
-<<<<<<< HEAD
-        <PaymentGateway bind:user onError={onDepositError}/>
-    </Modal>
-
-
-=======
         <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError}/>
     </Modal>
 
->>>>>>> a2dc001 (modal de depoosito listo)
     <Notifier bind:notify/>
 </div>
