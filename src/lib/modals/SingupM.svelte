@@ -9,8 +9,7 @@
     export let onOk;
     export let onError;
     export let platform;
-    export let usertype;
-
+    let usertype;
     //loading
     let loadSms;
     let loadSingup;
@@ -56,6 +55,7 @@
             minutes -= 1;
         } else if (minutes === 0 && seconds === 0) {
             activeSMS = false;
+            loadSms = false;
             clearInterval(timer);
         } else {
             seconds -= 1;
@@ -67,7 +67,7 @@
         if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");
         try {
             loadSms = true;
-            await ServerConnection.users.preRegister(username, email, country+phone, platform);
+            await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
             onOk("SMS enviado!, verifique su celular");
             counterResendSms();
         } catch (error) {
@@ -84,16 +84,22 @@
     async function registerClick(){
         if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");
         if (password.length <= 5) return onError("La contraseña debe tener 6 caracteres como mínimo");
-        if(!smscode) return onError("Ingrese el código de verificación");
+        console.log(codeAgent);
+        if (codeAgent) {
+            if (codeAgent.toString().length == 8)  operatorId = Math.floor(codeAgent / 10000);
+            else return onError("Código de agente inválido"); 
+        }
+        if(!smscode) return onError("Ingrese el código de verificación");   
         if(!term_conditions) return onError("Debe aceptar los términos y condiciones");
         try {
             loadSingup = true;
-            if (codeAgent !== '') operatorId = codeAgent.slice(0, 4);
-            const {data} = await ServerConnection.users.register(username,name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
+            usertype = codeAgent?'X':'W';
+            const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
             onOk(data);
         } catch (error) {
             if(error.response.data.message == 'SMS invalid') error = 'El código SMS es incorrecto';
             else if(error.response.data.message == '{resp=Err, Id=2, Msg=El correo o el Usuario ya Exite}') error = 'El e-mail ya esta registrado';
+            else if(error.response.data.message == '{resp=Err, Id=21, Msg=No existe ese id de grupo}') error = 'Código de agente inválido';
             else error = "Ocurrio un error, contactese con soporte";
             onError(error);
             loadSingup = false;

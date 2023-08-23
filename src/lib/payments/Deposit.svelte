@@ -7,7 +7,7 @@
     export let amountsFav;
 
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
-    let url_global = "https://d2zzz5z45zl95g.cloudfront.net/generic_imgs";
+    let url_global = "https://assets.apiusoft.com/generic_imgs";
     let loadDeposit = false;
     let iframeGateway;
     let sizeIframeGateway = '';//Pasarelas pueden variar de tamaño
@@ -101,7 +101,7 @@
     {:else}
         {#if iframeGateway}
             <button class="btn return" on:click={closePayMethod}></button>
-            <iframe  src="{iframeGateway}" frameborder="0" title="paymentGateway"></iframe>
+            <iframe class="deposit__iframe" src="{iframeGateway}" frameborder="0" title="paymentGateway"></iframe>
         {:else}
             {#if paySelected}
                 <button class="btn deposit__type" on:click={closePayMethod}>

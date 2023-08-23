@@ -1,8 +1,8 @@
 //$body  : ".Babieca"; //nombre de la pagina
 //$page : "Babieca";//default-light || default-dark
-$body  : ".Goldenbet"; //nombre de la pagina
-$page : "Goldenbet";//default-light || default-dark
-$bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep8v.jpg";
+$body  : ".Coliseosport"; //nombre de la pagina
+$page : "Coliseosport";//default-light || default-dark
+$bgi-signup: "https://wallpapers.com/i  mages/featured/horse-racing-ghym6kfaky4hep8v.jpg";
 @import './components/variables';
 @import "./components/mixins";
 @import './components/global';
@@ -21,8 +21,8 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
     //@extend "EL TIPO DE LOGIN QUE TENDRA QUI SE AGREGA"
     .header{
         //babieca-golden
-        @include structureHeader('babieca',6rem,6rem);
-        //@include structureHeader('babieca',8.5rem,6.5rem);
+        //@include structureHeader('babieca',6rem,6rem);
+        @include structureHeader('babieca',8.5rem,6.5rem);
         &__menu{
             @include dropdown-menu("normal");
         }
@@ -77,118 +77,16 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
         }
         &.deposit{
-           // @include deposit__model_1(2,130px); //maximo valor es 4
-            //@include numberOfPayments(2);
-            iframe{
-                height: -webkit-fill-available;
-                width: 100%;
-                border-radius: $borderR-btn;
-                margin: 0 auto;
-            }
-            .deposit{
-                &__types{
-                    display: grid;
-                    height: fit-content;
-                    border-radius: 0.25rem;
-                    gap: 0.35rem;
-                }
-                &__type{
-                    display: grid;
-                    grid-template-columns: auto 1fr 2rem;
-                    gap: 0.75rem;
-                    background: lighten($bg-modal, 4%);
-                    height: 4rem;
-                    align-items: center;
-                    text-align: inherit;
-                    & img{
-                        margin: auto 0 auto auto;
-                        border-radius: $borderR-btn;
-                        width: 100px;
-                        height: 30px;
-                    }
-                    &:hover{
-                        background: lighten($bg-modal, 8%);
-                    }
-                }
-                &__arrow{
-                    &.right{
-                        @include arrowPosition('right',2.25);
-                    }
-                    &.bottom{
-                        @include arrowPosition('bottom',2.25);
-                    }
-                }
-                &__details{
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    padding: 0.5rem 0.75rem;
-                    border-radius: 0.25rem;
-                    border: 1px solid #5d5e63;
-                    align-items: center;
-                    gap: 0.25rem 0.5rem;
-                }
-                //&__check{
-                //    width: 1.25rem;
-                //    height: 1.25rem;
-                //    background: #fff;
-                //    border-radius: 100%;
-                //    &.active{
-                //        background: radial-gradient(circle, rgba(255,255,255,1) 30%, rgb(42, 190, 0) 30%, rgb(42, 190, 0) 60%, rgba(255,255,255,1) 70%);
-                //    }
-                //}
-                &__mounts{
-                    display: flex;
-                    justify-content: center;
-                    gap: 0.35rem;
-                }
-                &__ipt{
-                    display: grid;
-                    grid-template-columns: 2rem 1fr 6rem;
-                    gap: 0.25rem;
-                    align-items: center;
-                    justify-items: center;
-                    & .ipt{
-                        font-size: $g-font-size + 6;
-                    }
-                }
-                &__gateway{
-                    display: grid;
-                    gap: 0.5rem;
-                    justify-content: center
-                }
-                &__limits{
-                    color: #bebebe;
-                    font-size: $g-font-size - 2;
-                }
-                &__info{
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 0.25rem 0.5rem;
-                    padding: 0.5rem 0.75rem;
-                    border-radius: 0.25rem;
-                    border: 1px solid #5d5e63;
-                }
-            }
-            .modal{
+            @include deposit__model_1();            
+            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
+        }
+        &.withdrawal{
+            & .modal{
                 &-body {
                     padding: 1rem;
                     align-content: start;
                     width: 100%;
                     overflow: auto;
-                    &.iframe{
-                        grid-template-rows: 1fr;
-                        @media (min-width: $size-web) {
-                            min-height: 37rem;
-                        }
-                        &.small{
-                            @media (min-width: $size-web) {
-                                min-height: 28rem;
-                            }
-                            & iframe{
-                                width: auto;
-                            }
-                        }
-                    }
                 }
                 &-dialog{
                     max-width: 500px;
@@ -198,9 +96,9 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                 }
                 @include modalFullScreen("mobile");
             }
-            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
-
-          
+            & .withdrawal{
+                
+            }
         }
 
     }

@@ -2,8 +2,9 @@
     import Notifier from './Notifier.svelte';
     import Login from './modals/Login.svelte';
     import Modal from '../lib/Modal.svelte';
-    import Singup from './modals/SingupXg.svelte';
+    import Singup from './modals/SingupW.svelte';
     import Deposit from './payments/Deposit.svelte';
+    import Withdrawal from './withdrawal/Withdrawal.svelte';
     import "../styles/app.scss";
     import utils from '../js/util';
     import { onMount } from 'svelte';
@@ -11,31 +12,29 @@
     export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
     export let platform;//usado para storybook
-    export let usertype = "X"
     //DEPOSITOS MONTOS FAVORITOS
-    //export let amountsFav = [5000, 10000, 30000, 50000];
+    //export let amountsFav = [5000, 10000, 30000, s50000];
     export let amountsFav = [50, 100, 300, 500];
-    let userState = "logout";
-    let active_view = "home";
     //export let ASSETS_GLOBAL;
     let loginModalOpen = false;
     let signupModalOpen = false;
     let depositModalOpen = false;
+    let withdrawalModalOpen = false;
     let modalOpened;
     let isToggleOn = false;
     //Deposit Modal
-    let notify={};
+    let notify = {};
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
     const onOpenSingup = () => { signupModalOpen = true; modalOpened = "singup" }
     const onOpenDeposit = () => { depositModalOpen = true; modalOpened = "deposit" }
+    const onOpenWithdrawal = () => { withdrawalModalOpen = true; modalOpened = "withdrawal" }
     const toggleMenuBar = () => ( isToggleOn =! isToggleOn )
 
     const onLoginOk = async (user_)=>{
         user = user_;
         notify = await utils.showNotify("success","Bienvenido a "+platform);
         loginModalOpen = false;
-        userState = "loggedIn"
     }
     const onLoginError = async (error)=>{
         notify = {};
@@ -62,6 +61,14 @@
         notify = await utils.showNotify("success",data);
         depositModalOpen = false;
     }
+    const onWithdrawalOk = async (data)=>{
+        notify = await utils.showNotify("success",data);
+        withdrawalModalOpen = false;
+    }
+    const onWithdrawalError = async (error)=>{
+        notify = {};
+        notify = await utils.showNotify("error",error);
+    }
 </script>
 
 <div class="{platform}">
@@ -76,16 +83,20 @@
         -->
     </header>
     <button class="btn singup" on:click={onOpenDeposit}>Depositow</button>
+    <button class="btn singup" on:click={onOpenWithdrawal}>Retirow</button>
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl}/>
     </Modal>
     
     <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
-        <Singup bind:platform bind:usertype onOk={onSignupOk} onError={onSingupError}/>
+        <Singup bind:platform onOk={onSignupOk} onError={onSingupError}/>
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
         <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError}/>
+    </Modal>
+    <Modal bind:open={withdrawalModalOpen} bind:modalOpened title="Retiro">
+        <Withdrawal bind:user onOk={onWithdrawalOk} onError={onWithdrawalError}/>
     </Modal>
 
     <Notifier bind:notify/>
