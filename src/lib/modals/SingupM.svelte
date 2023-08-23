@@ -9,6 +9,8 @@
     export let onOk;
     export let onError;
     export let platform;
+    export let countries;
+    export let currencies;
     let usertype;
     //loading
     let loadSms;
@@ -32,14 +34,7 @@
     let doctype;
     let document;
     let term_conditions;
-    let countries  = [
-      {prefix:"+56",flag:"chl"}
-    ];
-    //operatorId BO  = code agent - type W
-    let currencies  = [
-      {name:"Peso chileno", code:7 , agent:4675},//este codigo se toma como el id_operado en caso el tipo sea W
-    ];
-    
+ 
     //validations imput -utils JS
     const justTextValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\p{L}\s]/gu, "") }
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }

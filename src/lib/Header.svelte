@@ -24,6 +24,15 @@
     let isToggleOn = false;
     //Deposit Modal
     let notify = {};
+    //datos de registro M
+    let countries  = [
+      {prefix:"+56",flag:"chl"}
+    ];
+    //operatorId BO  = code agent - type W
+    let currencies  = [
+      {name:"Peso chileno", code:7 , agent:4675},//este codigo se toma como el id_operado en caso el tipo sea W
+    ];
+    // fin de registro m
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
     const onOpenSingup = () => { signupModalOpen = true; modalOpened = "singup" }
@@ -90,7 +99,7 @@
     </Modal>
     
     <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
-        <Singup bind:platform onOk={onSignupOk} onError={onSingupError}/>
+        <Singup bind:platform bind:countries bind:currencies onOk={onSignupOk} onError={onSingupError}/>
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
         <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError}/>
