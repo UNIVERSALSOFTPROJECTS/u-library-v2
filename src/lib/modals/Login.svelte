@@ -16,6 +16,9 @@
 			loadLogin = true
 			const {data} = await ServerConnection.users.login(username,password);
 			if(data.username=='') throw("USER_NOT_FOUND");
+			let date = new Date();
+      		date.setDate(date.getDate() + 1);
+			data.expireToken= date.getTime();
 			sessionStorage.setItem("user",JSON.stringify(data));
 			sessionStorage.setItem("token",data.token);
 			sessionStorage.setItem("agregatorToken",data.agregatorToken);
