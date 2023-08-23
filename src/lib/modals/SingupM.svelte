@@ -84,7 +84,6 @@
     async function registerClick(){
         if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");
         if (password.length <= 5) return onError("La contraseña debe tener 6 caracteres como mínimo");
-        console.log(codeAgent);
         if (codeAgent) {
             if (codeAgent.toString().length == 8)  operatorId = Math.floor(codeAgent / 10000);
             else return onError("Código de agente inválido"); 

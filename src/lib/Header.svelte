@@ -2,7 +2,7 @@
     import Notifier from './Notifier.svelte';
     import Login from './modals/Login.svelte';
     import Modal from '../lib/Modal.svelte';
-    import Singup from './modals/SingupW.svelte';
+    import Singup from './modals/SingupM.svelte';
     import Deposit from './payments/Deposit.svelte';
     import Withdrawal from './withdrawal/Withdrawal.svelte';
     import "../styles/app.scss";
