@@ -20,8 +20,6 @@
       		date.setDate(date.getDate() + 1);
 			data.expireToken= date.getTime();
 			sessionStorage.setItem("user",JSON.stringify(data));
-			sessionStorage.setItem("token",data.token);
-			sessionStorage.setItem("agregatorToken",data.agregatorToken);
 			onOk(data);
 		} catch (error) {
 			if(error.message == "Network Error" || error.response.data.message.includes("Connection refused")) error = "Página en mantenimiento, espere unos minutos";
