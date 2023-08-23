@@ -13,7 +13,7 @@
     export let platform;//usado para storybook
     export let usertype = "X"
     //DEPOSITOS MONTOS FAVORITOS
-    //export let amountsFav = [5000, 10000, 30000, s50000];
+    //export let amountsFav = [5000, 10000, 30000, 50000];
     export let amountsFav = [50, 100, 300, 500];
     let userState = "logout";
     let active_view = "home";
@@ -60,7 +60,7 @@
     }
     const onDepositOk = async (data)=>{
         notify = await utils.showNotify("success",data);
-        depositModalOpen = true;
+        depositModalOpen = false;
     }
 </script>
 

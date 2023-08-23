@@ -12,10 +12,10 @@
     function statusModal(isActive) {
         const body = document.body.classList;
         if(isActive){
-          body.add('modal__open');
+          body.add('modal-open');
           //document.addEventListener('click', handleClickOutside);
         }else{
-          body.remove('modal__open');
+          body.remove('modal-open');
           //document.removeEventListener('click', handleClickOutside)
         }
     }
