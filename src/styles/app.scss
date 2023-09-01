@@ -1,7 +1,7 @@
 //$body  : ".Babieca"; //nombre de la pagina
 //$page : "Babieca";//default-light || default-dark
-$body  : ".Coliseosport"; //nombre de la pagina
-$page : "Coliseosport";//default-light || default-dark
+$body  : ".Goldenbet"; //nombre de la pagina
+$page : "Goldenbet";//default-light || default-dark
 $bgi-signup: "https://wallpapers.com/i  mages/featured/horse-racing-ghym6kfaky4hep8v.jpg";
 @import './components/variables';
 @import "./components/mixins";
@@ -21,10 +21,38 @@ $bgi-signup: "https://wallpapers.com/i  mages/featured/horse-racing-ghym6kfaky4h
     //@extend "EL TIPO DE LOGIN QUE TENDRA QUI SE AGREGA"
     .header{
         //babieca-golden
-        //@include structureHeader('babieca',6rem,6rem);
-        @include structureHeader('babieca',8.5rem,6.5rem);
+        @include structureHeader('babieca',6rem,6rem);
+        //@include structureHeader('babieca',8.5rem,6.5rem);
         &__menu{
             @include dropdown-menu("normal");
+        }
+        &__balance{
+            display: grid;
+            justify-items: end;
+        }
+        &__bono{
+            @include arrowPositionDiv($g-font-size - 2);
+        }
+        &__userdata{
+            display: grid;
+            grid-template-columns: 2rem auto;
+            gap: 0.5rem;
+            & img {
+                width: 100%;
+                border-radius: $borderR-btn;
+            }
+        }
+        &__userid{
+            font-size: $g-font-size - 2;
+        }
+        &__account{
+            @include arrowPositionDiv($g-font-size);
+        }
+
+        @media (max-width: $size-web) {
+            &__userdata, & .btn.recharge { 
+                display: none;
+            }
         }
     }
     .btn{
@@ -65,6 +93,12 @@ $bgi-signup: "https://wallpapers.com/i  mages/featured/horse-racing-ghym6kfaky4h
             background-size: #{$g-font-size * 2.25} #{$g-font-size * 2.25};
             background-position: center;
         }
+        &.recharge{
+            font-weight: 700;
+            background: #088f08;
+            font-size: $g-font-size + 2;
+            width: 6rem;
+        }
     }
     .modal{
         &.login{
@@ -97,7 +131,14 @@ $bgi-signup: "https://wallpapers.com/i  mages/featured/horse-racing-ghym6kfaky4h
                 @include modalFullScreen("mobile");
             }
             & .withdrawal{
-                
+                &__info{
+                    @include structureInfo_1;
+                }
+                &__amount{
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
             }
         }
 

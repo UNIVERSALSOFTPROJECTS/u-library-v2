@@ -1,26 +1,26 @@
 import ServerConnection from '../src/js/server'
 //coliseospot
-export default{
-    start:()=>{
-        ServerConnection.setConfig({
-            API:"https://lobby-bff.apiusoft.com",
-            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-            API:"https://lobby-bff.apiusoft.com",
-            CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
-            CLIENT_CODE:"AAC1",
-            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-            ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",
-            WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
-            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-            country:"+56",
-            operatorId:"123",
-            domain:"http://coliseosport.com/",
-            assetsUrl:"https://assets.apiusoft.com",
-            org:"CLS",
-            currency:7,//CLP
-        })
-    }
-}
+//export default{
+//    start:()=>{
+//        ServerConnection.setConfig({
+//            API:"https://lobby-bff.apiusoft.com",
+//            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+//            API:"https://lobby-bff.apiusoft.com",
+//            CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
+//            CLIENT_CODE:"AAC1",
+//            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+//            ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",
+//            WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
+//            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+//            country:"+56",
+//            operatorId:"123",
+//            domain:"http://coliseosport.com/",
+//            assetsUrl:"https://assets.apiusoft.com",
+//            org:"CLS",
+//            currency:7,//CLP
+//        })
+//    }
+//}
 
 //export default{
 //    start:()=>{
@@ -43,27 +43,26 @@ export default{
 //        })
 //    }
 //}
-//export default{
-//    start:()=>{
-//        ServerConnection.setConfig({
-//            API:"https://lobby-bff.apiusoft.com",
-//            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-//            API:"https://lobby-bff.apiusoft.com",
-//            CLIENT_AUTH:"GOLD21GOLDENBET4A19028GOLDENBET1",
-//            CLIENT_CODE:"GOLD",
-//            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-//            ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",
-//            WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
-//            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-//            country:"+51",
-//            operatorId:"123",
-//            domain:"https://goldenbet.com.pe/",
-//            assetsUrl:"https://assets.apiusoft.com",
-//            org:"GB",
-//            currency:9,//PEN
-//        })
-//    }
-//}
+export default{
+    start:()=>{
+        ServerConnection.setConfig({
+            API:"https://lobby-bff.apiusoft.com",
+            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+            CLIENT_AUTH:"GOLD21GOLDENBET4A19028GOLDENBET1",
+            CLIENT_CODE:"GOLD",
+            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+            ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",
+            WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
+            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+            country:"+51",
+            operatorId:"123",
+            domain:"https://goldenbet.com.pe/",
+            assetsUrl:"https://assets.apiusoft.com",
+            org:"GB",
+            currency:9,//PEN
+        })
+    }
+}
 
 //export default{
 //    start:()=>{

@@ -28,6 +28,7 @@ input[type=date] {
 }
 
 
+
 //input[type=checkbox] {
 //   cursor: pointer;
 //}
@@ -36,7 +37,7 @@ input[type=date] {
     margin: 0;
 }
 
-#{$body}{
+#{$body}{    
     overscroll-behavior: none; /*eliminar el efecto scroll extendido fuera del body en safari*/
     *{
         color: #{$g-color};
@@ -75,6 +76,12 @@ input[type=date] {
     // a, link, input, button, select, textarea e iframe. / cuando has visto aun ciego jugar casino ?xdd, por eso esto es valido
     :focus, :focus-visible{
         outline: 0;
+    }
+    ::-webkit-scrollbar-thumb{
+        background: $color-primary;
+    }
+    ::-webkit-scrollbar-track{
+        background: #202124;
     }
 
 

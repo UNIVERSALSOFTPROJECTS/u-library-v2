@@ -31,6 +31,7 @@
     color: $color-ipt;
     height: $ipt-height;
     text-align: start;
+    background-color: #e9e9e9;
     background-repeat: no-repeat;
     background-position: right 0.5rem center;
     background-size: #{$g-font-size - 2}; 
@@ -40,6 +41,10 @@
     & > *{
         color: $color-ipt;
     }
+    &::-webkit-scrollbar{
+        width: 10px;
+    }
+    @extend %hover;
 }
 %input{
     font-family: inherit;
@@ -222,15 +227,6 @@
                 @include arrowPosition('bottom',2.25);
             }
         }
-        &__details{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            padding: 0.5rem 0.75rem;
-            border-radius: $borderR-btn;
-            border: 1px solid #5d5e63;
-            align-items: center;
-            gap: 0.25rem 0.5rem;
-        }
         &__mounts{
             display: flex;
             justify-content: center;
@@ -256,12 +252,7 @@
             font-size: $g-font-size - 2;
         }
         &__info{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.25rem 0.5rem;
-            padding: 0.5rem 0.75rem;
-            border-radius: $borderR-btn;
-            border: 1px solid #5d5e63;
+            @include structureInfo_1;
         }
     }
 }

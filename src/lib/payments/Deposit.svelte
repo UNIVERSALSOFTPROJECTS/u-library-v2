@@ -40,7 +40,6 @@
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre; });
             payMethods = data;
             loadDeposit = false;
-            console.log(data);
 		} catch (error) {
             if(user == null) error = "Sesión expirada!, cerrando sesión";//y hacer logout
             else error = "Ocurrio un error, contactese con soporte";
@@ -83,7 +82,7 @@
         bankDeposit.aditional='';
         bankDeposit.reference='';
     }
-    async function testdep() {
+    async function validateDepositBank() {
         if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '') return onError("Todos los campos son obligatorios"); 
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
@@ -114,7 +113,7 @@
                 </button>
                 {#if detailsTranference}
                     <b>Detalles:</b>
-                    <div class="deposit__details">
+                    <div class="deposit__info">
                         <p>Tipo de transferencia:</p><p>{typeTranference == 'bank'?'Directa':'Pasarela de pago'}</p>
                         <p>Tiempo de procesamiento:</p><p>{typeTranference == 'bank'?'Semi-automático':'Automático'}</p>
                     </div>
@@ -160,7 +159,7 @@
                         <input type="text" class="ipt" bind:value={amountDeposit} disabled>
                         <input type="date" class="ipt" bind:value={bankDeposit.date}>
                     </div>
-                    <button class="btn deposit" on:click={testdep}>Depositar</button>
+                    <button class="btn deposit" on:click={validateDepositBank}>Depositar</button>
                 {/if}
             {:else}
                 <b>Elige tu método de pago favorito:</b>

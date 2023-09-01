@@ -39,27 +39,33 @@
     const justTextValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\p{L}\s]/gu, "") }
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
     const notWhiteSpace = (e) =>{ e.target.value = e.target.value.replace(/[^\S+$]/g, "") }
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     function counterResendSms() {
         activeSMS = true;
-        minutes = 2;
-        seconds = 0;
+        minutes = 0;
+        seconds = 10;
         const timer = setInterval(() => {
-        if (seconds === 0 && minutes !== 0) {
-            seconds = 59;
-            minutes -= 1;
-        } else if (minutes === 0 && seconds === 0) {
-            activeSMS = false;
-            loadSms = false;
-            clearInterval(timer);
-        } else {
-            seconds -= 1;
-        }
+            if (seconds === 0 && minutes !== 0) {
+                seconds = 59;
+                minutes -= 1;
+            } else if (minutes === 0 && seconds === 0) {
+                activeSMS = false;
+                loadSms = false;
+                clearInterval(timer);
+            } else {
+                seconds -= 1;
+            }
         }, 1000);
+    }
+    const validationEmail = () =>{
+        let isValidEmail = emailPattern.test(email);
+        return isValidEmail;
     }
 
     async function preRegisterClick(){
-        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");
+        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");// ESTO PUEDE VARIAR SEGUN EL TIPO DE REGISTRO REQUERIDO
+        if (!validationEmail()) return onError("El e-mail es inválido");
         try {
             loadSms = true;
             await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
@@ -74,21 +80,25 @@
             onError(error);
             loadSms = false;
         }
-    }
+    }   
 
     async function registerClick(){
-        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");
+        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios"); // ESTO PUEDE VARIAR SEGUN EL TIPO DE REGISTRO REQUERIDO
+        if (!validationEmail()) return onError("El e-mail es inválido");
         if (password.length <= 5) return onError("La contraseña debe tener 6 caracteres como mínimo");
         if (codeAgent) {
             if (codeAgent.toString().length == 8)  operatorId = Math.floor(codeAgent / 10000);
-            else return onError("Código de agente inválido"); 
+            else return onError("Código de agente inválido");
         }
-        if(!smscode) return onError("Ingrese el código de verificación");   
+        if(!smscode) return onError("Ingrese el código de verificación");
         if(!term_conditions) return onError("Debe aceptar los términos y condiciones");
         try {
             loadSingup = true;
             usertype = codeAgent?'X':'W';
-            const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
+            username = username.trim();
+            const {data} = await ServerConnection.users.register(username,name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
+            data.username = username;
+            data.password = password;
             onOk(data);
         } catch (error) {
             if(error.response.data.message == 'SMS invalid') error = 'El código SMS es incorrecto';
@@ -109,7 +119,6 @@
             <DropdownDate bind:date/>
         </div>
     </div>
-
     <input type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" bind:value={email}>
     <input type="text" class="ipt" placeholder="Nombre de usuario" autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
     <div class="singup__form--pass">

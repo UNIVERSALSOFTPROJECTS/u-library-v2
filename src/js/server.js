@@ -1,22 +1,28 @@
 import axios from "axios"
 import utils from './util'
 
-let conf
-let headers = {}
+let conf;
+let headers = {};
 
 const ServerConnection = (() => {
 
-    
-
     const setConfig=(config)=>{
         conf = config;
-        headers = {"Content-Type":"application/json;charset=UTF-8", "clientAuth":conf.CLIENT_AUTH, "client":conf.CLIENT_CODE}
+        headers = {"Content-Type":"application/json;charset=UTF-8", "clientAuth":conf.CLIENT_AUTH, "client":conf.CLIENT_CODE};
     }
     
     
     const wallet = {
         checkPreviewWithdrawal:async(token)=>{
             var url=conf.API+`/checkRetailWithdrawal/${token}`;
+            return await axios.get(url,{headers});
+        },
+        accountNumber:async(token)=>{
+            var url=conf.API+`/accountNumber/${token}`;
+            return await axios.get(url,{headers});
+        },
+        consultUserWeb:async(token)=>{
+            var url=conf.API+`/numero_cuenta/${token}`;
             return await axios.get(url,{headers});
         },
         retailWithdrawal:async(token, amount)=>{
@@ -46,7 +52,7 @@ const ServerConnection = (() => {
         getPayLink:async (token, amount, type)=>{
             let url = conf.API+"/getpaylink/"
             return await axios.post( url,{token, amount, type},{headers} );
-        }     
+        }, 
     }
 
     const users = {
