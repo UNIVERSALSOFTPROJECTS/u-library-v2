@@ -1,8 +1,8 @@
 //$body  : ".Babieca"; //nombre de la pagina
 //$page : "Babieca";//default-light || default-dark
-$body  : ".Goldenbet"; //nombre de la pagina
-$page : "Goldenbet";//default-light || default-dark
-$bgi-signup: "https://wallpapers.com/i  mages/featured/horse-racing-ghym6kfaky4hep8v.jpg";
+$body  : ".Jetbet24"; //nombre de la pagina
+$page : "Jetbet24";//default-light || default-dark
+$bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep8v.jpg";
 @import './components/variables';
 @import "./components/mixins";
 @import './components/global';
@@ -17,11 +17,11 @@ $bgi-signup: "https://wallpapers.com/i  mages/featured/horse-racing-ghym6kfaky4h
 //en cambio el notifier , todas la estructura nunca varia mas que para cambiar el color y el icono, por lo que seria al contrario del modal
 #{$body}{
  
-    @include notifier("top-end",#008939,#d9534f);
+    @include notifier("top-end",#008939,#d9534f,#ffd245);
     //@extend "EL TIPO DE LOGIN QUE TENDRA QUI SE AGREGA"
     .header{
         //babieca-golden
-        @include structureHeader('babieca',6rem,6rem);
+        @include structureHeader('babieca',12rem,5rem);
         //@include structureHeader('babieca',8.5rem,6.5rem);
         &__menu{
             @include dropdown-menu("normal");

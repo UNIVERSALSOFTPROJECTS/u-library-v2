@@ -16,6 +16,7 @@
     export let onError;
     export let platform;
     export let usertype;
+    export let countries;
 
     //loading
     let loadSms;
@@ -39,9 +40,6 @@
     let doctype;
     let document;
     let term_conditions;
-    let countries  = [
-      {prefix:"+57",flag:"col"},    
-    ];
     //operatorId = code agent, in usertype
 
     //validations imput -utils JS

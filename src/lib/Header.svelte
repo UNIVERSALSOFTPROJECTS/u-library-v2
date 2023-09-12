@@ -2,7 +2,7 @@
     import Notifier from './Notifier.svelte';
     import Login from './modals/Login.svelte';
     import Modal from '../lib/Modal.svelte';
-    import Singup from './modals/SingupM.svelte';
+    import Singup from './modals/SingupXg.svelte';
     import Deposit from './payments/Deposit.svelte';
     import Withdrawal from './withdrawal/WithdrawalW.svelte';
     import "../styles/app.scss";
@@ -27,9 +27,9 @@
     //Deposit Modal
     let notify = {};
     //datos de registro M
-    let countries  = [
-      {prefix:"+56",flag:"chl"}
-    ];
+    //COLLISESPORT//let countries  = [ {prefix:"+56",flag:"chl"} ];
+    //JETBET24 
+    let countries  = [ {prefix:"+216",flag:"tnz"} ];
     //operatorId BO  = code agent - type W
     let currencies  = [
       {name:"Peso chileno", code:7 , agent:4675},//este codigo se toma como el id_operado en caso el tipo sea W

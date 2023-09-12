@@ -366,7 +366,7 @@
         background-position: center;
     }
 }
-@mixin notifier($position,$bg-success,$bg-error){
+@mixin notifier($position,$bg-success,$bg-error,$bg-warning){
     .notify{
         position: absolute;
         z-index: 9999;
@@ -393,6 +393,10 @@
         &.error{
             background: $bg-error;
             @include getIcon($error);
+        }
+        &.warning{
+            background: $bg-warning;
+            @include getIcon($warning);
         }
         &__message{
             display: grid;

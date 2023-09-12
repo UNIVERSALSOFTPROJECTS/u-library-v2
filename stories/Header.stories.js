@@ -41,3 +41,8 @@ export const showHeaderSuperderby = ()=>({
   Component:Header,
   props:{user, assetsUrl:assetsUrl+"/superderby", platform:'Superderby'}
 })
+
+export const showHeaderJetbet24 = ()=>({
+  Component:Header,
+  props:{user, assetsUrl:assetsUrl+"/jetbet24", platform:'Jetbet24'}
+})
