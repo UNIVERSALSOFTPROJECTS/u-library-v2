@@ -1,4 +1,4 @@
-import { Login } from '../src/index';
+import  Login from '../src/lib/topbar/Login.svelte';
 import init from './init';
 init.start();
 

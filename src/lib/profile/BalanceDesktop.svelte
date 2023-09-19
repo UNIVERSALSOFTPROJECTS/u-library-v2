@@ -1,0 +1,74 @@
+<script>
+
+
+  //export let open;
+  export let user;
+  export let onOpenDeposit;
+
+
+
+
+</script>
+
+<div class="u-main-content">
+  <div class="wrap-content">
+    <div class="u-title">
+      <span class="u-title-info">SALDO</span>
+    </div>
+    <div class="u-info-balance">
+      <div class="u-title-balance">{user.currency} {user.balance}</div>
+    </div>
+    <div class="u-control">
+      <button class="u-control-but" on:click={onOpenDeposit}>
+        <span class="u-sub-title-button">DEPÓSITO</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<style>
+  .u-main-content{
+    
+    padding: 0.5rem;
+  }
+  .wrap-content{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25%;
+    height: 35%;
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+  }
+  .u-title-info{
+    color: rgb(144, 144, 144);
+    font-size: 14px;
+  }
+  .u-info-balance{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .u-title-balance{
+    color: black;
+    font-size: 3rem;
+  }
+  .u-control-but{
+    border: none;
+    border-radius: 0.2rem;
+    height: 2rem;
+    background-color: #00BD71;
+    width: 100%;
+    cursor: pointer;
+  }
+  .u-sub-title-button{
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+  }
+</style>

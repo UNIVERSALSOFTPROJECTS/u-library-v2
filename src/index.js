@@ -1,6 +1,6 @@
 
 //export {default as Header} from "./lib/Header.svelte";
-export {default as Login} from "./lib/modals/Login.svelte";
+export {default as Login} from "./lib/topbar/Login.svelte";
 export {default as Deposit} from "./lib/payments/Deposit.svelte";
 export {default as ServerConnection} from "./js/server";
 export {default as Utils} from "./js/util";
@@ -11,3 +11,4 @@ export { default as DepositCashier } from './lib/payments/DepositCashier.svelte'
 export { default as WithdrawalCashier } from './lib/withdrawal/WithdrawalCashier.svelte';
 export { default as DepositBank } from './lib/payments/DepositBank.svelte';
 export { default as WithdrawalBank } from './lib/withdrawal/WithdrawalBank.svelte';
+export { default as TopBar } from './lib/topbar/TopBar.svelte';

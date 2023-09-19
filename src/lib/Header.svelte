@@ -1,6 +1,6 @@
 <script>
     import Notifier from './Notifier.svelte';
-    import Login from './modals/Login.svelte';
+    import Login from './topbar/Login.svelte';
     import Modal from '../lib/Modal.svelte';
     import Singup from './modals/SingupXg.svelte';
     import Deposit from './payments/Deposit.svelte';

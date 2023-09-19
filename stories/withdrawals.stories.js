@@ -1,5 +1,5 @@
-import { WithdrawalCashier } from '../src/index';
-import { WithdrawalBank } from '../src/index';
+import  WithdrawalCashier from '../src/lib/withdrawal/WithdrawalCashier.svelte';
+import WithdrawalBank  from '../src/lib/withdrawal/WithdrawalBank.svelte';
 import init from './init';
 init.start();
 let minAmount = 50;
