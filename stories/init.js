@@ -88,9 +88,11 @@ export default{
     start:()=>{
         ServerConnection.setConfig({
             API:"https://lobby-bff.apiusoft.com",
+            USER_API:"https://casino-stage.apiusoft.com/player",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
             CLIENT_AUTH:"086C6928CB443C361BC72F05JETBET24",
             CLIENT_CODE:"086C",
+            platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
             LOBBY_GAMES_API:"https://lobby.apiusoft.com",
             ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",
             WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",

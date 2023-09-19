@@ -87,7 +87,74 @@ const ServerConnection = (() => {
             return axios.get(url,{headers}) ;
         }
     }
-    return {setConfig, wallet,users,game }
+
+
+    /* PARA Universal User API */
+    const u_wallet = {
+        checkPendingWithdrawal: async (token) => {
+            headers['Authorization'] = token;
+            var url = conf.USER_API + `/checkPendingWithdrawal`;
+            return await axios.get(url, { headers });
+        },
+        listBankAccounts: async (userToken) => {
+            console.log("U-library: ", conf);
+            if (!conf) throw ("CONF ID EMPTY");
+            if (!conf.platformId) throw ("platformId EMPTY");
+            headers['Authorization'] = userToken;
+            let url = conf.USER_API + "/bankAccounts?platformId=" + conf.platformId;
+            return await axios.get(url, { headers });
+        },
+        bankDeposit: async (token, bankDeposit) => {
+            if (!bankDeposit.playerId) throw ("PLAYERID EMPTY");
+            if (!bankDeposit.currency) throw ("CURRENCY EMPTY");
+            let payload = { ...bankDeposit, token }
+            let url = conf.USER_API + "/wallet/bankDeposit";
+            payload.platformId = conf.platformId;
+            return await axios.post(url, payload, { headers });
+        },
+        withdrawalBank: async (token, amount, bank, account, info, playerId, trxType, platformId, currencyISO) => {
+            headers['Authorization'] = token;
+            let payload = { amount, bank, account, info, playerId, trxType, platformId, currencyISO }
+            console.log(payload);
+            let url = conf.USER_API + "/wallet/withdrawalBank";
+            return await axios.post(url, payload, { headers });
+        },
+        withdrawalCashier: async (token, amount, bank, account, info) => {
+            let payload = { token, amount, bank, account, info }
+            let url = conf.USER_API + "/withdrawalCashier";
+            return await axios.post(url, payload, { headers });
+        },
+    }
+
+    const u_user = {
+        getBalance: (userToken) => {
+            let url = conf.USER_API + `/balance/${userToken}`;
+            return axios.get(url, { headers });
+        },
+        preRegister: (username, email, phone) => {
+            if (!conf.platformId) throw ("PLATFORM ID EMPTY");
+            var url = conf.USER_API + "/user/preRegister";
+            //console.log("conf here: ",conf)
+            if (!conf.org) throw "ORG_MANDATORY";
+            var payload = { username, email, phone, org: conf.org, platformId: conf.platformId }
+            return axios.post(url, payload, { headers });
+        },
+        login: (username, password) => {
+            let payload = { username, password }
+            return axios.post(conf.USER_API + "/login", payload, { headers });
+
+        },
+        register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, currency = conf.currency) => {
+            if (!currency) throw "CURRENCY_MANDATORY";
+            if (!conf.domain) throw "DOMAIN_MANDATORY";
+            if (!conf.platformId) throw "PLATFORMID_EMPTY";
+            var url = conf.USER_API + "/user";
+            var payload = { username, name, phone: phone, email, currency, password, date, smscode, country, operatorId, doctype: "", document: "", birthday: date, domain: conf.domain, usertype, platformId: conf.platformId, org: conf.org }
+            return axios.post(url, payload, { headers });
+        }
+    }
+    /* */
+    return {setConfig, wallet,users,game, u_user, u_wallet }
     
 })()
 

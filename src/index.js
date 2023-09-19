@@ -7,3 +7,7 @@ export {default as Utils} from "./js/util";
 export {default as Notifier} from "./lib/Notifier.svelte";
 export {default as Modal} from "./lib/Modal.svelte";
 export {default as SingupW} from "./lib/modals/SingupM.svelte";
+export { default as DepositCashier } from './lib/payments/DepositCashier.svelte';
+export { default as WithdrawalCashier } from './lib/withdrawal/WithdrawalCashier.svelte';
+export { default as DepositBank } from './lib/payments/DepositBank.svelte';
+export { default as WithdrawalBank } from './lib/withdrawal/WithdrawalBank.svelte';
