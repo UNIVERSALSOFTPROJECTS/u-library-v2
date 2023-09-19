@@ -89,8 +89,8 @@ export default{
         ServerConnection.setConfig({
             API:"https://lobby-bff-test.apiusoft.com",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-            CLIENT_AUTH:"086C6928CB443C361BC72F05JETBET24",
-            CLIENT_CODE:"086C",
+            CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
+            CLIENT_CODE:"JU02",
             platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
             LOBBY_GAMES_API:"https://lobby.apiusoft.com",
             ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",

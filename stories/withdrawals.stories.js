@@ -2,8 +2,6 @@ import { WithdrawalCashier } from '../src/index';
 import { WithdrawalBank } from '../src/index';
 import init from './init';
 init.start();
-//import ServerConnection from '../src/js/server'
-//ServerConnection.setConfig({API:"https://lobby-bff.apiusoft.com",CLIENT_AUTH:"FORT2023FORTUNEUSOFFORTUNEBET12",CLIENT_CODE:"FORT"})
 let minAmount = 50;
 let maxAmount = 2000;
 let pendingWhitdrawall=null

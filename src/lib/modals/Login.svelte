@@ -5,6 +5,7 @@
 	export let onOk;
 	export let onError;
 	export let assetsUrl;
+	export let userGateway="neco";//neco/universal
 
 	let password;
 	let username;
@@ -14,7 +15,11 @@
 		if(!username || !password ) return onError("Todos los campos son obligatorios");
 		try {
 			loadLogin = true
-			const {data} = await ServerConnection.users.login(username,password);
+			let data ;
+			if (userGateway=='neco')  data = await ServerConnection.users.login(username,password);
+			else  data = await ServerConnection.u_user.login(username,password);
+			console.log("data: ",data);
+			data = data.data;
 			if(data.username=='') throw("USER_NOT_FOUND");
 			let date = new Date();
       		date.setDate(date.getDate() + 1);
@@ -22,6 +27,7 @@
 			sessionStorage.setItem("user",JSON.stringify(data));
 			onOk(data);
 		} catch (error) {
+			console.log("error: ", error);
 			if(error.message == "Network Error" || error.response.data.message.includes("Connection refused")) error = "Página en mantenimiento, espere unos minutos";
 			else if(error.response.data.message == "NECO_LOGIN_FAILED") error = "Usuario o contraseña incorrecto";
 			else error = "Ocurrio un error, contactese con soporte";
