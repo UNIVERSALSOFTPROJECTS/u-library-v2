@@ -18,7 +18,7 @@
       <table class="user">
         <div class="user-content">
           <tr>
-            <th class="codigo">{user.username} #{user.id}</th>
+            <th class="codigo">{user.username} #{user.serial}</th>
           </tr>
           <tr>
             <td>
