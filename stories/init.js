@@ -87,8 +87,7 @@ import ServerConnection from '../src/js/server'
 export default{
     start:()=>{
         ServerConnection.setConfig({
-            API:"https://lobby-bff.apiusoft.com",
-            USER_API:"https://casino-stage.apiusoft.com/player",
+            API:"https://lobby-bff-test.apiusoft.com",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
             CLIENT_AUTH:"086C6928CB443C361BC72F05JETBET24",
             CLIENT_CODE:"086C",

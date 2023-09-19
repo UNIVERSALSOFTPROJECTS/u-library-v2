@@ -93,7 +93,7 @@ const ServerConnection = (() => {
     const u_wallet = {
         checkPendingWithdrawal: async (token) => {
             headers['Authorization'] = token;
-            var url = conf.USER_API + `/checkPendingWithdrawal`;
+            var url = conf.API + `/casino/api/checkPendingWithdrawal`;
             return await axios.get(url, { headers });
         },
         listBankAccounts: async (userToken) => {
@@ -101,14 +101,14 @@ const ServerConnection = (() => {
             if (!conf) throw ("CONF ID EMPTY");
             if (!conf.platformId) throw ("platformId EMPTY");
             headers['Authorization'] = userToken;
-            let url = conf.USER_API + "/bankAccounts?platformId=" + conf.platformId;
+            let url = conf.API + "/casino/api/bankAccounts?platformId=" + conf.platformId;
             return await axios.get(url, { headers });
         },
         bankDeposit: async (token, bankDeposit) => {
             if (!bankDeposit.playerId) throw ("PLAYERID EMPTY");
             if (!bankDeposit.currency) throw ("CURRENCY EMPTY");
             let payload = { ...bankDeposit, token }
-            let url = conf.USER_API + "/wallet/bankDeposit";
+            let url = conf.API + "/casino/api/wallet/bankDeposit";
             payload.platformId = conf.platformId;
             return await axios.post(url, payload, { headers });
         },
@@ -116,24 +116,24 @@ const ServerConnection = (() => {
             headers['Authorization'] = token;
             let payload = { amount, bank, account, info, playerId, trxType, platformId, currencyISO }
             console.log(payload);
-            let url = conf.USER_API + "/wallet/withdrawalBank";
+            let url = conf.API + "/casino/api/wallet/withdrawalBank";
             return await axios.post(url, payload, { headers });
         },
         withdrawalCashier: async (token, amount, bank, account, info) => {
             let payload = { token, amount, bank, account, info }
-            let url = conf.USER_API + "/withdrawalCashier";
+            let url = conf.API + "/casino/api/withdrawalCashier";
             return await axios.post(url, payload, { headers });
         },
     }
 
     const u_user = {
         getBalance: (userToken) => {
-            let url = conf.USER_API + `/balance/${userToken}`;
+            let url = conf.API + `/casino/api/balance/${userToken}`;
             return axios.get(url, { headers });
         },
         preRegister: (username, email, phone) => {
             if (!conf.platformId) throw ("PLATFORM ID EMPTY");
-            var url = conf.USER_API + "/user/preRegister";
+            var url = conf.API + "/casino/api/user/preRegister";
             //console.log("conf here: ",conf)
             if (!conf.org) throw "ORG_MANDATORY";
             var payload = { username, email, phone, org: conf.org, platformId: conf.platformId }
@@ -141,14 +141,14 @@ const ServerConnection = (() => {
         },
         login: (username, password) => {
             let payload = { username, password }
-            return axios.post(conf.USER_API + "/login", payload, { headers });
+            return axios.post(conf.API + "/casino/api/login", payload, { headers });
 
         },
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, currency = conf.currency) => {
             if (!currency) throw "CURRENCY_MANDATORY";
             if (!conf.domain) throw "DOMAIN_MANDATORY";
             if (!conf.platformId) throw "PLATFORMID_EMPTY";
-            var url = conf.USER_API + "/user";
+            var url = conf.API + "/casino/api/user";
             var payload = { username, name, phone: phone, email, currency, password, date, smscode, country, operatorId, doctype: "", document: "", birthday: date, domain: conf.domain, usertype, platformId: conf.platformId, org: conf.org }
             return axios.post(url, payload, { headers });
         }
