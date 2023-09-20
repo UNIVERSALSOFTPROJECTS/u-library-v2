@@ -218,7 +218,9 @@
     notify.error(error);
   };
   const onLogin = () => {
-    alert("Login");
+    getFavGames();
+    ServerConnector.connect(`${conf.CLIENTCODE}-${user.username}`); //conecta al websocket.
+    location.reload();
   };
 
   const onSignupOk = async (user_) => {
