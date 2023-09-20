@@ -11,9 +11,6 @@
 	let username;
 	let loadLogin = false;
 
-	const loginEnter = (e) => {
-    	if (e.charCode === 13) loginClick();
-  	};
 
 	async function loginClick(){
 		if(!username || !password ) return onError("Todos los campos son obligatorios");
@@ -46,9 +43,9 @@
     <img class="login__logo" src="{assetsUrl}/logo.png" alt="logo-main">
     <div></div>
     <form class="login__form">
-		<input type="text" class="ipt" placeholder="Usuario" autocomplete="off" on:keypress={loginEnter} bind:value={username}>
+		<input type="text" class="ipt" placeholder="Usuario" autocomplete="off"  bind:value={username}>
 		<div class="login__ipt--pass">
-			<InputPassword bind:password {loginEnter}/>
+			<InputPassword bind:password />
 		</div>
 		<button type="button" class="btn singup" disabled="{loadLogin}" on:click={loginClick}>
 			{#if loadLogin}
