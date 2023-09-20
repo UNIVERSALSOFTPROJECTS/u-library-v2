@@ -309,16 +309,6 @@
     border-radius: 1rem;
     height: 1.8rem;
   }
-  .u-close{
-    height: 40px;
-    width: 35px;
-    text-align: center;
-    background: #ff6200;
-    color: black;
-    font-size: 28px;
-    font-weight: 800;
-    border-radius: 0.5rem;
-  }
   .u-opc-select{
     background-color: rgb(146, 175, 178);
   }
