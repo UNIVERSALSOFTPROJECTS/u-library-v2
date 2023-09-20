@@ -24,12 +24,12 @@
   let notify = {};
 
   const closeModal = () => {
+    console.log("cerrando");
     open = false;
   };
 
   onMount(async () => {
-    bankDeposit = {};
-    console.log("motando");
+    bankDeposit;
     await listBankAccounts();
     //bankDeposit.date = moment().format("YYYY-MM-DD");
     bankDeposit.date = moment().format("YYYY-MM-DD");

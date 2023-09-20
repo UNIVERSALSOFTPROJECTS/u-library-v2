@@ -15,6 +15,8 @@
   import MenuLogged from "./MenuLogged.svelte";
   import Register from "./Register.svelte";
   import notify from "../../js/notify";
+  import DepositCashier from "../payments/DepositCashier.svelte";
+  import WithdrawalCashier from "../withdrawal/WithdrawalCashier.svelte";
 
   export let userState;
   export let active_view;
@@ -26,6 +28,7 @@
   export let assetsUrl;
   export let platform;
   export let amountsFav = [5000, 10000, 30000, 50000];
+  export let userGateway;
 
   let username = "";
   let password = "";
@@ -36,10 +39,12 @@
   let showProfileModalDesktop = false;
   let showPasswordChangeModal = false;
   let showWithdrawal = false;
+  let showWithdrawalCashier = false;
   let pendingWhitdrawall = null;
   let scrollPosition = 0;
   let divClass = "";
   let depositModalOpen = false;
+  let depositModalCashier = false;
   let signupModalOpen = false;
 
   let countries = [{ prefix: "+56", flag: "chl" }];
@@ -107,15 +112,29 @@
 
   const onShowWithdrawalBank = async () => {
     try {
-      let data = await backend.wallet.checkPreviewWithdrawal(user.token);
+      let data = await backend.u_wallet.checkPendingWithdrawal(user.token);
       console.log(data);
       showWithdrawal = true;
+      showProfileModalDesktop = false;
+    } catch (error) {
+      console.log(error);
+      notify.error("Error");
+    }
+  };
+  const onShowWithdrawalCashier = async () => {
+    try {
+      console.log("entro");
+      let data = await backend.u_wallet.checkPendingWithdrawal(user.token);
+      console.log(data);
+      showWithdrawalCashier = true;
       showProfileModalDesktop = false;
       pendingWhitdrawall = data;
     } catch (error) {
       notify.error("Error al consultar retiro previo");
     }
   };
+
+  
 
   const onLogingClic = async (info, mode) => {
     let username = info.username;
@@ -177,14 +196,18 @@
   const onOpenMyAccount = async () => {
     showProfileModalDesktop = true;
     document.body.style.overflow = "hidden";
-    const data = await backend.getMyAccount(user.token);
-    let serial_api_casino = user.serial_api_casino;
-    let token = user.token;
-    let agregatorToken = user.agregatorToken;
-    user = { ...user, ...data };
-    user.serial_api_casino = serial_api_casino;
-    user.token = token;
-    user.agregatorToken = agregatorToken;
+    if(userGateway=='neco'){
+       const data = await backend.getMyAccount(user.token);
+      let serial_api_casino = user.serial_api_casino;
+      let token = user.token;
+      let agregatorToken = user.agregatorToken;
+      user = { ...user, ...data };
+      user.serial_api_casino = serial_api_casino;
+      user.token = token;
+      user.agregatorToken = agregatorToken;
+    }
+   
+    
   };
 
   const onPasswordChangeModal = () => {
@@ -199,6 +222,16 @@
       document.body.removeAttribute("style");
     }, 100);
   };
+
+  const onOpenDepositCashier = () => {
+    depositModalCashier = true;
+    modalOpened = "deposit";
+    showProfileModalDesktop = false;
+    setTimeout(() => {
+      document.body.removeAttribute("style");
+    }, 100);
+  };
+
   const onOpenSingup = () => {
     signupModalOpen = true;
     modalOpened = "singup";
@@ -222,7 +255,6 @@
     ServerConnector.connect(`${conf.CLIENTCODE}-${user.username}`); //conecta al websocket.
     location.reload();
   };
-
   const onSignupOk = async (user_) => {
     if (typeof user_ === "string") {
       //envio smss
@@ -254,10 +286,7 @@
 </script>
 
 <div
-  class="user-header {divClass} {active_view == 'virtual' &&
-  userState != 'logout'
-    ? 'virtual'
-    : ''} {platform}"
+  class="user-header {divClass} {active_view == 'virtual' && userState != 'logout'? 'virtual': ''} {platform}"
   id="user-header"
 >
   <div class="user-header-principal">
@@ -297,13 +326,15 @@
   </div>
 </div>
 
-<div class="Coliseosport">
+
+
+<div class={platform}>
   <Modal bind:open={loginModalOpen} bind:modalOpened>
     <Login
       onOk={onLoginOk}
       onError={onLoginError}
       {assetsUrl}
-      userGateway="universal"
+      {userGateway}
     />
   </Modal>
   <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
@@ -316,12 +347,22 @@
     />
   </Modal>
 
-  <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
+  <Modal bind:open={depositModalOpen} bind:modalOpened showHeader={false}>
     <DepositBank
       bind:user
       bind:amountsFav
       onOk={onDepositOk}
       onError={onDepositError}
+      bind:open={depositModalOpen}
+    />
+  </Modal>
+  <Modal bind:open={depositModalCashier} bind:modalOpened showHeader={false}>
+    <DepositCashier
+      bind:user
+      bind:amountsFav
+      onOk={onDepositOk}
+      onError={onDepositError}
+      bind:open={depositModalCashier}
     />
   </Modal>
 </div>
@@ -330,19 +371,31 @@
   <Register bind:userState {onPasswordChangeModal} />
 </Modal>
 
-<Modal bind:open={showProfileModalDesktop} showCloseButton={false}>
+<Modal bind:open={showProfileModalDesktop} showHeader={false} modalOpened={"profile"}>
   <Profile
     bind:user
     bind:open={showProfileModalDesktop}
     {onOpenDepositBank}
     {onShowWithdrawalBank}
+    {onOpenDepositCashier}
+    {onShowWithdrawalCashier}
   />
 </Modal>
 
-<Modal bind:open={showWithdrawal} showCloseButton={false}>
+<Modal bind:open={showWithdrawal} showHeader={false}>
   <WithdrawalBank
     bind:user
     bind:open={showWithdrawal}
+    bind:pendingWhitdrawall
+    onOk={onWithdrawalOk}
+    onError={onWithdrawalError}
+  />
+</Modal>
+
+<Modal bind:open={showWithdrawalCashier} showHeader={false}>
+  <WithdrawalCashier
+    bind:user
+    bind:open={showWithdrawalCashier}
     bind:pendingWhitdrawall
     onOk={onWithdrawalOk}
     onError={onWithdrawalError}

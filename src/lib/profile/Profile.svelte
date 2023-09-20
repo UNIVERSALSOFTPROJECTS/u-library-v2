@@ -10,6 +10,9 @@
   export let open;
   export let onShowWithdrawalBank;
   export let onOpenDepositBank;
+  export let onShowWithdrawalCashier;
+  export let onOpenDepositCashier;
+
   let icon = true; 
   let active_section="balance"
   let active_option="MyProfile"
@@ -50,7 +53,6 @@
 
 </script>
 
-<div class="u-main-content-general">
   <div class="u-main-content">
     <div class="u-menu-profile-user">
         <div class="u-icon-user">
@@ -96,10 +98,10 @@
             </button>
           </div>
           <div class="u-button-transfer">
-            <button class="u-withdrawal u-button"  on:click={onShowWithdrawalBank}>
+            <button class="u-withdrawal u-button"  on:click={onShowWithdrawalCashier}>
               <span>Retiro Efectivo</span>
             </button>
-            <button class="u-deposit u-button"  on:click={onOpenDepositBank}>
+            <button class="u-deposit u-button"  on:click={onOpenDepositCashier}>
               <span> Depósito Efectivo</span>
             </button>
           </div>
@@ -117,6 +119,7 @@
     <div class="u-menu-principal-opc">
         <div class="u-heard">
           <span>DASHBOARD</span>
+          <button on:click={closeModal}>X</button>
         </div>
         {#if active_option=="MyProfile" }
         <div class="u-options My-acount">
@@ -174,17 +177,10 @@
         -->
     </div>
   </div>
-  <button class="u-close" on:click={closeModal}>X</button>
-</div>
 
 
 
 <style>
-  .u-main-content-general{
-    display: flex;
-    flex-direction: row;
-    height: 70vh;
-  }
   .u-main-content{
     display: grid;
     grid-template-columns: 30% 70%;
