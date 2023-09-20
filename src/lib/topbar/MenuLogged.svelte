@@ -17,8 +17,8 @@
     <img class="usericon1 s-pLY60ePxNKjT" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png" alt="">
       <table class="user">
         <div class="user-content">
-          <tr style="color: white;">
-            <th class="codigo">{user.username} #{user.serial}</th>
+          <tr>
+            <th class="codigo" style="color: white;">{user.username} #{user.serial}</th>
           </tr>
           <tr>
             <td>
@@ -115,16 +115,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
-  .user-profile svg.ss {
-    width: 2.7rem;
-    height: 2.7rem;
-    background-color: white;
-    border-radius:2rem;
-    position: absolute;
-    left: -1.8rem;
-    top: 0.2rem;
-    border: 0.5px solid #5A5A5A;
-  }
+  
   .user-content th {
     background-color: transparent;
     width: 0.2rem;
