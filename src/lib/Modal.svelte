@@ -46,5 +46,7 @@
   .no-header{
     display: flex;
     background: none;
+    align-items: center;
+    justify-content: center;
   }
 </style>
