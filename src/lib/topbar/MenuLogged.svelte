@@ -17,7 +17,7 @@
     <img class="usericon1 s-pLY60ePxNKjT" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png" alt="">
       <table class="user">
         <div class="user-content">
-          <tr>
+          <tr style="color: white;">
             <th class="codigo">{user.username} #{user.serial}</th>
           </tr>
           <tr>
