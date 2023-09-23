@@ -1,9 +1,7 @@
 //$body  : ".Babieca"; //nombre de la pagina
 //$page : "Babieca";//default-light || default-dark
-//$body  : "Coliseosport" !default; //nombre de la pagina
-//$page : "Coliseosport" !default;//default-light || default-dark
-$body : "DemoPlatform" !default; //nombre de la pagina
-$page : "DemoPlatform" !default; //default-light || default-dark
+$body  : "DemoPlatform" !default; //nombre de la pagina
+$page : "DemoPlatform" !default;//default-light || default-dark
 $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep8v.jpg";
 @import './components/variables';
 @import "./components/mixins";
@@ -16,77 +14,99 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
 //Notas
 //El mixxin del notifier, no es igual al de del modal, el modal cuando se llga al body se desliga de este y toma las clases del padre
 //en cambio el notifier , todas la estructura nunca varia mas que para cambiar el color y el icono, por lo que seria al contrario del modal
-.Coliseosport{
- 
-    @include notifier("top-end",#008939,#d9534f,#ffd245);
+
+
+.DemoPlatform {
+
+    @include notifier("top-end", #008939, #d9534f, #ffd245);
+
     //@extend "EL TIPO DE LOGIN QUE TENDRA QUI SE AGREGA"
-    .header{
+    .header {
         //babieca-golden
-        @include structureHeader('babieca',12rem,5rem);
+        @include structureHeader('babieca', 12rem, 5rem);
+
         //@include structureHeader('babieca',8.5rem,6.5rem);
-        &__menu{
+        &__menu {
             @include dropdown-menu("normal");
         }
-        &__balance{
+
+        &__balance {
             display: grid;
             justify-items: end;
         }
-        &__bono{
+
+        &__bono {
             @include arrowPositionDiv($g-font-size - 2);
         }
-        &__userdata{
+
+        &__userdata {
             display: grid;
             grid-template-columns: 2rem auto;
             gap: 0.5rem;
+
             & img {
                 width: 100%;
                 border-radius: $borderR-btn;
             }
         }
-        &__userid{
+
+        &__userid {
             font-size: $g-font-size - 2;
         }
-        &__account{
+
+        &__account {
             @include arrowPositionDiv($g-font-size);
         }
 
         @media (max-width: $size-web) {
-            &__userdata, & .btn.recharge { 
+
+            &__userdata,
+            & .btn.recharge {
                 display: none;
             }
         }
     }
-    .btn{
-        &.login,&.singup{
+
+    .btn {
+
+        &.login,
+        &.singup {
             text-transform: uppercase;
             font-weight: 600;
         }
-        &.login{
+
+        &.login {
             background: #4a4b53;
         }
-        &.singup{
+
+        &.singup {
             background: $color-primary;
-            box-shadow: 0 0 6px $color-primary, 
-            inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0,0%,100%,.45), 
-            inset 0 0 11px $color-primary;
+            box-shadow: 0 0 6px $color-primary,
+                inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0, 0%, 100%, .45),
+                inset 0 0 11px $color-primary;
         }
+
         //se mandara a otra lugar esta wea
-        &.payment{
+        &.payment {
             background: #423b62;
-            &.active{
+
+            &.active {
                 background: $color-primary;
             }
         }
-        &.deposit{
+
+        &.deposit {
             background: #37ae3c;
         }
-        &.amount{
+
+        &.amount {
             background: #fff;
             color: #000;
         }
-        &.return{
+
+        &.return {
             width: 3rem;
-            background: #d90000;
+            background: #d90094;
             position: absolute;
             margin: 1rem;
             background-image: url("#{$arrow-left}");
@@ -94,52 +114,67 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             background-size: #{$g-font-size * 2.25} #{$g-font-size * 2.25};
             background-position: center;
         }
-        &.recharge{
+
+        &.recharge {
             font-weight: 700;
-            background: #088f08;
+            background: #3c088f;
             font-size: $g-font-size + 2;
             width: 6rem;
         }
     }
-    .modal{
-        &.login{
+
+    .modal {
+        &.login {
             // esto se tiene que convertir en un mixin , ya que las medidas de la imagen logo pueden variar mucho
             @include login__model_1(10rem);
-            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
+            @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
         }
-        &.profile{
-            width: 70%;
+
+        &.profile {
+            width: 100%;
         }
-        &.singup{
+
+        &.singup {
             @extend %singup__model_1;
-            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
+            @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
         }
-        &.deposit{
-            @include deposit__model_1();            
-            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
+
+        &.deposit {
+            @include deposit__model_1();
+            @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
             
         }
-        &.withdrawal{
-            & .modal{
+
+        &.withdrawal {
+            & .modal {
                 &-body {
                     padding: 1rem;
                     align-content: start;
                     width: 100%;
                     overflow: auto;
                 }
-                &-dialog{
+
+                &-dialog {
                     max-width: 500px;
                 }
-                &-header{
+
+                &-header {
                     background: $color-primary;
                 }
+
                 @include modalFullScreen("mobile");
             }
-            & .withdrawal{
-                &__info{
+
+            & .withdrawal {
+                &__info {
                     @include structureInfo_1;
                 }
-                &__amount{
+
+                &__amount {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
@@ -148,10 +183,11 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         }
 
     }
+
+    .ipt {
+        @extend %input;
+    }
 }
-
-
-
 //.loading{
 //   
 //}

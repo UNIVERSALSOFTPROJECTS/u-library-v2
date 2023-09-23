@@ -9,14 +9,15 @@
   import Profile from "../profile/Profile.svelte";
   import NoLoginMenu from "./NoLoginMenu.svelte";
   import Login from "./Login.svelte";
-  import DepositBank from "../payments/DepositBank.svelte";
+  import DepositBank from "../payments/BankDeposit.svelte";
   import WithdrawalBank from "../withdrawal/WithdrawalBank.svelte";
   import { SingupW } from "../..";
   import MenuLogged from "./MenuLogged.svelte";
   import Register from "./Register.svelte";
   import notify from "../../js/notify";
-  import DepositCashier from "../payments/DepositCashier.svelte";
+  import DepositCashier from "../payments/ConfirmCashDeposit.svelte";
   import WithdrawalCashier from "../withdrawal/WithdrawalCashier.svelte";
+  import Notifier from "../Notifier.svelte";
 
   export let userState;
   export let active_view;
@@ -29,6 +30,7 @@
   export let platform;
   export let amountsFav = [5000, 10000, 30000, 50000];
   export let userGateway;
+  export let onLogin;
 
   let username = "";
   let password = "";
@@ -136,46 +138,6 @@
 
   
 
-  const onLogingClic = async (info, mode) => {
-    let username = info.username;
-    let password = info.password;
-    let user_ = null;
-    try {
-      showMainLoading = true;
-      let data = await backend.login(username, password);
-      showMainLoading = false;
-      if (!data.username || data.username == "") {
-        throw "USER_NOT_FOUND";
-      }
-      user_ = {
-        balance: data.balance,
-        username: data.username,
-        currency: data.currency,
-        currency_id: data.currency_id,
-        bono: 0,
-        code: data.id,
-        token: data.token,
-        serial: data.serial,
-        agregatorToken: data.agregatorToken,
-      };
-      notify.success("Bienvenido a Coliseosport");
-      if (mode == "modal") document.body.style.overflow = "scroll";
-      showLoginModal = false;
-      let date = new Date();
-      date.setDate(date.getDate() + 1);
-      user = user_;
-      userState = "loggedIn";
-      active_view = "home";
-      user.expireToken = date.getTime();
-      sessionStorage.setItem("user", JSON.stringify(user));
-      onLogin();
-    } catch (e) {
-      showMainLoading = false;
-      console.log("ERROR: ", e);
-      if (e.message == "NECO_LOGIN_FAILED")
-        notify.error("usuario o contraseña incorrect@1");
-    }
-  };
 
   const onOpenLogin = () => {
     loginModalOpen = true;
@@ -250,11 +212,7 @@
   const onLoginError = async (error) => {
     notify.error(error);
   };
-  const onLogin = () => {
-    getFavGames();
-    ServerConnector.connect(`${conf.CLIENTCODE}-${user.username}`); //conecta al websocket.
-    location.reload();
-  };
+  
   const onSignupOk = async (user_) => {
     if (typeof user_ === "string") {
       //envio smss
@@ -365,9 +323,8 @@
       bind:open={depositModalCashier}
     />
   </Modal>
-</div>
 
-<Modal bind:open={showRegisterModal}>
+  <Modal bind:open={showRegisterModal}>
   <Register bind:userState {onPasswordChangeModal} />
 </Modal>
 
@@ -401,6 +358,11 @@
     onError={onWithdrawalError}
   />
 </Modal>
+
+<Notifier></Notifier>
+</div>
+
+
 
 <style>
   .class-b {

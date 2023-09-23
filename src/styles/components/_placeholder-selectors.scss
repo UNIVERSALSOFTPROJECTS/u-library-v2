@@ -65,7 +65,14 @@
     &::placeholder {
         color: $placeholder-color;
     }
+    &.info{
+        border: 1px solid black
+    }
     @extend %disabled;
+}
+
+%notify{
+    z-index: 2020;
 }
 
 %link{
@@ -189,11 +196,56 @@
         @include modalFullScreen("mobile");
     }
     & .deposit{
+        &-body {
+            overflow: auto;
+            background-color: #ffffff;
+        }
+        &__header{
+            background-color: $color-primary;
+            display: flex;
+            flex-direction: row;
+            gap: 0.1rem;
+        }
+        &__btn-direct{
+            background-color: $g-btn;
+            border: none;
+            height: 100%;
+            padding: 0.2rem;
+            cursor: pointer;
+        }
         &__iframe{
             height: -webkit-fill-available;
-            width: 100%;
+            width: 30vw;
             border-radius: $borderR-btn;
             margin: 0 auto;
+            &__body{
+                padding: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+        &_data{
+            &__info{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+        &__btn-close{
+            padding: 0.5rem;
+        }
+        &__btn {
+            padding: 0.5rem;
+            display: flex;
+            justify-content: center;
+            &_pay{
+                background-color: #27c504c7;
+                padding: 0.4rem;
+                border-radius: 0.3rem;
+                width: 70%;
+                cursor: pointer;
+            }
         }
         &__types{
             display: grid;

@@ -1,9 +1,9 @@
 <script>
     import ServerConnection from "./../../js/server"
     import moment from "moment";
+    import EventManager from "../../js/EventManager";
+    import notify from "../../js/notify";
     import { onMount } from "svelte";
-    import Notifier from "./../Notifier.svelte";
-    import util from "./../../js/util";
 
     export let open;
     export let minAmount;
@@ -14,9 +14,9 @@
     export let onError;
 
     let amount = "";
-    let notify = {};
     
     onMount(()=>{
+        notify.setEM(EventManager);
         getPendingWithdrawal(user.token);
     })
 
@@ -70,17 +70,13 @@
         let msg = "-"
         if(!amount || amount ==='') msg = "Ingrese el monto";
         else if(amount < minAmount || amount > maxAmount)  msg = "Monto mínimo " +minAmount +" "+ user.currency + ", máximo " + maxAmount+" "+user.currency;
-        if(msg !== "-") {return notify = await util.showNotify("error","Ingrese codigo");}
+        if(msg !== "-") {return notify.error("Ingrese codigo");}
         else{ cashout();}
     }
 
     
 
 </script>
-
-<Notifier
-    bind:notify={notify}
-/>
 
 <div class="u-main-payments">
     {#if pendingWhitdrawall && pendingWhitdrawall.monto>0}

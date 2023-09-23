@@ -112,9 +112,16 @@ const ServerConnection = (() => {
             payload.platformId = conf.platformId;
             return await axios.post(url, payload, { headers });
         },
-        withdrawalBank: async (token, amount, bank, account, info, playerId, trxType, platformId, currencyISO) => {
+        confirmCashDeposit: async (token, confirm) => {
             headers['Authorization'] = token;
-            let payload = { amount, bank, account, info, playerId, trxType, platformId, currencyISO }
+            let payload = { ...confirm }
+            let url = conf.API + "/casino/api/wallet/confirmCashDeposit";
+            payload.platformId = conf.platformId;
+            return await axios.post(url, payload, { headers });
+        },
+        withdrawalBank: async (token, amount, bank, account, info, playerId, platformId, currencyISO) => {
+            headers['Authorization'] = token;
+            let payload = { amount, bank, account, info, playerId, platformId, currencyISO }
             console.log(payload);
             let url = conf.API + "/casino/api/wallet/withdrawalBank";
             return await axios.post(url, payload, { headers });
@@ -124,6 +131,12 @@ const ServerConnection = (() => {
             let url = conf.API + "/casino/api/withdrawalCashier";
             return await axios.post(url, payload, { headers });
         },
+        transactions: async (token, dateStringFrom, dateStringTo, filter, page = 1) => {
+            headers['token'] = token;
+            let url = conf.API + "/casino/api/wallet/transactions?page=" + page + "&from=" + dateStringFrom + "&to=" + dateStringTo +"&filter="+filter;
+            return await axios.get(url, {headers});
+        }
+
     }
 
     const u_user = {

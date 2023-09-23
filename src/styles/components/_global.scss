@@ -210,7 +210,23 @@ input[type=date] {
         }
     }
     .btn{
-      height: $ipt-height;
+        height: $ipt-height;
+        &.close{
+            width: #{$g-font-size + 12};
+            height: #{$g-font-size + 15};
+            background: transparent;
+            border: none;
+            padding: 0;
+            background-image: url("#{$close}");
+            background-repeat: no-repeat;
+        }
+        &.eye {
+            @include bgIconCenter($eye);
+        }
+        &.no-eye {
+            @include bgIconCenter($no-eye);
+        }
+          
     }
 
 }

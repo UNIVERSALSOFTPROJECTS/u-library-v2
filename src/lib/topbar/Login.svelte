@@ -22,12 +22,12 @@
 			let data ;
 			if (userGateway=='neco')  data = await ServerConnection.users.login(username,password);
 			else  data = await ServerConnection.u_user.login(username,password);
-			console.log("data: ",data);
 			data = data.data;
 			if(data.username=='') throw("USER_NOT_FOUND");
 			let date = new Date();
       		date.setDate(date.getDate() + 1);
 			data.expireToken= date.getTime();
+			data.playerId = data.id;
 			sessionStorage.setItem("user",JSON.stringify(data));
 			onOk(data);
 		} catch (error) {

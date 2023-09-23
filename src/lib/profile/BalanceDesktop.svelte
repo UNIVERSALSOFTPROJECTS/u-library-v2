@@ -3,7 +3,6 @@
 
   //export let open;
   export let user;
-  export let onOpenDeposit;
 
 
 
@@ -17,11 +16,6 @@
     </div>
     <div class="u-info-balance">
       <div class="u-title-balance">{user.currency} {user.balance}</div>
-    </div>
-    <div class="u-control">
-      <button class="u-control-but" on:click={onOpenDeposit}>
-        <span class="u-sub-title-button">DEPÓSITO</span>
-      </button>
     </div>
   </div>
 </div>
@@ -56,19 +50,5 @@
   .u-title-balance{
     color: black;
     font-size: 3rem;
-  }
-  .u-control-but{
-    border: none;
-    border-radius: 0.2rem;
-    height: 2rem;
-    background-color: #00BD71;
-    width: 100%;
-    cursor: pointer;
-  }
-  .u-sub-title-button{
-    border: none;
-    font-size: 14px;
-    font-weight: 700;
-    color: rgb(255, 255, 255);
   }
 </style>

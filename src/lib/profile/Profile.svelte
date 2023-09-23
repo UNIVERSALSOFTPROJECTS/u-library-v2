@@ -3,8 +3,8 @@
   import EventManager from "../../js/EventManager";
   import BalanceDesktop from "../profile/BalanceDesktop.svelte";
   import MyDataDesktop from "../profile/MyDataDesktop.svelte";
-  import RecordDesktop from "../profile/History.svelte";
   import SecurityDesktop from "../profile/SecurityDesktop.svelte";
+  import History from "../profile/History.svelte";
 
   export let user;
   export let open;
@@ -90,18 +90,18 @@
             <span>{user.currency} {user.bonus_cab}</span>
           </div>
           <div class="u-button-transfer">
-            <button class="u-withdrawal u-button"  on:click={onShowWithdrawalBank}>
-              <span>Retiro por Banco</span>
+            <button class="u-withdrawal u-button" title="Solicitar Retiro a mi banco." on:click={onShowWithdrawalBank}>
+              <span>Retiro a Banco</span>
             </button>
-            <button class="u-deposit u-button"  on:click={onOpenDepositBank}>
-              <span> Depósito por Banco</span>
+            <button class="u-deposit u-button" title="Depositar a una cuenta de banco."  on:click={onOpenDepositBank}>
+              <span> Depósito a Banco</span>
             </button>
           </div>
           <div class="u-button-transfer">
-            <button class="u-withdrawal u-button"  on:click={onShowWithdrawalCashier}>
+            <button class="u-withdrawal u-button" title="Solicitar un retiro en efectivo." on:click={onShowWithdrawalCashier}>
               <span>Retiro Efectivo</span>
             </button>
-            <button class="u-deposit u-button"  on:click={onOpenDepositCashier}>
+            <button class="u-deposit u-button" title="Confirmar y activar un deposito en efectivo." on:click={onOpenDepositCashier}>
               <span> Depósito Efectivo</span>
             </button>
           </div>
@@ -140,7 +140,7 @@
           <div class="u-content-info">
             <div>
               {#if active_section =="balance"}
-                <BalanceDesktop bind:user {onOpenDepositBank}/>
+                <BalanceDesktop bind:user />
               {/if}
               {#if active_section =="MyData"}               
                 <MyDataDesktop bind:user onSubmitted={(status, error) => onSaveProfile(status, error)}
@@ -150,11 +150,6 @@
                 <SecurityDesktop bind:user onSubmitted={(status, error) => onChangePassword(status, error)}
                 />
               {/if}
-              <!--
-              {#if active_section =="Verification"}   
-                <VerificationDesktop bind:user/>
-              {/if}
-              -->
             </div>
           </div>
         </div>
@@ -162,19 +157,10 @@
         {#if active_option=="MyRecord" }
         <div class="u-options My-acount">
           <div class="u-content-info">
-            <RecordDesktop bind:user></RecordDesktop>
+            <History bind:user></History>
           </div>
         </div>
         {/if}
-        <!--
-        {#if active_option=="Promotions" }
-        <div class="u-options My-acount">
-          <div class="u-content-info">
-           <PromotionsDesktop></PromotionsDesktop>
-          </div>
-        </div>
-        {/if}
-        -->
     </div>
   </div>
 

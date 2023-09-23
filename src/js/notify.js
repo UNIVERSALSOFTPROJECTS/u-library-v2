@@ -8,7 +8,7 @@ export default {
         EventManager.publish("notify",{mode:'success', msg});
     },
     error:(msg, error=null)=>{
-        EventManager.publish("notify",{mode:'danger', msg, error}); 
+        EventManager.publish("notify", { mode:'error', msg, error}); 
     },
     loading:(show)=>{
         let msg=null;

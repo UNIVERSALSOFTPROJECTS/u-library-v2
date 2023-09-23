@@ -1,7 +1,7 @@
 <script>
     import ServerConnection from "./../../js/server";
-    import Notifier from "./../Notifier.svelte";
-    import util from "./../../js/util";
+    import EventManager from "../../js/EventManager";
+    import notify from "../../js/notify";
     import { onMount } from "svelte";
 
     export let open;
@@ -18,7 +18,6 @@
     let bankName="";
     let name="";
     let document="";
-    let notify = {};
     
     const closeModal = () => {
         console.log("cerrando modal");
@@ -26,57 +25,57 @@
     }
 
     onMount(()=>{
+        notify.setEM(EventManager);
     })
 
     const cashout = async()=>{  
         try {
-            let data = await ServerConnection.u_wallet.withdrawalBank(user.token, amount, bankName, accountNumber,info,user.playerId,user.trxType,user.platformId,user.currency);
-            notify = util.getNotify("success",data.MSG);
+            let {data} = await ServerConnection.u_wallet.withdrawalBank(user.token, amount, bankName, accountNumber,info,user.playerId,user.platformId,user.currency);
+            notify.success("Procesado");
             user.balance = data.balance;
             onOk(data);
         } catch (error) {
             onError(error);
-            let msg = "Error al hacer retiro";
-            if(error.errorCode && error.errorCode == 'PENDING_WITHDRAWAL' ) {
-                msg = error.message
-                console.log("ERRORX", msg);
-                notify = util.getNotify("error",msg)
-            }    
         }
     }    
     const validateAmount = (event) => {
         let isNumber = /\d/.test(event.key);
         if(event.charCode === 45 || event.charCode === 43){ event.preventDefault(); return}
         if (isNumber && amount.length < 4) amount += event.key;
-        else if(isNumber && amount.length >= 4) return notify = util.getNotify("error","Alcanzó el límite de cifras");
+        else if(isNumber && amount.length >= 4) return notify.error("Alcanzó el límite de cifras");
+    }
+
+    const validateData =async () => {
+        let msg = "-"
+        if(!amount || amount ==='') msg = "Ingrese el monto";
+        else if(amount < minAmount || amount > maxAmount)  msg = "Monto mínimo " +minAmount +" "+ user.currency + ", máximo " + maxAmount+" "+user.currency;
+        if(msg !== "-") {return notify.error("Ingrese codigo");}
+        else{ cashout();}
     }
 
     const validateName = (e) => {
         let validatePatternName = /^[A-Za-zúéáíóüÜÑñÓÍÚÁÉ ]*$/.test(e.key);
         if(!validatePatternName) e.preventDefault();
-        if(name.length >= 40) return notify = util.getNotify("error","Máximo 40 caracteres");
+        if(name.length >= 40) return notify.error("Máximo 40 caracteres");
     }
     const validateDocument = (event) => {
         let isNumber = /\d/.test(event.key);
         if (isNumber && document.length < 12) document += event.key;
-        else if (isNumber && document.length >= 12) return notify = util.getNotify("error","12 dígitos como máximo");
+        else if (isNumber && document.length >= 12) return notify.error("12 dígitos como máximo");
     }
     const validateBankName = (e) => {
         let validatePatternBankName = /^[A-Za-zúéáíóüÜÑñÓÍÚÁÉ ]*$/.test(e.key);
         if(! validatePatternBankName) e.preventDefault();
-        if(bankName.length >= 40) return notify = util.getNotify("error","40 caracteres como máximo");
+        if(bankName.length >= 40) return notify.error("40 caracteres como máximo");
     }
 
     const validateAccountNumber = (event) => {
         let isNumber = /\d/.test(event.key);
         if (isNumber && accountNumber.length < 20) accountNumber += event.key;
-        else if(isNumber && accountNumber.length >= 20) return notify = util.getNotify("error","40 caracteres como máximo");
+        else if(isNumber && accountNumber.length >= 20) return notify.error("40 caracteres como máximo");
     }
 </script>
 
-<Notifier
-    bind:notify={notify}
-/>
 
 <div class="u-main-payments">
     <div class="u-wrapp-payments">
@@ -115,7 +114,7 @@
         <div class="gb-process">
             <span>Horario de retiro: Lunes a Viernes de 09:00am a 05:00pm </span>
             <span>Al solicitar su retiro usted esta aceptando los términos y condiciones</span>
-            <button class="u-button-pay" on:click={cashout}>SOLICITAR RETIRO</button>
+            <button class="u-button-pay" on:click={validateData}>SOLICITAR RETIRO</button>
         </div>
     </div>
     <button class="u-close" on:click={closeModal} >X</button>

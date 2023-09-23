@@ -1,6 +1,5 @@
 /** @type { import('@storybook/svelte').Preview } */
-import "../src/styles/app.scss";
-import "../src/styles/custom.scss";
+import "../src/styles/appDemoPlatform.scss";
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },

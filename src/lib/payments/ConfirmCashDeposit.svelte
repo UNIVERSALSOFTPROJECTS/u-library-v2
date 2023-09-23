@@ -1,35 +1,25 @@
 <script>
-  import ServerConnection from "./../../js/server";
-  import Notifier from "./../Notifier.svelte";
-  import util from "./../../js/util";
-
+  import ServerConnection from "../../js/server";
+   import notify from "../../js/notify";
   export let open;
   export let user;
   export let onOk;
   export let onError;
 
-  let depositRetailCode = "";
+  let depositCode = "";
   let active_type_method = "TD";
-  let notify = {};
 
   const closeModal = () => {
     open = false;
   };
 
-  const deposit = async () => {
-    if (!depositRetailCode) {
-      return notify = await util.showNotify("error","Ingrese codigo");
-    }
+  const confirmDeposit = async () => {
+    if (!depositCode)  return notify.error("codigo Obligatorio");
+
     try {
-      let { data } = await ServerConnection.u_wallet.depositRetail(
-        user.token,
-        depositRetailCode
-      );
-      if (data.resp == "ok") {
-        user.balance = data.saldo;
-        onOk(data);
-      } else
-        onError(data.tipo == "T_NO_ENCONTRADA" ? "BAD_CODE" : "UNKNOW_ERROR");
+      let { data } = await ServerConnection.u_wallet.confirmCashDeposit(user.token,depositCode);
+      user.balance= data.balance;
+      onOk();
     } catch (e) {
       console.log("ERROR", e);
       //e es un JSON que tiene el mensaje de porque no se pudo procesar
@@ -40,16 +30,12 @@
   };
   //getPayMethods();
 </script>
-
-<Notifier bind:notify />
 <div class="u-main-payments">
   <div class="u-wrapp-body">
     <div class="u-headboard">
       <button
         class="type-method {active_type_method == 'TD' ? 'u-type-method' : ''}"
-        on:click={() => {
-          active_type_method = "TD";
-        }}>Métodos de pago</button
+        on:click={() => {active_type_method = "TD";}}>Métodos de pago</button
       >
       <!--button class="type-method {active_type_method=='TB'?'u-type-method':''}" on:click={()=>{  active_type_method="TB"}}>Transferencias Bancarias</button-->
     </div>
@@ -63,11 +49,9 @@
             class="u-wrapp-deposit-input"
             type="text"
             placeholder="Código de recarga"
-            bind:value={depositRetailCode}
+            bind:value={depositCode}
           />
-          <button class="u-wrapp-deposit-btn" on:click={deposit}>
-            Activar</button
-          >
+          <button class="u-wrapp-deposit-btn" on:click={confirmDeposit}>Activar</button >
         </div>
         <div>
           <p>

@@ -1,4 +1,4 @@
-import DepositCashier from '../src/lib/payments/DepositCashier.svelte';
+import ConfirmCashDeposit from '../src/lib/payments/ConfirmCashDeposit.svelte';
 import DepositBank from '../src/lib/payments/DepositBank.svelte';
 import init from './init';
 init.start();
@@ -15,7 +15,7 @@ let maxAmount = 6000;
 let minAmount = 50;
 export default {
   title: 'Deposits',
-  component: DepositCashier,
+  component: ConfirmCashDeposit,
 };
 
 const onOk = () => {
@@ -26,7 +26,7 @@ const onError = () => {
 }
 
 export const DepositCassh = () => ({
-  Component: DepositCashier,
+  Component: ConfirmCashDeposit,
   props: { user, open: true, onOk, onError, assetsUrl, maxAmount, minAmount }
 });
 
