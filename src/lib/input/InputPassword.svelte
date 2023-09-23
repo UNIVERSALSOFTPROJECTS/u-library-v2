@@ -7,5 +7,5 @@
 	const togglePasswordHide = () => { showPassword =! showPassword }
 </script>
 
-<input class="ipt" type={showPassword ? 'text' : 'password'}  placeholder="Contraseña" autocomplete="new-password" on:keypress={loginEnter} on:input={dataPassword}>
+<input class="ipt" type={showPassword ? 'text' : 'password'}  placeholder="Contraseña" on:keypress={loginEnter} on:input={dataPassword}>
 <button type="button" class="btn {showPassword ? 'no-eye' : 'eye'}" name="passowrd" on:click={togglePasswordHide}></button>
