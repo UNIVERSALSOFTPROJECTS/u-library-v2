@@ -1,6 +1,7 @@
 <script>
     import Notifier from './Notifier.svelte';
-    import Login from './topbar/Login.svelte';
+    //import Login from './topbar/Login.svelte';
+    import LoginAutosaved from './topbar/LoginAutosaved.svelte';
     import Modal from '../lib/Modal.svelte';
     import Singup from './modals/SingupXg.svelte';
     import Deposit from './payments/Deposit.svelte';
@@ -123,7 +124,7 @@
    
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
-        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl}/>
+        <LoginAutosaved onOk={onLoginOk} onError={onLoginError} {assetsUrl}/>
     </Modal>
     <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
         <Singup bind:platform bind:countries bind:currencies onOk={onSignupOk} onError={onSingupError}/>

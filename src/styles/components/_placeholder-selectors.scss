@@ -162,6 +162,14 @@
             font-size: 1.5rem;
             font-weight: 700;
         }
+        &__autosaved{
+            width: 100%;
+            font-weight: 600;
+            display: flex;
+           & *{
+            cursor: pointer;
+           }
+        }
     }
 }
 @mixin deposit__model_1(){

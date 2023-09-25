@@ -15,7 +15,7 @@ input{
 }
 input[type=date] {
     -webkit-appearance: none;
-    -moz-appearance: none;
+    -moz-appearance: none;  
     appearance: none;
     background-image: url("#{$calendar}");// ewsto puede ser un mixin, tambibne se us aen el input
     background-repeat: no-repeat;
