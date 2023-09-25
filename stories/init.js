@@ -6,10 +6,10 @@ export default{
         ServerConnection.setConfig({
             API:"https://lobby-bff.apiusoft.com",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-            CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
-            CLIENT_CODE:"AAC1",
+            CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
+            CLIENT_CODE:"JU02",
             LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-            ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",
+            ASSETS:"https://assets.apiusoft.com",
             WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
             ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
             country:"+56",
