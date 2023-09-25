@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { Button, Pagination, PaginationItem, Table } from "sveltestrap";
+  //import { Button, Pagination, PaginationItem, Table } from "sveltestrap";
 
   export let current;
   export let total;
@@ -37,7 +37,7 @@
 
 <nav class="page navigation example">
   <span>Total {total} items.</span>
-  <Pagination>
+  <div>
     <!--<PaginationItem disabled={current <= 1}>
       <Button class="page-link" on:click={() => onPageClick("prev")}>
         <span aria-hidden="true">&laquo;</span>
@@ -45,11 +45,11 @@
     </PaginationItem>
   -->
     {#each pages as page}
-      <PaginationItem active={current == page}>
-        <Button class="page-link" on:click={() => onPageClick(page)}>
+      <div >
+        <button class="page-link" on:click={() => onPageClick(page)}>
           {page}
-        </Button>
-      </PaginationItem>
+        </button>
+      </div>
     {/each}
 
     <!--<PaginationItem disabled={current >= range.length}>
@@ -57,7 +57,7 @@
           <span aria-hidden="true">&raquo;</span>
         </Button>
       </PaginationItem>-->
-  </Pagination>
+  </div>
 </nav>
 
 <style>
