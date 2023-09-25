@@ -2,7 +2,7 @@ import TopBar from '../src/lib/topbar/TopBar.svelte';
 import init from './init';
 init.start();
 
-let assetsUrl = 'https://assets.apiusoft.com/bo_fontend';
+let assetsUrl = 'https://assets.apiusoft.com';
 let userState = null;
 let active_view = null;
 let user = {};

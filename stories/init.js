@@ -6,7 +6,6 @@ export default{
         ServerConnection.setConfig({
             API:"https://lobby-bff.apiusoft.com",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-            API:"https://lobby-bff.apiusoft.com",
             CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
             CLIENT_CODE:"AAC1",
             LOBBY_GAMES_API:"https://lobby.apiusoft.com",
@@ -19,6 +18,7 @@ export default{
             assetsUrl:"https://assets.apiusoft.com",
             org:"CLS",
             currency:7,//CLP
+            platform:"bo_fontend"
         })
     }
 }

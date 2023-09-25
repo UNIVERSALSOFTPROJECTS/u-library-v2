@@ -16,119 +16,22 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
 //en cambio el notifier , todas la estructura nunca varia mas que para cambiar el color y el icono, por lo que seria al contrario del modal
 
 
-.DemoPlatform {
+@include notifier("top-end", #008939, #d9534f, #ffd245);
 
-    @include notifier("top-end", #008939, #d9534f, #ffd245);
+.u-hamburger-menu .u-active {
+    background: $color-primary;
+}
 
-    //@extend "EL TIPO DE LOGIN QUE TENDRA QUI SE AGREGA"
-    .header {
-        //babieca-golden
-        @include structureHeader('babieca', 12rem, 5rem);
-
-        //@include structureHeader('babieca',8.5rem,6.5rem);
-        &__menu {
-            @include dropdown-menu("normal");
-        }
-
-        &__balance {
-            display: grid;
-            justify-items: end;
-        }
-
-        &__bono {
-            @include arrowPositionDiv($g-font-size - 2);
-        }
-
-        &__userdata {
-            display: grid;
-            grid-template-columns: 2rem auto;
-            gap: 0.5rem;
-
-            & img {
-                width: 100%;
-                border-radius: $borderR-btn;
-            }
-        }
-
-        &__userid {
-            font-size: $g-font-size - 2;
-        }
-
-        &__account {
-            @include arrowPositionDiv($g-font-size);
-        }
-
-        @media (max-width: $size-web) {
-
-            &__userdata,
-            & .btn.recharge {
-                display: none;
-            }
-        }
-    }
-
-    .btn {
-
-        &.login,
-        &.singup {
-            text-transform: uppercase;
-            font-weight: 600;
-            border: none;
-            border-radius: 0.3rem;
-            background: $color-primary;
-            box-shadow: 0 0 6px $color-primary,
-            inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0, 0%, 100%, .45),
-            inset 0 0 11px $color-primary;
-        }
-
-        &.login {
-            background: #4a4b53;
-        }
-
-        //se mandara a otra lugar esta wea
-        &.payment {
-            background: #423b62;
-
-            &.active {
-                background: $color-primary;
-            }
-        }
-
-        &.deposit {
-            background: #37ae3c;
-        }
-
-        &.amount {
-            background: #fff;
-            color: #000;
-        }
-
-        &.return {
-            width: 3rem;
-            background: #423b62;
-            position: absolute;
-            margin: 1rem;
-            background-image: url("#{$arrow-left}");
-            background-repeat: no-repeat;
-            background-size: #{$g-font-size * 2.25} #{$g-font-size * 2.25};
-            background-position: center;
-        }
-
-        &.recharge {
-            font-weight: 700;
-            background: #3c088f;
-            font-size: $g-font-size + 2;
-            width: 6rem;
-        }
-        .close{
-            background: transparent
-        }
-    }
-
-    .modal {
+.modal {
         &.login {
             // esto se tiene que convertir en un mixin , ya que las medidas de la imagen logo pueden variar mucho
             @include login__model_1(10rem);
+            @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
+            & .btn.login{ background-color: $color-primary;  font-weight: bold; text-transform: uppercase; }
+        }
+
+        &.singup {
+            @extend %singup__model_1;
             @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
         }
 
@@ -138,10 +41,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             justify-content: center;
         }
 
-        &.singup {
-            @extend %singup__model_1;
-            @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
-        }
+        
 
         &.deposit {
             @include deposit__model_1();
@@ -288,7 +188,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         }
         
     }
-}
+
 //.loading{
 //   
 //}

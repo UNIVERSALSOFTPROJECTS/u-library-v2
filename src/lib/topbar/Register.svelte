@@ -76,7 +76,7 @@
       </div>
       {/if}
       <div class="u-controls-buttons">
-        <button class="u-login" on:click={registerUser}>INSCRIBIRSE</button>
+        <button class="btn btn-primary" on:click={registerUser}>INSCRIBIRSE</button>
         
         <p>
           ¿Ya eres usuario? <button class="u-btn password" on:click={onPasswordChangeModal}

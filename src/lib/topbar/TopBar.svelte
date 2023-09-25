@@ -248,7 +248,7 @@
   <div class="user-header-principal">
     <HamburguerMenu bind:active_view {onCategoryChange} {assetsUrl} />
     <button class="content-logo" on:click={() => (active_view = "home")}>
-      <img class="logo" src="{assetsUrl}/logo.png" alt="" />
+      <img class="logo" src="{assetsUrl}/{platform}/logo.png" alt="" />
     </button>
   </div>
   <div class="u-control">
@@ -291,6 +291,7 @@
       onError={onLoginError}
       {assetsUrl}
       {userGateway}
+      {platform}
     />
   </Modal>
   <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
@@ -359,8 +360,6 @@
 
 <Notifier></Notifier>
 </div>
-
-
 
 <style>
   

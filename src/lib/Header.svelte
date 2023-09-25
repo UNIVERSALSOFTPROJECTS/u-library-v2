@@ -6,7 +6,7 @@
     import Singup from './modals/SingupXg.svelte';
     import Deposit from './payments/Deposit.svelte';
     import Withdrawal from './withdrawal/WithdrawalW.svelte';
-    import "../styles/app.scss";
+    
     import utils from '../js/util';
     import { onMount } from 'svelte';
     import { ServerConnection } from '..';

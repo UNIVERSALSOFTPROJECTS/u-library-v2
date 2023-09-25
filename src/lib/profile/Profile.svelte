@@ -2,7 +2,7 @@
 // @ts-nocheck
   import EventManager from "../../js/EventManager";
   import BalanceDesktop from "../profile/BalanceDesktop.svelte";
-  import MyDataDesktop from "../profile/MyDataDesktop.svelte";
+  import MyDataDesktop from "./MyData.svelte";
   import SecurityDesktop from "../profile/SecurityDesktop.svelte";
   import History from "../profile/History.svelte";
 

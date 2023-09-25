@@ -103,22 +103,16 @@
 </div>
 
 <style>
-
-
   .u-menu-content{
-    
     height: 90vh;
     display:block;
     left: -0.7rem;
     position: absolute;
-
   }
   .u-hamburger-menu{
     position: relative;
   }
-  .u-hamburger-menu .u-active {
-    background: #f54b00;
-  }
+  
   button {
     color:white;
     box-sizing: border-box;

@@ -6,7 +6,7 @@ $bgc-body      : null;
 $bgc-header    : null;
 $menu-shape : 'normal';//la forma que tendra el menu
 $g-color       :null;
-$color-primary :null;
+$color-success: null;
 $g-btn :null;
 $bg-profile: null;
 
@@ -33,8 +33,11 @@ $bgc-primary: null;
 
 //modal
 //$bg-modal : #212529;
-$bg-modal : #e8e8e8;
+$bg-modal : #222;
 $bg-dropdown : #fff;
+$color-primary : #edce34;
+$color-success : #004a14;
+$color-txt : #fafafa;
 //relleno entre todo los form_ login__form singup_form,etc
 $gap-form: 0.75rem;
 
@@ -84,21 +87,14 @@ $landscape_size_mobile: "(orientation: landscape) and (max-width: 1000px)";
     //$bgc-primary: #f54b00;
 }
 @if($page =="DemoPlatform") {
-    //$g-color : #fff;
     $g-color : #000000f5;
     $bg-profile : #000000;
     $bgc-header : #151515ed;
-    //$color-primary : #A61D24;
-    $color-primary : #6622b9d7;
     $g-btn: #e676ff;
     $bgc-ipt: #ffF;
     $color-ipt: #000;
-
     $ipt-height: 40px;
-    //$bgc-body :#1c2226;
     $bgc-body : #313233;
-    //$bgc-header: #000;
-    //$bgc-primary: #f54b00;
 }
 @if($page == "Jetbet24"){
     //$g-color : #fff;

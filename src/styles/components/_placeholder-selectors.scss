@@ -21,7 +21,6 @@
 
 %button{
     @extend %configBtn;
-    background-color: transparent;
     @extend %hover;
     @extend %disabled;
 }

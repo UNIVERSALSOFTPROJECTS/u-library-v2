@@ -34,7 +34,7 @@
 <div class="u-main-no-login">
 
   <div class="u-buttons">
-    <button id="u-login-btn" class="button-star" on:click={onOpenLogin}>
+    <button id="u-login-btn" class="button-access-login" on:click={onOpenLogin}>
       ACCESO
     </button>
     <button class="button-check-in" on:click={onOpenSingup}>
@@ -95,26 +95,6 @@
     }
     
   }
-  .button-star {
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0.45rem;
-      border: none;
-      color: white;
-      background-color: #6622b9d7;
-      font-size: 0.8rem;
-      width: max-content;
-    }
-    .button-check-in {
-      display: flex;
-      color: white;
-      border: none;
-      padding: 0.45rem;
-      background-color: #406a4b;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
+  
+    
 </style>

@@ -56,14 +56,9 @@ const saveMyAccount = async (event) => {
         <label for="">birthday</label>
       </div>
       <div class="u-col-input u-control-select-phone-country">
-        <select class="u-phone-country" name="" disabled>
-          <option value="" >+54</option>
-        </select>
-        <div class=" u-form-label">
           <input type="text" class="u-form-control u-form-phone" id="floatingInput" on:keypress|preventDefault={(e)=>phoneOnlyNumber(e)} bind:value={user.phone}
           >
           <label for="">Phone</label>
-        </div>   
       </div>
       <div class=" u-form-label">
         <input type="text" class="u-form-control" id="floatingInput" bind:value={user.city}>
