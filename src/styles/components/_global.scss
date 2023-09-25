@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
+:root{
+    --color-primary:#{$color-primary};
+    --color-primary-text:#333;
+    --color-success:#{$color-success};
+    --color-success-text:#fafafa;
+
+}
+
 input{
     &[type=number]{
         -moz-appearance:textfield;
@@ -240,8 +248,8 @@ input[type=date] {
     padding: 0.45rem;
     border: none;
     color: white;
-    background-color: $color-primary;
-    color: #333;
+    background-color: var(--color-primary);
+    color: var(--color-primary-text);
     font-size: 0.8rem;
     width: max-content;
 }
@@ -250,7 +258,7 @@ input[type=date] {
     color: white;
     border: none;
     padding: 0.45rem;
-    background-color: $color-success;
+    background-color: var(--color-success);
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -323,6 +331,6 @@ div{
  }
 
 .btn-primary{
-    background-color: $color-primary;
-    color:#333;
+    background-color: var(--color-primary);
+    color:var(--color-primary-text);
 }
