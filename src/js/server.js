@@ -121,7 +121,7 @@ const ServerConnection = (() => {
         },
         checkOperationCode: async (token, code) =>{
             headers['Authorization'] = token;
-            let url = conf.API + "/casino/api/wallet/checkOperationCode?code="+ code;
+            let url = conf.API + "/casino/api/wallet/checkOperationDeposit?code="+ code;
             return await axios.get(url, { headers });
         },
         withdrawalBank: async (token, params) => {
