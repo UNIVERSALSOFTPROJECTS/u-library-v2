@@ -54,9 +54,15 @@
 			{#if loadLogin}
 				<div class="loading"><p></p><p></p><p></p></div>
 				{:else}
-				Ingresar
+				<p>Ingresar</p>
 			{/if}
 		</button>
 		<div class="link">¿Olvidaste tu contraseña?</div>
     </form>
 </div>
+
+<style>
+	p{
+		color: white;
+	}
+</style>

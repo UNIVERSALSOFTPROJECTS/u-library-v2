@@ -370,6 +370,7 @@
     .notify{
         position: absolute;
         z-index: 9999;
+        color: white;
         @if($position == "top-end"){
             top: 0;
             right: 0;

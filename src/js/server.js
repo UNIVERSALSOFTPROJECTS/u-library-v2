@@ -119,10 +119,14 @@ const ServerConnection = (() => {
             payload.platformId = conf.platformId;
             return await axios.post(url, payload, { headers });
         },
-        withdrawalBank: async (token, amount, bank, account, info, playerId, platformId, currencyISO) => {
+        checkOperationCode: async (token, code) =>{
             headers['Authorization'] = token;
-            let payload = { amount, bank, account, info, playerId, platformId, currencyISO }
-            console.log(payload);
+            let url = conf.API + "/casino/api/wallet/checkOperationCode?code="+ code;
+            return await axios.get(url, { headers });
+        },
+        withdrawalBank: async (token, params) => {
+            headers['Authorization'] = token;
+            let payload = {...params }
             let url = conf.API + "/casino/api/wallet/withdrawalBank";
             return await axios.post(url, payload, { headers });
         },

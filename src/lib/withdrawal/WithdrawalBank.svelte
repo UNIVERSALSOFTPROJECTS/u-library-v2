@@ -18,6 +18,7 @@
     let bankName="";
     let name="";
     let document="";
+    let processing = false;
     
     const closeModal = () => {
         console.log("cerrando modal");
@@ -29,14 +30,27 @@
     })
 
     const cashout = async()=>{  
+        if(!amount || amount =='') return notify.error("Ingrese monto");
+    
+        if(amount < minAmount || amount > maxAmount) return notify.error("Monto mínimo " +minAmount +" "+ user.currency + ", máximo " + maxAmount+" "+user.currency);
+        if(amount > user.balance) return notify.error("Saldo insuficiente");
+        if(!name) return notify.error("Ingrese su nombre");
+        if(!document) return notify.error("Ingrese su documento de Identidad");
+        if(!bankName) return notify.error("Ingrese nombre del banco");
+        if(!accountNumber) return notify.error("Ingrese numero de cuenta");
+
         try {
-            let {data} = await ServerConnection.u_wallet.withdrawalBank(user.token, amount, bankName, accountNumber,info,user.playerId,user.platformId,user.currency);
+            processing=true;
+            let params = {amount,name,document, bankName, accountNumber,info,playerId:user.playerId,platformId:user.platformId,currencyISO:user.currency};
+            let {data} = await ServerConnection.u_wallet.withdrawalBank(user.token, params);
+            //Retiro por banco descuenta balance
             notify.success("Procesado");
             user.balance = data.balance;
             onOk(data);
         } catch (error) {
             onError(error);
         }
+        processing = false;
     }    
     const validateAmount = (event) => {
         let isNumber = /\d/.test(event.key);
@@ -45,13 +59,6 @@
         else if(isNumber && amount.length >= 4) return notify.error("Alcanzó el límite de cifras");
     }
 
-    const validateData =async () => {
-        let msg = "-"
-        if(!amount || amount ==='') msg = "Ingrese el monto";
-        else if(amount < minAmount || amount > maxAmount)  msg = "Monto mínimo " +minAmount +" "+ user.currency + ", máximo " + maxAmount+" "+user.currency;
-        if(msg !== "-") {return notify.error("Ingrese codigo");}
-        else{ cashout();}
-    }
 
     const validateName = (e) => {
         let validatePatternName = /^[A-Za-zúéáíóüÜÑñÓÍÚÁÉ ]*$/.test(e.key);
@@ -114,13 +121,19 @@
         <div class="gb-process">
             <span>Horario de retiro: Lunes a Viernes de 09:00am a 05:00pm </span>
             <span>Al solicitar su retiro usted esta aceptando los términos y condiciones</span>
-            <button class="u-button-pay" on:click={validateData}>SOLICITAR RETIRO</button>
+           
+            
+            <button class="u-button-pay" on:click={cashout} disabled={processing}>{processing?"PROCESANDO...":"SOLICITAR RETIRO"}</button>
+        
         </div>
     </div>
     <button class="u-close" on:click={closeModal} >X</button>
 </div>
 
 <style>
+    .u-button-pay:disabled{
+        background-color: rgb(210, 184, 54);
+    }
 @media only screen and (max-width: 1200px) {
     .u-main-payments{
         display: flex;

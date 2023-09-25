@@ -8,6 +8,7 @@ $menu-shape : 'normal';//la forma que tendra el menu
 $g-color       :null;
 $color-primary :null;
 $g-btn :null;
+$bg-profile: null;
 
 $bgc-btn       : "#eee";
 $border-btn    : "1px solid transparent";
@@ -84,10 +85,11 @@ $landscape_size_mobile: "(orientation: landscape) and (max-width: 1000px)";
 }
 @if($page =="DemoPlatform") {
     //$g-color : #fff;
-    $g-color : #000000;
-    $bgc-header : #5a5a5a;
+    $g-color : #000000f5;
+    $bg-profile : #000000;
+    $bgc-header : #151515ed;
     //$color-primary : #A61D24;
-    $color-primary : #9110c1;
+    $color-primary : #6622b9d7;
     $g-btn: #e676ff;
     $bgc-ipt: #ffF;
     $color-ipt: #000;

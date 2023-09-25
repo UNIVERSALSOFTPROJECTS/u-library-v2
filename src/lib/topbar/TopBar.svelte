@@ -98,14 +98,12 @@
     util.setUrlPage(active_view);
   };
 
-  const onWithdrawalError = (e) => {
-    console.log("data: ", e);
-    if (e.message && e.message == "RET_PEND") notify.error("RETIRO PENDIENTE");
-    else if (e.message && e.message == "SALDO_INSUFICIENTE")
-      notify.error("SALDO INSUFICIENTE");
-    else {
-      notify.error("Tiene un retiro pendiente");
-    }
+   const onWithdrawalBankError = (e) => {
+      notify.error("Error al procesar retiro");
+  };
+
+  const onWithdrawalCashError = (e) => {
+    notify.error("Error al procesar retiro");
   };
 
   const onWithdrawalOk = (data) => {
@@ -345,7 +343,7 @@
     bind:open={showWithdrawal}
     bind:pendingWhitdrawall
     onOk={onWithdrawalOk}
-    onError={onWithdrawalError}
+    onError={onWithdrawalBankError}
   />
 </Modal>
 
@@ -355,7 +353,7 @@
     bind:open={showWithdrawalCashier}
     bind:pendingWhitdrawall
     onOk={onWithdrawalOk}
-    onError={onWithdrawalError}
+    onError={onWithdrawalCashError}
   />
 </Modal>
 
@@ -365,19 +363,14 @@
 
 
 <style>
-  .class-b {
-    background-color: #050505b8 !important;
-    position: fixed;
-    z-index: 6;
-    top: 0;
-  }
+  
   .user-header.virtual {
     position: fixed;
     z-index: 101;
     top: 0;
   }
   .user-header {
-    background-color: #05050533;
+    background-color: #05050598;
   }
   @media only screen and (max-width: 1022px) {
     .in-desktop {

@@ -6,18 +6,19 @@
     import { onMount } from "svelte";
 
     export let open;
-    export let minAmount;
-    export let maxAmount;
     export let user;
     export let pendingWhitdrawall;
     export let onOk;
     export let onError;
 
     let amount = "";
+    let processing = false;
     
     onMount(()=>{
         notify.setEM(EventManager);
+        console.log("Verificando pendiente");
         getPendingWithdrawal(user.token);
+        console.log("Verificado pendiente");
     })
 
     const closeModal = () => {
@@ -25,6 +26,7 @@
         open = false;
     };
     const getPendingWithdrawal = async(token) => {
+        console.log("data");
         let resp_pending = await ServerConnection.u_wallet.checkPendingWithdrawal(token);
         if(resp_pending.data.monto) pendingWhitdrawall = resp_pending.data; // si tiene monto quiere decir que tiene un retiro pendiente
     };
@@ -32,6 +34,9 @@
     const cashout = async()=>{
         pendingWhitdrawall=null;
         try {
+            if(!amount) return notify.error("Ingrese monto");
+            if(amount > user.balance) return notify.error("Saldo Insuficiente");
+            processing = true;
             let resp_withdrawal = null;
             await getPendingWithdrawal(user.token);
             if(!pendingWhitdrawall ){
@@ -45,10 +50,9 @@
             user.balance = data.balance;
         } catch (e_withdrawal) {
             console.log("e_withdrawal: ", e_withdrawal)
-            if(e_withdrawal.response.data.errorCode=='OLD_TOKEN') onError("DUPLICATE_SESSION"); 
-            else if(e_withdrawal.response.data.message != 'RET_PEND') onError(e_withdrawal.response.data.message);
-            else onError(e_withdrawal.response.data)
+            onError(e_withdrawal)
         }
+        processing= false;
     };
 
     const validateAmount = (event) => {
@@ -66,13 +70,7 @@
         navigator.clipboard.writeText(finalMessage);
     };
 
-    const validateData =async () => {
-        let msg = "-"
-        if(!amount || amount ==='') msg = "Ingrese el monto";
-        else if(amount < minAmount || amount > maxAmount)  msg = "Monto mínimo " +minAmount +" "+ user.currency + ", máximo " + maxAmount+" "+user.currency;
-        if(msg !== "-") {return notify.error("Ingrese codigo");}
-        else{ cashout();}
-    }
+    
 
     
 
@@ -119,7 +117,8 @@
         </div>
         <div class="gb-process">
             <span>Al solicitar su retiro usted esta aceptando los términos y condiciones</span>
-            <button class="u-button-pay" on:click={validateData}>SOLICITAR RETIRO</button>
+            <button class="u-button-pay" on:click={cashout} disabled={processing}>{processing?"PROCESANDO...":"SOLICITAR RETIRO"}</button>
+
         </div>
     </div>
     {/if}
@@ -141,6 +140,9 @@
     .small-text{
         color: #6c757d!important;
         font-size: .875em;
+    }
+    .u-button-pay:disabled{
+        background-color: rgb(210, 184, 54);
     }
     .u-info-retail{
         display: grid;

@@ -73,17 +73,16 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         &.singup {
             text-transform: uppercase;
             font-weight: 600;
+            border: none;
+            border-radius: 0.3rem;
+            background: $color-primary;
+            box-shadow: 0 0 6px $color-primary,
+            inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0, 0%, 100%, .45),
+            inset 0 0 11px $color-primary;
         }
 
         &.login {
             background: #4a4b53;
-        }
-
-        &.singup {
-            background: $color-primary;
-            box-shadow: 0 0 6px $color-primary,
-                inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0, 0%, 100%, .45),
-                inset 0 0 11px $color-primary;
         }
 
         //se mandara a otra lugar esta wea
@@ -106,7 +105,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
 
         &.return {
             width: 3rem;
-            background: #d90094;
+            background: #423b62;
             position: absolute;
             margin: 1rem;
             background-image: url("#{$arrow-left}");
@@ -121,6 +120,9 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             font-size: $g-font-size + 2;
             width: 6rem;
         }
+        .close{
+            background: transparent
+        }
     }
 
     .modal {
@@ -132,6 +134,8 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
 
         &.profile {
             width: 100%;
+            align-items: center;
+            justify-content: center;
         }
 
         &.singup {
@@ -186,6 +190,103 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
 
     .ipt {
         @extend %input;
+    }
+
+    .profile{
+        &.content{
+            display: grid;
+            grid-template-columns: 30% 70%;
+            width: 80%;
+            height: 80vh;
+        }
+        &.personaldata{
+            background: $bg-profile;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: 1em;
+            padding-bottom: 1rem;
+            &__copycode{
+                background: transparent;
+            }
+            &__user {
+                padding-top: 0.5rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+            }
+            &__userdata {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                background-color: #4f4f5f;
+                width: 85%;
+                padding: 0.4rem;
+                border-radius: 0.3rem;
+            }
+            &__userbalance {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                background-color: #4f4f5f;
+                width: 85%;
+                padding: 0.4rem;
+                border-radius: 0.3rem;
+            }
+            &__useroptions {
+                display: flex;
+                flex-direction: column;
+                background-color: #4f4f5f;
+                width: 85%;
+                padding: 0.4rem;
+                color: white;
+                &.u-opt-select {
+                    background-color: #392456;
+                }
+            }
+        &.balance{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background-color: transparent;
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            &.btn {
+                padding: 0.5rem;
+                &_deposit {
+                    background-color: #5ba968;
+                }
+            
+                &_withdrawal {
+                    background-color: #67666B;
+                }
+            }
+        }
+        }
+        &.viewinformation{
+            gap: 0.5rem;
+            color: white;
+            font-size: 1em;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            color: black;
+            border-radius: 0 1rem 1rem 0;
+            height: 100%;
+            &_header{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.5rem;
+                background-color: #67577e;
+                color: white;
+            }
+        }
+        
     }
 }
 //.loading{

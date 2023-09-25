@@ -1,5 +1,5 @@
 import ConfirmCashDeposit from '../src/lib/payments/ConfirmCashDeposit.svelte';
-import DepositBank from '../src/lib/payments/DepositBank.svelte';
+import BankDeposit from '../src/lib/payments/BankDeposit.svelte';
 import init from './init';
 init.start();
 //import ServerConnection from '../src/js/server'
@@ -31,7 +31,7 @@ export const DepositCassh = () => ({
 });
 
 export const DepositBanK = () => ({
-  Component: DepositBank,
+  Component: BankDeposit,
   props: { user, open: true, onOk, onError }
 });
 

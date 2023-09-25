@@ -21,7 +21,7 @@
 
 %button{
     @extend %configBtn;
-    background-color: #{$bgc-btn};
+    background-color: transparent;
     @extend %hover;
     @extend %disabled;
 }
@@ -73,6 +73,7 @@
 
 %notify{
     z-index: 2020;
+    color: white;
 }
 
 %link{

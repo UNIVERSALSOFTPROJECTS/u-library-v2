@@ -102,8 +102,8 @@
       align-items: center;
       padding: 0.45rem;
       border: none;
-      color: black;
-      background-color: #f54b00;
+      color: white;
+      background-color: #6622b9d7;
       font-size: 0.8rem;
       width: max-content;
     }
@@ -112,7 +112,7 @@
       color: white;
       border: none;
       padding: 0.45rem;
-      background-color: #004a14;
+      background-color: #406a4b;
       justify-content: center;
       align-items: center;
       cursor: pointer;

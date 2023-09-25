@@ -4,6 +4,7 @@
   import EventManager from "../../js/EventManager.js";
   import { onMount } from "svelte";
   import Pagination from "../Pagination.svelte";
+  import moment from "moment";
 
   export let user;
 
@@ -28,12 +29,12 @@
 
   onMount(() => {
     (monthFrom = "" + (from.getMonth() + 1)),
-      (dayFrom = "" + (from.getDate() - from.getDate() + 1)),
-      (yearFrom = from.getFullYear());
+    (dayFrom = "" + (from.getDate() - from.getDate() + 1)),
+    (yearFrom = from.getFullYear());
 
     (monthTo = "" + (to.getMonth() + 1)),
-      (dayTo = "" + to.getDate()),
-      (yearTo = to.getFullYear());
+    (dayTo = "" + to.getDate()),
+    (yearTo = to.getFullYear());
 
     if (monthFrom.length < 2) monthFrom = "0" + monthTo;
     if (dayFrom.length < 2) dayFrom = "0" + dayFrom;
@@ -80,6 +81,7 @@
       movements.list.map((m) => {
         m.currentDate = convertDateTimeZone(m.lfecha);
       });
+
     } catch (error) {
       let msg = "Error";
       EventManager.publish("notify", { mode: "error", msg: msg });
@@ -138,26 +140,26 @@
             <th>FECHA</th>
             <th>DESCRIPCIÓN</th>
             <th>TIPO</th>
-            <th>SALIDA</th>
-            <th>INGRESO</th>
-            <th>BILLETERA</th>
-            <th>BALANCE</th>
+            <th>OUT</th>
+            <th>ING</th>
+            <th>WALLET</th>
+            <th>BLC</th>
           </tr>
         </thead>
         <tbody>
           {#each movements.list as mov}
             <tr>
               <td>{mov.trxId}</td>
-              <td>{mov.created}</td>
+              <td>{moment(mov.created).format("YY-MM-DD HH:mm:ss")}</td>
               <td>{mov.description}</td>
               <td>{mov.txType}</td>
               {#if mov.txType == "BET" || mov.txType == "WITHDRAW"}
-                <td style="color: red;">- {mov.amount}</td>
+                <td style="color: red;">- {mov.amount.toFixed(2)}</td>
               {:else}
                 <td />
               {/if}
               {#if mov.txType === "WIN" || mov.txType == "DEPOSIT"}
-                <td style="color: green;">{mov.amount}</td>
+                <td style="color: green;">{mov.amount.toFixed(2)}</td>
               {:else}
                 <td />
               {/if}
@@ -183,14 +185,12 @@
    .u-content-info{
     display: flex;
     flex-direction: column;
-    padding-left: 1rem;
-    height: 80vh;
   }
   td{
     padding: 0.5rem;
   }
   .u-buttons-options{
-    display: flex;
+    display: flex; 
     font-size: 16px;
     padding: 0.5rem;
     gap: 0.5rem;

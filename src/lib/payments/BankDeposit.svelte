@@ -56,6 +56,14 @@
     }
   };
 
+  const checkOperationCode = async () => {
+     
+      let { data } = await ServerConnection.u_wallet.checkOperationCode(
+        user.token,
+        bankDeposit.reference
+      );
+  }
+
   const deposit = async () => {
     if(!bankDeposit.targetBankAccountId) return notify.error("Banco Obligatorio");
     console.log("error");
@@ -146,6 +154,7 @@
                 aria-label="refNumber"
                 type="text"
                 bind:value={bankDeposit.reference}
+                on:blur={checkOperationCode}
               />
             </div>
             <div >
