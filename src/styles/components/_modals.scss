@@ -5,8 +5,8 @@
         @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
 
         & .btn.login {
-            background-color: var(--color-primary);
-            color: var(--color-primary-text);
+            background-color: $color-primary;
+            color: $color-primary-text;
         }
     }
         
