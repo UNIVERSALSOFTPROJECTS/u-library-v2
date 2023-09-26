@@ -4,7 +4,7 @@ import ServerConnection from '../src/js/server'
 export default{
     start:()=>{
         ServerConnection.setConfig({
-            API:"https://lobby-bff.apiusoft.com",
+            API:"https://lobby-bff-test.apiusoft.com",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
             CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
             CLIENT_CODE:"JU02",
