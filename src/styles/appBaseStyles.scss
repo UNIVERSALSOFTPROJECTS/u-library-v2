@@ -8,6 +8,9 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
 @import './components/global';
 @import './components/placeholder-selectors';
 @import './components/functions';
+@import './components/modals';
+@import './components/menus';
+@import './components/profile';
 //@import SELECCIONAS EL TIPO DE THEMA DE LOGIN QUE QUIERES AQUI
 
 //Height minimo actual es de 375px
@@ -18,184 +21,10 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
 
 @include notifier("top-end", #008939, #d9534f, #ffd245);
 
-.u-hamburger-menu .u-active {
-    background: var(--color-primary);
-}
 
-.modal {
-        &.login {
-            // esto se tiene que convertir en un mixin , ya que las medidas de la imagen logo pueden variar mucho
-            @include login__model_1(10rem);
-            @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
-            & .btn.login{ 
-                background-color: var(--color-primary);
-                color:var(--color-primary-text);
-             }
-        }
 
-        &.singup {
-            @extend %singup__model_1;
-            @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
-        }
 
-        &.profile {
-            width: 100%;
-            align-items: center;
-            justify-content: center;
-        }
+   
 
-        
+    
 
-        &.deposit {
-            @include deposit__model_1();
-            @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            justify-content: center;
-            
-        }
-
-        &.withdrawal {
-            & .modal {
-                &-body {
-                    padding: 1rem;
-                    align-content: start;
-                    width: 100%;
-                    overflow: auto;
-                }
-
-                &-dialog {
-                    max-width: 500px;
-                }
-
-                &-header {
-                    background: $color-primary;
-                }
-
-                @include modalFullScreen("mobile");
-            }
-
-            & .withdrawal {
-                &__info {
-                    @include structureInfo_1;
-                }
-
-                &__amount {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                }
-            }
-        }
-
-    }
-
-    .ipt {
-        @extend %input;
-    }
-
-    .profile{
-        &.content{
-            display: grid;
-            grid-template-columns: 30% 70%;
-            width: 80%;
-            height: 80vh;
-        }
-        &.personaldata{
-            background: $bg-profile;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-            font-size: 1em;
-            padding-bottom: 1rem;
-            &__copycode{
-                background: transparent;
-            }
-            &__user {
-                padding-top: 0.5rem;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 1rem;
-            }
-            &__userdata {
-                display: flex;
-                flex-direction: row;
-                gap: 0.5rem;
-                background-color: #4f4f5f;
-                width: 85%;
-                padding: 0.4rem;
-                border-radius: 0.3rem;
-            }
-            &__userbalance {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-                background-color: #4f4f5f;
-                width: 85%;
-                padding: 0.4rem;
-                border-radius: 0.3rem;
-            }
-            &__useroptions {
-                display: flex;
-                flex-direction: column;
-                background-color: #4f4f5f;
-                width: 85%;
-                padding: 0.4rem;
-                color: white;
-                &.u-opt-select {
-                    background-color: #392456;
-                }
-            }
-        &.balance{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            background-color: transparent;
-            padding: 0.5rem;
-            border-radius: 0.3rem;
-            &.btn {
-                padding: 0.5rem;
-                &_deposit {
-                    background-color: #5ba968;
-                }
-            
-                &_withdrawal {
-                    background-color: #67666B;
-                }
-            }
-        }
-        }
-        &.viewinformation{
-            gap: 0.5rem;
-            color: white;
-            font-size: 1em;
-            display: flex;
-            flex-direction: column;
-            background: white;
-            color: black;
-            border-radius: 0 1rem 1rem 0;
-            height: 100%;
-            &_header{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 0.5rem;
-                background-color: #67577e;
-                color: white;
-            }
-        }
-        
-    }
-
-//.loading{
-//   
-//}
-//@include animatedLoad_3linesOrbit();
-// circule
-// 3arcos
-// orbtiando

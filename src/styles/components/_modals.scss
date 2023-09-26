@@ -1,0 +1,67 @@
+.modal {
+    &.login {
+        // esto se tiene que convertir en un mixin , ya que las medidas de la imagen logo pueden variar mucho
+        @include login__model_1(10rem);
+        @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
+
+        & .btn.login {
+            background-color: var(--color-primary);
+            color: var(--color-primary-text);
+        }
+    }
+
+    &.singup {
+        @extend %singup__model_1;
+        @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
+    }
+
+    &.profile {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.deposit {
+        @include deposit__model_1();
+        @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+
+    }
+
+    &.withdrawal {
+        & .modal {
+            &-body {
+                padding: 1rem;
+                align-content: start;
+                width: 100%;
+                overflow: auto;
+            }
+
+            &-dialog {
+                max-width: 500px;
+            }
+
+            &-header {
+                background: $color-primary;
+            }
+
+            @include modalFullScreen("mobile");
+        }
+
+        & .withdrawal {
+            &__info {
+                @include structureInfo_1;
+            }
+
+            &__amount {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+        }
+    }
+
+}

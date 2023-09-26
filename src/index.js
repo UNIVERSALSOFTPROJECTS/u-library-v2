@@ -1,7 +1,8 @@
 
 //export {default as Header} from "./lib/Header.svelte";
-export { default as appBaseStyles } from "./styles/appBaseStyles.scss"; 
+export {default as appBaseStyles} from "./styles/appBaseStyles.scss"; 
 export {default as Login} from "./lib/topbar/Login.svelte";
+export {default as Pagination} from "./lib/Pagination.svelte";
 export {default as LoginAutosaved} from "./lib/topbar/LoginAutosaved.svelte";
 export {default as Deposit} from "./lib/payments/Deposit.svelte";
 export {default as ServerConnection} from "./js/server";
