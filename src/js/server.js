@@ -127,7 +127,7 @@ const ServerConnection = (() => {
         withdrawalBank: async (token, params) => {
             headers['Authorization'] = token;
             let payload = { ...params }
-            let url = conf.API + "/api/casino/wallet/withdrawalBank";
+            let url = conf.API + "/api/casino/wallet/bankWithdrawal";
             return await axios.post(url, payload, { headers });
         },
         cashout: async (token, params) => {//retirar efectivo
