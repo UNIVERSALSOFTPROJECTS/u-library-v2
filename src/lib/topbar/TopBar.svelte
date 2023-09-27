@@ -112,8 +112,6 @@
 
   const onShowWithdrawalBank = async () => {
     try {
-      let data = await backend.u_wallet.checkPendingWithdrawal(user.token);
-      console.log(data);
       showWithdrawal = true;
       showProfileModalDesktop = false;
     } catch (error) {
@@ -124,7 +122,7 @@
   const onShowWithdrawalCashier = async () => {
     try {
       console.log("entro");
-      let data = await backend.u_wallet.checkPendingWithdrawal(user.token);
+      let data = await backend.u_wallet.checkPendingCashout(user.token);
       console.log(data);
       showWithdrawalCashier = true;
       showProfileModalDesktop = false;

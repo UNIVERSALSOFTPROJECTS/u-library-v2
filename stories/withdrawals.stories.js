@@ -1,4 +1,4 @@
-import  WithdrawalCashier from '../src/lib/withdrawal/WithdrawalCashier.svelte';
+import CashOut from '../src/lib/withdrawal/CashOut.svelte';
 import WithdrawalBank  from '../src/lib/withdrawal/WithdrawalBank.svelte';
 import init from './init';
 init.start();
@@ -21,11 +21,11 @@ const onError=()=>{
 
 export const withdrawalbank = () => ({
   Component: WithdrawalBank,
-  props: { user, open:true, pendingWhitdrawall, minAmount, maxAmount,onOK,onError}
+  props: { user, open:true, minAmount, maxAmount,onOK,onError}
 });
 
 export const withdrawalcashier = () => ({
-  Component: WithdrawalCashier,
+  Component: CashOut,
   props: { user, open: true, pendingWhitdrawall, minAmount, maxAmount, onOK, onError }
 });
 
