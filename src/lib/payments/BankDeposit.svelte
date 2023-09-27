@@ -42,22 +42,18 @@
 
   const listBankAccounts = async () => {
     try {
-      let { data } = await ServerConnection.u_wallet.listBankAccounts(
-        user.token
-      );
+      let { data } = await ServerConnection.u_wallet.listBankAccounts(user.token);
       console.log(data.list);
       bankAccounts = data.list.filter((e) => e.type == "BANK");
       appPaymethods = data.list.filter((e) => e.type == "CASH");
     } catch (error) {
       console.error(error);
-      //notify = util.getNotify("error","Error al conseguir metodos de pago")
       notify.error("Error al conseguir metodos de pago");
      
     }
   };
 
   const checkOperationCode = async () => {
-     
       let { data } = await ServerConnection.u_wallet.checkOperationCode(
         user.token,
         bankDeposit.reference

@@ -15,9 +15,9 @@
   import MenuLogged from "./MenuLogged.svelte";
   import Register from "./Register.svelte";
   import notify from "../../js/notify";
-  import DepositCashier from "../payments/ConfirmCashIn.svelte";
-  import WithdrawalCashier from "../withdrawal/CashOut.svelte";
   import Notifier from "../Notifier.svelte";
+  import CashOut from "../withdrawal/CashOut.svelte";
+  import ConfirmCashIn from "../payments/ConfirmCashIn.svelte";
 
   export let userState;
   export let active_view;
@@ -312,7 +312,7 @@
     />
   </Modal>
   <Modal bind:open={depositModalCashier} bind:modalOpened showHeader={false}>
-    <DepositCashier
+    <ConfirmCashIn
       bind:user
       bind:amountsFav
       onOk={onDepositOk}
@@ -347,7 +347,7 @@
 </Modal>
 
 <Modal bind:open={showWithdrawalCashier} showHeader={false}>
-  <WithdrawalCashier
+  <CashOut
     bind:user
     bind:open={showWithdrawalCashier}
     bind:pendingWhitdrawall
