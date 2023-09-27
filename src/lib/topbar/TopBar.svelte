@@ -15,8 +15,8 @@
   import MenuLogged from "./MenuLogged.svelte";
   import Register from "./Register.svelte";
   import notify from "../../js/notify";
-  import DepositCashier from "../payments/ConfirmCashDeposit.svelte";
-  import WithdrawalCashier from "../withdrawal/WithdrawalCashier.svelte";
+  import DepositCashier from "../payments/ConfirmCashIn.svelte";
+  import WithdrawalCashier from "../withdrawal/CashOut.svelte";
   import Notifier from "../Notifier.svelte";
 
   export let userState;

@@ -1,5 +1,5 @@
 <script>
-    import ServerConnection from "./../../js/server"
+    import ServerConnection from "../../js/server"
     import moment from "moment";
     import EventManager from "../../js/EventManager";
     import notify from "../../js/notify";
@@ -27,7 +27,7 @@
     };
     const getPendingWithdrawal = async(token) => {
         console.log("data");
-        let resp_pending = await ServerConnection.u_wallet.checkPendingWithdrawal(token);
+        let resp_pending = await ServerConnection.u_wallet.checkPendingCashout(token);
         if(resp_pending.data.monto) pendingWhitdrawall = resp_pending.data; // si tiene monto quiere decir que tiene un retiro pendiente
     };
 
@@ -40,13 +40,13 @@
             let resp_withdrawal = null;
             await getPendingWithdrawal(user.token);
             if(!pendingWhitdrawall ){
-                resp_withdrawal = await ServerConnection.wallet.retailWithdrawal(user.token, amount);
+                resp_withdrawal = await ServerConnection.u_wallet.cashout(user.token, {amount} );
                 await getPendingWithdrawal(user.token);
                 onOk(resp_withdrawal?resp_withdrawal:pendingWhitdrawall);
             }else{
                 onError("PENDING_WITHDRAWAL");
             }
-            let { data } = await ServerConnection.user.getBalance(user.agregatorToken);
+            let { data } = await ServerConnection.u_user.getBalance(user.agregatorToken);
             user.balance = data.balance;
         } catch (e_withdrawal) {
             console.log("e_withdrawal: ", e_withdrawal)

@@ -98,7 +98,7 @@
               <span>Retiro Efectivo</span>
             </button>
             <button class="profile personaldata balance btn_deposit" title="Confirmar y activar un deposito en efectivo." on:click={onOpenDepositCashier}>
-              <span> Depósito Efectivo</span>
+              <span> Confirmar Recarga</span>
             </button>
           </div>
         </div>
