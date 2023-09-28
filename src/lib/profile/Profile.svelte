@@ -86,18 +86,18 @@
             <span>{user.currency} {user.bonus_cab}</span>
           </div>
           <div class="profile personaldata balance">
-            <button class="profile personaldata balance btn_withdrawal" title="Solicitar Retiro a mi banco." on:click={onShowWithdrawalBank}>
+            <button class="profile  btn btn_withdrawal" title="Solicitar Retiro a mi banco." on:click={onShowWithdrawalBank}>
               <span>Retiro a Banco</span>
             </button>
-            <button class="profile personaldata balance btn_deposit" title="Depositar a una cuenta de banco."  on:click={onOpenDepositBank}>
+            <button class="profile btn btn_deposit" title="Depositar a una cuenta de banco."  on:click={onOpenDepositBank}>
               <span> Depósito a Banco</span>
             </button>
           </div>
           <div class="profile personaldata balance">
-            <button class="profile personaldata balance btn_withdrawal" title="Solicitar un retiro en efectivo." on:click={onShowWithdrawalCashier}>
+            <button class="profile  btn btn_withdrawal" title="Solicitar un retiro en efectivo." on:click={onShowWithdrawalCashier}>
               <span>Retiro Efectivo</span>
             </button>
-            <button class="profile personaldata balance btn_deposit" title="Confirmar y activar un deposito en efectivo." on:click={onOpenDepositCashier}>
+            <button class="profile  btn btn_deposit" title="Confirmar y activar un deposito en efectivo." on:click={onOpenDepositCashier}>
               <span> Confirmar Recarga</span>
             </button>
           </div>
@@ -109,7 +109,7 @@
     <div class="profile viewinformation">
         <div class="profile viewinformation_header">
           <span>DASHBOARD</span>
-          <button class="btn close" on:click={closeModal}>X</button>
+          <button class="btn close" on:click={closeModal}></button>
         </div>
         {#if active_option=="MyProfile" }
         <div class="u-options My-acount">

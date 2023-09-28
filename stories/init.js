@@ -9,6 +9,7 @@ export default{
             CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
             CLIENT_CODE:"JU02",
             LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+            platformId: "58dc8282-ab26-4e2d-9235-be4a3e2be91d",
             ASSETS:"https://assets.apiusoft.com",
             WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
             ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",

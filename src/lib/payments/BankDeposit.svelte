@@ -49,7 +49,6 @@
     } catch (error) {
       console.error(error);
       notify.error("Error al conseguir metodos de pago");
-     
     }
   };
 

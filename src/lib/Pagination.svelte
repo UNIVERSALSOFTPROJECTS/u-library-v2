@@ -34,15 +34,13 @@
   });
 </script>
 
-<nav class="page navigation example">
+<nav class="navigation">
   <span>Total {total} items.</span>
-  <div>
+  <div class="buttons">
     {#each pages as page}
-      <div >
-        <button class="page-link" on:click={() => onPageClick(page)}>
+        <button class="btn page-link" on:click={() => onPageClick(page)}>
           {page}
         </button>
-      </div>
     {/each}
   </div>
 </nav>
@@ -62,6 +60,22 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      color: black;
+    }
+    .buttons{
+      display: flex;
+      flex-direction: row;
+      gap: 0.3rem;
+    }
+    .btn{
+      color : rgb(0, 0, 0);
+      height: 25px;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .btn:active{
+      background-color: rgb(0, 255, 255);
     }
   }
 </style>

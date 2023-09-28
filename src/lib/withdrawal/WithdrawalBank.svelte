@@ -47,10 +47,12 @@
             notify.success("Procesado");
             user.balance = data.balance;
             onOk(data);
+            closeModal();
         } catch (error) {
             onError(error);
         }
         processing = false;
+
     }    
     const validateAmount = (event) => {
         let isNumber = /\d/.test(event.key);

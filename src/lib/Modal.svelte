@@ -48,5 +48,7 @@
     background: none;
     align-items: center;
     justify-content: center;
+    height: auto;
+    overflow: inherit;
   }
 </style>

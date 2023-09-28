@@ -17,7 +17,7 @@
     if (!depositCode)  return notify.error("codigo Obligatorio");
 
     try {
-      let { data } = await ServerConnection.u_wallet.confirmCashin(user.token,{depositCode});
+      let { data } = await ServerConnection.u_wallet.confirmCashin(user.token,{code:depositCode});
       user.balance= data.balance;
       onOk();
     } catch (e) {

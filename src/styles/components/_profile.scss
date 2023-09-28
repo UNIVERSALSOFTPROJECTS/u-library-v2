@@ -106,6 +106,23 @@ $media-small: 960px;
     }
 }
 
+.profile {
+    .btn{
+        padding: 0.5rem;
+        color: white;
+        font-weight: normal;
+        text-transform: none;
+        @extend %buttonhover;
+        &_deposit{
+            background-color: $color-deposit;
+        }
+        &_withdrawal{
+            background-color: $color-withdrawal;
+        }
+    }
+}
+
+
 @media (min-width: $media-small) {
 .profile {
     &.content {
@@ -171,25 +188,9 @@ $media-small: 960px;
         }
 
         &.balance {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 48% 48%;
             background-color: transparent;
-            padding: 0.5rem;
-            border-radius: 0.3rem;
-
-            &.btn {
-                padding: 0.5rem;
-
-                &_deposit {
-                    background-color: #5ba968;
-                }
-
-                &_withdrawal {
-                    background-color: #67666B;
-                }
-            }
         }
     }
 
