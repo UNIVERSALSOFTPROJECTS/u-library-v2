@@ -52,7 +52,10 @@
 	});
 
 	function cancelAutologin(status) {
-		if (!status) clearTimeout(timerLogin);
+		if (!status){
+			clearTimeout(timerLogin);
+			localStorage.removeItem('autoSaved');
+		}
 	}
 	$:cancelAutologin(autoLogin);
 </script>
