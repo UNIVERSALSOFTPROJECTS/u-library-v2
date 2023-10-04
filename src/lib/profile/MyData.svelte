@@ -23,7 +23,7 @@
     try {
       user.serial_api_casino = user.serial;
       close();
-      await backend.saveMyAccount(user);
+      await backend.u_user.saveMyAccount(user);
       onSubmitted("ok");
     } catch (e) {
       console.log(e);
@@ -67,6 +67,10 @@
     background-color: #c4b103;
     cursor: pointer;
   }
+  .ipt {
+    border: 1px solid rgb(208 206 206);
+    color: #000;
+  }
 
   @media only screen and (max-width: 1200px) {
     .u-main-form {
@@ -74,10 +78,6 @@
       flex-direction: column;
       gap: 0.5rem;
       margin-bottom: 0.8rem;
-    }
-    .ipt {
-      border: 1px solid rgb(208 206 206);
-      color: #000;
     }
   }
   @media only screen and (min-width: 1201px) {

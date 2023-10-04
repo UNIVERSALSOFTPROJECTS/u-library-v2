@@ -40,7 +40,7 @@
       return;
     }
     try {
-      let response = await backend.changePassword(
+      let response = await backend.u_user.changePassword(
         user.token,
         securityData.newpassword,
         securityData.current_password

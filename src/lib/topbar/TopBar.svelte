@@ -9,15 +9,11 @@
   import Profile from "../profile/Profile.svelte";
   import NoLoginMenu from "./NoLoginMenu.svelte";
   import Login from "./Login.svelte";
-  import DepositBank from "../payments/BankDeposit.svelte";
-  import WithdrawalBank from "../withdrawal/WithdrawalBank.svelte";
   import { SingupW } from "../..";
   import MenuLogged from "./MenuLogged.svelte";
   import Register from "./Register.svelte";
   import notify from "../../js/notify";
   import Notifier from "../Notifier.svelte";
-  import CashOut from "../withdrawal/CashOut.svelte";
-  import ConfirmCashIn from "../payments/ConfirmCashIn.svelte";
 
   export let userState;
   export let active_view;
@@ -28,7 +24,6 @@
   export let modalOpened;
   export let assetsUrl;
   export let platform;
-  export let amountsFav = [5000, 10000, 30000, 50000];
   export let userGateway;
   export let onLogin;
 
@@ -40,13 +35,10 @@
   let showProfileModalMobile = false;
   let showProfileModalDesktop = false;
   let showPasswordChangeModal = false;
-  let showWithdrawal = false;
-  let showWithdrawalCashier = false;
-  let pendingWhitdrawall = null;
+
   let scrollPosition = 0;
   let divClass = "";
-  let depositModalOpen = false;
-  let depositModalCashier = false;
+
   let signupModalOpen = false;
 
   let countries = [{ prefix: "+56", flag: "chl" }];
@@ -98,43 +90,6 @@
     util.setUrlPage(active_view);
   };
 
-   const onWithdrawalBankError = (e) => {
-      notify.error("Error al procesar retiro");
-  };
-
-  const onWithdrawalCashError = (e) => {
-    notify.error("Error al procesar retiro");
-  };
-
-  const onWithdrawalOk = (data) => {
-    notify.success("Retiro procesado");
-  };
-
-  const onShowWithdrawalBank = async () => {
-    try {
-      showWithdrawal = true;
-      showProfileModalDesktop = false;
-    } catch (error) {
-      console.log(error);
-      notify.error("Error");
-    }
-  };
-  const onShowWithdrawalCashier = async () => {
-    try {
-      console.log("entro");
-      let data = await backend.u_wallet.checkPendingCashout(user.token);
-      console.log(data);
-      showWithdrawalCashier = true;
-      showProfileModalDesktop = false;
-      pendingWhitdrawall = data;
-    } catch (error) {
-      notify.error("Error al consultar retiro previo");
-    }
-  };
-
-  
-
-
   const onOpenLogin = () => {
     loginModalOpen = true;
     modalOpened = "login";
@@ -154,8 +109,8 @@
   const onOpenMyAccount = async () => {
     showProfileModalDesktop = true;
     document.body.style.overflow = "hidden";
-    if(userGateway=='neco'){
-       const data = await backend.getMyAccount(user.token);
+    if (userGateway == "neco") {
+      const data = await backend.getMyAccount(user.token);
       let serial_api_casino = user.serial_api_casino;
       let token = user.token;
       let agregatorToken = user.agregatorToken;
@@ -164,30 +119,10 @@
       user.token = token;
       user.agregatorToken = agregatorToken;
     }
-   
-    
   };
 
   const onPasswordChangeModal = () => {
     showPasswordChangeModal = true;
-  };
-
-  const onOpenDepositBank = () => {
-    depositModalOpen = true;
-    modalOpened = "deposit";
-    showProfileModalDesktop = false;
-    setTimeout(() => {
-      document.body.removeAttribute("style");
-    }, 100);
-  };
-
-  const onOpenDepositCashier = () => {
-    depositModalCashier = true;
-    modalOpened = "deposit";
-    showProfileModalDesktop = false;
-    setTimeout(() => {
-      document.body.removeAttribute("style");
-    }, 100);
   };
 
   const onOpenSingup = () => {
@@ -208,7 +143,7 @@
   const onLoginError = async (error) => {
     notify.error(error);
   };
-  
+
   const onSignupOk = async (user_) => {
     if (typeof user_ === "string") {
       //envio smss
@@ -226,21 +161,13 @@
     //notify = await utils.showNotify("error",error);
     notify.error(error);
   };
-  const onDepositError = async (error) => {
-    //notify = {};
-    //notify = await utils.showNotify("error",error);
-    notify.error(error);
-  };
-  const onDepositOk = async (data) => {
-    // notify = await utils.showNotify("success",data);
-    depositModalOpen = false;
-
-    notify.success(data);
-  };
 </script>
 
 <div
-  class="user-header {divClass} {active_view == 'virtual' && userState != 'logout'? 'virtual': ''} {platform}"
+  class="user-header {divClass} {active_view == 'virtual' &&
+  userState != 'logout'
+    ? 'virtual'
+    : ''} {platform}"
   id="user-header"
 >
   <div class="user-header-principal">
@@ -258,8 +185,6 @@
           {onLogout}
           {onPasswordChangeModal}
           {onOpenMyAccount}
-          {onShowWithdrawalBank}
-          {onOpenDepositBank}
         />
       </div>
     {:else}
@@ -279,8 +204,6 @@
     {/if}
   </div>
 </div>
-
-
 
 <div class={platform}>
   <Modal bind:open={loginModalOpen} bind:modalOpened>
@@ -302,65 +225,22 @@
     />
   </Modal>
 
-  <Modal bind:open={depositModalOpen} bind:modalOpened showHeader={false}>
-    <DepositBank
-      bind:user
-      bind:amountsFav
-      onOk={onDepositOk}
-      onError={onDepositError}
-      bind:open={depositModalOpen}
-    />
-  </Modal>
-  <Modal bind:open={depositModalCashier} bind:modalOpened showHeader={false}>
-    <ConfirmCashIn
-      bind:user
-      bind:amountsFav
-      onOk={onDepositOk}
-      onError={onDepositError}
-      bind:open={depositModalCashier}
-    />
-  </Modal>
-
   <Modal bind:open={showRegisterModal}>
-  <Register bind:userState {onPasswordChangeModal} />
-</Modal>
+    <Register bind:userState {onPasswordChangeModal} />
+  </Modal>
 
-<Modal bind:open={showProfileModalDesktop} showHeader={false} modalOpened={"profile"}>
-  <Profile
-    bind:user
+  <Modal
     bind:open={showProfileModalDesktop}
-    {onOpenDepositBank}
-    {onShowWithdrawalBank}
-    {onOpenDepositCashier}
-    {onShowWithdrawalCashier}
-  />
-</Modal>
+    showHeader={false}
+    modalOpened={"profile"}
+  >
+    <Profile bind:user bind:open={showProfileModalDesktop} bind:modalOpened />
+  </Modal>
 
-<Modal bind:open={showWithdrawal} showHeader={false}>
-  <WithdrawalBank
-    bind:user
-    bind:open={showWithdrawal}
-    bind:pendingWhitdrawall
-    onOk={onWithdrawalOk}
-    onError={onWithdrawalBankError}
-  />
-</Modal>
-
-<Modal bind:open={showWithdrawalCashier} showHeader={false}>
-  <CashOut
-    bind:user
-    bind:open={showWithdrawalCashier}
-    bind:pendingWhitdrawall
-    onOk={onWithdrawalOk}
-    onError={onWithdrawalCashError}
-  />
-</Modal>
-
-<Notifier></Notifier>
+  <Notifier />
 </div>
 
 <style>
-  
   .user-header.virtual {
     position: fixed;
     z-index: 101;

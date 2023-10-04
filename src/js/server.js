@@ -168,7 +168,22 @@ const ServerConnection = (() => {
             var url = conf.API + "/api/casino/user";
             var payload = { username, name, phone: phone, email, currency, password, date, smscode, country, operatorId, doctype: "", document: "", birthday: date, domain: conf.domain, usertype, platformId: conf.platformId, org: conf.org }
             return axios.post(url, payload, { headers });
+        },
+        saveMyAccount:(user) => {
+            var payload = user;
+            var user_storage = JSON.parse(sessionStorage.getItem("user"))
+            payload.token = user_storage.token;
+            payload.agregatorToken = user_storage.agregatorToken;
+            var url = conf.API + "/api/casino/user/myaccount";
+            return axios.post(url, payload, {headers})
+        },
+
+        changePassword: (userToken, newPassword, oldpass) => {
+            var payload = { userToken, newPassword, oldpass }
+            var url = conf.API + "/api/casino/user/changepassword";
+            return axios.post(url, payload,{headers})
         }
+
     }
     /* */
     return { setConfig, wallet, users, game, u_user, u_wallet }
