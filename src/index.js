@@ -10,7 +10,7 @@ export {default as Notifier} from "./lib/Notifier.svelte";
 export {default as Modal} from "./lib/Modal.svelte";
 export {default as SingupW} from "./lib/modals/SingupM.svelte";
 export { default as ConfirmCashIn } from './lib/payments/ConfirmCashIn.svelte';
-export { default as Cashout } from './lib/withdrawal/CashOut.svelte';
+export { default as CashOut } from './lib/withdrawal/CashOut.svelte';
 export { default as DepositBank } from './lib/payments/BankDeposit.svelte';
 export { default as WithdrawalBank } from './lib/withdrawal/WithdrawalBank.svelte';
 export { default as TopBar } from './lib/topbar/TopBar.svelte';
