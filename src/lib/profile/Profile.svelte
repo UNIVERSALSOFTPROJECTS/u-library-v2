@@ -3,7 +3,7 @@
   import EventManager from "../../js/EventManager";
   import BalanceDesktop from "../profile/BalanceDesktop.svelte";
   import MyDataDesktop from "./MyData.svelte";
-  import SecurityDesktop from "../profile/SecurityDesktop.svelte";
+  import Security from "./Security.svelte";
   import History from "../profile/History.svelte";
 
   export let user;
@@ -56,8 +56,13 @@
   <div class="profile content">
     <div class="profile personaldata">
         <div class="profile personaldata__user">
-          <img class="usericon1 s-pLY60ePxNKjT" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png" alt="">
-          <span>Mi Cuenta</span>
+          <div class="my_name">
+            <img class="usericon1 s-pLY60ePxNKjT" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png" alt="">
+            <span>Mi Cuenta</span>
+          </div>
+          <div class="in-mobile">
+             <button on:click={closeModal} style="color: white;">X</button>
+          </div>
         </div>
         <div class="profile personaldata__userdata">
           {user.username} #{user.serial}
@@ -109,7 +114,7 @@
     <div class="profile viewinformation">
         <div class="profile viewinformation_header">
           <span>DASHBOARD</span>
-          <button class="btn close" on:click={closeModal}></button>
+          <button class="btn close in-desktop" on:click={closeModal}></button>
         </div>
         {#if active_option=="MyProfile" }
         <div class="u-options My-acount">
@@ -137,7 +142,7 @@
                 />
               {/if}
               {#if active_section =="Security"}
-                <SecurityDesktop bind:user onSubmitted={(status, error) => onChangePassword(status, error)}
+                <Security bind:user onSubmitted={(status, error) => onChangePassword(status, error)}
                 />
               {/if}
             </div>
@@ -167,9 +172,6 @@
     border: none;
   }
   
-  
-  
-  
   .u-balance{
     display: flex;
     flex-direction: row;
@@ -197,6 +199,21 @@
     background-color: #cfd3d3;
     border-radius: 1rem;
     height: 1.8rem;
+  }
+  @media only screen and (max-width: 1200px) {
+    .in-desktop{
+      display: none;
+    }
+    .my_name{
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+  @media only screen and (min-width: 1201px) {
+    .in-mobile{
+      display: none;
+    }
   }
   
 </style>

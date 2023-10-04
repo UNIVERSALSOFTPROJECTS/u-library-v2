@@ -15,10 +15,6 @@
   export let onOk;
   export let onError;
   let bankDeposit = {};
-  bankDeposit.reference = "";
-  bankDeposit.amount = "";
-  bankDeposit.account = "";
-  bankDeposit.targetBankId;
 
   let bankAccounts = [];
   let appPaymethods = [];
@@ -33,7 +29,6 @@
 
   onMount(async () => {
     notify.setEM(EventManager);
-    bankDeposit;
     promise = listBankAccounts();
     //bankDeposit.date = moment().format("YYYY-MM-DD");
     bankDeposit.date = moment().format("YYYY-MM-DD");
@@ -57,18 +52,18 @@
         user.token,
         bankDeposit.reference
       );
+      console.log("data de code: ",data);
+      if (data.duplicate) return notify.error("El codigo se repite");
   }
 
   const deposit = async () => {
     if(!bankDeposit.targetBankAccountId) return notify.error("Banco Obligatorio");
-    console.log("error");
-    //if(!bankDeposit.amount) return notify =await util.showNotify("error","Monto Obligatorio");
-    //if(!bankDeposit.reference) return notify =await util.showNotify("error","Codigo Obligatorio");
+    if(!bankDeposit.amount) return notify.error("Monto Obligatorio");
+    if(!bankDeposit.reference) return notify.error("Codigo Obligatorio");
     //let amount_ = Number(bankDeposit.amount);
     try {
       bankDeposit.playerId = user.playerId;
       bankDeposit.currency = user.currency;
-      
       let { data } = await ServerConnection.u_wallet.bankDeposit(
         user.token,
         bankDeposit
@@ -111,9 +106,9 @@
             {/await}
             <tbody>
               {#each bankAccounts as account}
-                <tr  style={bankDeposit.targetBankAccountId == account.bankId ? "background:#ccc" : ""}>
+                <tr  style={bankDeposit.targetBankAccountId == account.bankAccountId ? "background:#ccc" : ""}>
                   <td> 
-                    <button  on:click={() => { bankDeposit.targetBankAccountId = account.bankId; }} >
+                    <button  on:click={() => { bankDeposit.targetBankAccountId = account.bankAccountId; }} >
                     <div class="u-pay-pay"> <span>{account.bank}</span>  </div>
                     </button>
                   </td>
@@ -172,56 +167,16 @@
 </div>
 
 <style>
-  @media only screen and (max-width: 1200px) {
-   
-    
-    
-    
-    .u-button-pay {
-      background: #dead1a;
-      border: none;
-      height: 2rem;
-      width: 90%;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    
-    
+  @media only screen and (max-width: 1200px) {    
     .u-pay-pay {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 0.2rem;
-    }
-    .u-form-data {
-      display: grid;
-      grid-template-columns: 47% 47%;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      gap: 0.5rem;
-    }
-    .u-sub-form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 0.5rem;
-      height: 100%;
+      color: #000;
     }
     
-    .u-content-data {
-      width: 95%;
-      height: 1.5rem;
-      border-radius: 0.5rem;
-      border: 1px solid #000;
-      padding: 0.2rem;
-      padding-left: 0.5rem;
-      font-size: 1rem;
-    }
     input:focus-visible {
       outline: 0;
     }
@@ -233,92 +188,13 @@
       padding-left: 1.5rem;
     }
     
-    .u-main-payments {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: space-around;
-      gap: 0.5rem;
-      height: 100%;
-    }
-    .u-close {
-      background: #bd992a;
-      color: black;
-      width: 40px;
-      height: 44px;
-      font-size: 28px;
-      font-weight: 800;
-      border-radius: 0.5rem;
-      cursor: pointer;
-    }
-    .u-wrapp-body {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: center;
-      background: white;
-      padding-bottom: 2rem;
-      width: 100%;
-    }
-    .u-headboard {
-      width: 100%;
-      background-color: #bd992a;
-      height: 2rem;
-    }
-    .type-method {
-      background-color: transparent;
-      border: none;
-      height: 100%;
-    }
-    .u-wrapp-payments {
-      color: black;
-      height: 100%;
-      border-radius: 0.5rem;
-      width: 100%;
-    }
     
-    .u-form-data {
-      display: grid;
-      grid-template-columns: 47% 47%;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      gap: 0.5rem;
-    }
-    .u-sub-form {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      gap: 0.5rem;
-      height: 100%;
-    }
-    .u-content-data {
-      width: 95%;
-      height: 1.5rem;
-      border-radius: 0.5rem;
-      border: 1px solid #000;
-      padding: 0.2rem;
-      padding-left: 0.5rem;
-      font-size: 1rem;
-    }
+    
+    
     input:focus-visible {
       outline: 0;
     }
     
-    .u-button-pay {
-      background: #dead1a;
-      border: none;
-      height: 2rem;
-      width: 95%;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .loading{
-      width: 100%;
-      height: 100%;
-    }
+    
   }
 </style>

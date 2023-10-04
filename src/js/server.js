@@ -97,7 +97,6 @@ const ServerConnection = (() => {
             return await axios.get(url, { headers });
         },
         listBankAccounts: async (userToken) => {
-            console.log("U-library: ", conf);
             if (!conf) throw ("CONF ID EMPTY");
             if (!conf.platformId) throw ("platformId EMPTY");
             headers['Authorization'] = userToken;
