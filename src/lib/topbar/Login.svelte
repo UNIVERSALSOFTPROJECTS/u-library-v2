@@ -1,7 +1,8 @@
 <script>
 	import ServerConnection from "../../js/server";
 	import InputPassword from "../input/InputPassword.svelte";
-
+	import notify from "../../js/notify";
+  	import Notifier from "../Notifier.svelte";
 
 
 
@@ -35,11 +36,11 @@
 			sessionStorage.setItem("user",JSON.stringify(data));
 			onOk(data);
 		} catch (error) {
-			console.log("error: ", error);
 			if(error.message == "Network Error" || error.response.data.message.includes("Connection refused")) error = "Página en mantenimiento, espere unos minutos";
 			else if(error.response.data.message == "NECO_LOGIN_FAILED") error = "Usuario o contraseña incorrecto";
 			else error = "Ocurrio un error, contactese con soporte";
 			onError(error);
+			console.log("error: ", error);
 			loadLogin = false;
 		}
 	}

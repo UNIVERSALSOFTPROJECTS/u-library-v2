@@ -54,6 +54,7 @@
       divClass = "class-b";
     }
   };
+  
   onMount(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -104,11 +105,12 @@
     sessionStorage.removeItem("user");
     showProfileModalMobile = false;
     location.reload();
+    document.body.style.overflow = "hidden";
   };
 
   const onOpenMyAccount = async () => {
     showProfileModalDesktop = true;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = "visible";
     if (userGateway == "neco") {
       const data = await backend.getMyAccount(user.token);
       let serial_api_casino = user.serial_api_casino;

@@ -11,7 +11,6 @@
   import Modal from "../Modal.svelte";
   import WithdrawalBank from "../withdrawal/WithdrawalBank.svelte";
   import CashOut from "../withdrawal/CashOut.svelte";
-  import Notifier from "../Notifier.svelte";
   import notify from "../../js/notify";
 
   export let user;
@@ -28,7 +27,6 @@
   let active_option = "MyProfile";
 
   const closeModal = () => {
-    console.log("cerrando modal");
     open = false;
   };
 
