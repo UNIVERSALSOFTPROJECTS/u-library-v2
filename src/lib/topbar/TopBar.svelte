@@ -41,7 +41,7 @@
 
   let signupModalOpen = false;
 
-  let countries = [{ prefix: "+56", flag: "chl" }];
+  let countries = [{prefix: "+51", flag: "pe"}];
   let currencies = [
     { name: "Peso chileno", code: 7, agent: 4675 }, //este codigo se toma como el id_operado en caso el tipo sea W
   ];
@@ -218,18 +218,10 @@
     />
   </Modal>
   <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
-    <SingupW
-      bind:platform
-      bind:countries
-      bind:currencies
-      onOk={onSignupOk}
-      onError={onSingupError}
-    />
+    <Register bind:countries bind:platform></Register>
   </Modal>
 
-  <Modal bind:open={showRegisterModal}>
-    <Register bind:userState {onPasswordChangeModal} />
-  </Modal>
+
 
   <Modal
     bind:open={showProfileModalDesktop}
