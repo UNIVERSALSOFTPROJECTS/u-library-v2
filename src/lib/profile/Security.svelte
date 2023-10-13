@@ -46,7 +46,7 @@
         securityData.current_password
       );
       console.log("resp: ", response);
-      if (response.errorCode == "CHANGE_PASSWORD_FAILED") {
+      /*if (response.errorCode == "CHANGE_PASSWORD_FAILED") {
         EventManager.publish("notify", {
           mode: "error",
           msg: "Contraseña actual incorrecta",
@@ -57,7 +57,7 @@
           msg: "Contraseña cambiada exitosamente",
         });
         cleanInputs();
-      }
+      }*/
     } catch (error) {
       console.log(error);
     }

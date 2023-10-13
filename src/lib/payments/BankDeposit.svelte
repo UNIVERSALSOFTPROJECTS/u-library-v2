@@ -30,7 +30,6 @@
   onMount(async () => {
     notify.setEM(EventManager);
     promise = listBankAccounts();
-    //bankDeposit.date = moment().format("YYYY-MM-DD");
     bankDeposit.date = moment().format("YYYY-MM-DD");
 
   });
