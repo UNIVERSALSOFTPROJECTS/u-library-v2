@@ -10,6 +10,7 @@ $g-color       :null;
 $color-success: null;
 $g-btn :null;
 $bg-profile: null;
+$g-text-color : null;
 
 $bgc-btn       : "#eee";
 $border-btn    : "1px solid transparent";
@@ -92,7 +93,8 @@ $landscape_size_mobile: "(orientation: landscape) and (max-width: 1000px)";
     //$bgc-primary: #f54b00;
 }
 @if($page =="DemoPlatform") {
-    $g-color : #fffffff5;
+    $g-color : #000000f5;
+    $g-text-color: #fff;
     $bg-profile : #000000;
     $bgc-header : #151515ed;
     $g-btn: #e676ff;

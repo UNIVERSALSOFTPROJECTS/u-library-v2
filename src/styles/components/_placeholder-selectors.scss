@@ -200,6 +200,7 @@
         }
         &-content{
             border: 1px solid $color-primary;
+            color: $g-text-color;
         }
         &-body{
             width: 260px;
@@ -241,7 +242,6 @@
 @mixin deposit__model_1(){
     & .modal{
         &-body {
-            padding: 1rem;
             align-content: start;
             width: 100%;
             overflow: auto;
@@ -290,7 +290,6 @@
         }
         &__iframe{
             height: -webkit-fill-available;
-            width: 30vw;
             border-radius: $borderR-btn;
             margin: 0 auto;
             &__body{
@@ -417,7 +416,7 @@
     }
     & .dropdown{
         &-menu > *{
-            color: #000;
+            color: #493434;
             padding: 0.25rem 0.5rem;
         }
     }

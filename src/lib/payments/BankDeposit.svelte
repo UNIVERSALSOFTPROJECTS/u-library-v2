@@ -77,8 +77,8 @@
   };
 </script>
 
-<div class="modal deposit">
-  <div class="deposit-body">
+<div class="modal deposit ">
+  <div class="modal-body deposit-body">
     <div class="deposit__header">
       <button class="deposit__btn-direct">Transferencias Directas</button>
       <button disabled class="deposit__btn-direct {active_type_method=='TB'?'u-type-method':''}" on:click={()=>{  active_type_method="TB"}}>Pasarelas</button>
