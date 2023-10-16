@@ -24,7 +24,6 @@
 
   let modalShowWithdrawalBank = false;
   let modalCashOut = false;
-  let pendingWhitdrawall = null;
   let modalShowDepositBank = false;
   let modalShowConfirmDeposit = false;
   let icon = true;
@@ -72,7 +71,6 @@
     const copyId = "Id: " + user.id;
 
     const finalMessage = copyUser + copyId;
-    //navigator.clipboard.writeText(pendingWhitdrawall.codigo);
     navigator.clipboard.writeText(finalMessage);
   };
 
@@ -88,9 +86,7 @@
   const showCashOut = async () => {
     try {
       console.log("entro a funcion abrir modal");
-      let data = await backend.u_wallet.checkPendingCashout(user.token);
       modalCashOut = true;
-      pendingWhitdrawall = data;
     } catch (error) {
       console.log(error);
       notify.error("Error al consultar retiro previo");
@@ -335,7 +331,7 @@
 </Modal>
 
 <Modal bind:open={modalCashOut} showHeader={false}>
-  <CashOut bind:user bind:open={modalCashOut} bind:pendingWhitdrawall />
+  <CashOut bind:user bind:open={modalCashOut}  />
 </Modal>
 
 <style>

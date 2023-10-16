@@ -7,8 +7,8 @@
 
   export let open;
   export let user;
-  export let pendingWhitdrawall;
-
+  
+  let pendingWhitdrawall = null;
   let amount = "";
   let processing = false;
 
@@ -25,8 +25,10 @@
       let resp_pending = await ServerConnection.u_wallet.checkPendingCashout(
           token
           );
+      if (resp_pending.data.pending){
         pendingWhitdrawall = resp_pending.data; 
         console.log("retiro:", pendingWhitdrawall);
+      }
   };
 
   const cashout = async () => {
