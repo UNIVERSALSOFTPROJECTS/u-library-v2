@@ -228,7 +228,7 @@
     showHeader={false}
     modalOpened={"profile"}
   >
-    <Profile bind:user bind:open={showProfileModalDesktop} bind:modalOpened />
+    <Profile {onLogout} bind:user bind:open={showProfileModalDesktop} bind:modalOpened />
   </Modal>
 
   <Notifier />

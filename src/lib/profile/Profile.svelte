@@ -16,6 +16,11 @@
   export let user;
   export let open;
   export let modalOpened;
+  export let onLogout;
+  export const logout = () => {
+    //FALTA ir a Bancked a destruir session
+    onLogout();
+  };
 
   let modalShowWithdrawalBank = false;
   let modalCashOut = false;
@@ -239,6 +244,9 @@
         active_option = "MyRecord";
       }}>Historial</button
     >
+    <button class="profile personaldata__useroptions" on:click={logout}>
+      Cerrar Sesión
+    </button>
   </div>
   <div class="profile viewinformation">
     <div class="profile viewinformation_header">
