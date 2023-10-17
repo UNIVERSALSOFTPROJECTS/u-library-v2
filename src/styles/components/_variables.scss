@@ -10,6 +10,7 @@ $g-color       :null;
 $color-success: null;
 $g-btn :null;
 $bg-profile: null;
+$g-text-color : null;
 
 $bgc-btn       : "#eee";
 $border-btn    : "1px solid transparent";
@@ -90,16 +91,6 @@ $landscape_size_mobile: "(orientation: landscape) and (max-width: 1000px)";
     $bgc-body :#313233;
     //$bgc-header: #000;
     //$bgc-primary: #f54b00;
-}
-@if($page =="DemoPlatform") {
-    $g-color : #000000f5;
-    $bg-profile : #000000;
-    $bgc-header : #151515ed;
-    $g-btn: #e676ff;
-    $bgc-ipt: #ffF;
-    $color-ipt: #000;
-    $ipt-height: 40px;
-    $bgc-body : #313233;
 }
 @if($page == "Jetbet24"){
     //$g-color : #fff;

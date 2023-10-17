@@ -174,13 +174,13 @@ const ServerConnection = (() => {
             var user_storage = JSON.parse(sessionStorage.getItem("user"))
             payload.token = user_storage.token;
             payload.agregatorToken = user_storage.agregatorToken;
-            var url = conf.API + "/api/casino/user/myaccount";
+            var url = conf.API + "/api/casino/myAccount";
             return axios.post(url, payload, {headers})
         },
 
-        changePassword: (userToken, newPassword, oldpass) => {
-            var payload = { userToken, newPassword, oldpass }
-            var url = conf.API + "/api/casino/user/changepassword";
+        changePassword: (userToken, newPassword, oldPassword) => {
+            var payload = { userToken, newPassword, oldPassword }
+            var url = conf.API + "/api/casino/changepassword";
             return axios.post(url, payload,{headers})
         }
 

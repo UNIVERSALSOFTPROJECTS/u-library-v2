@@ -11,16 +11,19 @@
   import Modal from "../Modal.svelte";
   import WithdrawalBank from "../withdrawal/WithdrawalBank.svelte";
   import CashOut from "../withdrawal/CashOut.svelte";
-  import Notifier from "../Notifier.svelte";
   import notify from "../../js/notify";
 
   export let user;
   export let open;
   export let modalOpened;
+  export let onLogout;
+  export const logout = () => {
+    //FALTA ir a Bancked a destruir session
+    onLogout();
+  };
 
   let modalShowWithdrawalBank = false;
   let modalCashOut = false;
-  let pendingWhitdrawall = null;
   let modalShowDepositBank = false;
   let modalShowConfirmDeposit = false;
   let icon = true;
@@ -28,7 +31,6 @@
   let active_option = "MyProfile";
 
   const closeModal = () => {
-    console.log("cerrando modal");
     open = false;
   };
 
@@ -69,7 +71,6 @@
     const copyId = "Id: " + user.id;
 
     const finalMessage = copyUser + copyId;
-    //navigator.clipboard.writeText(pendingWhitdrawall.codigo);
     navigator.clipboard.writeText(finalMessage);
   };
 
@@ -85,9 +86,7 @@
   const showCashOut = async () => {
     try {
       console.log("entro a funcion abrir modal");
-      let data = await backend.u_wallet.checkPendingCashout(user.token);
       modalCashOut = true;
-      pendingWhitdrawall = data;
     } catch (error) {
       console.log(error);
       notify.error("Error al consultar retiro previo");
@@ -241,6 +240,9 @@
         active_option = "MyRecord";
       }}>Historial</button
     >
+    <button class="profile personaldata__useroptions" on:click={logout}>
+      Cerrar Sesión
+    </button>
   </div>
   <div class="profile viewinformation">
     <div class="profile viewinformation_header">
@@ -329,7 +331,7 @@
 </Modal>
 
 <Modal bind:open={modalCashOut} showHeader={false}>
-  <CashOut bind:user bind:open={modalCashOut} bind:pendingWhitdrawall />
+  <CashOut bind:user bind:open={modalCashOut}  />
 </Modal>
 
 <style>

@@ -1,6 +1,8 @@
 <script>
-	import ServerConnection from "../../js/server";
-	import InputPassword from "../input/InputPassword.svelte";
+  import ServerConnection from "../../js/server";
+  import InputPassword from "../input/InputPassword.svelte";
+  import notify from "../../js/notify";
+  import Notifier from "../Notifier.svelte";
 
 	export let onOk;
 	export let onError;

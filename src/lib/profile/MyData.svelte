@@ -21,9 +21,18 @@
       return;
     }
     try {
-      user.serial_api_casino = user.serial;
+      let params = {
+        playerId: user.playerId,
+        phone: user.phone,
+        state: 1,
+        address: user.address,
+        city: user.city,
+        serial: user.serial
+
+      }
+      //user.serial_api_casino = user.serial;
       close();
-      await backend.u_user.saveMyAccount(user);
+      await backend.u_user.saveMyAccount(params);
       onSubmitted("ok");
     } catch (e) {
       console.log(e);
@@ -44,8 +53,8 @@
     bind:value={user.phone}
     placeholder="Ingrese su número..."
   />
-  <input type="text" class="ipt" bind:value={user.city} />
-  <input type="text" class="ipt" bind:value={user.address} />
+  <input type="text" class="ipt" bind:value={user.city} placeholder="Ciudad"/>
+  <input type="text" class="ipt" bind:value={user.address} placeholder="Dirección"/>
   <select class="slc ipt" name="country" bind:value={user.country} disabled>
     <option value="51">Peru</option>
   </select>
