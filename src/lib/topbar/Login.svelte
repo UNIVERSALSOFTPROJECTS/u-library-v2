@@ -2,9 +2,6 @@
 	import ServerConnection from "../../js/server";
 	import InputPassword from "../input/InputPassword.svelte";
 
-
-
-
 	export let onOk;
 	export let onError;
 	export let assetsUrl;
@@ -15,9 +12,7 @@
 	let username;
 	let loadLogin = false;
 
-	const loginEnter = (e) => {
-    	if (e.charCode === 13) loginClick();
-  	};
+	const loginEnter = (e) => { if (e.charCode === 13) loginClick() };
 
 	async function loginClick(){
 		if(!username || !password ) return onError("Todos los campos son obligatorios");
@@ -47,14 +42,14 @@
 
 <div class="modal-body">
   	<div class="login__title">Bienvenido a</div>
-    <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-main">
+    <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-{platform}">
     <div></div>
     <form class="login__form">
 		<input type="text" class="ipt" placeholder="Usuario" on:keypress={loginEnter} bind:value={username}>
 		<div class="login__ipt--pass">
 			<InputPassword bind:password {loginEnter}/>
 		</div>
-		<button type="button" class="btn login" disabled="{loadLogin}" on:click={loginClick}>
+		<button type="button" class="btn singup" disabled="{loadLogin}" on:click={loginClick}>
 			{#if loadLogin}
 				<div class="loading"><p></p><p></p><p></p></div>
 				{:else}

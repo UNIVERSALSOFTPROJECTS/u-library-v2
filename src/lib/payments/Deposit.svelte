@@ -41,12 +41,14 @@
             payMethods = data;
             loadDeposit = false;
 		} catch (error) {
+            console.log(error);
             if(user == null) error = "Sesión expirada!, cerrando sesión";//y hacer logout
             else error = "Ocurrio un error, contactese con soporte";
 			onError(error);
             loadDeposit = false;
 		}
     }
+
    async function validateDeposit(pay){
         if (amountDeposit < pay.min) return onError("El monto mínimo de depósito es "+pay.min+" "+ pay.iso);
         else if(amountDeposit > pay.max) return onError("El monto máximo de depósito es "+pay.max+" "+ pay.iso);
@@ -67,11 +69,13 @@
             }
         }
     }
+
     const openPayMethod = (typePayment) => {
         paySelected = typePayment;
         if (paySelected.virtual === 0) paySelected.cta = JSON.parse(typePayment.cta);      
         typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
     }
+    
     const closePayMethod = () => {
         paySelected = '';
         amountDeposit = '';
@@ -82,6 +86,7 @@
         bankDeposit.aditional='';
         bankDeposit.reference='';
     }
+
     async function validateDepositBank() {
         if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '') return onError("Todos los campos son obligatorios"); 
             bankDeposit.originBank = paySelected.id;
@@ -91,6 +96,7 @@
             else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError("Depósito cancelado, tiene una solicitud pendiente");
             else onError("Ocurrio un error, contactese con soporte");
     }
+    
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
 </script>
 

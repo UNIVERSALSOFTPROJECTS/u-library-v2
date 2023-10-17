@@ -32,9 +32,14 @@ export const showHeaderGoldenbet = ()=>({
   Component:Header,
   props:{user, assetsUrl:assetsUrl+"/goldenbet", platform:'Goldenbet'}
 })
+
 export const showHeaderColisosport = ()=>({
   Component:Header,
   props:{user, assetsUrl:assetsUrl+"/coliseosport", platform:'Coliseosport'}
+})
+export const showHeaderApuestadepana = ()=>({
+  Component:Header,
+  props:{user, assetsUrl, platform:'Apuestadepana'}
 })
 
 export const showHeaderSuperderby = ()=>({
@@ -44,5 +49,5 @@ export const showHeaderSuperderby = ()=>({
 
 export const showHeaderJetbet24 = ()=>({
   Component:Header,
-  props:{user, assetsUrl:assetsUrl+"/jetbet24", platform:'Jetbet24'}
+  props:{user, assetsUrl, platform:'Jetbet24'}
 })
