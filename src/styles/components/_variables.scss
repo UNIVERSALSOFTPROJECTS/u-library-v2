@@ -12,12 +12,15 @@ $g-btn :null;
 $bg-profile: null;
 $g-text-color : null;
 
+$g-text-color : white;
+
 $bgc-btn       : "#eee";
 $border-btn    : "1px solid transparent";
 $borderR-btn   : 0.25rem;
-$bgc-ipt    : #000;
+$bgc-ipt    : #fff;
 $color-ipt : #000;
-$ipt-height : inherit;
+//$ipt-height : inherit;
+$ipt-height : 40px;
 //$shadow-ipt    : "0 0 0 0.1rem #383838";
 
 $icon-black : '000';
