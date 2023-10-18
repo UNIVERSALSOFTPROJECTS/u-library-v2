@@ -117,17 +117,17 @@
       justify-content: space-between;
       gap: 0.5rem;
       width: 100%;
+      overflow: auto;
     }
     .form-container{
       align-items: center;
-      width: 50%;
+      width: 80%;
       color: #000;
-      padding: 0.5rem;
-      margin: 0.5rem;
       display: flex;
       flex-direction: column;
       align-items: start;
       gap: 0.5rem;
+      
     }
     .ipt {
       border: 1px solid rgb(208 206 206);
