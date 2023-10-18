@@ -130,8 +130,8 @@
         <DropdowPrefix {countries} bind:country/>
         <input type="number" class="ipt" min="0" placeholder="Teléfono" autocomplete="off" bind:value={phone}>
     </div>
-    <div class="singup__sms">
-        <button type="button" class="btn btn-default" on:click={preRegisterClick} disabled={loadSms}>
+    <div class="singup__sms">   
+        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
             {#if !activeSMS}
                 {#if loadSms}
                     <div class="loading"><p></p><p></p><p></p></div>
@@ -149,7 +149,7 @@
         <label for="chk_conditions"></label> 
         <div>Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de {platform}.</div>
     </div>
-    <button type="button" class="btn btn-primary singup" on:click={registerClick} disabled={loadSingup}>
+    <button type="button" class="btn singup" on:click={registerClick} disabled={loadSingup}>
         {#if loadSingup}
             <div class="loading"><p></p><p></p><p></p></div>
             {:else}

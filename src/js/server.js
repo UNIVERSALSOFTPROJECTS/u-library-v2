@@ -60,11 +60,11 @@ const ServerConnection = (() => {
             let url = conf.API + `/balance/${userToken}`;
             return axios.get(url, { headers });
         },
-        preRegister: (username, email, phone, platform) => {
+        preRegister: (username, email, phone, platform,codeAgent) => {
             var url = conf.API + "/user/preRegister";
             //console.log("conf here: ",conf)
             if (!conf.org) throw "ORG_MANDATORY";
-            var payload = { username, email, phone, org: conf.org, platform }
+            var payload = { username, email, phone, org: conf.org, platform, codeAgent }
             return axios.post(url, payload, { headers });
         },
         login: (username, password) => {

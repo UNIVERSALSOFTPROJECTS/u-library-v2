@@ -31,6 +31,7 @@
 			data.expireToken= date.getTime();
 			sessionStorage.setItem("user",JSON.stringify(data));
 			if (autoLogin && !localStorage.getItem('autoSaved'))localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`);
+			if(timerLogin) clearTimeout(timerLogin);
 			onOk(data);
 		} catch (error) {
 			console.log("error: ", error);

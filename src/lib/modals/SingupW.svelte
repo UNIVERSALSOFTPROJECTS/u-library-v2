@@ -1,10 +1,4 @@
 <script>
-
-    //ESTE CAJERO ES OPERACION genereica
-    // EL MISMO CLIENTE , les da cajas a otrod clientes suyo para que cada uno de manera independiente se maneje por codigo de agente, aqui se mustra el codigo de agente
-
-
-
     import { onMount } from 'svelte';
     import ServerConnection from "../../js/server";
     import DropdowPrefix from '../dropdown/DropdowPrefix.svelte';
@@ -15,9 +9,9 @@
     export let onOk;
     export let onError;
     export let platform;
-    export let usertype;
     export let countries;
-
+    export let currencies;
+    let usertype;
     //loading
     let loadSms;
     let loadSingup;
@@ -34,41 +28,47 @@
     let email;
     let password;
     let operatorId;
-    let currency;//este se detecta al enviar codigo de agente por sendSMS
+    let currency;
     let phone;
     let smscode;
     let doctype;
     let document;
     let term_conditions;
-    //operatorId = code agent, in usertype
-
+ 
     //validations imput -utils JS
     const justTextValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\p{L}\s]/gu, "") }
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
     const notWhiteSpace = (e) =>{ e.target.value = e.target.value.replace(/[^\S+$]/g, "") }
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     function counterResendSms() {
         activeSMS = true;
         minutes = 2;
         seconds = 0;
         const timer = setInterval(() => {
-        if (seconds === 0 && minutes !== 0) {
-            seconds = 59;
-            minutes -= 1;
-        } else if (minutes === 0 && seconds === 0) {
-            activeSMS = false;
-            clearInterval(timer);
-        } else {
-            seconds -= 1;
-        }
+            if (seconds === 0 && minutes !== 0) {
+                seconds = 59;
+                minutes -= 1;
+            } else if (minutes === 0 && seconds === 0) {
+                activeSMS = false;
+                loadSms = false;
+                clearInterval(timer);
+            } else {
+                seconds -= 1;
+            }
         }, 1000);
+    }
+    const validationEmail = () =>{
+        let isValidEmail = emailPattern.test(email);
+        return isValidEmail;
     }
 
     async function preRegisterClick(){
-        if(!name || !date || !email || !username || !password || !phone || !codeAgent) return onError("Todos los campos son obligatorios");
+        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios");// ESTO PUEDE VARIAR SEGUN EL TIPO DE REGISTRO REQUERIDO
+        if (!validationEmail()) return onError("El e-mail es inválido");
         try {
             loadSms = true;
-            await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,codeAgent);
+            await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
             onOk("SMS enviado!, verifique su celular");
             counterResendSms();
         } catch (error) {
@@ -80,24 +80,30 @@
             onError(error);
             loadSms = false;
         }
-    }
+    }   
 
     async function registerClick(){
-        if(!name || !date || !email || !username || !password || !phone || !codeAgent) return onError("Todos los campos son obligatorios");
+        if(!name || !date || !email || !username || !password || !phone || !currency) return onError("Todos los campos son obligatorios"); // ESTO PUEDE VARIAR SEGUN EL TIPO DE REGISTRO REQUERIDO
+        if (!validationEmail()) return onError("El e-mail es inválido");
         if (password.length <= 5) return onError("La contraseña debe tener 6 caracteres como mínimo");
+        if (codeAgent) {
+            if (codeAgent.toString().length == 8)  operatorId = Math.floor(codeAgent / 10000);
+            else return onError("Código de agente inválido");
+        }
         if(!smscode) return onError("Ingrese el código de verificación");
         if(!term_conditions) return onError("Debe aceptar los términos y condiciones");
         try {
-  
-            //operatorId = codeAgent.slice(0, 4); // esto es para texto XD
-            operatorId = Math.floor(codeAgent / 1000);
-
-        
-            const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
+            loadSingup = true;
+            usertype = codeAgent?'X':'W';
+            username = username.trim();
+            const {data} = await ServerConnection.users.register(username,name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
+            data.username = username;
+            data.password = password;
             onOk(data);
         } catch (error) {
-            console.log(error);
             if(error.response.data.message == 'SMS invalid') error = 'El código SMS es incorrecto';
+            else if(error.response.data.message == '{resp=Err, Id=2, Msg=El correo o el Usuario ya Exite}') error = 'El e-mail ya esta registrado';
+            else if(error.response.data.message == '{resp=Err, Id=21, Msg=No existe ese id de grupo}') error = 'Código de agente inválido';
             else error = "Ocurrio un error, contactese con soporte";
             onError(error);
             loadSingup = false;
@@ -113,21 +119,21 @@
             <DropdownDate bind:date/>
         </div>
     </div>
-
     <input type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" bind:value={email}>
     <input type="text" class="ipt" placeholder="Nombre de usuario" autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
     <div class="singup__form--pass">
         <InputPassword bind:password/>
     </div>
-    <input type="number" class="ipt" min="0" placeholder="Código de agente" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>
+    <DropdownCurrencies {currencies} bind:operatorId bind:currency/>
+    <!--input type="number" class="ipt" min="0" placeholder="Código de agente (opcional)" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}-->
     <div class="singup__phone">
         <DropdowPrefix {countries} bind:country/>
         <input type="number" class="ipt" min="0" placeholder="Teléfono" autocomplete="off" bind:value={phone}>
     </div>
     <div class="singup__sms">
-        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={activeSMS}>
+        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
             {#if !activeSMS}
-                {#if activeSMS}
+                {#if loadSms}
                     <div class="loading"><p></p><p></p><p></p></div>
                     {:else}
                     Generar código SMS
@@ -138,12 +144,12 @@
         </button>
         <input type="number" class="ipt" min="0" placeholder="Código" autocomplete="off" bind:value={smscode} on:input={justNumbersValidate}>
     </div>
-    <div class="singup__conditions">   
+   <div class="singup__conditions">
         <input type="checkbox" id="chk_conditions" bind:checked={term_conditions}/>
         <label for="chk_conditions"></label> 
         <div>Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de {platform}.</div>
     </div>
-    <button type="button" class="btn singup" on:click={registerClick} disabled={loadSingup}>
+    <button type="button" class="btn btn-primary singup" on:click={registerClick} disabled={loadSingup}>
         {#if loadSingup}
             <div class="loading"><p></p><p></p><p></p></div>
             {:else}

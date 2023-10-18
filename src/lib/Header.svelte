@@ -1,11 +1,12 @@
 <script>
     import Notifier from './Notifier.svelte';
-    //import Login from './topbar/Login.svelte';
-    import LoginAutosaved from './topbar/LoginAutosaved.svelte';
+    import Login from './topbar/Login.svelte';
+    //import LoginAutosaved from './topbar/LoginAutosaved.svelte';
     import Modal from '../lib/Modal.svelte';
     import Singup from './modals/SingupXg.svelte';
     import Deposit from './payments/Deposit.svelte';
-    import Withdrawal from './withdrawal/WithdrawalW.svelte';
+    //import Withdrawal from './withdrawal/WithdrawalW.svelte';
+    import WithdrawalX from './withdrawal/WithdrawalX.svelte';
     
     import utils from '../js/util';
     import { onMount } from 'svelte';
@@ -28,13 +29,15 @@
     //Deposit Modal
     let notify = {};
     //datos de registro M
-    //COLLISESPORT//let countries  = [ {prefix:"+56",flag:"chl"} ];
+    //COLLISESPORT
+    //let countries  = [ {prefix:"+56",flag:"chl"} ];
     //JETBET24 
     let countries  = [ {prefix:"+216",flag:"tnz"} ];
     //operatorId BO  = code agent - type W
-    let currencies  = [
-      {name:"Peso chileno", code:7 , agent:4675},//este codigo se toma como el id_operado en caso el tipo sea W
-    ];
+    //let currencies  = [
+    ////  {name:"Peso chileno", code:7 , agent:4675},//este codigo se toma como el id_operado en caso el tipo sea W
+    //  {name:"Peso chileno", code:7 , agent:6546}, //aPUESTA DE PANA
+    //];
     // fin de registro m
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
@@ -96,7 +99,7 @@
 <div class="{platform}">
     <header class="header {activeSession?'logued':''}">
         <button class="btn header__menu {isToggleOn?'is-open':''}" on:click={toggleMenuBar}><span></span></button>
-        <img class="header__logo" src="{assetsUrl}/logo.png" alt="logo-main">
+        <img class="header__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-main">
         <div></div>
         {#if activeSession}
             <div class="header__userdata">
@@ -120,20 +123,22 @@
         -->
     </header>
 
-    <button class="btn singup" on:click={onOpenWithdrawal}>Retirow</button>
+    <button class="btn singup" on:click={onOpenWithdrawal}>RetiroX</button>
    
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
-        <LoginAutosaved onOk={onLoginOk} onError={onLoginError} {assetsUrl}/>
+        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} bind:platform/>
     </Modal>
     <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
-        <Singup bind:platform bind:countries bind:currencies onOk={onSignupOk} onError={onSingupError}/>
+        <!--Singup bind:platform bind:countries bind:currencies onOk={onSignupOk} onError={onSingupError}/-->
+        <Singup bind:platform bind:countries onOk={onSignupOk} onError={onSingupError}/>
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
         <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError}/>
     </Modal>
     <Modal bind:open={withdrawalModalOpen} bind:modalOpened title="Retiro">
-        <Withdrawal bind:user onOk={onWithdrawalOk} onError={onWithdrawalError}/>
+        <!--Withdrawal bind:user onOk={onWithdrawalOk} onError={onWithdrawalError}/-->
+        <WithdrawalX bind:user onOk={onWithdrawalOk} onError={onWithdrawalError}/>
     </Modal>
 
     <Notifier bind:notify/>
