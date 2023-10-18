@@ -15,7 +15,7 @@
     //loading
     let loadSms;
     let loadSingup;
-    //contador de 2 min
+    //contador de 2 min d
     let activeSMS;
     let minutes;
     let seconds;
