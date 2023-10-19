@@ -65,6 +65,7 @@ import ServerConnection from '../src/js/server'
 //        })
 //    }
 //}
+/*
 export default{
     start:()=>{
         ServerConnection.setConfig({
@@ -85,7 +86,7 @@ export default{
         })
     }
 }
-
+*/
 //export default{
 //    start:()=>{
 //        ServerConnection.setConfig({
@@ -106,25 +107,25 @@ export default{
 //        })
 //    }
 //}
-//export default{
-//    start:()=>{
-//        ServerConnection.setConfig({
-//            API:"https://lobby-bff-test.apiusoft.com",
-//            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-//            CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
-//            CLIENT_CODE:"JU02",
-//            platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
-//            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-//            ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",
-//            WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
-//            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-//            country:"+214",
-//            operatorId:"123",
-//            domain:"https://jetbet24.co/",
-//            assetsUrl:"https://assets.apiusoft.com",
-//            org:"J24",
-//            currency:9,//PEN
-//        })
-//    }
-//}
+export default{
+    start:()=>{
+       ServerConnection.setConfig({
+            API:"https://lobby-bff-test.apiusoft.com",
+            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+            CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
+            CLIENT_CODE:"JU02",
+            platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
+           LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+            ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",
+           WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
+           ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+            country:"+214",
+            operatorId:"123",
+            domain:"https://jetbet24.co/",
+            assetsUrl:"https://assets.apiusoft.com",
+            org:"J24",
+            currency:9,//PEN
+       })
+    }
+}
 

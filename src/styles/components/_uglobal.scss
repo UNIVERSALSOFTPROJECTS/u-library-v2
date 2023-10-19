@@ -1,0 +1,233 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+input{
+    &[type=number]{
+        -moz-appearance:textfield;
+        &::-webkit-inner-spin-button,&::-webkit-outer-spin-button{
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    }
+}
+input[type=date] {
+    -webkit-appearance: none;
+    -moz-appearance: none;  
+    appearance: none;
+    background-image: url("#{$calendar}");// ewsto puede ser un mixin, tambibne se us aen el input
+    background-repeat: no-repeat;
+    background-size: #{$g-font-size + 4};
+    padding-right: 2rem;
+    background-position: right 0.5rem center;
+    &::-webkit-calendar-picker-indicator {
+        background:0 0;
+    }
+}
+
+
+body,p,ul{
+    margin: 0;
+}
+
+body{    
+    overscroll-behavior: none; /*eliminar el efecto scroll extendido fuera del body en safari*/
+    *{color: #{$g-color}; }
+    font-family: $g-font;
+    font-size: $g-font-size;
+    background: $bgc-body;
+    .btn{
+        @extend %button;
+        //for modal
+        &.close {
+            width: #{$g-font-size + 4};
+            height: #{$g-font-size + 4};
+            background: transparent;
+            padding: 0;
+            background-image: url("#{$close}");
+            background-repeat: no-repeat;
+        }
+        &.eye{
+            @include bgIconCenter($eye);   
+        }
+        &.no-eye{
+            @include bgIconCenter($no-eye);
+        }
+    }
+    .slc{
+        @extend %select;
+    }
+    .ipt{
+        @extend %input;
+    }
+    .link{
+        @extend %link;
+    }
+
+    // a, link, input, button, select, textarea e iframe. / cuando has visto aun ciego jugar casino ?xdd, por eso esto es valido
+    :focus, :focus-visible{
+        outline: 0;
+    }
+    ::-webkit-scrollbar-thumb{
+        background: $color-primary;
+    }
+    ::-webkit-scrollbar-track{
+        background: #202124;
+    }
+
+}
+
+
+
+
+
+
+
+//MODAL GLOBAL
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1055;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.5);
+    &-open{
+      overflow: hidden;
+      padding-right: 15px;
+    }
+    &-dialog {
+        position: relative;
+        max-width: 100%;
+        margin: $height-header auto;
+        pointer-events: none;
+    }
+    & .centered{
+      min-height: calc(100% - #{$height-header * 2});
+      display: flex;
+      align-items: center;
+      align-items: center;
+      justify-content: center;
+    }
+    &-content {
+        position: relative;
+        pointer-events: auto;
+        background: $bg-modal;
+        border-radius: $borderR-btn;
+        width: 100%;
+        display: grid;
+        grid-template-rows: 3rem 1fr;
+        overflow: auto;
+    }
+    //  &-backdrop {
+    //    position: fixed;
+    //    top: 0;
+    //    left: 0;
+    //    z-index: 1050 ;
+    //    width: 100vw;
+    //    height: 100vh;
+    //    opacity: .5;
+    //    background: #000;
+    //}
+    &-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      text-transform: uppercase;
+      padding: 0 1rem;
+      font-size: #{$g-font-size + 4};
+      font-weight: 700;
+    }
+    &-body{
+        display: grid;
+        gap: $gap-form;
+        align-content: center;
+        margin: 0 auto;
+    }
+    @media #{$portrait_size_tablet} {
+        &-body{
+            max-width: 600px;
+        }
+    }
+    .btn{
+        height: $ipt-height;
+        //&.close{
+        //    width: #{$g-font-size + 12};
+        //    height: #{$g-font-size + 15};
+        //    background: transparent;
+        //    border: none;
+        //    padding: 0;
+        //    background-image: url("#{$close}");
+        //    background-repeat: no-repeat;
+        //}
+        &.eye {
+            @include bgIconCenter($eye);
+        }
+        &.no-eye {
+            @include bgIconCenter($no-eye);
+        }
+          
+    }
+
+}
+
+
+.button-access-login {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.45rem;
+    border: none;
+    color: white;
+    background-color: $color-primary;
+    font-size: 0.8rem;
+    width: max-content;
+}
+.button-check-in {
+    display: flex;
+    color: $color-success-text;
+    border: none;
+    padding: 0.45rem;
+    background-color: $color-success;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+//DROPDOWN - UNO PUEDE PERSONZALIZAR EL COLO OJITO- PERO FALTA HACER ESTO
+.dropdown{
+    position: relative;
+    &-menu {
+        position: absolute;
+        z-index: 1056;
+        min-width: 100%;
+        margin: 0;
+        text-align: left;
+        list-style: none;
+        background: $bg-dropdown;
+        background-clip: padding-box;
+        border-radius: 0.25rem;
+        & .btn {
+            text-align: left;
+        }
+    }
+    &-item {
+        display: block;
+        width: 100%;
+        padding: 0.25rem 1rem;
+        clear: both;
+        font-weight: 400;
+        color: #212529;
+        text-align: inherit;
+        text-decoration: none;
+        white-space: nowrap;
+        background: transparent;
+        border: 0;
+    }
+}
+

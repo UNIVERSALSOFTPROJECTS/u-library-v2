@@ -30,34 +30,30 @@
   };
   //getPayMethods();
 </script>
-<div class="u-main-payments">
-  <div class="u-wrapp-body">
-    <div class="u-headboard">
-      <button
-        class="type-method {active_type_method == 'TD' ? 'u-type-method' : ''}"
-        on:click={() => {active_type_method = "TD";}}>Métodos de pago</button
-      >
-      <!--button class="type-method {active_type_method=='TB'?'u-type-method':''}" on:click={()=>{  active_type_method="TB"}}>Transferencias Bancarias</button-->
-    </div>
+<div class="deposit-body">
+  <div class="deposit__header">
+    <button
+      class="deposit__btn-direct {active_type_method == 'TD' ? 'u-type-method' : ''}"
+      on:click={() => {active_type_method = "TD";}}>Confirmar Recarga
+    </button>
+    <button class="btn close" on:click={closeModal}></button>
+  </div>
 
-    <div class="u-wrapp-payments">
-      <div class="u-wrapp-deposit">
-        <p class="u-wrapp-deposit-title">Ingrese el código de recarga</p>
-        <div>
+  <div class="deposit__iframe__body">
+        <b>Ingrese Codigo de Recarga</b> 
+        <div class="deposit__iframe--code">
           <input
             aria-label="charge-code-txt"
-            class="u-wrapp-deposit-input"
+            class="ipt"
             type="text"
             placeholder="Código de recarga"
             bind:value={depositCode}
           />
-          <button class="u-wrapp-deposit-btn" on:click={confirmDeposit}>Activar</button >
+          <button class="btn deposit__iframe--code--active" on:click={confirmDeposit}>Activar</button >
         </div>
-        <div>
+        <div class="deposit__iframe--text">
           <p>
             Todos los depósitos serán acreditado a su cuenta en moneda local.
-          </p>
-          <p>
             Al depositar dinero a su cuenta, usted acepta automáticamente la
             versión mas reciente de los
             <a
@@ -66,19 +62,15 @@
               style="color:red;">términos y condiciones</a
             >
           </p>
-        </div>
-        <div>
           <p class="u-wrapp-deposit-title2">IMPORTANTE</p>
           <p>
             Acepto que al enviar el formulario estoy de acuerdo con los términos
             y condiciones de la Página web
           </p>
+            
+            
         </div>
       </div>
-    </div>
-    <!--button class="u-button-pay" on:click={validateData}>DEPOSITAR</button-->
-  </div>
-  <button class="u-close" on:click={closeModal}>X</button>
 </div>
 
 <style>

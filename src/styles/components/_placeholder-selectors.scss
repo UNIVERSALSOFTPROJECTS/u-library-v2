@@ -242,8 +242,8 @@
 @mixin deposit__model_1(){
     & .modal{
         &-body {
-            align-content: start;
-            width: 100%;
+            align-content: center;
+            width: auto;
             overflow: auto;
             &.iframe{
                 grid-template-rows: 1fr;
@@ -274,18 +274,19 @@
         &-body {
             overflow: auto;
             background-color: #ffffff;
+            border-radius: 0.5rem;
         }
         &__header{
-            background-color: $color-primary;
+            background-color: $color-primary-black;
             display: flex;
+            justify-content: space-between;
             flex-direction: row;
-            gap: 0.1rem;
+            padding: 0.5rem;
         }
         &__btn-direct{
-            background-color: $g-btn;
+            background-color: transparent;
             border: none;
             height: 100%;
-            padding: 0.2rem;
             cursor: pointer;
         }
         &__iframe{
@@ -296,14 +297,41 @@
                 padding: 0.5rem;
                 display: flex;
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 1rem;
+                &--btn{
+                    background-color: $color-primary;
+                    border: none;
+                    
+                }
+            }
+            &--code{
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                padding: 0.8rem;
+                background: #4a4a4a2b;
+                border-radius: 0.5rem;
+                &--active{
+                    background: #34b93d;
+                }
+            }
+            &--text{
+                text-align: justify;
+                padding: 0.2rem;
+                line-height: 25px;
             }
         }
         &_data{
             &__info{
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                gap: 1rem;
+                @media only screen and (max-width: 1199px){
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+                @media only screen and (min-width: 1200px) {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    gap: 1rem;
+                }
             }
         }
         &__btn-close{
@@ -314,10 +342,11 @@
             display: flex;
             justify-content: center;
             &_pay{
-                background-color: #27c504c7;
+                background-color:$color-primary;
                 padding: 0.4rem;
                 border-radius: 0.3rem;
-                width: 70%;
+                border: none;
+                width: 50%;
                 cursor: pointer;
             }
         }
@@ -382,6 +411,8 @@
         }
     }
 }
+
+
 
 %singup__model_1{
     & .modal{

@@ -32,8 +32,7 @@
 
   let showUserCreation = false;
   let showRegisterModal = false;
-  let showProfileModalMobile = false;
-  let showProfileModalDesktop = false;
+  let showModalProfile = false;
   let showPasswordChangeModal = false;
 
   let scrollPosition = 0;
@@ -103,13 +102,13 @@
     userState = "logout";
     active_view = "home";
     sessionStorage.removeItem("user");
-    showProfileModalMobile = false;
+    showModalProfile = false;
     location.reload();
     document.body.style.overflow = "hidden";
   };
 
   const onOpenMyAccount = async () => {
-    showProfileModalDesktop = true;
+    showModalProfile = true;
     document.body.style.overflow = "visible";
     if (userGateway == "neco") {
       const data = await backend.getMyAccount(user.token);
@@ -146,23 +145,6 @@
     notify.error(error);
   };
 
-  const onSignupOk = async (user_) => {
-    if (typeof user_ === "string") {
-      //envio smss
-      //notify = await utils.showNotify("success",user_);
-      notify.success(user_);
-    } else {
-      user = user_;
-      //notify = await utils.showNotify("success","Registro exitoso, bienvenido a "+platform);
-      notify.success("Registro exitoso, bienvenido a " + platform);
-      signupModalOpen = false;
-    }
-  };
-  const onSingupError = async (error) => {
-    //notify = {};
-    //notify = await utils.showNotify("error",error);
-    notify.error(error);
-  };
 </script>
 
 <div
@@ -224,11 +206,11 @@
 
 
   <Modal
-    bind:open={showProfileModalDesktop}
+    bind:open={showModalProfile}
     showHeader={false}
     modalOpened={"profile"}
   >
-    <Profile {onLogout} bind:user bind:open={showProfileModalDesktop} bind:modalOpened />
+    <Profile {onLogout} bind:user bind:open={showModalProfile} bind:modalOpened />
   </Modal>
 
   <Notifier />

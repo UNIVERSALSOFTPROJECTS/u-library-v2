@@ -235,7 +235,6 @@
     align-items: flex-start;
     justify-content: center;
     gap: 0.5rem;
-    height: 85vh;
   }
   .u-close {
     background: #bd992a;

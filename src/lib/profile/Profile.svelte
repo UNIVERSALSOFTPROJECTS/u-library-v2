@@ -17,7 +17,8 @@
   export let open;
   export let modalOpened;
   export let onLogout;
-  export const logout = () => {
+  export let showModalProfile;
+   const logout = () => {
     //FALTA ir a Bancked a destruir session
     onLogout();
   };
@@ -29,6 +30,7 @@
   let icon = true;
   let active_section = "balance";
   let active_option = "MyProfile";
+  
 
   const closeModal = () => {
     open = false;
@@ -77,7 +79,7 @@
   const showWithdrawalBank = async () => {
     try {
       modalShowWithdrawalBank = true;
-      showProfileModalDesktop = false;
+      showModalProfile = false;
     } catch (error) {
       console.log(error);
       notify.error("Error");
@@ -96,7 +98,7 @@
   const showDepositBank = () => {
     modalShowDepositBank = true;
     modalOpened = "deposit";
-    showProfileModalDesktop = false;
+    showModalProfile = false;
     setTimeout(() => {
       document.body.removeAttribute("style");
     }, 100);
@@ -105,7 +107,7 @@
   const showDepositCashier = () => {
     modalShowConfirmDeposit = true;
     modalOpened = "deposit";
-    showProfileModalDesktop = false;
+    showModalProfile = false;
     setTimeout(() => {
       document.body.removeAttribute("style");
     }, 100);
@@ -280,7 +282,7 @@
               <span>Verificación</span>
             </button-->
         </div>
-        <div class="u-content-info">
+        <div class="profile information--data">
           <div>
             {#if active_section == "balance"}
               <BalanceDesktop bind:user />

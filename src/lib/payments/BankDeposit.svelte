@@ -77,11 +77,13 @@
   };
 </script>
 
-<div class="modal deposit ">
-  <div class="modal-body deposit-body">
+  <div class="deposit-body">
     <div class="deposit__header">
-      <button class="deposit__btn-direct">Transferencias Directas</button>
-      <button disabled class="deposit__btn-direct {active_type_method=='TB'?'u-type-method':''}" on:click={()=>{  active_type_method="TB"}}>Pasarelas</button>
+      <div>
+        <button class="deposit__btn-direct">Transferencias Directas</button>
+        <button disabled class="deposit__btn-direct {active_type_method=='TB'?'u-type-method':''}" on:click={()=>{  active_type_method="TB"}}>Pasarelas</button>
+      </div>
+      <button class="btn close" on:click={closeModal} ></button>
     </div>
     <div class="deposit__iframe">
       <div class="deposit__iframe__body">
@@ -107,26 +109,18 @@
               {#each bankAccounts as account}
                 <tr  style={bankDeposit.targetBankAccountId == account.bankAccountId ? "background:#ccc" : ""}>
                   <td> 
-                    <button  on:click={() => { bankDeposit.targetBankAccountId = account.bankAccountId; }} >
-                    <div class="u-pay-pay"> <span>{account.bank}</span>  </div>
-                    </button>
+                    <button class="btn deposit__iframe__body--btn" on:click={()=>{bankDeposit.targetBankAccountId = account.bankAccountId;}}>{account.bank}</button>
                   </td>
-                  <td style="text-align: center;">
-                    {account.number}
-                  </td>
-                  <td>{account.currency}</td>
-                  <td style="text-align: center;">
-                    {account.amountMin}
-                  </td>
-                  <td style="text-align: center;">
-                    {account.amountMax}
-                  </td>
+                  <td style="text-align: center;"> {account.number} </td>
+                  <td style="text-align: center;">{account.currency}</td>
+                  <td style="text-align: center;"> {account.amountMin} </td>
+                  <td style="text-align: center;"> {account.amountMax} </td>
                 </tr>
               {/each}
             </tbody>
           </table>
         <div class="deposit_data">
-          <h4 class="gb-title-data-deposit">REGISTRO DE DATOS</h4>
+          <span class="gb-title-data-deposit"><b>REGISTRO DE DATOS</b></span>
           <div class="deposit_data__info">
             <div >
               <span>Fecha Transferencia</span>
@@ -162,23 +156,14 @@
       <button class="deposit__btn_pay" on:click={deposit}>DEPOSITAR</button>
     </div>
   </div>
-  <button class="deposit__btn-close" on:click={closeModal}>X</button>
-</div>
 
 <style>
-  @media only screen and (max-width: 1200px) {    
-    .u-pay-pay {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.2rem;
-      color: #000;
-    }
-    
-    input:focus-visible {
+  input:focus-visible {
       outline: 0;
     }
+  @media only screen and (max-width: 1199px) {    
+    
+    
     
   }
   @media only screen and (min-width: 1200px) {
@@ -186,14 +171,5 @@
     .gb-title-data-deposit {
       padding-left: 1.5rem;
     }
-    
-    
-    
-    
-    input:focus-visible {
-      outline: 0;
-    }
-    
-    
   }
 </style>

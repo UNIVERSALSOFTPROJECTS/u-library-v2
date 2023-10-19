@@ -76,32 +76,31 @@
     e.preventDefault();
   }}
 >
-  <div class="form-container">
-    <label for="sec-pass">Contraseña Actual</label>
+    <label for="sec-pass">Contraseña Actual
     <input
       type="password"
       class="ipt"
       autocomplete="off"
       bind:value={securityData.current_password}
-    />
+    /></label>
 
-    <label for="">Nueva Contraseña</label>
+    <label for="">Nueva Contraseña
     <input
       type="password"
       class="ipt"
       autocomplete="off"
       bind:value={securityData.new_password}
-    />
+    /></label>
 
-    <label for="">Repetir Contraseña</label>
+    <label for="">Repetir Contraseña
     <input
       type="password"
       class="ipt"
-      autocomplete="false"
+      autocomplete="off"
       bind:value={securityData.newpassword}
     />
+    </label>
     <button class="ipt btn-save" on:click={changePassword}>Guardar</button>
-  </div>
 </form>
 
 <style>
@@ -117,17 +116,6 @@
       justify-content: space-between;
       gap: 0.5rem;
       width: 100%;
-      overflow: auto;
-    }
-    .form-container{
-      align-items: center;
-      width: 80%;
-      color: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      gap: 0.5rem;
-      
     }
     .ipt {
       border: 1px solid rgb(208 206 206);
