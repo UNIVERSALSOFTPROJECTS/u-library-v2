@@ -28,10 +28,8 @@
         address: user.address,
         city: user.city,
         serial: user.serial
-
       }
       //user.serial_api_casino = user.serial;
-      close();
       await backend.u_user.saveMyAccount(params);
       onSubmitted("ok");
     } catch (e) {

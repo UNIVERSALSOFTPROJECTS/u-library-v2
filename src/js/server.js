@@ -175,6 +175,8 @@ const ServerConnection = (() => {
             payload.token = user_storage.token;
             payload.agregatorToken = user_storage.agregatorToken;
             var url = conf.API + "/api/casino/myAccount";
+            headers.agregatorToken = payload.agregatorToken;
+            headers.Authorization = payload.token;
             return axios.post(url, payload, {headers})
         },
 

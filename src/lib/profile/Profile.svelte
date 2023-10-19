@@ -3,7 +3,6 @@
   import backend from "../../js/server";
   import EventManager from "../../js/EventManager";
   import BalanceDesktop from "../profile/BalanceDesktop.svelte";
-  import MyDataDesktop from "./MyData.svelte";
   import Security from "./Security.svelte";
   import History from "../profile/History.svelte";
   import { DepositBank } from "../..";
@@ -12,6 +11,7 @@
   import WithdrawalBank from "../withdrawal/WithdrawalBank.svelte";
   import CashOut from "../withdrawal/CashOut.svelte";
   import notify from "../../js/notify";
+  import MyData from "./MyData.svelte";
 
   export let user;
   export let open;
@@ -288,7 +288,7 @@
               <BalanceDesktop bind:user />
             {/if}
             {#if active_section == "MyData"}
-              <MyDataDesktop
+              <MyData
                 bind:user
                 onSubmitted={(status, error) => onSaveProfile(status, error)}
               />
