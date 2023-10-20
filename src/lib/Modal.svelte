@@ -33,7 +33,7 @@
         {#if showHeader}
         <div class="modal-header">
             <div />
-            <div>{title}</div>
+            <div style="color: white;">{title}</div>
             <button class="btn close" on:click={() => (open = false)} />
             </div>
             {/if}

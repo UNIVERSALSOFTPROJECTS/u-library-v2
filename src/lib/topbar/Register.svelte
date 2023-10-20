@@ -8,11 +8,25 @@
 
   export let countries;
   export let platform;
+  export let currencies;
+  export let doctypes;
+  export let onOkSingup;
+
+
 
   let registerUser = {
     address: '-',
     zip: '-',
     city: '-',
+    name: '',
+    username: '',
+    password: '',
+    phone: '',
+    email: '',
+    smscode: '',
+    document: '',
+    birthday: '',
+
   };
   let loadSms;
   let loadSingup;
@@ -21,6 +35,7 @@
   let minutes;
   let seconds;
   let term_conditions;
+  let smsSent = false;
 
   function counterResendSms() {
     activeSMS = true;
@@ -47,23 +62,27 @@
     try {
       let params ={...registerUser}
       console.log(params);
+      notify.success("Se esta enviando un SMS a su telefono.")
       await backend.u_user.preRegister(params);
+      
+      smsSent = true
     } catch (error) {
       return notify.error("No se pudo crear el usuario");
     }
   }
 
   async function registerClick(){
+    let params ={...registerUser};
+    console.log(params);
+    for(  const key in params) {
+      if( params[key]=='' ) return notify.error('Llene todos los campos');
+    }
     try {
-      let params ={...registerUser};
-      for(  const key in params) {
-        if( params[key]=='' ) return notify.error('Falta: ' + key + '->Ingrese el campo');
-      }
       await backend.u_user.register(params);
-      
+      onOkSingup();
     } catch (error) {
       console.log('error', error);
-      if (error.response.data.errorCode == 'SMS_CODE_INVALID_') return notify.error("El codigo SMS es invalido");
+      if (error.response.data.errorCode == 'SMS_CODE_INVALID') return notify.error("El codigo SMS es invalido");
       else return notify.error("No se pudo crear el usuario")
     }
 
@@ -109,25 +128,32 @@
     </button>
     <input bind:value={registerUser.smscode}  on:keypress={isOnlyNumber} type="number" class="ipt" min="0" placeholder="Código" autocomplete="off" />
   </div>
-  <select bind:value={registerUser.currency} class="ipt" disabled>
-    <option  value="PEN">SOLES</option>
+  <select bind:value={registerUser.currency} class="ipt" >
+    {#each  currencies as currency }
+    <option>{currency}</option>
+    {/each}
   </select>
-  <select bind:value={registerUser.doctype} class="ipt" disabled>
-    <option  value="DNI">DNI</option>
+  <div class="singup__sms">
+    <select bind:value={registerUser.doctype} class="ipt">
+    {#each  doctypes as doctype }
+    <option>{doctype}</option>
+    {/each}
   </select>
   <input bind:value={registerUser.document}  on:keypress={isOnlyNumber}  type="text" class="ipt" placeholder="Ingrese su numero de documento" inputmode="numeric"/>
+  </div>
+  
   <div class="singup__form--date">
-    <p>Fecha de nacimiento</p>
+    <p>Fecha de nacimiento:</p>
     <div class="singup__date">
-      <DropdownDate bind:date={registerUser.date} />
+      <DropdownDate bind:date={registerUser.birthday} />
     </div>
   </div>
   <div class="singup__conditions">
-    <input type="checkbox" id="chk_conditions" bind:checked={term_conditions}/>
+    <input type="checkbox" id="chk_conditions" bind:checked={registerUser.term_conditions}/>
     <label for="chk_conditions"></label> 
-    <div>Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de {platform}.</div>
+    <div class="chk_conditions">Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de {platform}.</div>
   </div>
-  <button type="button" class="btn btn-primary singup" on:click={registerClick} disabled={loadSingup}>
+  <button type="button" class="btn singup__btn" on:click={registerClick} disabled={loadSingup || !smsSent}>
     {#if loadSingup}
       <div class="loading"><p></p><p></p><p></p></div>
       {:else}
@@ -137,6 +163,9 @@
 </div>
 
 <style>
+  .chk_conditions{
+    color: white;
+  }
   @media only screen and (max-width: 768px) {
   }
   @media only screen and (max-width: 768px) and (orientation: landscape) {

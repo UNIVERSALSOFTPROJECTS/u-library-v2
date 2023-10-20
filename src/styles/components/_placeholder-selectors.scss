@@ -89,6 +89,7 @@
 
 %link{
     cursor: pointer;
+    color: $color-primary;
     //text-decoration: none;
     &:hover, &.active{
         color: $color-primary;
@@ -471,6 +472,9 @@
             &--pass{
                 @extend %containerPassword;
             }
+        }
+        &__btn{
+            background-color: $color-primary;
         }
         &__date{
             display: grid;

@@ -181,7 +181,7 @@ const ServerConnection = (() => {
                 email: payload.email, 
                 currency: payload.currency, 
                 password: payload.password, 
-                birthday: payload.date, 
+                birthday: payload.birthday, 
                 smscode: payload.smscode, 
                 country: payload.countryCode, 
                 operatorId: '', 

@@ -27,6 +27,8 @@
   export let userGateway;
   export let onLogin;
   export let countries=["PE"];
+    export let currencies=["USD"];
+    export let doctypes=["DNI"];
 
   
 
@@ -44,9 +46,9 @@
   let signupModalOpen = false;
 
   
-  let currencies = [
+  /*let currencies = [
     { name: "Peso chileno", code: 7, agent: 4675 }, //este codigo se toma como el id_operado en caso el tipo sea W
-  ];
+  ];*/
 
   const handleScroll = () => {
     scrollPosition = window.scrollY;
@@ -136,6 +138,12 @@
       document.body.removeAttribute("style");
     }, 100);
   };
+
+  const onOkSingup = () => {
+    notify.success("Usuario registrado exitosamente")
+    signupModalOpen = false;
+  }
+  
   const onLoginOk = async (user_) => {
     user = user_;
     notify.success("Bienvenido a " + platform);
@@ -203,7 +211,7 @@
     />
   </Modal>
   <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
-    <Register bind:countries bind:platform></Register>
+    <Register bind:countries bind:platform bind:currencies bind:doctypes {onOkSingup}></Register>
   </Modal>
 
 
