@@ -5,6 +5,7 @@
   import backend from "../../js/server";
   import notify from "../../js/notify";
   import UDropdowPrefix from "./UDropdowPrefix.svelte";
+  import { onMount } from "svelte";
 
   export let countries;
   export let platform;
@@ -36,6 +37,10 @@
   let seconds;
   let term_conditions;
   let smsSent = false;
+  
+  onMount(()=>{
+    smsSent = false;
+  })
 
   function counterResendSms() {
     activeSMS = true;
