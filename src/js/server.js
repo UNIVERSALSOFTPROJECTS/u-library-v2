@@ -148,26 +148,51 @@ const ServerConnection = (() => {
             let url = conf.API + `/api/casino/balance/${userToken}`;
             return axios.get(url, { headers });
         },
-        preRegister: (username, email, phone) => {
+        preRegister: (payload) => {
             if (!conf.platformId) throw ("PLATFORM ID EMPTY");
             var url = conf.API + "/api/casino/user/preRegister";
             //console.log("conf here: ",conf)
             if (!conf.org) throw "ORG_MANDATORY";
-            var payload = { username, email, phone, org: conf.org, platformId: conf.platformId }
-            return axios.post(url, payload, { headers });
+            var payload_ = { 
+                username: payload.username, 
+                email: payload.email, 
+                phone: payload.countryPrefix +payload.phone, 
+                org: conf.org, 
+                platform: conf.org,
+                platformId: conf.platformId,
+
+            }
+            return axios.post(url, payload_, { headers });
         },
         login: (username, password) => {
             let payload = { username, password }
             return axios.post(conf.API + "/api/casino/login", payload, { headers });
 
         },
-        register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, currency = conf.currency) => {
-            if (!currency) throw "CURRENCY_MANDATORY";
+        register: (payload) => {
+            if (!payload.currency) throw "CURRENCY_MANDATORY";
             if (!conf.domain) throw "DOMAIN_MANDATORY";
             if (!conf.platformId) throw "PLATFORMID_EMPTY";
             var url = conf.API + "/api/casino/user";
-            var payload = { username, name, phone: phone, email, currency, password, date, smscode, country, operatorId, doctype: "", document: "", birthday: date, domain: conf.domain, usertype, platformId: conf.platformId, org: conf.org }
-            return axios.post(url, payload, { headers });
+            var payload_ = { 
+                username: payload.username, 
+                name: payload.name, 
+                phone: payload.countryPrefix + payload.phone,
+                email: payload.email, 
+                currency: payload.currency, 
+                password: payload.password, 
+                birthday: payload.date, 
+                smscode: payload.smscode, 
+                country: payload.countryCode, 
+                operatorId: '', 
+                doctype: payload.doctype, 
+                document: payload.document,  
+                domain: conf.domain, 
+                usertype: 'W', 
+                platformId: conf.platformId, 
+                org: conf.org 
+            }
+            return axios.post(url, payload_, { headers });
         },
         saveMyAccount:(user) => {
             var payload = user;
@@ -185,7 +210,6 @@ const ServerConnection = (() => {
             var url = conf.API + "/api/casino/changepassword";
             return axios.post(url, payload,{headers})
         }
-
     }
     /* */
     return { setConfig, wallet, users, game, u_user, u_wallet }

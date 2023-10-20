@@ -26,6 +26,9 @@
   export let platform;
   export let userGateway;
   export let onLogin;
+  export let countries=["PE"];
+
+  
 
   let username = "";
   let password = "";
@@ -40,7 +43,7 @@
 
   let signupModalOpen = false;
 
-  let countries = [{prefix: "+51", flag: "pe"}];
+  
   let currencies = [
     { name: "Peso chileno", code: 7, agent: 4675 }, //este codigo se toma como el id_operado en caso el tipo sea W
   ];
