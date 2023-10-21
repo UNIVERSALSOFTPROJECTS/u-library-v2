@@ -283,7 +283,6 @@
             </button-->
         </div>
         <div class="profile information--data">
-          <div>
             {#if active_section == "balance"}
               <BalanceDesktop bind:user />
             {/if}
@@ -299,7 +298,6 @@
                 onSubmitted={(status, error) => onChangePassword(status, error)}
               />
             {/if}
-          </div>
         </div>
       </div>
     {/if}

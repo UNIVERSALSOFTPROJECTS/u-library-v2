@@ -135,9 +135,9 @@ const ServerConnection = (() => {
             let url = conf.API + "/api/casino/wallet/cashout";
             return await axios.post(url, payload, { headers });
         },
-        transactions: async (token, dateStringFrom, dateStringTo, filter, page = 1) => {
-            headers['token'] = token;
-            let url = conf.API + "/api/casino/wallet/transactions?page=" + page + "&from=" + dateStringFrom + "&to=" + dateStringTo + "&filter=" + filter;
+        transactions: async (params,) => {
+            headers['token'] = params.token;
+            let url = conf.API + "/api/casino/wallet/transactions?page=" + params.page+"&xpage="+ params.xpage + "&from=" + params.from + "&to=" + params.to + "&filter=" + params.type;
             return await axios.get(url, { headers });
         }
 

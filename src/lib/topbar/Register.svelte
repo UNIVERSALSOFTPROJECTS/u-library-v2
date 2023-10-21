@@ -42,23 +42,6 @@
     smsSent = false;
   })
 
-  function counterResendSms() {
-    activeSMS = true;
-    minutes = 0;
-    seconds = 10;
-    const timer = setInterval(() => {
-      if (seconds === 0 && minutes !== 0) {
-        seconds = 59;
-        minutes -= 1;
-      } else if (minutes === 0 && seconds === 0) {
-        activeSMS = false;
-        loadSms = false;
-        clearInterval(timer);
-      } else {
-        seconds -= 1;
-      }
-    }, 1000);
-  }
 
   async function preRegisterClick() {
     if(!registerUser.username) return notify.error("Ingrese nombre de usuario");

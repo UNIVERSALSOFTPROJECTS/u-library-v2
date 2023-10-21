@@ -84,7 +84,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      margin-bottom: 0.8rem;
+      padding: 1rem;
     }
   }
   @media only screen and (min-width: 1201px) {
@@ -92,7 +92,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      margin-bottom: 0.8rem;
+      padding: 0.5rem;
     }
     .ipt {
       border: 1px solid rgb(208 206 206);

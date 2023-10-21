@@ -21,8 +21,10 @@
         <div class="user-content">
           <tr>
             <th class="codigo" style="color: white;"
-              >{user.username} #{user.serial}</th
+              >{user.username} 
+              <br>#{user.serial}</th
             >
+            
           </tr>
           <tr>
             <td>

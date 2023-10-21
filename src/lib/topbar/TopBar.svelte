@@ -27,8 +27,8 @@
   export let userGateway;
   export let onLogin;
   export let countries=["PE"];
-    export let currencies=["USD"];
-    export let doctypes=["DNI"];
+  export let currencies=["USD"];
+  export let doctypes=["DNI"];
 
   
 
@@ -71,11 +71,6 @@
   const onShowUserCreation = () => {
     user = {};
     showUserCreation = true;
-  };
-
-  const onRegisterOk = (data) => {
-    notify.success("Registro Correcto!");
-    document.getElementById("u-login-btn").click();
   };
 
   const onShowRegisterModal = (ev) => {
@@ -152,6 +147,7 @@
     active_view = "home";
     onLogin();
   };
+  
   const onLoginError = async (error) => {
     notify.error(error);
   };

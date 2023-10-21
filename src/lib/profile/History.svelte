@@ -9,42 +9,23 @@
 
   export let user;
 
-  let from = new Date(),
-    dayFrom,
-    monthFrom,
-    yearFrom;
-  let to = new Date(),
-    dayTo,
-    monthTo,
-    yearTo;
-  let dateStringFrom, dateStringTo;
-  let filter;
-  let filters = { page: 1, xpage: 10 };
+  
+  let filters = { page: 1, xpage: 20 };
   let movements = { list: [] };
   let active_section = "record";
   let promise;
 
   const onPageClick = (page) => {
     filters.page = page;
+    console.log("page", page);
     getMovements();
   };
 
   onMount(() => {
-    (monthFrom = "" + (from.getMonth() + 1)),
-      (dayFrom = "" + (from.getDate() - from.getDate() + 1)),
-      (yearFrom = from.getFullYear());
-
-    (monthTo = "" + (to.getMonth() + 1)),
-      (dayTo = "" + to.getDate()),
-      (yearTo = to.getFullYear());
-
-    if (monthFrom.length < 2) monthFrom = "0" + monthTo;
-    if (dayFrom.length < 2) dayFrom = "0" + dayFrom;
-    dateStringFrom = [yearFrom, monthFrom, dayFrom].join("-");
-
-    if (monthTo.length < 2) monthTo = "0" + monthTo;
-    if (dayTo.length < 2) dayTo = "0" + dayTo;
-    dateStringTo = [yearTo, monthTo, dayTo].join("-");
+    let actualDate = moment();
+    let dateRest = actualDate.subtract(0, "days");
+    filters.from = dateRest.format("YYYY-MM-DD");
+    filters.to = moment().format("YYYY-MM-DD");
     promise = getMovements();
   });
 
@@ -74,12 +55,10 @@
 
   const getMovements = async () => {
     try {
-      let { data } = await backend.u_wallet.transactions(
-        user.token,
-        dateStringFrom,
-        dateStringTo,
-        filter
-      );
+      let params = {...filters,
+        token:user.token
+      }
+      let { data } = await backend.u_wallet.transactions(params);
       movements = data;
       movements.list.map((m) => {
         m.currentDate = convertDateTimeZone(m.lfecha);
@@ -90,7 +69,6 @@
     }
   };
 </script>
-
 <div class="u-content-info">
   <div class="u-buttons-options">
     <button
@@ -106,15 +84,15 @@
   <div class="u-content-date">
     <div class="u-control-info">
       <span class="u-sub-title">Desde:</span>
-      <input class="ipt" type="date" bind:value={dateStringFrom} />
+      <input class="ipt" type="date" bind:value={filters.from} />
     </div>
     <div class="u-control-info">
       <span class="u-sub-title">Hasta:</span>
-      <input class="ipt" type="date" bind:value={dateStringTo} />
+      <input class="ipt" type="date" bind:value={filters.to} />
     </div>
     <div class="u-control-info">
       <span class="u-sub-title">Filtros:</span>
-      <select class="ipt" name="filtros" bind:value={filter}>
+      <select class="ipt" name="filtros" bind:value={filters.type}>
         <option value="TT">TODOS</option>
         <option value="DE">DEPOSITOS</option>
         <option value="RE">RETIROS</option>
@@ -123,43 +101,44 @@
     </div>
     <div class="u-control-info">
       <span class="u-sub-title">Consultar</span>
-      <button class="u-btn-consult ipt" on:click={getMovements}>CONSULTAR</button>
+      <button
+        class="u-btn-consult ipt"
+        on:click={() => {
+          promise = getMovements();
+        }}>CONSULTAR</button
+      >
     </div>
   </div>
   <div class="u-show-info">
-    {#if !movements.list.length}
-      <div class="u-no-record">
-        <span class="u-no-record-title">No hay nada aquí todavía</span>
-        <span>Las transacciones aparecerán cuando deposite o retire dinero</span>
-      </div>
-    {:else}
-      <div class="u-show-data">
-        <table>
-          <thead class="table_header">
+    <table class="table table-striped responsive">
+      <thead class="table_header">
+        <tr>
+          <th>ID</th>
+          <th>FECHA</th>
+          <th>DESCRIP.</th>
+          <th>GAME</th>
+          <th>TIPO</th>
+          <th>OUT</th>
+          <th>IN</th>
+          <th>WALLET</th>
+          <th>BLC</th>
+        </tr>
+      </thead>
+      {#if movements.list.length > 0}
+        {#await promise}
+          <tbody>
             <tr>
-              <th>ID</th>
-              <th>FECHA</th>
-              <th>DESCRIPCIÓN</th>
-              <th>TIPO</th>
-              <th>OUT</th>
-              <th>ING</th>
-              <th>WALLET</th>
-              <th>BLC</th>
+              <td colspan="9" style="position:relative"><Loading loading /></td>
             </tr>
-          </thead>
-          {#await promise}
-              <tbody>
-                <tr>
-                  <td colspan="8" style="position:relative"><Loading loading/></td>
-                </tr >
-              </tbody>
-            {/await}
+          </tbody>
+        {:then l}
           <tbody>
             {#each movements.list as mov}
               <tr>
-                <td>{mov.trxId}</td>
+                <td>{mov.serial}</td>
                 <td>{moment(mov.created).format("YY-MM-DD HH:mm:ss")}</td>
                 <td>{mov.description}</td>
+                <td style="min-width: 6rem; text-align:center;">{mov.game_name} ({mov.category} - {mov.brand})</td>
                 <td>{mov.txType}</td>
                 {#if mov.txType == "BET" || mov.txType == "WITHDRAW"}
                   <td style="color: red;">- {mov.amount.toFixed(2)}</td>
@@ -176,34 +155,56 @@
               </tr>
             {/each}
           </tbody>
-        </table>
-      </div>
+          <tfoot>
+            <tr>
+              <td colspan="9">
+                {#if movements.list.length}
+                  <Pagination
+                    bind:total={movements.total}
+                    bind:xpage={movements.xpage}
+                    bind:current={movements.page}
+                    {onPageClick}
+                  />
+                {/if}
+              </td>
+            </tr>
+          </tfoot>
+        {/await}
       {/if}
-      {#if movements.list.length}
-        <Pagination
-          bind:total={movements.total}
-          bind:xpage={movements.xpage}
-          current={1}
-          {onPageClick}
-        />
-      {/if}
+    </table>
   </div>
 </div>
 
 <style>
+  .table {
+    min-width: 100%;
+    min-height: 100%;
+  }
+  table.table-striped tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  .table_header {
+    background-color: #f8f9fa;
+  }
+  /* Texto en negritas */
+  thead th {
+    font-weight: bold;
+  }
+  thead th {
+    border-bottom: 2px solid #dee2e6;
+  }
   .ipt {
     border: 1px solid #000000;
   }
   .u-content-info {
     display: flex;
     flex-direction: column;
-    height: 70vh;
+    height: 80vh;
   }
   .u-show-info {
-    margin: 1rem;
+    margin: 0.5rem;
     overflow: auto;
     border: 1px solid black;
-    max-height: 50vh;
   }
   td {
     padding: 0.5rem;
@@ -221,16 +222,16 @@
     border: none;
     width: 8rem;
     padding: 0.5rem;
-    background-color: #d3e6db;
+    background-color: #8ea497;
     border-radius: 1rem;
     height: 1.8rem;
   }
   .u-content-date {
-    padding: 1rem;
+    padding: 0.5rem;
     display: grid;
     justify-content: space-between;
     gap: 1rem;
-    grid-template-columns: 47% 47%;
+    grid-template-columns: 1fr 1fr;
   }
   .u-control-info {
     display: flex;
@@ -238,19 +239,6 @@
     width: 100%;
     color: black;
     gap: 0.5rem;
-  }
-  .u-show-data {
-    height: auto;
-    color: #000000;
-  }
-  
-  .u-no-record {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: black;
   }
   .u-btn-consult {
     color: white;

@@ -25,8 +25,10 @@
 			if(data.username=='') throw("USER_NOT_FOUND");
 			let date = new Date();
       		date.setDate(date.getDate() + 1);
-			data.expireToken= date.getTime();
+			data.expireToken= data.claims.exp;
 			data.playerId = data.id;
+			delete data.claims
+			console.log("Info para session storage",data);
 			sessionStorage.setItem("user",JSON.stringify(data));
 			onOk(data);
 		} catch (error) {

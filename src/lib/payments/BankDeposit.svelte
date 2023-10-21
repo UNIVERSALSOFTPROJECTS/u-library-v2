@@ -88,7 +88,7 @@
     <div class="deposit__iframe">
       <div class="deposit__iframe__body">
         <p> Envianos los datos del deposito bancario que realizaste para confirmarlo e ingresar el dinero del deposito a tu cuenta.</p>
-        <table>
+        <table >
           <thead>
             <tr>
               <th>BANCO</th>

@@ -34,16 +34,20 @@
   });
 </script>
 
-<nav class="navigation">
+<nav aria-label="Page navigation" class="navigation">
+
   <span>Total {total} items.</span>
-  <div class="buttons">
+  <ul class="pagination">
+    
     {#each pages as page}
-        <button class="btn page-link" on:click={() => onPageClick(page)}>
-          {page}
-        </button>
+      <li class="page-item {page === current ? 'active' : ''}">
+        <button class="page-link" on:click={() => onPageClick(page)}>{page}</button>
+      </li>
     {/each}
-  </div>
+    
+  </ul>
 </nav>
+
 
 <style>
   @media (max-width: 1024px) {
@@ -60,22 +64,36 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      color: black;
-    }
-    .buttons{
-      display: flex;
-      flex-direction: row;
-      gap: 0.3rem;
-    }
-    .btn{
-      color : rgb(0, 0, 0);
-      height: 25px;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-    }
-    .btn:active{
-      background-color: rgb(0, 255, 255);
     }
   }
+ /* Estilos generales del paginador */
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilo de los elementos del paginador */
+.page-item {
+  list-style: none;
+}
+
+/* Estilo de los enlaces de los elementos del paginador */
+.page-link {
+  cursor: pointer;
+  padding: 0.375rem 0.75rem;
+  margin: 0 2px;
+  border: 1px solid #dee2e6;
+  color: #007bff;
+  background-color: #fff;
+}
+
+/* Estilo de los botones activos */
+.page-item.active .page-link {
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+}
+
+
+
 </style>

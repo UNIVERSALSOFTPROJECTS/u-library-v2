@@ -68,14 +68,7 @@
   };
 </script>
 
-<form
-  class="u-form"
-  autocomplete="off"
-  method="post"
-  on:submit={(e) => {
-    e.preventDefault();
-  }}
->
+<div class="security" >
     <label for="sec-pass">Contraseña Actual
     <input
       type="password"
@@ -100,22 +93,24 @@
       bind:value={securityData.newpassword}
     />
     </label>
-    <button class="ipt btn-save" on:click={changePassword}>Guardar</button>
-</form>
+    <button class="btn  btn-save" on:click={changePassword}>Guardar</button>
+</div>
 
 <style>
   .btn-save {
     background-color: #c4b103;
     cursor: pointer;
+    width: 60%;
   }
   @media only screen and (max-width: 1200px) {
-    .u-form {
+    .security {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
       width: 100%;
+      padding: 1rem;
     }
     .ipt {
       border: 1px solid rgb(208 206 206);
@@ -123,24 +118,13 @@
     }
   }
   @media only screen and (min-width: 1201px) {
-    .u-form {
+    .security {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
       width: 100%;
-    }
-    .form-container{
-      align-items: center;
-      width: 60%;
-      color: #000;
-      padding: 0.5rem;
-      margin: 0.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      gap: 0.5rem;
     }
     .ipt {
       border: 1px solid rgb(208 206 206);
