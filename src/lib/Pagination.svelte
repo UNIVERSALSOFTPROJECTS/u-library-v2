@@ -83,15 +83,17 @@
   padding: 0.375rem 0.75rem;
   margin: 0 2px;
   border: 1px solid #dee2e6;
-  color: #007bff;
+  color: #000000;
   background-color: #fff;
+  border-radius: 0.3rem;
 }
 
 /* Estilo de los botones activos */
 .page-item.active .page-link {
-  background-color: #007bff;
-  color: #fff;
-  border: 1px solid #007bff;
+  background-color: #fffb00;
+  color: #000000;
+  border: 1px solid #ceb302;
+  border-radius: 0.3rem;
 }
 
 
