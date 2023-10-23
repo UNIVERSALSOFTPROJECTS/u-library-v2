@@ -186,7 +186,7 @@ $media-small: 960px;
 
         &.balance {
             display: grid;
-            grid-template-columns: 48% 48%;
+            grid-template-columns: 1fr 1fr;
             background-color: transparent;
         }
 
