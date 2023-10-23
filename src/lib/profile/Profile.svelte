@@ -2,7 +2,7 @@
   // @ts-nocheck
   import backend from "../../js/server";
   import EventManager from "../../js/EventManager";
-  import BalanceDesktop from "../profile/BalanceDesktop.svelte";
+  import BalanceDesktop from "./Balance.svelte";
   import Security from "./Security.svelte";
   import History from "../profile/History.svelte";
   import { DepositBank } from "../..";
@@ -12,6 +12,7 @@
   import CashOut from "../withdrawal/CashOut.svelte";
   import notify from "../../js/notify";
   import MyData from "./MyData.svelte";
+  import Balance from "./Balance.svelte";
 
   export let user;
   export let open;
@@ -153,11 +154,11 @@
     <div class="profile personaldata__userbalance">
       <div class="u-balance">
         <span>Saldo</span>
-        <div class="u-label">{user.currency} {user.balance}</div>
+        <div class="u-label">{user.currency} {user.balance.toFixed(2)}</div>
       </div>
       <div class="u-balance">
         <span>Saldo Bono</span>
-        <span>{user.currency} {user.bonus_cab}</span>
+        <span>{user.currency} {user.bonus_cab.toFixed(2)}</span>
       </div>
       <div class="profile personaldata balance">
         <button
@@ -230,7 +231,7 @@
         </div>
         <div class="profile information--data">
             {#if active_section == "balance"}
-              <BalanceDesktop bind:user />
+              <Balance bind:user />
             {/if}
             {#if active_section == "MyData"}
               <MyData

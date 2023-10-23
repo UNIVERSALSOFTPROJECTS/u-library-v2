@@ -90,9 +90,9 @@
 
 /* Estilo de los botones activos */
 .page-item.active .page-link {
-  background-color: #fffb00;
-  color: #000000;
-  border: 1px solid #ceb302;
+  background-color: #0066ff;
+  color: #fff;
+  border: 1px solid #0066ff;
   border-radius: 0.3rem;
 }
 

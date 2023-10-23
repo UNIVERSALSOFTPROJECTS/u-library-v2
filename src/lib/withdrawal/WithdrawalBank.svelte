@@ -17,11 +17,11 @@
 
   onMount(() => {
     notify.setEM(EventManager);
-    console.log("user retiro", user);
     withdrawalBank={
       name: user.name,
       document: user.data.document,
       amount: 50,
+      info:'.'
     }
   });
 
@@ -70,13 +70,6 @@
     let validatePatternBankName = /^[A-Za-zúéáíóüÜÑñÓÍÚÁÉ ]*$/.test(e.key);
     if (!validatePatternBankName) e.preventDefault();
     if ( withdrawalBank.bankName.length >= 40) return notify.error("40 caracteres como máximo");
-  };
-
-  const validateAccountNumber = (event) => {
-    let isNumber = /\d/.test(event.key);
-    if (isNumber && withdrawalBank.accountNumber.length < 20) withdrawalBank.accountNumber += event.key;
-    else if (isNumber && withdrawalBank.accountNumber.length >= 20)
-      return notify.error("40 caracteres como máximo");
   };
 
   const withdrawalBankError = (e) => {
@@ -151,7 +144,6 @@
           maxlength="20"
           inputmode="numeric"
           bind:value={withdrawalBank.accountNumber}
-          on:keypress|preventDefault={(e) => validateAccountNumber(e)}
           placeholder="Ingrese el número de cuenta"
         />
       </label>

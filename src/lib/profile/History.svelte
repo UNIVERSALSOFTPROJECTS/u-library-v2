@@ -17,6 +17,7 @@
 
   const onPageClick = (page) => {
     filters.page = page;
+    filters.type = "TT"
     console.log("page", page);
     getMovements();
   };
@@ -54,6 +55,7 @@
   };
 
   const getMovements = async () => {
+    if(filters.type == "") delete filters.type;
     try {
       let params = {...filters,
         token:user.token
@@ -94,9 +96,9 @@
       <span class="u-sub-title">Filtros:</span>
       <select class="ipt" name="filtros" bind:value={filters.type}>
         <option value="TT">TODOS</option>
-        <option value="DE">DEPOSITOS</option>
-        <option value="RE">RETIROS</option>
-        <option value="PR">PREMIOS</option>
+        <option value="DEPOSIT">DEPOSITOS</option>
+        <option value="WITHDRAW">RETIROS</option>
+        <option value="WIN">PREMIOS</option>
       </select>
     </div>
     <div class="u-control-info">
@@ -151,7 +153,7 @@
                   <td />
                 {/if}
                 <td>{mov.balanceType}</td>
-                <td>{mov.newBalance}</td>
+                <td>{mov.newBalance.toFixed(2)}</td>
               </tr>
             {/each}
           </tbody>
