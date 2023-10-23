@@ -30,25 +30,14 @@
   export let currencies=["USD"];
   export let doctypes=["DNI"];
 
-  
-
   let username = "";
   let password = "";
-
   let showUserCreation = false;
   let showRegisterModal = false;
   let showModalProfile = false;
-  let showPasswordChangeModal = false;
-
   let scrollPosition = 0;
   let divClass = "";
-
   let signupModalOpen = false;
-
-  
-  /*let currencies = [
-    { name: "Peso chileno", code: 7, agent: 4675 }, //este codigo se toma como el id_operado en caso el tipo sea W
-  ];*/
 
   const handleScroll = () => {
     scrollPosition = window.scrollY;

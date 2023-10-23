@@ -39,13 +39,11 @@
   });
 
   async function preRegisterClick() {
-    if (!registerUser.username)
-      return notify.error("Ingrese nombre de usuario");
+    if (!registerUser.username)return notify.error("Ingrese nombre de usuario");
     if (!registerUser.email) return notify.error("Ingrese su email");
-    if (registerUser.password.length < 6)
-      return notify.error("La contraseña debe tener al menos 6 caracteres.");
-    if (!registerUser.phone)
-      return notify.error("Ingrese su numero de celular");
+    if (registerUser.password.length < 6) return notify.error("La contraseña debe tener al menos 6 caracteres.");
+    if (!registerUser.phone) return notify.error("Ingrese su numero de celular");
+    if (registerUser.password != registerUser.verifypassword) return notify.error("Las contraseñas son diferentes");
     try {
       let params = { ...registerUser };
       console.log(params);
@@ -63,15 +61,20 @@
     console.log(params);
     for (const key in params) {
       if (params[key] == "") return notify.error("Llene todos los campos");
-      if (!registerUser.term_conditions) return notify.error("Debes aceptar los términos y condiciones para registrarte.");
+      if (!registerUser.term_conditions)
+        return notify.error(
+          "Debes aceptar los términos y condiciones para registrarte."
+        );
     }
     try {
       await backend.u_user.register(params);
       onOkSingup();
     } catch (error) {
       console.log("error", error);
-      if (error.response.data.errorCode == "SMS_CODE_INVALID") return notify.error("El codigo SMS es invalido");
-      if (error.response.data.errorCode == "CASINO_PLATFORM_CHECK_EMAIL_PHONE") return notify.error("La informacion ya existe");
+      if (error.response.data.errorCode == "SMS_CODE_INVALID")
+        return notify.error("El codigo SMS es invalido");
+      if (error.response.data.errorCode == "CASINO_PLATFORM_CHECK_EMAIL_PHONE")
+        return notify.error("La informacion ya existe");
       else return notify.error("No se pudo crear el usuario");
     }
   }
@@ -102,6 +105,12 @@
     type="text"
     class="ipt"
     placeholder="Ingrese contraseña"
+  />
+  <input
+    bind:value={registerUser.verifypassword}
+    type="text"
+    class="ipt"
+    placeholder="Verificar contraseña"
   />
   <div class="singup__phone">
     <UDropdowPrefix

@@ -114,11 +114,11 @@
       <thead class="table_header">
         <tr>
           <th>ID</th>
-          <th>FECHA</th>
-          <th>DESCRIP.</th>
-          <th>GAME</th>
-          <th>TIPO</th>
-          <th>OUT</th>
+          <th style="min-width: 8rem; text-align:center;">FECHA</th>
+          <th style="min-width: 8rem; text-align:center;">DESCRIP.</th>
+          <th style="min-width: 12rem; text-align:center;">GAME</th>
+          <th style="min-width: 10rem;">TIPO</th>
+          <th style="min-width: 5rem;">OUT</th>
           <th>IN</th>
           <th>WALLET</th>
           <th>BLC</th>
@@ -138,10 +138,10 @@
                 <td>{mov.serial}</td>
                 <td>{moment(mov.created).format("YY-MM-DD HH:mm:ss")}</td>
                 <td>{mov.description}</td>
-                <td style="min-width: 6rem; text-align:center;">{mov.game_name} ({mov.category} - {mov.brand})</td>
-                <td>{mov.txType}</td>
+                <td style="text-align:center;">{mov.game_name} ({mov.category} - {mov.brand})</td>
+                <td>{mov.txType} - ({mov.paymentMethod})</td>
                 {#if mov.txType == "BET" || mov.txType == "WITHDRAW"}
-                  <td style="color: red;">- {mov.amount.toFixed(2)}</td>
+                  <td style="color: red;"> - {mov.amount.toFixed(2)}</td>
                 {:else}
                   <td />
                 {/if}

@@ -30,6 +30,7 @@
   let icon = true;
   let active_section = "balance";
   let active_option = "MyProfile";
+  let url_global = "https://assets.apiusoft.com";
   
 
   const closeModal = () => {
@@ -125,59 +126,23 @@
 <div class="profile content">
   <div class="profile personaldata">
     <div class="profile personaldata__user">
-      <div class="my_name">
-        <img
-          class="usericon1 s-pLY60ePxNKjT"
-          src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png"
-          alt=""
-        />
-        <span>Mi Cuenta</span>
-      </div>
-      <div class="in-mobile">
-        <button on:click={closeModal} style="color: white;">X</button>
-      </div>
+      <img class="usericon1" src="{url_global}/latinosport21/usericon1.png" alt="icon_user"/>
+      <span>Mi Cuenta</span>
+      <button on:click={closeModal} class="in-mobile" style="color: white;">X</button>
     </div>
     <div class="profile personaldata__userdata">
       {user.username} #{user.serial}
       {#if icon}
-        <button
-          title="Copiar Código"
-          class="profile personaldata__copycode"
-          on:click={copyCodeWhitdrawallUserId}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            ><path
-              d="M10 8V7C10 6.05719 10 5.58579 10.2929 5.29289C10.5858 5 11.0572 5 12 5H17C17.9428 5 18.4142 5 18.7071 5.29289C19 5.58579 19 6.05719 19 7V12C19 12.9428 19 13.4142 18.7071 13.7071C18.4142 14 17.9428 14 17 14H16M7 19H12C12.9428 19 13.4142 19 13.7071 18.7071C14 18.4142 14 17.9428 14 17V12C14 11.0572 14 10.5858 13.7071 10.2929C13.4142 10 12.9428 10 12 10H7C6.05719 10 5.58579 10 5.29289 10.2929C5 10.5858 5 11.0572 5 12V17C5 17.9428 5 18.4142 5.29289 18.7071C5.58579 19 6.05719 19 7 19Z"
-              stroke="#fff"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            /></svg
-          >
+        <button on:click={copyCodeWhitdrawallUserId} class="profile personaldata__copycode" title="Copiar Código" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M10 8V7C10 6.05719 10 5.58579 10.2929 5.29289C10.5858 5 11.0572 5 12 5H17C17.9428 5 18.4142 5 18.7071 5.29289C19 5.58579 19 6.05719 19 7V12C19 12.9428 19 13.4142 18.7071 13.7071C18.4142 14 17.9428 14 17 14H16M7 19H12C12.9428 19 13.4142 19 13.7071 18.7071C14 18.4142 14 17.9428 14 17V12C14 11.0572 14 10.5858 13.7071 10.2929C13.4142 10 12.9428 10 12 10H7C6.05719 10 5.58579 10 5.29289 10.2929C5 10.5858 5 11.0572 5 12V17C5 17.9428 5 18.4142 5.29289 18.7071C5.58579 19 6.05719 19 7 19Z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </button>
       {:else}
-        <button style="color:#fff;">
-          <svg
-            style="color:#fff;"
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
+        <button style="color:#fff; background: #4f4f5f;">
+          <svg style="color:#fff;" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" >
             <g id="Interface / Check">
-              <path
-                id="Vector"
-                d="M6 12L10.2426 16.2426L18.727 7.75732"
-                stroke="#fff"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+              <path id="Vector" d="M6 12L10.2426 16.2426L18.727 7.75732" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </g>
           </svg>
           copiado
@@ -195,56 +160,36 @@
       </div>
       <div class="profile personaldata balance">
         <button
-          class="profile btn btn_withdrawal"
-          title="Solicitar Retiro a mi banco."
           on:click={showWithdrawalBank}
-        >
-          <span>Retiro a Banco</span>
-        </button>
-        <button
-          class="profile btn btn_deposit"
-          title="Depositar a una cuenta de banco."
-          on:click={showDepositBank}
-        >
-          <span> Depósito a Banco</span>
-        </button>
-      </div>
-      <div class="profile personaldata balance">
-        <button
           class="profile btn btn_withdrawal"
-          title="Solicitar un retiro en efectivo."
+          title="Solicitar Retiro a mi banco.">
+          Retiro a Banco
+        </button>
+        <button
+          on:click={showDepositBank}
+          class="profile btn btn_deposit"
+          title="Depositar a una cuenta de banco.">
+          Depósito a Banco
+        </button>
+        <button
           on:click={showCashOut}
-        >
-          <span>Retiro Efectivo</span>
+          class="profile btn btn_withdrawal"
+          title="Solicitar un retiro en efectivo.">
+          Retiro Efectivo
         </button>
         <button
           class="profile btn btn_deposit"
           title="Confirmar y activar un deposito en efectivo."
-          on:click={showDepositCashier}
-        >
-          <span> Confirmar Recarga</span>
+          on:click={showDepositCashier}>
+          Confirmar Recarga
         </button>
       </div>
     </div>
-    <button
-      class="profile personaldata__useroptions {active_option == 'MyProfile'
-        ? ' u-opt-select'
-        : ''}"
-      on:click={() => {
-        active_option = "MyProfile";
-      }}>Mi Perfil</button
-    >
-    <button
-      class="profile personaldata__useroptions {active_option == 'MyRecord'
-        ? ' u-opt-select'
-        : ''}"
-      on:click={() => {
-        active_option = "MyRecord";
-      }}>Historial</button
-    >
-    <button class="profile personaldata__useroptions" on:click={logout}>
-      Cerrar Sesión
-    </button>
+    <div class="profile personaldata options">
+      <button on:click={()=>{active_option="MyProfile"}} class=" profile personaldata options__useroptions {active_option == 'MyProfile' ? ' u-opt-select' : ''}">Mi Perfil</button>
+      <button on:click={()=>{active_option="MyRecord"}} class="profile personaldata options__useroptions {active_option == 'MyRecord'?'u-opt-select':''}">Historial</button >
+      <button on:click={logout} class="profile personaldata options__useroptions">Cerrar Sesión</button>
+    </div>
   </div>
   <div class="profile viewinformation">
     <div class="profile viewinformation_header">
