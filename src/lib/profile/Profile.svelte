@@ -18,6 +18,7 @@
   export let modalOpened;
   export let onLogout;
   export let showModalProfile;
+  export let limitAmount;
    const logout = () => {
     //FALTA ir a Bancked a destruir session
     onLogout();
@@ -272,7 +273,7 @@
 </Modal>
 
 <Modal bind:open={modalShowWithdrawalBank} showHeader={false}>
-  <WithdrawalBank bind:user bind:open={modalShowWithdrawalBank} />
+  <WithdrawalBank bind:limitAmount bind:user bind:open={modalShowWithdrawalBank} />
 </Modal>
 
 <Modal bind:open={modalCashOut} showHeader={false}>

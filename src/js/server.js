@@ -91,7 +91,7 @@ const ServerConnection = (() => {
 
     /* PARA Universal User API */
     const u_wallet = {
-        checkPendingCashout: async (token) => {
+        chegckPendingCashout: async (token) => {
             headers['Authorization'] = token;
             var url = conf.API + `/api/casino/wallet/cashout/checkPending`;
             return await axios.get(url, { headers });
@@ -146,6 +146,10 @@ const ServerConnection = (() => {
     const u_user = {
         getBalance: (userToken) => {
             let url = conf.API + `/api/casino/balance/${userToken}`;
+            return axios.get(url, { headers });
+        },
+        myAccount: (userToken) =>{
+            let url = conf.API + `/api/casino/myAccount/${userToken}`;
             return axios.get(url, { headers });
         },
         preRegister: (payload) => {

@@ -29,6 +29,7 @@
   export let countries=["PE"];
   export let currencies=["USD"];
   export let doctypes=["DNI"];
+  export let limitAmount = {min: 50, max:2000};
 
   let username = "";
   let password = "";
@@ -99,16 +100,16 @@
   const onOpenMyAccount = async () => {
     showModalProfile = true;
     document.body.style.overflow = "visible";
-    if (userGateway == "neco") {
-      const data = await backend.getMyAccount(user.token);
-      let serial_api_casino = user.serial_api_casino;
-      let token = user.token;
-      let agregatorToken = user.agregatorToken;
-      user = { ...user, ...data };
-      user.serial_api_casino = serial_api_casino;
-      user.token = token;
-      user.agregatorToken = agregatorToken;
-    }
+    
+    const data = await backend.u_user.myAccount(user.token);
+    let serial_api_casino = user.serial_api_casino;
+    let token = user.token;
+    let agregatorToken = user.agregatorToken;
+    user = { ...user, ...data };
+    user.serial_api_casino = serial_api_casino;
+    user.token = token;
+    user.agregatorToken = agregatorToken;
+  
   };
 
   const onPasswordChangeModal = () => {
@@ -206,7 +207,7 @@
     showHeader={false}
     modalOpened={"profile"}
   >
-    <Profile {onLogout} bind:user bind:open={showModalProfile} bind:modalOpened />
+    <Profile bind:limitAmount {onLogout} bind:user bind:open={showModalProfile} bind:modalOpened />
   </Modal>
 
   <Notifier />
