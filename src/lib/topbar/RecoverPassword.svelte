@@ -22,8 +22,9 @@
         await backend.u_user.recoverPassword(payload)
         notify.success("Un mensaje esta siendo enviado a su correo electronico")
     } catch (error) {
-        
+        notify.error("Surgio un error, contacte a soporte");
     }
+    open = false;
   }
 </script>
 
