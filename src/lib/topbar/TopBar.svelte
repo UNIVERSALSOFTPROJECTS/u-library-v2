@@ -14,6 +14,7 @@
   import Register from "./Register.svelte";
   import notify from "../../js/notify";
   import Notifier from "../Notifier.svelte";
+  import RecoverPassword from "./RecoverPassword.svelte";
 
   export let userState;
   export let active_view;
@@ -26,15 +27,16 @@
   export let platform;
   export let userGateway;
   export let onLogin;
-  export let countries=["PE"];
-  export let currencies=["USD"];
-  export let doctypes=["DNI"];
-  export let limitAmount = {min: 50, max:2000};
+  export let countries = ["PE"];
+  export let currencies = ["USD"];
+  export let doctypes = ["DNI"];
+  export let limitAmount = { min: 50, max: 2000 };
 
   let username = "";
   let password = "";
   let showUserCreation = false;
   let showRegisterModal = false;
+  let showRecoverPass = false;
   let showModalProfile = false;
   let scrollPosition = 0;
   let divClass = "";
@@ -48,7 +50,7 @@
       divClass = "class-b";
     }
   };
-  
+
   onMount(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -88,6 +90,13 @@
     }, 100);
   };
 
+  const onOpenRecoverPass = () => {
+    loginModalOpen = false;
+    showRecoverPass = true;
+    modalOpened = "singup";
+
+  };
+
   const onLogout = () => {
     userState = "logout";
     active_view = "home";
@@ -100,7 +109,7 @@
   const onOpenMyAccount = async () => {
     showModalProfile = true;
     document.body.style.overflow = "visible";
-    
+
     const data = await backend.u_user.myAccount(user.token);
     let serial_api_casino = user.serial_api_casino;
     let token = user.token;
@@ -109,7 +118,6 @@
     user.serial_api_casino = serial_api_casino;
     user.token = token;
     user.agregatorToken = agregatorToken;
-  
   };
 
   const onPasswordChangeModal = () => {
@@ -125,10 +133,10 @@
   };
 
   const onOkSingup = () => {
-    notify.success("Usuario registrado exitosamente")
+    notify.success("Usuario registrado exitosamente");
     signupModalOpen = false;
-  }
-  
+  };
+
   const onLoginOk = async (user_) => {
     user = user_;
     notify.success("Bienvenido a " + platform);
@@ -137,11 +145,10 @@
     active_view = "home";
     onLogin();
   };
-  
+
   const onLoginError = async (error) => {
     notify.error(error);
   };
-
 </script>
 
 <div
@@ -194,20 +201,38 @@
       {assetsUrl}
       {userGateway}
       {platform}
+      {onOpenRecoverPass}
+    />
+  </Modal>
+  
+
+  <Modal bind:open={showRecoverPass} bind:modalOpened showHeader={false}>
+    <RecoverPassword 
+      bind:open={showRecoverPass}
     />
   </Modal>
   <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
-    <Register bind:countries bind:platform bind:currencies bind:doctypes {onOkSingup}></Register>
+    <Register
+      bind:countries
+      bind:platform
+      bind:currencies
+      bind:doctypes
+      {onOkSingup}
+    />
   </Modal>
-
-
 
   <Modal
     bind:open={showModalProfile}
     showHeader={false}
     modalOpened={"profile"}
   >
-    <Profile bind:limitAmount {onLogout} bind:user bind:open={showModalProfile} bind:modalOpened />
+    <Profile
+      bind:limitAmount
+      {onLogout}
+      bind:user
+      bind:open={showModalProfile}
+      bind:modalOpened
+    />
   </Modal>
 
   <Notifier />

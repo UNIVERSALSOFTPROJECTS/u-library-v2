@@ -22,7 +22,7 @@ export const LoginNeco = () => ({
 
 export const LoginUniversal = () => ({
   Component: Login,
-  props: { userGateway: 'universal', assetsUrl, onOk, onError }
+  props: { userGateway: 'universal', assetsUrl, onOk, onError, modalOpened}
 });
 
 

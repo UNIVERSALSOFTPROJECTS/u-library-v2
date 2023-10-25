@@ -213,6 +213,15 @@ const ServerConnection = (() => {
             var payload = { userToken, newPassword, oldPassword }
             var url = conf.API + "/api/casino/changepassword";
             return axios.post(url, payload,{headers})
+        },
+
+        recoverPassword: (payload) => {
+            var payload_ = {
+                email: payload.email,
+                platformId: conf.platformId,
+                platform: conf.org,
+            }
+            return axios.post(conf.API + "/api/casino/players/forgotPassword", payload_)
         }
     }
     /* */
