@@ -21,10 +21,10 @@
     console.log("Cerrando Modal.");
     open = false;
   };
+
   const getPendingWithdrawal = async (token) => {
-      let resp_pending = await ServerConnection.u_wallet.checkPendingCashout(
-          token
-          );
+    console.log("Checkpending");
+      let resp_pending = await ServerConnection.u_wallet.checkPendingCashout(token);
       if (resp_pending.data.pending){
         pendingWhitdrawall = resp_pending.data; 
         console.log("retiro:", pendingWhitdrawall);

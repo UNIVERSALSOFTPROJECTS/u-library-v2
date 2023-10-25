@@ -91,7 +91,7 @@ const ServerConnection = (() => {
 
     /* PARA Universal User API */
     const u_wallet = {
-        chegckPendingCashout: async (token) => {
+        checkPendingCashout: async (token) => {
             headers['Authorization'] = token;
             var url = conf.API + `/api/casino/wallet/cashout/checkPending`;
             return await axios.get(url, { headers });
