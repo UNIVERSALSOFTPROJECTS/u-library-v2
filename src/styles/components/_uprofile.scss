@@ -231,6 +231,10 @@ $media-small: 960px;
             color: white;
         }
     }
+    &.information--data{
+        height: 100%;
+        padding-top: 2rem;
+    }
 
 }
 }

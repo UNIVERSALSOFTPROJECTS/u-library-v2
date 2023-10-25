@@ -33,7 +33,6 @@
     bankDeposit.date = moment().format("YYYY-MM-DD");
     bankDeposit.name = user.name;
     bankDeposit.username = user.username;
-    console.log("User que llega a deposit bank", user);
   });
 
   const listBankAccounts = async () => {

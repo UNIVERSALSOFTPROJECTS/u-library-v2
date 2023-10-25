@@ -267,7 +267,6 @@
 <Modal bind:open={modalShowConfirmDeposit} bind:modalOpened showHeader={false}>
   <ConfirmCashIn
     bind:user
-    onOk={onDepositOk}
     onError={onDepositError}
     bind:open={modalShowConfirmDeposit}
   />

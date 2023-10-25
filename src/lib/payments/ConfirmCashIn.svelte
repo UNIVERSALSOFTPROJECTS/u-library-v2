@@ -3,7 +3,6 @@
    import notify from "../../js/notify";
   export let open;
   export let user;
-  export let onOk;
   export let onError;
 
   let depositCode = "";
@@ -16,12 +15,14 @@
   const confirmDeposit = async () => {
     if (!depositCode)  return notify.error("codigo Obligatorio");
     try {
+      notify.loading("Esta siendo procesado el codigo")
       let { data } = await ServerConnection.u_wallet.confirmCashin(user.token,{code:depositCode});
       user.balance= data.balance;
-      onOk();
+      notify.success("Procesado correctamente");
     } catch (e) {
       console.log("ERROR", e);
       if(e.response.data.errorCode == "CODE_NOT_FOUND") return notify.error("El codigo ingresado no existe");
+      else if(e.response.data.errorCode == "STATUS_IS_NOT_PENDING") return notify.error("El codigo ingresado ya ha sido confirmado");
       onError("Error al procesar deposito", e);
     }
   };

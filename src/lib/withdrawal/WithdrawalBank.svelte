@@ -26,6 +26,7 @@
   });
 
   const cashout = async () => {
+
     if (!withdrawalBank.amount || withdrawalBank.amount == "") return notify.error("Ingrese monto");
     if (Number(withdrawalBank.amount) < limitAmount.min || Number(withdrawalBank.amount) > limitAmount.max) return notify.error( "Monto mínimo " + limitAmount.min + " " + user.currency + ", máximo " +  limitAmount.max + " " + user.currency );
     if (withdrawalBank.amount > user.balance) return notify.error("Saldo insuficiente");
@@ -34,8 +35,14 @@
     if (!withdrawalBank.bankName) return notify.error("Ingrese nombre del banco");
     if (!withdrawalBank.accountNumber) return notify.error("Ingrese numero de cuenta");
     try {
+      const u = sessionStorage.getItem("user");
+      let user_ = JSON.parse(u);
       processing = true;
-      let params = {...withdrawalBank};
+      let params = {...withdrawalBank,
+        playerId: user_.playerId,
+        currencyISO: user_.currency,
+
+      };
       let { data } = await ServerConnection.u_wallet.withdrawalBank(user.token, params);
       notify.success("Procesado");
       withdrawalOk(data);
@@ -45,7 +52,6 @@
     }
     processing = false;
   };
-
 
   const isOnlyNumber = (event) => {
     if (!/\d/.test(event.key)) {

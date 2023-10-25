@@ -1,99 +1,97 @@
 <script>
-  import EventManager from "../../js/EventManager";
+  import notify from "../../js/notify";
   import backend from "../../js/server";
   export let showPasswordChangeModal;
   export let user;
 
-  let securityData = {};
-  securityData.current_password = "";
-  securityData.new_password = "";
+  let securityData = {
+    old_Password: "",
+    new_Password: "",
+    newpassword: ""
+  };
+
+  let showPassword = {
+    currentPassword: false,
+    newPassword: false,
+    confirmPassword: false
+  };
+
+  const togglePasswordHide = (field) => {
+    showPassword[field] = !showPassword[field];
+  };
 
   const cleanInputs = () => {
-    securityData.current_password = "";
-    securityData.new_password = "";
+    securityData.old_Password = "";
+    securityData.new_Password = "";
     securityData.newpassword = "";
   };
 
   const changePassword = async () => {
-    if (!securityData.current_password || securityData.current_password == "") {
-      EventManager.publish("notify", {
-        mode: "error",
-        msg: "Ingrese la contraseña actual",
-      });
-      return;
-    }
-    if (
-      securityData.new_password.length < 6 ||
-      securityData.new_password == ""
-    ) {
-      EventManager.publish("notify", {
-        mode: "error",
-        msg: "Mínimo 6 caracteres para las contraseñas",
-      });
-      return;
-    }
-    if (securityData.new_password != securityData.newpassword) {
-      EventManager.publish("notify", {
-        mode: "error",
-        msg: "La nueva contraseña no coincide",
-      });
-      return;
-    }
+    if (!securityData.old_Password) return notify.error("Ingrese su clave actual");
+    if (securityData.new_Password.length < 6 || securityData.new_Password === "") return notify.error("Ingrese al menos 6 caracteres");
+    if (securityData.new_Password !== securityData.newpassword) return notify.error("Las claves deben coincidir");
+
     try {
-      let response = await backend.u_user.changePassword(
-        user.token,
-        securityData.newpassword,
-        securityData.current_password
-      );
+      let payload = { ...securityData };
+      let response = await backend.u_user.changePassword(user.token, payload);
       console.log("resp: ", response);
-      /*if (response.errorCode == "CHANGE_PASSWORD_FAILED") {
-        EventManager.publish("notify", {
-          mode: "error",
-          msg: "Contraseña actual incorrecta",
-        });
-      } else {
-        EventManager.publish("notify", {
-          mode: "error",
-          msg: "Contraseña cambiada exitosamente",
-        });
-        cleanInputs();
-      }*/
     } catch (error) {
       console.log(error);
+      notify.error("No se pudo cambiar la clave");
     }
+    cleanInputs();
     close();
   };
+
   const close = () => {
     showPasswordChangeModal = false;
   };
+
+  const oldPassword = (e) => {
+    securityData.old_Password = e.target.value;
+  };
+  const newPassword = (e) => {
+    securityData.new_Password = e.target.value;
+  };
+  const newConfirmPassword = (e) => {
+    securityData.newpassword = e.target.value;
+  };
 </script>
 
-<div class="security" >
-    <label for="sec-pass">Contraseña Actual
+<div class="security">
+  <div class="security__ipt--pass">
+    Contraseña Actual:
     <input
-      type="password"
+      type={showPassword.currentPassword ? 'text' : 'password'}
       class="ipt"
       autocomplete="off"
-      bind:value={securityData.current_password}
-    /></label>
-
-    <label for="">Nueva Contraseña
-    <input
-      type="password"
-      class="ipt"
-      autocomplete="off"
-      bind:value={securityData.new_password}
-    /></label>
-
-    <label for="">Repetir Contraseña
-    <input
-      type="password"
-      class="ipt"
-      autocomplete="off"
-      bind:value={securityData.newpassword}
+      on:input={oldPassword}
     />
-    </label>
-    <button class="btn  btn-save" on:click={changePassword}>Guardar</button>
+    <button type="button" class="btn {showPassword.currentPassword ? 'no-eye' : 'eye'}" name="password" on:click={() => togglePasswordHide('currentPassword')}></button>
+  </div>
+
+  <div class="security__ipt--pass">
+    Nueva Contraseña:
+    <input
+      type={showPassword.newPassword ? 'text' : 'password'}
+      class="ipt"
+      autocomplete="off"
+      on:input={newPassword}
+    />
+    <button type="button" class="btn {showPassword.newPassword ? 'no-eye' : 'eye'}" name="password" on:click={() => togglePasswordHide('newPassword')}></button>
+  </div>
+
+  <div class="security__ipt--pass">
+    Repetir Contraseña:
+    <input
+      type={showPassword.confirmPassword ? 'text' : 'password'}
+      class="ipt"
+      autocomplete="off"
+      on:input={newConfirmPassword}
+    />
+    <button type="button" class="btn {showPassword.confirmPassword ? 'no-eye' : 'eye'}" name="password" on:click={() => togglePasswordHide('confirmPassword')}></button>
+  </div>
+  <button class="btn btn-save" on:click={changePassword}>Guardar</button>
 </div>
 
 <style>
@@ -102,14 +100,20 @@
     cursor: pointer;
     width: 60%;
   }
+  .security__ipt--pass {
+    width: 60%;
+    display: grid;
+    grid-template-columns: 80px 1fr 40px;
+  }
   @media only screen and (max-width: 1200px) {
     .security {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
+      gap: 1rem;
       width: 100%;
+      height: 100%;
       padding: 1rem;
     }
     .ipt {
@@ -125,6 +129,7 @@
       justify-content: space-between;
       gap: 0.5rem;
       width: 100%;
+      height: 100%;
     }
     .ipt {
       border: 1px solid rgb(208 206 206);

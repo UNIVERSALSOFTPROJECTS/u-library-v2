@@ -125,7 +125,9 @@ const ServerConnection = (() => {
         },
         withdrawalBank: async (token, params) => {
             headers['Authorization'] = token;
-            let payload = { ...params }
+            let payload = { ...params,
+                platformId: conf.platformId
+            }
             let url = conf.API + "/api/casino/wallet/bankWithdrawal";
             return await axios.post(url, payload, { headers });
         },
@@ -209,10 +211,15 @@ const ServerConnection = (() => {
             return axios.post(url, payload, {headers})
         },
 
-        changePassword: (userToken, newPassword, oldPassword) => {
-            var payload = { userToken, newPassword, oldPassword }
+        changePassword: (userToken, payload) => {
+            var payload_ = { 
+                newPassword: payload.new_Password, 
+                oldPassword: payload.old_Password 
+            }
+            headers.Authorization = userToken;
+            console.log(payload_);
             var url = conf.API + "/api/casino/changepassword";
-            return axios.post(url, payload,{headers})
+            return axios.post(url, payload_,{headers})
         },
 
         recoverPassword: (payload) => {
@@ -221,7 +228,7 @@ const ServerConnection = (() => {
                 platformId: conf.platformId,
                 platform: conf.org,
             }
-            return axios.post(conf.API + "/api/casino/players/forgotPassword", payload_)
+            return axios.post(conf.API + "/api/casino/forgotPassword", payload_)
         }
     }
     /* */
