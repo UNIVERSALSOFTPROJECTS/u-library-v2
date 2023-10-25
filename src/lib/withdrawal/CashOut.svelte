@@ -59,14 +59,11 @@
     processing = false;
   };
 
-  const validateAmount = (event) => {
-    if (!/\d/.test(event.key)) return;
-    if (event.charCode === 45 || event.charCode === 43) {
+  const isOnlyNumber = (event) => {
+    if (!/\d/.test(event.key)) {
       event.preventDefault();
-      return;
+      notify.error("Ingrese solo números");
     }
-    if (amount.length < 4) amount += event.key;
-    // else if(amount.length >= 4) return notify = util.getNotify("error","Alcanzó el limite de cifras" )
   };
 
   const copyCodeWhitdrawall = () => {
@@ -132,7 +129,7 @@
             </button>
           </div>
           <p>Monto:</p>
-          <span>{pendingWhitdrawall.amount}</span>
+          <span>{pendingWhitdrawall.amount.toFixed(2)}</span>
         </div>
         <div class="w-100">
           Acercate a nuestras sucursales, para proceder con el retiro.
@@ -151,9 +148,10 @@
         <input
           aria-label="amount"
           class="u-input-pay"
+          inputmode="numeric"
           bind:value={amount}
           type="text"
-          on:keypress|preventDefault={(e) => validateAmount(e)}
+          on:keypress={isOnlyNumber}
           placeholder="Ingrese el monto a retirar"
         />
       </div>
