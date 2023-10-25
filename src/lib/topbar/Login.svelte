@@ -67,6 +67,7 @@
       type="text"
       class="ipt"
       placeholder="Usuario"
+      autocapitalize="off"
       on:keypress={loginEnter}
       bind:value={username}
     />

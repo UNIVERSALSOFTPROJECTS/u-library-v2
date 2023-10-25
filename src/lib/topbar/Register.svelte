@@ -93,12 +93,14 @@
     type="text"
     class="ipt"
     placeholder="Nombre"
+    autocapitalize="off"
   />
   <input
     bind:value={registerUser.username}
     type="text"
     class="ipt"
     placeholder="Nombre de Usuario"
+    autocapitalize="off"
   />
   <input
     bind:value={registerUser.password}
