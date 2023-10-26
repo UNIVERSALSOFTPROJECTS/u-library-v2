@@ -6,6 +6,7 @@
   import Pagination from "../Pagination.svelte";
   import moment from "moment";
   import Loading from "../Loading.svelte";
+  import notify from "../../js/notify";
 
   export let user;
 
@@ -67,8 +68,7 @@
         m.currentDate = convertDateTimeZone(m.lfecha);
       });
     } catch (error) {
-      let msg = "Error";
-      EventManager.publish("notify", { mode: "error", msg: msg });
+      notify.error("Error al listar los movimientos")
     }
   };
 </script>
@@ -137,44 +137,43 @@
         {:then l}
           <tbody>
             {#each movements.list as mov}
-              <tr>
-                <td>{mov.serial}</td>
-                <td>{moment(mov.created).format("YY-MM-DD HH:mm:ss")}</td>
-                <td>{mov.description}</td>
-                <td style="text-align:center;">{mov.game_name} ({mov.category} - {mov.brand})</td>
-                <td>{mov.txType} - ({mov.paymentMethod})</td>
-                {#if mov.txType == "BET" || mov.txType == "WITHDRAW"}
-                  <td style="color: red;"> - {mov.amount.toFixed(2)}</td>
-                {:else}
-                  <td />
-                {/if}
-                {#if mov.txType === "WIN" || mov.txType == "DEPOSIT"}
-                  <td style="color: green;">{mov.amount.toFixed(2)}</td>
-                {:else}
-                  <td />
-                {/if}
-                <td>{mov.balanceType}</td>
-                <td>{mov.newBalance.toFixed(2)}</td>
-              </tr>
+              {#if mov.status != 4}
+                <tr>
+                  <td>{mov.serial}</td>
+                  <td>{moment(mov.created).format("YY-MM-DD HH:mm:ss")}</td>
+                  <td>{mov.description}</td>
+                  <td style="text-align:center;">{mov.game_name} ({mov.category} - {mov.brand})</td>
+                  <td>{mov.txType} ({mov.paymentMethod?mov.paymentMethod:'' })
+                  </td>
+                  {#if mov.txType == "BET" || mov.txType == "WITHDRAW"}
+                    <td style="color: red;"> - {mov.amount.toFixed(2)}</td>
+                  {:else}
+                    <td />
+                  {/if}
+                  {#if mov.txType === "WIN" || mov.txType == "DEPOSIT"}
+                    <td style="color: green;">{mov.amount.toFixed(2)}</td>
+                  {:else}
+                    <td />
+                  {/if}
+                  <td>{mov.balanceType}</td>
+                  <td>{mov.newBalance.toFixed(2)}</td>
+                </tr>
+              {/if}
             {/each}
           </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="9">
-                {#if movements.list.length}
-                  <Pagination
-                    bind:total={movements.total}
-                    bind:xpage={movements.xpage}
-                    bind:current={movements.page}
-                    {onPageClick}
-                  />
-                {/if}
-              </td>
-            </tr>
-          </tfoot>
         {/await}
       {/if}
     </table>
+  </div>
+  <div class="paginator">
+    {#if movements.list.length}
+      <Pagination
+        bind:total={movements.total}
+        bind:xpage={movements.xpage}
+        bind:current={movements.page}
+        {onPageClick}
+      />
+    {/if}
   </div>
 </div>
 
@@ -194,7 +193,10 @@
     font-weight: bold;
   }
   thead th {
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid #000000;
+  }
+  .paginator{
+    padding: 0.5rem;
   }
   .ipt {
     border: 1px solid #000000;
@@ -208,6 +210,7 @@
     margin: 0.5rem;
     overflow: auto;
     border: 1px solid black;
+    height: 100%;
   }
   td {
     padding: 0.5rem;
