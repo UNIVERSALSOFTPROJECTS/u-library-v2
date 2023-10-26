@@ -455,6 +455,13 @@
             flex-direction: column;
             gap: 0.5rem;
             padding: 0.8rem;
+            &--code{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0.5rem;
+            }
         }
 
         &__header {
@@ -507,11 +514,13 @@
             padding: 0.5rem;
             display: flex;
             justify-content: center;
+            align-items: center;
 
             &_pay {
                 background-color: $color-primary;
                 padding: 0.4rem;
                 border-radius: 0.3rem;
+                text-align: center;
                 border: none;
                 width: 50%;
                 cursor: pointer;

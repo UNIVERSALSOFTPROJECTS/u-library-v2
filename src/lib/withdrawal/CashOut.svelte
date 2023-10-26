@@ -144,26 +144,26 @@
         <span class="u-title">RETIRAR SU SALDO</span>
         <button class="btn close" on:click={closeModal}></button>
       </div>
-      <div class="u-content-info">
-        <span>INGRESE EL MONTO A RETIRAR:</span>
+      <div class="withdrawal__body">
+        <label class="withdrawal__body--code">
+          INGRESE EL MONTO A RETIRAR:
         <input
           aria-label="amount"
-          class="u-input-pay"
+          class="ipt"
           inputmode="numeric"
           bind:value={amount}
           type="text"
           on:keypress={isOnlyNumber}
           placeholder="Ingrese el monto a retirar"
         />
-      </div>
-      <div class="gb-process">
-        <span
-          >Al solicitar su retiro usted esta aceptando los términos y
-          condiciones</span
-        >
-        <button class="u-button-pay" on:click={cashout} disabled={processing}
-          >{processing ? "PROCESANDO..." : "SOLICITAR RETIRO"}</button
-        >
+        </label>
+        <span style="font-size: 0.8em;">Al solicitar su retiro usted esta aceptando los términos y
+          condiciones</span>
+        <div class="content-btn">
+          <button class="btn withdrawal__btn_pay" on:click={cashout} disabled={processing}
+            >{processing ? "PROCESANDO..." : "SOLICITAR RETIRO"}</button
+          >
+        </div>
       </div>
     </div>
   {/if}
@@ -175,50 +175,25 @@
     }
   /**/
   
-  .u-button-pay:disabled {
-    background-color: rgb(210, 184, 54);
+  .content-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+  .ipt{
+    border: 1px solid #ccc;
+  }
+
+  
+    input:focus-visible {
+      outline: 0;
+    }
   
   @media only screen and (max-width: 1200px) {
     /*Retirar Saldo sin saldo pendiente*/
     
-    .u-content-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      font-weight: 600;
-    }
-    input:focus-visible {
-      outline: 0;
-    }
-    .u-input-pay {
-      width: 15rem;
-      height: 2rem;
-      border-radius: 0.5rem;
-      border: 1px solid #000;
-      padding: 0.2rem;
-      padding-left: 0.5rem;
-      font-size: 1rem;
-      text-align: center;
-    }
-    .gb-process {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-size: 12px;
-    }
-    .u-button-pay {
-      background: #dead1a;
-      border: none;
-      height: 2rem;
-      width: 100%;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
+   
+    
     .u-section-code {
       display: flex;
       flex-direction: row;
@@ -240,43 +215,8 @@
   @media only screen and (min-width: 1200px) {
     /*Retirar Saldo sin saldo pendiente*/
     
-    .u-content-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      font-weight: 600;
-    }
-    input:focus-visible {
-      outline: 0;
-    }
-    .u-input-pay {
-      width: 15rem;
-      height: 2rem;
-      border-radius: 0.5rem;
-      border: 1px solid #000;
-      padding: 0.2rem;
-      padding-left: 0.5rem;
-      font-size: 1rem;
-      text-align: center;
-    }
-    .gb-process {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-size: 12px;
-    }
-    .u-button-pay {
-      background: #dead1a;
-      border: none;
-      height: 2rem;
-      width: 100%;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
+  
+    
     .u-section-code {
       display: flex;
       flex-direction: row;
