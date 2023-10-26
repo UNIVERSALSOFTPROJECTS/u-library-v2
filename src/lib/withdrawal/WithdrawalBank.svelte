@@ -11,14 +11,11 @@
   let withdrawalBank = {};
   let processing = false;
 
-  const closeModal = () => {
-    open = false;
-  };
-
   onMount(() => {
     notify.setEM(EventManager);
     withdrawalBank={
       name: user.name,
+      username: user.username,
       document: user.data.document,
       amount: 50,
       info:'.'
@@ -26,7 +23,6 @@
   });
 
   const cashout = async () => {
-
     if (!withdrawalBank.amount || withdrawalBank.amount == "") return notify.error("Ingrese monto");
     if (Number(withdrawalBank.amount) < limitAmount.min || Number(withdrawalBank.amount) > limitAmount.max) return notify.error( "Monto mínimo " + limitAmount.min + " " + user.currency + ", máximo " +  limitAmount.max + " " + user.currency );
     if (withdrawalBank.amount > user.balance) return notify.error("Saldo insuficiente");
@@ -54,9 +50,22 @@
   };
 
   const isOnlyNumber = (event) => {
-    if (!/\d/.test(event.key)) {
+    const inputAllowedCharacters = /[0-9.]/; // Permitir números, comas y puntos
+    const inputValue = event.target.value + event.key;
+    
+    if (!inputAllowedCharacters.test(event.key)) {
       event.preventDefault();
-      notify.error("Ingrese solo números");
+      notify.error("Ingrese solo números y puntos.");
+    }
+    // Verificar que el punto decimal no aparezca al principio
+    if (event.key === '.' && !inputValue.match(/[0-9]/)) {
+      event.preventDefault();
+      notify.error("No puede ingresar un punto al principio.");
+    }
+    // Asegurarse de que solo haya un punto decimal
+    if ((inputValue.match(/\./g) || []).length > 1) {
+      event.preventDefault();
+      notify.error("Ingrese solo un punto decimal.");
     }
   };
 
@@ -83,6 +92,9 @@
   };
   const withdrawalOk = (data) => {
     notify.success("Retiro procesado");
+  };
+  const closeModal = () => {
+    open = false;
   };
 </script>
 
@@ -148,7 +160,6 @@
           class="ipt"
           type="text"
           maxlength="20"
-          inputmode="numeric"
           bind:value={withdrawalBank.accountNumber}
           placeholder="Ingrese el número de cuenta"
         />

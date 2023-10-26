@@ -28,6 +28,7 @@
     filters.from = dateRest.format("YYYY-MM-DD");
     filters.to = moment().format("YYYY-MM-DD");
     promise = getMovements();
+    filters.playerId = user.playerId;
   });
 
   const convertDateTimeZone = (lfecha) => {
@@ -56,8 +57,8 @@
 
   const getMovements = async () => {
     if(filters.type == "") delete filters.type;
-    try {
-      let params = {...filters,
+    try { let params = {
+        ...filters, 
         token:user.token
       }
       let { data } = await backend.u_wallet.transactions(params);
