@@ -4,28 +4,31 @@
 //$page : "Coliseosport" ;//default-light || default-dark
 //$body  : "Coliseosport" !default; //nombre de la pagina
 //$page : "Coliseosport" !default;//default-light || default-dark
-$body : "DemoPlatform" !default; //nombre de la pagina
-$page : "DemoPlatform" !default; //default-light || default-dark
+$body : ".universal"; //nombre de la pagina
+$page : "universal"; //default-light || default-dark
 $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep8v.jpg";
 @import './components/variables';
 @import "./components/mixins";
-@import './components/global';
+@import './components/uglobal';
+@import './components/uprofile';
+@import './components/unotifier';
 @import './components/placeholder-selectors';
 @import './components/functions';
+@import './components/modals';
 //@import SELECCIONAS EL TIPO DE THEMA DE LOGIN QUE QUIERES AQUI
 
 //Height minimo actual es de 375px
 //Notas
 //El mixxin del notifier, no es igual al de del modal, el modal cuando se llga al body se desliga de este y toma las clases del padre
 //en cambio el notifier , todas la estructura nunca varia mas que para cambiar el color y el icono, por lo que seria al contrario del modal
-.Coliseosport{
- 
+/*
+#{$body}{   
     @include notifier("top-end",#008939,#d9534f,#ffd245);
     //@extend "EL TIPO DE LOGIN QUE TENDRA QUI SE AGREGA"
     .header{
         //babieca-golden
         //@include structureHeader('babieca',12rem,5rem);
-        @include structureHeader('babieca',8.5rem,6.5rem);
+        @include structureHeader('babieca',6.5rem,6.5rem);
         &__menu{
             @include dropdown-menu("normal");
         }
@@ -122,6 +125,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             
         }
         &.withdrawal{
+            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);  
             & .modal{
                 &-body {
                     padding: 1rem;
@@ -146,12 +150,25 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     align-items: center;
                     gap: 0.5rem;
                 }
+                &__code{
+                    display: grid;
+                    grid-template-columns: 0fr 1rem;
+                    gap: 0.5rem;
+                    align-items: center;
+                }
+                &__copy{
+                    @include bgIconCenter($copy);   
+                    background-color:#ffffff00;
+                    border-radius: 100%;
+                    height: auto;
+                    position: relative;
+                }
             }
         }
 
     }
 }
-
+*/
 
 
 //.loading{

@@ -152,6 +152,7 @@
         &-body {
             width: 260px;
             padding-bottom: 3rem;
+            
         }
 
         @include modalFullScreen("mobile");
@@ -206,6 +207,12 @@
         &-body{
             width: 260px;
             padding-bottom: 3rem;
+            & .btn.login{
+                background: $color-primary;
+                box-shadow: 0 0 6px $color-primary, 
+                inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0,0%,100%,.45), 
+                inset 0 0 11px $color-primary;
+            }
         }
         @include modalFullScreen("mobile");
     }
