@@ -109,6 +109,7 @@
         notify = {};
         notify = await utils.showNotify("error",error);
     }
+    //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
 </script>
 
 <div class="{platform}">
