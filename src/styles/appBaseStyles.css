@@ -283,6 +283,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .Jetbet24 .link {
   cursor: pointer;
   color: #0049b1;
+  background-color: transparent;
 }
 .Jetbet24 .link:hover, .Jetbet24 .active.link {
   color: #0049b1;
@@ -749,6 +750,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
   width: 260px;
   padding-bottom: 3rem;
 }
+.Jetbet24 .modal.login .modal-body .btn.login {
+  background: #0049b1;
+  box-shadow: 0 0 6px #0049b1, inset 0 -6px 10px #0049b1, inset 0 6px 10px hsla(0deg, 0%, 100%, 0.45), inset 0 0 11px #0049b1;
+}
 @media (max-width: 1023px) {
   .Jetbet24 .modal.login .modal-dialog {
     margin: 0;
@@ -1124,10 +1129,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .Jetbet24 .modal.withdrawal .withdrawal__info {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.25rem 0.5rem;
-  padding: 0.5rem 0.75rem;
+  gap: 0.25rem;
+}
+.Jetbet24 .modal.withdrawal .withdrawal__info--main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 3rem;
+  padding: 1rem;
+  gap: 0.25rem;
   border-radius: 0.25rem;
-  border: 1px solid #626262;
+  border: 1px solid #fff;
   align-items: center;
 }
 .Jetbet24 .modal.withdrawal .withdrawal__amount {
@@ -1149,9 +1159,17 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px;
-  background-color: rgba(255, 255, 255, 0);
-  border-radius: 100%;
-  height: auto;
+  background-color: #0049b1;
   position: relative;
+}
+.Jetbet24 .modal.withdrawal .withdrawal__copied {
+  position: absolute;
+  top: -2rem;
+  left: -0.5rem;
+  background: #35c900;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  z-index: 100;
 }
 /*# sourceMappingURL=appBaseStyles.css.map */

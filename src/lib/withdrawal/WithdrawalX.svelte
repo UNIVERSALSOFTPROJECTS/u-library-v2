@@ -6,37 +6,50 @@
     export let user;
     export let onOk;
     export let onError;
-
+    export let openTermsConditions;
+    export let t;
 
     let pendingWithdrawal;
     let amount;
     let loadWithdrawal = true;
+    let isCopied = false;
 
     const getPendingWithdrawal = async () => {
+       try {
         let resp = await ServerConnection.wallet.checkPreviewWithdrawal(user.token);
         if(resp.data.monto) pendingWithdrawal = resp.data; // si tiene monto quiere decir que tiene un retiro pendiente
         loadWithdrawal = false;
+       } catch (error) {
+            onError(t("msg.contactSupport"));//falta detectar los errores
+            console.log(error);
+       }
     };
 
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
  
     async function validateWithdrawal() {
-        let data = await ServerConnection.wallet.retailWithdrawal(user.token, amount);
-        pendingWithdrawal = data;
-        console.log(data);
+        if (amount === 0 || amount === "" || amount === undefined) return onError(t("withdrawal.amount0"));
+        if (user.balance < amount) return onError(t("withdrawal.lowBalance"));
+        try {
+            let data = await ServerConnection.wallet.retailWithdrawal(user.token, amount);
+            pendingWithdrawal = data;
+            loadWithdrawal = true;
+            getPendingWithdrawal();
+        } catch (error) {
+            //error.data.message = "SALDO_INSUFICIENTE"
+            onError(t("msg.contactSupport"));//falta detectar los errores
+            console.log(error);
+        }
     }
 
-    const copyCodeWhitdrawall = () => {
-        const copyUser = "Usuario: " + user.username + ", ";
-        const copyId = "Id: " + user.code + ", ";
-        const copyCode = "Codigo Retiro: " + pendingWithdrawal.codigo;
-        const finalMessage = copyUser + copyId + copyCode;
+    const copyCodeWhitdrawal = () => {
+        isCopied = true;
+        setTimeout(() => { isCopied = false }, 20000);
+        let finalMessage = t("withdrawal.copyCode",{user: user.username, id: user.code, code: pendingWithdrawal.codigo});
         navigator.clipboard.writeText(finalMessage);
     };
 
-    onMount(()=>{
-        getPendingWithdrawal();
-    })
+    onMount(()=>{ getPendingWithdrawal(); })
 </script>
 
 <div class="modal-body">
@@ -44,35 +57,37 @@
         <div class="loading"><p></p><p></p><p></p></div>
         {:else}
         {#if pendingWithdrawal && pendingWithdrawal.monto>0}
-            <b>Datos generales:</b>
+            <b>{t("withdrawal.generalData")}</b>
             <div class="withdrawal__info">
-                <b>Usuario:</b>
+                <b>{t("withdrawal.user")}</b>
                 <p> {user.username}</p>
-                <b>ID:</b>
+                <b>{t("withdrawal.id")}</b>
                 <p> {user.id}</p>   
-                <b>Fecha y hora:</b>
+                <b>{t("withdrawal.dateHour")}</b>
                 <p> {moment.unix(pendingWithdrawal.efecha).format("DD/MM/YYYY")} - {moment.unix(pendingWithdrawal.efecha).format("HH:mm")}</p>   
             </div>
-            <div class="withdrawal__info">
-                <div>
-                    <b>Código:</b>
-                    <p>{pendingWithdrawal.codigo}</p>
-                </div>
-                <div>
-                    <b>Monto:</b>
-                    <p>{pendingWithdrawal.monto}</p>
-                    <button title="Copiar Código" class="btn withdrawal__copy" on:click={copyCodeWhitdrawall}></button>
-                </div>
+            <div class="withdrawal__info--main">
+                <b>{t("withdrawal.code")}</b>
+                <p>{pendingWithdrawal.codigo}</p>
+                <b>{t("withdrawal.amount")}</b>
+                <p>{pendingWithdrawal.monto} {user.currency}</p>
+                <button class="btn withdrawal__copy" on:click={copyCodeWhitdrawal}>
+                    {#if isCopied}
+                    <div class="withdrawal__copied">{t("withdrawal.copied")}</div>
+                    {/if}
+                </button>
             </div>
-            <p>Acercate a nuestras sucursales, para proceder con el retiro.</p>
-            <p>Nota: No es necesario imprimir este ticket, solo debe identificar su usuario junto con el código de referencia</p>
+            {@html t("withdrawal.info")}
         {:else}
-        
-            <p>Ingrese el monto a retirar</p>
-            <input type="number" min="1" class="ipt" bind:value={amount} on:input={justNumbersValidate} placeholder="Ingrese un monto">
-            <p>Al solicitar su retiro usted esta aceptando los <b><a class="link" href="#">Términos y Condiciones</a></b></p>
-            <button class="btn deposit" on:click={validateWithdrawal}>Solicitar retiro</button>
-    
+            <p>{t("withdrawal.withdraw")}</p>
+            <div class="withdrawal__amount">
+                <input type="number" min="1" class="ipt" bind:value={amount} on:input={justNumbersValidate} placeholder={t("withdrawal.amount0")}>
+                <b>{user.currency}</b>
+            </div>
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div on:click={openTermsConditions}>{@html t("withdrawal.termsConditions")}</div>
+            <button class="btn deposit" on:click={validateWithdrawal}>{t("withdrawal.request")}</button>
         {/if}
     {/if}
 </div>

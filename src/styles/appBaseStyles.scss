@@ -101,6 +101,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             font-size: $g-font-size + 2;
             width: 6rem;
         }
+
     }
     .modal{
         &.login{
@@ -140,7 +141,19 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             }
             & .withdrawal{
                 &__info{
-                    @include structureInfo_1;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 0.25rem;
+                    &--main{
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr 1fr 3rem;
+                        padding: 1rem;
+                        gap: 0.25rem;
+                        border-radius: $borderR-btn;
+                        border: 1px solid #fff;
+                        align-items: center;
+                    }
+                    //@include structureInfo_1;
                 }
                 &__amount{
                     display: flex;
@@ -155,10 +168,18 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                 }
                 &__copy{
                     @include bgIconCenter($copy);   
-                    background-color:#ffffff00;
-                    border-radius: 100%;
-                    height: auto;
+                    background-color: $color-primary;
                     position: relative;
+                }
+                &__copied{
+                    position: absolute;
+                    top: -2rem;
+                    left: -0.5rem;
+                    background: #35c900;
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 0.25rem;
+                    border: 1px solid rgba(0,0,0,.2);
+                    z-index: 100;
                 }
             }
         }

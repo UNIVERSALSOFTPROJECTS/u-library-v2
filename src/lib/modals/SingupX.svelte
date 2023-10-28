@@ -16,6 +16,7 @@
     export let onError;
     export let platform;
     export let usertype;
+    export let t;
 
     //loading
     let loadSms;
@@ -117,7 +118,7 @@
     <input type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" bind:value={email}>
     <input type="text" class="ipt" placeholder="Nombre de usuario" autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
     <div class="singup__form--pass">
-        <InputPassword bind:password/>
+        <InputPassword bind:password t={t}/>
     </div>
     <DropdownCurrencies {currencies} bind:operatorId bind:currency/>
     <div class="singup__phone">

@@ -11,6 +11,7 @@
     export let platform;
     export let countries;
     export let currencies;
+    export let t;
     let usertype;
     //loading
     let loadSms;
@@ -122,7 +123,7 @@
     <input type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" bind:value={email}>
     <input type="text" class="ipt" placeholder="Nombre de usuario" autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
     <div class="singup__form--pass">
-        <InputPassword bind:password/>
+        <InputPassword bind:password t={t}/>
     </div>
     <DropdownCurrencies {currencies} bind:operatorId bind:currency/>
     <input type="number" class="ipt" min="0" placeholder="Código de agente (opcional)" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>

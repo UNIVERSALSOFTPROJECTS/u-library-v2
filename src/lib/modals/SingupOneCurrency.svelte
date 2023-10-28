@@ -1,5 +1,6 @@
 <script>
 
+//ESTE SE ELIMINARA ES SOLO PARA JETBET HASTA QUE NECO ME PASE EL ENDPOINT QUE FALTA !!!!
     //ESTE CAJERO ES OPERACION genereica
     // EL MISMO CLIENTE , les da cajas a otrod clientes suyo para que cada uno de manera independiente se maneje por codigo de agente, aqui se mustra el codigo de agente
 
@@ -17,6 +18,7 @@
     export let platform;
     export let usertype;
     export let countries;
+    export let openPrivacyPolicies;//pilitcas de privacidad
     export let t;
 
     //loading
@@ -35,12 +37,14 @@
     let email;
     let password;
     let operatorId;
-    let currency;//este se detecta al enviar codigo de agente por sendSMS
+    export let currency;//este se detecta al enviar codigo de agente por sendSMS
     let phone;
     let smscode;
     let doctype;
     let document;
     let term_conditions;
+   
+
     //operatorId = code agent, in usertype
 
     //validations imput -utils JS
@@ -66,40 +70,39 @@
     }
 
     async function preRegisterClick(){
-        if(!name || !date || !email || !username || !password || !phone || !codeAgent) return onError("Todos los campos son obligatorios");
+        if(!name || !date || !email || !username || !password || !phone) return onError(t("msg.allObligatory"));
         try {
             loadSms = true;
-            await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,codeAgent);
-            onOk("SMS enviado!, verifique su celular");
+            await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
+            onOk(t("msg.sendSms"));
             counterResendSms();
         } catch (error) {
-            if(error.response.data.message == 'El telefono ya existe') error = 'El teléfono ya esta registrado';
-            else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = 'Formato de teléfono incorrecto';
-            else if(error.response.data.message == 'El usuario  ya existe') error = 'El nombre de usuario ya esta registrado';
-            else if(error.response.data.message == 'El usuario u correo ya existe') error = 'El e-mail ya esta registrado';
-            else error = "Ocurrio un error, contactese con soporte";
+            if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
+            else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = t("msg.phoneFormat");
+            else if(error.response.data.message == 'El usuario  ya existe') error =  t("msg.userExist");
+            else if(error.response.data.message == 'El usuario u correo ya existe') error =   t("msg.emailExist");
+            else error = t("msg.contactSupport");
             onError(error);
             loadSms = false;
         }
     }
 
     async function registerClick(){
-        if(!name || !date || !email || !username || !password || !phone || !codeAgent) return onError("Todos los campos son obligatorios");
-        if (password.length <= 5) return onError("La contraseña debe tener 6 caracteres como mínimo");
-        if(!smscode) return onError("Ingrese el código de verificación");
-        if(!term_conditions) return onError("Debe aceptar los términos y condiciones");
+        if(!name || !date || !email || !username || !password || !phone || !codeAgent) return onError(t("msg.allObligatory"));
+        if (password.length <= 5) return onError(t("msg.passwordMin5"));
+        if(!smscode) return onError(t("msg.codeVerification"));
+        if(!term_conditions) return onError(t("msg.acceptTandC"));
         try {
-  
             //operatorId = codeAgent.slice(0, 4); // esto es para texto XD
-            operatorId = Math.floor(codeAgent / 1000);
-
-        
+            operatorId = Math.floor(codeAgent / 10000);//en algun moneto seran 5 digitos y necesita el - si o si para detectar la diferencia
             const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
+            data.username = username;
+            data.password = password;
             onOk(data);
         } catch (error) {
             console.log(error);
-            if(error.response.data.message == 'SMS invalid') error = 'El código SMS es incorrecto';
-            else error = "Ocurrio un error, contactese con soporte";
+            if(error.response.data.message == 'SMS invalid') error = t("msg.incorrectSms");
+            else error = t("msg.contactSupport");
             onError(error);
             loadSingup = false;
         }
@@ -107,23 +110,23 @@
 </script>
   
 <form class="modal-body">
-    <input type="text" class="ipt" placeholder="Nombres y apellidos" autocomplete="off" bind:value={name} on:input={justTextValidate}>
+    <input type="text" class="ipt" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={justTextValidate}>
     <div class="singup__form--date">
-        <p>Fecha de nacimiento</p>
+        <p>{t("signup.birthday")}</p>
         <div class="singup__date">
             <DropdownDate bind:date/>
         </div>
     </div>
 
-    <input type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" bind:value={email}>
-    <input type="text" class="ipt" placeholder="Nombre de usuario" autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
+    <input type="email" class="ipt" placeholder={t("signup.email")} autocomplete="off" bind:value={email}>
+    <input type="text" class="ipt" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
     <div class="singup__form--pass">
         <InputPassword bind:password t={t}/>
     </div>
-    <input type="number" class="ipt" min="0" placeholder="Código de agente" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>
+    <input type="number" class="ipt" min="0" placeholder={t("signup.codeAgent")} autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>
     <div class="singup__phone">
         <DropdowPrefix {countries} bind:country/>
-        <input type="number" class="ipt" min="0" placeholder="Teléfono" autocomplete="off" bind:value={phone}>
+        <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone}>
     </div>
     <div class="singup__sms">
         <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={activeSMS}>
@@ -131,24 +134,26 @@
                 {#if activeSMS}
                     <div class="loading"><p></p><p></p><p></p></div>
                     {:else}
-                    Generar código SMS
+                    {t("signup.generateCode")}
                 {/if}
             {:else}
                 Nuevo código en: <b>{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</b>
             {/if}
         </button>
-        <input type="number" class="ipt" min="0" placeholder="Código" autocomplete="off" bind:value={smscode} on:input={justNumbersValidate}>
+        <input type="number" class="ipt" min="0" placeholder={t("signup.code")} autocomplete="off" bind:value={smscode} on:input={justNumbersValidate}>
     </div>
     <div class="singup__conditions">   
         <input type="checkbox" id="chk_conditions" bind:checked={term_conditions}/>
         <label for="chk_conditions"></label> 
-        <div>Para convertirme en cliente, acepto las <b><a class="link" href="#">Políticas de Privacidad</a></b> de {platform}.</div>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <div on:click="{openPrivacyPolicies}">{@html t("signup.acceptPandP", {platform })}</div>
     </div>
     <button type="button" class="btn singup" on:click={registerClick} disabled={loadSingup}>
         {#if loadSingup}
             <div class="loading"><p></p><p></p><p></p></div>
             {:else}
-            Registrar
+            {t("signup.register")}
         {/if}
     </button>
 </form>

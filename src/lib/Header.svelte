@@ -1,9 +1,11 @@
 <script>
+    import { t, locale, locales } from "../js/i18n";
     import Notifier from './Notifier.svelte';
     import Login from './topbar/Login.svelte';
     //import LoginAutosaved from './topbar/LoginAutosaved.svelte';
     import Modal from '../lib/Modal.svelte';
-    import Singup from './modals/SingupXg.svelte';
+    //import Signup from './modals/SingupXg.svelte';
+    import Signup from './modals/SingupOneCurrency.svelte';
     import Deposit from './payments/Deposit.svelte';
     //import Withdrawal from './withdrawal/WithdrawalW.svelte';
     import WithdrawalX from './withdrawal/WithdrawalX.svelte';
@@ -28,6 +30,12 @@
     let isToggleOn = false;
     //Deposit Modal
     let notify = {};
+    function openPrivacyPolicies() {
+        console.log("abriendo openPrivacyPolicies");
+    }
+    function openTermsConditions() {
+        console.log("abriendo openTermsConditions");
+    }
     //datos de registro M
     //COLLISESPORT
     //let countries  = [ {prefix:"+56",flag:"chl"} ];
@@ -39,6 +47,8 @@
     //  {name:"Peso chileno", code:7 , agent:6546}, //aPUESTA DE PANA
     //];
     // fin de registro m
+    //IDIOMAR!!!
+    $locale = "fr";//Actualmente solo "es" y "fr"
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
     const onOpenSingup = () => { signupModalOpen = true; modalOpened = "singup" }
@@ -48,7 +58,7 @@
 
     const onLoginOk = async (user_)=>{
         user = user_;
-        notify = await utils.showNotify("success","Bienvenido a "+platform);
+        notify = await utils.showNotify("success", $t("msg.sucessLogin",{platform}));
         loginModalOpen = false;
         activeSession = true;
         user.bono_global = user_.bonus_cab + user_.bonus_cas + user_.bonus_dep + user_.bonus_general;
@@ -62,14 +72,18 @@
             notify = await utils.showNotify("success",user_);//SMS exitoso
         }else{
             user = user_;
-            notify = await utils.showNotify("success","Registro exitoso, bienvenido a "+platform);
+            notify = await utils.showNotify("success",$t("msg.sucessRegister",{platform}));
             signupModalOpen = false;
             //inicar sesion
             const {data} = await ServerConnection.users.login(user.username,user.password);
 			if(data.username=='') throw("USER_NOT_FOUND");
-			let date = new Date();
-      		date.setDate(date.getDate() + 1);
-			data.expireToken= date.getTime();
+            if(data.claims){
+                let date = new Date();
+                date.setDate(date.getDate() + 1);
+                data.expireToken = data.claims.exp;
+                data.playerId = data.id;
+                delete data.claims;
+            }
 			sessionStorage.setItem("user",JSON.stringify(data));
             onLoginOk(data);
         }
@@ -127,18 +141,18 @@
    
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
-        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} bind:platform/>
+        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} bind:platform t={$t}/>
     </Modal>
-    <Modal bind:open={signupModalOpen} bind:modalOpened title="Registrate Aquí">
+    <Modal bind:open={signupModalOpen} bind:modalOpened title={$t("signup.title")}>
         <!--Singup bind:platform bind:countries bind:currencies onOk={onSignupOk} onError={onSingupError}/-->
-        <Singup bind:platform bind:countries onOk={onSignupOk} onError={onSingupError}/>
+        <Signup bind:platform bind:countries currency={16} {openPrivacyPolicies} onOk={onSignupOk} onError={onSingupError} usertype={"X"} t={$t}/>
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
-        <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError}/>
+        <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError} />
     </Modal>
-    <Modal bind:open={withdrawalModalOpen} bind:modalOpened title="Retiro">
+    <Modal bind:open={withdrawalModalOpen} bind:modalOpened title={$t("withdrawal.title")}>
         <!--Withdrawal bind:user onOk={onWithdrawalOk} onError={onWithdrawalError}/-->
-        <WithdrawalX bind:user onOk={onWithdrawalOk} onError={onWithdrawalError}/>
+        <WithdrawalX bind:user {openTermsConditions} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
     </Modal>
 
     <Notifier bind:notify/>

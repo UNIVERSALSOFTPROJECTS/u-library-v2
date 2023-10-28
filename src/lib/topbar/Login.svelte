@@ -1,4 +1,5 @@
 <script>
+
   import ServerConnection from "../../js/server";
   import InputPassword from "../input/InputPassword.svelte";
   export let onOk;
@@ -7,19 +8,17 @@
   export let platform;
   export let userGateway = "neco"; //neco/universal
   export let onOpenRecoverPass;
+  export let t;//traduccion
 
   let password;
   let username;
   let loadLogin = false;
   
-
-  const loginEnter = (e) => {
-    if (e.charCode === 13) loginClick();
-  };
+  const loginEnter = (e) => { if (e.charCode === 13) loginClick();};
 
   async function loginClick() {
     if (!username || !password)
-      return onError("Todos los campos son obligatorios");
+      return onError(t("msg.allObligatory"));
     try {
       loadLogin = true;
       let data;
@@ -28,78 +27,44 @@
       else data = await ServerConnection.u_user.login(username, password);
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
-      let date = new Date();
-      date.setDate(date.getDate() + 1);
-      data.expireToken = data.claims.exp;
-      data.playerId = data.id;
-      delete data.claims;
-      console.log("Info para session storage", data);
+      if(data.claims){
+        let date = new Date();
+        date.setDate(date.getDate() + 1);
+        data.expireToken = data.claims.exp;
+        data.playerId = data.id;
+        delete data.claims;
+      }
       sessionStorage.setItem("user", JSON.stringify(data));
       onOk(data);
     } catch (error) {
       console.log("error: ", error);
-      if (
-        error.message == "Network Error" ||
-        error.response.data.message.includes("Connection refused")
-      )
-        error = "Página en mantenimiento, espere unos minutos";
+      if (error.message == "Network Error" || error.response.data.message.includes("Connection refused"))
+        error = t("msg.pageMaintenance");
       else if (error.response.data.message == "NECO_LOGIN_FAILED")
-        error = "Usuario o contraseña incorrecto";
-      else error = "Ocurrio un error, contactese con soporte";
+        error = t("msg.incorrectUserPass");
+      else error = t("msg.contactSupport");//si aparece esto, es un tipo de error nuevo y se tieneque debbugear
       onError(error);
       loadLogin = false;
     }
   }
-
-  
 </script>
 
 <div class="modal-body">
-  <div class="login__title">Bienvenido a</div>
-  <img
-    class="login__logo"
-    src="{assetsUrl}/{platform}/logo.png"
-    alt="logo-{platform}"
-  />
-  <div />
+  <div class="login__title">{t("login.title")}</div>
+  <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-{platform}"/>
+  <div></div>
   <div class="login__form">
-    <input
-      type="text"
-      class="ipt"
-      placeholder="Usuario"
-      autocapitalize="off"
-      on:keypress={loginEnter}
-      bind:value={username}
-    />
+    <input type="text" class="ipt" placeholder={t("login.user")} autocapitalize="off" on:keypress={loginEnter} bind:value={username}/>
     <div class="login__ipt--pass">
-      <InputPassword bind:password {loginEnter} />
+      <InputPassword bind:password {loginEnter} t={t} />
     </div>
-    <button
-      type="button"
-      class="btn login"
-      disabled={loadLogin}
-      on:click={loginClick}
-    >
+    <button type="button" class="btn login" disabled={loadLogin} on:click={loginClick}>
       {#if loadLogin}
-        <div class="loading">
-          <p />
-          <p />
-          <p />
-        </div>
+        <div class="loading"><p/><p/><p/></div>
       {:else}
-        <p>Ingresar</p>
+        <p>{t("login.access")}</p>
       {/if}
     </button>
-    <button on:click={onOpenRecoverPass} class="btn link"
-      >¿Olvidaste tu contraseña?</button
-    >
+    <button on:click={onOpenRecoverPass} class="btn link">{t("login.forgetPassword")}</button>
   </div>
 </div>
-
-
-
-<style>
-  .link {
-    background-color: transparent;
-  }
-</style>
