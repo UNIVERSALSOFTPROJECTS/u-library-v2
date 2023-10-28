@@ -93,6 +93,7 @@
         if(!smscode) return onError(t("msg.codeVerification"));
         if(!term_conditions) return onError(t("msg.acceptTandC"));
         try {
+            loadSingup = true;
             //operatorId = codeAgent.slice(0, 4); // esto es para texto XD
             operatorId = Math.floor(codeAgent / 10000);//en algun moneto seran 5 digitos y necesita el - si o si para detectar la diferencia
             const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, operatorId,smscode,usertype,platform,currency,doctype,document);
@@ -129,9 +130,9 @@
         <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone}>
     </div>
     <div class="singup__sms">
-        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={activeSMS}>
+        <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
             {#if !activeSMS}
-                {#if activeSMS}
+                {#if loadSms}
                     <div class="loading"><p></p><p></p><p></p></div>
                     {:else}
                     {t("signup.generateCode")}

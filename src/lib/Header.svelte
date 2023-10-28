@@ -72,6 +72,7 @@
             notify = await utils.showNotify("success",user_);//SMS exitoso
         }else{
             user = user_;
+            console.log(user);
             notify = await utils.showNotify("success",$t("msg.sucessRegister",{platform}));
             signupModalOpen = false;
             //inicar sesion
