@@ -17,98 +17,52 @@
 
 </script>
 
-<div>
-  <nav class="u-hamburger-menu">
-    <!--input type="checkbox" id="menu" /-->
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <button class="button-lineal {activeContent?'u-active':''}" on:click={() => onActiveContent()}> ☰ </button>
-    {#if activeContent}
-    <div class="u-menu-content">
-      <div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='home'?'u-category-select':''}" on:click={  ()=>onPageChange("home") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/Home.svg" alt=""/>
-          Inicio
-        </button>
-      </div>
-      <div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='sportbook'?'u-category-select':''}" on:click={ ()=> onPageChange("sportbook") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/Sportbook.svg" alt="" />
-          Deportes
-        </button>
-      </div>
-      <div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='horses'?'u-category-select':''}" on:click={ ()=> onPageChange("horses") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/Hipica.svg" alt="" />
-          Hípica
-        </button>
-      </div>
-      <!--div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='esports'?'u-category-select':''}"  on:click={ ()=> onPageChange("esports") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/Esports.svg" alt="" />
-          E-Sports
-        </button>
-      </div-->
-      <div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='slot'?'u-category-select':''}" on:click={ ()=> onPageChange("slot") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/Slots.svg" alt="" />
-          Casino
-        </button>
-      </div>
-      <div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='slotlive'?'u-category-select':''}" on:click={ ()=> onPageChange("slotlive") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/Casino.svg" alt="" />
-          Casino en Vivo
-        </button>
-      </div>
-
-
-
-      <div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='crash'?'u-category-select':''}" on:click={ ()=> onPageChange("crash") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/CrashGames.svg" alt="" />
-          Crash Games
-        </button>
-      </div>
-      <div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='scratch'?'u-category-select':''}"  on:click={ ()=> onPageChange("scratch") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/scratch.svg" alt="" />
-          Raspa y Gana
-        </button>
-      </div>
-      <div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='virtual'?'u-category-select':''}"  on:click={ ()=> onPageChange("virtual") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/GameVirtual.svg" alt="" />
-          Juegos Virtuales
-        </button>
-      </div>
-
-      <div class="u-sub-content">
-        <button class="u-menubar-button {active_view=='providers'?'u-category-select':''}"  on:click={ ()=> onPageChange("providers") }>
-          <img class="u-menubar-icon" src="{assetsUrl}/golden/Providers.svg" alt="" />
-          Proveedores
-        </button>
-      </div>
-      <!--
-        <div class="u-sub-content">
-          <button class="u-menubar-button {active_view=='promotions'?'u-category-select':''}"  on:click={ ()=> onPageChange("promotions") }>
-            <img class="u-menubar-icon" src="{assetsUrl}/golden/Promociones.svg" alt="" />
-            Promociones
-          </button>
-        </div>
-      -->
-    </div>
-    <div class="u-backdrop"/>
-    {/if}
-  </nav>
-</div>
+<nav class="u-hamburger-menu">
+  <button class="button-lineal {activeContent?'u-active':''}" on:click={() => onActiveContent()}> ☰ </button>
+  {#if activeContent}
+  <div class="u-menu-content">
+    <button class="u-menubar-button {active_view=='home'?'u-category-select':''}" on:click={  ()=>onPageChange("home") }>
+      <img class="u-menubar-icon" src="{assetsUrl}/golden/Home.svg" alt=""/>
+        Inicio
+    </button>
+    <button class="u-menubar-button {active_view=='sportbook'?'u-category-select':''}" on:click={ ()=> onPageChange("sportbook") }>
+      <img class="u-menubar-icon" src="{assetsUrl}/golden/Sportbook.svg" alt="" />
+      Deportes
+    </button>
+    <button class="u-menubar-button {active_view=='horses'?'u-category-select':''}" on:click={ ()=> onPageChange("horses") }>
+      <img class="u-menubar-icon" src="{assetsUrl}/golden/Hipica.svg" alt="" />
+      Hípica
+    </button>
+    <button class="u-menubar-button {active_view=='slot'?'u-category-select':''}" on:click={ ()=> onPageChange("slot") }>
+      <img class="u-menubar-icon" src="{assetsUrl}/golden/Slots.svg" alt="" />
+      Casino
+    </button>
+    <button class="u-menubar-button {active_view=='slotlive'?'u-category-select':''}" on:click={ ()=> onPageChange("slotlive") }>
+      <img class="u-menubar-icon" src="{assetsUrl}/golden/Casino.svg" alt="" />
+      Casino en Vivo
+    </button>
+    <button class="u-menubar-button {active_view=='crash'?'u-category-select':''}" on:click={ ()=> onPageChange("crash") }>
+      <img class="u-menubar-icon" src="{assetsUrl}/golden/CrashGames.svg" alt="" />
+      Crash Games
+    </button>
+    <button class="u-menubar-button {active_view=='scratch'?'u-category-select':''}"  on:click={ ()=> onPageChange("scratch") }>
+      <img class="u-menubar-icon" src="{assetsUrl}/golden/scratch.svg" alt="" />
+      Raspa y Gana
+    </button>
+    <button class="u-menubar-button {active_view=='virtual'?'u-category-select':''}"  on:click={ ()=> onPageChange("virtual") }>
+      <img class="u-menubar-icon" src="{assetsUrl}/golden/GameVirtual.svg" alt="" />
+      Juegos Virtuales
+    </button>
+    <button class="u-menubar-button {active_view=='providers'?'u-category-select':''}"  on:click={ ()=> onPageChange("providers") }>
+      <img class="u-menubar-icon" src="{assetsUrl}/golden/Providers.svg" alt="" />
+      Proveedores
+    </button>
+  </div>
+  <div on:click={onActiveContent} class="u-backdrop"></div>
+  {/if}
+</nav>
 
 <style>
-  .u-menu-content{
-    height: 90vh;
-    display:block;
-    left: -0.7rem;
-    position: absolute;
-  }
   .u-hamburger-menu{
     position: relative;
   }
@@ -140,14 +94,17 @@
   @media only screen and (max-width: 700px) {
     .u-menu-content {
       position: absolute;
-    padding: 0;
-    margin: 0;
-    left: -8px;
-    width: 100vw;
-    min-height: auto;
-    height: auto;
-    background: #262632;
-    z-index: 4;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem;
+      margin-top: 0.8rem;
+      left: -8px;
+      width: 95vw;
+      height: auto;
+      background: #aeaeb5;
+      z-index: 4;
+      z-index: 20000;
     }
     
     button {
@@ -196,21 +153,22 @@
     .u-category-select{
       background: rgb(67, 61, 61);
     }
-    .u-sub-content{
-      padding: 0.5rem;
-    }
   }
   
-  @media only screen and (min-width: 700px) {
+  @media only screen and (min-width: 701px) {
     .u-menu-content {
       position: absolute;
-      padding: 0;
-      margin-left: -1rem;
-      margin-top: 1rem;
-      width: 22vw;
-      background: #262632;
-      z-index: 4;
-      height: auto ;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      margin-left: -0.5rem;
+      margin-top: 0.8rem;
+      width: 32vw;
+      height: 100vh;
+      background: #42424c;
+      padding: 1rem;
+      z-index: 20000;
     }
     
     button {
@@ -226,30 +184,17 @@
       text-align: center;
       user-select: none;
     }
-
-    /* Estilo del boton cuando se pasa el mouse por encima*/
-     button:hover {
-      background: white;
-    }
-
-    .u-sub-content{
-      padding: 0.8rem;
-    }
-
-  
     .u-menubar-button {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: flex-start;
-      width: 95%;
+      width: 100%;
       gap: 0.5rem;
       background: #262632;
       border: none;
-      color: white;
       height: 2rem;
       cursor: pointer;
-      margin-left: 0.9rem;
     }
     .u-menubar-icon {
       width: 25px;
@@ -258,11 +203,20 @@
 
     /*Estilo cuando el mouse pasa encima de cada link del menu*/
     .u-menubar-button:hover{
-      background: #42424c;
+      background: #84849b;
       border-radius: 0.2rem;
     }
     .u-category-select{
-      background: rgb(67, 61, 61);
+      background: rgb(168, 147, 12);
+    }
+
+    .u-backdrop{
+      margin-top: 0.8rem;
+      margin-left: -0.5rem;
+      position: absolute;
+      height: 100vh;
+      width: 96.3vw;
+      background-color: rgba(101, 101, 101, 0.21);
     }
   }
 </style>
