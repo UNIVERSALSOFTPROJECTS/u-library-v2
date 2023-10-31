@@ -5,6 +5,7 @@
   import util from "../../js/util";
   import HamburguerMenu from "../topbar/HamburguerMenu.svelte";
   import { onMount } from "svelte";
+  import { t} from "../../js/i18n";
   import Modal from "../Modal.svelte";
   import Profile from "../profile/Profile.svelte";
   import NoLoginMenu from "./NoLoginMenu.svelte";
@@ -202,6 +203,7 @@
       {userGateway}
       {platform}
       {onOpenRecoverPass}
+      t={$t}
     />
   </Modal>
   
