@@ -102,7 +102,7 @@
       left: -8px;
       width: 100vw;
       height: auto;
-      background: #aeaeb5;
+      background: #42424c;
       z-index: 4;
       z-index: 20000;
     }
