@@ -26,6 +26,11 @@
     };
 
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
+
+    const updateBalance = async() => {
+        let updateBalance = await ServerConnection.users.getBalance(user.agregatorToken);
+        user.balance = updateBalance.data.balance;
+    }
  
     async function validateWithdrawal() {
         if (amount === 0 || amount === "" || amount === undefined) return onError(t("withdrawal.amount0"));
@@ -35,6 +40,7 @@
             pendingWithdrawal = data;
             loadWithdrawal = true;
             getPendingWithdrawal();
+            updateBalance();
         } catch (error) {
             //error.data.message = "SALDO_INSUFICIENTE"
             onError(t("msg.contactSupport"));//falta detectar los errores
