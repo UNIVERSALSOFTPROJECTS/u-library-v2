@@ -100,7 +100,7 @@
       padding: 1rem;
       margin-top: 0.8rem;
       left: -8px;
-      width: 95vw;
+      width: 100vw;
       height: auto;
       background: #aeaeb5;
       z-index: 4;
@@ -152,6 +152,14 @@
     }
     .u-category-select{
       background: rgb(67, 61, 61);
+    }
+    .u-backdrop{
+      margin-top: 0.8rem;
+      margin-left: -0.5rem;
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+      background-color: rgba(101, 101, 101, 0.21);
     }
   }
   
