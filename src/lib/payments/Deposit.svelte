@@ -59,9 +59,12 @@
                     loadDeposit = true;
                     paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
                     iframeGateway = paymentLink.data.link;
-                    sizeIframeGateway = iframeGateway.includes("izypay")?"small":"";//actualmente solo izypay presenta este tamaño
-                    amountDeposit = '';
-                    loadDeposit = false;
+                    if (pay.cta == "payku") { location.href = iframeGateway; }//esta pasarela no permite iframe
+                    else{
+                        sizeIframeGateway = iframeGateway.includes("izypay")?"small":"";//actualmente solo izypay presenta este tamaño
+                        amountDeposit = '';
+                        loadDeposit = false;
+                    }
                 } catch (error) {
                     onError("Ocurrio un error, contactese con soporte");
                     loadDeposit = false;
