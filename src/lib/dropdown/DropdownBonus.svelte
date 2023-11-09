@@ -23,7 +23,7 @@ onMount(()=>{
 
 <div class="dropdown-container">
   <button class="btn" on:click={toggleDropdown} on:blur={closeDropdown}>
-    {#if bonus.every(bono => bono.amount === 0)}
+    {#if bonus.every((/** @type {{ amount: number; }} */ bono) => bono.amount === 0)}
       No hay bonos
     {:else}
       Bonos <span class="dropdown-arrow">▼</span>
