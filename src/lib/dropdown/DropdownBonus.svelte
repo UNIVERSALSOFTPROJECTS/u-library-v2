@@ -2,8 +2,10 @@
   import { onMount } from "svelte";
 
 
+
     export let bonus;
   let isOpen = false;
+
 
 
 
@@ -19,15 +21,20 @@ onMount(()=>{
   function closeDropdown() {
     isOpen = false;
   }
+
+  function todosLosBonosCero() {
+    for (let i = 0; i < bonus.length; i++) {
+      if (bonus[i].amount !== 0) {
+        return false;
+      }
+    }
+    return true;
+  }
 </script>
 
 <div class="dropdown-container">
   <button class="btn" on:click={toggleDropdown} on:blur={closeDropdown}>
-    {#if bonus.every((/** @type {{ amount: number; }} */ bono) => bono.amount === 0)}
-      No hay bonos
-    {:else}
-      Bonos <span class="dropdown-arrow">▼</span>
-    {/if}
+    {todosLosBonosCero() ? 'No hay bonos' : 'Bonos ▼'}
  </button>
 
 
@@ -96,8 +103,6 @@ onMount(()=>{
     text-align: right; /* Alinea el texto a la derecha */
   }
 
-  .dropdown-arrow {
-    margin-left: 8px;
-  }
+ 
 </style>
 
