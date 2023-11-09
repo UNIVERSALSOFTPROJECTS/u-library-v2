@@ -27,6 +27,20 @@
       else data = await ServerConnection.u_user.login(username, password);
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
+      //Formatear la propiedad "bonus"
+      const formattedBonus = [];
+      for (const type in data.bonus) {
+        if (data.bonus.hasOwnProperty(type)) {
+          const currency = Object.keys(data.bonus[type])[0];
+          const amount = data.bonus[type][currency];
+
+          formattedBonus.push({
+            type: type,
+            currency: currency,
+            amount: amount
+          });
+        }
+      }
       if(data.claims){
         let date = new Date();
         date.setDate(date.getDate() + 1);
@@ -34,7 +48,9 @@
         data.playerId = data.id;
         delete data.claims;
       }
+      data.bonus = formattedBonus;
       sessionStorage.setItem("user", JSON.stringify(data));
+      console.log("Donde esta la info", data);
       onOk(data);
     } catch (error) {
       console.log("error: ", error);
