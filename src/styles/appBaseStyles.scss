@@ -4,8 +4,8 @@
 //$page : "Coliseosport" ;//default-light || default-dark
 //$body  : "Coliseosport" !default; //nombre de la pagina
 //$page : "Coliseosport" !default;//default-light || default-dark
-$body : ".Jetbet24"; //nombre de la pagina
-$page : "Jetbet24"; //default-light || default-dark
+$body : ".Apuestadepana"; //nombre de la pagina
+$page : "Apuestadepana"; //default-light || default-dark
 $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep8v.jpg";
 @import './components/variables';
 @import "./components/mixins";
@@ -23,8 +23,8 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
     //@extend "EL TIPO DE LOGIN QUE TENDRA QUI SE AGREGA"
     .header{
         //babieca-golden
-        @include structureHeader('babieca',12rem,5rem);
-        //@include structureHeader('babieca',6.5rem,6.5rem);
+        //@include structureHeader('babieca',12rem,5rem);
+        @include structureHeader('babieca',6.5rem,6.5rem);
         &__menu{
             @include dropdown-menu("normal");
         }
@@ -123,65 +123,8 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             
         }
         &.withdrawal{
+            @include withdrawalX__model__1();
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);  
-            & .modal{
-                &-body {
-                    padding: 1rem;
-                    align-content: start;
-                    width: 100%;
-                    overflow: auto;
-                }
-                &-dialog{
-                    max-width: 500px;
-                }
-                &-header{
-                    background: $color-primary;
-                }
-                @include modalFullScreen("mobile");
-            }
-            & .withdrawal{
-                &__info{
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 0.25rem;
-                    &--main{
-                        display: grid;
-                        grid-template-columns: 1fr 1fr 1fr 1fr 3rem;
-                        padding: 1rem;
-                        gap: 0.25rem;
-                        border-radius: $borderR-btn;
-                        border: 1px solid #fff;
-                        align-items: center;
-                    }
-                    //@include structureInfo_1;
-                }
-                &__amount{
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                }
-                &__code{
-                    display: grid;
-                    grid-template-columns: 0fr 1rem;
-                    gap: 0.5rem;
-                    align-items: center;
-                }
-                &__copy{
-                    @include bgIconCenter($copy);   
-                    background-color: $color-primary;
-                    position: relative;
-                }
-                &__copied{
-                    position: absolute;
-                    top: -2rem;
-                    left: -0.5rem;
-                    background: #35c900;
-                    padding: 0.25rem 0.5rem;
-                    border-radius: 0.25rem;
-                    border: 1px solid rgba(0,0,0,.2);
-                    z-index: 100;
-                }
-            }
         }
 
     }

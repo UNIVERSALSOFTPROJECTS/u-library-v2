@@ -10,8 +10,8 @@
   export let onOpenRecoverPass;
   export let t;//traduccion
 
-  let password;
-  let username;
+  let password = "";
+  let username = "";
   let loadLogin = false;
   
   const loginEnter = (e) => { if (e.charCode === 13) loginClick();};

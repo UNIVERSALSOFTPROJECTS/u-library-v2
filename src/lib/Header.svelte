@@ -5,7 +5,7 @@
     //import LoginAutosaved from './topbar/LoginAutosaved.svelte';
     import Modal from '../lib/Modal.svelte';
     //import Signup from './modals/SingupXg.svelte';
-    import Signup from './modals/SingupOneCurrency.svelte';
+    import Signup from './modals/SingupW.svelte';
     import Deposit from './payments/Deposit.svelte';
     //import Withdrawal from './withdrawal/WithdrawalW.svelte';
     import WithdrawalX from './withdrawal/WithdrawalX.svelte';
@@ -18,8 +18,8 @@
    // export let platform = "Babieca";//usado para storybook
     export let platform;//usado para storybook
     //DEPOSITOS MONTOS FAVORITOS
-    //export let amountsFav = [5000, 10000, 30000, s50000];
-    export let amountsFav = [50, 100, 300, 500];
+    export let amountsFav = [5000, 10000, 30000, 50000];
+    //export let amountsFav = [50, 100, 300, 500];
     let activeSession = false;
     //export let ASSETS_GLOBAL;
     let loginModalOpen = false;
@@ -38,17 +38,20 @@
     }
     //datos de registro M
     //COLLISESPORT
-    //let countries  = [ {prefix:"+56",flag:"chl"} ];
+    let countries  = [ {prefix:"+56",flag:"chl"} ];
     //JETBET24 
-    let countries  = [ {prefix:"+216",flag:"tnz"} ];
+    //let countries  = [ {prefix:"+216",flag:"tnz"} ];
     //operatorId BO  = code agent - type W
-    //let currencies  = [
+    let currencies  = [
     ////  {name:"Peso chileno", code:7 , agent:4675},//este codigo se toma como el id_operado en caso el tipo sea W
-    //  {name:"Peso chileno", code:7 , agent:6546}, //aPUESTA DE PANA
-    //];
+      {name:"Peso chileno", code:7 , agent:6546}, //aPUESTA DE PANA
+    ];
     // fin de registro m
     //IDIOMAR!!!
-    $locale = "fr";//Actualmente solo "es" y "fr"
+    $locale = "es";//Actualmente solo "es" y "fr"
+
+
+    const onOpenRecoverPass = () => {}
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
     const onOpenSingup = () => { signupModalOpen = true; modalOpened = "singup" }
@@ -143,11 +146,11 @@
    
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
-        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} bind:platform t={$t}/>
+        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPass} bind:platform t={$t}/>
     </Modal>
     <Modal bind:open={signupModalOpen} bind:modalOpened title={$t("signup.title")}>
-        <!--Singup bind:platform bind:countries bind:currencies onOk={onSignupOk} onError={onSingupError}/-->
-        <Signup bind:platform bind:countries currency={16} {openPrivacyPolicies} onOk={onSignupOk} onError={onSingupError} usertype={"X"} t={$t}/>
+        <Signup bind:platform bind:countries bind:currencies onOk={onSignupOk} onError={onSingupError} t={$t}/>
+        <!--Signup bind:platform bind:countries currency={16} {openPrivacyPolicies} onOk={onSignupOk} onError={onSingupError} usertype={"X"} t={$t}/-->
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
         <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError} />

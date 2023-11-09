@@ -65,8 +65,8 @@ export default{
 //        })
 //    }
 //}
-/*
-export default{
+
+/*export default{
     start:()=>{
         ServerConnection.setConfig({
             API:"https://lobby-bff.apiusoft.com",
@@ -85,8 +85,8 @@ export default{
             currency:7,//PEN
         })
     }
-}
-*/
+}*/
+
 //export default{
 //    start:()=>{
 //        ServerConnection.setConfig({
@@ -110,7 +110,7 @@ export default{
 /*export default{
     start:()=>{
        ServerConnection.setConfig({
-           API:"https://lobby-bff.apiusoft.com",
+            API:"https://lobby-bff.apiusoft.com",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
             CLIENT_AUTH:"086C6928CB443C361BC72F05JETBET24086C",
             CLIENT_CODE:"086C",
