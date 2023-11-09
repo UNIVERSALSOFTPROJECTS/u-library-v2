@@ -17,9 +17,14 @@
 </script>
 
 <div class="dropdown-container">
-  <button class="btn" on:click={toggleDropdown} on:blur={closeDropdown}>
-    Bonos <span class="dropdown-arrow">▼</span>
-  </button>
+  <button class="btn" on:click={toggleDropdown} on:blur={closeDropdown} disabled={bonus.some(bono => bono.amount > 0)}>
+    {#if bonus.some(bono => bono.amount > 0)}
+        Bonos <span class="dropdown-arrow">▼</span>
+    {:else}
+        No hay bonos
+    {/if}
+ </button>
+
 
   {#if isOpen && hasValidBonos}
     <div class="dropdown">
