@@ -1,11 +1,16 @@
 <script>
+  import { onMount } from "svelte";
+
 
     export let bonus;
   let isOpen = false;
 
-  let hasValidBonos = bonus.some(bono => bono.amount > 0);
 
 
+onMount(()=>{
+  console.log("bono", bonus[0].amount);
+  console.log("bono", bonus);
+})
   
   function toggleDropdown() {
     isOpen = !isOpen;
@@ -17,16 +22,16 @@
 </script>
 
 <div class="dropdown-container">
-  <button class="btn" on:click={toggleDropdown} on:blur={closeDropdown} disabled={bonus.some(bono => bono.amount > 0)}>
-    {#if bonus.some(bono => bono.amount > 0)}
-        Bonos <span class="dropdown-arrow">▼</span>
+  <button class="btn" on:click={toggleDropdown} on:blur={closeDropdown}>
+    {#if bonus.every(bono => bono.amount === 0)}
+      No hay bonos
     {:else}
-        No hay bonos
+      Bonos <span class="dropdown-arrow">▼</span>
     {/if}
  </button>
 
 
-  {#if isOpen && hasValidBonos}
+  {#if isOpen}
     <div class="dropdown">
       <ul>
           {#each bonus as bono}
