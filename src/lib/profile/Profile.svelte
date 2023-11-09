@@ -13,6 +13,7 @@
   import notify from "../../js/notify";
   import MyData from "./MyData.svelte";
   import Balance from "./Balance.svelte";
+  import { onMount } from "svelte";
 
   export let user;
   export let open;
@@ -33,6 +34,10 @@
   let active_section = "balance";
   let active_option = "MyProfile";
   let url_global = "https://assets.apiusoft.com";
+
+  onMount(()=>{
+    console.log("usuario", user);
+  })
   
 
   const closeModal = () => {
@@ -156,10 +161,17 @@
         <span>Saldo</span>
         <div class="u-label">{user.currency} {user.balance.toFixed(2)}</div>
       </div>
-      <div class="u-balance">
-        <span>Saldo Bono</span>
-        <span>{user.currency} {user.bonus_cab.toFixed(2)}</span>
-      </div>
+      {#if user.bonus && user.bonus.length >0}
+        {#each user.bonus as bono}
+          {#if bono.amount > 0}
+            <div class="u-balance">
+              <span>Bono {bono.type}</span>
+              <div class="u-label">{bono.currency} {bono.amount.toFixed(2)}</div>
+            </div>
+          {/if}
+        {/each}
+      
+      {/if}
       <div class="profile personaldata balance">
         <button
           on:click={showWithdrawalBank}

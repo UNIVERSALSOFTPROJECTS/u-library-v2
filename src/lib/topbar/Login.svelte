@@ -50,7 +50,6 @@
       }
       data.bonus = formattedBonus;
       sessionStorage.setItem("user", JSON.stringify(data));
-      console.log("Donde esta la info", data);
       onOk(data);
     } catch (error) {
       console.log("error: ", error);
