@@ -6,31 +6,57 @@
     export let user;
     export let onError;
     export let onOk;
+    export let openTermsConditions;
+    export let t;
 
+    let pendingWithdrawal;
     let amount;
-    let infoAccount = {};
+    let loadWithdrawal = true;
     let infoUser = {};
+    let infoAccount = {
+        adicional:"",
+        numero_cta:"",
+        banco:""
+    };
 
+    const justTextValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\p{L}\s]/gu, "") }
+    const justNumbersAccountValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d-]/g, "") };
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") };
 
     checkWithdrawal();
 
-    async function checkWithdrawal() {
-        const {data} = await ServerConnection.wallet.accountNumber(user.token);
-        infoAccount = data.cuenta == null?'':data.cuenta[0];
-        infoUser = data.data[0];
+    const updateBalance = async() => {
+        let updateBalance = await ServerConnection.users.getBalance(user.agregatorToken);
+        user.balance = updateBalance.data.balance;
+    }
 
-        //pendingWithdrawal = data.monto?true:false;
-        //dataWithdrawal = data;
+    async function checkWithdrawal() {
+        loadWithdrawal = true;
+        try {
+            const {data} = await ServerConnection.wallet.accountNumber(user.token);
+            infoAccount = data.cuenta == null?infoAccount:data.cuenta[0];
+            infoUser = data.data[0];
+            pendingWithdrawal = infoUser.bloqueo_fondos?true:false;
+            loadWithdrawal = false;
+        } catch (error) {
+            onError(t("msg.contactSupport"));//falta detectar los errores
+            console.log(error);
+        }
     }
 
     async function validateWithdrawal() {
-        if(amount > user.balance){ console.log("No tienes saldo suficiente"); }
+        if(amount == 0 || amount == undefined) return onError("Ingrese un monto a retirar");
+        if(amount < infoUser.retiro_min) return onError("El retiro mínimo es "+infoUser.retiro_min+" "+user.currency);
+        if(amount > infoUser.retiro_max) return onError("El retiro maximo es "+infoUser.retiro_max+" "+user.currency);
+        if(amount > user.balance) return onError("No tienes saldo suficiente");
         let info = infoAccount.adicional;
         let account = infoAccount.numero_cta;
         let bank = infoAccount.banco;
+        if(!infoUser.documento || !info || !account || !bank) return onError("Todos los campos son obligatorios");
         try {
             let data = await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,account,info);
+            updateBalance();
+            checkWithdrawal();
             console.log(data);
         } catch (error) {
             console.log(error);
@@ -38,26 +64,38 @@
     }
 </script>
 <div class="modal-body">
-    <div class="withdrawal__amount">
-        <b>{user.currency}</b>
-        <input type="number" class="ipt" min="0" placeholder="Ingrese el monto aquí" bind:value={amount}>
-    </div>
-    <p>Saldo disponible: {user.balance} {user.currency}</p>
-    <p>Retiro mínimo de {infoUser.retiro_min || 0} {user.currency} y maximo de {infoUser.retiro_max || 0} {user.currency}</p>
-    <div class="withdrawal__info">
-        <p>Nombre completo:</p>
-        <p>Documento de identidad:</p>
-        <input type="text" class="ipt" bind:value={infoUser.nombre} disabled>
-        <input type="number" class="ipt" min="0" bind:value={infoUser.documento}>
-        <p>Nombre de banco:</p>
-        <p>Nro de cuenta:</p>
-        <input type="text" class="ipt" bind:value={infoAccount.banco}>
-        <input type="number" class="ipt" bind:value={infoAccount.numero_cta}>
-        <p>Información adicional:</p>
-        <p></p>
-        <input type="text" class="ipt" bind:value={infoAccount.adicional}>
-    </div>
-    <p><b>Horario de retiro:</b> {infoUser.horarios || ''}</p>
-    <p> Al solicitar su retiro usted esta aceptando los <b><a class="link" href="#">Términos y Condiciones</a></b></p>
-    <button class="btn singup" on:click={validateWithdrawal}>Solicitar retiro</button>
+    {#if loadWithdrawal}
+        <div class="loading"><p></p><p></p><p></p></div>
+    {:else}
+        {#if pendingWithdrawal}
+           <p>Usted cuenta actualmente con una solicitud de retiro de :</p>
+           <p class="withdrawal__pending">{infoUser.bloqueo_fondos} {user.currency}</p>
+           <p>Si desea saber en que estado se encuentra su solicitud de retiro, puede comunicarse con nuestro centro de atención al cliente</p>
+        {:else}
+            <div class="withdrawal__amount">
+                <b>{user.currency}</b>
+                <input type="number" class="ipt" min="0" placeholder="Ingrese el monto aquí" bind:value={amount}>
+            </div>
+            <p>Saldo disponible: {user.balance} {user.currency}</p>
+            <p>Retiro mínimo de {infoUser.retiro_min || 0} {user.currency} y maximo de {infoUser.retiro_max || 0} {user.currency}</p>
+            <div class="withdrawal__info">
+                <p>Nombre completo:</p>
+                <p>Documento de identidad:</p>
+                <input type="text" class="ipt" bind:value={infoUser.nombre} disabled>
+                <input type="text" inputmode="numeric" class="ipt" bind:value={infoUser.documento} on:input={justNumbersValidate}>
+                <p>Nombre de banco:</p>
+                <p>Nro de cuenta:</p>
+                <input type="text" class="ipt" bind:value={infoAccount.banco} on:input={justTextValidate}>
+                <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={justNumbersAccountValidate}>
+                <p>Información adicional:</p>
+                <p></p>
+                <input type="text" class="ipt" bind:value={infoAccount.adicional}>
+            </div>
+            <p><b>Horario de retiro:</b> {infoUser.horarios || ''}</p>
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div on:click={openTermsConditions}>{@html t("withdrawal.termsConditions")}</div>
+            <button class="btn singup" on:click={validateWithdrawal}>Solicitar retiro</button>
+        {/if}
+    {/if}
 </div>

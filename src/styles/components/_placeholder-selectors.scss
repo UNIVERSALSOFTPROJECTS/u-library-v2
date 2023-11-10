@@ -491,6 +491,7 @@
             text-align: center;
             padding: 0.5rem;
         }
+        
         &__info{
             padding: 0.5rem;
             display: flex;
@@ -586,6 +587,12 @@
             @include bgIconCenter($copy);   
             background-color: $color-primary;
             position: relative;
+        }
+        &__pending{
+            font-size: 30px;
+            font-weight: 700;
+            text-align: center;
+            padding: 1rem 0;
         }
         &__copied{
             position: absolute;

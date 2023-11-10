@@ -123,7 +123,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             
         }
         &.withdrawal{
-            @include withdrawalX__model__1();
+            @include withdrawalX__model__1();//este es general para x y w
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);  
         }
 

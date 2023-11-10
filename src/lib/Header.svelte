@@ -8,7 +8,7 @@
     import Signup from './modals/SingupW.svelte';
     import Deposit from './payments/Deposit.svelte';
     //import Withdrawal from './withdrawal/WithdrawalW.svelte';
-    import WithdrawalX from './withdrawal/WithdrawalX.svelte';
+    import WithdrawalX from './withdrawal/WithdrawalW.svelte';
     
     import utils from '../js/util';
     import { onMount } from 'svelte';

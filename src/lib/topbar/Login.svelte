@@ -53,8 +53,8 @@
   <div class="login__title">{t("login.title")}</div>
   <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-{platform}"/>
   <div></div>
-  <div class="login__form">
-    <input type="text" class="ipt" placeholder={t("login.user")} autocapitalize="off" on:keypress={loginEnter} bind:value={username}/>
+  <form class="login__form">
+    <input type="text" class="ipt" placeholder={t("login.user")} autocapitalize="off" autocomplete="username" on:keypress={loginEnter} bind:value={username}/>
     <div class="login__ipt--pass">
       <InputPassword bind:password {loginEnter} t={t} />
     </div>
@@ -66,5 +66,5 @@
       {/if}
     </button>
     <button on:click={onOpenRecoverPass} class="btn link">{t("login.forgetPassword")}</button>
-  </div>
+  </form>
 </div>
