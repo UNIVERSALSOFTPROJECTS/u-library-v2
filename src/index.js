@@ -19,6 +19,7 @@ export {default as CashOut } from './lib/withdrawal/CashOut.svelte';
 export {default as DepositBank } from './lib/payments/BankDeposit.svelte';
 export {default as WithdrawalBank } from './lib/withdrawal/WithdrawalBank.svelte';
 export {default as WithdrawalX } from './lib/withdrawal/WithdrawalX.svelte';
+export {default as WithdrawalW } from './lib/withdrawal/WithdrawalW.svelte';
 export {default as TopBar } from './lib/topbar/TopBar.svelte';
 
 
