@@ -59,6 +59,7 @@
             checkWithdrawal();
             console.log(data);
         } catch (error) {
+             onError(t("msg.contactSupport"));//falta detectar los errores
             console.log(error);
         }
     }
