@@ -1,4 +1,6 @@
 <script>
+  import DropdownBonus from "../dropdown/DropdownBonus.svelte";
+
   export let user = {};
   export let onLogout;
   export let onOpenMyAccount;
@@ -61,8 +63,7 @@
         </tr>
         <tr>
           <td>{user.balance} <span class="currency">{user.currency}</span> </td>
-          <td>{user.bonus_cab} <span class="currency">{user.currency}</span></td
-          >
+          <td><DropdownBonus bind:bonus={user.bonus}></DropdownBonus></td>
         </tr>
       </table>
     </div>
