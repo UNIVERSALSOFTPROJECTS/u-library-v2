@@ -1,7 +1,6 @@
 <script>
 
   import ServerConnection from "../../js/server";
-  import InputPassword from "../input/InputPassword.svelte";
   export let onOk;
   export let onError;
   export let assetsUrl;
@@ -13,7 +12,10 @@
   let password = "";
   let username = "";
   let loadLogin = false;
-  
+  let showPassword = false;
+
+	const dataPassword = (e) =>{ password = e.target.value }
+	const togglePasswordHide = () => { showPassword =! showPassword }
   const loginEnter = (e) => { if (e.charCode === 13) loginClick();};
 
   async function loginClick() {
@@ -71,7 +73,8 @@
   <form class="login__form">
     <input type="text" class="ipt" placeholder={t("login.user")} autocapitalize="off" autocomplete="username" on:keypress={loginEnter} bind:value={username}/>
     <div class="login__ipt--pass">
-      <InputPassword bind:password {loginEnter} t={t} />
+      <input class="ipt" type={showPassword ? 'text' : 'password'} autocomplete="current-password"  placeholder={t("login.password")} on:keypress={loginEnter} on:input={dataPassword}>
+      <button type="button" class="btn {showPassword ? 'no-eye' : 'eye'}" name="passowrd" on:click={togglePasswordHide}></button>
     </div>
     <button type="button" class="btn login" disabled={loadLogin} on:click={loginClick}>
       {#if loadLogin}

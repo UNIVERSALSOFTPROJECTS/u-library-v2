@@ -60,6 +60,10 @@ const ServerConnection = (() => {
             let url = conf.API + `/balance/${userToken}`;
             return axios.get(url, { headers });
         },
+        getCurrencyIdByCodeAgent: (id) => {
+            let url = conf.API + `/retailAgents/${id}/currencies`;
+            return axios.get(url, { headers });
+        },
         preRegister: (username, email, phone, platform) => {
             var url = conf.API + "/user/preRegister";
             //console.log("conf here: ",conf)
@@ -70,7 +74,7 @@ const ServerConnection = (() => {
         login: (username, password) => {
             let payload = { username, password }
             return axios.post(conf.API + "/login", payload, { headers });
-        },
+        },//operatorId o codeAgent,son lo mismo
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
             if (!currency) throw "CURRENCY_MANDATORY";
             if (!conf.domain) throw "DOMAIN_MANDATORY";

@@ -26,14 +26,14 @@
   </script>
   
   <div class="dropdown prefix">
-    <button type="button" class="slc singup__prefix" on:click={toggleDropdown}>
-		<!-- singup__prefix  {classModal}__prefix -->
+    <button type="button" class="slc signup__prefix" on:click={toggleDropdown}>
+		<!-- signup__prefix  {classModal}__prefix -->
         <img src="{url_global}/flags/{selectedFlag}.png" alt="{selectedFlag}-country">{country}
     </button>
     {#if isDropdownOpen}
       <div class="dropdown-menu">
           {#each countries as country}
-                <button type="button" class="btn singup__prefix" on:click={() => selectOption(country)}>
+                <button type="button" class="btn signup__prefix" on:click={() => selectOption(country)}>
                     <img src="{url_global}/flags/{country.flag}.png" alt="{selectedFlag}-country">
                     {country.prefix}
                 </button>

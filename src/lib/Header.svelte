@@ -5,7 +5,7 @@
     //import LoginAutosaved from './topbar/LoginAutosaved.svelte';
     import Modal from '../lib/Modal.svelte';
     //import Signup from './modals/SingupXg.svelte';
-    import Signup from './modals/SingupW.svelte';
+    import Signup from './modals/Signup.svelte';
     import Deposit from './payments/Deposit.svelte';
     //import Withdrawal from './withdrawal/WithdrawalW.svelte';
     import WithdrawalX from './withdrawal/WithdrawalW.svelte';
@@ -30,6 +30,7 @@
     let isToggleOn = false;
     //Deposit Modal
     let notify = {};
+
     function openPrivacyPolicies() {
         console.log("abriendo openPrivacyPolicies");
     }
@@ -38,14 +39,27 @@
     }
     //datos de registro M
     //COLLISESPORT
-    let countries  = [ {prefix:"+56",flag:"chl"} ];
+    //let countries  = [ {prefix:"+56",flag:"chl"} ];
     //JETBET24 
     //let countries  = [ {prefix:"+216",flag:"tnz"} ];
     //operatorId BO  = code agent - type W
-    let currencies  = [
-    ////  {name:"Peso chileno", code:7 , agent:4675},//este codigo se toma como el id_operado en caso el tipo sea W
-      {name:"Peso chileno", code:7 , agent:6546}, //aPUESTA DE PANA
-    ];
+    //let currencies  = [
+    //////  {name:"Peso chileno", code:7 , agent:4675},//este codigo se toma como el id_operado en caso el tipo sea W
+    //  {name:"Peso chileno", code:7 , agent:6546}, //aPUESTA DE PANA
+    //];
+    const confSignup = {
+        platform,
+        typeSignup: "mixed", //codeAgent / selectCurrency /  mixed (codeAgent and selectCurrency)
+        usertype: "X",// X / W
+        currencies: [ 
+            {name:"Peso chileno", agent:6546},
+            //{name:'', agent:''}, // en caso no tenga
+        ],
+        countries: [
+            {prefix:"+216",flag:"tnz"},
+            //{prefix:"+56",flag:"chl"},
+        ]
+    };
     // fin de registro m
     //IDIOMAR!!!
     $locale = "es";//Actualmente solo "es" y "fr"
@@ -54,7 +68,7 @@
     const onOpenRecoverPass = () => {}
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
-    const onOpenSingup = () => { signupModalOpen = true; modalOpened = "singup" }
+    const onOpenSignup = () => { signupModalOpen = true; modalOpened = "signup" }
     const onOpenDeposit = () => { depositModalOpen = true; modalOpened = "deposit" }
     const onOpenWithdrawal = () => { withdrawalModalOpen = true; modalOpened = "withdrawal" }
     const toggleMenuBar = () => ( isToggleOn =! isToggleOn )
@@ -92,7 +106,7 @@
             onLoginOk(data);
         }
     }
-    const onSingupError = async (error)=>{
+    const onSignupError = async (error)=>{
         notify = {};
         notify = await utils.showNotify("error",error);
     }
@@ -135,22 +149,21 @@
             <button class="btn recharge" on:click={onOpenDeposit}>Recargar</button>
         {:else}
             <button class="btn login" on:click={onOpenLogin}>Acceso</button>
-            <button class="btn singup" on:click={onOpenSingup}>Registro</button>
+            <button class="btn signup" on:click={onOpenSignup}>Registro</button>
         {/if}
         <!-- 
             Notas: on:click|stopPropagation={onOpenLogin}, esto er apara los modale s pero el bug de los dropdow hizo que se descartara momentaneamente
         -->
     </header>
 
-    <button class="btn singup" on:click={onOpenWithdrawal}>RetiroX</button>
+    <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
    
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPass} bind:platform t={$t}/>
     </Modal>
     <Modal bind:open={signupModalOpen} bind:modalOpened title={$t("signup.title")}>
-        <Signup bind:platform bind:countries bind:currencies onOk={onSignupOk} onError={onSingupError} t={$t}/>
-        <!--Signup bind:platform bind:countries currency={16} {openPrivacyPolicies} onOk={onSignupOk} onError={onSingupError} usertype={"X"} t={$t}/-->
+        <Signup {confSignup} {openPrivacyPolicies} onOk={onSignupOk} onError={onSignupError} t={$t}/>
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
         <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError} />

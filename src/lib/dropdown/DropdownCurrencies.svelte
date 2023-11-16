@@ -1,13 +1,11 @@
 <script>
     import { onMount } from "svelte";
     export let currencies;
-    export let operatorId;
-    export let currency;
+    export let codeAgent;
 
     const onChangeCurrency = (option) =>{
         selectedOption = option.name;
-        operatorId = option.agent;
-        currency = option.code;
+        codeAgent = option.agent;
         isDropdownOpen = false;
     }
 

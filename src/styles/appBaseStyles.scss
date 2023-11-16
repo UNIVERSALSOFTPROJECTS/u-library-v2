@@ -65,7 +65,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         &.login{
             background: #4a4b53;
         }
-        &.singup{
+        &.signup{
             background: $color-primary;
             box-shadow: 0 0 6px $color-primary, 
             inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0,0%,100%,.45), 
@@ -110,11 +110,11 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             @include login__model_1(13rem);
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
         }
-        &.profile{
+        &.profile{//no se de donde es esto pero no pertenece a las marcas blancas
             width: 70%;
         }
-        &.singup{
-            @extend %singup__model_1;
+        &.signup{
+            @extend %signup__model_1;
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
         }
         &.deposit{
