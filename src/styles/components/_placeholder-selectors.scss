@@ -135,6 +135,15 @@
     }
 }
 
+%btn__signup_model_1{
+    background: $color-primary;
+    box-shadow: 0 0 6px $color-primary, 
+    inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0,0%,100%,.45), 
+    inset 0 0 11px $color-primary;
+    font-size: $g-font-size + 2;
+    font-weight: 600;
+}
+
 //COMPENENTES
 //- contenedor -- marcar el max-width con $mx-wiht_modal_login;
 //REGLAS

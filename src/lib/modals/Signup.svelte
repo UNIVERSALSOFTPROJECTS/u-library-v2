@@ -11,8 +11,8 @@
     export let openPrivacyPolicies;
     export let t;
 
-    let platform = confSignup.typeSignup;
-    let typeSignup = confSignup.typeSignup
+    let platform = confSignup.platform;
+    let typeSignup = confSignup.typeSignup;
     let usertype = confSignup.usertype;
     let countries = confSignup.countries;
     let currencies = confSignup.currencies;
@@ -103,7 +103,7 @@
         if(!term_conditions) return onError(t("msg.acceptTandC"));
         try {
             loadSignup = true;
-            await getCurrencyId();
+            if(typeSignup != "selectCurrency") await getCurrencyId();//Just if add codeagent
             const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, codeAgent,smscode,usertype,platform,currency,doctype,document);
             data.username = username;
             data.password = password;
@@ -147,7 +147,7 @@
             </div>
         </div>
     {:else if typeSignup === "selectCurrency"}
-        <DropdownCurrencies {currencies} bind:codeAgent />
+        <DropdownCurrencies {currencies} bind:currency bind:codeAgent t={t}/>
     {:else if typeSignup === "codeAgent"}
         <div class="signup__container">
             <p>{t("signup.codeAgent")}</p>

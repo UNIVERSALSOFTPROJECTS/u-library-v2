@@ -49,15 +49,16 @@
     //];
     const confSignup = {
         platform,
-        typeSignup: "mixed", //codeAgent / selectCurrency /  mixed (codeAgent and selectCurrency)
-        usertype: "X",// X / W
+        typeSignup: "selectCurrency", //codeAgent / selectCurrency /  mixed (codeAgent and selectCurrency)
+        usertype: "W",// X / W
         currencies: [ 
-            {name:"Peso chileno", agent:6546},
-            //{name:'', agent:''}, // en caso no tenga
+            {id: 7, agent:6546},
+            //{id: 3, agent:6546},
+            //{id: '', agent:''}, // en caso no tenga
         ],
         countries: [
-            {prefix:"+216",flag:"tnz"},
-            //{prefix:"+56",flag:"chl"},
+            //{prefix:"+216",flag:"tnz"},
+            {prefix:"+56",flag:"chl"},
         ]
     };
     // fin de registro m

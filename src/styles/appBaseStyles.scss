@@ -65,11 +65,8 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         &.login{
             background: #4a4b53;
         }
-        &.signup{
-            background: $color-primary;
-            box-shadow: 0 0 6px $color-primary, 
-            inset 0 -6px 10px $color-primary, inset 0 6px 10px hsla(0,0%,100%,.45), 
-            inset 0 0 11px $color-primary;
+        &.signup,&.withdrawal{
+            @extend %btn__signup_model_1;
         }
         //se mandara a otra lugar esta wea
         &.payment{

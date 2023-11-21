@@ -96,7 +96,7 @@
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div on:click={openTermsConditions}>{@html t("withdrawal.termsConditions")}</div>
-            <button class="btn singup" on:click={validateWithdrawal}>Solicitar retiro</button>
+            <button class="btn withdrawal" on:click={validateWithdrawal}>Solicitar retiro</button>
         {/if}
     {/if}
 </div>

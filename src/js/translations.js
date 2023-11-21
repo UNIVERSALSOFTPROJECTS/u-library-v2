@@ -19,6 +19,9 @@ export default {
       "signup.code": "Código",
       "signup.acceptPandP": "Para convertirme en cliente, acepto las <b><span class='link'>Políticas de Privacidad</span></b> de {{platform}}.",
       "signup.register": "Registrarse",
+      //---------------SINGUP/NAME CURRENCIES-----------------------------
+      "currency.usd":"Dólar estadounidense",
+      "currency.clp":"Peso chileno",
       //---------------Withdrawal-----------------------------
       "withdrawal.title": "Retiro",
       "withdrawal.amount0": "Ingrese un monto",
@@ -37,7 +40,7 @@ export default {
       "withdrawal.request": "Solicitar retiro",
       //---------------MENSAJES-----------------------------
       "msg.sucessLogin": "Bienvenido a {{platform}}",
-      "msg.sucessRegister": "Registro exitoso, bienvenido a {{platform}}",
+      "msg.sucessRegister": "Registro exitoso",
       "msg.allObligatory": "Todos los campos son obligatorios",
       "msg.pageMaintenance": "Página en mantenimiento, espere unos minutos",
       "msg.incorrectUserPass": "Usuario o contraseña incorrecto",
@@ -73,6 +76,9 @@ export default {
         "signup.code": "Code",
         "signup.acceptPandP": "Pour me convertir en client, acceptez les <b><span class='link'>Politiques de Confidentialité</span></b> de {{platform}}.",
         "signup.register": "S'inscrire",
+        //---------------SINGUP/NAME CURRENCIES-----------------------------
+        "currency.usd":"Dollar américain",
+        "currency.clp":"Peso chilien",
         //---------------Withdrawal-----------------------------
         "withdrawal.title": "Retrait",
         "withdrawal.amount0": "Entrez un montant",
@@ -91,7 +97,7 @@ export default {
         "withdrawal.request": "Demander le retrait",
         //---------------MENSAJES-----------------------------
         "msg.sucessLogin": "Bienvenue en {{platform}}",
-        "msg.sucessRegister": "Inscription réussie, bienvenue sur {{platform}}",
+        "msg.sucessRegister": "Inscription réussie",
         "msg.allObligatory": "Tous les champs sont requis",
         "msg.pageMaintenance": "Page en maintenance, attendez quelques minutes",
         "msg.incorrectUserPass": "Identifiant ou mot de passe incorrect",
