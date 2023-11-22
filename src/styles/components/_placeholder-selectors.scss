@@ -49,6 +49,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    padding-right: 1.5rem;
+    text-overflow: ellipsis;
     & > *{
         color: $color-ipt;
     }
@@ -743,7 +745,7 @@
     & .signup{
         &__container{
             display: grid;
-            grid-template-columns: 0.6fr 1fr;
+            grid-template-columns: 1fr auto;
             align-items: stretch;
             gap: 0.1rem;
             & p{

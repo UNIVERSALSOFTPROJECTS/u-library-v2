@@ -5,17 +5,17 @@
     import DropdownCurrencies from '../dropdown/DropdownCurrencies.svelte';
     import InputPassword from '../input/InputPassword.svelte';
 
-    export let confSignup;
+    export let configSignup;
     export let onOk;
     export let onError;
     export let openPrivacyPolicies;
     export let t;
 
-    let platform = confSignup.platform;
-    let typeSignup = confSignup.typeSignup;
-    let usertype = confSignup.usertype;
-    let countries = confSignup.countries;
-    let currencies = confSignup.currencies;
+    let platform = configSignup.platform;
+    let typeSignup = configSignup.typeSignup;
+    let userType = configSignup.userType;
+    let countries = configSignup.countries;
+    let currencies = configSignup.currencies;
 
     //loading
     let loadSms;
@@ -104,7 +104,7 @@
         try {
             loadSignup = true;
             if(typeSignup != "selectCurrency") await getCurrencyId();//Just if add codeagent
-            const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, codeAgent,smscode,usertype,platform,currency,doctype,document);
+            const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, codeAgent,smscode,userType,platform,currency,doctype,document);
             data.username = username;
             data.password = password;
             onOk(data);

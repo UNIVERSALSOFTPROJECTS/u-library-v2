@@ -4,6 +4,7 @@
     import moment from "moment";
 
     export let user;
+    export let configWithdrawal;
     export let onError;
     export let onOk;
     export let openTermsConditions;
@@ -86,11 +87,34 @@
                 <input type="text" inputmode="numeric" class="ipt" bind:value={infoUser.documento} on:input={justNumbersValidate}>
                 <p>Nombre de banco:</p>
                 <p>Nro de cuenta:</p>
-                <input type="text" class="ipt" bind:value={infoAccount.banco} on:input={justTextValidate}>
+
+                {#if configWithdrawal.dataType != "static"}
+                    <input type="text" class="ipt" bind:value={infoAccount.banco} on:input={justTextValidate}>
+                {:else}
+                    <select class="slc" bind:value={infoAccount.banco}>
+                        <option value="" disabled>Selecciona tu banco</option>
+                        {#each configWithdrawal.banksNames as banks}
+                            <option value={banks.id}>{banks.name}</option>
+                        {/each}
+                    </select>
+                {/if}
+
                 <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={justNumbersAccountValidate}>
                 <p>Información adicional:</p>
                 <p></p>
-                <input type="text" class="ipt" bind:value={infoAccount.adicional}>
+
+                {#if configWithdrawal.dataType != "static"}
+                    <input type="text" class="ipt" bind:value={infoAccount.adicional}>
+                {:else}
+                    <select class="slc" bind:value={infoAccount.adicional}>
+                        <option value="" disabled>Selecciona tu tipo de cuenta</option>
+                        {#each configWithdrawal.typeAccount as account}
+                            <option value={account.id}>{account.name}</option>
+                        {/each}
+                    </select>
+                {/if}
+
+                
             </div>
             <p><b>Horario de retiro:</b> {infoUser.horarios || ''}</p>
             <!-- svelte-ignore a11y-click-events-have-key-events -->
