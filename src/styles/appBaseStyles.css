@@ -246,6 +246,8 @@ input[type=date]::-webkit-calendar-picker-indicator {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  padding-right: 1.5rem;
+  text-overflow: ellipsis;
 }
 .Apuestadepana .slc > * {
   color: #000;
@@ -353,7 +355,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .Apuestadepana .modal.signup .signup__container {
   display: grid;
-  grid-template-columns: 0.6fr 1fr;
+  grid-template-columns: 1fr auto;
   align-items: stretch;
   gap: 0.1rem;
 }

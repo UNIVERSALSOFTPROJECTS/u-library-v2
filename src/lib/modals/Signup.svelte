@@ -120,7 +120,7 @@
   
 <form class="modal-body">
     <input type="text" class="ipt" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={justTextValidate}>
-    <div class="signup__container">
+    <div class="signup__container--date">
         <p>{t("signup.birthday")}</p>
         <div class="signup__date">
             <DropdownDate bind:date/>
@@ -149,7 +149,7 @@
     {:else if typeSignup === "selectCurrency"}
         <DropdownCurrencies {currencies} bind:currency bind:codeAgent t={t}/>
     {:else if typeSignup === "codeAgent"}
-        <div class="signup__container">
+        <div class="signup__container--agent">
             <p>{t("signup.codeAgent")}</p>
             <div class="signup__codeAgent">
                 <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>

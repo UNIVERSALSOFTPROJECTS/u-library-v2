@@ -298,7 +298,7 @@
             border-radius: 0.5rem;
         }
         &__header{
-            background-color: $color-primary-black;
+            background-color: $color-primary;
             display: flex;
             justify-content: space-between;
             flex-direction: row;
@@ -759,6 +759,12 @@
             } 
             &--pass{
                 @extend %containerPassword;
+            }
+            &--date{
+                grid-template-columns: 1fr auto;
+            }
+            &--agent{
+                grid-template-columns: auto 1fr;
             }
         }
         &__btn{
