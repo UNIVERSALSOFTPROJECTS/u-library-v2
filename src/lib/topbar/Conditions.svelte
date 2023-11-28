@@ -20,7 +20,6 @@
       <button class="help__header" class:active={selected === "politica"} on:click={() => (selected = "politica")}>Política de Privacidad<i class="fas fa-arrow-right"></i></button>
       <button class="help__header" class:active={selected === "preguntas"} on:click={() => (selected = "preguntas")}>Preguntas frecuentes<i class="fas fa-arrow-right"></i></button>
     </div>
-
     <div>
       {#if selected === "aml"}
         <div class="help__header--title">Procedimientos de AML</div>
@@ -8188,7 +8187,7 @@
     max-height: 72vh;
     overflow-x: auto;
     padding: 0.5rem;
-    background: #333638;
+    background: #bdbbbb;
   }
 
   .help__header,

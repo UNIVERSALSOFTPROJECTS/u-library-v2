@@ -10,6 +10,10 @@
   export let currencies;
   export let doctypes;
   export let onOkSingup;
+  export let onOpenConditions;
+
+  
+
 
   let registerUser = {
     address: "-",
@@ -82,6 +86,8 @@
       notify.error("Ingrese solo números");
     }
   };
+
+  
 </script>
 
 <div class="modal-body">
@@ -135,7 +141,7 @@
   <div class="signup__conditions">
     <input type="checkbox" id="chk_conditions" bind:checked={registerUser.term_conditions} />
     <label for="chk_conditions" />
-    <div class="chk_conditions"> Para convertirme en cliente, acepto las <b><a class="link" href="./Conditions.svelte">Políticas de Privacidad</a></b>de {platform}.</div>
+    <div class="chk_conditions"> Para convertirme en cliente, acepto las <b><button  on:click={onOpenConditions} class="link" >Políticas de Privacidad</button></b>de {platform}.</div>
   </div>
   <button class="btn signup__btn" on:click={registerClick} disabled={loadSingup || !smsSent} >
     {#if loadSingup}
@@ -150,9 +156,18 @@
   </button>
 </div>
 
+
+
 <style>
   .chk_conditions {
     color: white;
+  }
+  .link{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-bottom: 1px solid white;
   }
   @media only screen and (max-width: 768px) {
   }

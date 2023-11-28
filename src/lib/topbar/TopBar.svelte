@@ -16,6 +16,7 @@
   import notify from "../../js/notify";
   import Notifier from "../Notifier.svelte";
   import RecoverPassword from "./RecoverPassword.svelte";
+  import Conditions from "./Conditions.svelte";
 
   export let userState;
   export let active_view;
@@ -42,6 +43,7 @@
   let scrollPosition = 0;
   let divClass = "";
   let signupModalOpen = false;
+  let showConditions = false;
 
   const handleScroll = () => {
     scrollPosition = window.scrollY;
@@ -95,7 +97,12 @@
     loginModalOpen = false;
     showRecoverPass = true;
     modalOpened = "singup";
+  };
 
+  const onOpenConditions = () => {
+    signupModalOpen = false;
+    showConditions = true;
+    modalOpened = "singup";
   };
 
   const onLogout = () => {
@@ -220,7 +227,12 @@
       bind:currencies
       bind:doctypes
       {onOkSingup}
+      {onOpenConditions}
     />
+  </Modal>
+
+  <Modal bind:open={showConditions} bind:modalOpened title="Condiciones">
+    <Conditions></Conditions>
   </Modal>
 
   <Modal
