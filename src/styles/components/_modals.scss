@@ -12,9 +12,10 @@
         
 
     &.singup {
-        @extend %singup__model_1;
+        @extend %signup__model_1;
         @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
     }
+
 
     &.profile {
         width: 100%;
