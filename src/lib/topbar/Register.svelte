@@ -1,6 +1,4 @@
 <script>
-  import EventManager from "../../js/EventManager.js";
-  import DropdowPrefix from "../dropdown/DropdowPrefix.svelte";
   import DropdownDate from "../dropdown/DropdownDate.svelte";
   import backend from "../../js/server";
   import notify from "../../js/notify";
@@ -49,7 +47,6 @@
       console.log(params);
       notify.success("Se esta enviando un SMS a su telefono.");
       await backend.u_user.preRegister(params);
-
       smsSent = true;
     } catch (error) {
       return notify.error("El preregistro de usuario fallo");
@@ -88,62 +85,17 @@
 </script>
 
 <div class="modal-body">
-  <input
-    bind:value={registerUser.name}
-    type="text"
-    class="ipt"
-    placeholder="Nombre"
-    autocapitalize="off"
-  />
-  <input
-    bind:value={registerUser.username}
-    type="text"
-    class="ipt"
-    placeholder="Nombre de Usuario"
-    autocapitalize="off"
-  />
-  <input
-    bind:value={registerUser.password}
-    type="text"
-    class="ipt"
-    placeholder="Ingrese contraseña"
-  />
-  <input
-    bind:value={registerUser.verifypassword}
-    type="text"
-    class="ipt"
-    placeholder="Verificar contraseña"
-  />
+  <input bind:value={registerUser.name} class="ipt" placeholder="Nombre" autocapitalize="off" />
+  <input bind:value={registerUser.username} class="ipt" placeholder="Nombre de Usuario" autocapitalize="off"/>
+  <input bind:value={registerUser.password} class="ipt" placeholder="Ingrese contraseña"/>
+  <input bind:value={registerUser.verifypassword} class="ipt" placeholder="Verificar contraseña"/>
   <div class="singup__phone">
-    <UDropdowPrefix
-      {countries}
-      bind:countryPrefix={registerUser.countryPrefix}
-      bind:countryCode={registerUser.countryCode}
-    />
-    <input
-      bind:value={registerUser.phone}
-      on:keypress={isOnlyNumber}
-      inputmode="numeric"
-      type="text"
-      class="ipt"
-      placeholder="Teléfono"
-      autocomplete="off"
-    />
+    <UDropdowPrefix {countries} bind:countryPrefix={registerUser.countryPrefix} bind:countryCode={registerUser.countryCode} />
+    <input bind:value={registerUser.phone} on:keypress={isOnlyNumber} inputmode="numeric" class="ipt" placeholder="Teléfono" autocomplete="off" />
   </div>
-  <input
-    bind:value={registerUser.email}
-    type="email"
-    class="ipt"
-    placeholder="Correo electrónico"
-    autocomplete="off"
-  />
+  <input bind:value={registerUser.email} type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" >
   <div class="singup__sms">
-    <button
-      type="button"
-      class="btn btn-default"
-      on:click={preRegisterClick}
-      disabled={loadSms}
-    >
+    <button class="btn btn-default" on:click={preRegisterClick} disabled={loadSms}>
       {#if !activeSMS}
         {#if loadSms}
           <div class="loading">
@@ -155,22 +107,10 @@
           Generar código SMS
         {/if}
       {:else}
-        Nuevo código en: <b
-          >{minutes.toString().padStart(2, "0")}:{seconds
-            .toString()
-            .padStart(2, "0")}</b
-        >
+        Nuevo código en: <b>{minutes.toString().padStart(2, "0")}:{seconds.toString().padStart(2, "0")}</b>
       {/if}
     </button>
-    <input
-      bind:value={registerUser.smscode}
-      on:keypress={isOnlyNumber}
-      type="number"
-      class="ipt"
-      min="0"
-      placeholder="Código"
-      autocomplete="off"
-    />
+    <input bind:value={registerUser.smscode} on:keypress={isOnlyNumber} type="number" class="ipt" min="0" placeholder="Código" autocomplete="off"/>
   </div>
   <select bind:value={registerUser.currency} class="ipt">
     {#each currencies as currency}
@@ -183,14 +123,7 @@
         <option>{doctype}</option>
       {/each}
     </select>
-    <input
-      bind:value={registerUser.document}
-      on:keypress={isOnlyNumber}
-      type="text"
-      class="ipt"
-      placeholder="Ingrese su numero de documento"
-      inputmode="numeric"
-    />
+    <input bind:value={registerUser.document} on:keypress={isOnlyNumber} class="ipt" placeholder="Ingrese su numero de documento" inputmode="numeric"/>
   </div>
 
   <div class="singup__form--date">
@@ -200,25 +133,11 @@
     </div>
   </div>
   <div class="singup__conditions">
-    <input
-      type="checkbox"
-      id="chk_conditions"
-      bind:checked={registerUser.term_conditions}
-    />
+    <input type="checkbox" id="chk_conditions" bind:checked={registerUser.term_conditions} />
     <label for="chk_conditions" />
-    <div class="chk_conditions">
-      Para convertirme en cliente, acepto las <b
-        ><a class="link" href="#">Políticas de Privacidad</a></b
-      >
-      de {platform}.
-    </div>
+    <div class="chk_conditions"> Para convertirme en cliente, acepto las <b><a class="link" href="./Conditions.svelte">Políticas de Privacidad</a></b>de {platform}.</div>
   </div>
-  <button
-    type="button"
-    class="btn singup__btn"
-    on:click={registerClick}
-    disabled={loadSingup || !smsSent}
-  >
+  <button class="btn singup__btn" on:click={registerClick} disabled={loadSingup || !smsSent} >
     {#if loadSingup}
       <div class="loading">
         <p />

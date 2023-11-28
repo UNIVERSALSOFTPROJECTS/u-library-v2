@@ -10,7 +10,6 @@
   function generatePageRange() {
     let pages_ = [];
     const visiblePages = 5; // Número de páginas visibles en la paginación
-
     const totalPages = Math.ceil(total / xpage);
     const middlePage = Math.ceil(visiblePages / 2);
     let startPage = current - middlePage + 1;
@@ -50,7 +49,7 @@
 
 
 <style>
-  @media (max-width: 1024px) {
+  @media only screen and (max-width: 1024px) {
     .navigation {
       display: flex;
       flex-direction: row;
@@ -58,7 +57,7 @@
       align-items: center;
     }
   }
-  @media (min-width: 1025px) {
+  @media only screen and (min-width: 1025px) {
     .navigation {
       display: flex;
       flex-direction: row;
