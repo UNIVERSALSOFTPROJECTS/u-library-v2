@@ -89,12 +89,12 @@
   <input bind:value={registerUser.username} class="ipt" placeholder="Nombre de Usuario" autocapitalize="off"/>
   <input bind:value={registerUser.password} class="ipt" placeholder="Ingrese contraseña"/>
   <input bind:value={registerUser.verifypassword} class="ipt" placeholder="Verificar contraseña"/>
-  <div class="singup__phone">
+  <div class="signup__phone">
     <UDropdowPrefix {countries} bind:countryPrefix={registerUser.countryPrefix} bind:countryCode={registerUser.countryCode} />
     <input bind:value={registerUser.phone} on:keypress={isOnlyNumber} inputmode="numeric" class="ipt" placeholder="Teléfono" autocomplete="off" />
   </div>
   <input bind:value={registerUser.email} type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" >
-  <div class="singup__sms">
+  <div class="signup__sms">
     <button class="btn btn-default" on:click={preRegisterClick} disabled={loadSms}>
       {#if !activeSMS}
         {#if loadSms}
@@ -117,7 +117,7 @@
       <option>{currency}</option>
     {/each}
   </select>
-  <div class="singup__sms">
+  <div class="signup__sms">
     <select bind:value={registerUser.doctype} class="ipt">
       {#each doctypes as doctype}
         <option>{doctype}</option>
@@ -126,18 +126,18 @@
     <input bind:value={registerUser.document} on:keypress={isOnlyNumber} class="ipt" placeholder="Ingrese su numero de documento" inputmode="numeric"/>
   </div>
 
-  <div class="singup__form--date">
+  <div class="signup__form--date">
     <p>Fecha de nacimiento:</p>
-    <div class="singup__date">
+    <div class="signup__date">
       <DropdownDate bind:date={registerUser.birthday} />
     </div>
   </div>
-  <div class="singup__conditions">
+  <div class="signup__conditions">
     <input type="checkbox" id="chk_conditions" bind:checked={registerUser.term_conditions} />
     <label for="chk_conditions" />
     <div class="chk_conditions"> Para convertirme en cliente, acepto las <b><a class="link" href="./Conditions.svelte">Políticas de Privacidad</a></b>de {platform}.</div>
   </div>
-  <button class="btn singup__btn" on:click={registerClick} disabled={loadSingup || !smsSent} >
+  <button class="btn signup__btn" on:click={registerClick} disabled={loadSingup || !smsSent} >
     {#if loadSingup}
       <div class="loading">
         <p />
