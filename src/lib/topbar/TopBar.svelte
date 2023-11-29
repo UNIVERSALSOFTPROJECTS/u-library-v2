@@ -102,7 +102,7 @@
   const onOpenConditions = () => {
     signupModalOpen = false;
     showConditions = true;
-    modalOpened = "signup";
+    modalOpened = "singup";
   };
 
   const onLogout = () => {
@@ -231,8 +231,8 @@
     />
   </Modal>
 
-  <Modal bind:open={showConditions} bind:modalOpened title="Condiciones">
-    <Conditions></Conditions>
+  <Modal bind:open={showConditions} bind:modalOpened showHeader={false}>
+    <Conditions bind:open={showConditions}></Conditions>
   </Modal>
 
   <Modal
