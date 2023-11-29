@@ -4,6 +4,7 @@ export default {
       "login.user": "Usuario",
       "login.password": "Contraseña",
       "login.access": "Ingresar",
+      "login.remember": "Recordar",
       "login.forgetPassword": "¿Olvidaste tu contraseña?",
       //---------------SINGUP-----------------------------
       "signup.title": "Registrate aquí",
@@ -61,6 +62,7 @@ export default {
         "login.user": "Utilisateur",
         "login.password": "Mot de passe",
         "login.access": "Entrer dans",
+        "login.remember": "Rappeler",
         "login.forgetPassword": "Vous avez oublié votre mot de passe?",
         //---------------SINGUP-----------------------------
         "signup.title": "Inscrivez-vous ici",

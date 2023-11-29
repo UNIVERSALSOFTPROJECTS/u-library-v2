@@ -1,7 +1,7 @@
 <script>
     import { t, locale, locales } from "../js/i18n";
     import Notifier from './Notifier.svelte';
-    import Login from './topbar/Login.svelte';
+    import Login from './topbar/LoginAutosaved.svelte';
     //import LoginAutosaved from './topbar/LoginAutosaved.svelte';
     import Modal from '../lib/Modal.svelte';
     //import Signup from './modals/SingupXg.svelte';
@@ -93,7 +93,7 @@
 
     // fin de registro m
     //IDIOMAR!!!
-    $locale = "es";//Actualmente solo "es" y "fr"
+    $locale = "fr";//Actualmente solo "es" y "fr"
 
 
     const onOpenRecoverPass = () => {}
