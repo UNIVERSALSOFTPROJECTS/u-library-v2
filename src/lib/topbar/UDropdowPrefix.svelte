@@ -46,8 +46,7 @@
           {#each countries as country}
                 <button type="button" class="btn signup__prefix" on:click={() => selectOption(country)}>
                     <img src="{url_global}/flags/{country.flag}.png" alt="{selectedFlag}-country">
-                    {country.prefix}
-                </button>
+                <p>{country}</p></button>
           {/each}
       </div>
     {/if}

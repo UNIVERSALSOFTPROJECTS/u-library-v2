@@ -12,9 +12,6 @@
   export let onOkSingup;
   export let onOpenConditions;
 
-  
-
-
   let registerUser = {
     address: "-",
     zip: "-",
