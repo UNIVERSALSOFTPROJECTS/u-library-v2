@@ -102,7 +102,7 @@
   const onOpenConditions = () => {
     signupModalOpen = false;
     showConditions = true;
-    modalOpened = "singup";
+    modalOpened = "signup";
   };
 
   const onLogout = () => {
