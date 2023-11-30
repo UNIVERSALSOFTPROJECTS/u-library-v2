@@ -66,7 +66,7 @@
 
 <div class="modal-body">
   	<div class="login__title">{t("login.title")}</div>
-    <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-main">
+    <img class="login__logo" src="{assetsUrl}/logo.png" alt="logo-main">
     <div></div>
     <form class="login__form">
 		<input type="text" class="ipt" placeholder={t("login.user")} on:keypress={loginEnter} bind:value={username} disabled="{autoLogin}" >
