@@ -47,7 +47,6 @@
         align-items: center;
         justify-content: center;
     }
-
     &.withdrawal {
         & .modal {
             &-body {
@@ -84,6 +83,13 @@
                 gap: 0.5rem;
             }
         }
+    }
+    &.condition{
+        @include conditions__model_1();
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
 
 }
