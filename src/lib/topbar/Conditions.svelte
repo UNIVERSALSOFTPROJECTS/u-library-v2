@@ -21,13 +21,13 @@
 <div class="conditions modal">
   <div class="conditions-body">
     <div class="conditions__header">
-      <span>styllll</span>
+      <span>CONDICIONES</span>
       <button class="btn close" on:click={closeModal} />
     </div>
     <div class="conditions__body">
       <div class="conditions help__options" id="accordion-help">
-        <button class="conditions help__header" on:click={() => (selected = "aml")} class:active={selected === "aml"}>Procedimientos de AML<i class="fasfa-arrow-right"></i></button>
-        <button class="conditions help__header" on:click={() => (selected = "tandc")} class:active={selected === "tandc"}> Términos y Condiciones<i class="fas fa-arrow-right"></i> </button>
+        <button class="help__header" on:click={() => (selected = "aml")} class:active={selected === "aml"}>Procedimientos de AML<i class="fasfa-arrow-right"></i></button>
+        <button class="help__header" on:click={() => (selected = "tandc")} class:active={selected === "tandc"}> Términos y Condiciones<i class="fas fa-arrow-right"></i> </button>
         <button class="help__header" on:click={() => (selected = "gameres")} class:active={selected === "gameres"}>Juego Responsable<i class="fas fa-arrow-right"></i></button>
         <button class="help__header" on:click={openDropDown}> Reglas deportivas y opciones de apuestas </button>
         {#if selectedDropDown} 
