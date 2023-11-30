@@ -6,8 +6,11 @@
 	export let onOk;
 	export let onError;
 	export let assetsUrl;
+	export let platform;
 	export let userGateway="neco";//neco/universal
-
+	export let onOpenRecoverPass;
+	export let t;//traduccion
+	
 	let password;
 	let username;
 	let loadLogin = false;
@@ -17,7 +20,7 @@
 	const loginEnter = (e) => { if (e.charCode === 13) loginClick(); };
 
 	async function loginClick(){
-		if(!username || !password ) return onError("Todos los campos son obligatorios");
+		if(!username || !password ) return onError(t("msg.allObligatory"));
 		try {
 			loadLogin = true
 			let data ;
@@ -35,9 +38,9 @@
 			onOk(data);
 		} catch (error) {
 			console.log("error: ", error);
-			if(error.message == "Network Error" || error.response.data.message.includes("Connection refused")) error = "Página en mantenimiento, espere unos minutos";
-			else if(error.response.data.message == "NECO_LOGIN_FAILED") error = "Usuario o contraseña incorrecto";
-			else error = "Ocurrio un error, contactese con soporte";
+			if(error.message == "Network Error" || error.response.data.message.includes("Connection refused")) error = t("msg.pageMaintenance");
+			else if(error.response.data.message == "NECO_LOGIN_FAILED") error = t("msg.incorrectUserPass");
+			else error = t("msg.contactSupport");
 			onError(error);
 			loadLogin = false;
 		}
@@ -62,23 +65,23 @@
 </script>
 
 <div class="modal-body">
-  	<div class="login__title">Bienvenido a</div>
-    <img class="login__logo" src="{assetsUrl}/logo.png" alt="logo-main">
+  	<div class="login__title">{t("login.title")}</div>
+    <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-main">
     <div></div>
     <form class="login__form">
-		<input type="text" class="ipt" placeholder="Usuario" on:keypress={loginEnter} bind:value={username} disabled="{autoLogin}" >
-		<input class="ipt" type="password"  placeholder="Contraseña" on:keypress={loginEnter} on:input={password} bind:value={password} disabled="{autoLogin}" >
+		<input type="text" class="ipt" placeholder={t("login.user")} on:keypress={loginEnter} bind:value={username} disabled="{autoLogin}" >
+		<input class="ipt" type="password"  placeholder={t("login.password")} on:keypress={loginEnter} on:input={password} bind:value={password} disabled="{autoLogin}" >
 		<div class="login__autosaved">
 			<input type="checkbox" id="autosaved" bind:checked={autoLogin} >
-			<label for="autosaved">Recordar</label>
+			<label for="autosaved">{t("login.remember")}</label>
 		</div>
-		<button type="button" class="btn singup" disabled="{loadLogin}" on:click={loginClick}>
+		<button type="button" class="btn login" disabled="{loadLogin}" on:click={loginClick}>
 			{#if loadLogin}
 				<div class="loading"><p></p><p></p><p></p></div>
 				{:else}
-				Ingresar
+				<p>{t("login.access")}</p>
 			{/if}
 		</button>
-		<div class="link">¿Olvidaste tu contraseña?</div>
+		<button on:click={onOpenRecoverPass} class="btn link">{t("login.forgetPassword")}</button>
     </form>
 </div>
