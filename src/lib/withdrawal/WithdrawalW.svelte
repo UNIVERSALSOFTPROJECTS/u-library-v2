@@ -55,7 +55,7 @@
         let bank = infoAccount.banco;
         if(!infoUser.documento || !info || !account || !bank) return onError("Todos los campos son obligatorios");
         try {
-            let data = await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,account,info);
+            let data = await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,account,info, infoUser.documento);
             updateBalance();
             checkWithdrawal();
             console.log(data);
