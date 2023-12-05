@@ -6,7 +6,7 @@
 
     const statusNotifier = (isActive) => {
         clearTimeout(timer);
-        //if(isActive === true) timer = setTimeout(() => { notify.open = false; }, 3000); 
+        if(isActive === true) timer = setTimeout(() => { notify.open = false; }, 3000); 
     }
 
     EventManager.subscribe("notify", (event) => {

@@ -20,6 +20,7 @@
                 case 'WITHDRAW-BANK': msg = "Retiro bancario confirmado"; break;
             }
             notify.success(msg);
+            getBalance(user.agregatorToken);
        
         });
     })
@@ -28,7 +29,6 @@
         try {
             if(!token) alert("TOKEN NOT_FOUND");
             const {data} =  await server.users.getBalance(token);
-            console.log(data);
             user.balance = data.balance;
         } catch (error) {
             notify.error("No se pudo consultar Balance");
