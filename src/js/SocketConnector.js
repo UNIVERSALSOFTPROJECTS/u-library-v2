@@ -11,10 +11,10 @@ const SocketConnector = (() => {
     }
        
     function connect(user){
-       console.log(`Opening WS connection with   ${conf.WS_URL}/change-balance`)
+       console.log(`Opening WS connection with   ${conf.BALANCE_WS}/change-balance`)
 
             stompClient = new Client({
-                    brokerURL:conf.WS_URL+'/change-balance',
+                    brokerURL:conf.BALANCE_WS+'/change-balance',
                     connectHeaders: {
                          platformId: user.platformId,
                          userId: user.userId,
