@@ -6,6 +6,7 @@
     import server from "../js/server"; 
     import Notifier from "./Notifier.svelte";
     export let user;
+    export let onChangeBalance;
 
     SocketConnector.connect(user);
 
@@ -30,6 +31,7 @@
             if(!token) alert("TOKEN NOT_FOUND");
             const {data} =  await server.u_user.getBalance(token);
             user.balance = data.balance;
+            onChangeBalance();
         } catch (error) {
             notify.error("No se pudo consultar Balance");
         }
