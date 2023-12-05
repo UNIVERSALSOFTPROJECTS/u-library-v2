@@ -866,9 +866,11 @@
                 @extend %containerPassword;
             }
             &--date{
+                @extend .signup__container;
                 grid-template-columns: 1fr auto;
             }
             &--agent{
+                @extend .signup__container;
                 grid-template-columns: auto 1fr;
             }
         }

@@ -93,7 +93,7 @@
 
     // fin de registro m
     //IDIOMAR!!!
-    $locale = "fr";//Actualmente solo "es" y "fr"
+    $locale = "es";//Actualmente solo "es" y "fr"
 
 
     const onOpenRecoverPass = () => {}
