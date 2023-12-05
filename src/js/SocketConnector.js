@@ -17,8 +17,8 @@ const SocketConnector = (() => {
                     brokerURL:conf.BALANCE_WS+'/change-balance',
                     connectHeaders: {
                          platformId: user.platformId,
-                         userId: user.userId,
-                         currencyISO:user.currencyISO,
+                         userId: user.id,
+                         currencyISO:user.currency,
                          connectionId:user.token
                     },
                     debug: function (str) {console.log(str);},
