@@ -9,10 +9,13 @@ let user = {
   playerId:'W-e9d847b4-5cc1-453a-9030-d51fe17a85fe',
   currency:'PEN',
   token: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYWthbm9tYWxkaXRvMTIiLCJpYXQiOjE2OTUxMzcyNTIsImV4cCI6MTY5NTE0MDg1Mn0.NG2Lm7O11ZPELAd5IIx-xHphv-jTwi5OrXDWYVfLFPfQeNIpwK_v4FtEcYfUIUHS8UjKzDlZnr5SleXIVeHMIA", 
-  balance: 12.21 };
+  balance: 12.21
+};
+
 let assetsUrl = "https://assets.apiusoft.com";
 let maxAmount = 6000;
 let minAmount = 50;
+
 export default {
   title: 'Deposits',
   component: ConfirmCashIn,
