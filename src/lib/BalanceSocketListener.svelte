@@ -28,7 +28,7 @@
     const getBalance=async(token)=>{
         try {
             if(!token) alert("TOKEN NOT_FOUND");
-            const {data} =  await server.users.getBalance(token);
+            const {data} =  await server.u_user.getBalance(token);
             user.balance = data.balance;
         } catch (error) {
             notify.error("No se pudo consultar Balance");
