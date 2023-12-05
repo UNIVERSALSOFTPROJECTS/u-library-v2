@@ -28,7 +28,7 @@ const SocketConnector = (() => {
         stompClient.onConnect = (frame) => {
             stompClient.subscribe('/users/queue/balance', (data) => {
                     console.log("gretting",JSON.parse(data.body));
-                    new Audio('music/iphone-notificacion.mp3').play();
+                    new Audio('https://assetsapiusoft.s3.us-west-2.amazonaws.com/audios/iphone-notificacion.mp3').play();
                     EventManager.publish("changeBalance",JSON.parse(data.body) )
 
             });
