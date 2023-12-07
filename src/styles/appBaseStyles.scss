@@ -125,6 +125,22 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         }
 
     }
+    .dropdown{
+        &.idiom{
+            *{
+                color: black;
+            }
+            & button img{
+                width: 2.5rem;
+                border-radius: $borderR-btn;
+            }
+            & .slc,  & .btn{
+                display: flex;
+                align-items: center;
+                gap: 0.25rem;
+            }
+        }
+    }
 }
 
 

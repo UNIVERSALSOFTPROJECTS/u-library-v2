@@ -76,7 +76,6 @@ const ServerConnection = (() => {
             return axios.post(conf.API + "/login", payload, { headers });
         },//operatorId o codeAgent,son lo mismo
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
-            console.log(usertype);
             if (!currency) throw "CURRENCY_MANDATORY";
             if (!conf.domain) throw "DOMAIN_MANDATORY";
             var url = conf.API + "/user";

@@ -250,12 +250,15 @@
             font-weight: 700;
         }
         &__autosaved{
+            display: grid;
+            grid-template-columns: auto auto 1fr 1fr;
+            align-items: center;
             width: 100%;
             font-weight: 600;
-            display: flex;
-           & *{
-            cursor: pointer;
-           }
+            & * {
+                cursor: pointer;
+                height: auto;
+            }
         }
     }
 }
