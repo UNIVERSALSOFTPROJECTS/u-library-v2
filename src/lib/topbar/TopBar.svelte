@@ -157,6 +157,25 @@
   const onLoginError = async (error) => {
     notify.error(error);
   };
+
+  /*const getBonus = () => {
+    let data;
+    const formattedBonus = [];
+    for (const type in data.bonus) {
+      if (data.bonus.hasOwnProperty(type)) {
+        const currency = Object.keys(data.bonus[type])[0];
+        const amount = data.bonus[type][currency];
+
+        formattedBonus.push({
+          type: type,
+          currency: currency,
+          amount: amount
+        });
+      }
+    }
+    data.bonus = formattedBonus;
+  }*/
+
 </script>
 
 <div

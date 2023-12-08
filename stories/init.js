@@ -69,6 +69,7 @@ import ServerConnection from '../src/js/server'
 export default{
     start:()=>{
         ServerConnection.setConfig({
+            platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
             API:"https://lobby-bff.apiusoft.com",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
             CLIENT_AUTH:"ADPNAPUESTADEPANA9APUESTADEPANA92023",

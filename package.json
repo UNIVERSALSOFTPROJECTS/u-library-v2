@@ -36,6 +36,8 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "axios": "^1.4.0",
+    "firebase": "^10.7.1",
+    "google-login-svelte": "^0.0.1",
     "moment": "^2.29.4",
     "rollup-plugin-svelte": "^7.1.6",
     "rollup-plugin-terser": "^7.0.2",
