@@ -250,12 +250,15 @@
             font-weight: 700;
         }
         &__autosaved{
+            display: grid;
+            grid-template-columns: auto auto 1fr 1fr;
+            align-items: center;
             width: 100%;
             font-weight: 600;
-            display: flex;
-           & *{
-            cursor: pointer;
-           }
+            & * {
+                cursor: pointer;
+                height: auto;
+            }
         }
     }
 }
@@ -866,9 +869,11 @@
                 @extend %containerPassword;
             }
             &--date{
+                @extend .signup__container;
                 grid-template-columns: 1fr auto;
             }
             &--agent{
+                @extend .signup__container;
                 grid-template-columns: auto 1fr;
             }
         }

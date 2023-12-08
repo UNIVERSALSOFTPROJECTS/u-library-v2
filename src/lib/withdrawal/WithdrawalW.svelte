@@ -73,6 +73,7 @@
            <p>Usted cuenta actualmente con una solicitud de retiro de :</p>
            <p class="withdrawal__pending">{infoUser.bloqueo_fondos} {user.currency}</p>
            <p>Si desea saber en que estado se encuentra su solicitud de retiro, puede comunicarse con nuestro centro de atención al cliente</p>
+           <!--p>Nota: El tiempo de espera para aprobar su solicitud de retiro es de <b>45 minutos</b> aproximadamente.</p-->   
         {:else}
             <div class="withdrawal__amount">
                 <b>{user.currency}</b>

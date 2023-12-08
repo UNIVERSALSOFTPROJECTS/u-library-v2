@@ -105,6 +105,7 @@
             loadSignup = true;
             if(typeSignup != "selectCurrency") await getCurrencyId();//Just if add codeagent
             const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, codeAgent,smscode,userType,platform,currency,doctype,document);
+            console.log("userType",userType);
             data.username = username;
             data.password = password;
             onOk(data);

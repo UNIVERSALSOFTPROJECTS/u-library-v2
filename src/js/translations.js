@@ -115,4 +115,13 @@ export default {
         "msg.codeVerification": "Entrez le code de vérification",
         "msg.acceptTandC": "Vous devez accepter les Termes et Conditions",
     },
+    //solo para testear crashgames login autosaved
+    br:{
+      "login.title": "Bem-vindo a",
+      "login.user": "Utilizador",
+      "login.password": "Senha",
+      "login.access": "Entrar",
+      "login.remember": "Lembrar",
+      
+    }
   };

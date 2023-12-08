@@ -1,5 +1,6 @@
 
 import ServerConnection from '../src/js/server'
+import SocketConnector from '../src/js/SocketConnector'
 
 //export default{
 //    start:()=>{
@@ -66,7 +67,9 @@ import ServerConnection from '../src/js/server'
 //    }
 //}
 //
-export default{
+
+
+/*export default{
     start:()=>{
         ServerConnection.setConfig({
             platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
@@ -86,7 +89,34 @@ export default{
             currency:7,//PEN
         })
     }
+}*/
+
+export default{
+    start:()=>{
+        ServerConnection.setConfig({
+            API:"https://lobby-bff.apiusoft.com",
+            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+            CLIENT_AUTH:"ADPNAPUESTADEPANA9APUESTADEPANA92023",
+            CLIENT_CODE:"ADPN",
+            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+            ASSETS:"https://d2zzz5z45zl95g.cloudfront.net",
+            WS_URL:"ws://localhost:5000",
+            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+            country:"+56",
+            operatorId:"123",
+            domain:"https://apuestadepana.com/",
+            assetsUrl:"https://assets.apiusoft.com",
+            org:"ADP",
+            currency:7,//PEN
+        })
+    },
+    startSocket:()=>{
+        SocketConnector.setConfig({
+            WS_URL:"ws://localhost:5000",
+        })
+    }
 }
+
 
 //export default{
 //    start:()=>{
