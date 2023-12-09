@@ -33,6 +33,7 @@
   export let currencies = ["USD"];
   export let doctypes = ["DNI"];
   export let limitAmount = { min: 50, max: 2000 };
+  export let isOauth;
 
   let username = "";
   let password = "";
@@ -44,6 +45,7 @@
   let divClass = "";
   let signupModalOpen = false;
   let showConditions = false;
+  
 
   const handleScroll = () => {
     scrollPosition = window.scrollY;
@@ -230,6 +232,7 @@
       {platform}
       {onOpenRecoverPass}
       t={$t}
+      bind:isOauth
     />
   </Modal>
   
@@ -247,6 +250,7 @@
       bind:doctypes
       {onOkSingup}
       {onOpenConditions}
+      bind:isOauth
     />
   </Modal>
 

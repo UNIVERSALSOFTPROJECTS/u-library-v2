@@ -10,6 +10,7 @@
   export let userGateway = "neco"; //neco/universal
   export let onOpenRecoverPass;
   export let t;//traduccion
+  export let isOauth;
 
   let password = "";
   let username = "";
@@ -114,7 +115,9 @@
   <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-{platform}"/>
   <div></div>
   <div class="login__form">
-    <div id="g_id_signin"></div>
+    {#if isOauth}
+      <div id="g_id_signin"></div>
+    {/if}
     <input type="text" class="ipt" placeholder={t("login.user")} autocapitalize="off" autocomplete="username" on:keypress={loginEnter} bind:value={username} disabled={userGmail}/>
     <div class="login__ipt--pass">
       <input class="ipt" type={showPassword ? 'text' : 'password'} autocomplete="current-password"  placeholder={t("login.password")} on:keypress={loginEnter} on:input={dataPassword} disabled={userGmail}>

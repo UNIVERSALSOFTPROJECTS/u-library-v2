@@ -11,6 +11,7 @@
   export let doctypes;
   export let onOkSingup;
   export let onOpenConditions;
+  export let isOauth;
 
   let registerUser = {
     address: "-",
@@ -142,7 +143,9 @@
 </script>
 
 <div class="modal-body">
-  <div id="g_id_signin"></div>
+  {#if isOauth}
+    <div id="g_id_signin"></div>
+  {/if}
   <input bind:value={registerUser.name} class="ipt" placeholder="Nombre" autocapitalize="off" disabled={userGmail} />
   <input bind:value={registerUser.username} class="ipt" placeholder="Nombre de Usuario" autocapitalize="off" disabled={userGmail} />
   <input bind:value={registerUser.password} type="password" class="ipt" placeholder="Ingrese contraseña" disabled={userGmail} />
@@ -207,8 +210,6 @@
     {/if}
   </button>
 </div>
-
-
 
 <style>
   .chk_conditions {

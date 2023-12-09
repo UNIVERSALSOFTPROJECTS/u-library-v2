@@ -11,7 +11,7 @@ let showMainLoading = false;
 let loginModalOpen = false;
 let modalOpened;
 let platform = "DemoPlatform";
-
+let isOauth = true;
 
 
 
@@ -34,7 +34,7 @@ const onLogin = () => {};
 
 export const TopBarDemo = () => ({
   Component: TopBar,
-  props: { userGateway: 'universal', user, active_view, showLoginModal, modalOpened, loginModalOpen, showMainLoading, assetsUrl, platform, userState, onOk, onError, onLogin }
+  props: { userGateway: 'universal', user, active_view, showLoginModal, modalOpened, loginModalOpen, showMainLoading, assetsUrl, platform, userState, onOk, onError, onLogin, isOauth}
 });
 
 
