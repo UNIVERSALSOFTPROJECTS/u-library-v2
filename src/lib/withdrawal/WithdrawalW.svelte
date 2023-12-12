@@ -10,6 +10,10 @@
     export let openTermsConditions;
     export let t;
 
+    let dataType = configWithdrawal.dataType;
+    let banksNames = configWithdrawal.banksNames;
+    let typeAccount = configWithdrawal.typeAccount;
+    let messageOptional = configWithdrawal.messageOptional;
     let pendingWithdrawal;
     let amount;
     let loadWithdrawal = true;
@@ -73,7 +77,9 @@
            <p>Usted cuenta actualmente con una solicitud de retiro de :</p>
            <p class="withdrawal__pending">{infoUser.bloqueo_fondos} {user.currency}</p>
            <p>Si desea saber en que estado se encuentra su solicitud de retiro, puede comunicarse con nuestro centro de atención al cliente</p>
-           <!--p>Nota: El tiempo de espera para aprobar su solicitud de retiro es de <b>45 minutos</b> aproximadamente.</p-->   
+           {#if messageOptional}
+           <p>{messageOptional}</p>
+           {/if}
         {:else}
             <div class="withdrawal__amount">
                 <b>{user.currency}</b>
@@ -89,12 +95,12 @@
                 <p>Nombre de banco:</p>
                 <p>Nro de cuenta:</p>
 
-                {#if configWithdrawal.dataType != "static"}
+                {#if dataType != "static"}
                     <input type="text" class="ipt" bind:value={infoAccount.banco} on:input={justTextValidate}>
                 {:else}
                     <select class="slc" bind:value={infoAccount.banco}>
                         <option value="" disabled>Selecciona tu banco</option>
-                        {#each configWithdrawal.banksNames as banks}
+                        {#each banksNames as banks}
                             <option value={banks.id}>{banks.name}</option>
                         {/each}
                     </select>
@@ -104,23 +110,26 @@
                 <p>Información adicional:</p>
                 <p></p>
 
-                {#if configWithdrawal.dataType != "static"}
+                {#if dataType != "static"}
                     <input type="text" class="ipt" bind:value={infoAccount.adicional}>
                 {:else}
                     <select class="slc" bind:value={infoAccount.adicional}>
                         <option value="" disabled>Selecciona tu tipo de cuenta</option>
-                        {#each configWithdrawal.typeAccount as account}
-                            <option value={account.id}>{account.name}</option>
+                        {#each typeAccount as account}
+                            <option value={account.id} >{account.name}</option>
                         {/each}
                     </select>
                 {/if}
 
                 
             </div>
-            <p><b>Horario de retiro:</b> {infoUser.horarios || ''}</p>
+            {#if infoUser.horarios}
+                <p><b>Horario de retiro:</b> {infoUser.horarios}</p>
+            {/if}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div on:click={openTermsConditions}>{@html t("withdrawal.termsConditions")}</div>
+            <div><b>Nota:</b> Si tienes un bono activo y realizas un retiro, este se perderá.</div>
             <button class="btn withdrawal" on:click={validateWithdrawal}>Solicitar retiro</button>
         {/if}
     {/if}

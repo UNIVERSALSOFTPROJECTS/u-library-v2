@@ -20,11 +20,14 @@
       //document.removeEventListener('click', handleClickOutside)
     }
   }
+
+  const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
+
   $: statusModal(open);
 </script>
 
 {#if open}
-  <div class="modal {modalOpened}">
+  <div class="modal {modalOpened}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom}>
     <div
       class="modal-dialog centered"
       transition:fly={{ y: -50, duration: 500 }}

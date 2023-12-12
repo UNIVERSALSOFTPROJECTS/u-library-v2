@@ -64,6 +64,7 @@
     
     const configWithdrawal = {
         dataType : "static",
+        messageOptional : "Tenga en cuenta que su deposito puede demorar desde 20 hasta 45 minutos* aproximadamente en hacerce efectivo *(Tiempo que demora el procesador de pagos en transferir, la aprobación del mismo es inmediata.)",
         banksNames: [
             { id:"0001" , name: "Banco de Chile"},
             { id:"0009" , name: "Banco Internacional"},
@@ -85,9 +86,9 @@
             { id:"875"  , name: "Mercado Pago"},
         ],
         typeAccount: [
-            { id: 1 , name: "Corriente"},
-            { id: 2 , name: "Vista/Cuenta RUT"},
-            { id: 3 , name: "Ahorro"},
+            { id: "1" , name: "Corriente"},
+            { id: "2" , name: "Vista/Cuenta RUT"},
+            { id: "3" , name: "Ahorro"},
         ]
     };
 
