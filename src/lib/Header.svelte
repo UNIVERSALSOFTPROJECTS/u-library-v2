@@ -63,33 +63,10 @@
     };
     
     const configWithdrawal = {
-        dataType : "static",
-        messageOptional : "Tenga en cuenta que su deposito puede demorar desde 20 hasta 45 minutos* aproximadamente en hacerce efectivo *(Tiempo que demora el procesador de pagos en transferir, la aprobación del mismo es inmediata.)",
-        banksNames: [
-            { id:"0001" , name: "Banco de Chile"},
-            { id:"0009" , name: "Banco Internacional"},
-            { id:"0012" , name: "Banco Estado"},
-            { id:"0014" , name: "Scotiabank Chile"},
-            { id:"0016" , name: "Banco de crédito e inversiones (BCI)"},
-            { id:"0028" , name: "Banco Bice"},
-            { id:"0037" , name: "Banco Santander Chile"},
-            { id:"0039" , name: "Itaú Corpbanca"},
-            { id:"0049" , name: "Banco Security"},
-            { id:"0051" , name: "Banco Falabella"},
-            { id:"0053" , name: "Banco Ripley"},
-            { id:"0055" , name: "Banco Consorcio"},
-            { id:"0504" , name: "Banco Bilbao Vizcaya Argentaria Chile (BBVA)"},
-            { id:"0672" , name: "Coopeuch"},
-            { id:"729"  , name: "Caja los Andes"},
-            { id:"730"  , name: "Tenpo"},
-            { id:"732"  , name: "Los Andes"},
-            { id:"875"  , name: "Mercado Pago"},
-        ],
-        typeAccount: [
-            { id: "1" , name: "Corriente"},
-            { id: "2" , name: "Vista/Cuenta RUT"},
-            { id: "3" , name: "Ahorro"},
-        ]
+        dataType : "",
+        messageOptional : "",
+        banksNames: [],
+        typeAccount: []
     };
 
     // fin de registro m

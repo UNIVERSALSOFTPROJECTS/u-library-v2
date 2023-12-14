@@ -209,12 +209,11 @@
 
 @mixin login__model_1($width-image){
     & .modal{
-        &-dialog{
-            max-width: 360px;
-        }
+
         &-content{
             border: 1px solid $color-primary;
             color: $g-text-color;
+            max-width: 360px;
         }
         &-body{
             width: 260px;
@@ -286,7 +285,7 @@
                 }
             }
         }
-        &-dialog{
+        &-content{
             max-width: 500px;
         }
         &-header{
@@ -562,7 +561,7 @@
             width: 100%;
             overflow: auto;
         }
-        &-dialog{
+        &-content{
             max-width: 500px;
         }
         &-header{
