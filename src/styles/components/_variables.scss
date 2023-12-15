@@ -142,12 +142,21 @@ $landscape_size_mobile: "(orientation: landscape) and (max-width: 1000px)";
 //}
 @if($page == "lajoya"){
     $g-color : #fff;
-    $color-primary : #f54b00;
+    $color-primary : #831250;
 
     //$bgc-body :#1c2226;
     $bgc-body :#313233;
     $bgc-header: #000;
-    $bgc-primary: #f54b00;
+    $bgc-primary: #79115c;
+}
+@if($page =="Habanawin") {
+    $g-color : #fff;
+    $color-primary : #831250;
+
+    //$bgc-body :#1c2226;
+    $bgc-body : #313233;
+    $bgc-header: #000;
+    $bgc-primary: #79115c;
 }
 @if($page == "Babieca"){
     //$g-color : #fff;
