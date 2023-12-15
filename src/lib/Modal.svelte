@@ -1,10 +1,15 @@
 <script>
   import { onDestroy, onMount } from "svelte";
   import { fly } from "svelte/transition";
+  import { watchResize } from "svelte-watch-resize";
+
   export let open;
   export let modalOpened = "";
   export let title = "";
   export let showHeader = true;
+
+  let heightModal;
+  let inputFocus;
   //Hay un conflicto con los dropdow XDDDD ptmr, f
   // const handleClickOutside = (e) => { console.log(e.target);
   //    if(!e.target.closest('.modal-content') || e.target.closest('.dropdown-menu button') ) open = false;
@@ -12,24 +17,28 @@
 
   function statusModal(isActive) {
     const body = document.body.classList;
-    if (isActive) {
-      body.add("modal-open");
-      //document.addEventListener('click', handleClickOutside);
-    } else {
-      body.remove("modal-open");
-      //document.removeEventListener('click', handleClickOutside)
-    }
+    isActive ? body.add("modal-open"):body.remove("modal-open");
   }
+
+  const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
+
+  function resizeHeightModal() {
+    inputFocus = document.activeElement;
+    if(inputFocus && inputFocus.tagName === 'INPUT') inputFocus.blur();
+  }
+
+  function closeVirtualKeyboard(focus) {
+    if(focus) setTimeout(() => { heightModal = visualViewport.height; }, 500);
+  }
+
+  $: closeVirtualKeyboard(inputFocus);
   $: statusModal(open);
 </script>
 
 {#if open}
-  <div class="modal {modalOpened}">
-    <div
-      class="modal-dialog centered"
-      transition:fly={{ y: -50, duration: 500 }}
-    >
-      <div class="modal-content {!showHeader?'no-header':''}">
+  <div class="modal {modalOpened}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom}>
+    <div class="modal-dialog centered" transition:fly={{ y: -50, duration: 500 }}>
+      <div class="modal-content {!showHeader?'no-header':''}" use:watchResize={resizeHeightModal} style="max-height:{heightModal}px">
         {#if showHeader}
         <div class="modal-header">
             <div />

@@ -169,7 +169,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
   color: white;
   background-color: #dbb919;
   font-size: 0.8rem;
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
@@ -306,13 +305,12 @@ input[type=date]::-webkit-calendar-picker-indicator {
 
 .Apuestadepana .btn.signup, .Apuestadepana .btn.withdrawal {
   background: #dbb919;
-  box-shadow: 0 0 6px #dbb919, inset 0 -6px 10px #dbb919, inset 0 6px 10px hsla(0deg, 0%, 100%, 0.45), inset 0 0 11px #dbb919;
+  box-shadow: 0 0 6px #dbb919, inset 0 -6px 10px #dbb919, inset 0 6px 10px hsla(0, 0%, 100%, 0.45), inset 0 0 11px #dbb919;
   font-size: 16px;
   font-weight: 600;
 }
 
 .Apuestadepana .modal.signup .modal-body {
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   padding: 1rem;
@@ -353,13 +351,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
   color: #493434;
   padding: 0.25rem 0.5rem;
 }
-.Apuestadepana .modal.signup .signup__container {
+.Apuestadepana .modal.signup .signup__container, .Apuestadepana .modal.signup .signup__container--agent, .Apuestadepana .modal.signup .signup__container--date {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: stretch;
   gap: 0.1rem;
 }
-.Apuestadepana .modal.signup .signup__container p {
+.Apuestadepana .modal.signup .signup__container p, .Apuestadepana .modal.signup .signup__container--agent p, .Apuestadepana .modal.signup .signup__container--date p {
   display: flex;
   align-items: center;
   background-color: #bbbbbb;
@@ -367,6 +365,12 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border-radius: 0.25rem 0 0 0.25rem;
   padding: 0.5rem;
   line-height: 0.85;
+}
+.Apuestadepana .modal.signup .signup__container--date {
+  grid-template-columns: 1fr auto;
+}
+.Apuestadepana .modal.signup .signup__container--agent {
+  grid-template-columns: auto 1fr;
 }
 .Apuestadepana .modal.signup .signup__btn {
   background-color: #dbb919;
@@ -413,14 +417,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
   /* Made by Jimmy Gillam */
   /* Checkmark style starts */
 }
-@-webkit-keyframes dothabottomcheck {
-  0% {
-    height: 0;
-  }
-  100% {
-    height: 10px;
-  }
-}
 @keyframes dothabottomcheck {
   0% {
     height: 0;
@@ -430,17 +426,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
   }
 }
 @keyframes dothatopcheck {
-  0% {
-    height: 0;
-  }
-  50% {
-    height: 0;
-  }
-  100% {
-    height: 20px;
-  }
-}
-@-webkit-keyframes dothatopcheck {
   0% {
     height: 0;
   }
@@ -495,13 +480,11 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .Apuestadepana .modal.signup .signup__conditions input[type=checkbox]:checked + label::after,
 .Apuestadepana .modal.signup .signup__conditions label.checked::after {
   height: 10px;
-  -webkit-animation: dothabottomcheck 0.2s ease 0s forwards;
   animation: dothabottomcheck 0.2s ease 0s forwards;
 }
 .Apuestadepana .modal.signup .signup__conditions input[type=checkbox]:checked + label::before,
 .Apuestadepana .modal.signup .signup__conditions label.checked::before {
   height: 24px;
-  -webkit-animation: dothatopcheck 0.4s ease 0s forwards;
   animation: dothatopcheck 0.4s ease 0s forwards;
 }
 .Apuestadepana .modal.signup .signup__prefix {
@@ -594,16 +577,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  -webkit-animation: progress-bar 3s linear forwards;
-          animation: progress-bar 3s linear forwards;
-}
-@-webkit-keyframes progress-bar {
-  0% {
-    width: 100%;
-  }
-  100% {
-    width: 0;
-  }
+  animation: progress-bar 3s linear forwards;
 }
 @keyframes progress-bar {
   0% {
@@ -769,7 +743,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .Apuestadepana .modal.login .modal-body .btn.login {
   background: #dbb919;
-  box-shadow: 0 0 6px #dbb919, inset 0 -6px 10px #dbb919, inset 0 6px 10px hsla(0deg, 0%, 100%, 0.45), inset 0 0 11px #dbb919;
+  box-shadow: 0 0 6px #dbb919, inset 0 -6px 10px #dbb919, inset 0 6px 10px hsla(0, 0%, 100%, 0.45), inset 0 0 11px #dbb919;
 }
 @media (max-width: 1023px) {
   .Apuestadepana .modal.login .modal-dialog {
@@ -799,12 +773,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
   font-weight: 700;
 }
 .Apuestadepana .modal.login .login__autosaved {
+  display: grid;
+  grid-template-columns: auto auto 1fr 1fr;
+  align-items: center;
   width: 100%;
   font-weight: 600;
-  display: flex;
 }
 .Apuestadepana .modal.login .login__autosaved * {
   cursor: pointer;
+  height: auto;
 }
 .Apuestadepana .modal.login .loading {
   display: flex;
@@ -817,22 +794,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Apuestadepana .modal.login .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Apuestadepana .modal.login .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
-}
-@-webkit-keyframes load_3p {
-  to {
-    opacity: 0.4;
-    transform: translate3d(0, 0.2rem, 0);
-  }
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -854,16 +822,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Apuestadepana .modal.signup .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Apuestadepana .modal.signup .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -919,7 +884,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border-radius: 0.5rem;
 }
 .Apuestadepana .modal.deposit .deposit__header {
-  background-color: #c2a203;
+  background-color: #dbb919;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -993,7 +958,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .Apuestadepana .modal.deposit .deposit__types {
   display: grid;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   border-radius: 0.25rem;
@@ -1075,16 +1039,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Apuestadepana .modal.deposit .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Apuestadepana .modal.deposit .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -1179,16 +1140,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Apuestadepana .modal.withdrawal .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Apuestadepana .modal.withdrawal .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -1196,4 +1154,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
     transform: translate3d(0, 0.2rem, 0);
   }
 }
-/*# sourceMappingURL=appBaseStyles.css.map */
+.Apuestadepana .dropdown.idiom * {
+  color: black;
+}
+.Apuestadepana .dropdown.idiom button img {
+  width: 2.5rem;
+  border-radius: 0.25rem;
+}
+.Apuestadepana .dropdown.idiom .slc, .Apuestadepana .dropdown.idiom .btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}/*# sourceMappingURL=appBaseStyles.css.map */

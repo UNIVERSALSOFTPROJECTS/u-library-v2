@@ -33,6 +33,7 @@
   export let currencies = ["USD"];
   export let doctypes = ["DNI"];
   export let limitAmount = { min: 50, max: 2000 };
+  export let isOauth;
 
   let username = "";
   let password = "";
@@ -44,6 +45,7 @@
   let divClass = "";
   let signupModalOpen = false;
   let showConditions = false;
+  
 
   const handleScroll = () => {
     scrollPosition = window.scrollY;
@@ -157,6 +159,25 @@
   const onLoginError = async (error) => {
     notify.error(error);
   };
+
+  /*const getBonus = () => {
+    let data;
+    const formattedBonus = [];
+    for (const type in data.bonus) {
+      if (data.bonus.hasOwnProperty(type)) {
+        const currency = Object.keys(data.bonus[type])[0];
+        const amount = data.bonus[type][currency];
+
+        formattedBonus.push({
+          type: type,
+          currency: currency,
+          amount: amount
+        });
+      }
+    }
+    data.bonus = formattedBonus;
+  }*/
+
 </script>
 
 <div
@@ -211,6 +232,7 @@
       {platform}
       {onOpenRecoverPass}
       t={$t}
+      bind:isOauth
     />
   </Modal>
   
@@ -228,6 +250,7 @@
       bind:doctypes
       {onOkSingup}
       {onOpenConditions}
+      bind:isOauth
     />
   </Modal>
 

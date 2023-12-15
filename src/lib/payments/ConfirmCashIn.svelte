@@ -1,6 +1,6 @@
 <script>
   import ServerConnection from "../../js/server";
-   import notify from "../../js/notify";
+  import notify from "../../js/notify";
   export let open;
   export let user;
   export let onError;

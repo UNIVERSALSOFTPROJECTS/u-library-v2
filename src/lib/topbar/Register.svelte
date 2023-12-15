@@ -11,6 +11,7 @@
   export let doctypes;
   export let onOkSingup;
   export let onOpenConditions;
+  export let isOauth;
 
   let registerUser = {
     address: "-",
@@ -25,6 +26,7 @@
     document: "",
     birthday: "",
   };
+  
   let loadSms;
   let loadSingup;
   //contador de 2 min
@@ -32,10 +34,63 @@
   let minutes;
   let seconds;
   let smsSent = false;
+  let userGmail;
 
   onMount(() => {
-    smsSent = false;
+    smsSent = false;  
+    loadScript("https://accounts.google.com/gsi/client").then( data  => {
+      console.log("Script loaded successfully", data);
+      setTimeout( ()=>{
+        console.log("Goolgle Loaded: " , window.google); 
+        window.google.accounts.id.initialize({
+        client_id: "632683480398-i9lkrr218mhu4r3dbsq5eq5sai5g6tch.apps.googleusercontent.com",
+        callback: handleSigninGoogleOAuth2
+      }) 
+      window.google.accounts.id.renderButton(document.getElementById("g_id_signin"), {});
+      },1000 );
+    }).catch( err => { console.error(err); });
+
   });
+
+
+  const loadScript = (FILE_URL, async = true, type = "text/javascript") => {
+    return new Promise((resolve, reject) => {
+      try {
+        const scriptEle = document.createElement("script");
+        scriptEle.type = type;
+        scriptEle.async = async;
+        scriptEle.defer = true;
+        scriptEle.src =FILE_URL;
+        scriptEle.addEventListener("load", (ev) => { resolve({ status: true }); });
+        scriptEle.addEventListener("error", (ev) => { reject({status: false, message: `Failed to load the script ${FILE_URL}`});});
+        document.body.appendChild(scriptEle);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+  const parseJwt = (token)=>{
+    return JSON.parse(atob(token.split('.')[1]));
+  }
+
+  const handleSigninGoogleOAuth2 = async (event) => {
+    try {
+      notify.loading("identificando");
+      userGmail = parseJwt(event.credential);
+      console.log("USUARIO DE GMAIL: " , userGmail);
+      registerUser.email = userGmail.email;
+      registerUser.name = userGmail.name;
+      registerUser.username = userGmail.email;
+      registerUser.password = userGmail.sub;
+      registerUser.verifypassword = userGmail.sub;
+
+    } catch (e) {
+      let msg = "Error!";
+      notify.error(msg);
+    }
+    notify.loading(false);
+  }
 
   async function preRegisterClick() {
     if (!registerUser.username)return notify.error("Ingrese nombre de usuario");
@@ -50,6 +105,7 @@
       await backend.u_user.preRegister(params);
       smsSent = true;
     } catch (error) {
+      console.log("error",error);
       return notify.error("El preregistro de usuario fallo");
     }
   }
@@ -83,20 +139,22 @@
       notify.error("Ingrese solo números");
     }
   };
-
   
 </script>
 
 <div class="modal-body">
-  <input bind:value={registerUser.name} class="ipt" placeholder="Nombre" autocapitalize="off" />
-  <input bind:value={registerUser.username} class="ipt" placeholder="Nombre de Usuario" autocapitalize="off"/>
-  <input bind:value={registerUser.password} class="ipt" placeholder="Ingrese contraseña"/>
-  <input bind:value={registerUser.verifypassword} class="ipt" placeholder="Verificar contraseña"/>
+  {#if isOauth}
+    <div id="g_id_signin"></div>
+  {/if}
+  <input bind:value={registerUser.name} class="ipt" placeholder="Nombre" autocapitalize="off" disabled={userGmail} />
+  <input bind:value={registerUser.username} class="ipt" placeholder="Nombre de Usuario" autocapitalize="off" disabled={userGmail} />
+  <input bind:value={registerUser.password} type="password" class="ipt" placeholder="Ingrese contraseña" disabled={userGmail} />
+  <input bind:value={registerUser.verifypassword} type="password" class="ipt" placeholder="Verificar contraseña" disabled={userGmail}/>
   <div class="signup__phone">
     <UDropdowPrefix {countries} bind:countryPrefix={registerUser.countryPrefix} bind:countryCode={registerUser.countryCode} />
     <input bind:value={registerUser.phone} on:keypress={isOnlyNumber} inputmode="numeric" class="ipt" placeholder="Teléfono" autocomplete="off" />
   </div>
-  <input bind:value={registerUser.email} type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" >
+  <input bind:value={registerUser.email} type="email" class="ipt" placeholder="Correo electrónico" autocomplete="off" disabled={userGmail}>
   <div class="signup__sms">
     <button class="btn btn-default" on:click={preRegisterClick} disabled={loadSms}>
       {#if !activeSMS}
@@ -152,8 +210,6 @@
     {/if}
   </button>
 </div>
-
-
 
 <style>
   .chk_conditions {

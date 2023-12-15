@@ -1,10 +1,10 @@
-
 //export {default as Header} from "./lib/Header.svelte";
 export {default as Login} from "./lib/topbar/Login.svelte";
 export {default as Pagination} from "./lib/Pagination.svelte";
 export {default as LoginAutosaved} from "./lib/topbar/LoginAutosaved.svelte";
 export {default as Deposit} from "./lib/payments/Deposit.svelte";
 export {default as ServerConnection} from "./js/server";
+export {default as SocketConnector} from "./js/SocketConnector";
 
 export {default as Utils} from "./js/util";
 export {default as translate} from "./js/translations";
@@ -21,5 +21,8 @@ export {default as WithdrawalBank } from './lib/withdrawal/WithdrawalBank.svelte
 export {default as WithdrawalX } from './lib/withdrawal/WithdrawalX.svelte';
 export {default as WithdrawalW } from './lib/withdrawal/WithdrawalW.svelte';
 export {default as TopBar } from './lib/topbar/TopBar.svelte';
+export {default as BalanceSocketListener } from './lib/BalanceSocketListener.svelte';
+
+
 
 

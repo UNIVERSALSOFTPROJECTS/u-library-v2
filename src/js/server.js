@@ -35,8 +35,8 @@ const ServerConnection = (() => {
             var payload = { token, cod }
             return axios.post(url, payload, { headers });
         },
-        withdrawal_w: async (token, amount, bank, account, info) => {
-            let payload = { token, amount, bank, account, info }
+        withdrawal_w: async (token, amount, bank, account, info, dni) => {
+            let payload = { token, amount, bank, account, info, dni }
             let url = conf.API + "/withdrawal";
             return await axios.post(url, payload, { headers });
         },
