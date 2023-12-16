@@ -55,6 +55,7 @@
                 minutes -= 1;
             } else if (minutes === 0 && seconds === 0) {
                 activeSMS = false;
+                loadSms = false;
                 clearInterval(timer);
             } else {
                 seconds -= 1;
@@ -166,14 +167,14 @@
     </div>
     <div class="signup__sms">
         <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
-            {#if !activeSMS}
+            {#if activeSMS}
+                {t("signup.newCodeIn")}: <b>{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</b>
+            {:else}
                 {#if loadSms}
                     <div class="loading"><p></p><p></p><p></p></div>
                 {:else}
                     {t("signup.generateCode")}
                 {/if}
-            {:else}
-                {t("signup.newCodeIn")}: <b>{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}</b>
             {/if}
         </button>
         <input type="number" class="ipt" min="0" placeholder={t("signup.code")} autocomplete="off" bind:value={smscode} on:input={justNumbersValidate}>
