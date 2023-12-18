@@ -74,7 +74,7 @@
             if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = t("msg.phoneFormat");
             else if(error.response.data.message == 'El usuario  ya existe') error = t("msg.userExist");
-            else if(error.response.data.message == 'El usuario u correo ya existe') error = t("msg.emailExist");
+            else if(error.response.data.message == 'El usuario u correo ya existe' || error.response.data.message == '{resp=Err, Id=2, Msg=El correo o el Usuario ya Exite}') error = t("msg.emailExist");
             else error = t("msg.contactSupport");
             onError(error);
             loadSms = false;
