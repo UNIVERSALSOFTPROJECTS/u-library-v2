@@ -179,9 +179,9 @@
     </Modal>
     <Modal bind:open={withdrawalModalOpen} bind:modalOpened title={$t("withdrawal.title")}>
         <!--
-            OJO el configWithdrawal es solo para retiro W
+            OJO el configWithdrawal es solo para retiro W {configWithdrawal}
         -->
-        <WithdrawalW {configWithdrawal} bind:user {openTermsConditions} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
+        <WithdrawalW  bind:user {openTermsConditions} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
     </Modal>
 
     <Notifier bind:notify/>
