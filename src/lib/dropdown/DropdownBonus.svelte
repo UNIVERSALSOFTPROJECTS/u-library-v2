@@ -10,8 +10,6 @@
 
 
 onMount(()=>{
-  console.log("bono", bonus[0].amount);
-  console.log("bono", bonus);
 })
   
   function toggleDropdown() {
