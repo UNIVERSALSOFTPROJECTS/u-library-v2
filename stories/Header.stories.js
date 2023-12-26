@@ -35,7 +35,7 @@ export const showHeaderGoldenbet = ()=>({
 
 export const showHeaderColisosport = ()=>({
   Component:Header,
-  props:{user, assetsUrl:assetsUrl+"/coliseosport", platform:'Coliseosport'}
+  props:{user, assetsUrl, platform:'Coliseosport'}
 })
 export const showHeaderApuestadepana = ()=>({
   Component:Header,

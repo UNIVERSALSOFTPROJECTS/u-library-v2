@@ -73,7 +73,7 @@
         } catch (error) {
             if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = t("msg.phoneFormat");
-            else if(error.response.data.message == 'El usuario  ya existe') error = t("msg.userExist");
+            else if(error.response.data.message == 'El usuario  ya existe' || error.response.data.message == '{resp=Err, Id=1, Msg=Usuario ya Exite}') error = t("msg.userExist");
             else if(error.response.data.message == 'El usuario u correo ya existe' || error.response.data.message == '{resp=Err, Id=2, Msg=El correo o el Usuario ya Exite}') error = t("msg.emailExist");
             else error = t("msg.contactSupport");
             onError(error);
@@ -99,6 +99,10 @@
 
     async function registerClick(){
         if(!name || !date || !email || !username || !password || !phone || !codeAgent) return onError(t("msg.allObligatory"));
+        if (email) {
+            let emailvalid = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(email);
+            if (!emailvalid) return onError(t("msg.emailInvalid"));
+        }
         if (password.length <= 5) return onError(t("msg.passwordMin5"));
         if(!smscode) return onError(t("msg.codeVerification"));
         if(!term_conditions) return onError(t("msg.acceptTandC"));
