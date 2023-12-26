@@ -10,8 +10,6 @@
 
 
 onMount(()=>{
-  console.log("bono", bonus[0].amount);
-  console.log("bono", bonus);
 })
   
   function toggleDropdown() {
@@ -22,19 +20,16 @@ onMount(()=>{
     isOpen = false;
   }
 
-  function todosLosBonosCero() {
-    for (let i = 0; i < bonus.length; i++) {
-      if (bonus[i].amount !== 0) {
-        return false;
-      }
-    }
-    return true;
+  function bonusExists() {
+    let exists=false;
+    if(bonus && bonus.find(e => e.amount !== 0)) exists = true;
+    return exists;
   }
 </script>
 
 <div class="dropdown-container">
   <button class="btn" on:click={toggleDropdown} on:blur={closeDropdown}>
-    {todosLosBonosCero() ? 'No hay bonos' : 'Bonos ▼'}
+    {bonusExists() ? 'No hay bonos' : 'Bonos ▼'}
  </button>
 
 
