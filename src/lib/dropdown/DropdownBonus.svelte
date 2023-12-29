@@ -1,15 +1,13 @@
 <script>
   import { onMount } from "svelte";
-
-
-
-    export let bonus;
+  export let bonus;
   let isOpen = false;
 
 
 
 
 onMount(()=>{
+  console.log("bonus", bonus);
 })
   
   function toggleDropdown() {

@@ -2,28 +2,28 @@
 import ServerConnection from '../src/js/server'
 import SocketConnector from '../src/js/SocketConnector'
 
-//export default{
-//    start:()=>{
-//        ServerConnection.setConfig({
-//            API:"https://lobby-bff-test.apiusoft.com",
-//            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-//            CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
-//            CLIENT_CODE:"JU02",
-//            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-//            platformId: "58dc8282-ab26-4e2d-9235-be4a3e2be91d",
-//            ASSETS:"https://assets.apiusoft.com",
-//            WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
-//            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-//            country:"+56",
-//            operatorId:"123",
-//            domain:"http://coliseosport.com/",
-//            assetsUrl:"https://assets.apiusoft.com",
-//            org:"CLS",
-//            currency:7,//CLP
-//            platform:"bo_fontend"
-//        })
-//    }
-//}
+export default{
+    start:()=>{
+        ServerConnection.setConfig({
+            API:"https://lobby-bff-test.apiusoft.com",
+            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+            CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
+            CLIENT_CODE:"JU02",
+            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+            platformId: "58dc8282-ab26-4e2d-9235-be4a3e2be91d",
+            ASSETS:"https://assets.apiusoft.com",
+            WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
+            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+            country:"+56",
+            operatorId:"123",
+            domain:"http://coliseosport.com/",
+            assetsUrl:"https://assets.apiusoft.com",
+            org:"CLS",
+            currency:7,//CLP
+            platform:"bo_fontend"
+        })
+    }
+}
 
 //export default{
 //    start:()=>{
@@ -165,7 +165,7 @@ import SocketConnector from '../src/js/SocketConnector'
 //    }
 //}
 
-export default{
+/*export default{
     start:()=>{
        ServerConnection.setConfig({
             API:"https://lobby-bff.apiusoft.com",
@@ -189,6 +189,6 @@ export default{
             WS_URL:"ws://localhost:5000",
         })
     }
-}
+}*/
 
 
