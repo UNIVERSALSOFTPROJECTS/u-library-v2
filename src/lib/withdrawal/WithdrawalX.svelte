@@ -51,7 +51,7 @@
     const copyCodeWhitdrawal = () => {
         isCopied = true;
         setTimeout(() => { isCopied = false }, 2000);
-        let finalMessage = t("withdrawal.copyCode",{user: user.username, id: user.code, code: pendingWithdrawal.codigo});
+        let finalMessage = t("withdrawal.copyCode",{user: user.username, id: user.id, code: pendingWithdrawal.codigo});
         navigator.clipboard.writeText(finalMessage);
     };
 

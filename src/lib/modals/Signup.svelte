@@ -117,6 +117,9 @@
         } catch (error) {
             console.log(error);
             if(error.response.data.message == 'SMS invalid') error = t("msg.incorrectSms");
+            else if(error.response.data.message == '{resp=Err, Id=1, Msg=Usuario ya Exite}') error = t("msg.userExist");
+            else if(error.response.data.message == '{resp=Err, Id=2, Msg=El correo o el Usuario ya Exite}') error = t("msg.emailExist");
+            else if(error.response.data.message == '{resp=Err, Id=21, Msg=No existe ese id de grupo}') error = t("msg.incorrectCodeAgent");
             else error = t("msg.contactSupport");
             onError(error);
             loadSignup = false;
