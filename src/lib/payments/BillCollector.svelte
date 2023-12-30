@@ -8,7 +8,7 @@
     const brokerURL="ws://localhost:8181";
 
     $:{//escuchara cambios en table user.
-        if(user !== undefined){
+        if(user !== undefined && user.token){
             connectUserToBillCollector(user);
         }
     }
@@ -37,7 +37,7 @@
         };
 
         stompClient.onWebSocketError = (error) => {
-            console.error('Error with websocket', error);
+            console.error('Error with BillCollector Websocket', error);
         };
 
         stompClient.onStompError = (frame) => {
