@@ -5,7 +5,7 @@
     import { Client } from '@stomp/stompjs';
 
     let stompClient;
-    const brokerURL="ws://localhost:8181";
+    const brokerURL="ws://127.0.0.1:8181";
 
     $:{//escuchara cambios en table user.
         if(user !== undefined && user.token){
