@@ -12,12 +12,14 @@
     $:{//escuchara cambios en table user.
         if(user !== undefined && user.token){
             connectUserToBillCollector(user);
+            console.log("USERSSSSSSSS", user);
         }
     }
 
     const connectUserToBillCollector=(user)=>{
-        let playerId = user.userId;
+        let playerId = user.playerId;
         let token = user.token;
+        console.log("Socket", socket);
         //stompClient.publish({destination:"/", body:{playerId, token} });
         socket.send(JSON.stringify({playerId, token}));
     }
