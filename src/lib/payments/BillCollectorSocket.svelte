@@ -11,8 +11,8 @@
 
     $:{//escuchara cambios en table user.
         if(user !== undefined && user.token){
-            connectUserToBillCollector(user);
             console.log("USERSSSSSSSS", user);
+            connectUserToBillCollector(user);
         }
     }
 
