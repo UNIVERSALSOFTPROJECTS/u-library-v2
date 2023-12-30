@@ -15,7 +15,7 @@ export {default as SingupW} from "./lib/modals/SingupW.svelte";//temporales mies
 export {default as SingupM} from "./lib/modals/SingupM.svelte";//temporales miestras se unifica - una vez ser termine de pasa todos al registro global eliminar
 export {default as Signup} from "./lib/modals/Signup.svelte";//temporales miestras se unifica
 export {default as ConfirmCashIn } from './lib/payments/ConfirmCashIn.svelte';
-export {default as BillCollector } from './lib/payments/BillCollector.svelte';
+export {default as BillCollectorSocket } from './lib/payments/BillCollectorSocket.svelte';
 export {default as CashOut } from './lib/withdrawal/CashOut.svelte';
 export {default as DepositBank } from './lib/payments/BankDeposit.svelte';
 export {default as WithdrawalBank } from './lib/withdrawal/WithdrawalBank.svelte';
