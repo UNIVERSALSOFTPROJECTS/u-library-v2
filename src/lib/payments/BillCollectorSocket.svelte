@@ -78,12 +78,13 @@
 
 <style>
     div#bill-notify{
-        position: absolute;
+        position: fixed;
         bottom:1px;
         right:1px;
         padding:3px;
         width:200px;
         border-radius: 2px;
+        z-index:1001;
     }
     .status-open{
         background:#44ed7cb2;
