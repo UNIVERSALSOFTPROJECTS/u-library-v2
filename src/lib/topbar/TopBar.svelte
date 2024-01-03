@@ -34,6 +34,7 @@
   export let doctypes = ["DNI"];
   export let limitAmount = { min: 50, max: 2000 };
   export let isOauth;
+  export let configs=false;
 
   let username = "";
   let password = "";
@@ -41,6 +42,7 @@
   let showRegisterModal = false;
   let showRecoverPass = false;
   let showModalProfile = false;
+  let showConfigs= false;
   let scrollPosition = 0;
   let divClass = "";
   let signupModalOpen = false;
@@ -160,6 +162,11 @@
     notify.error(error);
   };
 
+  const onShowConfigs = ()=>{
+    modalOpened = "configs";
+    showConfigs = true;
+  }
+
   /*const getBonus = () => {
     let data;
     const formattedBonus = [];
@@ -188,7 +195,7 @@
   id="user-header"
 >
   <div class="user-header-principal">
-    <HamburguerMenu bind:active_view {onCategoryChange} {assetsUrl} />
+    <HamburguerMenu bind:active_view {onCategoryChange} {assetsUrl} {configs} {onShowConfigs} />
     <button class="content-logo" on:click={() => (active_view = "home")}>
       <img class="logo" src="{assetsUrl}/{platform}/logo.png" alt="" />
     </button>
@@ -235,6 +242,12 @@
       bind:isOauth
     />
   </Modal>
+
+  <Modal bind:open={showConfigs} bind:modalOpened showHeader={true}>
+    <div id="configuration-div">
+      <label for="bill-collector-config"> <input id="bill-collector-config" type="checkbox" bind:checked={configs.billCollector}> Billetero </label>
+    </div>
+  </Modal>
   
 
   <Modal bind:open={showRecoverPass} bind:modalOpened showHeader={false}>
@@ -276,6 +289,12 @@
 </div>
 
 <style>
+
+  #configuration-div label{
+    color:white;
+    padding:2rem;
+  }
+
   .user-header.virtual {
     position: fixed;
     z-index: 101;

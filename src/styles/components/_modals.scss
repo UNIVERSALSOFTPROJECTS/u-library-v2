@@ -1,4 +1,5 @@
 .modal {
+   
     &.login {
         // esto se tiene que convertir en un mixin , ya que las medidas de la imagen logo pueden variar mucho
         @include login__model_1(10rem);

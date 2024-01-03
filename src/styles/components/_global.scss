@@ -37,6 +37,19 @@ input[type=date] {
     margin: 0;
 }
 
+.btn{
+    @extend %button;
+    //for modal
+    &.close {
+        width: #{$g-font-size + 4};
+        height: #{$g-font-size + 4};
+        background: transparent;
+        padding: 0;
+        background-image: url("#{$close}");
+        background-repeat: no-repeat;
+    }
+}
+
 #{$body}{    
     overscroll-behavior: none; /*eliminar el efecto scroll extendido fuera del body en safari*/
     *{
