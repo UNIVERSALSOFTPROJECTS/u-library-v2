@@ -4,7 +4,7 @@
 
   export let configs;
 
-  let config_ = { ...configs }; // Hacer una copia de configs para realizar cambios temporales
+  let config_ = { ...configs }; 
 
   onMount(() => {
     console.log("configs", configs);
