@@ -704,6 +704,94 @@
     }
 }
 
+@mixin config__model_1() {
+    & .modal {
+        &-body {
+            align-content: center;
+            overflow: auto;
+
+            &.iframe {
+                grid-template-rows: 1fr;
+
+                @media (min-width: $size-web) {
+                    min-height: 37rem;
+                    max-height: 37rem;
+                }
+
+                &.small {
+                    @media (min-width: $size-web) {
+                        min-height: 28rem;
+                        max-height: 28rem;
+                    }
+
+                    & iframe {
+                        width: auto;
+                    }
+                }
+            }
+        }
+
+        &-dialog {
+            max-width: 100%;
+        }
+
+        @include modalFullScreen("mobile");
+    }
+
+    & .config {
+        &-body {
+            overflow: auto;
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        &__body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem;
+        }
+
+        &__header {
+            background-color: $color-primary;
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            flex-direction: row;
+            padding: 0.5rem;
+            gap: 3rem;
+        }
+
+        &--btn {
+            background-color: $color-primary;
+            color: #fff;
+        }
+
+        &__btn-close {
+            padding: 0.5rem;
+        }
+
+        &__btn {
+            padding: 0.5rem;
+            display: flex;
+            justify-content: center;
+
+            &_pay {
+                background-color: $color-primary;
+                padding: 0.4rem;
+                border-radius: 0.3rem;
+                border: none;
+                width: 50%;
+                cursor: pointer;
+                color: #000;
+            }
+        }
+    }
+}
+
 @mixin conditions__model_1(){
     & .modal {
         &-body {

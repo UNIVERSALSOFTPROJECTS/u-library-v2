@@ -26,20 +26,16 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background: 0 0;
 }
 
-.Coliseosport, body, p, ul {
+body, p, ul {
   margin: 0;
 }
 
-.Coliseosport {
+body {
   overscroll-behavior: none; /*eliminar el efecto scroll extendido fuera del body en safari*/
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 14px;
-  background: #313233;
 }
-.Coliseosport * {
-  color: #fff;
-}
-.Coliseosport .btn.close {
+body .btn.close {
   width: 18px;
   height: 18px;
   background: transparent;
@@ -47,7 +43,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'  fill='%23fff' %3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
 }
-.Coliseosport .btn.eye {
+body .btn.eye {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'  fill='%23000' %3e%3cpath d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/%3e%3c/svg%3e");
   color: #000;
   height: 40px;
@@ -56,7 +52,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-position: center;
   background-size: 16px;
 }
-.Coliseosport .btn.no-eye {
+body .btn.no-eye {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'  fill='%23000' %3e%3cpath d='M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z'/%3e%3c/svg%3e");
   color: #000;
   height: 40px;
@@ -65,22 +61,17 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-position: center;
   background-size: 16px;
 }
-.Coliseosport :focus, .Coliseosport :focus-visible {
+body :focus, body :focus-visible {
   outline: 0;
 }
-.Coliseosport ::-webkit-scrollbar-thumb {
-  background: #f54b00;
+body ::-webkit-scrollbar-thumb {
+  background: #bd992a;
 }
-.Coliseosport ::-webkit-scrollbar-track {
+body ::-webkit-scrollbar-track {
   background: #202124;
 }
 
-/*h6, h5, h4, h3, h2, h1{
-    margin: 0;
-    font-weight: 500;
-}*/
 .modal {
-  overscroll-behavior: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -98,11 +89,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .modal-dialog {
   position: relative;
   max-width: 100%;
+  margin: 4rem auto;
   pointer-events: none;
 }
 .modal .centered {
-  min-height: 100%;
+  min-height: calc(100% - 8rem);
   display: flex;
+  align-items: center;
   align-items: center;
   justify-content: center;
 }
@@ -111,7 +104,8 @@ input[type=date]::-webkit-calendar-picker-indicator {
   pointer-events: auto;
   background: #222;
   border-radius: 0.25rem;
-  width: 100%;
+  width: auto;
+  padding: 0.5rem;
   display: grid;
   grid-template-rows: 3rem 1fr;
   overflow: auto;
@@ -121,7 +115,8 @@ input[type=date]::-webkit-calendar-picker-indicator {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   text-transform: uppercase;
-  padding: 0 1rem;
+  padding: 0rem 1rem;
+  gap: 0.8rem;
   font-size: 18px;
   font-weight: 700;
 }
@@ -166,7 +161,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding: 0.45rem;
   border: none;
   color: white;
-  background-color: #f54b00;
+  background-color: #bd992a;
   font-size: 0.8rem;
   width: -moz-max-content;
   width: max-content;
@@ -214,15 +209,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border: 0;
 }
 
-.Coliseosport .slc:hover, .Coliseosport .modal.withdrawal .withdrawal__copy:hover, .Coliseosport .btn:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
+body .slc:hover, .DemoPlatform .modal.withdrawal .withdrawal__copy:hover, body .btn:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
   filter: brightness(0.9);
 }
 
-.Coliseosport .ipt:disabled, .Coliseosport .modal.withdrawal .withdrawal__copy:disabled, .Coliseosport .btn:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
+body .ipt:disabled, .DemoPlatform .modal.withdrawal .withdrawal__copy:disabled, body .btn:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
   filter: brightness(0.7);
 }
 
-.Coliseosport .slc, .Coliseosport .modal.withdrawal .withdrawal__copy, .Coliseosport .btn, .Coliseosport .btn.eye, .Coliseosport .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
+body .slc, .DemoPlatform .modal.withdrawal .withdrawal__copy, body .btn, body .btn.eye, body .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
   cursor: pointer;
   font-size: inherit;
   width: 100%;
@@ -232,7 +227,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.Coliseosport .slc {
+body .slc {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   color: #000;
   height: 40px;
@@ -247,18 +242,18 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding-right: 1.5rem;
   text-overflow: ellipsis;
 }
-.Coliseosport .slc > * {
+body .slc > * {
   color: #000;
 }
-.Coliseosport .slc::-webkit-scrollbar {
+body .slc::-webkit-scrollbar {
   width: 10px;
 }
 
-.Coliseosport .ipt {
+body .ipt:focus, body .ipt {
   font-family: inherit;
   font-size: inherit;
   border: none;
-  background-color: #ffF;
+  background-color: #fff;
   color: #000;
   height: 40px;
   width: 100%;
@@ -266,97 +261,97 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding: 0.5rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.Coliseosport .ipt:focus {
-  box-shadow: 0 0 0 0.1rem #ff8e5c;
-  border: 1px solid #ff8e5c;
+body .ipt:focus {
+  box-shadow: 0 0 0 0.1rem #dfc36e;
+  border: 1px solid #dfc36e;
 }
-.Coliseosport .ipt::-moz-placeholder {
+body .ipt::-moz-placeholder, body .ipt:focus::-moz-placeholder {
   color: #909090;
 }
-.Coliseosport .ipt::placeholder {
+body .ipt::placeholder, body .ipt:focus::placeholder {
   color: #909090;
 }
-.Coliseosport .info.ipt {
+body .info.ipt {
   border: 1px solid black;
 }
 
-.Coliseosport .link {
+body .link {
   cursor: pointer;
-  color: #f54b00;
+  color: #bd992a;
   background-color: transparent;
   text-decoration: underline;
 }
-.Coliseosport .link:hover, .Coliseosport .active.link {
-  color: #f54b00;
+body .link:hover, body .active.link {
+  color: #bd992a;
 }
 
-.Coliseosport .modal.login .login__ipt--pass, .Coliseosport .modal.signup .signup__container--pass {
+.DemoPlatform .modal.login .login__ipt--pass, .DemoPlatform .modal.signup .signup__container--pass {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 40px;
 }
-.Coliseosport .modal.login .login__ipt--pass .ipt, .Coliseosport .modal.signup .signup__container--pass .ipt {
+.DemoPlatform .modal.login .login__ipt--pass .ipt, .DemoPlatform .modal.signup .signup__container--pass .ipt {
   border-radius: 0.25rem 0 0 0.25rem;
 }
-.Coliseosport .modal.login .login__ipt--pass .btn, .Coliseosport .modal.signup .signup__container--pass .btn {
+.DemoPlatform .modal.login .login__ipt--pass .btn, .DemoPlatform .modal.signup .signup__container--pass .btn {
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
-.Coliseosport .btn.signup, .Coliseosport .btn.withdrawal {
-  background: #f54b00;
-  box-shadow: 0 0 6px #f54b00, inset 0 -6px 10px #f54b00, inset 0 6px 10px hsla(0, 0%, 100%, 0.45), inset 0 0 11px #f54b00;
+.DemoPlatform .btn.signup, .DemoPlatform .btn.withdrawal {
+  background: #bd992a;
+  box-shadow: 0 0 6px #bd992a, inset 0 -6px 10px #bd992a, inset 0 6px 10px hsla(0, 0%, 100%, 0.45), inset 0 0 11px #bd992a;
   font-size: 16px;
   font-weight: 600;
 }
 
-.Coliseosport .modal.signup .modal-body {
+.DemoPlatform .modal.signup .modal-body {
   height: -moz-fit-content;
   height: fit-content;
   padding: 1rem;
   max-width: 430px;
 }
 @media (max-width: 1023px) and (orientation: landscape) {
-  .Coliseosport .modal.signup .modal-body {
+  .DemoPlatform .modal.signup .modal-body {
     grid-template-columns: 1fr 1fr;
     align-items: center;
     max-width: inherit;
   }
 }
-.Coliseosport .modal.signup .modal-header {
+.DemoPlatform .modal.signup .modal-header {
   font-size: 28px;
   justify-items: center;
 }
-.Coliseosport .modal.signup .modal-content {
+.DemoPlatform .modal.signup .modal-content {
   max-width: 480px;
 }
 @media (max-width: 1023px) {
-  .Coliseosport .modal.signup .modal-dialog {
+  .DemoPlatform .modal.signup .modal-dialog {
     margin: 0;
     grid-template-columns: auto;
     max-width: 100%;
   }
-  .Coliseosport .modal.signup .modal-content {
+  .DemoPlatform .modal.signup .modal-content {
     border-radius: 0;
     height: 100vh;
     max-width: 100%;
   }
 }
 @media (orientation: portrait) and (min-width: 765px) and (max-width: 825px) {
-  .Coliseosport .modal.signup .modal-header {
+  .DemoPlatform .modal.signup .modal-header {
     background: #4a4a4a;
   }
 }
-.Coliseosport .modal.signup .dropdown-menu > * {
+.DemoPlatform .modal.signup .dropdown-menu > * {
   color: #493434;
   padding: 0.25rem 0.5rem;
 }
-.Coliseosport .modal.signup .signup__container, .Coliseosport .modal.signup .signup__container--agent, .Coliseosport .modal.signup .signup__container--date {
+.DemoPlatform .modal.signup .signup__container, .DemoPlatform .modal.signup .signup__container--agent, .DemoPlatform .modal.signup .signup__container--date {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: stretch;
   gap: 0.1rem;
 }
-.Coliseosport .modal.signup .signup__container p, .Coliseosport .modal.signup .signup__container--agent p, .Coliseosport .modal.signup .signup__container--date p {
+.DemoPlatform .modal.signup .signup__container p, .DemoPlatform .modal.signup .signup__container--agent p, .DemoPlatform .modal.signup .signup__container--date p {
   display: flex;
   align-items: center;
   background-color: #bbbbbb;
@@ -365,50 +360,50 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding: 0.5rem;
   line-height: 0.85;
 }
-.Coliseosport .modal.signup .signup__container--date {
+.DemoPlatform .modal.signup .signup__container--date {
   grid-template-columns: 1fr auto;
 }
-.Coliseosport .modal.signup .signup__container--agent {
+.DemoPlatform .modal.signup .signup__container--agent {
   grid-template-columns: auto 1fr;
 }
-.Coliseosport .modal.signup .signup__btn {
-  background-color: #f54b00;
+.DemoPlatform .modal.signup .signup__btn {
+  background-color: #bd992a;
 }
-.Coliseosport .modal.signup .signup__date {
+.DemoPlatform .modal.signup .signup__date {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.1rem;
 }
-.Coliseosport .modal.signup .signup__mixed {
+.DemoPlatform .modal.signup .signup__mixed {
   display: grid;
   grid-template-columns: auto 1fr 1fr;
   justify-items: center;
 }
-.Coliseosport .modal.signup .signup__codeAgent {
+.DemoPlatform .modal.signup .signup__codeAgent {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: 0.2rem;
   align-items: center;
 }
-.Coliseosport .modal.signup .signup__sms {
+.DemoPlatform .modal.signup .signup__sms {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.35rem;
 }
-.Coliseosport .modal.signup .signup__phone {
+.DemoPlatform .modal.signup .signup__phone {
   display: grid;
   grid-template-columns: 6.2rem 1fr;
 }
-.Coliseosport .modal.signup .signup__phone .slc {
+.DemoPlatform .modal.signup .signup__phone .slc {
   border-radius: 0.25rem 0 0 0.25rem;
   padding-right: 0.25rem;
   background-color: #e9e9e9;
 }
-.Coliseosport .modal.signup .signup__phone .ipt {
+.DemoPlatform .modal.signup .signup__phone .ipt {
   border-radius: 0 0.25rem 0.25rem 0;
   padding-left: 0.25rem;
 }
-.Coliseosport .modal.signup .signup__conditions {
+.DemoPlatform .modal.signup .signup__conditions {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
@@ -435,10 +430,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
     height: 20px;
   }
 }
-.Coliseosport .modal.signup .signup__conditions input[type=checkbox] {
+.DemoPlatform .modal.signup .signup__conditions input[type=checkbox] {
   display: none;
 }
-.Coliseosport .modal.signup .signup__conditions label {
+.DemoPlatform .modal.signup .signup__conditions label {
   height: 20px;
   width: 20px;
   background: transparent;
@@ -450,7 +445,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   transition: border-color ease 0.2s;
   cursor: pointer;
 }
-.Coliseosport .modal.signup .signup__conditions label::before, .Coliseosport .modal.signup .signup__conditions label::after {
+.DemoPlatform .modal.signup .signup__conditions label::before, .DemoPlatform .modal.signup .signup__conditions label::after {
   box-sizing: border-box;
   position: absolute;
   height: 0;
@@ -462,45 +457,45 @@ input[type=date]::-webkit-calendar-picker-indicator {
   content: " ";
   transition: opacity ease 0.5;
 }
-.Coliseosport .modal.signup .signup__conditions label::before {
+.DemoPlatform .modal.signup .signup__conditions label::before {
   top: 14.4px;
   left: 8.2px;
   transform: rotate(-135deg);
 }
-.Coliseosport .modal.signup .signup__conditions label::after {
+.DemoPlatform .modal.signup .signup__conditions label::after {
   top: 7.4px;
   left: 1px;
   transform: rotate(-45deg);
 }
-.Coliseosport .modal.signup .signup__conditions input[type=checkbox]:checked + label,
-.Coliseosport .modal.signup .signup__conditions label.checked {
+.DemoPlatform .modal.signup .signup__conditions input[type=checkbox]:checked + label,
+.DemoPlatform .modal.signup .signup__conditions label.checked {
   border-color: #34b93d;
 }
-.Coliseosport .modal.signup .signup__conditions input[type=checkbox]:checked + label::after,
-.Coliseosport .modal.signup .signup__conditions label.checked::after {
+.DemoPlatform .modal.signup .signup__conditions input[type=checkbox]:checked + label::after,
+.DemoPlatform .modal.signup .signup__conditions label.checked::after {
   height: 10px;
   animation: dothabottomcheck 0.2s ease 0s forwards;
 }
-.Coliseosport .modal.signup .signup__conditions input[type=checkbox]:checked + label::before,
-.Coliseosport .modal.signup .signup__conditions label.checked::before {
+.DemoPlatform .modal.signup .signup__conditions input[type=checkbox]:checked + label::before,
+.DemoPlatform .modal.signup .signup__conditions label.checked::before {
   height: 24px;
   animation: dothatopcheck 0.4s ease 0s forwards;
 }
-.Coliseosport .modal.signup .signup__prefix {
+.DemoPlatform .modal.signup .signup__prefix {
   display: grid;
   grid-template-columns: 2rem 1.5rem;
   gap: 0.25rem;
   align-items: center;
 }
-.Coliseosport .modal.signup .signup__prefix img {
+.DemoPlatform .modal.signup .signup__prefix img {
   width: 1.75rem;
 }
-.Coliseosport .modal.signup .btn.validsms {
+.DemoPlatform .modal.signup .btn.validsms {
   background: #2783ff;
   min-width: 150px;
 }
 
-.Coliseosport .notify {
+.DemoPlatform .notify {
   position: absolute;
   z-index: 9999;
   color: white;
@@ -511,19 +506,19 @@ input[type=date]::-webkit-calendar-picker-indicator {
   font-size: 18px;
 }
 @media (min-width: 600px) {
-  .Coliseosport .notify {
+  .DemoPlatform .notify {
     max-width: 50%;
   }
 }
 @media (min-width: 1023px) {
-  .Coliseosport .notify {
+  .DemoPlatform .notify {
     max-width: 35%;
   }
 }
-.Coliseosport .notify.success {
+.DemoPlatform .notify.success {
   background: #008939;
 }
-.Coliseosport .notify.success .notify__icon {
+.DemoPlatform .notify.success .notify__icon {
   background-image: url("data:image/svg+xml,<svg viewBox%3D'0%200%2048%2048'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' fill='%23fff'><g><g><rect%20width%3D'48'%20height%3D'48'%20fill%3D'none'%2F><%2Fg><g><path%20d%3D'M24%206A18%2018%200%201%201%206%2024%2018.1%2018.1%200%200%201%2024%206m0-4A22%2022%200%201%200%2046%2024%2021.9%2021.9%200%200%200%2024%202Z'%2F><path%20d%3D'M18.6%2032.4l-6-5.9a2.1%202.1%200%200%201-.2-2.7%201.9%201.9%200%200%201%203-.2L20%2028.2%2032.6%2015.6a2%202%200%200%201%202.8%202.8l-14%2014A1.9%201.9%200%200%201%2018.6%2032.4Z'%2F><%2Fg><%2Fg><%2Fsvg>");
   color: #000;
   text-align: start;
@@ -532,10 +527,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-repeat: no-repeat;
   background-position: center;
 }
-.Coliseosport .notify.error {
+.DemoPlatform .notify.error {
   background: #d9534f;
 }
-.Coliseosport .notify.error .notify__icon {
+.DemoPlatform .notify.error .notify__icon {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23fff'><g><g><g><path d='M437.016,74.984c-99.979-99.979-262.075-99.979-362.033,0.002c-99.978,99.978-99.978,262.073,0.004,362.031c99.954,99.978,262.05,99.978,362.029-0.002C536.995,337.059,536.995,174.964,437.016,74.984z M406.848,406.844c-83.318,83.318-218.396,83.318-301.691,0.004c-83.318-83.299-83.318-218.377-0.002-301.693c83.297-83.317,218.375-83.317,301.691,0S490.162,323.549,406.848,406.844z'/><path d='M361.592,150.408c-8.331-8.331-21.839-8.331-30.17,0l-75.425,75.425l-75.425-75.425c-8.331-8.331-21.839-8.331-30.17,0s-8.331,21.839,0,30.17l75.425,75.425L150.43,331.4c-8.331,8.331-8.331,21.839,0,30.17c8.331,8.331,21.839,8.331,30.17,0l75.397-75.397l75.419,75.419c8.331,8.331,21.839,8.331,30.17,0c8.331-8.331,8.331-21.839,0-30.17l-75.419-75.419l75.425-75.425C369.923,172.247,369.923,158.74,361.592,150.408z'/></g></g></g></svg>");
   color: #000;
   text-align: start;
@@ -544,10 +539,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-repeat: no-repeat;
   background-position: center;
 }
-.Coliseosport .notify.warning {
+.DemoPlatform .notify.warning {
   background: #ffd245;
 }
-.Coliseosport .notify.warning .notify__icon {
+.DemoPlatform .notify.warning .notify__icon {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-0.5 0 25 25' fill='none'><path d='M18.2202 21.25H5.78015C5.14217 21.2775 4.50834 21.1347 3.94373 20.8364C3.37911 20.5381 2.90402 20.095 2.56714 19.5526C2.23026 19.0101 2.04372 18.3877 2.02667 17.7494C2.00963 17.111 2.1627 16.4797 2.47015 15.92L8.69013 5.10999C9.03495 4.54078 9.52077 4.07013 10.1006 3.74347C10.6804 3.41681 11.3346 3.24518 12.0001 3.24518C12.6656 3.24518 13.3199 3.41681 13.8997 3.74347C14.4795 4.07013 14.9654 4.54078 15.3102 5.10999L21.5302 15.92C21.8376 16.4797 21.9907 17.111 21.9736 17.7494C21.9566 18.3877 21.7701 19.0101 21.4332 19.5526C21.0963 20.095 20.6211 20.5381 20.0565 20.8364C19.4919 21.1347 18.8581 21.2775 18.2202 21.25V21.25Z' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><path d='M10.8809 17.15C10.8809 17.0021 10.9102 16.8556 10.9671 16.7191C11.024 16.5825 11.1074 16.4586 11.2125 16.3545C11.3175 16.2504 11.4422 16.1681 11.5792 16.1124C11.7163 16.0567 11.8629 16.0287 12.0109 16.03C12.2291 16.034 12.4413 16.1021 12.621 16.226C12.8006 16.3499 12.9398 16.5241 13.0211 16.7266C13.1023 16.9292 13.122 17.1512 13.0778 17.3649C13.0335 17.5786 12.9272 17.7745 12.7722 17.9282C12.6172 18.0818 12.4203 18.1863 12.2062 18.2287C11.9921 18.2711 11.7703 18.2494 11.5685 18.1663C11.3666 18.0833 11.1938 17.9426 11.0715 17.7618C10.9492 17.5811 10.8829 17.3683 10.8809 17.15ZM11.2409 14.42L11.1009 9.20001C11.0876 9.07453 11.1008 8.94766 11.1398 8.82764C11.1787 8.70761 11.2424 8.5971 11.3268 8.5033C11.4112 8.40949 11.5144 8.33449 11.6296 8.28314C11.7449 8.2318 11.8697 8.20526 11.9959 8.20526C12.1221 8.20526 12.2469 8.2318 12.3621 8.28314C12.4774 8.33449 12.5805 8.40949 12.6649 8.5033C12.7493 8.5971 12.8131 8.70761 12.852 8.82764C12.8909 8.94766 12.9042 9.07453 12.8909 9.20001L12.7609 14.42C12.7609 14.6215 12.6808 14.8149 12.5383 14.9574C12.3957 15.0999 12.2024 15.18 12.0009 15.18C11.7993 15.18 11.606 15.0999 11.4635 14.9574C11.321 14.8149 11.2409 14.6215 11.2409 14.42Z' stroke-width='2' fill='%23fff'/></svg>");
   color: #000;
   text-align: start;
@@ -556,23 +551,23 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-repeat: no-repeat;
   background-position: center;
 }
-.Coliseosport .notify__message {
+.DemoPlatform .notify__message {
   display: grid;
   grid-template-columns: auto 1fr;
   padding: 0.5rem;
   align-items: center;
   gap: 0.75rem;
 }
-.Coliseosport .notify__text {
+.DemoPlatform .notify__text {
   margin: 0.35rem 0;
 }
-.Coliseosport .notify__timer {
+.DemoPlatform .notify__timer {
   width: 100%;
   height: 3px;
   background: transparent;
   overflow: hidden;
 }
-.Coliseosport .notify__progress-bar {
+.DemoPlatform .notify__progress-bar {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
@@ -586,28 +581,28 @@ input[type=date]::-webkit-calendar-picker-indicator {
     width: 0;
   }
 }
-.Coliseosport .header {
+.DemoPlatform .header {
   display: grid;
   grid-template-columns: auto auto 1fr 6rem 6rem;
   align-items: center;
   height: 4rem;
   padding: 0 0.75rem;
   gap: 0.5rem;
-  background: #202124;
+  background: #000;
 }
-.Coliseosport .header__logo {
+.DemoPlatform .header__logo {
   cursor: pointer;
   width: 6.5rem;
 }
 @media (max-width: 1023px) {
-  .Coliseosport .header__logo {
+  .DemoPlatform .header__logo {
     width: 6.5rem;
   }
 }
-.Coliseosport .header.logued {
+.DemoPlatform .header.logued {
   grid-template-columns: auto 1fr auto auto auto auto;
 }
-.Coliseosport .header__menu {
+.DemoPlatform .header__menu {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -616,13 +611,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding: 10px;
   background: transparent;
 }
-.Coliseosport .header__menu span {
+.DemoPlatform .header__menu span {
   width: 100%;
   height: 2px;
   position: relative;
   background: transparent;
 }
-.Coliseosport .header__menu:after, .Coliseosport .header__menu:before, .Coliseosport .header__menu span:after, .Coliseosport .header__menu span:before {
+.DemoPlatform .header__menu:after, .DemoPlatform .header__menu:before, .DemoPlatform .header__menu span:after, .DemoPlatform .header__menu span:before {
   content: "";
   display: block;
   width: 100%;
@@ -631,24 +626,24 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background: #fff;
   transition: opacity 0.2s ease-in-out, transform 0.25s ease-in-out;
 }
-.Coliseosport .header__menu span:after, .Coliseosport .header__menu span:before {
+.DemoPlatform .header__menu span:after, .DemoPlatform .header__menu span:before {
   position: absolute;
   width: 100%;
 }
-.Coliseosport .header__menu.is-open span:before {
+.DemoPlatform .header__menu.is-open span:before {
   transform: rotate(45deg);
 }
-.Coliseosport .header__menu.is-open span:after {
+.DemoPlatform .header__menu.is-open span:after {
   transform: rotate(-45deg);
 }
-.Coliseosport .header__menu.is-open:before, .Coliseosport .header__menu.is-open:after {
+.DemoPlatform .header__menu.is-open:before, .DemoPlatform .header__menu.is-open:after {
   opacity: 0;
 }
-.Coliseosport .header__balance {
+.DemoPlatform .header__balance {
   display: grid;
   justify-items: end;
 }
-.Coliseosport .header__bono {
+.DemoPlatform .header__bono {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z'/></svg>");
   background-repeat: no-repeat;
   background-size: 14px;
@@ -659,22 +654,22 @@ input[type=date]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   border-radius: 0.25rem;
 }
-.Coliseosport .header__bono:hover {
-  background-color: #383a3f;
+.DemoPlatform .header__bono:hover {
+  background-color: #1a1a1a;
 }
-.Coliseosport .header__userdata {
+.DemoPlatform .header__userdata {
   display: grid;
   grid-template-columns: 2rem auto;
   gap: 0.5rem;
 }
-.Coliseosport .header__userdata img {
+.DemoPlatform .header__userdata img {
   width: 100%;
   border-radius: 0.25rem;
 }
-.Coliseosport .header__userid {
+.DemoPlatform .header__userid {
   font-size: 12px;
 }
-.Coliseosport .header__account {
+.DemoPlatform .header__account {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z'/></svg>");
   background-repeat: no-repeat;
   background-size: 14px;
@@ -685,35 +680,35 @@ input[type=date]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   border-radius: 0.25rem;
 }
-.Coliseosport .header__account:hover {
-  background-color: #383a3f;
+.DemoPlatform .header__account:hover {
+  background-color: #1a1a1a;
 }
 @media (max-width: 1023px) {
-  .Coliseosport .header__userdata, .Coliseosport .header .btn.recharge {
+  .DemoPlatform .header__userdata, .DemoPlatform .header .btn.recharge {
     display: none;
   }
 }
-.Coliseosport .btn.login, .Coliseosport .btn.singup {
+.DemoPlatform .btn.login, .DemoPlatform .btn.singup {
   text-transform: uppercase;
   font-weight: 600;
 }
-.Coliseosport .btn.login {
+.DemoPlatform .btn.login {
   background: #4a4b53;
 }
-.Coliseosport .btn.payment {
+.DemoPlatform .btn.payment {
   background: #423b62;
 }
-.Coliseosport .btn.payment.active {
-  background: #f54b00;
+.DemoPlatform .btn.payment.active {
+  background: #bd992a;
 }
-.Coliseosport .btn.deposit {
+.DemoPlatform .btn.deposit {
   background: #37ae3c;
 }
-.Coliseosport .btn.amount {
+.DemoPlatform .btn.amount {
   background: #fff;
   color: #000;
 }
-.Coliseosport .btn.return {
+.DemoPlatform .btn.return {
   width: 3rem;
   background: #d90000;
   position: absolute;
@@ -723,80 +718,80 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-size: 31.5px 31.5px;
   background-position: center;
 }
-.Coliseosport .btn.recharge {
+.DemoPlatform .btn.recharge {
   font-weight: 700;
   background: #088f08;
   font-size: 16px;
   width: 6rem;
 }
-.Coliseosport .modal.login .modal-content {
-  border: 1px solid #f54b00;
+.DemoPlatform .modal.login .modal-content {
+  border: 1px solid #bd992a;
   color: white;
   max-width: 360px;
 }
-.Coliseosport .modal.login .modal-body {
+.DemoPlatform .modal.login .modal-body {
   width: 260px;
   padding-bottom: 3rem;
 }
-.Coliseosport .modal.login .modal-body .btn.login {
-  background: #f54b00;
-  box-shadow: 0 0 6px #f54b00, inset 0 -6px 10px #f54b00, inset 0 6px 10px hsla(0, 0%, 100%, 0.45), inset 0 0 11px #f54b00;
+.DemoPlatform .modal.login .modal-body .btn.login {
+  background: #bd992a;
+  box-shadow: 0 0 6px #bd992a, inset 0 -6px 10px #bd992a, inset 0 6px 10px hsla(0, 0%, 100%, 0.45), inset 0 0 11px #bd992a;
 }
 @media (max-width: 1023px) {
-  .Coliseosport .modal.login .modal-dialog {
+  .DemoPlatform .modal.login .modal-dialog {
     margin: 0;
     grid-template-columns: auto;
     max-width: 100%;
   }
-  .Coliseosport .modal.login .modal-content {
+  .DemoPlatform .modal.login .modal-content {
     border-radius: 0;
     height: 100vh;
     max-width: 100%;
   }
 }
-.Coliseosport .modal.login .login__logo {
+.DemoPlatform .modal.login .login__logo {
   width: 13rem;
   margin: 0 auto;
 }
-.Coliseosport .modal.login .login__form {
+.DemoPlatform .modal.login .login__form {
   display: grid;
   gap: 0.75rem;
   justify-items: center;
 }
-.Coliseosport .modal.login .login__title {
+.DemoPlatform .modal.login .login__title {
   display: flex;
   justify-content: center;
   font-size: 1.5rem;
   font-weight: 700;
 }
-.Coliseosport .modal.login .login__autosaved {
+.DemoPlatform .modal.login .login__autosaved {
   display: grid;
   grid-template-columns: auto auto 1fr 1fr;
   align-items: center;
   width: 100%;
   font-weight: 600;
 }
-.Coliseosport .modal.login .login__autosaved * {
+.DemoPlatform .modal.login .login__autosaved * {
   cursor: pointer;
   height: auto;
 }
-.Coliseosport .modal.login .loading {
+.DemoPlatform .modal.login .loading {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
 }
-.Coliseosport .modal.login .loading p {
+.DemoPlatform .modal.login .loading p {
   width: 0.5rem;
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
   animation: 0.5s load_3p infinite alternate;
 }
-.Coliseosport .modal.login .loading p:nth-child(2) {
+.DemoPlatform .modal.login .loading p:nth-child(2) {
   animation-delay: 0.1s;
 }
-.Coliseosport .modal.login .loading p:nth-child(3) {
+.DemoPlatform .modal.login .loading p:nth-child(3) {
   animation-delay: 0.3s;
 }
 @keyframes load_3p {
@@ -805,26 +800,26 @@ input[type=date]::-webkit-calendar-picker-indicator {
     transform: translate3d(0, 0.2rem, 0);
   }
 }
-.Coliseosport .modal.profile {
+.DemoPlatform .modal.profile {
   width: 70%;
 }
-.Coliseosport .modal.signup .loading {
+.DemoPlatform .modal.signup .loading {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
 }
-.Coliseosport .modal.signup .loading p {
+.DemoPlatform .modal.signup .loading p {
   width: 0.5rem;
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
   animation: 0.5s load_3p infinite alternate;
 }
-.Coliseosport .modal.signup .loading p:nth-child(2) {
+.DemoPlatform .modal.signup .loading p:nth-child(2) {
   animation-delay: 0.1s;
 }
-.Coliseosport .modal.signup .loading p:nth-child(3) {
+.DemoPlatform .modal.signup .loading p:nth-child(3) {
   animation-delay: 0.3s;
 }
 @keyframes load_3p {
@@ -833,135 +828,135 @@ input[type=date]::-webkit-calendar-picker-indicator {
     transform: translate3d(0, 0.2rem, 0);
   }
 }
-.Coliseosport .modal.deposit .modal-body {
+.DemoPlatform .modal.deposit .modal-body {
   align-content: center;
   width: 100%;
   overflow: auto;
   padding: 1rem;
 }
-.Coliseosport .modal.deposit .modal-body.iframe {
+.DemoPlatform .modal.deposit .modal-body.iframe {
   grid-template-rows: 1fr;
 }
 @media (min-width: 1023px) {
-  .Coliseosport .modal.deposit .modal-body.iframe {
+  .DemoPlatform .modal.deposit .modal-body.iframe {
     min-height: 37rem;
     max-height: 37rem;
   }
 }
 @media (min-width: 1023px) {
-  .Coliseosport .modal.deposit .modal-body.iframe.small {
+  .DemoPlatform .modal.deposit .modal-body.iframe.small {
     min-height: 28rem;
     max-height: 28rem;
   }
 }
-.Coliseosport .modal.deposit .modal-body.iframe.small iframe {
+.DemoPlatform .modal.deposit .modal-body.iframe.small iframe {
   width: auto;
 }
-.Coliseosport .modal.deposit .modal-content {
+.DemoPlatform .modal.deposit .modal-content {
   max-width: 500px;
 }
-.Coliseosport .modal.deposit .modal-header {
-  background: #f54b00;
+.DemoPlatform .modal.deposit .modal-header {
+  background: #bd992a;
 }
 @media (max-width: 1023px) {
-  .Coliseosport .modal.deposit .modal-dialog {
+  .DemoPlatform .modal.deposit .modal-dialog {
     margin: 0;
     grid-template-columns: auto;
     max-width: 100%;
   }
-  .Coliseosport .modal.deposit .modal-content {
+  .DemoPlatform .modal.deposit .modal-content {
     border-radius: 0;
     height: 100vh;
     max-width: 100%;
   }
 }
-.Coliseosport .modal.deposit .deposit-body {
+.DemoPlatform .modal.deposit .deposit-body {
   overflow: auto;
   background-color: #ffffff;
   border-radius: 0.5rem;
 }
-.Coliseosport .modal.deposit .deposit__header {
-  background-color: #f54b00;
+.DemoPlatform .modal.deposit .deposit__header {
+  background-color: #bd992a;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   padding: 0.5rem;
 }
-.Coliseosport .modal.deposit .deposit__btn-direct {
+.DemoPlatform .modal.deposit .deposit__btn-direct {
   background-color: transparent;
   border: none;
   height: 100%;
   cursor: pointer;
 }
-.Coliseosport .modal.deposit .deposit__iframe {
+.DemoPlatform .modal.deposit .deposit__iframe {
   width: 100%;
   height: 100%;
   border-radius: 0.25rem;
   margin: 0 auto;
 }
-.Coliseosport .modal.deposit .deposit__iframe__body {
+.DemoPlatform .modal.deposit .deposit__iframe__body {
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
-.Coliseosport .modal.deposit .deposit__iframe__body--btn {
-  background-color: #f54b00;
+.DemoPlatform .modal.deposit .deposit__iframe__body--btn {
+  background-color: #bd992a;
   border: none;
 }
-.Coliseosport .modal.deposit .deposit__iframe--code {
+.DemoPlatform .modal.deposit .deposit__iframe--code {
   display: grid;
   grid-template-columns: 3fr 1fr;
   padding: 0.8rem;
   background: rgba(74, 74, 74, 0.168627451);
   border-radius: 0.5rem;
 }
-.Coliseosport .modal.deposit .deposit__iframe--code--active {
+.DemoPlatform .modal.deposit .deposit__iframe--code--active {
   background: #34b93d;
 }
-.Coliseosport .modal.deposit .deposit__iframe--text {
+.DemoPlatform .modal.deposit .deposit__iframe--text {
   text-align: justify;
   padding: 0.2rem;
   line-height: 25px;
 }
 @media only screen and (max-width: 1199px) {
-  .Coliseosport .modal.deposit .deposit_data__info {
+  .DemoPlatform .modal.deposit .deposit_data__info {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 }
 @media only screen and (min-width: 1200px) {
-  .Coliseosport .modal.deposit .deposit_data__info {
+  .DemoPlatform .modal.deposit .deposit_data__info {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
   }
 }
-.Coliseosport .modal.deposit .deposit__btn-close {
+.DemoPlatform .modal.deposit .deposit__btn-close {
   padding: 0.5rem;
 }
-.Coliseosport .modal.deposit .deposit__btn {
+.DemoPlatform .modal.deposit .deposit__btn {
   padding: 0.5rem;
   display: flex;
   justify-content: center;
 }
-.Coliseosport .modal.deposit .deposit__btn_pay {
-  background-color: #f54b00;
+.DemoPlatform .modal.deposit .deposit__btn_pay {
+  background-color: #bd992a;
   padding: 0.4rem;
   border-radius: 0.3rem;
   border: none;
   width: 50%;
   cursor: pointer;
 }
-.Coliseosport .modal.deposit .deposit__types {
+.DemoPlatform .modal.deposit .deposit__types {
   display: grid;
   height: -moz-fit-content;
   height: fit-content;
   border-radius: 0.25rem;
   gap: 0.35rem;
 }
-.Coliseosport .modal.deposit .deposit__type {
+.DemoPlatform .modal.deposit .deposit__type {
   display: grid;
   grid-template-columns: auto 1fr 2rem;
   gap: 0.75rem;
@@ -970,54 +965,54 @@ input[type=date]::-webkit-calendar-picker-indicator {
   align-items: center;
   text-align: inherit;
 }
-.Coliseosport .modal.deposit .deposit__type img {
+.DemoPlatform .modal.deposit .deposit__type img {
   margin: auto 0 auto auto;
   border-radius: 0.25rem;
   width: 100px;
   height: 45px;
 }
-.Coliseosport .modal.deposit .deposit__type:hover {
+.DemoPlatform .modal.deposit .deposit__type:hover {
   background: #363636;
 }
-.Coliseosport .modal.deposit .deposit__arrow.right {
+.DemoPlatform .modal.deposit .deposit__arrow.right {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z'/></svg>");
   background-repeat: no-repeat;
   background-size: 31.5px;
   background-position: center;
   height: -webkit-fill-available;
 }
-.Coliseosport .modal.deposit .deposit__arrow.bottom {
+.DemoPlatform .modal.deposit .deposit__arrow.bottom {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z'/></svg>");
   background-repeat: no-repeat;
   background-size: 31.5px;
   background-position: center;
   height: -webkit-fill-available;
 }
-.Coliseosport .modal.deposit .deposit__mounts {
+.DemoPlatform .modal.deposit .deposit__mounts {
   display: flex;
   justify-content: center;
   gap: 0.35rem;
 }
-.Coliseosport .modal.deposit .deposit__ipt {
+.DemoPlatform .modal.deposit .deposit__ipt {
   display: grid;
   grid-template-columns: 2rem 1fr 6rem;
   gap: 0.25rem;
   align-items: center;
   justify-items: center;
 }
-.Coliseosport .modal.deposit .deposit__ipt .ipt {
+.DemoPlatform .modal.deposit .deposit__ipt .ipt {
   font-size: 20px;
 }
-.Coliseosport .modal.deposit .deposit__gateway {
+.DemoPlatform .modal.deposit .deposit__gateway {
   display: grid;
   gap: 0.5rem;
   justify-content: center;
 }
-.Coliseosport .modal.deposit .deposit__limits {
+.DemoPlatform .modal.deposit .deposit__limits {
   color: #bebebe;
   font-size: 12px;
 }
-.Coliseosport .modal.deposit .deposit__info {
+.DemoPlatform .modal.deposit .deposit__info {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.25rem 0.5rem;
@@ -1026,23 +1021,23 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border: 1px solid #626262;
   align-items: center;
 }
-.Coliseosport .modal.deposit .loading {
+.DemoPlatform .modal.deposit .loading {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
 }
-.Coliseosport .modal.deposit .loading p {
+.DemoPlatform .modal.deposit .loading p {
   width: 0.5rem;
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
   animation: 0.5s load_3p infinite alternate;
 }
-.Coliseosport .modal.deposit .loading p:nth-child(2) {
+.DemoPlatform .modal.deposit .loading p:nth-child(2) {
   animation-delay: 0.1s;
 }
-.Coliseosport .modal.deposit .loading p:nth-child(3) {
+.DemoPlatform .modal.deposit .loading p:nth-child(3) {
   animation-delay: 0.3s;
 }
 @keyframes load_3p {
@@ -1051,36 +1046,118 @@ input[type=date]::-webkit-calendar-picker-indicator {
     transform: translate3d(0, 0.2rem, 0);
   }
 }
-.Coliseosport .modal.withdrawal .modal-body {
-  padding: 1rem;
-  align-content: start;
-  width: 100%;
+.DemoPlatform .modal.config .modal-body {
+  align-content: center;
   overflow: auto;
 }
-.Coliseosport .modal.withdrawal .modal-content {
-  max-width: 500px;
+.DemoPlatform .modal.config .modal-body.iframe {
+  grid-template-rows: 1fr;
 }
-.Coliseosport .modal.withdrawal .modal-header {
-  background: #f54b00;
+@media (min-width: 1023px) {
+  .DemoPlatform .modal.config .modal-body.iframe {
+    min-height: 37rem;
+    max-height: 37rem;
+  }
+}
+@media (min-width: 1023px) {
+  .DemoPlatform .modal.config .modal-body.iframe.small {
+    min-height: 28rem;
+    max-height: 28rem;
+  }
+}
+.DemoPlatform .modal.config .modal-body.iframe.small iframe {
+  width: auto;
+}
+.DemoPlatform .modal.config .modal-dialog {
+  max-width: 100%;
 }
 @media (max-width: 1023px) {
-  .Coliseosport .modal.withdrawal .modal-dialog {
+  .DemoPlatform .modal.config .modal-dialog {
     margin: 0;
     grid-template-columns: auto;
     max-width: 100%;
   }
-  .Coliseosport .modal.withdrawal .modal-content {
+  .DemoPlatform .modal.config .modal-content {
     border-radius: 0;
     height: 100vh;
     max-width: 100%;
   }
 }
-.Coliseosport .modal.withdrawal .withdrawal__info {
+.DemoPlatform .modal.config .config-body {
+  overflow: auto;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.DemoPlatform .modal.config .config__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+.DemoPlatform .modal.config .config__header {
+  background-color: #bd992a;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  flex-direction: row;
+  padding: 0.5rem;
+  gap: 3rem;
+}
+.DemoPlatform .modal.config .config--btn {
+  background-color: #bd992a;
+  color: #fff;
+}
+.DemoPlatform .modal.config .config__btn-close {
+  padding: 0.5rem;
+}
+.DemoPlatform .modal.config .config__btn {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+.DemoPlatform .modal.config .config__btn_pay {
+  background-color: #bd992a;
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  border: none;
+  width: 50%;
+  cursor: pointer;
+  color: #000;
+}
+.DemoPlatform .modal.withdrawal .modal-body {
+  padding: 1rem;
+  align-content: start;
+  width: 100%;
+  overflow: auto;
+}
+.DemoPlatform .modal.withdrawal .modal-content {
+  max-width: 500px;
+}
+.DemoPlatform .modal.withdrawal .modal-header {
+  background: #bd992a;
+}
+@media (max-width: 1023px) {
+  .DemoPlatform .modal.withdrawal .modal-dialog {
+    margin: 0;
+    grid-template-columns: auto;
+    max-width: 100%;
+  }
+  .DemoPlatform .modal.withdrawal .modal-content {
+    border-radius: 0;
+    height: 100vh;
+    max-width: 100%;
+  }
+}
+.DemoPlatform .modal.withdrawal .withdrawal__info {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.25rem;
 }
-.Coliseosport .modal.withdrawal .withdrawal__info--main {
+.DemoPlatform .modal.withdrawal .withdrawal__info--main {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 3rem;
   padding: 1rem;
@@ -1089,18 +1166,18 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border: 1px solid #fff;
   align-items: center;
 }
-.Coliseosport .modal.withdrawal .withdrawal__amount {
+.DemoPlatform .modal.withdrawal .withdrawal__amount {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-.Coliseosport .modal.withdrawal .withdrawal__code {
+.DemoPlatform .modal.withdrawal .withdrawal__code {
   display: grid;
   grid-template-columns: 0fr 1rem;
   gap: 0.5rem;
   align-items: center;
 }
-.Coliseosport .modal.withdrawal .withdrawal__copy {
+.DemoPlatform .modal.withdrawal .withdrawal__copy {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'><g><path d='M13.3332 0.833374H1.6665V14.1667H3.33317V2.50004H13.3332V0.833374ZM17.4998 4.16671H4.99984V19.1667H17.4998V4.16671ZM15.8332 17.5H6.6665V5.83337H15.8332V17.5Z' fill='white'/></g><defs><clipPath><rect width='20' height='20' fill='white'/></clipPath></defs></svg>");
   color: #000;
   height: 40px;
@@ -1108,16 +1185,16 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px;
-  background-color: #f54b00;
+  background-color: #bd992a;
   position: relative;
 }
-.Coliseosport .modal.withdrawal .withdrawal__pending {
+.DemoPlatform .modal.withdrawal .withdrawal__pending {
   font-size: 30px;
   font-weight: 700;
   text-align: center;
   padding: 1rem 0;
 }
-.Coliseosport .modal.withdrawal .withdrawal__copied {
+.DemoPlatform .modal.withdrawal .withdrawal__copied {
   position: absolute;
   top: -2rem;
   left: -0.5rem;
@@ -1127,23 +1204,23 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border: 1px solid rgba(0, 0, 0, 0.2);
   z-index: 100;
 }
-.Coliseosport .modal.withdrawal .loading {
+.DemoPlatform .modal.withdrawal .loading {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.25rem;
 }
-.Coliseosport .modal.withdrawal .loading p {
+.DemoPlatform .modal.withdrawal .loading p {
   width: 0.5rem;
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
   animation: 0.5s load_3p infinite alternate;
 }
-.Coliseosport .modal.withdrawal .loading p:nth-child(2) {
+.DemoPlatform .modal.withdrawal .loading p:nth-child(2) {
   animation-delay: 0.1s;
 }
-.Coliseosport .modal.withdrawal .loading p:nth-child(3) {
+.DemoPlatform .modal.withdrawal .loading p:nth-child(3) {
   animation-delay: 0.3s;
 }
 @keyframes load_3p {
@@ -1152,14 +1229,14 @@ input[type=date]::-webkit-calendar-picker-indicator {
     transform: translate3d(0, 0.2rem, 0);
   }
 }
-.Coliseosport .dropdown.idiom * {
+.DemoPlatform .dropdown.idiom * {
   color: black;
 }
-.Coliseosport .dropdown.idiom button img {
+.DemoPlatform .dropdown.idiom button img {
   width: 2.5rem;
   border-radius: 0.25rem;
 }
-.Coliseosport .dropdown.idiom .slc, .Coliseosport .dropdown.idiom .btn {
+.DemoPlatform .dropdown.idiom .slc, .DemoPlatform .dropdown.idiom .btn {
   display: flex;
   align-items: center;
   gap: 0.25rem;

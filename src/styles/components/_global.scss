@@ -50,7 +50,7 @@ input[type=date] {
     }
 }
 
-#{$body}{    
+#{$body}, body{    
     overscroll-behavior: none; /*eliminar el efecto scroll extendido fuera del body en safari*/
     *{
         color: #{$g-color};

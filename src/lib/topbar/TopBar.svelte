@@ -17,6 +17,7 @@
   import Notifier from "../Notifier.svelte";
   import RecoverPassword from "./RecoverPassword.svelte";
   import Conditions from "./Conditions.svelte";
+  import Config from "./Config.svelte";
 
   export let userState;
   export let active_view;
@@ -163,7 +164,7 @@
   };
 
   const onShowConfigs = ()=>{
-    modalOpened = "singup";
+    modalOpened = "config";
     showConfigs = true;
   }
 
@@ -243,10 +244,8 @@
     />
   </Modal>
 
-  <Modal bind:open={showConfigs} bind:modalOpened showHeader={true}>
-    <div id="configuration-div">
-      <label for="bill-collector-config"> <input id="bill-collector-config" type="checkbox" bind:checked={configs.billCollector}> Billetero </label>
-    </div>
+  <Modal bind:open={showConfigs} bind:modalOpened title="Configuracion">
+    <Config bind:configs></Config>
   </Modal>
   
 
@@ -290,10 +289,7 @@
 
 <style>
 
-  #configuration-div label{
-    color:white;
-    padding:2rem;
-  }
+  
 
   .user-header.virtual {
     position: fixed;
