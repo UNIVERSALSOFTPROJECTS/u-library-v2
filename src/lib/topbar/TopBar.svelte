@@ -163,7 +163,7 @@
   };
 
   const onShowConfigs = ()=>{
-    modalOpened = "configs";
+    modalOpened = "singup";
     showConfigs = true;
   }
 
