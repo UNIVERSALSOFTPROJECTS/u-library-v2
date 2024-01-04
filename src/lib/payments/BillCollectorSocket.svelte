@@ -18,11 +18,11 @@
     }
 
     const connectUserToBillCollector=(user)=>{
-        let playerId = user.playerId;
-        let token = user.token;
+        let {playerId, token, username} = user;
+
         //if(!socket) return alert("No hay conexion con Billetero.");
         if(socket && socket.readyState  === WebSocket.OPEN ){
-            socket.send(JSON.stringify({playerId, token}));
+            socket.send(JSON.stringify({playerId, token, username}));
         }else{//Closing, closed, CONNECTING
             console.log(`${log} Waiting 1 sec for send.`);
             setTimeout( ()=>{ connectUserToBillCollector(user); }, 2000 );
