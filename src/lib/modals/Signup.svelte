@@ -16,6 +16,7 @@
     let userType = configSignup.userType;
     let countries = configSignup.countries;
     let currencies = configSignup.currencies;
+    let agentCodeType = configSignup.agentCodeType||'numeric';
 
     //loading
     let loadSms;
@@ -26,6 +27,7 @@
     let seconds;
     //registro
     let codeAgent;
+    let usernameAgent;
     let country;
     let name;
     let username;
@@ -40,11 +42,23 @@
     let term_conditions;
     let currency;
 
+    let cashierAgentList= [
+        { code:123, username:'steve123'},
+    ];
+
+    
+
     //validations imput -utils JS
     const justTextValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\p{L}\s]/gu, "") }
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
     const notWhiteSpace = (e) =>{ e.target.value = e.target.value.replace(/[^\S+$]/g, "") }
 
+    const setCodeAgent=()=>{
+        
+        let cashier = cashierAgentList.find(e=>e.username == usernameAgent);
+        if(cashier) codeAgent = cashier.code;
+        else alert("Este Agente no existe.");
+    }
     function counterResendSms() {
         activeSMS = true;
         minutes = 2;
@@ -159,12 +173,23 @@
         <DropdownCurrencies {currencies} bind:currency bind:codeAgent t={t}/>
     {:else if typeSignup === "codeAgent"}
         <div class="signup__container--agent">
+            
+
+            {#if agentCodeType=='numeric'}
             <p>{t("signup.codeAgent")}</p>
             <div class="signup__codeAgent">
                 <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>
                 <div>-</div>
                 <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" on:input={justNumbersValidate}>
             </div>
+            {:else}
+            <p>{t("signup.codeAgent")} {codeAgent?`(${codeAgent})`:''}</p>
+            <div class="signup__codeAgent">
+                <input type="text" class="ipt" autocomplete="off" bind:value={usernameAgent} on:blur={setCodeAgent}>
+                
+            </div>
+            {/if}
+            
         </div>
     {/if}
 
