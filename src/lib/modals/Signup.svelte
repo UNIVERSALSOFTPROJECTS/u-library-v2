@@ -100,6 +100,7 @@
             let data = await ServerConnection.users.getCurrencyIdByCodeAgent(codeAgent)
             if (data.data[0].id) {
                 currency = data.data[0].id; 
+                userType = "X";
                 console.log(data);
             }else{
                 let error = data.data.error == "NO_HAY_INFORM"?t("msg.incorrectCodeAgent"):t("msg.contactSupport");
@@ -161,12 +162,12 @@
             <!-- svelte-ignore a11y-click-events-have-key-events --> <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div on:click={()=>typeSignup = "codeAgent"}>
                 <input type="checkbox">
-                <label for="">Si</label>
+                <label for="">{t("signup.yes")}</label>
             </div>
             <!-- svelte-ignore a11y-click-events-have-key-events --> <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div on:click={()=>typeSignup = "selectCurrency"}>
                 <input type="checkbox">
-                <label for="">No</label>
+                <label for="">{t("signup.no")}</label>
             </div>
         </div>
     {:else if typeSignup === "selectCurrency"}

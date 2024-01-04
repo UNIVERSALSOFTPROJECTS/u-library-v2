@@ -20,6 +20,8 @@ export default {
       "signup.code": "Código",
       "signup.acceptPandP": "Para convertirme en cliente, acepto las <b><span class='link'>Políticas de Privacidad</span></b> de {{platform}}.",
       "signup.register": "Registrarse",
+      "signup.yes":"Si",
+      "signup.no":"No",
       //---------------SINGUP/NAME CURRENCIES-----------------------------
       "currency.usd":"Dólar estadounidense",
       "currency.clp":"Peso chileno",
@@ -79,6 +81,8 @@ export default {
         "signup.code": "Code",
         "signup.acceptPandP": "Pour me convertir en client, acceptez les <b><span class='link'>Politiques de Confidentialité</span></b> de {{platform}}.",
         "signup.register": "S'inscrire",
+        "signup.yes":"Oui",
+        "signup.no":"Non",
         //---------------SINGUP/NAME CURRENCIES-----------------------------
         "currency.usd":"Dollar américain",
         "currency.clp":"Peso chilien",

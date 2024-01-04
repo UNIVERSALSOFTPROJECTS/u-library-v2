@@ -49,7 +49,7 @@
     //];
     const configSignup = {
         platform,
-        typeSignup: "selectCurrency", //codeAgent / selectCurrency /  mixed (codeAgent and selectCurrency)
+        typeSignup: "mixed", //codeAgent / selectCurrency /  mixed (codeAgent and selectCurrency)
         userType: "W",// X / W
         currencies: [ 
             {id: 7, agent:6546},
@@ -181,7 +181,7 @@
         <!--
             OJO el configWithdrawal es solo para retiro W {configWithdrawal}
         -->
-        <WithdrawalW  bind:user {openTermsConditions} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
+        <WithdrawalW {configWithdrawal}  bind:user {openTermsConditions} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
     </Modal>
 
     <Notifier bind:notify/>
