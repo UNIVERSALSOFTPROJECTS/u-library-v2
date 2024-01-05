@@ -96,6 +96,7 @@ body{
     overflow-x: hidden;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.5);
+
     &-open{
       overflow: hidden;
       padding-right: 15px;
@@ -178,6 +179,7 @@ body{
 }
 
 
+
 .button-access-login {
     cursor: pointer;
     display: flex;
@@ -232,4 +234,3 @@ body{
         border: 0;
     }
 }
-

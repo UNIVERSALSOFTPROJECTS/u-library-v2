@@ -9,10 +9,13 @@ $page : "Coliseosport" !default;//default-light || default-dark
 $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep8v.jpg";
 @import './components/variables';
 @import "./components/mixins";
+
+
 //@import './components/global';
-@import './components/uglobal';
 @import './components/placeholder-selectors';
 @import './components/functions';
+@import "./components/modals";
+@import './components/uglobal';
 //@import SELECCIONAS EL TIPO DE THEMA DE LOGIN QUE QUIERES AQUI
 
 //Height minimo actual es de 375px
@@ -111,18 +114,17 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         &.profile{//no se de donde es esto pero no pertenece a las marcas blancas
             width: 70%;
         }
-        &.signup{
+        
+        /*&.signup{
             @extend %signup__model_1;
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
-        }
+        }*/
         &.deposit{
             @include deposit__model_1();            
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
             
         }
-        &.config {
-            @include config__model_1();
-        }
+       
         &.withdrawal{
             @include withdrawalX__model__1();//este es general para x y w
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);  

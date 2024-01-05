@@ -10,8 +10,6 @@
             color: $color-primary-text;
         }
     }
-        
-
     &.singup {
         @extend %signup__model_1;
         @include animateLoad_3points(#fff, 0.5rem, 0.5s, 0.2rem);
