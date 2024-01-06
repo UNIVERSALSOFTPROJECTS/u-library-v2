@@ -13,6 +13,8 @@
     import utils from '../js/util';
     import { onMount } from 'svelte';
     import { ServerConnection } from '..';
+    import RecoverPassword from "./topbar/RecoverPassword.svelte";
+    import ConfirmResetPassword from "./topbar/ConfirmResetPassword.svelte";
     export let user = {};
     export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
@@ -23,6 +25,8 @@
     let activeSession = false;
     //export let ASSETS_GLOBAL;
     let loginModalOpen = false;
+    let resetpassModalOpen=false;
+    let confirmResetpassModalOpen=false;
     let signupModalOpen = false;
     let depositModalOpen = false;
     let withdrawalModalOpen = false;
@@ -74,7 +78,7 @@
     $locale = "es";//Actualmente solo "es" y "fr"
 
 
-    const onOpenRecoverPass = () => {}
+    const onOpenRecoverPass = () => { resetpassModalOpen=true; }
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
     const onOpenSignup = () => { signupModalOpen = true; modalOpened = "signup" }
@@ -135,6 +139,12 @@
         notify = {};
         notify = await utils.showNotify("error",error);
     }
+
+    onMount(()=>{
+        let currentUrl = window.location.href;
+        console.log("domain",currentUrl);
+        if(/resetPassword/.test(currentUrl)) confirmResetpassModalOpen=true;
+    })
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
 </script>
 
@@ -171,6 +181,15 @@
     <Modal bind:open={loginModalOpen} bind:modalOpened >
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPass} bind:platform t={$t}/>
     </Modal>
+
+    <Modal bind:open={resetpassModalOpen} bind:modalOpened >
+        <RecoverPassword bind:open={resetpassModalOpen} />
+    </Modal>
+
+    <Modal bind:open={confirmResetpassModalOpen} bind:modalOpened>
+        <ConfirmResetPassword bind:open={confirmResetpassModalOpen} />
+    </Modal>
+
     <Modal bind:open={signupModalOpen} bind:modalOpened title={$t("signup.title")}>
         <Signup {configSignup} {openPrivacyPolicies} onOk={onSignupOk} onError={onSignupError} t={$t}/>
     </Modal>
@@ -183,6 +202,8 @@
         -->
         <WithdrawalW {configWithdrawal}  bind:user {openTermsConditions} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
     </Modal>
+
+
 
     <Notifier bind:notify/>
 </div>

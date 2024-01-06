@@ -10,7 +10,7 @@
   export let userGateway = "neco"; //neco/universal
   export let onOpenRecoverPass;
   export let t;//traduccion
-  export let isOauth;
+  export let isOauth=false;
 
   let password = "";
   let username = "";

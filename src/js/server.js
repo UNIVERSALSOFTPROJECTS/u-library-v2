@@ -81,6 +81,15 @@ const ServerConnection = (() => {
             var url = conf.API + "/user";
             var payload = { username, name, phone, email, currency, password, date, smscode, country, operatorId, doctype: doctype, document: document, birthday: date, domain: conf.domain, usertype, platform, org: conf.org }
             return axios.post(url, payload, { headers });
+        },
+        resetPassword:(data)=>{
+            const url = window.origin;
+            var payload = { email:data.email, url  };
+            return axios.post(`${conf.API}/resetPassword`, payload, { headers });
+        },
+        confirmResetPassword:(temporalToken)=>{
+            var payload = { token:temporalToken };
+            return axios.post(`${conf.API}/confirmResetPassword`, payload, { headers });
         }
     }
     const game = {
