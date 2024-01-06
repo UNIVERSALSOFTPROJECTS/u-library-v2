@@ -78,7 +78,7 @@
     $locale = "es";//Actualmente solo "es" y "fr"
 
 
-    const onOpenRecoverPass = () => { resetpassModalOpen=true; }
+    const onOpenRecoverPass = () => { resetpassModalOpen=true; loginModalOpen = false; }
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
     const onOpenSignup = () => { signupModalOpen = true; modalOpened = "signup" }
@@ -182,7 +182,7 @@
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPass} bind:platform t={$t}/>
     </Modal>
 
-    <Modal bind:open={resetpassModalOpen} bind:modalOpened >
+    <Modal bind:open={resetpassModalOpen} bind:modalOpened title="Recuperar Contraseña" >
         <RecoverPassword bind:open={resetpassModalOpen} />
     </Modal>
 
