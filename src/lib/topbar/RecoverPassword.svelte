@@ -54,7 +54,7 @@
   }
 </script>
 
-<div>
+<div style="padding:10px;">
   <div class="recoverpass-body" style="margin-top:20px;">
     
     <div>

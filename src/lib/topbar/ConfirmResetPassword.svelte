@@ -28,12 +28,12 @@
   
 </script>
 
-<div class="recoverpass modal">
+<div style="padding:10px;">
   <div class="recoverpass-body">
  
     
-    <div class="recoverpass__body" style="background:#333">
-      <div style="display:flex; justify-content:space-between"> <h4 style="margin:0; margin-bottom:10px; font-size:1.5em; color:white;">Confirmar cambio contraseña</h4>  <button class="btn close" on:click={closeModal} /> </div>
+    <div class="recoverpass__body">
+      
         <span style="color:white;">{message}.</span>
     </div>
   </div>
