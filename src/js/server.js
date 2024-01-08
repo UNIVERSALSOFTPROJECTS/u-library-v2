@@ -83,7 +83,7 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         resetPassword:(data)=>{
-            const url = window.origin;
+            const url = window.origin+"/resetPassword";
             var payload = { email:data.email, url  };
             return axios.post(`${conf.API}/resetPassword`, payload, { headers });
         },
