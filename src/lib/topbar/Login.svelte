@@ -130,7 +130,7 @@
         <p>{t("login.access")}</p>
       {/if}
     </button>
-    <button on:click={onOpenRecoverPass} class="btn- link" style="border:0">{t("login.forgetPassword")}</button>
+    <button on:click={onOpenRecoverPass} class="btn link">{t("login.forgetPassword")}</button>
 
   </div>
 </div>

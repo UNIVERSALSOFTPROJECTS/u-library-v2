@@ -209,11 +209,12 @@
 
 @mixin login__model_1($width-image){
     & .modal{
-
+        &-dialog{
+            max-width: 360px;
+        }
         &-content{
             border: 1px solid $color-primary;
             color: $g-text-color;
-            max-width: 360px;
         }
         &-body{
             width: 260px;
@@ -249,15 +250,12 @@
             font-weight: 700;
         }
         &__autosaved{
-            display: grid;
-            grid-template-columns: auto auto 1fr 1fr;
-            align-items: center;
             width: 100%;
             font-weight: 600;
-            & * {
-                cursor: pointer;
-                height: auto;
-            }
+            display: flex;
+           & *{
+            cursor: pointer;
+           }
         }
     }
 }

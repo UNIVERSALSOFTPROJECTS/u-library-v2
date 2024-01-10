@@ -51,3 +51,8 @@ export const showHeaderJetbet24 = ()=>({
   Component:Header,
   props:{user, assetsUrl, platform:'Jetbet24'}
 })
+
+export const showHeaderGanawin = ()=>({
+  Component:Header,
+  props:{user, assetsUrl, platform:'Ganawin'}
+})

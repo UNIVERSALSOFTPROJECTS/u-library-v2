@@ -30,6 +30,28 @@ export default{
 //        ServerConnection.setConfig({
 //            API:"https://lobby-bff.apiusoft.com",
 //            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+//            CLIENT_AUTH:"GAWNGANAWIN2024GANA20GANAWIN2024WINGWIN",
+//            CLIENT_CODE:"GAWN",
+//            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+//            ASSETS:"https://assets.apiusoft.com",
+//            WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
+//            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+//            country:"+56",
+//            operatorId:"123",
+//            domain:"http://ganawin.mx/",
+//            assetsUrl:"https://assets.apiusoft.com",
+//            org:"GWN",
+//            currency:7,//CLP
+//            //platform:"bo_fontend"
+//        })
+//    }
+//}
+
+//export default{
+//    start:()=>{
+//        ServerConnection.setConfig({
+//            API:"https://lobby-bff.apiusoft.com",
+//            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
 //            API:"https://lobby-bff.apiusoft.com",
 //            CLIENT_AUTH:"A12D3853C2C0A95F6C4HIPICASBABIEC",
 //            CLIENT_CODE:"A12D",
