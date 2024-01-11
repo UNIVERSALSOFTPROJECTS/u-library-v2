@@ -61,8 +61,8 @@
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
+        open = false;
        }
-       open = false;
     }
   });
 </script>
