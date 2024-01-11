@@ -25,6 +25,14 @@ export default {
       //---------------SINGUP/NAME CURRENCIES-----------------------------
       "currency.usd":"Dólar estadounidense",
       "currency.clp":"Peso chileno",
+      //---------------RECOVERPASSWORD-----------------------------
+      "recoverPassword.title":"Recuperar Contraseña",
+      "recoverPassword.email":"Ingrese su corrreo electrónico",
+      "recoverPassword.send":"Enviar",
+      "recoverPassword.info":"¡No hay problema! Sólo tienes que ingresar tu correo electrónico y se te enviará un código SMS a tu celular, con el cual reestableceras tu contraseña.",
+      "recoverPassword.infoSms":"Por favor ingrese el código de 8 digitos que fue enviado a su celular, recuerde que este código sera su nueva contraseña",
+
+      "recoverPassword.confirmingChangePass":"Confirmando el cambio de contraseña, espere un momento.",
       //---------------Withdrawal-----------------------------
       "withdrawal.title": "Retiro",
       "withdrawal.amount0": "Ingrese un monto",
@@ -86,6 +94,12 @@ export default {
         //---------------SINGUP/NAME CURRENCIES-----------------------------
         "currency.usd":"Dollar américain",
         "currency.clp":"Peso chilien",
+        //---------------RECOVERPASSWORD-----------------------------
+        "recoverPassword.title":"Récupérer le mot de passe",
+        "recoverPassword.email":"Entrer votre Email",
+        "recoverPassword.send":"Envoyer",
+        "recoverPassword.info":"Il n'y a pas de problème! Il vous suffit de saisir votre email et un code SMS sera envoyé sur votre téléphone portable, avec lequel vous réinitialiserez votre mot de passe.",
+        "recoverPassword.infoSms":"Veuillez inclure le code à 8 chiffres que vous souhaitez sur votre téléphone portable.",
         //---------------Withdrawal-----------------------------
         "withdrawal.title": "Retrait",
         "withdrawal.amount0": "Entrez un montant",

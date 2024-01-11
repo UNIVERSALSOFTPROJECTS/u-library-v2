@@ -8,7 +8,7 @@
   export let assetsUrl;
   export let platform;
   export let userGateway = "neco"; //neco/universal
-  export let onOpenRecoverPass;
+  export let onOpenRecoverPassword;
   export let t;//traduccion
   export let isOauth=false;
 
@@ -49,7 +49,7 @@
       else data = await ServerConnection.u_user.login(username, password);
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
-      //Formatear la propiedad "bonus"
+      //Formatear la propiedad "bonus" con el updatebalance
       if(data.claims){
         let date = new Date();
         date.setDate(date.getDate() + 1);
@@ -107,21 +107,21 @@
     notify.loading(false);
   }
 
-
+  const avoidSubmit = (e) =>{ e.preventDefault(); }
 </script>
 
-<div class="modal-body">
+<div class="modal-body" on:submit={avoidSubmit}>
   <div class="login__title">{t("login.title")}</div>
   <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-{platform}"/>
   <div></div>
-  <div class="login__form">
+  <form class="login__form">
     {#if isOauth}
       <div id="g_id_signin"></div>
     {/if}
     <input type="text" class="ipt" placeholder={t("login.user")} autocapitalize="off" autocomplete="username" on:keypress={loginEnter} bind:value={username} disabled={userGmail}/>
     <div class="login__ipt--pass">
       <input class="ipt" type={showPassword ? 'text' : 'password'} autocomplete="current-password"  placeholder={t("login.password")} on:keypress={loginEnter} on:input={dataPassword} disabled={userGmail}>
-      <button type="button" class="btn {showPassword ? 'no-eye' : 'eye'}" name="passowrd" on:click={togglePasswordHide}></button>
+      <button type="button" class="btn {showPassword ? 'no-eye' : 'eye'}" name="password" on:click={togglePasswordHide}></button>
     </div>
     <button type="button" class="btn login" disabled={loadLogin} on:click={loginClick}>
       {#if loadLogin}
@@ -130,7 +130,6 @@
         <p>{t("login.access")}</p>
       {/if}
     </button>
-    <button on:click={onOpenRecoverPass} class="btn link">{t("login.forgetPassword")}</button>
-
-  </div>
+    <button type="button" on:click={onOpenRecoverPassword} class="btn link">{t("login.forgetPassword")}</button>
+  </form>
 </div>

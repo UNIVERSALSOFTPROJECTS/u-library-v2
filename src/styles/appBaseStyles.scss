@@ -69,7 +69,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         &.login{
             background: #4a4b53;
         }
-        &.signup,&.withdrawal{
+        &.signup,&.withdrawal,&.send{
             @extend %btn__signup_model_1;
         }
         //se mandara a otra lugar esta wea
@@ -110,6 +110,14 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             @include login__model_1(10rem);
             //@include login__model_1(13rem);
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
+        }
+        &.recoverPassword{
+            @extend %recoverPassword__model_1;
+            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
+        }
+        &.resetPassword{
+            @extend %recoverPassword__model_1;
+            @include animateLoad_12lines();
         }
         &.profile{//no se de donde es esto pero no pertenece a las marcas blancas
             width: 70%;
