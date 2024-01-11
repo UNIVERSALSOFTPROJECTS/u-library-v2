@@ -31,7 +31,6 @@ export default {
       "recoverPassword.send":"Enviar",
       "recoverPassword.info":"¡No hay problema! Sólo tienes que ingresar tu correo electrónico y se te enviará un código SMS a tu celular, con el cual reestableceras tu contraseña.",
       "recoverPassword.infoSms":"Por favor ingrese el código de 8 digitos que fue enviado a su celular, recuerde que este código sera su nueva contraseña",
-
       "recoverPassword.confirmingChangePass":"Confirmando el cambio de contraseña, espere un momento.",
       //---------------Withdrawal-----------------------------
       "withdrawal.title": "Retiro",
@@ -67,6 +66,7 @@ export default {
       "msg.passwordMin5": "La contraseña debe tener 5 caracteres como mínimo",
       "msg.codeVerification": "Ingrese el código de verificación",
       "msg.acceptTandC": "Debe aceptar los términos y condiciones",
+      "msg.confirmedChangePassword": "Se ha confirmado el cambio de contraseña",
     },
     fr: {
         "login.title": "Bienvenue en",
@@ -100,6 +100,7 @@ export default {
         "recoverPassword.send":"Envoyer",
         "recoverPassword.info":"Il n'y a pas de problème! Il vous suffit de saisir votre email et un code SMS sera envoyé sur votre téléphone portable, avec lequel vous réinitialiserez votre mot de passe.",
         "recoverPassword.infoSms":"Veuillez inclure le code à 8 chiffres que vous souhaitez sur votre téléphone portable.",
+        "recoverPassword.confirmingChangePass":"Confirmation du changement de mot de passe, veuillez patienter un moment.",
         //---------------Withdrawal-----------------------------
         "withdrawal.title": "Retrait",
         "withdrawal.amount0": "Entrez un montant",
@@ -134,6 +135,7 @@ export default {
         "msg.passwordMin5": "Le mot de passe doit comporter au moins 5 caractères",
         "msg.codeVerification": "Entrez le code de vérification",
         "msg.acceptTandC": "Vous devez accepter les Termes et Conditions",
+        "msg.confirmedChangePassword": "Changement de mot de passe confirmé",
     },
     //solo para testear crashgames login autosaved
     br:{
