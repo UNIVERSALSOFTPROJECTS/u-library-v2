@@ -319,44 +319,44 @@ body .ipt:focus, .Coliseosport .ipt, body .ipt {
   font-weight: 600;
 }
 
-.Coliseosport .modal.resetPassword .modal-dialog, .Coliseosport .modal.recoverPassword .modal-dialog {
+.Coliseosport .modal.recoverPassword .modal-dialog {
   max-width: 400px;
 }
-.Coliseosport .modal.resetPassword .modal-content, .Coliseosport .modal.recoverPassword .modal-content {
+.Coliseosport .modal.recoverPassword .modal-content {
   border: 1px solid #f54b00;
   color: white;
 }
-.Coliseosport .modal.resetPassword .modal-header, .Coliseosport .modal.recoverPassword .modal-header {
+.Coliseosport .modal.recoverPassword .modal-header {
   justify-items: center;
 }
-.Coliseosport .modal.resetPassword .modal-body, .Coliseosport .modal.recoverPassword .modal-body {
+.Coliseosport .modal.recoverPassword .modal-body {
   padding: 1rem;
   height: -moz-fit-content;
   height: fit-content;
   max-width: 450px;
 }
 @media (max-width: 1023px) {
-  .Coliseosport .modal.resetPassword .modal-dialog, .Coliseosport .modal.recoverPassword .modal-dialog {
+  .Coliseosport .modal.recoverPassword .modal-dialog {
     margin: 0;
     grid-template-columns: auto;
     max-width: 100%;
   }
-  .Coliseosport .modal.resetPassword .modal-content, .Coliseosport .modal.recoverPassword .modal-content {
+  .Coliseosport .modal.recoverPassword .modal-content {
     border-radius: 0;
     height: 100vh;
     max-width: 100%;
   }
 }
-.Coliseosport .modal.resetPassword .recoverPassword__form, .Coliseosport .modal.recoverPassword .recoverPassword__form {
+.Coliseosport .modal.recoverPassword .recoverPassword__form {
   display: grid;
   gap: 0.75rem;
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset, .Coliseosport .modal.recoverPassword .recoverPassword__reset {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset {
   display: grid;
   gap: 1rem;
   text-align: center;
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading, .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading {
   font-size: 66.5px;
   position: relative;
   display: inline-block;
@@ -364,7 +364,7 @@ body .ipt:focus, .Coliseosport .ipt, body .ipt {
   height: 66.5px;
   margin: auto;
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p, .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p {
   position: absolute;
   left: 0.4629em;
   bottom: 0;
@@ -375,51 +375,51 @@ body .ipt:focus, .Coliseosport .ipt, body .ipt {
   transform-origin: center -0.2222em;
   animation: spinner-fade 1s infinite linear;
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(1), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(1) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(1) {
   animation-delay: 0s;
   transform: rotate(0deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(2), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(2) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(2) {
   animation-delay: 0.083s;
   transform: rotate(30deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(3), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(3) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(3) {
   animation-delay: 0.166s;
   transform: rotate(60deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(4), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(4) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(4) {
   animation-delay: 0.249s;
   transform: rotate(90deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(5), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(5) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(5) {
   animation-delay: 0.332s;
   transform: rotate(120deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(6), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(6) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(6) {
   animation-delay: 0.415s;
   transform: rotate(150deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(7), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(7) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(7) {
   animation-delay: 0.498s;
   transform: rotate(180deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(8), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(8) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(8) {
   animation-delay: 0.581s;
   transform: rotate(210deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(9), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(9) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(9) {
   animation-delay: 0.664s;
   transform: rotate(240deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(10), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(10) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(10) {
   animation-delay: 0.747s;
   transform: rotate(270deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(11), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(11) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(11) {
   animation-delay: 0.83s;
   transform: rotate(300deg);
 }
-.Coliseosport .modal.resetPassword .recoverPassword__reset .loading p:nth-child(12), .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(12) {
+.Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(12) {
   animation-delay: 0.913s;
   transform: rotate(330deg);
 }
@@ -1745,81 +1745,6 @@ body .ipt:focus, .Coliseosport .ipt, body .ipt {
   to {
     opacity: 0.4;
     transform: translate3d(0, 0.2rem, 0);
-  }
-}
-.Coliseosport .modal.resetPassword .loading {
-  font-size: 66.5px;
-  position: relative;
-  display: inline-block;
-  width: 66.5px;
-  height: 66.5px;
-  margin: auto;
-}
-.Coliseosport .modal.resetPassword .loading p {
-  position: absolute;
-  left: 0.4629em;
-  bottom: 0;
-  width: 0.074em;
-  height: 0.2777em;
-  border-radius: 0.0555em;
-  background-color: transparent;
-  transform-origin: center -0.2222em;
-  animation: spinner-fade 1s infinite linear;
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(1) {
-  animation-delay: 0s;
-  transform: rotate(0deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(2) {
-  animation-delay: 0.083s;
-  transform: rotate(30deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(3) {
-  animation-delay: 0.166s;
-  transform: rotate(60deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(4) {
-  animation-delay: 0.249s;
-  transform: rotate(90deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(5) {
-  animation-delay: 0.332s;
-  transform: rotate(120deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(6) {
-  animation-delay: 0.415s;
-  transform: rotate(150deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(7) {
-  animation-delay: 0.498s;
-  transform: rotate(180deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(8) {
-  animation-delay: 0.581s;
-  transform: rotate(210deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(9) {
-  animation-delay: 0.664s;
-  transform: rotate(240deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(10) {
-  animation-delay: 0.747s;
-  transform: rotate(270deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(11) {
-  animation-delay: 0.83s;
-  transform: rotate(300deg);
-}
-.Coliseosport .modal.resetPassword .loading p:nth-child(12) {
-  animation-delay: 0.913s;
-  transform: rotate(330deg);
-}
-@keyframes spinner-fade {
-  0% {
-    background-color: #f54b00;
-  }
-  100% {
-    background-color: transparent;
   }
 }
 .Coliseosport .modal.profile {

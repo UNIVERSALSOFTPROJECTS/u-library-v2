@@ -115,10 +115,6 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             @extend %recoverPassword__model_1;
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
         }
-        &.resetPassword{
-            @extend %recoverPassword__model_1;
-            @include animateLoad_12lines();
-        }
         &.profile{//no se de donde es esto pero no pertenece a las marcas blancas
             width: 70%;
         }

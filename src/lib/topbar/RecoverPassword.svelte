@@ -48,7 +48,7 @@
          const urlParams =  new URLSearchParams(window.location.search);
          const token = urlParams.get('token');
          const {data} = await backend.users.confirmResetPassword(token);
-         if (data == "OK") {
+         if (data.resp == "OK") {
           onOk(t("msg.confirmedChangePassword"));
           let url = new URL(currentUrl);
           let urlOriginal = url.origin;
