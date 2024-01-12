@@ -140,9 +140,10 @@
             loadSignup = false;
         }
     }
+    const avoidSubmit = (e) =>{ e.preventDefault(); }
 </script>
   
-<form class="modal-body">
+<form class="modal-body" on:submit={avoidSubmit}>
     <input type="text" class="ipt" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={justTextValidate}>
     <div class="signup__container--date">
         <p>{t("signup.birthday")}</p>

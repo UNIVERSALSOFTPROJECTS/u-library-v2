@@ -2,7 +2,7 @@
 import ServerConnection from '../src/js/server'
 import SocketConnector from '../src/js/SocketConnector'
 
-export default{
+/*export default{
     start:()=>{
         ServerConnection.setConfig({
             API:"https://lobby-bff-test.apiusoft.com",
@@ -23,7 +23,7 @@ export default{
             platform:"bo_fontend"
         })
     }
-}
+}*/
 
 //export default{
 //    start:()=>{
@@ -187,7 +187,7 @@ export default{
 //    }
 //}
 
-/*export default{
+export default{
     start:()=>{
        ServerConnection.setConfig({
             API:"https://lobby-bff.apiusoft.com",
@@ -211,6 +211,6 @@ export default{
             WS_URL:"ws://localhost:5000",
         })
     }
-}*/
+}
 
 

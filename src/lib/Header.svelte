@@ -14,7 +14,6 @@
     import { onMount } from 'svelte';
     import { ServerConnection } from '..';
     import RecoverPassword from "./topbar/RecoverPassword.svelte";
-    import ConfirmResetPassword from "./topbar/ConfirmResetPassword.svelte";
     export let user = {};
     export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
@@ -26,7 +25,7 @@
     //export let ASSETS_GLOBAL;
     let loginModalOpen = false;
     let resetpassModalOpen=false;
-    let confirmResetpassModalOpen=false;
+
     let signupModalOpen = false;
     let depositModalOpen = false;
     let withdrawalModalOpen = false;
@@ -78,7 +77,11 @@
     $locale = "es";//Actualmente solo "es" y "fr"
 
 
-    const onOpenRecoverPass = () => { resetpassModalOpen=true; loginModalOpen = false; }
+    const onOpenRecoverPassword = () => { 
+        loginModalOpen = false;
+        resetpassModalOpen=true;
+        modalOpened = "recoverPassword";
+    }
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
     const onOpenSignup = () => { signupModalOpen = true; modalOpened = "signup" }
@@ -86,6 +89,7 @@
     const onOpenWithdrawal = () => { withdrawalModalOpen = true; modalOpened = "withdrawal" }
     const toggleMenuBar = () => ( isToggleOn =! isToggleOn )
 
+    //NOTA: SE CREARA UN onOk y un onError generico para aquellos modales que no necesiten motrar info adicional;
     const onLoginOk = async (user_)=>{
         user = user_;
         notify = await utils.showNotify("success", $t("msg.sucessLogin",{platform}));
@@ -139,12 +143,22 @@
         notify = {};
         notify = await utils.showNotify("error",error);
     }
+    const onRecoverPasswordOk = async (data)=>{
+        notify = await utils.showNotify("success",data);
+    }
+    const onRecoverPasswordError = async (error)=>{
+        notify = {};
+        notify = await utils.showNotify("error",error);
+    }
 
     onMount(()=>{
         let currentUrl = window.location.href;
         console.log("domain",currentUrl);
-        if(/resetPassword/.test(currentUrl)) confirmResetpassModalOpen=true;
-    })
+        if(/resetPassword/.test(currentUrl)) {
+            resetpassModalOpen=true;
+            modalOpened = "resetPassword";
+        } 
+    });
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
 </script>
 
@@ -179,16 +193,12 @@
    
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
-        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPass} bind:platform t={$t}/>
+        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword} bind:platform t={$t}/>
     </Modal>
 
-    <Modal bind:open={resetpassModalOpen} bind:modalOpened title="Recuperar Contraseña" >
-        <RecoverPassword bind:open={resetpassModalOpen} />
-    </Modal>
-
-    <Modal bind:open={confirmResetpassModalOpen} bind:modalOpened>
-        <ConfirmResetPassword bind:open={confirmResetpassModalOpen} />
-    </Modal>
+    <Modal bind:open={resetpassModalOpen} bind:modalOpened title={$t("recoverPassword.title")} >
+        <RecoverPassword onOk={onRecoverPasswordOk} onError={onRecoverPasswordError} bind:open={resetpassModalOpen} t={$t}/>
+    </Modal>                                                                          
 
     <Modal bind:open={signupModalOpen} bind:modalOpened title={$t("signup.title")}>
         <Signup {configSignup} {openPrivacyPolicies} onOk={onSignupOk} onError={onSignupError} t={$t}/>
