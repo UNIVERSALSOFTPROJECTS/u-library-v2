@@ -55,13 +55,12 @@
             setTimeout(() => { window.location.href = urlOriginal;}, 3000);
          }else{
           onError(t("msg.contactSupport"));
-          open = false;
          }
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
-        open = false;
-       }
+      }
+      open = false;
     }
   });
 </script>
