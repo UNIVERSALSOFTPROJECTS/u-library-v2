@@ -160,8 +160,10 @@ const ServerConnection = (() => {
 
     const u_user = {
         getBalance: (userToken) => {
-            let url = conf.API + `/api/casino/balance/${userToken}`;
-            return axios.get(url, { headers });
+            return axios.get(conf.API +`/api/casino/balance/${userToken}`, { headers });
+        },
+        refreshToken:(userToken)=> {
+            return axios.get(conf.API +`/api/casino/refreshToken/${userToken}`, { headers });
         },
         myAccount: (userToken) =>{
             let url = conf.API + `/api/casino/myAccount/${userToken}`;
