@@ -54,7 +54,7 @@
             let url = new URL(currentUrl);
             let urlOriginal = url.origin;
             setTimeout(() => { window.location.href = urlOriginal;}, 3000);
-          }, 10000);
+          }, 100000000);
          }else{
           onError(t("msg.contactSupport"));
          }
