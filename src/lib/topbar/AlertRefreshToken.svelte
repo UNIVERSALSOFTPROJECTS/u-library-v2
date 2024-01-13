@@ -85,9 +85,9 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
   .config__footer{
     display: flex;
   }
-
   .config__footer button{
-    margin: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   .config__header{
@@ -107,7 +107,6 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
     width: 13%;
     height: 285px;
   }
-
   .no-header{
     display: flex;
     background: none;
