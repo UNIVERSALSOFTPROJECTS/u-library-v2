@@ -44,6 +44,7 @@
   let showRegisterModal = false;
   let showRecoverPass = false;
   let showModalProfile = false;
+  let showModalAlertyRefreshToken = true;
   let showConfigs= false;
   let scrollPosition = 0;
   let divClass = "";
@@ -285,9 +286,12 @@
     />
   </Modal>
 
-  <AlertRefreshToken  bind:user/>
-  
+  <Modal  bind:open={showModalAlertyRefreshToken}>
+    <AlertRefreshToken  bind:user/>
+  </Modal>
+ 
   <Notifier />
+
 </div>
 
 <style>

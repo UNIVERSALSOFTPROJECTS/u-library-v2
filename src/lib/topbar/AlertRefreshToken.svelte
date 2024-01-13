@@ -22,7 +22,7 @@ let intervalID  = setInterval(compareHoursRefreshToken, 500, user);
 
 function compareHoursRefreshToken(item) {
   console.log("user : - ",item)
-  if(item){
+  if(item != ""){
     let now = new Date()
     let currentHour = now.getHours() * 60 + now.getMinutes()
     let fechaMoment = moment(item.expireToken);
