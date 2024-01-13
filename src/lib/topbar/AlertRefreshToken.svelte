@@ -9,7 +9,6 @@
   let showAlertRefreshToken = false;
   let userLogaout={}
 
-
   const onObserverUser=async (user)=>{
     console.log("user logaout ", user);
     userLogaout = {...user}
