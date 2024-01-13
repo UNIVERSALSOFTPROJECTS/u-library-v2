@@ -7,20 +7,27 @@
   
   let showHeader = true;
   let showAlertRefreshToken = false;
+  let userLogaout={}
+
+
+  const onObserverUser=async (user)=>{
+    console.log("user logaout ", user);
+    userLogaout = {...user}
+  }
 
   const onRefreshToken = async ()=>{
       try {
-        let {data} = await ServerConnection.u_user.refreshToken(user.token)
-        user.token = data.token;
-        user.expireToken = data.expireToken;
-        sessionStorage.setItem("user",JSON.stringify(user))
+        let {data} = await ServerConnection.u_user.refreshToken(userLogaout.token)
+        userLogaout.token = data.token;
+        userLogaout.expireToken = data.expireToken;
+        sessionStorage.setItem("user",JSON.stringify(userLogaout))
         restartInterval();
       } catch (error) {
           console.log("ERROR : Refresh token ", error);
       }
   }
 
-let intervalID  = setInterval(compareHoursRefreshToken, 500, user);
+let intervalID  = setInterval(compareHoursRefreshToken, 500, userLogaout);
 
 function compareHoursRefreshToken(item) {
   if(item !== null && Object.keys(item).length !== 0){
@@ -37,8 +44,10 @@ function compareHoursRefreshToken(item) {
   }
 }
 
+$: onObserverUser(user);
+
 function restartInterval() {
-  intervalID = setInterval(compareHoursRefreshToken, 500, user);
+  intervalID = setInterval(compareHoursRefreshToken, 500, userLogaout);
 }
 
 const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
