@@ -23,7 +23,6 @@
 let intervalID  = setInterval(compareHoursRefreshToken, 500, user);
 
 function compareHoursRefreshToken(item) {
-  console.log("user : - ",item)
   if(item !== null && Object.keys(item).length !== 0){
     let now = new Date()
     let currentHour = now.getHours() * 60 + now.getMinutes()
