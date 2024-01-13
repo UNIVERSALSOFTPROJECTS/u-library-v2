@@ -290,7 +290,7 @@
     />
   </Modal>
 
-  <AlertRefreshToken  bind:user/>
+  <AlertRefreshToken/>
 
   <Notifier />
 
