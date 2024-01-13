@@ -44,7 +44,7 @@
   let showRegisterModal = false;
   let showRecoverPass = false;
   let showModalProfile = false;
-  let showModalAlertyRefreshToken = true;
+  let showModalAlertyRefreshToken = false;
   let showConfigs= false;
   let scrollPosition = 0;
   let divClass = "";
