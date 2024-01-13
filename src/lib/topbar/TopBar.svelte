@@ -290,10 +290,8 @@
     />
   </Modal>
 
-  <Modal  bind:open={showModalAlertyRefreshToken}>
-    <AlertRefreshToken  bind:user {OnCloseModalAlertRefreshToken} />
-  </Modal>
- 
+  <AlertRefreshToken  bind:user/>
+
   <Notifier />
 
 </div>
