@@ -24,7 +24,7 @@ let intervalID  = setInterval(compareHoursRefreshToken, 500, user);
 
 function compareHoursRefreshToken(item) {
   console.log("user : - ",item)
-  if(item !== null && Object.keys(item).length == 0){
+  if(item !== null && Object.keys(item).length !== 0){
     let now = new Date()
     let currentHour = now.getHours() * 60 + now.getMinutes()
     let fechaMoment = moment(item.expireToken);
@@ -104,8 +104,8 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
   }
 
   .modal-content{
-    width: 18%;
-    height: 270px;
+    width: 13%;
+    height: 285px;
   }
 
   .no-header{
