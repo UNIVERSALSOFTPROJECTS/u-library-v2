@@ -170,6 +170,10 @@
     showConfigs = true;
   }
 
+  const OnCloseModalAlertRefreshToken=()=>{
+    showModalAlertyRefreshToken=false;
+  }
+
   /*const getBonus = () => {
     let data;
     const formattedBonus = [];
@@ -287,7 +291,7 @@
   </Modal>
 
   <Modal  bind:open={showModalAlertyRefreshToken}>
-    <AlertRefreshToken  bind:user/>
+    <AlertRefreshToken  bind:user {OnCloseModalAlertRefreshToken} />
   </Modal>
  
   <Notifier />

@@ -3,6 +3,7 @@
   import ServerConnection from "../../js/server";
   import moment from "moment";
   export let user;
+  export let OnCloseModalAlertRefreshToken;
 
   let showAlertRefreshToken = false;
 
@@ -22,7 +23,7 @@ let intervalID  = setInterval(compareHoursRefreshToken, 500, user);
 
 function compareHoursRefreshToken(item) {
   console.log("user : - ",item)
-  if(item != ""){
+  if("expireToken" in user.expireToken){
     let now = new Date()
     let currentHour = now.getHours() * 60 + now.getMinutes()
     let fechaMoment = moment(item.expireToken);
@@ -60,7 +61,7 @@ function restartInterval() {
       </div>
       <div class="config__footer">
         <button class="btn btn-danger" on:click={onRefreshToken}>Si</button>
-        <button class="btn config--btn" on:click={()=>showAlertRefreshToken = false}>No</button>
+        <button class="btn config--btn" on:click={()=>OnCloseModalAlertRefreshToken}>No</button>
       </div>
     </div>
   </div>
