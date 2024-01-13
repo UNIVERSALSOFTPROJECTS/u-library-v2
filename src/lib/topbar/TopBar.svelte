@@ -18,6 +18,7 @@
   import RecoverPassword from "./RecoverPassword.svelte";
   import Conditions from "./Conditions.svelte";
   import Config from "./Config.svelte";
+  import AlertRefreshToken from "./AlertRefreshToken.svelte"
 
   export let userState;
   export let active_view;
@@ -284,6 +285,8 @@
     />
   </Modal>
 
+  <AlertRefreshToken  bind:user/>
+  
   <Notifier />
 </div>
 

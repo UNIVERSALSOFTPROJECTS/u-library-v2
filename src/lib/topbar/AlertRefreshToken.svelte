@@ -6,7 +6,6 @@
 
   let showAlertRefreshToken = false;
 
- 
   const onRefreshToken = async ()=>{
       try {
         let {data} = await ServerConnection.u_user.refreshToken(user.token)
@@ -19,13 +18,13 @@
       }
   }
 
-let intervalID  = setInterval(compareHoursRefreshToken, 500, user.expireToken);
+let intervalID  = setInterval(compareHoursRefreshToken, 500, user);
 
-function compareHoursRefreshToken(expired) {
-  if(user){
+function compareHoursRefreshToken(item) {
+  if(item){
     let now = new Date()
     let currentHour = now.getHours() * 60 + now.getMinutes()
-    let fechaMoment = moment(expired);
+    let fechaMoment = moment(item.expireToken);
     let tokenHour = fechaMoment.hours() * 60 + fechaMoment.minutes(); 
     const isWithin5Minutes = tokenHour - currentHour <= 5;
     console.log("La diferencia es menor o igual a 5 minutos.",currentHour + " --- " + tokenHour , fechaMoment);
@@ -37,7 +36,7 @@ function compareHoursRefreshToken(expired) {
 }
 
 function restartInterval() {
-  intervalID = setInterval(compareHoursRefreshToken, 500, user.expireToken);
+  intervalID = setInterval(compareHoursRefreshToken, 500, user);
 }
 
 </script>
