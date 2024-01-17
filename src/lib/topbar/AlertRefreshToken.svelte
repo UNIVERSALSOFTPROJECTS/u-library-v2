@@ -35,6 +35,7 @@ let intervalID  = setInterval(compareHoursRefreshToken, 500, userLogaout);
 
 function compareHoursRefreshToken(item) {
   if(item !== null && Object.keys(item).length !== 0){
+    console.log("date",new Date());
     let now = new Date()
     let currentHour = now.getHours() * 60 + now.getMinutes()
     let fechaMoment = moment(item.expireToken);
