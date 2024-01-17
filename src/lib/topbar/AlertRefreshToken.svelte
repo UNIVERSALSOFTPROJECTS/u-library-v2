@@ -10,6 +10,7 @@
   let userLogaout={}
   let chronometer = 15
   let cronometroID;
+  let buttonDisabled = false;
 
   const onObserverUser = async (user)=>{
     console.log("user logaout ", user);
@@ -35,13 +36,11 @@ let intervalID  = setInterval(compareHoursRefreshToken, 500, userLogaout);
 
 function compareHoursRefreshToken(item) {
   if(item !== null && Object.keys(item).length !== 0){
-    console.log("date",new Date());
     let now = new Date()
     let currentHour = now.getHours() * 60 + now.getMinutes()
     let fechaMoment = moment(item.expireToken);
     let tokenHour = fechaMoment.hours() * 60 + fechaMoment.minutes(); 
     const isWithin5Minutes = tokenHour - currentHour <= 5;
-    console.log("La diferencia es menor o igual a 5 minutos.",currentHour + " --- " + item.expireToken);
     if (isWithin5Minutes) {
       showAlertRefreshToken = true;
       if(chronometer > 0) startChronometer();
@@ -56,6 +55,7 @@ function startChronometer() {
     cronometroID = setTimeout(startChronometer,1000);
   } else {
     console.log("tiempo finalizado");
+    buttonDisabled = true;
     sessionStorage.removeItem("user");
   }
 }
@@ -105,7 +105,7 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
               </div>
             </div>
             <div class="config__footer">
-              <button class="btn btn-danger" on:click={onRefreshToken}>Si</button>
+              <button class="btn btn-danger" on:click={onRefreshToken} disabled = {buttonDisabled}>Si</button>
               <button class="btn config--btn" on:click={onNotRefreshToken}>No</button>
             </div>
           </div>
@@ -113,7 +113,6 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
     </div>
   </div>
 </div>
-
 {/if}
 
 <style>
@@ -143,7 +142,7 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
   }
   .modal-content{
     width: 14%;
-    height: 310px;
+    height: 314px;
   }
   .no-header{
     display: flex;
