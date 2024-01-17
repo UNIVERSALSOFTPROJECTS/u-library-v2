@@ -31,8 +31,17 @@
     checkWithdrawal();
 
     const updateBalance = async() => {
-        let updateBalance = await ServerConnection.users.getBalance(user.agregatorToken);
-        user.balance = updateBalance.data.balance;
+        let data = JSON.parse(sessionStorage.getItem("user"));
+        let updateBalance = await ServerConnection.users.getBalance(data.agregatorToken);
+        const { balance, bonus_global, bonus_horses, bonus_slot, bonus_sportbook } = updateBalance.data;
+        data.balance         = balance;
+        data.bonus_global    = bonus_global;
+        data.bonus_horses    = bonus_horses;
+        data.bonus_slot      = bonus_slot;
+        data.bonus_sportbook = bonus_sportbook;
+        data.bonus_sumTotal  = bonus_global + bonus_horses + bonus_slot + bonus_sportbook;
+        sessionStorage.setItem("user", JSON.stringify(data));
+        user = data;
     }
 
     async function checkWithdrawal() {
