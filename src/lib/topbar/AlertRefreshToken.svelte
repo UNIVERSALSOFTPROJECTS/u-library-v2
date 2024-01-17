@@ -8,14 +8,19 @@
   let showHeader = true;
   let showAlertRefreshToken = false;
   let userLogaout={}
+  let chronometer = 15
+  let cronometroID;
 
-  const onObserverUser=async (user)=>{
+  const onObserverUser = async (user)=>{
     console.log("user logaout ", user);
     userLogaout = {...user}
+    if(user) intervalID = setInterval(compareHoursRefreshToken, 500, userLogaout);
   }
 
   const onRefreshToken = async ()=>{
       try {
+        showAlertRefreshToken = false;
+        clearInterval(intervalID);
         let {data} = await ServerConnection.u_user.refreshToken(userLogaout.token)
         userLogaout.token = data.token;
         userLogaout.expireToken = data.expireToken;
@@ -35,12 +40,29 @@ function compareHoursRefreshToken(item) {
     let fechaMoment = moment(item.expireToken);
     let tokenHour = fechaMoment.hours() * 60 + fechaMoment.minutes(); 
     const isWithin5Minutes = tokenHour - currentHour <= 5;
-    console.log("La diferencia es menor o igual a 5 minutos.",currentHour + " --- " + tokenHour , fechaMoment);
+    console.log("La diferencia es menor o igual a 5 minutos.",currentHour + " --- " + item.expireToken);
     if (isWithin5Minutes) {
       showAlertRefreshToken = true;
-      clearInterval(intervalID);
+      if(chronometer > 0) startChronometer();
     }
   }
+}
+
+function startChronometer() {
+  if (chronometer > 0) {
+    console.log(chronometer);
+    chronometer--;
+    cronometroID = setTimeout(startChronometer,1000);
+  } else {
+    console.log("tiempo finalizado");
+    sessionStorage.removeItem("user");
+  }
+}
+
+function onNotRefreshToken () {
+  showAlertRefreshToken = false;
+  clearInterval(intervalID);
+  chronometer = 0;
 }
 
 $: onObserverUser(user);
@@ -73,19 +95,24 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
             </div>
             <div class="config__body" style="color: white;">
               <label for="bill-collector-config mb"> 
-                Sesión esta por expirar en 5 minutos
+                Sesión esta por expirar en 1 minuto
               </label>
               <p><strong>Desea continuar!</strong></p>
+
+              <div class="chronometer">
+                   <p>{chronometer}</p>
+              </div>
             </div>
             <div class="config__footer">
               <button class="btn btn-danger" on:click={onRefreshToken}>Si</button>
-              <button class="btn config--btn" on:click={()=>showAlertRefreshToken=false}>No</button>
+              <button class="btn config--btn" on:click={onNotRefreshToken}>No</button>
             </div>
           </div>
         </div>
     </div>
   </div>
 </div>
+
 {/if}
 
 <style>
@@ -96,7 +123,6 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
     margin-left: 2px;
     margin-right: 2px;
   }
-
   .config__header{
     margin-bottom: 15px;
   }
@@ -104,15 +130,19 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
   .center{
     text-align: center;
   }
-
   .config__body{
-    margin-bottom: 40px;
-  
+    margin-bottom: 20px;
   }
-
+  .chronometer{
+    margin-top: 20px;
+    font-size: 40px;
+  }
+  .chronometer p{
+    color: orange;
+  }
   .modal-content{
-    width: 13%;
-    height: 285px;
+    width: 14%;
+    height: 310px;
   }
   .no-header{
     display: flex;
@@ -122,6 +152,4 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
     height: auto;
     overflow: inherit;
   }
-
-
 </style>
