@@ -18,6 +18,7 @@
   import RecoverPassword from "./RecoverPassword.svelte";
   import Conditions from "./Conditions.svelte";
   import Config from "./Config.svelte";
+  import AlertRefreshToken from "./AlertRefreshToken.svelte"
 
   export let userState;
   export let active_view;
@@ -43,6 +44,7 @@
   let showRegisterModal = false;
   let showRecoverPass = false;
   let showModalProfile = false;
+  let showModalAlertyRefreshToken = false;
   let showConfigs= false;
   let scrollPosition = 0;
   let divClass = "";
@@ -168,6 +170,10 @@
     showConfigs = true;
   }
 
+  const OnCloseModalAlertRefreshToken=()=>{
+    showModalAlertyRefreshToken=false;
+  }
+
   /*const getBonus = () => {
     let data;
     const formattedBonus = [];
@@ -284,7 +290,10 @@
     />
   </Modal>
 
+  <AlertRefreshToken bind:user />
+
   <Notifier />
+
 </div>
 
 <style>
