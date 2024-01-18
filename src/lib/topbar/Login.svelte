@@ -57,6 +57,14 @@
         data.playerId = data.id;
         delete data.claims;
       }
+      let updateBalance = await ServerConnection.users.getBalance(data.agregatorToken);
+      const { balance, bonus_global, bonus_horses, bonus_slot, bonus_sportbook } = updateBalance.data;
+      data.balance         = balance;
+      data.bonus_global    = bonus_global;
+      data.bonus_horses    = bonus_horses;
+      data.bonus_slot      = bonus_slot;
+      data.bonus_sportbook = bonus_sportbook;
+      data.bonus_sumTotal  = bonus_global + bonus_horses + bonus_slot + bonus_sportbook;
       sessionStorage.setItem("user", JSON.stringify(data));
       onOk(data);
     } catch (error) {

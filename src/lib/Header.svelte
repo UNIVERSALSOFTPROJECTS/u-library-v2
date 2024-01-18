@@ -40,6 +40,9 @@
     function openTermsConditions() {
         console.log("abriendo openTermsConditions");
     }
+
+    //Update complete Balance and add sessionStorage
+
     //datos de registro M
     //COLLISESPORT
     //let countries  = [ {prefix:"+56",flag:"chl"} ];
@@ -95,7 +98,6 @@
         notify = await utils.showNotify("success", $t("msg.sucessLogin",{platform}));
         loginModalOpen = false;
         activeSession = true;
-        user.bono_global = user_.bonus_cab + user_.bonus_cas + user_.bonus_dep + user_.bonus_general;
     }
     const onLoginError = async (error)=>{
         notify = {};
@@ -177,7 +179,7 @@
             </div>
             <div class="header__balance">
                 <p>{user.currency} {user.balance}</p>
-                <p class="header__bono">Bono {user.currency} {user.bono_global}</p>
+                <p class="header__bono">Bono {user.currency} {user.bonus_sumTotal}</p>
             </div>
             <button class="btn recharge" on:click={onOpenDeposit}>Recargar</button>
         {:else}
@@ -190,10 +192,9 @@
     </header>
 
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
-   
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
-        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword} bind:platform t={$t}/>
+        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword}  bind:platform t={$t}/>
     </Modal>
 
     <Modal bind:open={resetpassModalOpen} bind:modalOpened title={$t("recoverPassword.title")} >
