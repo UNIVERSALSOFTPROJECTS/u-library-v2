@@ -38,8 +38,8 @@ onMount(()=>{
           {#if bono.amount > 0}
             <li>
               <div class="bono">
-                <span class="tipo">{bono.type}</span>
-                <span class="currency">{bono.currency}</span>
+                <span class="tipo">{bono.name}</span>
+                <span class="currency">{bono.currencyISO}</span>
                 <span class="amount">{bono.amount}</span>
               </div>
             </li>
