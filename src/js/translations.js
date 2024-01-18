@@ -25,6 +25,7 @@ export default {
       //---------------SINGUP/NAME CURRENCIES-----------------------------
       "currency.usd":"Dólar estadounidense",
       "currency.clp":"Peso chileno",
+      "currency.cop":"Peso colombiano",
       //---------------RECOVERPASSWORD-----------------------------
       "recoverPassword.title":"Recuperar Contraseña",
       "recoverPassword.email":"Ingrese su corrreo electrónico",
@@ -94,6 +95,7 @@ export default {
         //---------------SINGUP/NAME CURRENCIES-----------------------------
         "currency.usd":"Dollar américain",
         "currency.clp":"Peso chilien",
+        "currency.cop":"Peso colombien",
         //---------------RECOVERPASSWORD-----------------------------
         "recoverPassword.title":"Récupérer le mot de passe",
         "recoverPassword.email":"Entrer votre Email",
