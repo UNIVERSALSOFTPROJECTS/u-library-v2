@@ -9,6 +9,7 @@
     const namesCurrenciesById = {
         3: t("currency.usd"),
         7: t("currency.clp"),
+        8: t("currency.cop"),
     };
 
     currencies.forEach(obj => { obj.name = namesCurrenciesById[obj.id] || 'add this new currency'; });
