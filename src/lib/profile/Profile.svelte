@@ -165,8 +165,8 @@
         {#each user.bonus as bono}
           {#if bono.amount > 0}
             <div class="u-balance">
-              <span>Bono {bono.type}</span>
-              <div class="u-label">{bono.currency} {bono.amount.toFixed(2)}</div>
+              <span>Bono {bono.name}</span>
+              <div class="u-label">{bono.currencyISO} {bono.amount.toFixed(2)}</div>
             </div>
           {/if}
         {/each}
