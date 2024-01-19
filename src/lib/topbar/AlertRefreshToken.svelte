@@ -57,6 +57,7 @@ function startChronometer() {
     console.log("tiempo finalizado");
     buttonDisabled = true;
     sessionStorage.removeItem("user");
+    location.reload();
   }
 }
 
