@@ -56,8 +56,7 @@ function startChronometer() {
   } else {
     console.log("tiempo finalizado");
     buttonDisabled = true;
-    sessionStorage.removeItem("user");
-    location.reload();
+    //sessionStorage.removeItem("user");
   }
 }
 
@@ -65,6 +64,8 @@ function onNotRefreshToken () {
   showAlertRefreshToken = false;
   clearInterval(intervalID);
   chronometer = 0;
+  sessionStorage.removeItem("user");
+  location.reload();
 }
 
 $: onObserverUser(user);
