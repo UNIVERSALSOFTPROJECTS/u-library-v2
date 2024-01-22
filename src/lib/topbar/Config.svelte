@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
 
   export let configs;
+  export let onShowConfigs1;
 
   let config_ = { ...configs }; 
 
@@ -30,6 +31,7 @@
       <input id="bill-collector-config" type="checkbox" bind:checked={config_.billCollector}> 
       Billetero 
     </label>
+    <button on:click={onShowConfigs1}>show logs</button>
     <button on:click={saveConfig} class="btn config--btn">Guardar</button>
   </div>
 </div>

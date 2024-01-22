@@ -19,6 +19,9 @@
   import Conditions from "./Conditions.svelte";
   import Config from "./Config.svelte";
   import AlertRefreshToken from "./AlertRefreshToken.svelte"
+  import moment from 'moment';
+
+    import LogsBillColector from "./LogsBillColector.svelte";
 
   export let userState;
   export let active_view;
@@ -50,6 +53,7 @@
   let divClass = "";
   let signupModalOpen = false;
   let showConditions = false;
+  let showlogs= false;
   
 
   const handleScroll = () => {
@@ -62,6 +66,14 @@
   };
 
   onMount(() => {
+   loadConfigs();
+    console.log("Billetro check:"+ billCollectorActive());
+   
+    if(user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
+    if(!user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', {});
+
+
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -170,8 +182,23 @@
     showConfigs = true;
   }
 
+const onShowConfigs1 = ()=>{
+    modalOpened = "config";
+    showlogs = true;
+  }
+
   const OnCloseModalAlertRefreshToken=()=>{
     showModalAlertyRefreshToken=false;
+  }
+
+  const loadConfigs=()=>{
+    let configs_ = localStorage.getItem("config");
+    if(configs_) {
+      configs_ = JSON.parse(configs_);
+      configs = configs_;
+      console.log("CONFIGS encontrados", configs_);
+    }
+
   }
 
   /*const getBonus = () => {
@@ -191,6 +218,35 @@
     }
     data.bonus = formattedBonus;
   }*/
+
+
+  var filter = { startDate: moment().format("YYYY-MM-DD"), search: "",listLogs:'' };
+  function fetchLogs(filter) {
+    sendToWinWebview("Get", filter);
+  }
+
+  if(window.chrome){
+    window.chrome.webview?.addEventListener('message', function (e) {
+      var receivedMessage = JSON.parse(e.data);
+      filter.listLogs=receivedMessage;
+      
+    });
+  }else{console.log("Navegador no compatible Gracia!.");}
+
+  const sendToWinWebview = (action, data) => {
+    if (window.chrome && window.chrome.webview) {
+      data.action = action;
+      window.chrome.webview.postMessage(data);
+    } else {
+      console.log("Disponible: solo pra el billetero Gracia!.");
+    }
+  }
+
+ 
+
+  const billCollectorActive = ()=> ( configs && configs.billCollector );
+  const isWinWebview = ()=> (window.chrome && window.chrome.webview);
+
 
 </script>
 
@@ -251,8 +307,14 @@
   </Modal>
 
   <Modal bind:open={showConfigs} bind:modalOpened title="Configuracion">
-    <Config bind:configs></Config>
+    <Config {onShowConfigs1} bind:configs></Config>
   </Modal>
+
+  <Modal bind:open={showlogs} bind:modalOpened title="Configuracion">
+    <LogsBillColector  {fetchLogs} {filter} />
+  </Modal>
+
+  
   
 
   <Modal bind:open={showRecoverPass} bind:modalOpened showHeader={false}>
