@@ -67,12 +67,12 @@
 
   onMount(() => {
    loadConfigs();
-    console.log("Billetro check:"+ billCollectorActive());
+    console.log("Billetro check:"+ billCollectorActive()+"--"+isWinWebview()+"---------",user);
    
     if(user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
     if(!user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', {});
 
-
+      console.log(user);
 
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -182,7 +182,7 @@
     showConfigs = true;
   }
 
-const onShowConfigs1 = ()=>{
+const onShowLogsBill = ()=>{
     modalOpened = "config";
     showlogs = true;
   }
@@ -228,7 +228,7 @@ const onShowConfigs1 = ()=>{
   if(window.chrome){
     window.chrome.webview?.addEventListener('message', function (e) {
       var receivedMessage = JSON.parse(e.data);
-      filter.listLogs=receivedMessage;
+      filter.listLogs.set(receivedMessage);
       
     });
   }else{console.log("Navegador no compatible Gracia!.");}
@@ -307,7 +307,7 @@ const onShowConfigs1 = ()=>{
   </Modal>
 
   <Modal bind:open={showConfigs} bind:modalOpened title="Configuracion">
-    <Config {onShowConfigs1} bind:configs></Config>
+    <Config {onShowLogsBill} bind:configs></Config>
   </Modal>
 
   <Modal bind:open={showlogs} bind:modalOpened title="Configuracion">

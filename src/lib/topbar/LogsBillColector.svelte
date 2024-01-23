@@ -1,6 +1,6 @@
 
 <script>
- export let toggleModal;
+ 
  export let fetchLogs;
  export let filter = { startDate: '', search: '',listLogs:"" };
 
@@ -12,7 +12,7 @@
 
 <div class="modal-log">
   <div class="modal-content">
-    <span class="close" on:click={toggleModal}>&times;</span>
+    <span class="close" >&times;</span>
     <h2>Registro de log {(filter.listLogs?.length) }</h2>
     <div class="search-container">
       <input bind:value={filter.search} placeholder="Ingrese usuario" id="searchInput"  autocomplete="false" />
