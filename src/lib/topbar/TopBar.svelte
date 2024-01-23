@@ -67,12 +67,12 @@
 
   onMount(() => {
    loadConfigs();
-    console.log("Billetro check:"+ billCollectorActive()+"--"+isWinWebview()+"---------",user);
+    console.log("BILL LIBRARY:"+ billCollectorActive()+"--"+isWinWebview()+"---------",user);
    
     if(user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
     if(!user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', {});
 
-      console.log(user);
+        console.log("USUARIO LOGEADO LIBRARY : ",user);
 
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -142,6 +142,7 @@
     let token = user.token;
     let agregatorToken = user.agregatorToken;
     user = { ...user, ...data };
+      console.log("USUARIO LOGEADO LIBRARY1 : ",user);
     user.serial_api_casino = serial_api_casino;
     user.token = token;
     user.agregatorToken = agregatorToken;
@@ -166,6 +167,7 @@
 
   const onLoginOk = async (user_) => {
     user = user_;
+      console.log("USUARIO LOGEADO LIBRARY ok : ",user);
     notify.success("Bienvenido a " + platform);
     loginModalOpen = false;
     userState = "loggedIn";
