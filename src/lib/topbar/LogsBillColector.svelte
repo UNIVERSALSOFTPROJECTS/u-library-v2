@@ -10,46 +10,38 @@
 }
 </script>
 
-<div class="modal-log">
-  <div class="modal-content">
-    <span class="close" >&times;</span>
-    <h2>Registro de log {(filter.listLogs?.length) }</h2>
+
+<div class="logs-body">
+  <span class="logs__header">Total: {(filter.listLogs?.length) }</span>
+  <div class="logs__body">
     <div class="search-container">
-      <input bind:value={filter.search} placeholder="Ingrese usuario" id="searchInput"  autocomplete="false" />
-      <input bind:value={filter.startDate} type="date" id="dateInput"  />
+      <input bind:value={filter.search} placeholder="Ingrese usuario" id="searchInput" autocomplete="false" />
+      <input bind:value={filter.startDate} type="date" id="dateInput" />
       <button on:click={logSearch}>Buscar</button>
     </div>
 
     <div class="log-list">
       {#each filter.listLogs as item  }
-      <div class="log-item">{JSON.stringify(item)}</div>
+        <div class="log-item">{JSON.stringify(item)}</div>
       {/each}
     </div>
-
-
   </div>
 </div>
 
 <style>
-
-  .modal-log {
-
+   .logs-body {
+    background-color: white;
+    padding: 20px; 
+    max-height: 500px; 
+    overflow-y: auto; 
+   
   }
-
-  .modal-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
+  .logs__header {
+    font-size: 18px; 
+    font-weight: bold; 
   }
-
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+  .search-container {
+    margin-bottom: 15px; 
   }
   .search-container {
     display: flex;

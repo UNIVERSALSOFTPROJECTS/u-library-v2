@@ -65,14 +65,19 @@
     }
   };
 
+   $:{
+    if(user && user.username){
+      console.log("Cambio usuario", user);
+      if(user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
+      if(!user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', {});
+
+          console.log("USUARIO LOGEADO LIBRARY : ",user);
+      }
+  }
+
   onMount(() => {
    loadConfigs();
-    console.log("BILL LIBRARY:"+ billCollectorActive()+"--"+isWinWebview()+"---------",user);
    
-    if(user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
-    if(!user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', {});
-
-        console.log("USUARIO LOGEADO LIBRARY : ",user);
 
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -187,6 +192,7 @@
 const onShowLogsBill = ()=>{
     modalOpened = "config";
     showlogs = true;
+    showConfigs = false;
   }
 
   const OnCloseModalAlertRefreshToken=()=>{
