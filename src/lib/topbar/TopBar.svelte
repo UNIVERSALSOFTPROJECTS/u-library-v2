@@ -71,7 +71,7 @@
       if(user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
       if(!user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', {});
 
-          console.log("USUARIO LOGEADO LIBRARY : ",user);
+         
       }
   }
 
@@ -130,6 +130,8 @@
   };
 
   const onLogout = () => {
+
+      console.log("USUARIO GOUT=> LIBRARY : ",user);
     userState = "logout";
     active_view = "home";
     sessionStorage.removeItem("user");
@@ -147,7 +149,7 @@
     let token = user.token;
     let agregatorToken = user.agregatorToken;
     user = { ...user, ...data };
-      console.log("USUARIO LOGEADO LIBRARY1 : ",user);
+     
     user.serial_api_casino = serial_api_casino;
     user.token = token;
     user.agregatorToken = agregatorToken;
@@ -172,7 +174,8 @@
 
   const onLoginOk = async (user_) => {
     user = user_;
-      console.log("USUARIO LOGEADO LIBRARY ok : ",user);
+     
+      console.log("USUARIO LOGEADO=> LIBRARY : ",user);
     notify.success("Bienvenido a " + platform);
     loginModalOpen = false;
     userState = "loggedIn";
