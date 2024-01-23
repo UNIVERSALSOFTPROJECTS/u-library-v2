@@ -65,33 +65,22 @@
     }
   };
 
-   /*$:{
-    if(user && user.username){
+   $:{
+    if(user && user.balance>0 ){
+
       console.log("Cambio usuario", user);
+
       if(user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
       if(!user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', {});
 
          
       }
-  }*/
-
-  const recoverSessionUser=()=>{
-    user = null;
-    let now = new Date();
-    const u = sessionStorage.getItem("user");
-    if (u) {
-      let user_ = JSON.parse(u);
-    }
-    console.log("||||||||||||||||||||| : ",user_);
   }
 
-
+ 
 
   onMount(() => {
    loadConfigs();
-   recoverSessionUser();
-   
- console.log("===========> : ",user);
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -144,7 +133,6 @@
 
   const onLogout = () => {
 
-      console.log("USUARIO GOUT=> LIBRARY : ",user);
     userState = "logout";
     active_view = "home";
     sessionStorage.removeItem("user");
@@ -187,8 +175,7 @@
 
   const onLoginOk = async (user_) => {
     user = user_;
-     
-      console.log("USUARIO LOGEADO=> LIBRARY : ",user);
+
     notify.success("Bienvenido a " + platform);
     loginModalOpen = false;
     userState = "loggedIn";
