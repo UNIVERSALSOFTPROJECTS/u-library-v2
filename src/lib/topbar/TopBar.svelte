@@ -65,7 +65,7 @@
     }
   };
 
-   $:{
+   /*$:{
     if(user && user.username){
       console.log("Cambio usuario", user);
       if(user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
@@ -73,12 +73,25 @@
 
          
       }
+  }*/
+
+  const recoverSessionUser=()=>{
+    user = null;
+    let now = new Date();
+    const u = sessionStorage.getItem("user");
+    if (u) {
+      let user_ = JSON.parse(u);
+    }
+    console.log("||||||||||||||||||||| : ",user_);
   }
+
+
 
   onMount(() => {
    loadConfigs();
+   recoverSessionUser();
    
-
+ console.log("===========> : ",user);
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
