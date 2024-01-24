@@ -19,10 +19,9 @@
   import Conditions from "./Conditions.svelte";
   import Config from "./Config.svelte";
   import AlertRefreshToken from "./AlertRefreshToken.svelte"
+  import WebView2 from "./WebView2.svelte"
   import moment from 'moment';
-
-    import LogsBillColector from "./LogsBillColector.svelte";
-
+  import LogsBillColector from "./LogsBillColector.svelte";
   export let userState;
   export let active_view;
   export let user = {};
@@ -65,40 +64,7 @@
     }
   };
 
-   $:{
-    if(user && user.balance>0 ){
-      console.log("Cambio ==usuario", user);
-      if(user && billCollectorActive()) sendToWinWebview('setUser', user);
-      if(!user && billCollectorActive()) sendToWinWebview('logout', {});
-
-      }
-  }
-
-  $: {
-  if (user && 'balance' in user) {
-    console.log("Cambio ****en el balance del usuario", user.balance);
-
-    // Realizar acciones específicas si el balance cambia
-    if (billCollectorActive()) {
-      sendToWinWebview('setUser', user);
-    }
-  }
-}
-
-$: {
-  if (user && user.balance != undefined) {
-    console.log(" ===Cambio en el balance del usuario", user.balance);
-
-    // Realizar acciones específicas si el balance cambia
-    if (billCollectorActive()) {
-      sendToWinWebview('setUser', user);
-    }
-  }
-}
-
-
  
-
   onMount(() => {
    loadConfigs();
     window.addEventListener("scroll", handleScroll);
@@ -157,7 +123,6 @@ $: {
     active_view = "home";
     sessionStorage.removeItem("user");
     showModalProfile = false;
-    sendToWinWebview('logout', {});
     location.reload();
     document.body.style.overflow = "hidden";
   };
@@ -277,7 +242,7 @@ const onShowLogsBill = ()=>{
  
 
   const billCollectorActive = ()=> ( configs && configs.billCollector );
-  const isWinWebview = ()=> (window.chrome && window.chrome.webview);
+  //const isWinWebview = ()=> (window.chrome && window.chrome.webview);
 
 
 </script>
@@ -385,6 +350,7 @@ const onShowLogsBill = ()=>{
   </Modal>
 
   <AlertRefreshToken bind:user />
+  <WebView2 bind:user {billCollectorActive} bind:configs/>
 
   <Notifier />
 
