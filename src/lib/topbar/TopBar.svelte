@@ -67,15 +67,35 @@
 
    $:{
     if(user && user.balance>0 ){
+      console.log("Cambio ==usuario", user);
+      if(user && billCollectorActive()) sendToWinWebview('setUser', user);
+      if(!user && billCollectorActive()) sendToWinWebview('logout', {});
 
-      console.log("Cambio usuario", user);
-
-      if(user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
-      if(!user && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', {});
-
-         
       }
   }
+
+  $: {
+  if (user && 'balance' in user) {
+    console.log("Cambio ****en el balance del usuario", user.balance);
+
+    // Realizar acciones específicas si el balance cambia
+    if (billCollectorActive()) {
+      sendToWinWebview('setUser', user);
+    }
+  }
+}
+
+$: {
+  if (user && user.balance != undefined) {
+    console.log(" ===Cambio en el balance del usuario", user.balance);
+
+    // Realizar acciones específicas si el balance cambia
+    if (billCollectorActive()) {
+      sendToWinWebview('setUser', user);
+    }
+  }
+}
+
 
  
 
@@ -137,6 +157,7 @@
     active_view = "home";
     sessionStorage.removeItem("user");
     showModalProfile = false;
+    sendToWinWebview('logout', {});
     location.reload();
     document.body.style.overflow = "hidden";
   };
