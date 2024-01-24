@@ -19,7 +19,6 @@
   import Conditions from "./Conditions.svelte";
   import Config from "./Config.svelte";
   import AlertRefreshToken from "./AlertRefreshToken.svelte"
-  import WebView2 from "./WebView2.svelte"
   import moment from 'moment';
   import LogsBillColector from "./LogsBillColector.svelte";
   export let userState;
@@ -66,7 +65,7 @@
 
  
   onMount(() => {
-   loadConfigs();
+  
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -188,16 +187,7 @@ const onShowLogsBill = ()=>{
     showModalAlertyRefreshToken=false;
   }
 
-  const loadConfigs=()=>{
-    let configs_ = localStorage.getItem("config");
-    if(configs_) {
-      configs_ = JSON.parse(configs_);
-      configs = configs_;
-      console.log("CONFIGS encontrados", configs_);
-    }
-
-  }
-
+  
   /*const getBonus = () => {
     let data;
     const formattedBonus = [];
@@ -216,7 +206,7 @@ const onShowLogsBill = ()=>{
     data.bonus = formattedBonus;
   }*/
 
-
+ ////INICIO SECTION BILL/////
   var filter = { startDate: moment().format("YYYY-MM-DD"), search: "",listLogs:'' };
   function fetchLogs(filter) {
     sendToWinWebview("Get", filter);
@@ -239,10 +229,9 @@ const onShowLogsBill = ()=>{
     }
   }
 
- 
+ ////FIN SECTION BILL/////
 
-  const billCollectorActive = ()=> ( configs && configs.billCollector );
-  //const isWinWebview = ()=> (window.chrome && window.chrome.webview);
+  
 
 
 </script>
@@ -350,7 +339,7 @@ const onShowLogsBill = ()=>{
   </Modal>
 
   <AlertRefreshToken bind:user />
-  <WebView2 bind:user {billCollectorActive} bind:configs/>
+ 
 
   <Notifier />
 
