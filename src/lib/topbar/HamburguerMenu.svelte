@@ -4,7 +4,6 @@
    export let assetsUrl;
   export let onCategoryChange;
   export let active_view;
-  export let configs;
   export let onShowConfigs;
   let activeContent=false;
 
@@ -60,9 +59,9 @@
       <img class="u-menubar-icon" src="{assetsUrl}/golden/Providers.svg" alt="" />
       Proveedores
     </button>
-    {#if configs}
     <button class="u-menubar-button" on:click={ ()=>{ activeContent=false; onShowConfigs(); } }> Configuraciones </button>
-    {/if}
+  
+ 
   </div>
   <div on:click={onActiveContent} class="u-backdrop"></div>
   {/if}

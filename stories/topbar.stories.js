@@ -12,7 +12,11 @@ let loginModalOpen = false;
 let modalOpened;
 let platform = "DemoPlatform";
 let isOauth = true;
-let configs = {};
+let configsAllowed={billCollector:true};
+
+const onShowCustomConfig=()=>{
+  alert("mostrar modal configuracion billtereo");
+}
 
 
 
@@ -34,7 +38,9 @@ const onLogin = () => {};
 
 export const TopBarDemo = () => ({
   Component: TopBar,
-  props: { userGateway: 'universal', user, active_view, showLoginModal, modalOpened, loginModalOpen, showMainLoading, assetsUrl, platform, userState, onOk, onError, onLogin, isOauth, configs}
+  props: { 
+    userGateway: 'universal', 
+    user, active_view, showLoginModal, modalOpened, loginModalOpen, showMainLoading, assetsUrl, platform, userState, onOk, onError, onLogin, isOauth, configsAllowed, onShowCustomConfig }
 });
 
 

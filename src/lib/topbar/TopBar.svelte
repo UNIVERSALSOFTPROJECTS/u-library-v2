@@ -17,10 +17,9 @@
   import Notifier from "../Notifier.svelte";
   import RecoverPassword from "./RecoverPassword.svelte";
   import Conditions from "./Conditions.svelte";
-  import Config from "./Config.svelte";
-  import AlertRefreshToken from "./AlertRefreshToken.svelte"
-  import moment from 'moment';
-  import LogsBillColector from "./LogsBillColector.svelte";
+  import AlertRefreshToken from "./AlertRefreshToken.svelte";
+  import Configs from "./Configs.svelte";
+
   export let userState;
   export let active_view;
   export let user = {};
@@ -37,7 +36,8 @@
   export let doctypes = ["DNI"];
   export let limitAmount = { min: 50, max: 2000 };
   export let isOauth;
-  export let configs=false;
+  export let configsAllowed;
+  export let onShowCustomConfig;
 
   let username = "";
   let password = "";
@@ -46,12 +46,20 @@
   let showRecoverPass = false;
   let showModalProfile = false;
   let showModalAlertyRefreshToken = false;
-  let showConfigs= false;
   let scrollPosition = 0;
   let divClass = "";
   let signupModalOpen = false;
   let showConditions = false;
-  let showlogs= false;
+
+  let showConfigs=false;
+
+  const onShowConfigs = ()=>{
+    modalOpened = "config";
+    showConfigs = true;
+  }
+  
+
+
   
 
   const handleScroll = () => {
@@ -172,16 +180,7 @@
     notify.error(error);
   };
 
-  const onShowConfigs = ()=>{
-    modalOpened = "config";
-    showConfigs = true;
-  }
 
-const onShowLogsBill = ()=>{
-    modalOpened = "config";
-    showlogs = true;
-    showConfigs = false;
-  }
 
   const OnCloseModalAlertRefreshToken=()=>{
     showModalAlertyRefreshToken=false;
@@ -201,39 +200,10 @@ const onShowLogsBill = ()=>{
           currency: currency,
           amount: amount
         });
-      }
-    }
-    data.bonus = formattedBonus;
-  }*/
+      }*/
 
- ////INICIO SECTION BILL/////
-  var filter = { startDate: moment().format("YYYY-MM-DD"), search: "",listLogs:'' };
-  function fetchLogs(filter) {
-    sendToWinWebview("Get", filter);
-  }
-
-  if(window.chrome){
-    window.chrome.webview?.addEventListener('message', function (e) {
-      var receivedMessage = JSON.parse(e.data);
-      filter.listLogs.set(receivedMessage);
-      
-    });
-  }else{console.log("Navegador no compatible Gracia!.");}
-
-  const sendToWinWebview = (action, data) => {
-    if (window.chrome && window.chrome.webview) {
-      data.action = action;
-      window.chrome.webview.postMessage(data);
-    } else {
-      console.log("Disponible: solo pra el billetero Gracia!.");
-    }
-  }
-
- ////FIN SECTION BILL/////
 
   
-
-
 </script>
 
 <div
@@ -244,7 +214,7 @@ const onShowLogsBill = ()=>{
   id="user-header"
 >
   <div class="user-header-principal">
-    <HamburguerMenu bind:active_view {onCategoryChange} {assetsUrl} {configs} {onShowConfigs} />
+    <HamburguerMenu bind:active_view {onCategoryChange} {assetsUrl} {onShowConfigs} />
     <button class="content-logo" on:click={() => (active_view = "home")}>
       <img class="logo" src="{assetsUrl}/{platform}/logo.png" alt="" />
     </button>
@@ -293,14 +263,9 @@ const onShowLogsBill = ()=>{
   </Modal>
 
   <Modal bind:open={showConfigs} bind:modalOpened title="Configuracion">
-    <Config {onShowLogsBill} bind:configs></Config>
+    <Configs {configsAllowed} {onShowCustomConfig}></Configs>
   </Modal>
 
-  <Modal bind:open={showlogs} bind:modalOpened title="Configuracion">
-    <LogsBillColector  {fetchLogs} {filter} />
-  </Modal>
-
-  
   
 
   <Modal bind:open={showRecoverPass} bind:modalOpened showHeader={false}>
