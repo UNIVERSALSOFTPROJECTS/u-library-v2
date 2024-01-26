@@ -10,6 +10,7 @@
   let loading;
   let logsOpen=false;
   let internetReconnect=0;
+  let messengerInf="";
 
 	let logFilter = { startDate: moment().format("YYYY-MM-DD"), search: "" };
 	let logs = [];
@@ -61,9 +62,10 @@
 	 }
 
   const getLogs=()=> {
-    if(!isWinWebview()) return console.log("No esta usando UniversalPOS");
+    if(!isWinWebview()) {messengerInf ="No esta usando UniversalPOS"; return;};
     logs=[];
     loading=true;
+    messengerInf='';
     sendToWinWebview("getLogs", logFilter);
   }
 
@@ -113,7 +115,7 @@
 
 <Modal open={logsOpen} title="Historial Billetero">
     <div class="logs-body">
-     
+      <p class="messenger-info">{messengerInf}</p>
       <div class="logs__body">
         <div>
           <input bind:value={logFilter.startDate} type="date" class="u-form-control"/>
@@ -212,6 +214,13 @@
 }
 button.search-losg:hover {
   background-color: #d19e06;
+}
+.messenger-info {
+  
+    color: blue; 
+    font-size: 14px; 
+    margin: 10px; 
+    
 }
   
  
