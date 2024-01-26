@@ -39,16 +39,16 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-repeat: no-repeat;
 }
 
-.Coliseosport, body {
+.Coliseosport {
   overscroll-behavior: none; /*eliminar el efecto scroll extendido fuera del body en safari*/
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 14px;
   background: #313233;
 }
-.Coliseosport *, body * {
+.Coliseosport * {
   color: #fff;
 }
-.Coliseosport .btn.close, body .btn.close {
+.Coliseosport .btn.close {
   width: 18px;
   height: 18px;
   background: transparent;
@@ -56,7 +56,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'  fill='%23fff' %3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
 }
-.Coliseosport .btn.eye, body .btn.eye {
+.Coliseosport .btn.eye {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'  fill='%23000' %3e%3cpath d='M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/%3e%3c/svg%3e");
   color: #000;
   height: 40px;
@@ -65,7 +65,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-position: center;
   background-size: 16px;
 }
-.Coliseosport .btn.no-eye, body .btn.no-eye {
+.Coliseosport .btn.no-eye {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'  fill='%23000' %3e%3cpath d='M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z'/%3e%3c/svg%3e");
   color: #000;
   height: 40px;
@@ -74,13 +74,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-position: center;
   background-size: 16px;
 }
-.Coliseosport :focus, .Coliseosport :focus-visible, body :focus, body :focus-visible {
+.Coliseosport :focus, .Coliseosport :focus-visible {
   outline: 0;
 }
-.Coliseosport ::-webkit-scrollbar-thumb, body ::-webkit-scrollbar-thumb {
+.Coliseosport ::-webkit-scrollbar-thumb {
   background: #f54b00;
 }
-.Coliseosport ::-webkit-scrollbar-track, body ::-webkit-scrollbar-track {
+.Coliseosport ::-webkit-scrollbar-track {
   background: #202124;
 }
 
@@ -168,6 +168,24 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background-size: 16px;
 }
 
+.accordion__body {
+  gap: 0.25rem;
+  display: none;
+  padding-left: 0.5rem;
+}
+.accordion__body * {
+  background-color: transparent;
+  color: #d7d7d7;
+  text-align: left;
+}
+.accordion.active .accordion__select {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M18.2929 15.2893C18.6834 14.8988 18.6834 14.2656 18.2929 13.8751L13.4007 8.98766C12.6195 8.20726 11.3537 8.20757 10.5729 8.98835L5.68257 13.8787C5.29205 14.2692 5.29205 14.9024 5.68257 15.2929C6.0731 15.6835 6.70626 15.6835 7.09679 15.2929L11.2824 11.1073C11.673 10.7168 12.3061 10.7168 12.6966 11.1073L16.8787 15.2893C17.2692 15.6798 17.9024 15.6798 18.2929 15.2893Z'/></svg>");
+  color: #f54b00;
+}
+.accordion.active .accordion__body {
+  display: grid;
+}
+
 .button-access-login {
   cursor: pointer;
   display: flex;
@@ -224,15 +242,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
   border: 0;
 }
 
-.Coliseosport .slc:hover, body .slc:hover, .Coliseosport .modal.withdrawal .withdrawal__copy:hover, .btn:hover, body .btn.eye:hover, body .btn.no-eye:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
+.Coliseosport .slc:hover, .Coliseosport .modal.withdrawal .withdrawal__copy:hover, .Coliseosport .icon--chat:hover, .Coliseosport .footer__social--instagram:hover, .Coliseosport .footer__social--facebook:hover, .Coliseosport .footer--lang:hover, .Coliseosport .footer--chat:hover, .btn:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
   filter: brightness(0.9);
 }
 
-.Coliseosport .ipt:disabled, body .ipt:disabled, .Coliseosport .modal.withdrawal .withdrawal__copy:disabled, .btn:disabled, body .btn.eye:disabled, body .btn.no-eye:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
+.Coliseosport .ipt:disabled, .Coliseosport .modal.withdrawal .withdrawal__copy:disabled, .Coliseosport .icon--chat:disabled, .Coliseosport .footer__social--instagram:disabled, .Coliseosport .footer__social--facebook:disabled, .Coliseosport .footer--lang:disabled, .Coliseosport .footer--chat:disabled, .btn:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
   filter: brightness(0.7);
 }
 
-.Coliseosport .slc, body .slc, .Coliseosport .modal.withdrawal .withdrawal__copy, .btn, .Coliseosport .btn, body .btn, .Coliseosport .btn.eye, body .btn.eye, .Coliseosport .btn.no-eye, body .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
+.accordion__select, .Coliseosport .slc, .Coliseosport .modal.withdrawal .withdrawal__copy, .Coliseosport .icon--chat, .Coliseosport .footer__social--instagram, .Coliseosport .footer__social--facebook, .Coliseosport .footer--lang, .Coliseosport .footer--chat, .btn, .Coliseosport .btn, .Coliseosport .btn.eye, .Coliseosport .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
   cursor: pointer;
   font-size: inherit;
   width: 100%;
@@ -242,7 +260,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.Coliseosport .slc, body .slc {
+.Coliseosport .slc {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   color: #000;
   height: 40px;
@@ -257,14 +275,30 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding-right: 1.5rem;
   text-overflow: ellipsis;
 }
-.Coliseosport .slc > *, body .slc > * {
+.Coliseosport .slc > * {
   color: #000;
 }
-.Coliseosport .slc::-webkit-scrollbar, body .slc::-webkit-scrollbar {
+.Coliseosport .slc::-webkit-scrollbar {
   width: 10px;
 }
 
-body .ipt:focus, .Coliseosport .ipt, body .ipt {
+.accordion__select {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z'/></svg>");
+  min-height: 40px;
+  text-align: start;
+  background-color: #e9e9e9;
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 24.5px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 1.5rem;
+  text-overflow: ellipsis;
+  transition: transform 0.5s;
+}
+
+.Coliseosport .ipt {
   font-family: inherit;
   font-size: inherit;
   border: none;
@@ -276,27 +310,27 @@ body .ipt:focus, .Coliseosport .ipt, body .ipt {
   padding: 0.5rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.Coliseosport .ipt:focus, body .ipt:focus {
+.Coliseosport .ipt:focus {
   box-shadow: 0 0 0 0.1rem #ff8e5c;
   border: 1px solid #ff8e5c;
 }
-.Coliseosport .ipt::-moz-placeholder, body .ipt::-moz-placeholder, body .ipt:focus::-moz-placeholder {
+.Coliseosport .ipt::-moz-placeholder {
   color: #909090;
 }
-.Coliseosport .ipt::placeholder, body .ipt::placeholder, body .ipt:focus::placeholder {
+.Coliseosport .ipt::placeholder {
   color: #909090;
 }
-.Coliseosport .info.ipt, body .info.ipt {
+.Coliseosport .info.ipt {
   border: 1px solid black;
 }
 
-.Coliseosport .link, body .link {
+.Coliseosport .link {
   cursor: pointer;
   color: #f54b00;
   background-color: transparent;
   text-decoration: underline;
 }
-.Coliseosport .link:hover, body .link:hover, .Coliseosport .active.link, body .active.link {
+.Coliseosport .link:hover, .Coliseosport .active.link {
   color: #f54b00;
 }
 
@@ -623,6 +657,159 @@ body .ipt:focus, .Coliseosport .ipt, body .ipt {
   min-width: 150px;
 }
 
+.Coliseosport .footer {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #202124;
+}
+.Coliseosport .footer__top {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.Coliseosport .footer--lang, .Coliseosport .footer--chat {
+  background: #4a4b53;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8rem;
+  gap: 0.5rem;
+}
+.Coliseosport .footer--lang img, .Coliseosport .footer--chat img {
+  width: 30px;
+  height: 20px;
+  border-radius: 0.1875rem;
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .footer__accordion {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5rem;
+  }
+}
+.Coliseosport .footer .accordion__select {
+  font-weight: 600;
+  background-color: transparent;
+  border-bottom: 1px solid #4a4b53;
+  border-radius: 0;
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .footer .accordion__select {
+    background-image: none;
+  }
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .footer .accordion__body {
+    display: grid;
+  }
+}
+.Coliseosport .footer__payments {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+.Coliseosport .footer__payments--imgs {
+  display: flex;
+  gap: 1rem;
+}
+.Coliseosport .footer__payments--imgs img {
+  width: 120px;
+  border-radius: 0.25rem;
+}
+.Coliseosport .footer__container {
+  display: grid;
+  gap: 1rem;
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .footer__container {
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+  }
+}
+.Coliseosport .footer__container--sub {
+  display: grid;
+  gap: 1rem;
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .footer__container--sub:nth-child(1) {
+    order: 3;
+  }
+  .Coliseosport .footer__container--sub:nth-child(2) {
+    order: 2;
+  }
+}
+.Coliseosport .footer__social {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: center;
+}
+.Coliseosport .footer__social--links {
+  display: flex;
+  gap: 0.5rem;
+}
+.Coliseosport .footer__social p {
+  filter: invert(100%) sepia(0%) saturate(27%) hue-rotate(30deg) brightness(106%) contrast(106%);
+  width: 40px;
+}
+.Coliseosport .footer__social--facebook {
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 21 21' xmlns='http://www.w3.org/2000/svg'><g><path d='M20.5 10.0866C20.4997 8.17558 19.9518 6.3047 18.9213 4.6954C17.8908 3.0861 16.4207 1.80579 14.6851 1.00602C12.9495 0.206253 11.0211 -0.079469 9.12821 0.182678C7.23529 0.444825 5.45712 1.24386 4.00421 2.4852C2.5513 3.72653 1.48449 5.35818 0.930087 7.18698C0.375679 9.01577 0.356887 10.9651 0.875935 12.8043C1.39498 14.6434 2.43014 16.2953 3.85884 17.5644C5.28755 18.8336 7.04999 19.6667 8.9375 19.9653V12.9772H6.39875V10.0866H8.9375V7.88344C8.9375 5.37719 10.4306 3.99282 12.7144 3.99282C13.4644 4.00322 14.2126 4.06839 14.9531 4.18782V6.64907H13.6919C13.4769 6.62052 13.2584 6.64071 13.0523 6.70813C12.8462 6.77555 12.658 6.88847 12.5015 7.03854C12.345 7.1886 12.2243 7.37196 12.1483 7.57502C12.0723 7.77808 12.043 7.99563 12.0625 8.21157V10.0866H14.8363L14.3925 12.9772H12.0625V19.9653C14.4149 19.5932 16.5572 18.3937 18.104 16.5827C19.6507 14.7718 20.5004 12.4682 20.5 10.0866Z'></path></g><defs><clipPath><rect></rect></clipPath></defs></svg>");
+  color: #000;
+  height: 40px;
+  text-align: start;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.Coliseosport .footer__social--facebook:hover {
+  filter: invert(24%) sepia(86%) saturate(2610%) hue-rotate(214deg) brightness(102%) contrast(103%);
+}
+.Coliseosport .footer__social--instagram {
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 21 21' xmlns='http://www.w3.org/2000/svg'><g><path d='M10.5 2.39844C13 2.39844 13.3 2.40781 14.2881 2.45281C14.8828 2.45983 15.4718 2.56913 16.0294 2.77594C16.4364 2.92621 16.8046 3.16583 17.1069 3.47719C17.4182 3.77942 17.6579 4.14762 17.8081 4.55469C18.0149 5.11227 18.1242 5.70128 18.1313 6.29594C18.1763 7.28594 18.1875 7.58594 18.1875 10.0859C18.1875 12.5859 18.1781 12.8859 18.1331 13.8741C18.1261 14.4687 18.0168 15.0577 17.81 15.6153C17.6539 16.0194 17.4151 16.3865 17.1087 16.6928C16.8024 16.9991 16.4354 17.238 16.0313 17.3941C15.4737 17.6009 14.8847 17.7102 14.29 17.7172C13.3019 17.7622 13.005 17.7716 10.5019 17.7716C7.99875 17.7716 7.70188 17.7622 6.71375 17.7172C6.11909 17.7102 5.53008 17.6009 4.9725 17.3941C4.56543 17.2438 4.19723 17.0042 3.895 16.6928C3.58365 16.3906 3.34402 16.0224 3.19375 15.6153C2.98695 15.0577 2.87764 14.4687 2.87063 13.8741C2.82375 12.8859 2.8125 12.5891 2.8125 10.0859C2.8125 7.58281 2.82188 7.28594 2.86688 6.29781C2.87389 5.70316 2.9832 5.11414 3.19 4.55656C3.34082 4.14932 3.58109 3.78111 3.89313 3.47906C4.19536 3.16771 4.56356 2.92808 4.97063 2.77781C5.52821 2.57101 6.11722 2.46171 6.71188 2.45469C7.7 2.40969 8 2.39844 10.5 2.39844ZM10.5 0.710938C7.95375 0.710938 7.63438 0.721563 6.635 0.767188C5.85701 0.78367 5.08741 0.931589 4.35875 1.20469C3.7336 1.43997 3.16716 1.8085 2.69875 2.28469C2.22188 2.75291 1.8527 3.31937 1.61688 3.94469C1.34378 4.67335 1.19586 5.44295 1.17938 6.22094C1.13563 7.22031 1.125 7.53969 1.125 10.0859C1.125 12.6322 1.13563 12.9516 1.18125 13.9509C1.19773 14.7289 1.34565 15.4985 1.61875 16.2272C1.85458 16.8525 2.22376 17.419 2.70063 17.8872C3.16885 18.3641 3.73531 18.7332 4.36063 18.9691C5.08929 19.2422 5.85889 19.3901 6.63688 19.4066C7.63688 19.4522 7.95563 19.4628 10.5019 19.4628C13.0481 19.4628 13.3675 19.4522 14.3669 19.4066C15.1449 19.3901 15.9145 19.2422 16.6431 18.9691C17.2657 18.7278 17.831 18.3593 18.3031 17.8872C18.7752 17.4151 19.1437 16.8497 19.385 16.2272C19.6581 15.4985 19.806 14.7289 19.8225 13.9509C19.8681 12.9509 19.8788 12.6322 19.8788 10.0859C19.8788 7.53969 19.8681 7.22031 19.8225 6.22094C19.806 5.44295 19.6581 4.67335 19.385 3.94469C19.1492 3.31937 18.78 2.75291 18.3031 2.28469C17.8349 1.80782 17.2684 1.43864 16.6431 1.20281C15.9145 0.929714 15.1449 0.781795 14.3669 0.765313C13.3656 0.721563 13.0463 0.710938 10.5 0.710938Z'></path><path d='M10.5 5.27344C9.54818 5.27344 8.61773 5.55569 7.82632 6.08449C7.03491 6.61329 6.41808 7.3649 6.05383 8.24427C5.68959 9.12364 5.59428 10.0913 5.77997 11.0248C5.96566 11.9583 6.42401 12.8158 7.09705 13.4889C7.77009 14.1619 8.6276 14.6203 9.56113 14.806C10.4947 14.9917 11.4623 14.8964 12.3417 14.5321C13.221 14.1679 13.9726 13.551 14.5014 12.7596C15.0303 11.9682 15.3125 11.0378 15.3125 10.0859C15.3125 8.80958 14.8055 7.5855 13.903 6.68299C13.0004 5.78047 11.7764 5.27344 10.5 5.27344ZM10.5 13.2109C9.88194 13.2109 9.27775 13.0277 8.76384 12.6843C8.24994 12.3409 7.8494 11.8528 7.61288 11.2818C7.37635 10.7108 7.31447 10.0825 7.43505 9.47628C7.55563 8.87009 7.85325 8.31327 8.29029 7.87623C8.72733 7.43919 9.28415 7.14156 9.89034 7.02098C10.4965 6.9004 11.1249 6.96229 11.6959 7.19881C12.2669 7.43534 12.755 7.83588 13.0983 8.34978C13.4417 8.86368 13.625 9.46787 13.625 10.0859C13.625 10.9147 13.2958 11.7096 12.7097 12.2956C12.1237 12.8817 11.3288 13.2109 10.5 13.2109Z'></path><path d='M15.5044 6.20654C16.1257 6.20654 16.6294 5.70286 16.6294 5.08154C16.6294 4.46022 16.1257 3.95654 15.5044 3.95654C14.883 3.95654 14.3794 4.46022 14.3794 5.08154C14.3794 5.70286 14.883 6.20654 15.5044 6.20654Z'></path></g><defs><clipPath ><rect></rect></clipPath></defs></svg>");
+  color: #000;
+  height: 40px;
+  text-align: start;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.Coliseosport .footer__social--instagram:hover {
+  filter: invert(41%) sepia(14%) saturate(5653%) hue-rotate(296deg) brightness(87%) contrast(92%);
+}
+.Coliseosport .footer__contact {
+  text-align: center;
+}
+.Coliseosport .footer__imgs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+.Coliseosport .footer__imgs img {
+  border-radius: 0.375rem;
+}
+.Coliseosport .footer__imgs img:nth-child(1) {
+  width: 100px;
+}
+.Coliseosport .footer__imgs img:nth-child(2) {
+  width: 125px;
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .footer__imgs {
+    justify-content: start;
+  }
+}
+.Coliseosport .footer__bottom {
+  display: grid;
+  gap: 0.5rem;
+  text-align: center;
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .footer__bottom {
+    text-align: start;
+  }
+}
+
 .Coliseosport .notify {
   position: absolute;
   z-index: 9999;
@@ -851,6 +1038,17 @@ body .ipt:focus, .Coliseosport .ipt, body .ipt {
   background: #088f08;
   font-size: 16px;
   width: 6rem;
+}
+.Coliseosport .icon--chat {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='none'><path d='M18.536 2H2.464a.987.987 0 0 0-.682.27.904.904 0 0 0-.282.653V14c0 .245.102.48.282.653.181.173.427.27.682.27h2.893V18l4.73-3.077h8.449a.987.987 0 0 0 .682-.27A.904.904 0 0 0 19.5 14V2.923a.904.904 0 0 0-.282-.653.987.987 0 0 0-.682-.27ZM6.643 9.692c-.254 0-.503-.072-.714-.207a1.244 1.244 0 0 1-.474-.552 1.182 1.182 0 0 1-.073-.712c.05-.238.172-.458.352-.63s.409-.29.658-.337a1.34 1.34 0 0 1 .743.07c.235.094.436.251.577.454a1.194 1.194 0 0 1-.16 1.554c-.241.23-.568.36-.91.36Zm3.857 0c-.254 0-.503-.072-.714-.207a1.244 1.244 0 0 1-.474-.552 1.182 1.182 0 0 1-.073-.712c.05-.238.172-.458.352-.63s.409-.29.658-.337c.25-.047.508-.023.743.07.235.094.436.251.577.454a1.194 1.194 0 0 1-.16 1.554c-.241.23-.568.36-.909.36Zm3.857 0c-.254 0-.503-.072-.714-.207a1.244 1.244 0 0 1-.474-.552 1.182 1.182 0 0 1-.073-.712c.05-.238.172-.458.352-.63s.409-.29.658-.337a1.34 1.34 0 0 1 .743.07c.235.094.436.251.577.454a1.194 1.194 0 0 1-.16 1.554c-.24.23-.568.36-.909.36Z' fill='url(%23a)'/><defs><linearGradient id='a' x1='10.5' y1='1.795' x2='10.5' y2='18' gradientUnits='userSpaceOnUse'><stop stop-color='%23fff'/><stop offset='1' stop-color='%23B4D3DB'/></linearGradient></defs></svg>");
+  color: #000;
+  height: 40px;
+  text-align: start;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
 }
 .Coliseosport .modal.login .modal-dialog {
   max-width: 360px;
@@ -1291,6 +1489,82 @@ body .ipt:focus, .Coliseosport .ipt, body .ipt {
   animation-delay: 0.1s;
 }
 .Coliseosport .modal.withdrawal .loading p:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes load_3p {
+  to {
+    opacity: 0.4;
+    transform: translate3d(0, 0.2rem, 0);
+  }
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .modal.chatLive {
+    width: 400px;
+    height: calc(500px + 3rem);
+    right: 0;
+    left: auto;
+    top: auto;
+    bottom: 0;
+    margin: 1rem;
+    border-radius: 0.25rem;
+    background: transparent;
+  }
+}
+.Coliseosport .modal.chatLive .modal-body {
+  width: 100%;
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .modal.chatLive .modal-body {
+    min-height: 500px;
+  }
+}
+.Coliseosport .modal.chatLive .modal-header {
+  background-color: #5a5a5a;
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .modal.chatLive .modal-dialog.centered {
+    margin: 0;
+  }
+}
+@media (max-width: 1023px) {
+  .Coliseosport .modal.chatLive .modal-dialog {
+    margin: 0;
+    grid-template-columns: auto;
+    max-width: 100%;
+  }
+  .Coliseosport .modal.chatLive .modal-content {
+    border-radius: 0;
+    height: 100vh;
+    max-width: 100%;
+  }
+}
+.Coliseosport .modal.chatLive iframe {
+  width: 100%;
+  border: 0;
+  height: calc(100vh - 3rem);
+}
+@media (orientation: landscape) and (min-width: 1023.99px) {
+  .Coliseosport .modal.chatLive iframe {
+    height: 500px;
+  }
+}
+.Coliseosport .modal.chatLive .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+}
+.Coliseosport .modal.chatLive .loading p {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #fff;
+  border-radius: 50%;
+  animation: 0.5s load_3p infinite alternate;
+}
+.Coliseosport .modal.chatLive .loading p:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.Coliseosport .modal.chatLive .loading p:nth-child(3) {
   animation-delay: 0.3s;
 }
 @keyframes load_3p {

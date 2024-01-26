@@ -102,7 +102,13 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             font-size: $g-font-size + 2;
             width: 6rem;
         }
-
+    }
+    .icon{
+        &--chat{
+            @include bgIconCenter($chat,"cover");
+            width: 20px;
+            height: 20px;
+        }
     }
     .modal{
         &.login{
@@ -128,10 +134,55 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
             
         }
-       
         &.withdrawal{
             @include withdrawalX__model__1();//este es general para x y w
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);  
+        }
+        &.chatLive{
+            @media #{$landscape_pc} {
+                &{
+                    width: 400px;
+                    height: calc(500px + 3rem);
+                    right: 0;
+                    left: auto;
+                    top: auto;
+                    bottom: 0;
+                    margin: 1rem;
+                    border-radius: 0.25rem;
+                    background: transparent;
+                }
+            }
+            & .modal {
+                //&-dialog {
+                //    max-width: 560px;
+                //}
+                &-body {
+                    width: 100%;
+                    @media #{$landscape_pc} {
+                        min-height: 500px;
+                    }
+                }
+                &-header{
+                    background-color: #5a5a5a;
+                }
+                
+                @media #{$landscape_pc} {
+                    &-dialog.centered{
+                        margin: 0;
+                    }
+                }
+        
+                @include modalFullScreen("mobile");
+            }
+            iframe{
+                width: 100%;
+                border: 0;
+                height: calc(100vh - 3rem);
+                @media #{$landscape_pc} {
+                    height: 500px;
+                }
+            }
+            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
         }
 
     }
@@ -151,5 +202,8 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             }
         }
     }
+    //.footer{
+    @extend %footer__model_1;
+    //}   
 }
 

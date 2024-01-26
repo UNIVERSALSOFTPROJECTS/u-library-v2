@@ -50,10 +50,10 @@ body{
             background-repeat: no-repeat;
         }
         &.eye{
-            @include bgIconCenter($eye);   
+            @include bgIconCenter($eye,"default");   
         }
         &.no-eye{
-            @include bgIconCenter($no-eye);
+            @include bgIconCenter($no-eye,"default");
         }
     }
     .slc{
@@ -168,10 +168,10 @@ body{
         //    background-repeat: no-repeat;
         //}
         &.eye {
-            @include bgIconCenter($eye);
+            @include bgIconCenter($eye,"default");
         }
         &.no-eye {
-            @include bgIconCenter($no-eye);
+            @include bgIconCenter($no-eye,"default");
         }
           
     }
