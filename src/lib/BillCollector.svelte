@@ -61,7 +61,7 @@
 	 }
 
   const getLogs=()=> {
-    if(!isWinWebview()) return alert("No esta usando UniversalPOS");
+    if(!isWinWebview()) return console.log("No esta usando UniversalPOS");
     logs=[];
     loading=true;
     sendToWinWebview("getLogs", logFilter);
@@ -79,7 +79,7 @@
         loading=false;
         
       });
-  }else{alert("Billetero no funcionara! no esta usando la aplicacion UniversalPOS.");}
+  }else{console.log("Billetero no funcionara! no esta usando la aplicacion UniversalPOS.");}
   });
 
   const handleOnline=()=>{
