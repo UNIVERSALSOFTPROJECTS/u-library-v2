@@ -59,6 +59,18 @@
 
     <div class="footer__container">
         <div class="footer__container--sub">
+            {#if payments.length != 0}
+            <div class="footer__payments">
+                <b>Métodos de pago</b>
+                <div class="footer__payments--imgs">
+                    {#each payments as payment}
+                    <img src="https://assets.apiusoft.com/generic_imgs/payments/{payment.name}.png" alt="">
+                    {/each}
+                </div>
+            </div>
+            {/if}
+        </div>
+        <div class="footer__container--sub">
             {#if socials.length != 0}
             <div class="footer__social">
                 <b>Síguenos en:</b>
@@ -75,18 +87,7 @@
                 <a href="mailto:{email}">{email}</a>
             </div>
         </div>
-        <div class="footer__container--sub">
-            {#if payments.length != 0}
-            <div class="footer__payments">
-                <b>Métodos de pago</b>
-                <div class="footer__payments--imgs">
-                    {#each payments as payment}
-                    <img src="https://assets.apiusoft.com/generic_imgs/payments/{payment.name}.png" alt="">
-                    {/each}
-                </div>
-            </div>
-            {/if}
-        </div>
+    
         <div class="footer__container--sub">
             <div class="footer__imgs">
                 <img src="https://assets.apiusoft.com/generic_imgs/footer/powered.png" alt="powered-img">

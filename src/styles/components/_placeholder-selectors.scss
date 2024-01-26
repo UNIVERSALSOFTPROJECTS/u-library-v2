@@ -1150,10 +1150,10 @@
                 gap: 1rem;
                 @media #{$landscape_pc} {
                     &:nth-child(1){
-                        order: 3;
+                        order: 2;
                     }
                     &:nth-child(2){
-                        order: 2;
+                        order: 3;
                     }
                 }
             }
@@ -1191,6 +1191,8 @@
             align-items: center;
             gap: 1rem;
             justify-content: center;
+            flex-direction: column;
+            flex-direction: column-reverse;
             & img{
                 border-radius: $borderR-btn * 1.5;
                 &:nth-child(1){
@@ -1202,6 +1204,7 @@
             }
             @media #{$landscape_pc} {
                 justify-content: start;
+                flex-direction: row;
             }
         }
         &__bottom{

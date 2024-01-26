@@ -95,7 +95,7 @@
         email:"info@coliseosport.com",
     };
 
-    let chatLiveUrl = "https://tawk.to/chat/651dc3fc6fcfe87d54b68fb5/1hbu4b5db";
+    let chatLiveUrl = "https://tawk.to/chat/65845e7d70c9f2407f824709/1hi6h274h";
     let chatLiveModalOpen = false;
 
     const openChatLive = () =>{ chatLiveModalOpen = true; modalOpened = "chatLive" }

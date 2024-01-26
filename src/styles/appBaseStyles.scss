@@ -163,7 +163,12 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     }
                 }
                 &-header{
-                    background-color: #5a5a5a;
+                    background-color: #23a84e;
+                    & .btn.close{
+                        background-image: url("#{$minimized}");
+                        width: 30px;
+                        height: 30px;
+                    }
                 }
                 
                 @media #{$landscape_pc} {
