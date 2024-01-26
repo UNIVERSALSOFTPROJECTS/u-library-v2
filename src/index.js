@@ -23,6 +23,7 @@ export {default as WithdrawalW } from './lib/withdrawal/WithdrawalW.svelte';
 export {default as TopBar } from './lib/topbar/TopBar.svelte';
 export {default as BalanceSocketListener } from './lib/BalanceSocketListener.svelte';
 export {default as RecoverPassword } from './lib/topbar/RecoverPassword.svelte';
+export {default as BillCollector} from './lib/BillCollector.svelte';
 
 
 
