@@ -9,7 +9,7 @@
 
   const onActiveContent = () =>{
     activeContent=!activeContent;
-    console.log("xxx", activeContent) ;
+  
   }
   
   const onPageChange = (page) => {

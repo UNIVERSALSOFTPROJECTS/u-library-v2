@@ -19,6 +19,7 @@
                 case 'DEPOSIT-CASH': msg = "Deposito efectivo procesado"; break;
                 case 'WITHDRAW-CASH': msg = "Retiro efectivo confirmado"; break;
                 case 'WITHDRAW-BANK': msg = "Retiro bancario confirmado"; break;
+                case 'CASCH-CASH': msg = "Deposito desde Billetero confirmado"; break;
             }
             notify.success(msg);
             getBalance(user.agregatorToken);
