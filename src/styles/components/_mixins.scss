@@ -315,7 +315,7 @@
 }
 
 //icon eye pass o otrer bg incons
-@mixin bgIconCenter($type-icon){
+@mixin bgIconCenter($type-icon, $size){// defult size and personalized
     @extend %button;
     background-image: url("#{$type-icon}");
     color: $color-ipt;
@@ -323,7 +323,11 @@
     text-align: start;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: #{$g-font-size + 2} ; 
+    @if($size == "default"){
+        background-size: #{$g-font-size + 2} ; 
+    }@else{
+        background-size: #{$size} ; 
+    }
 }
 
 //animation-Load

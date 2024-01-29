@@ -59,6 +59,22 @@
     }
     @extend %hover;
 }
+%accordion{
+    @extend %configBtn;
+    background-image: url("#{$arrow-bottom}");
+    min-height: $ipt-height;
+    text-align: start;
+    background-color: #e9e9e9;
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: #{$g-font-size * 1.75}; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 1.5rem;
+    text-overflow: ellipsis;
+    transition: transform 0.5s;
+}
 %input{
     font-family: inherit;
     font-size: inherit;
@@ -630,7 +646,7 @@
             align-items: center;
         }
         &__copy{
-            @include bgIconCenter($copy);   
+            @include bgIconCenter($copy,"default");   
             background-color: $color-primary;
             position: relative;
         }
@@ -1057,6 +1073,147 @@
         &.validsms{
             background: #2783ff;
             min-width: 150px;
+        }
+    }
+}
+
+%footer__model_1{
+    .footer{
+        display: grid;
+        gap: 1rem;
+        padding: 1rem;
+        background-color: $bgc-header;
+        &__top{
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        &--lang, &--chat{
+            @extend %button;
+            background: #4a4b53;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 8rem;
+            gap: 0.5rem;
+            & img{
+                width: 30px;
+                height: 20px;
+                border-radius: $borderR-btn * 0.75;
+            }
+        }
+        &__accordion{
+            @media #{$landscape_pc} {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 5rem;
+            }
+        }
+        & .accordion{
+            &__select{
+                font-weight: 600;
+                background-color: transparent;
+                border-bottom: 1px solid #4a4b53;
+                border-radius: 0;
+                @media #{$landscape_pc} {
+                    background-image: none;
+                }
+            }
+            &__body{
+                @media #{$landscape_pc} {
+                    display: grid;
+                }
+            }
+        }
+        &__payments{
+            display: grid;
+            justify-items: center;
+            gap: 0.5rem;
+            &--imgs{
+                display: flex;
+                gap: 1rem;
+                & img {
+                    width: 120px;
+                    border-radius: $borderR-btn;
+                }
+            }
+        }
+        &__container{
+            display: grid;
+            gap: 1rem;
+            @media #{$landscape_pc} {
+                grid-template-columns: 1fr 1fr 1fr;
+                align-items: center;
+            }
+            &--sub{
+                display: grid;
+                gap: 1rem;
+                @media #{$landscape_pc} {
+                    &:nth-child(1){
+                        order: 2;
+                    }
+                    &:nth-child(2){
+                        order: 3;
+                    }
+                }
+            }
+        }
+        &__social{
+            display: grid;
+            gap: 0.5rem;
+            justify-items: center;
+            &--links{
+                display: flex;
+                gap: 0.5rem;
+            }
+            p{
+                filter: invert(100%) sepia(0%) saturate(27%) hue-rotate(30deg) brightness(106%) contrast(106%);//white default
+                width: 40px;
+            }
+            &--facebook{
+                @include bgIconCenter($social_facebook,"cover");
+                &:hover{
+                    filter: invert(24%) sepia(86%) saturate(2610%) hue-rotate(214deg) brightness(102%) contrast(103%);
+                }
+            }
+            &--instagram{
+                @include bgIconCenter($social_instagram,"cover");
+                &:hover{
+                    filter: invert(41%) sepia(14%) saturate(5653%) hue-rotate(296deg) brightness(87%) contrast(92%);
+                }
+            }
+        }
+        &__contact{
+            text-align: center;
+        }
+        &__imgs{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            justify-content: center;
+            flex-direction: column;
+            flex-direction: column-reverse;
+            & img{
+                border-radius: $borderR-btn * 1.5;
+                &:nth-child(1){
+                    width: 100px;
+                }
+                &:nth-child(2){
+                    width: 125px;
+                }
+            }
+            @media #{$landscape_pc} {
+                justify-content: start;
+                flex-direction: row;
+            }
+        }
+        &__bottom{
+            display: grid;
+            gap: 0.5rem;
+            text-align: center;
+            @media #{$landscape_pc} {
+                text-align: start;
+            }
         }
     }
 }

@@ -157,7 +157,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     align-items: center;
                 }
                 &__copy{
-                    @include bgIconCenter($copy);   
+                    @include bgIconCenter($copy,"default");   
                     background-color:#ffffff00;
                     border-radius: 100%;
                     height: auto;

@@ -5,5 +5,14 @@
   
     @return rgb($red, $green, $blue);
 }
+
+//background-color: lighten($bgc-header, 10%);
+@function adjustOpacity($color,$opacidad) {
+    $red: red($color);
+    $green: green($color);
+    $blue: blue($color);
+  
+    @return rgba($red, $green, $blue, $opacidad);
+}
   
 

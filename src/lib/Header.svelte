@@ -10,6 +10,10 @@
     //import Withdrawal from './withdrawal/WithdrawalW.svelte';
     import WithdrawalW from './withdrawal/WithdrawalW.svelte';
     
+    import Footer from "./Footer.svelte";
+    
+    import ChatLive from "./modals/ChatLive.svelte";
+
     import utils from '../js/util';
     import { onMount } from 'svelte';
     import { ServerConnection } from '..';
@@ -74,7 +78,27 @@
         banksNames: [],
         typeAccount: []
     };
+    const configFooter = {  
+        platform,
+        country : "Chile",
+        flag:"chl",
+        isChat: true,
+        payments: [
+            {name: "KHIPU"},
+            {name: "FLOW"},
+        ],
+        social: [ //ASEGURATO DE COLOCAR EL NOMBRE EN MINUSCULA Y EL ENLACE CORRECTO!!!
+            {name:"facebook", url:"https://www.facebook.com/coliseosportoficial"},
+            {name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
+            //social: []//si no hay redes sociales
+        ],
+        email:"info@coliseosport.com",
+    };
 
+    let chatLiveUrl = "https://tawk.to/chat/65845e7d70c9f2407f824709/1hi6h274h";
+    let chatLiveModalOpen = false;
+
+    const openChatLive = () =>{ chatLiveModalOpen = true; modalOpened = "chatLive" }
     // fin de registro m
     //IDIOMAR!!!
     $locale = "es";//Actualmente solo "es" y "fr"
@@ -161,6 +185,9 @@
             modalOpened = "resetPassword";
         } 
     });
+    const onCategoryChange = (param) => {
+        console.log(param);
+    }
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
 </script>
 
@@ -214,7 +241,12 @@
         <WithdrawalW {configWithdrawal}  bind:user {openTermsConditions} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
     </Modal>
 
+    <Footer {configFooter} {onCategoryChange} {openChatLive}/>
 
+
+    <Modal bind:open={chatLiveModalOpen} bind:modalOpened title="Chat en vivo">
+        <ChatLive bind:chatLiveUrl/>
+    </Modal>
 
     <Notifier bind:notify/>
 </div>
