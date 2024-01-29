@@ -45,6 +45,10 @@
   const saveConfig=()=>{
     try {
       localStorage.setItem("config", JSON.stringify(configs));
+      if(configs.billCollector){
+      }else{
+      sendToWinWebview('onLogout', {});
+      }
       window.location.reload();
     } catch (error) {
         console.error("Error al guardar la configuración:", error);
