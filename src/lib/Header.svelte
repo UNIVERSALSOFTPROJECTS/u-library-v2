@@ -33,7 +33,10 @@
     let signupModalOpen = false;
     let depositModalOpen = false;
     let withdrawalModalOpen = false;
+
     let modalOpened;
+    let subModalOpened;
+
     let isToggleOn = false;
     //Deposit Modal
     let notify = {};
@@ -97,8 +100,7 @@
 
     let chatLiveUrl = "https://tawk.to/chat/65845e7d70c9f2407f824709/1hi6h274h";
     let chatLiveModalOpen = false;
-
-    const openChatLive = () =>{ chatLiveModalOpen = true; modalOpened = "chatLive" }
+    const openChatLive = () =>{ chatLiveModalOpen = true; subModalOpened = "chatLive" }
     // fin de registro m
     //IDIOMAR!!!
     $locale = "es";//Actualmente solo "es" y "fr"
@@ -244,7 +246,7 @@
     <Footer {configFooter} {onCategoryChange} {openChatLive}/>
 
 
-    <Modal bind:open={chatLiveModalOpen} bind:modalOpened title="Chat en vivo">
+    <Modal bind:open={chatLiveModalOpen} bind:subModalOpened title="Chat en vivo">
         <ChatLive bind:chatLiveUrl/>
     </Modal>
 

@@ -166,6 +166,9 @@ input[type=date] {
     overflow-x: hidden;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.5);
+    &.sub{
+        z-index: 1056;
+    }
     &-open{
       overflow: hidden;
       padding-right: 15px;

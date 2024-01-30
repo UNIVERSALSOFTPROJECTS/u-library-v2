@@ -7,6 +7,7 @@
   export let modalOpened = "";
   export let title = "";
   export let showHeader = true;
+  export let subModalOpened = "";
 
   //let heightModal;
   //let inputFocus;
@@ -17,6 +18,7 @@
   //   }
 
   function statusModal(isActive) {
+    if (subModalOpened) return;
     const body = document.body.classList;
     isActive ? body.add("modal-open"):body.remove("modal-open");
   }
@@ -24,7 +26,7 @@
   const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
 
   //function resizeHeightModal() {
-  //  inputFocus = document.activeElement;
+  //  inputFocus = document.activeElement;  d
   //  if(inputFocus && inputFocus.tagName === 'INPUT') inputFocus.blur();
   //}
 //
@@ -37,7 +39,7 @@
 </script>
 
 {#if open}
-  <div class="modal {modalOpened}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom}>
+  <div class="{subModalOpened?'sub':''} modal {modalOpened || subModalOpened}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom}>
     <div class="modal-dialog centered" transition:fly={{ y: -50, duration: 500 }}>
       <div class="modal-content {!showHeader?'no-header':''}"> <!--use:watchResize={resizeHeightModal} style="max-height:{heightModal}px"  Error en APK de momento no se usara-->
         {#if showHeader}
