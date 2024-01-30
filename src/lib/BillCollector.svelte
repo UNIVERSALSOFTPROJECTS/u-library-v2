@@ -2,6 +2,9 @@
 	import { onMount } from "svelte";
   import moment from "moment";
   import Modal from "./Modal.svelte";
+  import notify from "../js/notify";
+  import Notifier from "./Notifier.svelte";
+  import EventManager from "../js/EventManager";
 
   export let user;	
   export let configs;
@@ -11,6 +14,7 @@
   let logsOpen=false;
   let internetReconnect=0;
   let messengerInf="";
+  let messageSaving="";
 
 	let logFilter = { startDate: moment().format("YYYY-MM-DD"), search: "" };
 	let logs = [];
@@ -46,12 +50,16 @@
     try {
       localStorage.setItem("config", JSON.stringify(configs));
       if(!configs.billCollector){
-      sendToWinWebview('onLogout', {});
-      console.log("avisando onlougout");
+        messageSaving="Apagando Billetero. Espere...";
+        sendToWinWebview('shutdown', {});
+        console.log("avisando shutdown");
+
       }
+      notify.success("Configuracion Guardada");
       //window.location.reload();
     } catch (error) {
         console.error("Error al guardar la configuración:", error);
+        notify.success("Fallo al guardar Configuracion");
     }
   }
 
@@ -74,6 +82,7 @@
   }
 
   onMount(()=>{
+    notify.setEM(EventManager);
     logs=[];
   if(isWinWebview()){
     window.chrome.webview.addEventListener('message', function (e) {
@@ -81,6 +90,7 @@
         let data=JSON.parse(e.data);
         switch(data.msg){
           case 'getLogs': logs = data.data; break;
+          case 'shutdownOk': window.location.reload(); break;
         }
         loading=false;
         
@@ -104,6 +114,7 @@
 <Modal open={configOpen} title="Configuracion Billetero">
   <div class="config-wrapper"> 
     <div>
+      <p class="messenger-info">{messageSaving}</p>
       <label for="checkbillcollector"> 
         <input id="checkbillcollector" type="checkbox" bind:checked={configs.billCollector} /> Activado </label>
     {#if configs && configs.billCollector}
@@ -163,6 +174,7 @@
     </div>
 </Modal>
 
+<Notifier />
 
 
 
