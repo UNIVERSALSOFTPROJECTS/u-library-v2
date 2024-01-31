@@ -1094,7 +1094,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 8rem;
+            width: auto ;
             gap: 0.5rem;
             & img{
                 width: 30px;
@@ -1105,7 +1105,7 @@
         &__accordion{
             @media #{$landscape_pc} {
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
                 gap: 5rem;
             }
         }

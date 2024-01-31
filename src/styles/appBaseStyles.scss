@@ -189,7 +189,23 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             }
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
         }
-
+        &.promotions{
+            & .modal{
+                &-body {
+                    padding: 1rem;
+                    align-content: start;
+                    width: 100%;
+                    overflow: auto;
+                }
+                &-content{
+                    max-width: 500px;
+                }
+                &-header{
+                    background: $color-primary;
+                }
+                @include modalFullScreen("mobile");
+            }
+        }
     }
     .dropdown{
         &.idiom{

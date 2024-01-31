@@ -10,6 +10,7 @@
     let socials = configFooter.social;
     let email = configFooter.email;
     let platform = configFooter.platform;
+    let bonus = configFooter.bonus;
     let activePanel = null;
 
     const toggleAccordion = (panel) => { activePanel = activePanel === panel ? null : panel; };
@@ -55,6 +56,16 @@
                 <a class="btn" href="https://assets.apiusoft.com/{platform}/q&a.pdf" target="_blank">Preguntas frecuentes</a>
             </div>
         </div>
+        {#if bonus.length != 0}
+        <div class="accordion {activePanel === 'panel4' ? 'active' : ''}">
+            <button class="accordion__select" on:click={() => toggleAccordion('panel4')}>Promociones</button>
+            <div class="accordion__body">
+                {#each bonus as bono}
+                <a class="btn" href="https://assets.apiusoft.com/{platform}/bonus_sportbook.pdf" target="_blank">{bono.name}</a>
+                {/each}
+            </div>
+        </div>
+        {/if}
     </div>
 
     <div class="footer__container">
@@ -99,5 +110,4 @@
             </div>
         </div>
     </div>
-
 </footer>

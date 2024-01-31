@@ -13,6 +13,7 @@
     import Footer from "./Footer.svelte";
     
     import ChatLive from "./modals/ChatLive.svelte";
+    import Promotions from "./modals/Promotions.svelte";
 
     import utils from '../js/util';
     import { onMount } from 'svelte';
@@ -28,6 +29,7 @@
     let activeSession = false;
     //export let ASSETS_GLOBAL;
     let loginModalOpen = false;
+    let promotionsModalOpen = false;
     let resetpassModalOpen=false;
 
     let signupModalOpen = false;
@@ -96,6 +98,15 @@
             //social: []//si no hay redes sociales
         ],
         email:"info@coliseosport.com",
+        bonus:[
+            {name:"Bono Deportivas"}
+        ],
+    };
+    const configPromotions = {
+        platform,
+        bonus:[
+            {name:"spoortbook"}
+        ],
     };
 
     let chatLiveUrl = "https://tawk.to/chat/65845e7d70c9f2407f824709/1hi6h274h";
@@ -190,6 +201,11 @@
     const onCategoryChange = (param) => {
         console.log(param);
     }
+    const onOpenPromotions = () => {
+        promotionsModalOpen = true;
+        modalOpened = "promotions";
+    }
+
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
 </script>
 
@@ -220,6 +236,7 @@
         -->
     </header>
 
+    <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
@@ -243,12 +260,16 @@
         <WithdrawalW {configWithdrawal}  bind:user {openTermsConditions} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
     </Modal>
 
-    <Footer {configFooter} {onCategoryChange} {openChatLive}/>
-
-
+    <Modal bind:open={promotionsModalOpen} bind:modalOpened title="Promociones">
+        <Promotions {configPromotions}/>
+    </Modal>
+    
     <Modal bind:open={chatLiveModalOpen} bind:subModalOpened title="Chat en vivo">
         <ChatLive bind:chatLiveUrl/>
     </Modal>
-
+    
+    <Footer {configFooter} {onCategoryChange} {openChatLive}/>
+    
+    
     <Notifier bind:notify/>
 </div>
