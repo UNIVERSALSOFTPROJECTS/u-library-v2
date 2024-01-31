@@ -88,9 +88,11 @@
     window.chrome.webview.addEventListener('message', function (e) {
         console.log("mensaje recibido C#:",e.data);
         let data=JSON.parse(e.data);
-        switch(data.msg){
+        switch(data.action){
           case 'getLogs': logs = data.data; break;
           case 'shutdownOk': window.location.reload(); break;
+          case 'notify': alert(data?.code); break;
+          
         }
         loading=false;
         
@@ -105,6 +107,15 @@
   }
   const handleOffline=()=>{
     console.log("Desconetado a internet ");
+    onLogginExitUserCurrent();
+  }
+  const onLogginExitUserCurrent=()=>{
+    const u = sessionStorage.getItem("user");
+    if(u){
+      sessionStorage.removeItem("user");
+      sendToWinWebview('onLogout', {});
+    }
+
   }
 
 
