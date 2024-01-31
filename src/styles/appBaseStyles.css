@@ -100,6 +100,9 @@ input[type=date]::-webkit-calendar-picker-indicator {
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.5);
 }
+.modal.sub {
+  z-index: 1056;
+}
 .modal-open {
   overflow: hidden;
   padding-right: 15px;
@@ -673,7 +676,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 8rem;
+  width: auto;
   gap: 0.5rem;
 }
 .Coliseosport .footer--lang img, .Coliseosport .footer--chat img {
@@ -684,7 +687,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 @media (orientation: landscape) and (min-width: 1023.99px) {
   .Coliseosport .footer__accordion {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 5rem;
   }
 }
@@ -1579,6 +1582,30 @@ input[type=date]::-webkit-calendar-picker-indicator {
   to {
     opacity: 0.4;
     transform: translate3d(0, 0.2rem, 0);
+  }
+}
+.Coliseosport .modal.promotions .modal-body {
+  padding: 1rem;
+  align-content: start;
+  width: 100%;
+  overflow: auto;
+}
+.Coliseosport .modal.promotions .modal-content {
+  max-width: 500px;
+}
+.Coliseosport .modal.promotions .modal-header {
+  background: #f54b00;
+}
+@media (max-width: 1023px) {
+  .Coliseosport .modal.promotions .modal-dialog {
+    margin: 0;
+    grid-template-columns: auto;
+    max-width: 100%;
+  }
+  .Coliseosport .modal.promotions .modal-content {
+    border-radius: 0;
+    height: 100vh;
+    max-width: 100%;
   }
 }
 .Coliseosport .dropdown.idiom * {
