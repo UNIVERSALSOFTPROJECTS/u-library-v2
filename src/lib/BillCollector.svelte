@@ -15,6 +15,9 @@
   let internetReconnect=0;
   let messengerInf="";
   let messageSaving="";
+  let showNotifyModal = false;
+  let machineCrashed = false;
+  let notificationData = {};
 
 	let logFilter = { startDate: moment().format("YYYY-MM-DD"), search: "" };
 	let logs = [];
@@ -24,6 +27,7 @@
 		  if(user  && activeBillCollector && isNewUser() && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
     	if(!user && activeBillCollector && billCollectorActive() && isWinWebview()) sendToWinWebview('onLogout', {});
       
+      if( machineCrashed===true && showNotifyModal==false) showNotifyModal=true; 
 	}
 
   const isNewUser=()=>{
@@ -51,12 +55,13 @@
       localStorage.setItem("config", JSON.stringify(configs));
       if(!configs.billCollector){
         messageSaving="Apagando Billetero. Espere...";
-        sendToWinWebview('shutdown', {});
+        sendToWinWebview('onLogout', {});
         console.log("avisando shutdown");
 
       }
       notify.success("Configuracion Guardada");
       //window.location.reload();
+      configOpen=false;
     } catch (error) {
         console.error("Error al guardar la configuración:", error);
         notify.success("Fallo al guardar Configuracion");
@@ -91,7 +96,7 @@
         switch(data.action){
           case 'getLogs': logs = data.data; break;
           case 'shutdownOk': window.location.reload(); break;
-          case 'notify': alert(data?.code); break;
+          case 'notify': showNotifyAll(data); break;
           
         }
         loading=false;
@@ -105,6 +110,12 @@
     if(user) sendToWinWebview('setUser', user);
     
   }
+  const showNotifyAll = (result) => {
+    notificationData = result;
+    showNotifyModal = true;
+    if( result.type=='error' ) machineCrashed= true;
+    
+  };
   const handleOffline=()=>{
     console.log("Desconetado a internet ");
     onLogginExitUserCurrent();
@@ -121,6 +132,34 @@
 
   window.addEventListener('online', handleOnline);
   window.addEventListener('offiline', handleOffline);
+
+  /*action,
+code,
+message,
+type
+*/
+let translateCodes = {
+    'INVALID_GET_LOGS': 'Error al obtener registros de logs.' ,
+    'INVALID_CURRENCY': 'Tipo de moneda no permitido.' ,
+    'BILLCOLLECTOR_DISCONNECT': 'El recolector de billetes está desconectado.' ,
+    'LOGOUT_ERROR': 'Error al cerrar sesión.' ,
+    'BILLCOLLECTOR_CONNECTED': 'El recolector de billetes está conectado.',
+    'BILLCOLLECTOR_INITIALIZE_ERROR': 'Error al inicializar el recolector de billetes.' ,
+    'TOKEN_EXPIRED': 'Token expirado.' ,
+    'ERROR': 'Error general.',
+    'DEPOSIT_TO_INCORRECT_USER': 'Depósito en usuario incorrecto.',
+    'USER_NOT_FOUND': 'Usuario no encontrado.' ,
+    'ERROR_NETWORK': 'Error de red.' ,
+    'DEPOSITO_OK': 'Depósito exitoso.' ,
+    'DEPOSITO_FALLO': 'Fallo en el depósito.' ,
+    'GENERAL_ERROR': 'Error general.' ,
+    'warning': 'Advertencia.' ,
+    'info': 'Información.' ,
+    'error': 'Error.' ,
+    'success': 'exito.' ,
+    'BILLCOLLECTOR_DISCONECT':'El recolector de billetes está desconectado.'
+  };
+
 </script>
 <Modal open={configOpen} title="Configuracion Billetero">
   <div class="config-wrapper"> 
@@ -137,6 +176,32 @@
   <button on:click={saveConfig} class="btn">Guardar</button>
   </div>
   
+</Modal>
+
+<Modal open={showNotifyModal} title={`Mensaje de ${translateCodes[notificationData?.type]|| 'tipo no encontrado.'}`}>
+  <div class="config-wrapper" style="background-color: aliceblue;"> 
+    <div class="mx-auto flex items-center justify-center ">
+      {#if notificationData.type === 'error'}
+        <!-- Error Icon -->
+      {:else if notificationData.type === 'warning'}
+        <!-- Warning Icon -->
+      {:else if notificationData.type === 'info'}
+        <!-- Info Icon -->
+      {/if}
+    </div>
+    <div style="margin: 20px; text-align: center; font-weight: bold;color: black;">
+      <span >
+        <b>
+          {#if notificationData.type === 'error'}
+           {notificationData?.data}
+            ACTUALMENTE ESTÁ PRESENTANDO ERROR, CONTACTE CON SOPORTE O CAJERO.!
+          {:else}
+          {translateCodes[notificationData?.code] || 'codigo no encontrado.'}
+          {/if}
+        </b>
+      </span>
+  </div>
+  </div>
 </Modal>
 
 <Modal open={logsOpen} title="Historial Billetero">
