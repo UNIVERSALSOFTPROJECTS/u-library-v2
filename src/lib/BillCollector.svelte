@@ -27,7 +27,7 @@
 		  if(user  && activeBillCollector && isNewUser() && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
     	if(!user && activeBillCollector && billCollectorActive() && isWinWebview()) sendToWinWebview('onLogout', {});
       
-      if( machineCrashed===true && showNotifyModal==false) showNotifyModal=true; 
+      //if( machineCrashed===true && showNotifyModal==false) showNotifyModal=true; 
 	}
 
   const isNewUser=()=>{
@@ -182,20 +182,13 @@ const ERROR_CODES = {
 <Modal open={showNotifyModal} title="NOTIFICACION">
   <div class="config-wrapper" style="background-color: aliceblue;"> 
     <div class="mx-auto flex items-center justify-center ">
-      {#if notificationData.type === 'error'}
-        <!-- Error Icon -->
-      {:else if notificationData.type === 'warning'}
-        <!-- Warning Icon -->
-      {:else if notificationData.type === 'info'}
-        <!-- Info Icon -->
-      {/if}
+     
     </div>
     <div style="margin: 20px; text-align: center; font-weight: bold;color: black;">
-      <span >
+   
         <b>
           Notificacion
         </b>
-      </span>
   </div>
   </div>
 </Modal>
