@@ -17,7 +17,7 @@
   let messageSaving="";
   let showNotifyModal = false;
   let machineCrashed = false;
-  let notificationData = {};
+  let notifyData = {};
 
 	let logFilter = { startDate: moment().format("YYYY-MM-DD"), search: "" };
 	let logs = [];
@@ -111,8 +111,9 @@
     
   }
   const showNotifyAll = (result) => {
-    notificationData = result;
-    console.log("Notify", notificationData);
+    notifyData = result;
+    console.log("Notify", notifyData);
+    notifyData.title=getNotifyTitle();
     showNotifyModal = true;
     //if( result.type=='error' ) machineCrashed= true;
     
@@ -142,10 +143,10 @@ type
 const ERROR_CODES = {
     'INVALID_GET_LOGS': 'Error al obtener registros de logs.' ,
     'INVALID_CURRENCY': 'Tipo de moneda no permitido.' ,
-    'BILLCOLLECTOR_DISCONNECT': 'El recolector de billetes está desconectado.' ,
+    'BILLCOLLECTOR_DISCONNECT': 'El billetero está desconectado.' ,
     'LOGOUT_ERROR': 'Error al cerrar sesión.' ,
-    'BILLCOLLECTOR_CONNECTED': 'El recolector de billetes está conectado.',
-    'BILLCOLLECTOR_INITIALIZE_ERROR': 'Error al inicializar el recolector de billetes.' ,
+    'BILLCOLLECTOR_CONNECTED': 'El billetero está conectado.',
+    'BILLCOLLECTOR_INITIALIZE_ERROR': 'Error al inicializar el billetero.' ,
     'TOKEN_EXPIRED': 'Token expirado.' ,
     'ERROR': 'Error general.',
     'DEPOSIT_TO_INCORRECT_USER': 'Depósito en usuario incorrecto.',
@@ -154,12 +155,19 @@ const ERROR_CODES = {
     'DEPOSITO_OK': 'Depósito exitoso.' ,
     'DEPOSITO_FALLO': 'Fallo en el depósito.' ,
     'GENERAL_ERROR': 'Error general.' ,
-    'warning': 'Advertencia.' ,
-    'info': 'Información.' ,
-    'error': 'Error.' ,
-    'success': 'exito.' ,
-    'BILLCOLLECTOR_DISCONECT':'El recolector de billetes está desconectado.'
+    'BILLCOLLECTOR_DISCONECT':'El billetero está desconectado.'
   };
+
+  const getNotifyTitle=()=>{
+    let title="";
+    switch(notifyData.type){
+      case 'error': title='ERROR'; break;
+      case 'warning': title='PRECAUCION'; break;
+      case 'info': title= 'INFORMACION'; break;
+      case 'success': title= 'EXITO'; break;
+    }
+    return title;
+  }
 
 </script>
 <Modal open={configOpen} title="Configuracion Billetero">
@@ -178,18 +186,34 @@ const ERROR_CODES = {
   </div>
   
 </Modal>
-
-<Modal open={showNotifyModal} title="NOTIFICACION">
+<Modal bind:open={showNotifyModal} title={notifyData.title}>
   <div class="config-wrapper" style="background-color: aliceblue;"> 
-    <div class="mx-auto flex items-center justify-center ">
-     
+    
+    <div style="margin: 0; text-align: center; font-weight: bold;color: black;">
+
+      {#if notifyData.type === 'error'}
+        <div class="icon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="#dc3545" class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+          </svg>
+        </div>
+      {/if}
+    
+      {#if notifyData.type === 'warning'}
+        <div class="icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="#ffc107" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+        </svg>
+      </div>
+      {/if}
+    
+      <p>{ERROR_CODES[notifyData.code]}</p>
+    
+      {#if /error|warning/.test(notifyData.type)}
+        <p style="padding:5px; color: #888;">{notifyData.message} :: {notifyData.data || ''} </p>
+      {/if}
     </div>
-    <div style="margin: 20px; text-align: center; font-weight: bold;color: black;">
-   
-        <b>
-          Notificacion
-        </b>
-  </div>
+    
   </div>
 </Modal>
 
@@ -245,6 +269,10 @@ const ERROR_CODES = {
 
 
 <style>
+  .icon-wrapper{
+    text-align: center;
+    padding:1rem;
+  }
   .money{ text-align: right;}
   tbody tr:hover{
     background-color: #c0c0c0;
