@@ -112,8 +112,9 @@
   }
   const showNotifyAll = (result) => {
     notificationData = result;
+    console.log("Notify", notificationData);
     showNotifyModal = true;
-    if( result.type=='error' ) machineCrashed= true;
+    //if( result.type=='error' ) machineCrashed= true;
     
   };
   const handleOffline=()=>{
@@ -138,7 +139,7 @@ code,
 message,
 type
 */
-let translateCodes = {
+const ERROR_CODES = {
     'INVALID_GET_LOGS': 'Error al obtener registros de logs.' ,
     'INVALID_CURRENCY': 'Tipo de moneda no permitido.' ,
     'BILLCOLLECTOR_DISCONNECT': 'El recolector de billetes está desconectado.' ,
@@ -178,7 +179,7 @@ let translateCodes = {
   
 </Modal>
 
-<Modal open={showNotifyModal} title={`Mensaje de ${translateCodes[notificationData?.type]|| 'tipo no encontrado.'}`}>
+<Modal open={showNotifyModal} title="NOTIFICACION">
   <div class="config-wrapper" style="background-color: aliceblue;"> 
     <div class="mx-auto flex items-center justify-center ">
       {#if notificationData.type === 'error'}
@@ -192,12 +193,7 @@ let translateCodes = {
     <div style="margin: 20px; text-align: center; font-weight: bold;color: black;">
       <span >
         <b>
-          {#if notificationData.type === 'error'}
-           {notificationData?.data}
-            ACTUALMENTE ESTÁ PRESENTANDO ERROR, CONTACTE CON SOPORTE O CAJERO.!
-          {:else}
-          {translateCodes[notificationData?.code] || 'codigo no encontrado.'}
-          {/if}
+          Notificacion
         </b>
       </span>
   </div>
