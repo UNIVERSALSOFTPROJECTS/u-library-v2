@@ -58,6 +58,8 @@
         sendToWinWebview('onLogout', {});
         console.log("avisando shutdown");
 
+      }else{
+        window.location.reload();
       }
       notify.success("Configuracion Guardada");
       //window.location.reload();
