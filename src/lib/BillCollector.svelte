@@ -27,7 +27,7 @@
 		  if(user  && activeBillCollector && isNewUser() && billCollectorActive() && isWinWebview()) sendToWinWebview('setUser', user);
     	if(!user && activeBillCollector && billCollectorActive() && isWinWebview()) sendToWinWebview('onLogout', {});
       
-      //if( machineCrashed===true && showNotifyModal==false) showNotifyModal=true; 
+      if( machineCrashed===true && showNotifyModal==false) showNotifyModal=true; 
 	}
 
   const isNewUser=()=>{
@@ -113,11 +113,12 @@
     
   }
   const showNotifyAll = (result) => {
+    console.log("LLEGÓ MSM DESDE BILCOLECTOR",result);
     notifyData = result;
     console.log("Notify", notifyData);
     notifyData.title=getNotifyTitle();
     showNotifyModal = true;
-    //if( result.type=='error' ) machineCrashed= true;
+    if( result.type=='error' ) machineCrashed= true;
     
   };
   const handleOffline=()=>{
@@ -157,7 +158,8 @@ const ERROR_CODES = {
     'DEPOSITO_OK': 'Depósito exitoso.' ,
     'DEPOSITO_FALLO': 'Fallo en el depósito.' ,
     'GENERAL_ERROR': 'Error general.' ,
-    'BILLCOLLECTOR_DISCONECT':'El billetero está desconectado.'
+    'BILLCOLLECTOR_DISCONECT':'El billetero está desconectado.',
+    'USER_NOT_LOGGED':'Buscando usuario actual....'
   };
 
   const getNotifyTitle=()=>{
