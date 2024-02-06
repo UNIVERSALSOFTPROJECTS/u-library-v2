@@ -52,12 +52,15 @@ input[type=date] {
 
 #{$body}{    //PROHIBIDO AGREGAR body aqui mismo!!!, DAÑAS ABSOLUTAMENTE TODOS los styles de las marcas blancas
     overscroll-behavior: none; /*eliminar el efecto scroll extendido fuera del body en safari*/
+    background: #202124;
     *{
         color: #{$g-color};
     }
     font-family: $g-font;
     font-size: $g-font-size;
     background: $bgc-body;
+    user-select: none;
+    -webkit-user-select: none;
     .btn{
         @extend %button;
         //for modal
