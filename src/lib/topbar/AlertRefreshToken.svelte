@@ -82,9 +82,9 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
 <div class="modal {showAlertRefreshToken}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom}>
   <div class="modal-dialog centered" transition:fly={{ y: -50, duration: 5 }}>
     <div class="modal-content">
-      {#if showHeader}
-         <div class="modal-header"> <div />
-            <button class="btn close" on:click={() => (showAlertRefreshToken = false)} />
+       {#if showHeader}
+          <div class="modal-header"> <div />
+             <button class="btn close" on:click={() => (showAlertRefreshToken = false)} />
            </div>
           {/if}
         <div class="config-body">
