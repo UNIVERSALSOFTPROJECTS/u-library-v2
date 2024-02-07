@@ -11,11 +11,11 @@
   let chronometer = 15
   let cronometroID;
   let buttonDisabled = false;
+  let intervalID
 
   const onObserverUser = async (user)=>{
-    console.log("user logaout ", user);
     userLogaout = {...user}
-    if(user) intervalID = setInterval(compareHoursRefreshToken, 500, userLogaout);
+    if(user) intervalID = setInterval(compareHoursRefreshToken, 1000, userLogaout);
   }
 
   const onRefreshToken = async ()=>{
@@ -32,8 +32,6 @@
       }
   }
 
-let intervalID  = setInterval(compareHoursRefreshToken, 500, userLogaout);
-
 function compareHoursRefreshToken(item) {
   if(item !== null && Object.keys(item).length !== 0){
     let now = new Date()
@@ -48,15 +46,16 @@ function compareHoursRefreshToken(item) {
   }
 }
 
+
+compareHoursRefreshToken(userLogaout);
+
 function startChronometer() {
+  clearInterval(intervalID);
   if (chronometer > 0) {
-    console.log(chronometer);
     chronometer--;
     cronometroID = setTimeout(startChronometer,1000);
   } else {
-    console.log("tiempo finalizado");
     buttonDisabled = true;
-    //sessionStorage.removeItem("user");
   }
 }
 
@@ -71,7 +70,7 @@ function onNotRefreshToken () {
 $: onObserverUser(user);
 
 function restartInterval() {
-  intervalID = setInterval(compareHoursRefreshToken, 500, userLogaout);
+  intervalID = setInterval(compareHoursRefreshToken, 1000, userLogaout);
 }
 
 const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
