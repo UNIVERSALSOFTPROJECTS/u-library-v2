@@ -36,8 +36,8 @@ function compareHoursRefreshToken(item) {
   if(item !== null && Object.keys(item).length !== 0){
     let now = new Date()
     let currentHour = now.getHours() * 60 + now.getMinutes()
-    let fechaMoment = moment(item.expireToken);
-    let tokenHour = fechaMoment.hours() * 60 + fechaMoment.minutes(); 
+    let timeMoment = moment(item.expireToken);
+    let tokenHour = timeMoment.hours() * 60 + timeMoment.minutes(); 
     const isWithin5Minutes = tokenHour - currentHour <= 5;
     if (isWithin5Minutes) {
       showAlertRefreshToken = true;
