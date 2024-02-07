@@ -11,11 +11,11 @@
   let chronometer = 15
   let cronometroID;
   let buttonDisabled = false;
+  let intervalID
 
   const onObserverUser = async (user)=>{
-    console.log("user logaout ", user);
     userLogaout = {...user}
-    if(user) intervalID = setInterval(compareHoursRefreshToken, 500, userLogaout);
+    if(user) intervalID = setInterval(compareHoursRefreshToken, 1000, userLogaout);
   }
 
   const onRefreshToken = async ()=>{
@@ -32,14 +32,12 @@
       }
   }
 
-let intervalID  = setInterval(compareHoursRefreshToken, 500, userLogaout);
-
 function compareHoursRefreshToken(item) {
   if(item !== null && Object.keys(item).length !== 0){
     let now = new Date()
     let currentHour = now.getHours() * 60 + now.getMinutes()
-    let fechaMoment = moment(item.expireToken);
-    let tokenHour = fechaMoment.hours() * 60 + fechaMoment.minutes(); 
+    let timeMoment = moment(item.expireToken);
+    let tokenHour = timeMoment.hours() * 60 + timeMoment.minutes(); 
     const isWithin5Minutes = tokenHour - currentHour <= 5;
     if (isWithin5Minutes) {
       showAlertRefreshToken = true;
@@ -48,15 +46,16 @@ function compareHoursRefreshToken(item) {
   }
 }
 
+
+compareHoursRefreshToken(userLogaout);
+
 function startChronometer() {
+  clearInterval(intervalID);
   if (chronometer > 0) {
-    console.log(chronometer);
     chronometer--;
     cronometroID = setTimeout(startChronometer,1000);
   } else {
-    console.log("tiempo finalizado");
     buttonDisabled = true;
-    //sessionStorage.removeItem("user");
   }
 }
 
@@ -71,7 +70,7 @@ function onNotRefreshToken () {
 $: onObserverUser(user);
 
 function restartInterval() {
-  intervalID = setInterval(compareHoursRefreshToken, 500, userLogaout);
+  intervalID = setInterval(compareHoursRefreshToken, 1000, userLogaout);
 }
 
 const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
@@ -82,9 +81,9 @@ const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
 <div class="modal {showAlertRefreshToken}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom}>
   <div class="modal-dialog centered" transition:fly={{ y: -50, duration: 5 }}>
     <div class="modal-content">
-      {#if showHeader}
-         <div class="modal-header"> <div />
-            <button class="btn close" on:click={() => (showAlertRefreshToken = false)} />
+       {#if showHeader}
+          <div class="modal-header"> <div />
+             <button class="btn close" on:click={() => (showAlertRefreshToken = false)} />
            </div>
           {/if}
         <div class="config-body">

@@ -15,6 +15,8 @@
     import ChatLive from "./modals/ChatLive.svelte";
     import Promotions from "./modals/Promotions.svelte";
 
+    import ScreenGames from "./modals/ScreenGames.svelte";
+
     import utils from '../js/util';
     import { onMount } from 'svelte';
     import { ServerConnection } from '..';
@@ -109,6 +111,8 @@
         ],
     };
 
+    let screenGamesOpen = false;
+
     let chatLiveUrl = "https://tawk.to/chat/65845e7d70c9f2407f824709/1hi6h274h";
     let chatLiveModalOpen = false;
     const openChatLive = () =>{ chatLiveModalOpen = true; subModalOpened = "chatLive" }
@@ -121,6 +125,11 @@
         loginModalOpen = false;
         resetpassModalOpen=true;
         modalOpened = "recoverPassword";
+    }
+
+    const onOpenGame = () => { 
+        screenGamesOpen = true;
+    
     }
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
@@ -238,6 +247,7 @@
 
     <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
+    <button class="btn signup" on:click={onOpenGame}>RetiroX</button>
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword}  bind:platform t={$t}/>
@@ -267,6 +277,8 @@
     <Modal bind:open={chatLiveModalOpen} bind:subModalOpened title="Chat en vivo">
         <ChatLive bind:chatLiveUrl/>
     </Modal>
+
+    <ScreenGames bind:open={screenGamesOpen} bind:platform/>
     
     <Footer {configFooter} {onCategoryChange} {openChatLive}/>
     

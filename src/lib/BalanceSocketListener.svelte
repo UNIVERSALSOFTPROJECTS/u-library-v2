@@ -15,11 +15,11 @@
         EventManager.subscribe("changeBalance", (data)=>{
             let msg = "transaction desconocida";
             switch(data.event){
-                case 'DEPOSIT-BANK': msg = "Deposito confirmado"; break;
-                case 'DEPOSIT-CASH': msg = "Deposito efectivo procesado"; break;
-                case 'WITHDRAW-CASH': msg = "Retiro efectivo confirmado"; break;
-                case 'WITHDRAW-BANK': msg = "Retiro bancario confirmado"; break;
-                case 'CASCH-CASH': msg = "Deposito desde Billetero confirmado"; break;
+                case 'DEPOSIT-BANK': msg = `Depósito confirmado: ${data.amount} ${data.currency}` ; break;
+                case 'DEPOSIT-CASH': msg = `Deposito efectivo procesado: ${data.amount} ${data.currency}`; break;
+                case 'WITHDRAW-CASH': msg = `Retiro efectivo confirmado: ${data.amount} ${data.currency}`; break;
+                case 'WITHDRAW-BANK': msg = `Retiro bancario confirmado:  ${data.amount} ${data.currency}`; break;
+                case 'BILLMACHINE-CASH': msg = `Deposito desde Billetero confirmado: ${data.amount} ${data.currency}`; break;
             }
             notify.success(msg);
             getBalance(user.agregatorToken);
