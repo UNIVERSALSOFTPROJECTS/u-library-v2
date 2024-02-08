@@ -3,9 +3,10 @@ import { onMount } from "svelte";
 import ServerConnection from "../../js/server";
 import { fly } from "svelte/transition";
 import moment from "moment";
+    import Login from "./Login.svelte";
 
 export let user;
-let myIntervalID;
+let intervalID;
 let showHeader = true;
 let showAlertRefreshToken = false;
 let userLogaout = {};
@@ -14,9 +15,12 @@ let cronometroID;
 let buttonDisabled = false;
 
 
+console.log("LO ESRTAN LLAMADNO");
+
 const onObserverUser = async (user) => {
     userLogaout = { ...user };
-    myIntervalID = startInterval();
+    console.log("userLogaout",userLogaout);
+    startInterval();
 };
 
 const onRefreshToken = async () => {
@@ -34,17 +38,16 @@ const updateUserData = (data) => {
     sessionStorage.setItem("user", JSON.stringify(userLogaout));
     showAlertRefreshToken = false;
     userLogaout = { ...JSON.parse(sessionStorage.getItem("user")) };
-    restartInterval();
+    startInterval();
 };
 
 const startInterval = () => {
-  const intervalID  = setInterval(compareHoursRefreshToken, 1800, userLogaout);
-  return intervalID
+   intervalID  = setInterval(compareHoursRefreshToken, 1800, userLogaout);
 };
 
 const compareHoursRefreshToken = (item) => {
 
-    console.log("intervalID",myIntervalID);
+    console.log("intervalID",intervalID);
 
     if (item && Object.keys(item).length !== 0) {
         const now = new Date();
@@ -53,8 +56,8 @@ const compareHoursRefreshToken = (item) => {
         const differenceInMinutes = differenceInMilliseconds / 60000;
         console.log("differenceInMinutes",differenceInMinutes);
         if (differenceInMinutes <= 9) {
-            clearInterval(myIntervalID);
-            console.log("intervalID-----2",myIntervalID);
+            clearInterval(intervalID);
+            console.log("intervalID-----2",intervalID);
             showAlertRefreshToken = true;
             if (chronometer > 0) startChronometer();
         }
@@ -66,20 +69,17 @@ const startChronometer = () => {
         console.log("chronometer",chronometer);
         cronometroID = setTimeout(startChronometer, 1800);
     } else {
-        clearInterval(myIntervalID);
+        clearInterval(intervalID);
         buttonDisabled = true;
     }
 };
+
 const onNotRefreshToken = () => {
     showAlertRefreshToken = false;
-    clearInterval(myIntervalID);
+    clearInterval(intervalID);
     chronometer = 0;
     sessionStorage.removeItem("user");
     location.reload();
-};
-
-const restartInterval = () => {
-  setInterval(compareHoursRefreshToken, 1800, userLogaout);
 };
 
 const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); };
