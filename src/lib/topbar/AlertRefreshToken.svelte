@@ -12,6 +12,8 @@
   let cronometroID;
   let buttonDisabled = false; 
 
+  let intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
+  
   const onObserverUser = async (user)=>{
     userLogaout = {...user}
     if(user) intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
@@ -48,7 +50,7 @@ function compareHoursRefreshToken(item) {
   }
 }
 
-let intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
+
 
 function startChronometer() {
   if (chronometer > 0) {
@@ -56,6 +58,7 @@ function startChronometer() {
     chronometer--;
     cronometroID = setTimeout(startChronometer,1000);
   } else {
+    clearInterval(intervalID);
     buttonDisabled = true;
   }
 }
