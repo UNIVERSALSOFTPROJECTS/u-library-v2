@@ -17,7 +17,6 @@ let intervalStarted = false;
 
 const onObserverUser = async (user) => {
     userLogaout = { ...user };
-    console.log("userLogaout", userLogaout);
     if (!intervalStarted && Object.keys(userLogaout).length !== 0) {
         startInterval();
         intervalStarted = true;
@@ -49,10 +48,10 @@ const startInterval = () => {
 const compareHoursRefreshToken = (item) => {
     if (item && Object.keys(item).length !== 0) {
         const now = new Date();
+        console.log("item.expireToken",item.expireToken);
         const timeExpireToken = moment(item.expireToken);
         const differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
         const differenceInMinutes = differenceInMilliseconds / 60000;
-        console.log("differenceInMinutes",differenceInMinutes);
         if (differenceInMinutes <= 9) {
             clearInterval(intervalID);
             showAlertRefreshToken = true;
@@ -63,7 +62,6 @@ const compareHoursRefreshToken = (item) => {
 const startChronometer = () => {
     if (chronometer > 0) {
         chronometer--;
-        console.log("chronometer",chronometer);
         cronometroID = setTimeout(startChronometer, 1800);
     } else {
         clearInterval(intervalID);
