@@ -3,7 +3,7 @@ import { onMount } from "svelte";
 import ServerConnection from "../../js/server";
 import { fly } from "svelte/transition";
 import moment from "moment";
-    import Login from "./Login.svelte";
+import Login from "./Login.svelte";
 
 export let user;
 let intervalID;
@@ -13,14 +13,16 @@ let userLogaout = {};
 let chronometer = 16
 let cronometroID;
 let buttonDisabled = false;
-
+let intervalStarted = false;
 
 const onObserverUser = async (user) => {
     userLogaout = { ...user };
-    console.log("userLogaout",userLogaout);
-    if(!userLogaout) startInterval();
-    
-  
+    console.log("userLogaout", userLogaout);
+
+    if (!intervalStarted && Object.keys(userLogaout).length !== 0) {
+        startInterval();
+        intervalStarted = true;
+    }
 };
 
 const onRefreshToken = async () => {
@@ -42,8 +44,8 @@ const updateUserData = (data) => {
 };
 
 const startInterval = () => {
-   console.log("startInterval",intervalID);
    intervalID  = setInterval(compareHoursRefreshToken, 1800, userLogaout);
+   console.log("startInterval",intervalID);
 };
 
 const compareHoursRefreshToken = (item) => {
