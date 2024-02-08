@@ -9,7 +9,7 @@ export let user;
 let showHeader = true;
 let showAlertRefreshToken = false;
 let userLogaout = {};
-let chronometer = 15;
+let chronometer = 16
 let cronometroID;
 let buttonDisabled = false;
 let intervalID;
@@ -49,24 +49,25 @@ const compareHoursRefreshToken = (item) => {
         const timeExpireToken = moment(item.expireToken);
         const differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
         const differenceInMinutes = differenceInMilliseconds / 60000;
-        if (differenceInMinutes <= 8) {
+        console.log("differenceInMinutes",differenceInMinutes);
+        if (differenceInMinutes <= 9) {
             clearInterval(intervalID);
             showAlertRefreshToken = true;
             if (chronometer > 0) startChronometer();
         }
     }
 };
-
 const startChronometer = () => {
     if (chronometer > 0) {
         chronometer--;
-        cronometroID = setTimeout(startChronometer, 1000);
+
+        console.log("chronometer",chronometer);
+        cronometroID = setTimeout(startChronometer, 1800);
     } else {
         clearInterval(intervalID);
         buttonDisabled = true;
     }
 };
-
 const onNotRefreshToken = () => {
     showAlertRefreshToken = false;
     clearInterval(intervalID);
