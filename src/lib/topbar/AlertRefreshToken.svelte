@@ -15,12 +15,12 @@ let cronometroID;
 let buttonDisabled = false;
 
 
-console.log("LO ESRTAN LLAMADNO");
-
 const onObserverUser = async (user) => {
     userLogaout = { ...user };
     console.log("userLogaout",userLogaout);
-    startInterval();
+    if(!userLogaout) startInterval();
+    
+  
 };
 
 const onRefreshToken = async () => {
