@@ -15,14 +15,14 @@ let buttonDisabled = false;
 let intervalID;
 
 const onObserverUser = async (user) => {
-    console.log("userLogaout", userLogaout);
+
+    console.log("intervalID", intervalID);
     userLogaout = { ...user };
     if (user) startInterval();
 };
 
 const onRefreshToken = async () => {
     try {
-        clearInterval(intervalID);
         const { data } = await ServerConnection.u_user.refreshToken(userLogaout.token);
         updateUserData(data);
     } catch (error) {
@@ -55,6 +55,7 @@ const compareHoursRefreshToken = (item) => {
         console.log("differenceInMinutes",differenceInMinutes);
         if (differenceInMinutes <= 9) {
             clearInterval(intervalID);
+            console.log("intervalID-----2",intervalID);
             showAlertRefreshToken = true;
             if (chronometer > 0) startChronometer();
         }
