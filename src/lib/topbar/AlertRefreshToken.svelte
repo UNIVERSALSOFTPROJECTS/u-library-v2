@@ -49,7 +49,7 @@ const compareHoursRefreshToken = (item) => {
         const timeExpireToken = moment(item.expireToken);
         const differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
         const differenceInMinutes = differenceInMilliseconds / 60000;
-        if (differenceInMinutes <= 5) {
+        if (differenceInMinutes <= 1) {
             clearInterval(intervalID);
             showAlertRefreshToken = true;
             if (chronometer > 0) startChronometer();

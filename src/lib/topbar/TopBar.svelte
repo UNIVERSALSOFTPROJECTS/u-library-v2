@@ -256,8 +256,6 @@
     <Configs {configsAllowed} {onShowCustomConfig}></Configs>
   </Modal>
 
-  
-
   <Modal bind:open={showRecoverPass} bind:modalOpened showHeader={false}>
     <RecoverPassword 
       bind:open={showRecoverPass}
@@ -292,8 +290,6 @@
       bind:modalOpened
     />
   </Modal>
-
-  <AlertRefreshToken {user} />
 
   <Notifier />
 
