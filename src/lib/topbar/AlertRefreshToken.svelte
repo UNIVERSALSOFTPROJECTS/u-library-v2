@@ -14,7 +14,7 @@
 
   const onObserverUser = async (user)=>{
     userLogaout = {...user}
-    if(user) intervalID = setInterval(compareHoursRefreshToken, 1500, userLogaout);
+    if(user) intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
   }
 
   const onRefreshToken = async ()=>{
@@ -39,9 +39,6 @@ function compareHoursRefreshToken(item) {
     let differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
     let differenceInMinutes = differenceInMilliseconds / 60000;
     console.log("differenceInMinutes",differenceInMinutes);
-    //let currentHour = now.getHours() * 60 + now.getMinutes()
-    //let timeMoment = moment(item.expireToken);
-    //Let tokenHour = timeMoment.hours() * 60 + timeMoment.minutes(); 
     const isWithin5Minutes = differenceInMinutes <= 5;
     if (isWithin5Minutes) {
       showAlertRefreshToken = true;
@@ -51,7 +48,7 @@ function compareHoursRefreshToken(item) {
   }
 }
 
-let intervalID = setInterval(compareHoursRefreshToken, 1500, userLogaout);
+let intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
 
 function startChronometer() {
   if (chronometer > 0) {
