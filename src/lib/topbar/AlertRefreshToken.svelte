@@ -56,10 +56,17 @@ const compareHoursRefreshToken = (item) => {
         const differenceInMinutes = differenceInMilliseconds / 60000;
         console.log("differenceInMinutes",differenceInMinutes);
         if (differenceInMinutes <= 9) {
-            clearInterval(intervalID);
-            console.log("intervalID-----2",intervalID);
+
+          if (chronometer > 0) {
+                chronometer--;
+                console.log("chronometer",chronometer);
+            } else {
+                clearInterval(intervalID);
+                buttonDisabled = true;
+            }
+
             showAlertRefreshToken = true;
-            if (chronometer > 0) startChronometer();
+  
         }
     }
 };
