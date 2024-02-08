@@ -7,7 +7,7 @@ let user={
     userId:"X-8f64a0a8-be87-434d-af64-5b8cd9e6de9c",
     currencyISO:"PEN",
     token:"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYWthbm8tVy1lOWQ4NDdiNC01Y2MxLTQ1M2EtOTAzMC1kNTFmZTE3YTg1ZmUiLCJpYXQiOjE3MDUxMDA1ODksImV4cCI6MTcwNTEwNzc4OX0.ev6YiXycEZX0g0dbtOYaRefCoEMnm47RCtUXBQVNYzYV8am3feY5FshZXJ4OAZTh9LeTM9RD3CnzkR_7vnezQA",
-    expireToken:"2024-01-11T08:26:44.000+00:00"
+    expireToken:"2024-02-08T15:46:56.000+00:00"
 }
 
 export default {

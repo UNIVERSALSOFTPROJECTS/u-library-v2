@@ -15,17 +15,18 @@
 
   const onObserverUser = async (user)=>{
     userLogaout = {...user}
-    if(user) intervalID = setInterval(compareHoursRefreshToken, 1000, userLogaout);
+    if(user) intervalID = setInterval(compareHoursRefreshToken, 1500, userLogaout);
   }
 
   const onRefreshToken = async ()=>{
       try {
-        showAlertRefreshToken = false;
         clearInterval(intervalID);
         let {data} = await ServerConnection.u_user.refreshToken(userLogaout.token)
         userLogaout.token = data.token;
         userLogaout.expireToken = data.expireToken;
         sessionStorage.setItem("user",JSON.stringify(userLogaout))
+        showAlertRefreshToken = false;
+        userLogaout = { ... JSON.parse(sessionStorage.getItem("user"))}
         restartInterval();
       } catch (error) {
           console.log("ERROR : Refresh token ", error);
@@ -35,10 +36,13 @@
 function compareHoursRefreshToken(item) {
   if(item !== null && Object.keys(item).length !== 0){
     let now = new Date()
-    let currentHour = now.getHours() * 60 + now.getMinutes()
-    let timeMoment = moment(item.expireToken);
-    let tokenHour = timeMoment.hours() * 60 + timeMoment.minutes(); 
-    const isWithin5Minutes = tokenHour - currentHour <= 5;
+    let timeExpireToken = moment(item.expireToken); 
+    let differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
+    let differenceInMinutes = differenceInMilliseconds / 60000;
+    //let currentHour = now.getHours() * 60 + now.getMinutes()
+    //let timeMoment = moment(item.expireToken);
+    //Let tokenHour = timeMoment.hours() * 60 + timeMoment.minutes(); 
+    const isWithin5Minutes = differenceInMinutes <= 5;
     if (isWithin5Minutes) {
       showAlertRefreshToken = true;
       if(chronometer > 0) startChronometer();
@@ -46,8 +50,6 @@ function compareHoursRefreshToken(item) {
   }
 }
 
-
-compareHoursRefreshToken(userLogaout);
 
 function startChronometer() {
   clearInterval(intervalID);
