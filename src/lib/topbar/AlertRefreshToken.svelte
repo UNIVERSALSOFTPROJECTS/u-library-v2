@@ -44,7 +44,8 @@ const startInterval = () => {
 };
 
 const compareHoursRefreshToken = (item) => {
-    if (item && Object.keys(item).length !== 0) {
+    try {
+      if (item && Object.keys(item).length !== 0) {
         const now = new Date();
         const timeExpireToken = moment(item.expireToken);
         const differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
@@ -56,11 +57,13 @@ const compareHoursRefreshToken = (item) => {
             if (chronometer > 0) startChronometer();
         }
     }
+    } catch (error) {
+      console.log("ERROR: ",error)
+    }
 };
 const startChronometer = () => {
     if (chronometer > 0) {
         chronometer--;
-
         console.log("chronometer",chronometer);
         cronometroID = setTimeout(startChronometer, 1800);
     } else {
