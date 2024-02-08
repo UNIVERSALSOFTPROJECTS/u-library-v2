@@ -11,8 +11,7 @@
   let chronometer = 15
   let cronometroID;
   let buttonDisabled = false; 
-
-  let intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
+  let intervalID;
 
   const onObserverUser = async (user)=>{
     console.log("userLogaout",userLogaout);
