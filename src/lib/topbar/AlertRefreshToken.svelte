@@ -10,8 +10,7 @@
   let userLogaout={}
   let chronometer = 15
   let cronometroID;
-  let buttonDisabled = false;
-  let intervalID
+  let buttonDisabled = false; 
 
   const onObserverUser = async (user)=>{
     userLogaout = {...user}
@@ -46,14 +45,15 @@ function compareHoursRefreshToken(item) {
     const isWithin5Minutes = differenceInMinutes <= 5;
     if (isWithin5Minutes) {
       showAlertRefreshToken = true;
+      clearInterval(intervalID);
       if(chronometer > 0) startChronometer();
     }
   }
 }
 
+let intervalID = setInterval(compareHoursRefreshToken, 1500, userLogaout);
 
 function startChronometer() {
-  clearInterval(intervalID);
   if (chronometer > 0) {
     console.log("chronometer",chronometer);
     chronometer--;
