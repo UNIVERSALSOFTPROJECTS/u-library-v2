@@ -13,8 +13,9 @@
   let buttonDisabled = false; 
 
   let intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
-  
+
   const onObserverUser = async (user)=>{
+    console.log("userLogaout",userLogaout);
     userLogaout = {...user}
     if(user) intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
   }
@@ -36,6 +37,7 @@
 
 function compareHoursRefreshToken(item) {
   if(item !== null && Object.keys(item).length !== 0){
+    console.log("item",item);
     let now = new Date()
     let timeExpireToken = moment(item.expireToken); 
     let differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
@@ -49,8 +51,6 @@ function compareHoursRefreshToken(item) {
     }
   }
 }
-
-
 
 function startChronometer() {
   if (chronometer > 0) {
