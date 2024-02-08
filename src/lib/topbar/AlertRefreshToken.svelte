@@ -1,10 +1,7 @@
 <script>
-import { onMount } from "svelte";
 import ServerConnection from "../../js/server";
 import { fly } from "svelte/transition";
 import moment from "moment";
-    import Login from "./Login.svelte";
-
 export let user;
 let intervalID;
 let showHeader = true;
@@ -48,11 +45,10 @@ const startInterval = () => {
 const compareHoursRefreshToken = (item) => {
     if (item && Object.keys(item).length !== 0) {
         const now = new Date();
-        console.log("item.expireToken",item.expireToken);
         const timeExpireToken = moment(item.expireToken);
         const differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
         const differenceInMinutes = differenceInMilliseconds / 60000;
-        if (differenceInMinutes <= 9) {
+        if (differenceInMinutes <= 1) {
             clearInterval(intervalID);
             showAlertRefreshToken = true;
             if (chronometer > 0) startChronometer();
