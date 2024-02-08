@@ -3,7 +3,7 @@ import { onMount } from "svelte";
 import ServerConnection from "../../js/server";
 import { fly } from "svelte/transition";
 import moment from "moment";
-import Login from "./Login.svelte";
+    import Login from "./Login.svelte";
 
 export let user;
 let intervalID;
@@ -18,7 +18,6 @@ let intervalStarted = false;
 const onObserverUser = async (user) => {
     userLogaout = { ...user };
     console.log("userLogaout", userLogaout);
-
     if (!intervalStarted && Object.keys(userLogaout).length !== 0) {
         startInterval();
         intervalStarted = true;
@@ -45,13 +44,9 @@ const updateUserData = (data) => {
 
 const startInterval = () => {
    intervalID  = setInterval(compareHoursRefreshToken, 1800, userLogaout);
-   console.log("startInterval",intervalID);
 };
 
 const compareHoursRefreshToken = (item) => {
-
-    console.log("intervalID",intervalID);
-
     if (item && Object.keys(item).length !== 0) {
         const now = new Date();
         const timeExpireToken = moment(item.expireToken);
@@ -59,19 +54,12 @@ const compareHoursRefreshToken = (item) => {
         const differenceInMinutes = differenceInMilliseconds / 60000;
         console.log("differenceInMinutes",differenceInMinutes);
         if (differenceInMinutes <= 9) {
-          if (chronometer > 0) {
-                chronometer--;
-                console.log("chronometer",chronometer);
-            } else {
-                clearInterval(intervalID);
-                buttonDisabled = true;
-            }
+            clearInterval(intervalID);
             showAlertRefreshToken = true;
+            if (chronometer > 0) startChronometer();
         }
     }
 };
-
-
 const startChronometer = () => {
     if (chronometer > 0) {
         chronometer--;
