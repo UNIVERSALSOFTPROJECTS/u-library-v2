@@ -5,20 +5,18 @@ import { fly } from "svelte/transition";
 import moment from "moment";
 
 export let user;
-
+let myIntervalID;
 let showHeader = true;
 let showAlertRefreshToken = false;
 let userLogaout = {};
 let chronometer = 16
 let cronometroID;
 let buttonDisabled = false;
-let intervalID;
+
 
 const onObserverUser = async (user) => {
-
-    console.log("intervalID", intervalID);
     userLogaout = { ...user };
-    if (user) startInterval();
+    myIntervalID = startInterval();
 };
 
 const onRefreshToken = async () => {
@@ -40,12 +38,13 @@ const updateUserData = (data) => {
 };
 
 const startInterval = () => {
-    intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
+  const intervalID  = setInterval(compareHoursRefreshToken, 1800, userLogaout);
+  return intervalID
 };
 
 const compareHoursRefreshToken = (item) => {
 
-    console.log("intervalID",intervalID);
+    console.log("intervalID",myIntervalID);
 
     if (item && Object.keys(item).length !== 0) {
         const now = new Date();
@@ -54,8 +53,8 @@ const compareHoursRefreshToken = (item) => {
         const differenceInMinutes = differenceInMilliseconds / 60000;
         console.log("differenceInMinutes",differenceInMinutes);
         if (differenceInMinutes <= 9) {
-            clearInterval(intervalID);
-            console.log("intervalID-----2",intervalID);
+            clearInterval(myIntervalID);
+            console.log("intervalID-----2",myIntervalID);
             showAlertRefreshToken = true;
             if (chronometer > 0) startChronometer();
         }
@@ -67,20 +66,20 @@ const startChronometer = () => {
         console.log("chronometer",chronometer);
         cronometroID = setTimeout(startChronometer, 1800);
     } else {
-        clearInterval(intervalID);
+        clearInterval(myIntervalID);
         buttonDisabled = true;
     }
 };
 const onNotRefreshToken = () => {
     showAlertRefreshToken = false;
-    clearInterval(intervalID);
+    clearInterval(myIntervalID);
     chronometer = 0;
     sessionStorage.removeItem("user");
     location.reload();
 };
 
 const restartInterval = () => {
-    intervalID = setInterval(compareHoursRefreshToken, 1800, userLogaout);
+  setInterval(compareHoursRefreshToken, 1800, userLogaout);
 };
 
 const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); };
