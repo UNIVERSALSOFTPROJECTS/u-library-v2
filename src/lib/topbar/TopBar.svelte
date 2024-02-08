@@ -45,7 +45,6 @@
   let showRegisterModal = false;
   let showRecoverPass = false;
   let showModalProfile = false;
-  let showModalAlertyRefreshToken = false;
   let scrollPosition = 0;
   let divClass = "";
   let signupModalOpen = false;
@@ -57,10 +56,6 @@
     modalOpened = "config";
     showConfigs = true;
   }
-  
-
-
-  
 
   const handleScroll = () => {
     scrollPosition = window.scrollY;
@@ -71,7 +66,6 @@
     }
   };
 
- 
   onMount(() => {
   
     window.addEventListener("scroll", handleScroll);
@@ -181,10 +175,6 @@
   };
 
 
-
-  const OnCloseModalAlertRefreshToken=()=>{
-    showModalAlertyRefreshToken=false;
-  }
 
   
   /*const getBonus = () => {
@@ -303,8 +293,7 @@
     />
   </Modal>
 
-  <AlertRefreshToken bind:user />
- 
+  <AlertRefreshToken {user} />
 
   <Notifier />
 
