@@ -39,6 +39,7 @@ function compareHoursRefreshToken(item) {
     let timeExpireToken = moment(item.expireToken); 
     let differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
     let differenceInMinutes = differenceInMilliseconds / 60000;
+    console.log("differenceInMinutes",differenceInMinutes);
     //let currentHour = now.getHours() * 60 + now.getMinutes()
     //let timeMoment = moment(item.expireToken);
     //Let tokenHour = timeMoment.hours() * 60 + timeMoment.minutes(); 
@@ -54,6 +55,7 @@ function compareHoursRefreshToken(item) {
 function startChronometer() {
   clearInterval(intervalID);
   if (chronometer > 0) {
+    console.log("chronometer",chronometer);
     chronometer--;
     cronometroID = setTimeout(startChronometer,1000);
   } else {
