@@ -42,6 +42,7 @@ const updateUserData = (data) => {
 };
 
 const startInterval = () => {
+   console.log("startInterval",intervalID);
    intervalID  = setInterval(compareHoursRefreshToken, 1800, userLogaout);
 };
 
@@ -56,7 +57,6 @@ const compareHoursRefreshToken = (item) => {
         const differenceInMinutes = differenceInMilliseconds / 60000;
         console.log("differenceInMinutes",differenceInMinutes);
         if (differenceInMinutes <= 9) {
-
           if (chronometer > 0) {
                 chronometer--;
                 console.log("chronometer",chronometer);
@@ -64,12 +64,12 @@ const compareHoursRefreshToken = (item) => {
                 clearInterval(intervalID);
                 buttonDisabled = true;
             }
-
             showAlertRefreshToken = true;
-  
         }
     }
 };
+
+
 const startChronometer = () => {
     if (chronometer > 0) {
         chronometer--;
