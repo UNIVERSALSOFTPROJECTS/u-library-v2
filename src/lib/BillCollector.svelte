@@ -159,7 +159,8 @@ const ERROR_CODES = {
     'DEPOSITO_FALLO': 'Fallo en el depósito.' ,
     'GENERAL_ERROR': 'Error general.' ,
     'BILLCOLLECTOR_DISCONECT':'El billetero está desconectado.',
-    'USER_NOT_LOGGED':'Buscando usuario actual....'
+    'USER_NOT_LOGGED':'Buscando usuario actual....',
+    'BIIL_MACHINE_NOT_FOND':'Billetero no conectado'
   };
 
   const getNotifyTitle=()=>{
@@ -236,6 +237,7 @@ const ERROR_CODES = {
             <tr>
               <th>Fecha</th>
               <th>Usuario</th>
+              <th>Cod: Operacion</th>
               <th>Evento</th>
               <th>Moneda</th>
               <th>Monto</th>
@@ -246,16 +248,17 @@ const ERROR_CODES = {
           </thead>
           <tbody>
             {#each logs as item  }
-          <tr>
-            <td>{moment(item.timestamp).format('DD/MM/YY HH:mm:ss')}</td>
-            <td>{item.LoggedUser}</td>
-            <td>{item.type}</td>
-            <td>{item.currencyISO}</td>
-            <td class="money">{item.type=='Login'?'-':item.totalMoney}</td>
-            <td class="money">{item.balance}</td>
-            <td class="money">{ item.type=='DEPOSITO_OK'? (Number(item.balance) + Number(item.totalMoney)).toFixed(2):'-' }</td>
-            <td>{item.message}</td>
-          </tr>
+            <tr>
+              <td>{moment(item.timestamp).format('DD/MM/YY HH:mm:ss')}</td>
+              <td>{item.LoggedUser}</td>
+              <td>{item.codeOperation || '-'}</td>
+              <td>{item.type}</td>
+              <td>{item.currencyISO}</td>
+              <td class="money">{item.type=='Login'?'-':item.totalMoney}</td>
+              <td class="money">{ item.type=='DEPOSITO_OK'? (Number(item.balance) - Number(item.totalMoney)).toFixed(2):'-' }</td>
+              <td class="money">{item.balance}</td>
+              <td>{item.message}</td>
+            </tr>
           {/each}
           </tbody>
           {#if loading}
