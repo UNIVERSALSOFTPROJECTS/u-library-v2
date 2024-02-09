@@ -54,6 +54,7 @@
         let date = new Date();
         date.setDate(date.getDate() + 1);
         data.expireToken = data.claims.exp;
+        data.initToken = data.claims.iat;
         data.playerId = data.id;
         delete data.claims;
       }
