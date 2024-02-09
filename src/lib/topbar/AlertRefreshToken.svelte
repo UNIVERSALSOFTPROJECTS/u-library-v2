@@ -48,7 +48,6 @@ const compareHoursRefreshToken = (item) => {
         const timeExpireToken = moment(item.expireToken);
         const differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
         const differenceInMinutes = differenceInMilliseconds / 60000;
-        console.log("differenceInMinutes",differenceInMinutes);
         if (differenceInMinutes <= 1) {
             clearInterval(intervalID);
             showAlertRefreshToken = true;
