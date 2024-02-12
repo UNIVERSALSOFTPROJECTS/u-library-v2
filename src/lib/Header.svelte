@@ -279,8 +279,11 @@
         <ChatLive bind:chatLiveUrl/>
     </Modal>
 
+
+
     <ScreenGames bind:open={screenGamesOpen} bind:platform bind:user/>
-    
+
+
     <Footer {configFooter} {onCategoryChange} {openChatLive}/>
     
     

@@ -56,6 +56,7 @@
          }else{
           onError(t("msg.contactSupport"));
          }
+         debugger
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
