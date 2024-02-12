@@ -47,6 +47,7 @@
       try {
           const urlParams =  new URLSearchParams(window.location.search);
           const token = urlParams.get('token');
+          console.log("tokentokentokentokentoken",token);
           const {data} = await backend.users.confirmResetPassword(token);
           setTimeout(() => {
             if (data.resp == "OK") {
