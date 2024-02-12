@@ -50,13 +50,13 @@
          const {data} = await backend.users.confirmResetPassword(token);
          if (data.resp == "OK") {
             onOk(t("msg.confirmedChangePassword"));
+            debugger;
             let url = new URL(currentUrl);
             let urlOriginal = url.origin;
             //setTimeout(() => { window.location.href = urlOriginal;}, 300000);
          }else{
           onError(t("msg.contactSupport"));
          }
-         debugger
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
