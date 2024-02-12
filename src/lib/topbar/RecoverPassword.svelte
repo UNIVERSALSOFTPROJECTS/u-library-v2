@@ -44,20 +44,20 @@
     let currentUrl = window.location.href;
     if(/resetPassword/.test(currentUrl)) {
       view = "reset";
-      console.log("Holaa rtes");
       try {
-         const urlParams =  new URLSearchParams(window.location.search);
-         const token = urlParams.get('token');
-         const {data} = await backend.users.confirmResetPassword(token);
-         console.log(data);
-         if (data.resp == "OK") {
-            onOk(t("msg.confirmedChangePassword"));
-            let url = new URL(currentUrl);
-            let urlOriginal = url.origin;
-            //setTimeout(() => { window.location.href = urlOriginal;}, 300000);
-         }else{
-          onError(t("msg.contactSupport"));
-         }
+          const urlParams =  new URLSearchParams(window.location.search);
+          const token = urlParams.get('token');
+          const {data} = await backend.users.confirmResetPassword(token);
+          setTimeout(() => {
+            if (data.resp == "OK") {
+                onOk(t("msg.confirmedChangePassword"));
+                let url = new URL(currentUrl);
+                let urlOriginal = url.origin;
+                setTimeout(() => { window.location.href = urlOriginal;}, 3000);
+            }else{
+              onError(t("msg.contactSupport"));
+            }
+          }, 5000);
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
