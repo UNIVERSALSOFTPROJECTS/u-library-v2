@@ -43,13 +43,13 @@
   onMount(async () => {
     let currentUrl = window.location.href;
     if(/resetPassword/.test(currentUrl)) {
-      view = "reset";
       try {
+          view = "reset";
           const urlParams =  new URLSearchParams(window.location.search);
           const token = urlParams.get('token');
           console.log("tokentokentokentokentoken",token);
           const {data} = await backend.users.confirmResetPassword(token);
-          setTimeout(() => {
+          //setTimeout(() => {
             if (data.resp == "OK") {
                 onOk(t("msg.confirmedChangePassword"));
                 let url = new URL(currentUrl);
@@ -58,7 +58,7 @@
             }else{
               onError(t("msg.contactSupport"));
             }
-          }, 5000);
+          //}, 5000);
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
