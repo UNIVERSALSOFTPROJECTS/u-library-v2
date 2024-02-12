@@ -98,6 +98,12 @@ const ServerConnection = (() => {
             var url = conf.API + `/brands?m=${mode}`;
             url += category != "all" ? "&c=" + category : ""
             return axios.get(url, { headers });
+        },
+        authInGame: async (agregatorToken) => {
+            console.log("jectnado server");
+          var url = conf.API+`/authInGame/${agregatorToken}`;
+          console.log(url,"desde server");
+          return await axios.get(url, { headers });
         }
     }
 

@@ -52,7 +52,7 @@
             onOk(t("msg.confirmedChangePassword"));
             let url = new URL(currentUrl);
             let urlOriginal = url.origin;
-            setTimeout(() => { window.location.href = urlOriginal;}, 3000);
+            //setTimeout(() => { window.location.href = urlOriginal;}, 300000);
          }else{
           onError(t("msg.contactSupport"));
          }
