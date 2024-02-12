@@ -44,13 +44,14 @@
     let currentUrl = window.location.href;
     if(/resetPassword/.test(currentUrl)) {
       view = "reset";
+      debugger;
+      console.log("Holaa rtes");
       try {
          const urlParams =  new URLSearchParams(window.location.search);
          const token = urlParams.get('token');
          const {data} = await backend.users.confirmResetPassword(token);
          if (data.resp == "OK") {
             onOk(t("msg.confirmedChangePassword"));
-            debugger;
             let url = new URL(currentUrl);
             let urlOriginal = url.origin;
             //setTimeout(() => { window.location.href = urlOriginal;}, 300000);
