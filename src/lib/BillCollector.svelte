@@ -17,6 +17,7 @@
   let messageSaving="";
   let showNotifyModal = false;
   let machineCrashed = false;
+  let retrunMoneneyModal = false;
   let notifyData = {};
 
 	let logFilter = { startDate: moment().format("YYYY-MM-DD"), search: "" };
@@ -74,6 +75,7 @@
   const sendToWinWebview = (action, data) => {
     if (window.chrome && window.chrome.webview) {
       data.action = action;
+      console.log("enviando a billColector:", data);
       window.chrome.webview.postMessage(data);
     } else {
       console.log("Disponible: solo pra el billetero Gracia!.");
@@ -99,6 +101,7 @@
           case 'getLogs': logs = data.data; break;
           case 'shutdownOk': window.location.reload(); break;
           case 'notify': showNotifyAll(data); break;
+          case "UpdateLogOk": getLogs(); break;
           
         }
         loading=false;
@@ -113,9 +116,9 @@
     
   }
   const showNotifyAll = (result) => {
-    console.log("LLEGÓ MSM DESDE BILCOLECTOR",result);
+    console.log("LLEGÓ SMS DESDE BILCOLECTOR",result);
     notifyData = result;
-    console.log("Notify", notifyData);
+   
     notifyData.title=getNotifyTitle();
     showNotifyModal = true;
     if( result.type=='error' ) machineCrashed= true;
@@ -133,6 +136,24 @@
     }
 
   }
+
+  const selectOptions = ["MANUAL"];
+  const returnManually = {
+    codeOperation: "",
+    selectOption: "",
+    description: "",
+  };
+  const returnMoney = (codeOperation) => {
+    if (codeOperation) {
+      returnManually.codeOperation = codeOperation;
+    }
+    retrunMoneneyModal = !retrunMoneneyModal;
+  };
+
+  const processReturnMoney = () => {
+    sendToWinWebview("returnMoney", returnManually);
+    retrunMoneneyModal = false;
+  };
 
 
   window.addEventListener('online', handleOnline);
@@ -244,6 +265,8 @@ const ERROR_CODES = {
               <th>Balance</th>
               <th>Acumulado</th>
               <th>Observaciones</th>
+              <th>Estado</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -258,6 +281,17 @@ const ERROR_CODES = {
               <td class="money">{ item.type=='DEPOSITO_OK'? (Number(item.balance) - Number(item.totalMoney)).toFixed(2):'-' }</td>
               <td class="money">{item.balance}</td>
               <td>{item.message}</td>
+              <td>{item.status}</td>
+              {#if item.status === "Pendiente"}
+                <td><button class="search-losg" on:click={() => returnMoney(item.codeOperation)} title="Devolver">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-reply-fill" viewBox="0 0 16 16" >
+                      <path d="M5.921 11.9 1.353 8.62a.72.72 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+                    </svg>
+                    </button
+                  >
+                  </td
+                >
+              {/if}
             </tr>
           {/each}
           </tbody>
@@ -268,6 +302,24 @@ const ERROR_CODES = {
         <span class="logs__header">Total: {(logs?.length) } registros</span>
       </div>
     </div>
+</Modal>
+<Modal open={retrunMoneneyModal} title="Devoluciones">
+  <div class="config-wrapper">
+    <select class="centered-input" bind:value={returnManually.selectOption}>
+      {#each selectOptions as option}
+        <option value={option}>{option}</option>
+      {/each}
+    </select>
+    <textarea
+      bind:value={returnManually.description}
+      rows="2"
+      class="centered-input"
+    ></textarea>
+
+    <button on:click={processReturnMoney} class="centered-button search-losg"
+      >Devolver</button
+    >
+  </div>
 </Modal>
 
 <Notifier />
@@ -338,6 +390,26 @@ button.search-losg:hover {
     margin: 10px; 
     
 }
+.config-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+    padding: 20px; /* Ajusta según sea necesario */
+  }
+
+  .centered-input {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center; /* Centra el texto en el elemento */
+  }
+
+  select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
   
  
 </style>
