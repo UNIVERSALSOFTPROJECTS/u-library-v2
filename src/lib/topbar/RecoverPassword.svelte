@@ -51,6 +51,7 @@
           const {data} = await backend.users.confirmResetPassword(token);
           setTimeout(() => {
             if (data.resp == "OK") {
+                open = false;
                 onOk(t("msg.confirmedChangePassword"));
                 let url = new URL(currentUrl);
                 let urlOriginal = url.origin;
@@ -62,8 +63,8 @@
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
+        open = false;
       }
-      open = false;
     }
   });
 </script>
