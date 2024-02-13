@@ -43,8 +43,8 @@
   onMount(async () => {
     let currentUrl = window.location.href;
     if(/resetPassword/.test(currentUrl)) {
+      view = "reset";
       try {
-          view = "reset";
           const urlParams =  new URLSearchParams(window.location.search);
           const token = urlParams.get('token');
           console.log("tokentokentokentokentoken",token);
