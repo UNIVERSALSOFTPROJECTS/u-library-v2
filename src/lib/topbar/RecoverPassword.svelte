@@ -59,7 +59,7 @@
             }else{
               onError(t("msg.contactSupport"));
             }
-          }, 3000);
+          }, 3500);
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
