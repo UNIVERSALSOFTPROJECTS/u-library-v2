@@ -1,79 +1,81 @@
 <script>
-  import { onMount } from "svelte";
-  import ServerConnection from "../../js/server";
-  import { fly } from "svelte/transition";
-  import moment from "moment";
-  export let user;
-  
-  let showHeader = true;
-  let showAlertRefreshToken = false;
-  let userLogaout={}
-  let chronometer = 15
-  let cronometroID;
-  let buttonDisabled = false;
-  let intervalID
+import ServerConnection from "../../js/server";
+import { fly } from "svelte/transition";
+import moment from "moment";
+export let user;
+let intervalID;
+let showHeader = true;
+let showAlertRefreshToken = false;
+let userLogaout = {};
+let chronometer = 16
+let cronometroID;
+let buttonDisabled = false;
+let intervalStarted = false;
 
-  const onObserverUser = async (user)=>{
-    userLogaout = {...user}
-    if(user) intervalID = setInterval(compareHoursRefreshToken, 1000, userLogaout);
-  }
-
-  const onRefreshToken = async ()=>{
-      try {
-        showAlertRefreshToken = false;
-        clearInterval(intervalID);
-        let {data} = await ServerConnection.u_user.refreshToken(userLogaout.token)
-        userLogaout.token = data.token;
-        userLogaout.expireToken = data.expireToken;
-        sessionStorage.setItem("user",JSON.stringify(userLogaout))
-        restartInterval();
-      } catch (error) {
-          console.log("ERROR : Refresh token ", error);
-      }
-  }
-
-function compareHoursRefreshToken(item) {
-  if(item !== null && Object.keys(item).length !== 0){
-    let now = new Date()
-    let currentHour = now.getHours() * 60 + now.getMinutes()
-    let timeMoment = moment(item.expireToken);
-    let tokenHour = timeMoment.hours() * 60 + timeMoment.minutes(); 
-    const isWithin5Minutes = tokenHour - currentHour <= 5;
-    if (isWithin5Minutes) {
-      showAlertRefreshToken = true;
-      if(chronometer > 0) startChronometer();
+const onObserverUser = async (user) => {
+    userLogaout = { ...user };
+    if (!intervalStarted && Object.keys(userLogaout).length !== 0) {
+        startInterval();
+        intervalStarted = true;
     }
-  }
-}
+};
 
+const onRefreshToken = async () => {
+    try {
+        const { data } = await ServerConnection.u_user.refreshToken(userLogaout.token);
+        updateUserData(data);
+    } catch (error) {
+        console.log("ERROR: Refresh token", error);
+    }
+};
 
-compareHoursRefreshToken(userLogaout);
+const updateUserData = (data) => {
+    userLogaout.token = data.token;
+    userLogaout.expireToken = data.expireToken;
+    sessionStorage.setItem("user", JSON.stringify(userLogaout));
+    showAlertRefreshToken = false;
+    userLogaout = { ...JSON.parse(sessionStorage.getItem("user")) };
+    startInterval();
+};
 
-function startChronometer() {
-  clearInterval(intervalID);
-  if (chronometer > 0) {
-    chronometer--;
-    cronometroID = setTimeout(startChronometer,1000);
-  } else {
-    buttonDisabled = true;
-  }
-}
+const startInterval = () => {
+   intervalID  = setInterval(compareHoursRefreshToken, 1800, userLogaout);
+};
 
-function onNotRefreshToken () {
-  showAlertRefreshToken = false;
-  clearInterval(intervalID);
-  chronometer = 0;
-  sessionStorage.removeItem("user");
-  location.reload();
-}
+const compareHoursRefreshToken = (item) => {
+    if (item && Object.keys(item).length !== 0) {
+        const now = new Date();
+        const timeExpireToken = moment(item.expireToken);
+        const differenceInMilliseconds = timeExpireToken.diff(now, 'milliseconds');
+        const differenceInMinutes = differenceInMilliseconds / 60000;
+        if (differenceInMinutes <= 1) {
+            clearInterval(intervalID);
+            showAlertRefreshToken = true;
+            if (chronometer > 0) startChronometer();
+        }
+    }
+};
+const startChronometer = () => {
+    if (chronometer > 0) {
+        chronometer--;
+        cronometroID = setTimeout(startChronometer, 1800);
+    } else {
+        clearInterval(intervalID);
+        buttonDisabled = true;
+    }
+};
+
+const onNotRefreshToken = () => {
+    showAlertRefreshToken = false;
+    clearInterval(intervalID);
+    chronometer = 0;
+    sessionStorage.removeItem("user");
+    location.reload();
+};
+
+const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); };
 
 $: onObserverUser(user);
-
-function restartInterval() {
-  intervalID = setInterval(compareHoursRefreshToken, 1000, userLogaout);
-}
-
-const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
 
 </script>
 

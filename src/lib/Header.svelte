@@ -76,6 +76,7 @@
         countries: [
             //{prefix:"+216",flag:"tnz"},
             {prefix:"+56",flag:"chl"},
+            {prefix:"+51",flag:"pe"},
         ]
     };
     
@@ -128,8 +129,8 @@
     }
 
     const onOpenGame = () => { 
-        screenGamesOpen = true;
-    
+        !sessionStorage.getItem("user") ? onOpenLogin() : screenGamesOpen = true;
+        //screenGamesOpen = true;
     }
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
@@ -247,7 +248,7 @@
 
     <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
-    <button class="btn signup" on:click={onOpenGame}>RetiroX</button>
+    <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button>
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword}  bind:platform t={$t}/>
@@ -278,8 +279,11 @@
         <ChatLive bind:chatLiveUrl/>
     </Modal>
 
-    <ScreenGames bind:open={screenGamesOpen} bind:platform/>
-    
+
+
+    <ScreenGames bind:open={screenGamesOpen} bind:platform bind:user/>
+
+
     <Footer {configFooter} {onCategoryChange} {openChatLive}/>
     
     
