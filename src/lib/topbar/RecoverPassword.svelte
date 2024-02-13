@@ -49,7 +49,7 @@
           const token = urlParams.get('token');
           console.log("tokentokentokentokentoken",token);
           const {data} = await backend.users.confirmResetPassword(token);
-          //setTimeout(() => {
+          setTimeout(() => {
             if (data.resp == "OK") {
                 onOk(t("msg.confirmedChangePassword"));
                 let url = new URL(currentUrl);
@@ -58,7 +58,7 @@
             }else{
               onError(t("msg.contactSupport"));
             }
-          //}, 5000);
+          }, 4000);
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
