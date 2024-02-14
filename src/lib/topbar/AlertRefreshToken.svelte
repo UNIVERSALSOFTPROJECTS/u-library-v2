@@ -1,8 +1,10 @@
 <script>
 import ServerConnection from "../../js/server";
 import { fly } from "svelte/transition";
+import {createEventDispatcher} from "svelte";
 import moment from "moment";
-export let user;
+export let user = {};
+let dispatch =  createEventDispatcher()
 let intervalID;
 let showHeader = true;
 let showAlertRefreshToken = false;
@@ -35,6 +37,7 @@ const updateUserData = (data) => {
     sessionStorage.setItem("user", JSON.stringify(userLogaout));
     showAlertRefreshToken = false;
     userLogaout = { ...JSON.parse(sessionStorage.getItem("user")) };
+    dispatch('onlogin',userLogaout)
     startInterval();
 };
 
@@ -68,6 +71,7 @@ const startChronometer = () => {
 const onNotRefreshToken = () => {
     showAlertRefreshToken = false;
     clearInterval(intervalID);
+    dispatch('logout')
     chronometer = 0;
     sessionStorage.removeItem("user");
     location.reload();
@@ -83,9 +87,9 @@ $: onObserverUser(user);
 <div class="modal {showAlertRefreshToken}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom}>
   <div class="modal-dialog centered" transition:fly={{ y: -50, duration: 5 }}>
     <div class="modal-content">
-       {#if showHeader}
-          <div class="modal-header"> <div />
-             <button class="btn close" on:click={() => (showAlertRefreshToken = false)} />
+         {#if showHeader}
+          <div class="modal-header">
+             <button class="btn close" on:click={onNotRefreshToken} />
            </div>
           {/if}
         <div class="config-body">
