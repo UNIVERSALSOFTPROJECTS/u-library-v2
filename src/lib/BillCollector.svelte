@@ -5,6 +5,7 @@
   import notify from "../js/notify";
   import Notifier from "./Notifier.svelte";
   import EventManager from "../js/EventManager";
+  import AlertRefreshToken from "./topbar/AlertRefreshToken.svelte";
 
   export let user;	
   export let configs;
@@ -132,6 +133,17 @@
       sendToWinWebview('onLogout', {});
     }
 
+  }
+
+  const handleLogout=()=>{
+    alert();
+    sendToWinWebview('onLogout', {});
+  }
+
+
+  const handleLogin=(event)=>{
+    console.log(event);
+    sendToWinWebview('setUser', {});
   }
 
 
@@ -272,7 +284,7 @@ const ERROR_CODES = {
 
 <Notifier />
 
-
+<AlertRefreshToken on:logout={handleLogout} on:onlogin={handleLogin}/>
 
 
 <style>
