@@ -127,9 +127,9 @@
     {#if isOauth}
       <div id="g_id_signin"></div>
     {/if}
-    <input type="text" class="ipt" placeholder={t("login.user")} autocapitalize="off" autocomplete="username" on:keypress={loginEnter} bind:value={username} disabled={userGmail}/>
+    <input type="text" class="ipt icon--user" placeholder={t("login.user")} autocapitalize="off" autocomplete="username" on:keypress={loginEnter} bind:value={username} disabled={userGmail}/>
     <div class="login__ipt--pass">
-      <input class="ipt" type={showPassword ? 'text' : 'password'} autocomplete="current-password"  placeholder={t("login.password")} on:keypress={loginEnter} on:input={dataPassword} disabled={userGmail}>
+      <input class="ipt icon--password" type={showPassword ? 'text' : 'password'} autocomplete="current-password"  placeholder={t("login.password")} on:keypress={loginEnter} on:input={dataPassword} disabled={userGmail}>
       <button type="button" class="btn {showPassword ? 'no-eye' : 'eye'}" name="password" on:click={togglePasswordHide}></button>
     </div>
     <button type="button" class="btn login" disabled={loadLogin} on:click={loginClick}>

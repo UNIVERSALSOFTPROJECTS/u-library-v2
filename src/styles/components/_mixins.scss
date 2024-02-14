@@ -100,6 +100,13 @@
         }
     }
 }
+@mixin inputIconPosition($icon){
+    background-image: url("#{$icon}");
+    background-repeat: no-repeat;
+    background-size: #{$g-font-size + 2};
+    padding-left: 2.5rem;
+    background-position: left 0.75rem center;
+}
 
 //animations
 @mixin borderSquareAnimated($b-color1,$b-color2,$bg-color, $b-witdth){
@@ -358,6 +365,65 @@
         }
     }
 }
+@mixin animatedLoad_3linesRotate($bg,$color1, $color2, $color3){
+    .loading {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: $bg;
+        & b{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            & b{
+                position: relative;
+                width: 130px;
+                height: 130px;
+                border-radius: 50%;
+                border: 3px solid transparent;
+                border-top-color: $color1;
+                animation: 2s spinner-rotate360 linear infinite;
+                &::before, &::after{
+                    content: '';
+                    position: absolute;
+                    border-radius: 50%;
+                    border: 3px solid transparent;
+                }
+                &::before{
+                    top: 5px;
+                    left: 5px;
+                    right: 5px;
+                    bottom: 5px;
+                    border-top-color: $color2;
+                    animation: spinner-rotate360 2s linear infinite;
+                }
+                &::after{
+                    top: 15px;
+                    left: 15px;
+                    right: 15px;
+                    bottom: 15px;
+                    @if($color3 == ''){
+                        border-top-color: lighten($color1, 12%);
+                    }@else{
+                        border-top-color: $color3;
+                    }
+                    animation: spinner-rotate360 1s linear infinite;
+                }
+            }
+        }
+        @keyframes spinner-rotate360 {
+            from {
+              transform: rotate(0);
+            }
+            to {
+              -webkit-transform: rotate(360deg);
+            }
+        }
+    }
+}
+
 @mixin animateLoad_12lines(){
     .loading {
         font-size: $g-font-size * 4.75;
@@ -387,15 +453,15 @@
             }
           }
         }
+        @keyframes spinner-fade {
+          0% {
+            background-color: $color-primary;
+          }
+          100% {
+            background-color: transparent;
+          }
+        };
       }
-      @keyframes spinner-fade {
-        0% {
-          background-color: $color-primary;
-        }
-        100% {
-          background-color: transparent;
-        }
-      };
 }
 
 @mixin getIcon($type-icon){

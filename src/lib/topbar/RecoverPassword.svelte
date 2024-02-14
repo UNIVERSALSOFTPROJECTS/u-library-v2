@@ -45,22 +45,26 @@
     if(/resetPassword/.test(currentUrl)) {
       view = "reset";
       try {
-         const urlParams =  new URLSearchParams(window.location.search);
-         const token = urlParams.get('token');
-         const {data} = await backend.users.confirmResetPassword(token);
-         if (data.resp == "OK") {
-            onOk(t("msg.confirmedChangePassword"));
-            let url = new URL(currentUrl);
-            let urlOriginal = url.origin;
-            setTimeout(() => { window.location.href = urlOriginal;}, 3000);
-         }else{
-          onError(t("msg.contactSupport"));
-         }
+          const urlParams =  new URLSearchParams(window.location.search);
+          const token = urlParams.get('token');
+          console.log("tokentokentokentokentoken",token);
+          const {data} = await backend.users.confirmResetPassword(token);
+          setTimeout(() => {
+            if (data.resp == "OK") {
+                open = false;
+                onOk(t("msg.confirmedChangePassword"));
+                let url = new URL(currentUrl);
+                let urlOriginal = url.origin;
+                setTimeout(() => { window.location.href = urlOriginal;}, 3000);
+            }else{
+              onError(t("msg.contactSupport"));
+            }
+          }, 3500);
        } catch (error) {
         console.log(error);
         onError(t("msg.contactSupport"));
+        open = false;
       }
-      open = false;
     }
   });
 </script>
