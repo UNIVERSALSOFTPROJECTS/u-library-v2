@@ -144,19 +144,22 @@
 </script>
   
 <form class="modal-body" on:submit={avoidSubmit}>
-    <input type="text" class="ipt" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={justTextValidate}>
+    <p>{t("signup.infoPersonal")}</p>
+    <input type="text" class="ipt icon--user" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={justTextValidate}>
     <div class="signup__container--date">
         <p>{t("signup.birthday")}</p>
         <div class="signup__date">
             <DropdownDate bind:date/>
         </div>
     </div>
-
-    <input type="email" class="ipt" placeholder={t("signup.email")} autocomplete="off" bind:value={email}>
-    <input type="text" class="ipt" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
+    <p>{t("signup.dataAccess")}</p>
+    <p class="signup__text--resalt">{t("signup.loguedEmailUser")}</p>
+    <input type="email" class="ipt icon--email" placeholder={t("signup.email")} autocomplete="off" bind:value={email}>
+    <input type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
     <div class="signup__container--pass">
         <InputPassword bind:password t={t}/>
     </div>
+    <p>{t("signup.validation")}</p>
     {#if typeSignup === "mixed"}
         <div class="signup__mixed">
             <p>{t("signup.haveCodeAgent")}</p>
@@ -175,8 +178,6 @@
         <DropdownCurrencies {currencies} bind:currency bind:codeAgent t={t}/>
     {:else if typeSignup === "codeAgent"}
         <div class="signup__container--agent">
-            
-
             {#if agentCodeType=='numeric'}
             <p>{t("signup.codeAgent")}</p>
             <div class="signup__codeAgent">
@@ -187,11 +188,9 @@
             {:else}
             <p>{t("signup.codeAgent")} {codeAgent?`(${codeAgent})`:''}</p>
             <div class="signup__codeAgent">
-                <input type="text" class="ipt" autocomplete="off" bind:value={usernameAgent} on:blur={setCodeAgent}>
-                
+                <input type="text" class="ipt" autocomplete="off" bind:value={usernameAgent} on:blur={setCodeAgent}> 
             </div>
             {/if}
-            
         </div>
     {/if}
 
