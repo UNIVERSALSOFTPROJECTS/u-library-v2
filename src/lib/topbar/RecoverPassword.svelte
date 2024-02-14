@@ -73,13 +73,12 @@
     {#if view == "recover"}
       <form class="recoverPassword__form" on:submit={avoidSubmit}>
         {#if newPassword}
-          <p>{t("recoverPassword.infoSms")}</p>
-          <input type="number" min="0" class="ipt" placeholder="00000000" autocomplete="off" bind:value={codeSms} on:input={justNumbersValidate}>
+          <p class="recoverPassword__text">{@html t("recoverPassword.infoSms")}</p>
+          <input type="number" min="0" class="ipt icon--password" placeholder="00000000" autocomplete="off" bind:value={codeSms} on:input={justNumbersValidate}>
           <button type="button" class="btn send" on:click={validateCodeSMS}>{t("recoverPassword.send")}</button>
         {:else}
-          <p>{t("login.forgetPassword")}</p>
-          <p>{t("recoverPassword.info")}</p>
-          <input type="email" class="ipt" placeholder={t("recoverPassword.email")} bind:value={forgotPass.email}/>
+        <p class="recoverPassword__text">{@html t("recoverPassword.info")}</p>
+          <input type="email" class="ipt icon--email" placeholder={t("recoverPassword.email")} autocomplete="off" bind:value={forgotPass.email}/>
           <button type="button" class="btn send" on:click={sendRecoverPassword} disabled={!forgotPass.email||loadRecoverPasword }>
             {#if loadRecoverPasword}
               <div class="loading"><p/><p/><p/></div>

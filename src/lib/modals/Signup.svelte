@@ -5,6 +5,7 @@
     import DropdownCurrencies from '../dropdown/DropdownCurrencies.svelte';
     import InputPassword from '../input/InputPassword.svelte';
 
+    export let onOpenLogin;
     export let configSignup;
     export let onOk;
     export let onError;
@@ -97,23 +98,18 @@
 
     async function getCurrencyId() {
         try {
-            let data = await ServerConnection.users.getCurrencyIdByCodeAgent(codeAgent)
+            let data = await ServerConnection.users.getCurrencyIdByCodeAgent(codeAgent);
             if (data.data[0].id) {
                 currency = data.data[0].id; 
-                userType = "X";
-                console.log(data);
-            }else{
-                let error = data.data.error == "NO_HAY_INFORM"?t("msg.incorrectCodeAgent"):t("msg.contactSupport");
-                return onError(error);
+                userType = "X";      
             }
         } catch (error) {
-            console.log(error);//error descconicido de momento
-            onError(t("msg.contactSupport"));
+            onError(t("msg.incorrectCodeAgent"));
         }
     }
 
     async function registerClick(){
-        if(!name || !date || !email || !username || !password || !phone || !codeAgent) return onError(t("msg.allObligatory"));
+        if(!name || !date || !email || !username || !password || !phone) return onError(t("msg.allObligatory"));
         if (email) {
             let emailvalid = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(email);
             if (!emailvalid) return onError(t("msg.emailInvalid"));
@@ -121,11 +117,18 @@
         if (password.length <= 5) return onError(t("msg.passwordMin5"));
         if(!smscode) return onError(t("msg.codeVerification"));
         if(!term_conditions) return onError(t("msg.acceptTandC"));
+        if (!codeAgent) { 
+            if (typeSignup === "mixed") {//jut if not have codeagent       
+                codeAgent = currencies[0].agent;
+                currency = currencies[0].id;
+            }else{
+                return onError(t("msg.incorrectCodeAgent"));
+            }
+         }
         try {
             loadSignup = true;
-            if(typeSignup != "selectCurrency") await getCurrencyId();//Just if add codeagent
+            if(typeSignup === "codeAgent") await getCurrencyId();//Just if add codeagent
             const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, codeAgent,smscode,userType,platform,currency,doctype,document);
-            console.log("userType",userType);
             data.username = username;
             data.password = password;
             onOk(data);
@@ -144,34 +147,28 @@
 </script>
   
 <form class="modal-body" on:submit={avoidSubmit}>
-    <p>{t("signup.infoPersonal")}</p>
-    <input type="text" class="ipt icon--user" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={justTextValidate}>
+    <b>{t("signup.infoPersonal")}</b>
+    <form><input type="text" class="ipt icon--user" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={justTextValidate}></form>
     <div class="signup__container--date">
         <p>{t("signup.birthday")}</p>
         <div class="signup__date">
             <DropdownDate bind:date/>
         </div>
     </div>
-    <p>{t("signup.dataAccess")}</p>
+    <b>{t("signup.dataAccess")}</b>
     <p class="signup__text--resalt">{t("signup.loguedEmailUser")}</p>
-    <input type="email" class="ipt icon--email" placeholder={t("signup.email")} autocomplete="off" bind:value={email}>
-    <input type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}>
+    <form><input type="email" class="ipt icon--email" placeholder={t("signup.email")} autocomplete="off" bind:value={email}></form>
+    <form><input type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}></form>
     <div class="signup__container--pass">
         <InputPassword bind:password t={t}/>
     </div>
-    <p>{t("signup.validation")}</p>
+    <b>{t("signup.validation")}</b>
     {#if typeSignup === "mixed"}
         <div class="signup__mixed">
-            <p>{t("signup.haveCodeAgent")}</p>
             <!-- svelte-ignore a11y-click-events-have-key-events --> <!-- svelte-ignore a11y-no-static-element-interactions -->
             <div on:click={()=>typeSignup = "codeAgent"}>
                 <input type="checkbox">
-                <label for="">{t("signup.yes")}</label>
-            </div>
-            <!-- svelte-ignore a11y-click-events-have-key-events --> <!-- svelte-ignore a11y-no-static-element-interactions -->
-            <div on:click={()=>typeSignup = "selectCurrency"}>
-                <input type="checkbox">
-                <label for="">{t("signup.no")}</label>
+                <label for="">{t("signup.haveCodeAgent")}</label>
             </div>
         </div>
     {:else if typeSignup === "selectCurrency"}
@@ -193,7 +190,6 @@
             {/if}
         </div>
     {/if}
-
     <div class="signup__phone">
         <DropdowPrefix {countries} bind:country/>
         <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone}>
@@ -226,4 +222,5 @@
             {t("signup.register")}
         {/if}
     </button>
+    <button type="button" on:click={onOpenLogin} class="btn openLogin">{t("signup.loginHere")}</button>
 </form>

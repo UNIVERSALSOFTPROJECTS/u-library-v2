@@ -102,6 +102,11 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             font-size: $g-font-size + 2;
             width: 6rem;
         }
+        &.openSignup,&.openForgotPass,&.openLogin{
+            background: transparent;
+            text-decoration: underline;
+            height: 30px;
+        }
     }
     .icon{
         &--chat{
@@ -250,8 +255,11 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         }
     }
     .ipt{
+        $user:addColorIcon("user","969696");
+        $email:addColorIcon("email","969696");
+        $key:addColorIcon("key","969696");
         &.icon--user{
-            @include inputIconPosition($user);
+            @include inputIconPosition($user);  
         }
         &.icon--email{
             @include inputIconPosition($email);
@@ -260,6 +268,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             @include inputIconPosition($key);
         }
     }
+
     //.footer{
     @extend %footer__model_1;
     //}   
