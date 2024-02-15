@@ -10,8 +10,7 @@ const UserHelper = (() => {
         if (u) {
             let user_ = JSON.parse(u);
             user = user_;
-            console.log("backend", backend);
-            let data = await backend.getBalance(user.agregatorToken);
+            let data = await backend.users.getBalance(user.agregatorToken);
             user.balance = data.balance;
             connectToSocket(conf);
 
