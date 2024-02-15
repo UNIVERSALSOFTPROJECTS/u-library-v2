@@ -156,16 +156,15 @@
     retrunMoneneyModal = false;
   };
 
-  const handleLogout=()=>{
-    alert();
-    sendToWinWebview('onLogout', {});
-  }
+  EventManager.subscribe("onlogout", (data)=>{
+       console.log("event conect onlogout bill collector:  ",data);
+       sendToWinWebview('onLogout', {});
+  });
 
-
-  const handleLogin=(event)=>{
-    console.log(event);
-    sendToWinWebview('setUser', {});
-  }
+  EventManager.subscribe("onlogin", (data)=>{
+       console.log("event conect onlogin bill collector:  ",data);
+       sendToWinWebview('setUser', data);
+  });
 
 
   window.addEventListener('online', handleOnline);
@@ -329,14 +328,12 @@ const ERROR_CODES = {
     ></textarea>
 
     <button on:click={processReturnMoney} class="centered-button search-losg"
-      >Devolver</button
-    >
+      >Devolver</button >
   </div>
 </Modal>
 
 <Notifier />
 
-<AlertRefreshToken on:logout={handleLogout} on:onlogin={handleLogin}/>
 
 
 <style>
