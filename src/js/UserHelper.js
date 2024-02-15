@@ -3,17 +3,14 @@ import backend from './server';
 
 const UserHelper = (() => {
 
-    const checkAndLoadUserLogged = async(conf) => {
-        
+    const checkAndLoadUserLogged = async (conf) => {
+
         let user = null;
         const u = sessionStorage.getItem("user");
         if (u) {
             let user_ = JSON.parse(u);
             user = user_;
-            //let usertoken = user.token;
-            //let agregatorToken = user.agregatorToken;
-            //let userState = "loggedIn";
-            //getFavGames();
+            console.log("backend", backend);
             let data = await backend.getBalance(user.agregatorToken);
             user.balance = data.balance;
             connectToSocket(conf);
@@ -21,8 +18,8 @@ const UserHelper = (() => {
         }
         return user;
     };
-    
-    const connectToSocket = (user, conf)=>{
+
+    const connectToSocket = (user, conf) => {
         if (!conf.CLIENTCODE) throw "CONF_CLIENTCODE_NOT_FOUND";
         SocketConnector.connect(`${conf.CLIENTCODE}-${user.username}`); //conecta al websocket.
     };
@@ -31,7 +28,7 @@ const UserHelper = (() => {
 
 
 
-    
+
     return {
         checkAndLoadUserLogged,
     }
