@@ -11,6 +11,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   -webkit-appearance: none;
   margin: 0;
 }
+input:-internal-autofill-selected {
+  padding: 0.5rem !important;
+}
 
 input[type=date] {
   -webkit-appearance: none;
@@ -472,11 +475,14 @@ input[type=date]::-webkit-calendar-picker-indicator {
     background-color: transparent;
   }
 }
+.Coliseosport .modal.recoverPassword .recoverPassword__text b {
+  color: #00D2E4;
+}
 
 .Coliseosport .modal.signup .modal-body {
   height: -moz-fit-content;
   height: fit-content;
-  padding: 1rem;
+  padding: 1rem 1rem 2rem 1rem;
   max-width: 430px;
   gap: 0.5rem;
 }
@@ -542,6 +548,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   display: grid;
   grid-template-columns: auto 1fr 1fr;
   justify-items: center;
+  margin: 0.5rem 0;
 }
 .Coliseosport .modal.signup .signup__codeAgent {
   display: grid;
@@ -572,6 +579,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 0.75rem;
+  padding: 0.5rem 0;
   /* Made by Jimmy Gillam */
   /* Checkmark style starts */
 }
@@ -1053,6 +1061,11 @@ input[type=date]::-webkit-calendar-picker-indicator {
   font-size: 16px;
   width: 6rem;
 }
+.Coliseosport .btn.openSignup, .Coliseosport .btn.openForgotPass, .Coliseosport .btn.openLogin {
+  background: transparent;
+  text-decoration: underline;
+  height: 30px;
+}
 .Coliseosport .icon--chat {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='none'><path d='M18.536 2H2.464a.987.987 0 0 0-.682.27.904.904 0 0 0-.282.653V14c0 .245.102.48.282.653.181.173.427.27.682.27h2.893V18l4.73-3.077h8.449a.987.987 0 0 0 .682-.27A.904.904 0 0 0 19.5 14V2.923a.904.904 0 0 0-.282-.653.987.987 0 0 0-.682-.27ZM6.643 9.692c-.254 0-.503-.072-.714-.207a1.244 1.244 0 0 1-.474-.552 1.182 1.182 0 0 1-.073-.712c.05-.238.172-.458.352-.63s.409-.29.658-.337a1.34 1.34 0 0 1 .743.07c.235.094.436.251.577.454a1.194 1.194 0 0 1-.16 1.554c-.241.23-.568.36-.91.36Zm3.857 0c-.254 0-.503-.072-.714-.207a1.244 1.244 0 0 1-.474-.552 1.182 1.182 0 0 1-.073-.712c.05-.238.172-.458.352-.63s.409-.29.658-.337c.25-.047.508-.023.743.07.235.094.436.251.577.454a1.194 1.194 0 0 1-.16 1.554c-.241.23-.568.36-.909.36Zm3.857 0c-.254 0-.503-.072-.714-.207a1.244 1.244 0 0 1-.474-.552 1.182 1.182 0 0 1-.073-.712c.05-.238.172-.458.352-.63s.409-.29.658-.337a1.34 1.34 0 0 1 .743.07c.235.094.436.251.577.454a1.194 1.194 0 0 1-.16 1.554c-.24.23-.568.36-.909.36Z' fill='url(%23a)'/><defs><linearGradient id='a' x1='10.5' y1='1.795' x2='10.5' y2='18' gradientUnits='userSpaceOnUse'><stop stop-color='%23fff'/><stop offset='1' stop-color='%23B4D3DB'/></linearGradient></defs></svg>");
   color: #000;
@@ -1113,6 +1126,9 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .Coliseosport .modal.login .login__autosaved * {
   cursor: pointer;
+}
+.Coliseosport .modal.login .btn.openForgotPass {
+  color: #f54b00;
 }
 .Coliseosport .modal.login .loading {
   display: flex;
@@ -1701,21 +1717,21 @@ input[type=date]::-webkit-calendar-picker-indicator {
   gap: 0.25rem;
 }
 .Coliseosport .ipt.icon--user {
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M11 4.16667C11 6.37581 9.20912 8.16667 6.99998 8.16667C4.79084 8.16667 2.99998 6.37581 2.99998 4.16667C2.99998 1.95753 4.79084 0.166672 6.99998 0.166672C9.20912 0.166672 11 1.95753 11 4.16667ZM9.66665 4.16667C9.66665 5.63943 8.47274 6.83334 6.99998 6.83334C5.52722 6.83334 4.33331 5.63943 4.33331 4.16667C4.33331 2.69391 5.52722 1.50001 6.99998 1.50001C8.47274 1.50001 9.66665 2.69391 9.66665 4.16667Z' fill='%23000'/><path fill-rule='evenodd' clip-rule='evenodd' d='M7.00003 8.83334C5.04328 8.83334 3.63245 9.23923 2.62041 9.84783C1.60433 10.4589 1.03363 11.2483 0.718468 11.9387C0.452812 12.5207 0.573721 13.1138 0.926676 13.5364C1.26312 13.9392 1.78624 14.1667 2.33335 14.1667H11.6667C12.2137 14.1667 12.7369 13.9392 13.0733 13.5364C13.4263 13.1139 13.5472 12.5208 13.2815 11.9388C12.9664 11.2483 12.3957 10.4589 11.3796 9.84784C10.3676 9.23923 8.95679 8.83334 7.00003 8.83334ZM1.93141 12.4924C2.15018 12.0131 2.55204 11.4448 3.30755 10.9905C4.06708 10.5337 5.22683 10.1667 7.00003 10.1667C8.77324 10.1667 9.93298 10.5337 10.6925 10.9905C11.448 11.4448 11.8498 12.0131 12.0686 12.4924C12.0944 12.549 12.0933 12.583 12.0907 12.6004C12.0877 12.6202 12.078 12.6481 12.05 12.6816C11.9899 12.7536 11.8559 12.8333 11.6667 12.8333H2.33335C2.14406 12.8333 2.01009 12.7536 1.94998 12.6816C1.92199 12.6481 1.91226 12.6202 1.9093 12.6004C1.90671 12.583 1.90558 12.549 1.93141 12.4924Z' fill='%23000'/></svg>");
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M11 4.16667C11 6.37581 9.20912 8.16667 6.99998 8.16667C4.79084 8.16667 2.99998 6.37581 2.99998 4.16667C2.99998 1.95753 4.79084 0.166672 6.99998 0.166672C9.20912 0.166672 11 1.95753 11 4.16667ZM9.66665 4.16667C9.66665 5.63943 8.47274 6.83334 6.99998 6.83334C5.52722 6.83334 4.33331 5.63943 4.33331 4.16667C4.33331 2.69391 5.52722 1.50001 6.99998 1.50001C8.47274 1.50001 9.66665 2.69391 9.66665 4.16667Z' fill='%23969696'/><path fill-rule='evenodd' clip-rule='evenodd' d='M7.00003 8.83334C5.04328 8.83334 3.63245 9.23923 2.62041 9.84783C1.60433 10.4589 1.03363 11.2483 0.718468 11.9387C0.452812 12.5207 0.573721 13.1138 0.926676 13.5364C1.26312 13.9392 1.78624 14.1667 2.33335 14.1667H11.6667C12.2137 14.1667 12.7369 13.9392 13.0733 13.5364C13.4263 13.1139 13.5472 12.5208 13.2815 11.9388C12.9664 11.2483 12.3957 10.4589 11.3796 9.84784C10.3676 9.23923 8.95679 8.83334 7.00003 8.83334ZM1.93141 12.4924C2.15018 12.0131 2.55204 11.4448 3.30755 10.9905C4.06708 10.5337 5.22683 10.1667 7.00003 10.1667C8.77324 10.1667 9.93298 10.5337 10.6925 10.9905C11.448 11.4448 11.8498 12.0131 12.0686 12.4924C12.0944 12.549 12.0933 12.583 12.0907 12.6004C12.0877 12.6202 12.078 12.6481 12.05 12.6816C11.9899 12.7536 11.8559 12.8333 11.6667 12.8333H2.33335C2.14406 12.8333 2.01009 12.7536 1.94998 12.6816C1.92199 12.6481 1.91226 12.6202 1.9093 12.6004C1.90671 12.583 1.90558 12.549 1.93141 12.4924Z' fill='%23969696'/></svg>");
   background-repeat: no-repeat;
   background-size: 16px;
   padding-left: 2.5rem;
   background-position: left 0.75rem center;
 }
 .Coliseosport .ipt.icon--email {
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'><g><path d='M14.6666 3.16666H1.33331V13.8333H14.6666V3.16666ZM13.3333 5.83333L7.99998 9.16666L2.66665 5.83333V4.5L7.99998 7.83333L13.3333 4.5V5.83333Z' fill='%23000'/></g><defs><clipPath><rect width='16' height='16' fill='%23fff' transform='translate(0 0.5)'/></clipPath></defs></svg>");
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'><g><path d='M14.6666 3.16666H1.33331V13.8333H14.6666V3.16666ZM13.3333 5.83333L7.99998 9.16666L2.66665 5.83333V4.5L7.99998 7.83333L13.3333 4.5V5.83333Z' fill='%23969696'/></g><defs><clipPath><rect width='16' height='16' fill='%23fff' transform='translate(0 0.5)'/></clipPath></defs></svg>");
   background-repeat: no-repeat;
   background-size: 16px;
   padding-left: 2.5rem;
   background-position: left 0.75rem center;
 }
 .Coliseosport .ipt.icon--password {
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'><g><path d='M7.96171 7.33265L8.07926 7.66667H8.43335H14.8334V9.33333H14H13.5V9.83333V12H11.8334V9.83333V9.33333H11.3334H8.43335H8.07926L7.96171 9.66735C7.48326 11.0269 6.18793 12 4.66669 12C2.73616 12 1.16669 10.4305 1.16669 8.5C1.16669 6.56948 2.73616 5 4.66669 5C6.18793 5 7.48326 5.97315 7.96171 7.33265ZM2.83335 8.5C2.83335 9.50948 3.65721 10.3333 4.66669 10.3333C5.67616 10.3333 6.50002 9.50948 6.50002 8.5C6.50002 7.49052 5.67616 6.66667 4.66669 6.66667C3.65721 6.66667 2.83335 7.49052 2.83335 8.5Z' stroke='%23000'/></g><defs><clipPath ><rect width='16' height='16' fill='%23fff' transform='translate(0 0.5)'/></clipPath></defs></svg>");
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'><g><path d='M7.96171 7.33265L8.07926 7.66667H8.43335H14.8334V9.33333H14H13.5V9.83333V12H11.8334V9.83333V9.33333H11.3334H8.43335H8.07926L7.96171 9.66735C7.48326 11.0269 6.18793 12 4.66669 12C2.73616 12 1.16669 10.4305 1.16669 8.5C1.16669 6.56948 2.73616 5 4.66669 5C6.18793 5 7.48326 5.97315 7.96171 7.33265ZM2.83335 8.5C2.83335 9.50948 3.65721 10.3333 4.66669 10.3333C5.67616 10.3333 6.50002 9.50948 6.50002 8.5C6.50002 7.49052 5.67616 6.66667 4.66669 6.66667C3.65721 6.66667 2.83335 7.49052 2.83335 8.5Z' stroke='%23969696'/></g><defs><clipPath ><rect width='16' height='16' fill='%23fff' transform='translate(0 0.5)'/></clipPath></defs></svg>");
   background-repeat: no-repeat;
   background-size: 16px;
   padding-left: 2.5rem;
