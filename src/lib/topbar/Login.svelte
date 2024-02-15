@@ -9,6 +9,7 @@
   export let platform;
   export let userGateway = "neco"; //neco/universal
   export let onOpenRecoverPassword;
+  export let onOpenSignup;  
   export let t;//traduccion
   export let isOauth=false;
 
@@ -139,6 +140,7 @@
         <p>{t("login.access")}</p>
       {/if}
     </button>
-    <button type="button" on:click={onOpenRecoverPassword} class="btn link">{t("login.forgetPassword")}</button>
+    <button type="button" on:click={onOpenSignup} class="btn openSignup">{t("login.signupHere")}</button>
+    <button type="button" on:click={onOpenRecoverPassword} class="btn openForgotPass">{t("login.forgetPassword")}</button>
   </form>
 </div>

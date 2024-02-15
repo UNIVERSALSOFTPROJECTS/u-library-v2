@@ -66,7 +66,7 @@
     //];
     const configSignup = {
         platform,
-        typeSignup: "mixed", //codeAgent / selectCurrency /  mixed (codeAgent and selectCurrency)
+        typeSignup: "mixed", //codeAgent / selectCurrency /  mixed (codeAgent and codeAgentW = currencies.agent )
         userType: "W",// X / W
         currencies: [ 
             {id: 7, agent:6546},
@@ -119,7 +119,7 @@
     const openChatLive = () =>{ chatLiveModalOpen = true; subModalOpened = "chatLive" }
     // fin de registro m
     //IDIOMAR!!!
-    $locale = "fr";//Actualmente solo "es" y "fr"
+    $locale = "es";//Actualmente solo "es" y "fr"
 
 
     const onOpenRecoverPassword = () => { 
@@ -133,8 +133,8 @@
         //screenGamesOpen = true;
     }
 
-    const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login" } 
-    const onOpenSignup = () => { signupModalOpen = true; modalOpened = "signup" }
+    const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login"; signupModalOpen = false; } 
+    const onOpenSignup = () => { signupModalOpen = true; modalOpened = "signup"; loginModalOpen = false; }
     const onOpenDeposit = () => { depositModalOpen = true; modalOpened = "deposit" }
     const onOpenWithdrawal = () => { withdrawalModalOpen = true; modalOpened = "withdrawal" }
     const toggleMenuBar = () => ( isToggleOn =! isToggleOn )
@@ -251,7 +251,7 @@
     <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button>
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
-        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword}  bind:platform t={$t}/>
+        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword} {onOpenSignup}  bind:platform t={$t}/>
     </Modal>
 
     <Modal bind:open={resetpassModalOpen} bind:modalOpened title={$t("recoverPassword.title")} >
@@ -259,7 +259,7 @@
     </Modal>                                                                          
 
     <Modal bind:open={signupModalOpen} bind:modalOpened title={$t("signup.title")}>
-        <Signup {configSignup} {openPrivacyPolicies} onOk={onSignupOk} onError={onSignupError} t={$t}/>
+        <Signup {configSignup} {openPrivacyPolicies} onOk={onSignupOk} onError={onSignupError} {onOpenLogin} t={$t}/>
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
         <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError} />

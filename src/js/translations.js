@@ -5,6 +5,7 @@ export default {
       "login.password": "Contraseña",
       "login.access": "Ingresar",
       "login.remember": "Recordar",
+      "login.signupHere": "¿Eres nuevo? Registrate aquí",
       "login.forgetPassword": "¿Olvidaste tu contraseña?",
       //---------------SINGUP-----------------------------
       "signup.title": "Registrate aquí",
@@ -16,7 +17,7 @@ export default {
       "signup.birthday": "Fecha de nacimiento",
       "signup.email": "Correo electrónico",
       "signup.username": "Nombre de usuario",
-      "signup.haveCodeAgent": "¿Tienes un código de agente?",
+      "signup.haveCodeAgent": "Si tienes un código de agente, marca esta opción.",
       "signup.codeAgent": "Código de agente",
       "signup.phone": "Teléfono",
       "signup.generateCode": "Generar código SMS",
@@ -24,18 +25,17 @@ export default {
       "signup.code": "Código",
       "signup.acceptPandP": "Confirmo haber leído y aceptado los <b><span class='link'>Términos y condiciones</span></b> de {{platform}}.",
       "signup.register": "Registrarse",
-      "signup.yes":"Si",
-      "signup.no":"No",
+      "signup.loginHere": "¿Ya tienes una cuenta? Ingresa aquí",
       //---------------SINGUP/NAME CURRENCIES-----------------------------
       "currency.usd":"Dólar estadounidense",
       "currency.clp":"Peso chileno",
       "currency.cop":"Peso colombiano",
       //---------------RECOVERPASSWORD-----------------------------
-      "recoverPassword.title":"Recuperar Contraseña",
+      "recoverPassword.title":"¿Olvidaste tu contraseña?",
       "recoverPassword.email":"Ingrese su corrreo electrónico",
       "recoverPassword.send":"Enviar",
-      "recoverPassword.info":"¡No hay problema! Sólo tienes que ingresar tu correo electrónico y se te enviará un código SMS a tu celular, con el cual reestableceras tu contraseña.",
-      "recoverPassword.infoSms":"Por favor ingrese el código de 8 digitos que fue enviado a su celular, recuerde que este código sera su nueva contraseña.",
+      "recoverPassword.info":"¡No hay problema! Sólo tienes que <b>ingresar tu correo electrónico</b> y se <b>te enviará un código SMS a tu celular</b>, con el cual reestableceras tu contraseña.",
+      "recoverPassword.infoSms":"Por favor <b>ingrese el código de 8 digitos que fue enviado a su celular</b>, recuerde que <b>este código sera su nueva contraseña</b>.",
       "recoverPassword.confirmingChangePass":"Confirmando el cambio de contraseña, espere un momento.",
       //---------------Withdrawal-----------------------------
       "withdrawal.title": "Retiro",
@@ -98,8 +98,6 @@ export default {
         "signup.code": "Code",
         "signup.acceptPandP": "Pour me convertir en client, acceptez les <b><span class='link'>Politiques de Confidentialité</span></b> de {{platform}}.",
         "signup.register": "S'inscrire",
-        "signup.yes":"Oui",
-        "signup.no":"Non",
         //---------------SINGUP/NAME CURRENCIES-----------------------------
         "currency.usd":"Dollar américain",
         "currency.clp":"Peso chilien",
