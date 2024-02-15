@@ -550,6 +550,14 @@ input[type=date]::-webkit-calendar-picker-indicator {
   justify-items: center;
   margin: 0.5rem 0;
 }
+.Coliseosport .modal.signup .signup__mixed--check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.Coliseosport .modal.signup .signup__mixed--check label {
+  color: #00D2E4;
+}
 .Coliseosport .modal.signup .signup__codeAgent {
   display: grid;
   grid-template-columns: 1fr auto 1fr;

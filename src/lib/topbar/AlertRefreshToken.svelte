@@ -147,10 +147,10 @@ $: onObserverUser(user);
   .chronometer p{
     color: orange;
   }
-  .modal-content{
+  /*.modal-content{
     width: 14%;
     height: 314px;
-  }
+  }*/
   .no-header{
     display: flex;
     background: none;
