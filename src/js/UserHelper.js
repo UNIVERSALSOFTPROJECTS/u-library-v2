@@ -1,5 +1,5 @@
 import { SocketConnector } from '..';
-import backend from './server';
+import ServerConnection from './server';
 
 const UserHelper = (() => {
 
@@ -10,7 +10,7 @@ const UserHelper = (() => {
         if (u) {
             let user_ = JSON.parse(u);
             user = user_;
-            let data = await backend.users.getBalance(user.agregatorToken);
+            let data = await ServerConnection.users.getBalance(user.agregatorToken);
             user.balance = data.balance;
             connectToSocket(conf);
 
