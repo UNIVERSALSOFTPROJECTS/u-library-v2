@@ -168,6 +168,11 @@
   }
 
 
+  EventManager.subscribe("onlogin", (data)=>{
+       console.log("envento conecto ",data);
+  });
+
+
   window.addEventListener('online', handleOnline);
   window.addEventListener('offiline', handleOffline);
 

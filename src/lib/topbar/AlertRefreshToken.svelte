@@ -1,6 +1,7 @@
 <script>
 import ServerConnection from "../../js/server";
 import { fly } from "svelte/transition";
+import EventManager from "../../js/EventManager";
 import {createEventDispatcher} from "svelte";
 import moment from "moment";
 export let user = {};
@@ -37,6 +38,7 @@ const updateUserData = (data) => {
     sessionStorage.setItem("user", JSON.stringify(userLogaout));
     showAlertRefreshToken = false;
     userLogaout = { ...JSON.parse(sessionStorage.getItem("user")) };
+    EventManager.publish("onlogin",userLogaout)
     dispatch('onlogin',userLogaout);
     startInterval();
 };
