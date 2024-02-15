@@ -25,7 +25,6 @@
       loadRecoverPassword = true;
       let payload = {...forgotPass}
       const {data} = (userGateway=='neco')?await backend.users.resetPassword(payload):await backend.u_user.recoverPassword(payload);
-      console.log(data);
       if (data.sms.response_code=='SUCCESS') {
         onOk(t("msg.sendSms"));
         newPassword = data.pass;
