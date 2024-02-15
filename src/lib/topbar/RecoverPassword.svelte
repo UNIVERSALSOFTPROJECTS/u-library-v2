@@ -26,15 +26,12 @@
       let payload = {...forgotPass}
       const {data} = (userGateway=='neco')?await backend.users.resetPassword(payload):await backend.u_user.recoverPassword(payload);
       if (data.sms.response_code=='SUCCESS') {
-        onOk(t("msg.sendSms"));
         newPassword = data.pass;
         redirectURL = data.url+"?token="+data.token;
-      }else{
-        onError(t("msg.emailInvalid"));
+        onOk(t("msg.sendSms"));
       }
     } catch (error) {
-      console.log(error);
-      onError(t("msg.contactSupport"));
+      onError(t("msg.emailInvalid"));
     }
     loadRecoverPassword = false;
   }
