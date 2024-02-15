@@ -4,7 +4,7 @@ import { fly } from "svelte/transition";
 import {createEventDispatcher} from "svelte";
 import moment from "moment";
 export let user = {};
-let dispatch =  createEventDispatcher()
+const dispatch = createEventDispatcher();
 let intervalID;
 let showHeader = true;
 let showAlertRefreshToken = false;
@@ -37,7 +37,7 @@ const updateUserData = (data) => {
     sessionStorage.setItem("user", JSON.stringify(userLogaout));
     showAlertRefreshToken = false;
     userLogaout = { ...JSON.parse(sessionStorage.getItem("user")) };
-    dispatch('onlogin',userLogaout)
+    dispatch('onlogin',userLogaout);
     startInterval();
 };
 

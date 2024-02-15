@@ -157,13 +157,13 @@
   };
 
   const handleLogout=()=>{
-    alert();
+    console.log("INGRESOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
     sendToWinWebview('onLogout', {});
   }
 
 
   const handleLogin=(event)=>{
-    console.log(event);
+    console.log("INGRESOPPPPPPPPPPPPPPPPPPPP");
     sendToWinWebview('setUser', {});
   }
 
@@ -329,8 +329,7 @@ const ERROR_CODES = {
     ></textarea>
 
     <button on:click={processReturnMoney} class="centered-button search-losg"
-      >Devolver</button
-    >
+      >Devolver</button >
   </div>
 </Modal>
 
