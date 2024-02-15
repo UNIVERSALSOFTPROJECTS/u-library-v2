@@ -19,7 +19,8 @@ const UserHelper = (() => {
     };
 
     const connectToSocket = (user, conf) => {
-        if (!conf.CLIENTCODE) throw "CONF_CLIENTCODE_NOT_FOUND";
+        console.log("CONGIH",conf);
+        if (!conf.CLIENTCODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         SocketConnector.connect(`${conf.CLIENT_CODE}-${user.username}`); //conecta al websocket.
     };
 
