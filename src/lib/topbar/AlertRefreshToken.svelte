@@ -2,10 +2,8 @@
 import ServerConnection from "../../js/server";
 import { fly } from "svelte/transition";
 import EventManager from "../../js/EventManager";
-import {createEventDispatcher} from "svelte";
 import moment from "moment";
 export let user = {};
-const dispatch = createEventDispatcher();
 let intervalID;
 let showHeader = true;
 let showAlertRefreshToken = false;
@@ -39,7 +37,6 @@ const updateUserData = (data) => {
     showAlertRefreshToken = false;
     userLogaout = { ...JSON.parse(sessionStorage.getItem("user")) };
     EventManager.publish("onlogin",userLogaout)
-    dispatch('onlogin',userLogaout);
     startInterval();
 };
 
@@ -73,7 +70,7 @@ const startChronometer = () => {
 const onNotRefreshToken = () => {
     showAlertRefreshToken = false;
     clearInterval(intervalID);
-    dispatch('logout')
+    EventManager.publish("onlogout",userLogaout)
     chronometer = 0;
     sessionStorage.removeItem("user");
     location.reload();

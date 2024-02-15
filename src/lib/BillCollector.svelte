@@ -156,20 +156,14 @@
     retrunMoneneyModal = false;
   };
 
-  const handleLogout=()=>{
-    console.log("INGRESOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-    sendToWinWebview('onLogout', {});
-  }
-
-
-  const handleLogin=(event)=>{
-    console.log("INGRESOPPPPPPPPPPPPPPPPPPPP");
-    sendToWinWebview('setUser', {});
-  }
-
+  EventManager.subscribe("onlogout", (data)=>{
+       console.log("event conect onlogout bill collector:  ",data);
+       sendToWinWebview('onLogout', {});
+  });
 
   EventManager.subscribe("onlogin", (data)=>{
-       console.log("envento conecto ",data);
+       console.log("event conect onlogin bill collector:  ",data);
+       sendToWinWebview('setUser', data);
   });
 
 
@@ -340,7 +334,6 @@ const ERROR_CODES = {
 
 <Notifier />
 
-<AlertRefreshToken on:logout={handleLogout} on:onlogin={handleLogin}/>
 
 
 <style>
