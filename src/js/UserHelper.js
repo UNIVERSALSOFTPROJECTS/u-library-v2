@@ -20,7 +20,7 @@ const UserHelper = (() => {
 
     const connectToSocket = (user, conf) => {
         if (!conf.CLIENTCODE) throw "CONF_CLIENTCODE_NOT_FOUND";
-        SocketConnector.connect(`${conf.CLIENTCODE}-${user.username}`); //conecta al websocket.
+        SocketConnector.connect(`${conf.CLIENT_CODE}-${user.username}`); //conecta al websocket.
     };
 
 
