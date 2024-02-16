@@ -5,6 +5,7 @@
   import notify from "../js/notify";
   import Notifier from "./Notifier.svelte";
   import EventManager from "../js/EventManager";
+  import AlertRefreshToken from "./topbar/AlertRefreshToken.svelte";
 
   export let user;	
   export let configs;
@@ -155,6 +156,16 @@
     returnManually.description= "" ;
     selectOptions = [];
   };
+
+  EventManager.subscribe("onlogout", (data)=>{
+       console.log("event conect onlogout bill collector:  ",data);
+       sendToWinWebview('onLogout', {});
+  });
+
+  EventManager.subscribe("onlogin", (data)=>{
+       console.log("event conect onlogin bill collector:  ",data);
+       sendToWinWebview('setUser', data);
+  });
 
 
   window.addEventListener('online', handleOnline);
@@ -320,13 +331,11 @@ const ERROR_CODES = {
     ></textarea>
 
     <button on:click={processReturnMoney} class="centered-button search-losg"
-      >Devolver</button
-    >
+      >Devolver</button >
   </div>
 </Modal>
 
 <Notifier />
-
 
 
 

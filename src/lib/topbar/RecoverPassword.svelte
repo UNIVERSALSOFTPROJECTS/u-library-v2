@@ -9,7 +9,7 @@
   export let onError;
 
   let forgotPass = {}
-  let loadRecoverPasword = false;
+  let loadRecoverPassword = false;
   let newPassword;
   let redirectURL;
   let codeSms;
@@ -22,21 +22,18 @@
     let isEmailValid = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(forgotPass.email);
     if (!isEmailValid) return onError(t("msg.emailInvalid"));
     try {
-      loadRecoverPasword = true;
+      loadRecoverPassword = true;
       let payload = {...forgotPass}
-      const {data} = (userGateway=='neco')?await backend.users.resetPassword(payload):await backend.u_user.recoverPassword(payload)
-      if (data.response_code=='SUCCESS') {
+      const {data} = (userGateway=='neco')?await backend.users.resetPassword(payload):await backend.u_user.recoverPassword(payload);
+      if (data.sms.response_code=='SUCCESS') {
+        newPassword = data.pass;
+        redirectURL = data.url+"?token="+data.token;
         onOk(t("msg.sendSms"));
-        newPassword = data.data.messages[0].body.match(/password: (.+)$/)[1];
-        redirectURL = data.data.messages[0].body.match(/ aqui (.+?) este /)[1];
-      }else{
-        onError(t("msg.emailInvalid"));
       }
     } catch (error) {
-      console.log(error);
-      onError(t("msg.contactSupport"));
+      onError(t("msg.emailInvalid"));
     }
-    loadRecoverPasword = false;
+    loadRecoverPassword = false;
   }
   const validateCodeSMS = () => { newPassword == codeSms? window.location.href = redirectURL : onError(t("msg.incorrectSms")); }
 
@@ -73,15 +70,14 @@
     {#if view == "recover"}
       <form class="recoverPassword__form" on:submit={avoidSubmit}>
         {#if newPassword}
-          <p>{t("recoverPassword.infoSms")}</p>
-          <input type="number" min="0" class="ipt" placeholder="00000000" autocomplete="off" bind:value={codeSms} on:input={justNumbersValidate}>
+          <p class="recoverPassword__text">{@html t("recoverPassword.infoSms")}</p>
+          <input type="number" min="0" class="ipt icon--password" placeholder="00000000" autocomplete="off" bind:value={codeSms} on:input={justNumbersValidate}>
           <button type="button" class="btn send" on:click={validateCodeSMS}>{t("recoverPassword.send")}</button>
         {:else}
-          <p>{t("login.forgetPassword")}</p>
-          <p>{t("recoverPassword.info")}</p>
-          <input type="email" class="ipt" placeholder={t("recoverPassword.email")} bind:value={forgotPass.email}/>
-          <button type="button" class="btn send" on:click={sendRecoverPassword} disabled={!forgotPass.email||loadRecoverPasword }>
-            {#if loadRecoverPasword}
+        <p class="recoverPassword__text">{@html t("recoverPassword.info")}</p>
+          <input type="email" class="ipt icon--email" placeholder={t("recoverPassword.email")} autocomplete="off" bind:value={forgotPass.email}/>
+          <button type="button" class="btn send" on:click={sendRecoverPassword} disabled={!forgotPass.email||loadRecoverPassword }>
+            {#if loadRecoverPassword}
               <div class="loading"><p/><p/><p/></div>
             {:else}
               {t("recoverPassword.send")}

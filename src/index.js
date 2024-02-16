@@ -6,7 +6,8 @@ export {default as Deposit} from "./lib/payments/Deposit.svelte";
 export {default as ServerConnection} from "./js/server";
 export {default as SocketConnector} from "./js/SocketConnector";
 
-export {default as Utils} from "./js/util";
+export { default as Utils } from "./js/util";
+export { default as UserHelper } from "./js/UserHelper";
 export {default as translate} from "./js/translations";
 //export {default as i18n} from "./js/i18n";
 export {default as Notifier} from "./lib/Notifier.svelte";
@@ -27,7 +28,8 @@ export {default as TopBar } from './lib/topbar/TopBar.svelte';
 export {default as BalanceSocketListener } from './lib/BalanceSocketListener.svelte';
 export {default as RecoverPassword } from './lib/topbar/RecoverPassword.svelte';
 export {default as BillCollector} from './lib/BillCollector.svelte';
-export {default as AlertTokenExpired} from './lib/topbar/AlertRefreshToken.svelte';
+export { default as AlertTokenExpired } from './lib/topbar/AlertRefreshToken.svelte';
+export { default as DuplicatedSessionListener } from './lib/DuplicatedSessionListener.svelte';
 
 
 

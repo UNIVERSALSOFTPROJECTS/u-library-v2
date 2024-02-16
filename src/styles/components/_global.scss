@@ -12,7 +12,11 @@ input{
             margin: 0; 
         }
     }
+    &:-internal-autofill-selected {
+        padding: 0.5rem !important;
+    }
 }
+
 input[type=date] {
     -webkit-appearance: none;
     -moz-appearance: none;  

@@ -274,6 +274,11 @@
            }
         }
     }
+    & .btn{
+        &.openForgotPass{
+            color: $color-primary;
+        }
+    }
 }
 %recoverPassword__model_1{
     & .modal{
@@ -304,6 +309,11 @@
             gap: 1rem;
             text-align: center;
             @include animateLoad_12lines();
+        }
+        &__text{
+            & b {
+                color: #00D2E4;
+            }
         }
     }
 
@@ -953,15 +963,16 @@
     & .modal{
         &-body{
             height: fit-content;
-            padding: 1rem;
+            padding: 1rem 1rem 2rem 1rem;
             max-width: 430px;
+            gap: 0.5rem;
             // esto puede ser un mixin, como un strucutre content division2
             // $landscape_size_mobile: "(orientation: landscape) and (max-width: 1000px)";
-            @media (max-width: $size-web) and (orientation: landscape) {
-                grid-template-columns: 1fr 1fr;
-                align-items: center;
-                max-width: inherit;
-            }
+            //@media (max-width: $size-web) and (orientation: landscape) {
+            //    grid-template-columns: 1fr 1fr;
+            //    align-items: center;
+            //    max-width: inherit;
+            //}
         }
         &-header{
             font-size: #{$g-font-size * 2};
@@ -969,6 +980,7 @@
         }
         &-content{
             max-width: 480px;
+            border: 1px solid $color-primary;
         }
 
         @include modalFullScreen("mobile");
@@ -1025,6 +1037,17 @@
             display: grid;
             grid-template-columns: auto 1fr 1fr;
             justify-items: center;
+            margin: 0.5rem 0;
+            &--check{
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                & label{
+                    color: #00D2E4;
+                }
+            }
+            //border: 1.5px solid #fff;
+            //border-radius: 0.25rem;
         }
         &__codeAgent{
             display: grid;
@@ -1057,6 +1080,7 @@
             grid-template-columns: auto 1fr;
             align-items: center;
             gap: 0.75rem;
+            padding: 0.5rem 0;
             @include animateCheckBox_1(#34b93d,grey,20px,.4s);
         }
         &__prefix{
@@ -1068,11 +1092,22 @@
                 width: 1.75rem;
             }
         }
+        &__text{
+            &--resalt{
+                color: #00D2E4;
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+        }
     }
     & .btn{
         &.validsms{
             background: #2783ff;
             min-width: 150px;
+        }
+        &.signup{
+            text-transform: uppercase;
         }
     }
 }
