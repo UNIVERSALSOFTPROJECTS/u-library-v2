@@ -138,11 +138,8 @@
 
   }
 
-  const selectOptions = ["MANUAL"];
-  const returnManually = {
-    codeOperation: "",
-    selectOption: "",
-    description: "",
+  let selectOptions = ["MANUAL"];
+  const returnManually = {codeOperation: "",selectOption: "", description: "",
   };
   const returnMoney = (codeOperation) => {
     if (codeOperation) {
@@ -154,18 +151,21 @@
   const processReturnMoney = () => {
     sendToWinWebview("returnMoney", returnManually);
     retrunMoneneyModal = false;
+    returnManually.codeOperation= "";
+    returnManually.selectOption= "";
+    returnManually.description= "" ;
+    selectOptions = [];
   };
 
-  const handleLogout=()=>{
-    alert();
-    sendToWinWebview('onLogout', {});
-  }
+  EventManager.subscribe("onlogout", (data)=>{
+       console.log("event conect onlogout bill collector:  ",data);
+       sendToWinWebview('onLogout', {});
+  });
 
-
-  const handleLogin=(event)=>{
-    console.log(event);
-    sendToWinWebview('setUser', {});
-  }
+  EventManager.subscribe("onlogin", (data)=>{
+       console.log("event conect onlogin bill collector:  ",data);
+       sendToWinWebview('setUser', data);
+  });
 
 
   window.addEventListener('online', handleOnline);
@@ -193,7 +193,9 @@ const ERROR_CODES = {
     'GENERAL_ERROR': 'Error general.' ,
     'BILLCOLLECTOR_DISCONECT':'El billetero está desconectado.',
     'USER_NOT_LOGGED':'Buscando usuario actual....',
-    'BIIL_MACHINE_NOT_FOND':'Billetero no conectado'
+    'BIIL_MACHINE_NOT_FOND':'Billetero no conectado',
+    'DEPOSIT_NOT_COMPLET':'Deposito no completado',
+    'DEPOSIT_RETURNED_MANUALITY':'Dinero devuelto manualmente ya'
   };
 
   const getNotifyTitle=()=>{
@@ -329,14 +331,12 @@ const ERROR_CODES = {
     ></textarea>
 
     <button on:click={processReturnMoney} class="centered-button search-losg"
-      >Devolver</button
-    >
+      >Devolver</button >
   </div>
 </Modal>
 
 <Notifier />
 
-<AlertRefreshToken on:logout={handleLogout} on:onlogin={handleLogin}/>
 
 
 <style>

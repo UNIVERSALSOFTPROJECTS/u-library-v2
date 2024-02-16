@@ -166,7 +166,7 @@
     {#if typeSignup === "mixed"}
         <div class="signup__mixed">
             <!-- svelte-ignore a11y-click-events-have-key-events --> <!-- svelte-ignore a11y-no-static-element-interactions -->
-            <div on:click={()=>typeSignup = "codeAgent"}>
+            <div class="signup__mixed--check" on:click={()=>typeSignup = "codeAgent"}>
                 <input type="checkbox">
                 <label for="">{t("signup.haveCodeAgent")}</label>
             </div>

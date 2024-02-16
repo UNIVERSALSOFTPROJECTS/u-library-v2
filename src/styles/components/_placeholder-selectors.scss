@@ -1038,6 +1038,14 @@
             grid-template-columns: auto 1fr 1fr;
             justify-items: center;
             margin: 0.5rem 0;
+            &--check{
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                & label{
+                    color: #00D2E4;
+                }
+            }
             //border: 1.5px solid #fff;
             //border-radius: 0.25rem;
         }
