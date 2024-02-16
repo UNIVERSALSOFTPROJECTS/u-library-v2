@@ -6,7 +6,7 @@ const SocketConnector = (() => {
     let stompClient
     let conf ={};
 
-    function connectToLobbySocket(user){
+    function connectToLobbySocket(user, conf){
         console.log(`Opening WS connection with lobbybff`);
         stompClient = new Client({
             brokerURL: conf.WS_URL,
