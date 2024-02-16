@@ -137,11 +137,8 @@
 
   }
 
-  const selectOptions = ["MANUAL"];
-  const returnManually = {
-    codeOperation: "",
-    selectOption: "",
-    description: "",
+  let selectOptions = ["MANUAL"];
+  const returnManually = {codeOperation: "",selectOption: "", description: "",
   };
   const returnMoney = (codeOperation) => {
     if (codeOperation) {
@@ -153,6 +150,10 @@
   const processReturnMoney = () => {
     sendToWinWebview("returnMoney", returnManually);
     retrunMoneneyModal = false;
+    returnManually.codeOperation= "";
+    returnManually.selectOption= "";
+    returnManually.description= "" ;
+    selectOptions = [];
   };
 
 
@@ -181,7 +182,9 @@ const ERROR_CODES = {
     'GENERAL_ERROR': 'Error general.' ,
     'BILLCOLLECTOR_DISCONECT':'El billetero está desconectado.',
     'USER_NOT_LOGGED':'Buscando usuario actual....',
-    'BIIL_MACHINE_NOT_FOND':'Billetero no conectado'
+    'BIIL_MACHINE_NOT_FOND':'Billetero no conectado',
+    'DEPOSIT_NOT_COMPLET':'Deposito no completado',
+    'DEPOSIT_RETURNED_MANUALITY':'Dinero devuelto manualmente ya'
   };
 
   const getNotifyTitle=()=>{
