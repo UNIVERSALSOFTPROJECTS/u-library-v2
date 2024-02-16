@@ -7,23 +7,17 @@ const SocketConnector = (() => {
     let conf = {};
 
     function connectToLobbySocket(username, conf) {
-        console.log("CONF", conf);
-        console.log(`Opening WS connection with lobbybff`);
+        console.log(`Opening WS connection to LOBBYBFF`);
         stompClient = new Client({
             brokerURL: conf.WS_URL,
-           /* connectHeaders: {
-                platformId: user.platformId,
-                userId: user.id,
-                currencyISO: user.currency,
-                connectionId: user.token
-            },*/
+            connectHeaders: { username},
             debug: function (str) { console.log(str); },
             reconnectDelay: 2500,
         });
 
-        stompClient.onConnect = ({username},frame) => {
-            stompClient.subscribe('/users/queue/messages', (data) => {
-                console.log("message", JSON.parse(data.body));
+        stompClient.onConnect = (frame) => {
+            stompClient.subscribe('/user/queue/messages', (data) => {
+                //console.log("message", data.body);
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
