@@ -30,7 +30,7 @@ const UserHelper = (() => {
 
 
     return {
-        checkAndLoadUserLogged, connectToSocket
+        checkAndLoadUserLogged, connectToLobbySocket
     }
 })()
 
