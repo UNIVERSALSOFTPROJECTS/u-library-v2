@@ -6,22 +6,22 @@ const SocketConnector = (() => {
     let stompClient
     let conf = {};
 
-    function connectToLobbySocket(user, conf) {
+    function connectToLobbySocket(username, conf) {
         console.log("CONF", conf);
         console.log(`Opening WS connection with lobbybff`);
         stompClient = new Client({
             brokerURL: conf.WS_URL,
-            connectHeaders: {
+           /* connectHeaders: {
                 platformId: user.platformId,
                 userId: user.id,
                 currencyISO: user.currency,
                 connectionId: user.token
-            },
+            },*/
             debug: function (str) { console.log(str); },
             reconnectDelay: 2500,
         });
 
-        stompClient.onConnect = (frame) => {
+        stompClient.onConnect = ({username},frame) => {
             stompClient.subscribe('/users/queue/messages', (data) => {
                 console.log("message", JSON.parse(data.body));
                 if (data.body == "NEW_SESSION_OPENED") {
