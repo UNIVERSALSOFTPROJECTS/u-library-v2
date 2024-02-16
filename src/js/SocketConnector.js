@@ -6,6 +6,46 @@ const SocketConnector = (() => {
     let stompClient
     let conf ={};
 
+    function connectToLobbySocket(user){
+        console.log(`Opening WS connection with lobbybff`);
+        stompClient = new Client({
+            brokerURL: conf.WS_URL,
+            connectHeaders: {
+                platformId: user.platformId,
+                userId: user.id,
+                currencyISO: user.currency,
+                connectionId: user.token
+            },
+            debug: function (str) { console.log(str); },
+            reconnectDelay: 2500,
+        });
+
+        stompClient.onConnect = (frame) => {
+            stompClient.subscribe('/users/queue/messages', (data) => {
+                console.log("message", JSON.parse(data.body));
+                if (data.body == "NEW_SESSION_OPENED") {
+                    console.log("NEW_SESSION_OPENED");
+                    EventManager.publish("duplicated_session", {})
+                }
+
+            });
+        };
+
+        stompClient.onWebSocketError = (error) => {
+            console.error('Error with websocket', error);
+            EventManager.publish("logout", {});
+            EventManager.publish("error", { errorCode: "OIV9FABT2A", errorMessage: "Connection closed" });
+        };
+
+        stompClient.onStompError = (frame) => {
+            console.error('Broker reported error: ' + frame.headers['message']);
+            console.error('Additional details: ' + frame.body);
+        };
+
+        stompClient.activate();
+
+    }
+
     function setConfig(conf_){
         conf = conf_;
     }
@@ -47,7 +87,7 @@ const SocketConnector = (() => {
     }
 
     return {
-        connect,setConfig
+        connect, setConfig, connectToLobbySocket
     }
 
 })()

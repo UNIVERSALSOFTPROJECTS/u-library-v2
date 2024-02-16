@@ -12,16 +12,16 @@ const UserHelper = (() => {
             user = user_;
             let data = await ServerConnection.users.getBalance(user.agregatorToken);
             user.balance = data.balance;
-            connectToSocket(user, conf);
+            connectToLobbySocket(user, conf);
 
         }
         return user;
     };
 
-    const connectToSocket = (user, conf) => {
+    const connectToLobbySocket = (user, conf) => {
         console.log("CONGIH",conf);
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
-        SocketConnector.connect(`${conf.CLIENT_CODE}-${user.username}`); //conecta al websocket.
+        SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}`); //conecta al websocket.
     };
 
 
