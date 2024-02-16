@@ -4,9 +4,9 @@
   import EventManager from "../js/EventManager";
 
 EventManager.subscribe("duplicated_session", (event) => {
+    console.log("Session Duplicada");
         EventManager.publish("notify", { mode: "error", msg: "SESION DUPLICADA! - En breve se cerrara esta ventana." });
-        //mainLoadingMessage =
-        //  "SESION DUPLICADA! - En breve se cerrara esta ventana..";
+      
         userState = "logout";
         active_view = "home";
         sessionStorage.removeItem("user");
