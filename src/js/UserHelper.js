@@ -12,6 +12,7 @@ const UserHelper = (() => {
             user = user_;
             let data = await ServerConnection.users.getBalance(user.agregatorToken);
             user.balance = data.balance;
+            console.log("userLooged CONF",conf);
             connectToLobbySocket(user, conf);
 
         }
