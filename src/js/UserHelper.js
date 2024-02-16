@@ -1,4 +1,4 @@
-import { SocketConnector } from '..';
+import SocketConnector  from './SocketConnector';
 import ServerConnection from './server';
 
 const UserHelper = (() => {
