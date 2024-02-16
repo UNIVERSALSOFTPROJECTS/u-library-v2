@@ -80,11 +80,44 @@
         ]
     };
     
+    //const configWithdrawal = {
+    //    dataType : "",
+    //    messageOptional : "",
+    //    banksNames: [],
+    //    typeAccount: []
+    //};
     const configWithdrawal = {
-        dataType : "",
+        dataType : "static",
         messageOptional : "",
-        banksNames: [],
-        typeAccount: []
+        formVerification : "https://forms.gle/5rRcbJVgE7n4F6Ro7",
+        platform,
+        banksNames: [
+            { id:"Banco Estado" , name:"Banco Estado" },
+            { id:"Banco Falabella" , name:"Banco Falabella" },
+            { id:"Banco Santander" , name:"Banco Santander" },
+            { id:"Banco de Chile(Edwards Citi)" , name:"Banco de Chile(Edwards Citi)" },
+            { id:"Banco BCI" , name:"Banco BCI" },
+            { id:"Scotiabank" , name:"Scotiabank" },
+            { id:"Banco Itaú" , name:"Banco Itaú" },
+            { id:"Coopeuch" , name:"Coopeuch" },
+            { id:"Banco Ripley" , name:"Banco Ripley" },
+            { id:"Banco BICE" , name:"Banco BICE" },
+            { id:"Tenpo" , name:"Tenpo" },
+            { id:"Banco Consorcio" , name:"Banco Consorcio" },
+            { id:"Banco Internacional" , name:"Banco Internacional" },
+            { id:"Mercado Pago" , name:"Mercado Pago" },
+            { id:"Prepago Los Héroes" , name:"Prepago Los Héroes" },
+            { id:"Superdigital" , name:"Superdigital" },
+            { id:"Tapp Caja Los Andes" , name:"Tapp Caja Los Andes" },
+        ],
+        typeAccount: [
+            { id:"Corriente", name:"Corriente" },
+            { id:"Vista/Cuenta RUT", name:"Vista/Cuenta RUT" },
+            { id:"Ahorros", name:"Ahorros" },
+        ], 
+        linksChats: [
+            //{name: "Whatssap", url:""}
+        ]
     };
     const configFooter = {  
         platform,
@@ -268,7 +301,7 @@
         <!--
             OJO el configWithdrawal es solo para retiro W {configWithdrawal}
         -->
-        <WithdrawalW {configWithdrawal}  bind:user {openTermsConditions} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
+        <WithdrawalW {configWithdrawal}  bind:user {openTermsConditions} {openChatLive} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
     </Modal>
 
     <Modal bind:open={promotionsModalOpen} bind:modalOpened title="Promociones">

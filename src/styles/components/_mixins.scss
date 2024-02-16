@@ -100,12 +100,17 @@
         }
     }
 }
-@mixin inputIconPosition($icon){
+@mixin elementIconPosition($icon,$position){
     background-image: url("#{$icon}");
     background-repeat: no-repeat;
-    background-size: #{$g-font-size + 2};
-    padding-left: 2.5rem;
-    background-position: left 0.75rem center;
+    background-size: #{$g-font-size + 2};   
+    @if($position == "right"){
+        background-position: #{$position} 0.75rem center;
+        padding-right: 2.5rem;
+    }@else if ($position == "left"){
+        background-position: #{$position} 0.75rem center;
+        padding-left: 2.5rem;
+    }
 }
 
 //animations

@@ -92,6 +92,15 @@ input[type=date] {
     .link{
         @extend %link;
     }
+    
+    a{
+        &.btn{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+    }
 
     // a, link, input, button, select, textarea e iframe. / cuando has visto aun ciego jugar casino ?xdd, por eso esto es valido
     :focus, :focus-visible{

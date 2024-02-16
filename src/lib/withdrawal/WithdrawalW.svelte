@@ -5,15 +5,18 @@
 
     export let user;
     export let configWithdrawal;
+    export let openChatLive;
     export let onError;
     export let onOk;
-    export let openTermsConditions;
     export let t;
 
+    let platform = configWithdrawal.platform;
     let dataType = configWithdrawal.dataType;
     let banksNames = configWithdrawal.banksNames;
     let typeAccount = configWithdrawal.typeAccount;
     let messageOptional = configWithdrawal.messageOptional;
+    let formVerification = configWithdrawal.formVerification;
+    let linksChats = configWithdrawal.linksChats;
     let pendingWithdrawal;
     let amount;
     let loadWithdrawal = true;
@@ -117,7 +120,7 @@
 
                 <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={justNumbersAccountValidate}>
                 <p>Información adicional:</p>
-                <p></p>
+                <p class="withdrawal__text--resalt">Verificación obligatoria</p>
 
                 {#if dataType != "static"}
                     <input type="text" class="ipt" bind:value={infoAccount.adicional}>
@@ -129,6 +132,9 @@
                         {/each}
                     </select>
                 {/if}
+                {#if formVerification}
+                    <a class="btn verification" href={formVerification} target="_blank">Verificación de identidad</a>
+                {/if}
 
                 
             </div>
@@ -137,9 +143,18 @@
             {/if}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-static-element-interactions -->
-            <div on:click={openTermsConditions}>{@html t("withdrawal.termsConditions")}</div>
-            <div><b>Nota:</b> Si tienes un bono activo y realizas un retiro, este se perderá.</div>
+            <a href="https://assets.apiusoft.com/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
+            <div class="withdrawal__note"><b>Nota:</b>Asegúrate de completar <b>tu verificación de identidad</b> para poder proceder con el <b>retiro de tu dinero.</b> Sin esta verificación, <b>no podremos procesar tu solicitud.</b> Además, ten en cuenta que si tienes un bono activo y realizas un retiro, este se perderá.</div>
             <button class="btn withdrawal" on:click={validateWithdrawal}>Solicitar retiro</button>
+            <div class="withdrawal__help">
+                <p>¿Necesitas ayuda?</p>
+                <div class="withdrawal__help--btns">
+                    <button type="button" class="btn chat" on:click={openChatLive}>Chat en vivo</button>
+                    {#each linksChats as linksChat}
+                        <a class="btn {linksChat.name}" href={linksChat.url}>{linksChat.name}</a>
+                    {/each}
+                </div>
+            </div>
         {/if}
     {/if}
 </div>

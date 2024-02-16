@@ -44,7 +44,7 @@
     <div class="modal-dialog centered" transition:fly={{ y: -50, duration: 500 }}>
       <div class="modal-content {!showHeader?'no-header':''}" > <!--use:watchResize={resizeHeightModal} style="max-height:{heightModal}px"  Error en APK de momento no se usara-->
         {#if showHeader}
-        <div class="modal-header">
+            <div class="modal-header">
             <div />
             <div style="color: white;">{title}</div>
             <button class="btn close" on:click={() => (open = false)} />

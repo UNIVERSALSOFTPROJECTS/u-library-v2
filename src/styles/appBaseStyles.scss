@@ -258,14 +258,15 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         $user:addColorIcon("user","969696");
         $email:addColorIcon("email","969696");
         $key:addColorIcon("key","969696");
+    
         &.icon--user{
-            @include inputIconPosition($user);  
+            @include elementIconPosition($user,"left");  
         }
         &.icon--email{
-            @include inputIconPosition($email);
+            @include elementIconPosition($email,"left");
         }
         &.icon--password{
-            @include inputIconPosition($key);
+            @include elementIconPosition($key,"left");
         }
     }
 
