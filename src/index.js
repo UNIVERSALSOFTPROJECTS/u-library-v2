@@ -18,6 +18,7 @@ export {default as Signup} from "./lib/modals/Signup.svelte";//temporales miestr
 export {default as Promotions} from "./lib/modals/Promotions.svelte";
 export {default as Footer} from "./lib/Footer.svelte";
 export {default as ChatLive} from "./lib/modals/ChatLive.svelte";
+export {default as ExpireSession} from "./lib/modals/ExpireSession.svelte";
 export {default as ConfirmCashIn } from './lib/payments/ConfirmCashIn.svelte';
 export {default as CashOut } from './lib/withdrawal/CashOut.svelte';
 export {default as DepositBank } from './lib/payments/BankDeposit.svelte';
