@@ -237,6 +237,39 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             }   
             @include animatedLoad_3linesRotate(#000,$color-primary,#d8d8d8,'');
         }
+        &.expireSession{
+            & .modal{
+                &-content{
+                    max-width: 500px;
+                }
+                &-header{
+                    & .btn.close{
+                        display: none;
+                    }
+                }
+                &-body {
+                    padding-bottom: 3rem;
+                    justify-items: center;
+                    gap: 1rem;
+                }
+            }
+            & .expireSession{
+                &__logo{
+                    width: 15rem;
+                }
+                &__title{
+                    font-size: $g-font-size * 1.5;
+                }
+                &__text{
+                    color: #808080;
+                }
+            }
+            & .btn{
+                &.continue{
+                    background-color: $color-primary;
+                }
+            }
+        }
     }
     .dropdown{
         &.idiom{

@@ -1,0 +1,24 @@
+<script>
+ export let updateTimeSession;
+ export let platform;
+ export let onLogout;
+
+ let time = 60;
+
+ function countdownTimer() {
+    time -= 1;
+    if (time < 0) {
+      clearInterval(interval);
+      time = 0;
+      onLogout();
+    }
+  }
+
+  const interval = setInterval(countdownTimer, 1000);
+</script>
+<div class="modal-body">
+    <img class="expireSession__logo" src="https://assets.apiusoft.com/{platform}/logo.png" alt="logo-{platform}">
+    <p class="expireSession__title">¿Sigues ahí?</p>
+   <button class="btn continue" on:click={updateTimeSession}>Continuar jugando</button>
+   <p class="expireSession__text">Su sesión expira en <b>{time}</b>s</p>
+</div>

@@ -59,6 +59,7 @@
         data.playerId = data.id;
         delete data.claims;
       }
+
       let updateBalance = await ServerConnection.users.getBalance(data.agregatorToken);
       const { balance, bonus_global, bonus_horses, bonus_slot, bonus_sportbook } = updateBalance.data;
       data.balance         = balance;

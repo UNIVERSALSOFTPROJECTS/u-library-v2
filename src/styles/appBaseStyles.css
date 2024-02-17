@@ -1759,6 +1759,29 @@ input[type=date]::-webkit-calendar-picker-indicator {
     -webkit-transform: rotate(360deg);
   }
 }
+.Coliseosport .modal.expireSession .modal-content {
+  max-width: 500px;
+}
+.Coliseosport .modal.expireSession .modal-header .btn.close {
+  display: none;
+}
+.Coliseosport .modal.expireSession .modal-body {
+  padding-bottom: 3rem;
+  justify-items: center;
+  gap: 1rem;
+}
+.Coliseosport .modal.expireSession .expireSession__logo {
+  width: 15rem;
+}
+.Coliseosport .modal.expireSession .expireSession__title {
+  font-size: 21px;
+}
+.Coliseosport .modal.expireSession .expireSession__text {
+  color: #808080;
+}
+.Coliseosport .modal.expireSession .btn.continue {
+  background-color: #f54b00;
+}
 .Coliseosport .dropdown.idiom * {
   color: black;
 }

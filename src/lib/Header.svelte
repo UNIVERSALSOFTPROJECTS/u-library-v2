@@ -13,6 +13,7 @@
     import Footer from "./Footer.svelte";
     
     import ChatLive from "./modals/ChatLive.svelte";
+    import ExpireSession from "./modals/ExpireSession.svelte";
     import Promotions from "./modals/Promotions.svelte";
 
     import ScreenGames from "./modals/ScreenGames.svelte";
@@ -37,6 +38,7 @@
     let signupModalOpen = false;
     let depositModalOpen = false;
     let withdrawalModalOpen = false;
+    let expireSessionModalOpen = false;
 
     let modalOpened;
     let subModalOpened;
@@ -168,6 +170,9 @@
 
     const onOpenLogin = () => { loginModalOpen = true;  modalOpened = "login"; signupModalOpen = false; } 
     const onOpenSignup = () => { signupModalOpen = true; modalOpened = "signup"; loginModalOpen = false; }
+
+    const onOpenExpireSession = () => { expireSessionModalOpen = true; subModalOpened = "expireSession"; chatLiveModalOpen = false; }
+
     const onOpenDeposit = () => { depositModalOpen = true; modalOpened = "deposit" }
     const onOpenWithdrawal = () => { withdrawalModalOpen = true; modalOpened = "withdrawal" }
     const toggleMenuBar = () => ( isToggleOn =! isToggleOn )
@@ -240,7 +245,21 @@
             resetpassModalOpen=true;
             modalOpened = "resetPassword";
         } 
+        if (sessionStorage.getItem("user")) {
+            updateTimeSession();
+            setInterval(() => {
+                let timeNow = Math.floor(Date.now() / 1000);
+                let timeSession = parseInt(sessionStorage.getItem("expireSession"),10);
+                if (timeNow > timeSession)  onOpenExpireSession();
+            }, 1800000);//30min
+        }
     });
+    function updateTimeSession() {
+        let timeExpireSession =  (Math.floor(Date.now() / 1000) + (30 * 60));
+        sessionStorage.setItem("expireSession", timeExpireSession.toString());
+        expireSessionModalOpen = false;
+    }
+
     const onCategoryChange = (param) => {
         console.log(param);
     }
@@ -249,7 +268,11 @@
         modalOpened = "promotions";
     }
 
+    const onLogout = () => {
+        alert("cierre de sesion");
+    }
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
+
 </script>
 
 <div class="{platform}">
@@ -273,6 +296,7 @@
         {:else}
             <button class="btn login" on:click={onOpenLogin}>Acceso</button>
             <button class="btn signup" on:click={onOpenSignup}>Registro</button>
+            
         {/if}
         <!-- 
             Notas: on:click|stopPropagation={onOpenLogin}, esto er apara los modale s pero el bug de los dropdow hizo que se descartara momentaneamente
@@ -282,6 +306,7 @@
     <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
     <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button>
+
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword} {onOpenSignup}  bind:platform t={$t}/>
@@ -301,13 +326,17 @@
         <!--
             OJO el configWithdrawal es solo para retiro W {configWithdrawal}
         -->
-        <WithdrawalW {configWithdrawal}  bind:user {openTermsConditions} {openChatLive} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
+        <WithdrawalW {configWithdrawal}  bind:user {openChatLive} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
     </Modal>
 
     <Modal bind:open={promotionsModalOpen} bind:modalOpened title="Promociones">
         <Promotions {configPromotions}/>
     </Modal>
     
+    <Modal bind:open={expireSessionModalOpen} bind:subModalOpened>
+        <ExpireSession {updateTimeSession} bind:platform  {onLogout}/>
+    </Modal>
+
     <Modal bind:open={chatLiveModalOpen} bind:subModalOpened title="Chat en vivo">
         <ChatLive bind:chatLiveUrl/>
     </Modal>
