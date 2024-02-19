@@ -732,6 +732,9 @@ input[type=date]::-webkit-calendar-picker-indicator {
     background-image: none;
   }
 }
+.Coliseosport .footer .accordion__body a {
+  padding: 0.5rem;
+}
 @media (orientation: landscape) and (min-width: 1023.99px) {
   .Coliseosport .footer .accordion__body {
     display: grid;
@@ -1769,6 +1772,18 @@ input[type=date]::-webkit-calendar-picker-indicator {
   padding-bottom: 3rem;
   justify-items: center;
   gap: 1rem;
+}
+@media (max-width: 1023px) {
+  .Coliseosport .modal.expireSession .modal-dialog {
+    margin: 0;
+    grid-template-columns: auto;
+    max-width: 100%;
+  }
+  .Coliseosport .modal.expireSession .modal-content {
+    border-radius: 0;
+    height: 100vh;
+    max-width: 100%;
+  }
 }
 .Coliseosport .modal.expireSession .expireSession__logo {
   width: 15rem;

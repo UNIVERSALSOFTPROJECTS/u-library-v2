@@ -1192,6 +1192,9 @@
                 }
             }
             &__body{
+                & a{
+                    padding: 0.5rem;
+                }
                 @media #{$landscape_pc} {
                     display: grid;
                 }

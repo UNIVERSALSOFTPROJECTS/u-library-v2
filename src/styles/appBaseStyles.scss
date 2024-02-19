@@ -252,6 +252,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     justify-items: center;
                     gap: 1rem;
                 }
+                @include modalFullScreen("mobile");
             }
             & .expireSession{
                 &__logo{

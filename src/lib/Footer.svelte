@@ -49,11 +49,11 @@
         <div class="accordion {activePanel === 'panel3' ? 'active' : ''}">
             <button class="accordion__select" on:click={() => toggleAccordion('panel3')}>Seguridad y privacidad</button>
             <div class="accordion__body">
-                <a class="btn" href="https://assets.apiusoft.com/{platform}/t&c.pdf" target="_blank">Términos y condiciones</a>
-                <a class="btn" href="https://assets.apiusoft.com/{platform}/p&p.pdf" target="_blank">Políticas de privacidad</a>
-                <a class="btn" href="https://assets.apiusoft.com/{platform}/g&r.pdf" target="_blank">Juego responsable</a>
-                <a class="btn" href="https://assets.apiusoft.com/{platform}/p&a.pdf" target="_blank">Procedimiento AML</a>
-                <a class="btn" href="https://assets.apiusoft.com/{platform}/q&a.pdf" target="_blank">Preguntas frecuentes</a>
+                <a href="https://assets.apiusoft.com/{platform}/t&c.pdf" target="_blank">Términos y condiciones</a>
+                <a href="https://assets.apiusoft.com/{platform}/p&p.pdf" target="_blank">Políticas de privacidad</a>
+                <a href="https://assets.apiusoft.com/{platform}/g&r.pdf" target="_blank">Juego responsable</a>
+                <a href="https://assets.apiusoft.com/{platform}/p&a.pdf" target="_blank">Procedimiento AML</a>
+                <a href="https://assets.apiusoft.com/{platform}/q&a.pdf" target="_blank">Preguntas frecuentes</a>
             </div>
         </div>
         {#if bonus.length != 0}
@@ -61,7 +61,7 @@
             <button class="accordion__select" on:click={() => toggleAccordion('panel4')}>Promociones</button>
             <div class="accordion__body">
                 {#each bonus as bono}
-                <a class="btn" href="https://assets.apiusoft.com/{platform}/bonus_sportbook.pdf" target="_blank">{bono.name}</a>
+                <a href="https://assets.apiusoft.com/{platform}/bonus_sportbook.pdf" target="_blank">{bono.name}</a>
                 {/each}
             </div>
         </div>
