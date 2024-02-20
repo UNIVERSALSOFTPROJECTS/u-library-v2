@@ -10,7 +10,7 @@ const UserHelper = (() => {
         if (u) {
             let user_ = JSON.parse(u);
             user = user_;
-            let data = await ServerConnection.users.getBalance(user.agregatorToken);
+            let {data} = await ServerConnection.users.getBalance(user.agregatorToken);
             user.balance = data.balance;
             //console.log("userLooged CONF", conf);
             connectToLobbySocket(user, conf);

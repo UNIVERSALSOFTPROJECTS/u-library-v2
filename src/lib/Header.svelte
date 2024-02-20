@@ -244,7 +244,9 @@
         if(/resetPassword/.test(currentUrl)) {
             resetpassModalOpen=true;
             modalOpened = "resetPassword";
-        } 
+        }else if (/colisosport/.test(currentUrl)) {//afiliado
+            onOpenSignup();
+        }
         if (sessionStorage.getItem("user")) {
             updateTimeSession();
             setInterval(() => {

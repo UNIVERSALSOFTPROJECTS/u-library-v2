@@ -4,6 +4,8 @@
     import DropdownDate from '../dropdown/DropdownDate.svelte';
     import DropdownCurrencies from '../dropdown/DropdownCurrencies.svelte';
     import InputPassword from '../input/InputPassword.svelte';
+    import { onMount } from 'svelte';
+
 
     export let onOpenLogin;
     export let configSignup;
@@ -17,7 +19,7 @@
     let userType = configSignup.userType;
     let countries = configSignup.countries;
     let currencies = configSignup.currencies;
-    let agentCodeType = configSignup.agentCodeType||'numeric';
+    let agentCodeType = configSignup.agentCodeType || '';
 
     //loading
     let loadSms;
@@ -43,9 +45,6 @@
     let term_conditions;
     let currency;
 
-    let cashierAgentList= [
-        { code:123, username:'steve123'},
-    ];
 
     
 
@@ -54,12 +53,6 @@
     const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
     const notWhiteSpace = (e) =>{ e.target.value = e.target.value.replace(/[^\S+$]/g, "") }
 
-    const setCodeAgent=()=>{
-        
-        let cashier = cashierAgentList.find(e=>e.username == usernameAgent);
-        if(cashier) codeAgent = cashier.code;
-        else alert("Este Agente no existe.");
-    }
     function counterResendSms() {
         activeSMS = true;
         minutes = 2;
@@ -144,6 +137,16 @@
         }
     }
     const avoidSubmit = (e) =>{ e.preventDefault(); }
+
+    onMount(()=>{
+        let currentUrl = window.location.href;
+        const numbersUrl = currentUrl.match(/\d+$/);
+        if (numbersUrl) {
+            codeAgent = numbersUrl[0];
+            agentCodeType = "url";
+            typeSignup = "codeAgent";
+        }
+    });
 </script>
   
 <form class="modal-body" on:submit={avoidSubmit}>
@@ -175,18 +178,15 @@
         <DropdownCurrencies {currencies} bind:currency bind:codeAgent t={t}/>
     {:else if typeSignup === "codeAgent"}
         <div class="signup__container--agent">
-            {#if agentCodeType=='numeric'}
-            <p>{t("signup.codeAgent")}</p>
-            <div class="signup__codeAgent">
-                <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>
-                <div>-</div>
-                <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" on:input={justNumbersValidate}>
-            </div>
+            {#if agentCodeType=='url'}
+                <div></div>
             {:else}
-            <p>{t("signup.codeAgent")} {codeAgent?`(${codeAgent})`:''}</p>
-            <div class="signup__codeAgent">
-                <input type="text" class="ipt" autocomplete="off" bind:value={usernameAgent} on:blur={setCodeAgent}> 
-            </div>
+                <p>{t("signup.codeAgent")}</p>
+                <div class="signup__codeAgent">
+                    <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>
+                    <div>-</div>
+                    <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" on:input={justNumbersValidate}>
+                </div>
             {/if}
         </div>
     {/if}
