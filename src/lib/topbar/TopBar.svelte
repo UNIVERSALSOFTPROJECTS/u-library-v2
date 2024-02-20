@@ -175,8 +175,6 @@
   };
 
 
-
-  
   /*const getBonus = () => {
     let data;
     const formattedBonus = [];

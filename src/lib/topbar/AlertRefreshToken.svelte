@@ -85,7 +85,7 @@ $: onObserverUser(user);
 {#if showAlertRefreshToken}
 <div class="modal {showAlertRefreshToken}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom}>
   <div class="modal-dialog centered" transition:fly={{ y: -50, duration: 5 }}>
-    <div class="modal-content">
+    <div class="alert-modal-content modal-content">
          {#if showHeader}
           <div class="modal-header">
              <button class="btn close" on:click={onNotRefreshToken} />
@@ -146,10 +146,10 @@ $: onObserverUser(user);
   .chronometer p{
     color: orange;
   }
-  /*.modal-content{
+  .alert-modal-content{
     width: 14%;
-    height: 314px;
-  }*/
+    height: 316px;
+  }
   .no-header{
     display: flex;
     background: none;
