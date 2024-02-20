@@ -9,7 +9,7 @@ export {default as SocketConnector} from "./js/SocketConnector";
 export { default as Utils } from "./js/util";
 export { default as UserHelper } from "./js/UserHelper";
 export {default as translate} from "./js/translations";
-//export {default as i18n} from "./js/i18n";
+export {t,locale as i18n} from "./js/i18n";
 export {default as Notifier} from "./lib/Notifier.svelte";
 export {default as Modal} from "./lib/Modal.svelte";
 export {default as SingupW} from "./lib/modals/SingupW.svelte";//temporales miestras se unifica - una vez ser termine de pasa todos al registro global eliminar
