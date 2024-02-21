@@ -154,7 +154,7 @@
     returnManually.codeOperation= "";
     returnManually.selectOption= "";
     returnManually.description= "" ;
-    selectOptions = [];
+    //selectOptions = [];
   };
 
   EventManager.subscribe("onlogout", (data)=>{
