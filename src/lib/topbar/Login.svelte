@@ -74,7 +74,7 @@
       console.log("error: ", error);
       if (error.message == "Network Error" || error.response.data.message.includes("Connection refused"))
         error = t("msg.pageMaintenance");
-      else if (error.response.data.message == "NECO_LOGIN_FAILED")
+      else if (error.response.data.message == "NECO_LOGIN_FAILED" || error.response.data.message == "LOGIN_ERROR")
         error = t("msg.incorrectUserPass");
       else error = t("msg.contactSupport");//si aparece esto, es un tipo de error nuevo y se tieneque debbugear
       onError(error);
