@@ -274,6 +274,10 @@
         alert("cierre de sesion");
     }
     let url_game = "";
+    
+    function updateBalance() {
+        console.log("actualizando :v");
+    }
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
 
 </script>
@@ -345,9 +349,9 @@
     </Modal>
 
 
-
-    <ScreenGames bind:open={screenGamesOpen} bind:platform bind:url_game/>
-
+    {#if user}
+        <ScreenGames bind:open={screenGamesOpen} bind:platform bind:url_game {updateBalance}/>
+    {/if}
 
     <Footer {configFooter} {onCategoryChange} {openChatLive}/>
     
