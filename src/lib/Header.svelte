@@ -273,6 +273,7 @@
     const onLogout = () => {
         alert("cierre de sesion");
     }
+    let url_game = "";
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
 
 </script>
@@ -345,7 +346,7 @@
 
 
 
-    <ScreenGames bind:open={screenGamesOpen} bind:platform bind:user/>
+    <ScreenGames bind:open={screenGamesOpen} bind:platform bind:url_game/>
 
 
     <Footer {configFooter} {onCategoryChange} {openChatLive}/>
