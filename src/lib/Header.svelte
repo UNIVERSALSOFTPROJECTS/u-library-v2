@@ -118,7 +118,7 @@
             { id:"Ahorros", name:"Ahorros" },
         ], 
         linksChats: [
-            //{name: "Whatssap", url:""}
+            {name: "Whatssap", url:"https://web.whatsapp.com/send?phone=56964783055"}
         ]
     };
     const configFooter = {  
