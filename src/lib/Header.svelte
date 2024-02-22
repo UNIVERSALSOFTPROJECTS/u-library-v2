@@ -80,7 +80,7 @@
             {prefix:"+56",flag:"chl"},
             {prefix:"+51",flag:"pe"},
         ],
-        preRegister:false, //por defecto esta comentado, solo descomentar en caso falle el proveedor de sms
+       // preRegister:false, //por defecto esta comentado, solo descomentar en caso falle el proveedor de sms
     };
     
     //const configWithdrawal = {
@@ -140,6 +140,9 @@
         bonus:[
             {name:"Bono Deportivas"}
         ],
+        linksChats: [
+            {name: "Whatssap", url:"https://web.whatsapp.com/send?phone=56964783055"}
+        ]
     };
     const configPromotions = {
         platform,
@@ -245,7 +248,7 @@
         if(/resetPassword/.test(currentUrl)) {
             resetpassModalOpen=true;
             modalOpened = "resetPassword";
-        }else if (/colisosport/.test(currentUrl)) {//afiliado
+        }else if (/afiliado/.test(currentUrl)) {//afiliadocolisosport
             onOpenSignup();
         }
         if (sessionStorage.getItem("user")) {

@@ -11,6 +11,7 @@
     let email = configFooter.email;
     let platform = configFooter.platform;
     let bonus = configFooter.bonus;
+    let linksChats = configFooter.linksChats;
     let activePanel = null;
 
     const toggleAccordion = (panel) => { activePanel = activePanel === panel ? null : panel; };
@@ -27,6 +28,9 @@
             <span>Chat en vivo</span>
         </button>
         {/if}
+        {#each linksChats as linksChat}
+            <a class="btn footer--chat {linksChat.name}" target="_blank" href={linksChat.url}>{linksChat.name}</a>
+        {/each}
     </div>
     <div class="footer__accordion">
         <div class="accordion {activePanel === 'panel1' ? 'active' : ''}">

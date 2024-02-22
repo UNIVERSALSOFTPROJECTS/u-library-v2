@@ -700,6 +700,16 @@
             justify-content: center;
            }
         }
+        &__balance{
+            padding: 1rem;
+            background: #494949;
+            border-radius: $borderR-btn;
+            text-align: center;
+            & span{
+                padding-left: 0.5rem;
+                font-size: $g-font-size + 2;
+            }
+        }
     }
     $card:addColorIcon("card","fff");
     .btn{
@@ -1292,6 +1302,12 @@
             @media #{$landscape_pc} {
                 text-align: start;
             }
+        }
+    }
+    .btn{
+        &.Whatssap{
+            @include elementIconPosition($whatssap,"left");
+            background-color: #4a4b53;  
         }
     }
 }
