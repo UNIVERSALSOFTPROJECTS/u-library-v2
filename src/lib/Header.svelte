@@ -79,7 +79,8 @@
             //{prefix:"+216",flag:"tnz"},
             {prefix:"+56",flag:"chl"},
             {prefix:"+51",flag:"pe"},
-        ]
+        ],
+        preRegister:false, //por defecto esta comentado, solo descomentar en caso falle el proveedor de sms
     };
     
     //const configWithdrawal = {

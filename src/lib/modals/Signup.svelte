@@ -20,7 +20,7 @@
     let countries = configSignup.countries;
     let currencies = configSignup.currencies;
     let agentCodeType = configSignup.agentCodeType || '';
-
+    let preRegister = configSignup.preRegister == undefined?true:false;//solo si falla el proveedor de sms
     //loading
     let loadSms;
     let loadSignup;
@@ -75,9 +75,13 @@
         if(!name || !date || !email || !username || !password || !phone) return onError(t("msg.allObligatory"));
         try {
             loadSms = true;
-            await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
-            onOk(t("msg.sendSms"));
-            counterResendSms();
+            let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
+            if (preRegister) {
+                onOk(t("msg.sendSms"));
+                counterResendSms();
+            }else{
+                smscode = data.smscode;
+            }
         } catch (error) {
             if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = t("msg.phoneFormat");
@@ -108,10 +112,16 @@
             if (!emailvalid) return onError(t("msg.emailInvalid"));
         }
         if (password.length <= 5) return onError(t("msg.passwordMin5"));
-        if(!smscode) return onError(t("msg.codeVerification"));
+        if(!smscode && preRegister){
+            return onError(t("msg.codeVerification"));
+        }else{
+            loadSignup = true;
+            await preRegisterClick();
+            loadSignup = false;
+        }
         if(!term_conditions) return onError(t("msg.acceptTandC"));
         if (!codeAgent) { 
-            if (typeSignup === "mixed") {//jut if not have codeagent       
+            if (typeSignup === "mixed") {//just if not have codeagent       
                 codeAgent = currencies[0].agent;
                 currency = currencies[0].id;
             }else{
@@ -194,6 +204,7 @@
         <DropdowPrefix {countries} bind:country/>
         <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone}>
     </div>
+    {#if preRegister} 
     <div class="signup__sms">
         <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
             {#if activeSMS}
@@ -208,6 +219,7 @@
         </button>
         <input type="number" class="ipt" min="0" placeholder={t("signup.code")} autocomplete="off" bind:value={smscode} on:input={justNumbersValidate}>
     </div>
+    {/if}
     <div class="signup__conditions">   
         <input type="checkbox" id="chk_conditions" bind:checked={term_conditions}/>
         <label for="chk_conditions"></label> 
