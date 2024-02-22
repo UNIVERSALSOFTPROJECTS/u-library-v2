@@ -79,6 +79,7 @@ export default {
         "login.password": "Mot de passe",
         "login.access": "Entrer dans",
         "login.remember": "Rappeler",
+        "login.signupHere": "Vous êtes nouveau? inscrivez-vous ici",
         "login.forgetPassword": "Vous avez oublié votre mot de passe?",
         //---------------SINGUP-----------------------------
         "signup.title": "Inscrivez-vous ici",
@@ -98,6 +99,7 @@ export default {
         "signup.code": "Code",
         "signup.acceptPandP": "Pour me convertir en client, acceptez les <b><span class='link'>Politiques de Confidentialité</span></b> de {{platform}}.",
         "signup.register": "S'inscrire",
+        "signup.loginHere": "Avez-vous déjà un compte? Entrer ici",
         //---------------SINGUP/NAME CURRENCIES-----------------------------
         "currency.usd":"Dollar américain",
         "currency.clp":"Peso chilien",
