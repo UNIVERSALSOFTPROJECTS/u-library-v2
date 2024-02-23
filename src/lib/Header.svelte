@@ -47,6 +47,12 @@
     //Deposit Modal
     let notify = {};
 
+
+        //UTIls
+        const updateTimeSession = "";//utils.updateTimeSession();
+//      PETICION DE DETECCCION DE SOLICITUDES AYAX COMO UN UN ADDEVENT LISTENER  QUE SEA DE 10 MIN DE INACTIVIDAD O 16 O 20 PUEDE SER
+
+
     function openPrivacyPolicies() {
         console.log("abriendo openPrivacyPolicies");
     }
@@ -243,6 +249,9 @@
     }
 
     onMount(()=>{
+        //const useutil = utils.testxd();
+
+
         let currentUrl = window.location.href;
         console.log("domain",currentUrl);
         if(/resetPassword/.test(currentUrl)) {
@@ -252,7 +261,7 @@
             onOpenSignup();
         }
         if (sessionStorage.getItem("user")) {
-            updateTimeSession();
+            updateTimeSession;
             setInterval(() => {
                 let timeNow = Math.floor(Date.now() / 1000);
                 let timeSession = parseInt(sessionStorage.getItem("expireSession"),10);
@@ -260,11 +269,7 @@
             }, 1800000);//30min
         }
     });
-    function updateTimeSession() {
-        let timeExpireSession =  (Math.floor(Date.now() / 1000) + (30 * 60));
-        sessionStorage.setItem("expireSession", timeExpireSession.toString());
-        expireSessionModalOpen = false;
-    }
+
 
     const onCategoryChange = (param) => {
         console.log(param);
@@ -282,6 +287,9 @@
     function updateBalance() {
         console.log("actualizando :v");
     }
+
+
+
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
 
 </script>

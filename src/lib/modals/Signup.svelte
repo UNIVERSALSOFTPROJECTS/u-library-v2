@@ -114,7 +114,7 @@
         if (password.length <= 5) return onError(t("msg.passwordMin5"));
         if(!smscode && preRegister){
             return onError(t("msg.codeVerification"));
-        }else{
+        }else if(!preRegister){
             loadSignup = true;
             await preRegisterClick();
             loadSignup = false;
