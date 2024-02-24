@@ -1,22 +1,14 @@
 const utils = (() => {
-    //new code
-    const updateTimeSession = (openModal) => {
-        let timeExpireSession =  (Math.floor(Date.now() / 1000) + (30 * 60));
-        sessionStorage.setItem("expireSession", timeExpireSession.toString());
-        openModal = false;
+
+  
+  const showNotify = async(type, message) => {
+    await sleep(0.1);
+    let notify = { open: true, type, message };
+    return notify
+  }
+    const sleep=(seconds)=>{
+      return new Promise( (result)=>{ setTimeout( ()=>{ result()  },seconds*1000 ) } )
     }
-
-
-    const showNotify = async(type, message) => {
-        await sleep(0.1);
-        let notify = { open: true, type, message };
-        return notify;
-    }
-    
-    const sleep =(seconds) => { return new Promise( (result)=>{ setTimeout( ()=>{ result()  },seconds*1000 )}) };
-
-    //old code 
-
     const checkSetIsFav=(games, favGames)=>{
       if(!Array.isArray(games)) return []
       let favs = favGames.map(e=>e.id)
@@ -94,8 +86,6 @@ const utils = (() => {
       return isDropdownOpen;
     }
 
-    return { 
-        updateTimeSession,
-        isJson,initDropdown, showNotify,sleep,checkSetIsFav,getImgUrl,getProviderImgUrl,getGameURL,isMobile,dateDiffInDays,getAge,setUrlPage,categoryAllowedChange} ;
+    return { isJson,initDropdown, showNotify,sleep,checkSetIsFav,getImgUrl,getProviderImgUrl,getGameURL,isMobile,dateDiffInDays,getAge,setUrlPage,categoryAllowedChange} ;
 })()
 export default utils

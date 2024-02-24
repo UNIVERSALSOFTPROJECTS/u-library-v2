@@ -1,5 +1,7 @@
 <script>
     export let configPromotions;
+
+    let platform = configPromotions.platform;
 </script>
 <div class="modal-body">
     <b class="jut">“Bono del 20% Primer Depósito sin Rollover”</b>
@@ -37,7 +39,7 @@
         <br><br>
         <b> 9. ¿Cuántas veces puedo acceder a este beneficio?</b>
         <br>
-        Este beneficio sólo es válido una vez por cliente/dirección IP/domicilio/ usuarios/ número de tarjeta débito o crédito, cuenta bancaria o por otros criterios que considere Coliseosport.
+        Este beneficio sólo es válido una vez por cliente/dirección IP/domicilio/ usuarios/ número de tarjeta débito o crédito, cuenta bancaria o por otros criterios que considere {platform}.
         <br><br>
         <b>10. ¿Cuándo no se considerará como legítimo este beneficio?</b>
         <br>
@@ -50,7 +52,7 @@
         <br> <br>
         <b>12. ¿Qué pasa si incumplo con los términos y condiciones brindadas por la administración?</b>
         <br>
-        Coliseosport se reserva el derecho a descalificar a cualquier usuario de esta promoción y cerrar su cuenta con todo el saldo existente y de manera definitiva si se encuentra evidencia de abuso o fraude.
+        {platform} se reserva el derecho a descalificar a cualquier usuario de esta promoción y cerrar su cuenta con todo el saldo existente y de manera definitiva si se encuentra evidencia de abuso o fraude.
         <br> <br>
         <b>13. Pueden haber cambios en los métodos de cómo se aplica este beneficio?</b>
         <br>
