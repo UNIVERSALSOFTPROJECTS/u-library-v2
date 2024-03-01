@@ -124,24 +124,25 @@
     };
     const configFooter = {  
         platform,
-        country : "Chile",
-        flag:"chl",
+        country : {name: "Chile", flag: "chl"},
         isChat: true,
+        categoryGames: ["slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"],//globalCategoryGames,en 
+        //"slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"
         payments: [
-            {name: "KHIPU"},
-            {name: "FLOW"},
+            //{name: "KHIPU"},
+            //{name: "FLOW"},
         ],
         social: [ //ASEGURATO DE COLOCAR EL NOMBRE EN MINUSCULA Y EL ENLACE CORRECTO!!!
-            {name:"facebook", url:"https://www.facebook.com/coliseosportoficial"},
-            {name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
+            //{name:"facebook", url:"https://www.facebook.com/coliseosportoficial"},
+            //{name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
             //social: []//si no hay redes sociales
         ],
         email:"info@coliseosport.com",
-        bonus:[
-            {name:"Bono Deportivas"}
+        bonus:[ 
+            {name:"Bono Deportivas"} 
         ],
-        linksChats: [
-            {name: "Whatssap", url:"https://web.whatsapp.com/send?phone=56964783055"}
+        linksChats: [ 
+            //{name: "Whatssap", url:"https://web.whatsapp.com/send?phone=56964783055"} 
         ]
     };
     const configPromotions = {
@@ -280,7 +281,7 @@
     let url_game = "";
     
     function updateBalance() {
-        console.log("actualizando :v");
+        console.log("actualizando balance :v");
     }
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
 
@@ -357,7 +358,7 @@
         <ScreenGames bind:open={screenGamesOpen} bind:platform bind:url_game {updateBalance}/>
     {/if}
 
-    <Footer {configFooter} {onCategoryChange} {openChatLive}/>
+    <Footer {configFooter} {onCategoryChange} {openChatLive} t={$t}/>
     
     
     <Notifier bind:notify/>

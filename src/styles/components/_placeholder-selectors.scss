@@ -1162,7 +1162,7 @@
     }
 }
 
-%footer__model_1{
+@mixin footer__model_1 ($columns){   
     .footer{
         display: grid;
         gap: 1rem;
@@ -1190,8 +1190,11 @@
         &__accordion{
             @media #{$landscape_pc} {
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-template-columns: repeat($columns,1fr);
                 gap: 5rem;
+                @if($columns == 1){
+                    justify-items: center;
+                }
             }
         }
         & .accordion{
@@ -1202,6 +1205,9 @@
                 border-radius: 0;
                 @media #{$landscape_pc} {
                     background-image: none;
+                    @if($columns == 1){
+                        text-align: center;
+                    }
                 }
             }
             &__body{
@@ -1210,6 +1216,11 @@
                 }
                 @media #{$landscape_pc} {
                     display: grid;
+                    @if($columns == 1){
+                        justify-items: center;
+                        grid-template-columns: repeat(5,1fr);
+                        padding-top: 1rem;
+                    }
                 }
             }
         }
@@ -1232,6 +1243,10 @@
             @media #{$landscape_pc} {
                 grid-template-columns: 1fr 1fr 1fr;
                 align-items: center;
+                @if($columns == 1){
+                    border-top: 1px solid #4a4b53;
+                    padding-top: 1rem;
+                }
             }
             &--sub{
                 display: grid;

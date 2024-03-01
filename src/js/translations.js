@@ -53,6 +53,28 @@ export default {
       "withdrawal.withdraw": "Ingrese el monto a retirar",
       "withdrawal.termsConditions": "Al solicitar su retiro usted esta aceptando los <b><span class='link'>Términos y Condiciones</span></b>",
       "withdrawal.request": "Solicitar retiro",
+      //---------------NAME CAT GAMES-----------------------------
+      "categoryGame.slot": "Casino",
+      "categoryGame.slotlive": "Casino en vivo",
+      "categoryGame.crash": "Crash games",
+      "categoryGame.scratch": "Raspa y gana",
+      "categoryGame.sportbook": "Deportes",
+      "categoryGame.sportbooklive": "Deportes en vivo",
+      "categoryGame.horses": "Hipicas",
+      "categoryGame.virtual": "Juegos virtuales",
+      //---------------FOOTER-----------------------------
+      "footer.s_p":"Seguridad y privacidad",
+      "footer.t_c":"Términos y condiciones",
+      "footer.p_p":"Políticas de privacidad",
+      "footer.g_r":"Juego responsable",
+      "footer.p_a":"Procedimiento AML",
+      "footer.q_a":"Preguntas frecuentes",
+      "footer.promotions":"Promociones",
+      "footer.follow":"Síguenos en",
+      "footer.paymethods":"Métodos de pago",
+      "footer.contanct":"Contáctanos",
+      "footer.declaration":"está sujeto a los términos y condiciones de este sitio web. Todos los derechos reservados.",
+
       //---------------MENSAJES-----------------------------
       "msg.sucessLogin": "Bienvenido a {{platform}}",
       "msg.sucessRegister": "Registro exitoso",
