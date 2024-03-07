@@ -30,7 +30,7 @@
         <br> <br>
         <b>6. Cual es el monto máximo de bono al que puedo acceder? </b>
         <br>
-        El monto máximo de esta recompensa es de $1.000.0000 CLP.
+        El monto máximo de esta recompensa es de $1.000.000 CLP.
         <br><br>
         <b>8. ¿Con qué vigencia cuenta este bono?</b>
         <br>
