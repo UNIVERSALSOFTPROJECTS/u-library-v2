@@ -100,10 +100,14 @@ const ServerConnection = (() => {
             return axios.get(url, { headers });
         },
         authInGame: async (agregatorToken) => {
-            console.log("jectnado server");
           var url = conf.API+`/authInGame/${agregatorToken}`;
           console.log(url,"desde server");
           return await axios.get(url, { headers });
+        },
+        getURLNovus: (url) => {
+            
+            return axios.get(url, { headers });
+           
         }
     }
 

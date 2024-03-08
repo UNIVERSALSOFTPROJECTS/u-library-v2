@@ -1,6 +1,7 @@
 <script>
   import { onDestroy, onMount } from "svelte";
   import ut from '../../js/util';
+  import backend from '../../js/server'
 
   export let userState;
   export let active_view
@@ -83,8 +84,15 @@
   };
 
   const openNovusbet = async () => {
+    
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.novusbet, options.gameToken) : baseUrlNovusbet;
-    url += active_view == "sportbooklive" ? "&currentgame=live" : "&currentgame=PreMatch";
+    url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
+
+    if (userState == "loggedIn"){
+      const {data} = await backend.game.getURLNovus(url);
+      url = data.url
+    }
+    console.log("sportbookNovus: ", url);
     sportbookGameUrl = url;
   };
   
