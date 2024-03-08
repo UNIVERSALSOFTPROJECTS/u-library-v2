@@ -4,11 +4,11 @@
      import Modal from '../lib/Modal.svelte';
      import Notifier from './Notifier.svelte';
 
-     import utils from '../js/util';
+    import utils from '../js/util';
     import { onMount } from 'svelte';
     import { ServerConnection } from '..';
-     export let user = {};
-        export let assetsUrl;
+    export let user = {};
+    export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
     export let platform;//usado para storybook
     const onOpenRecoverPass = () => {}
