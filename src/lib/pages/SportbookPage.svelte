@@ -97,8 +97,8 @@
   };
   
   onDestroy(async () => {
-    //let data = await backend.getBalance(user.agregatorToken);
-    //user.balance = data.balance;
+    let {data} = await backend.users.getBalance(user.agregatorToken);
+    user.balance = data.balance;
   })
 
 </script>
