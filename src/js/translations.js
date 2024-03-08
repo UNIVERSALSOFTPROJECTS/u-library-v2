@@ -40,7 +40,9 @@ export default {
       //---------------Withdrawal-----------------------------
       "withdrawal.title": "Retiro",
       "withdrawal.amount0": "Ingrese un monto",
-      "withdrawal.lowBalance": "Saldo insuficiente",
+      "withdrawal.min": "El retiro mínimo es ",
+      "withdrawal.max": "El retiro maximo es ",
+      "withdrawal.lowBalance": "No tienes saldo suficiente",
       "withdrawal.copyCode": "Usuario: {{user}}\nId: {{id}}\nCódigo de retiro: {{code}}",
       "withdrawal.generalData": "Datos generales:",
       "withdrawal.user": "Usuario:",

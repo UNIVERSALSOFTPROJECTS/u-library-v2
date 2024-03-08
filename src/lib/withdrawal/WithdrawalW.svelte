@@ -1,7 +1,8 @@
 <script>
-    import { useReducer } from "react";
+    import { onMount } from 'svelte';
     import ServerConnection from "../../js/server";
-    import moment from "moment";
+    import inputUtils from '../../js/utils/inputUtils';
+    import { getUpdateBalance } from '../../js/utils/serverUtils';
 
     export let user;
     export let configWithdrawal;
@@ -21,31 +22,11 @@
     let amount;
     let loadWithdrawal = true;
     let infoUser = {};
-    let infoAccount = {
-        adicional:"",
-        numero_cta:"",
-        banco:""
-    };
+    let infoAccount = { adicional:"", numero_cta:"", banco:"" };
 
-    const justTextValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\p{L}\s]/gu, "") }
-    const justNumbersAccountValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d-]/g, "") };
-    const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") };
-
-    checkWithdrawal();
-
-    const updateBalance = async() => {
-        let data = JSON.parse(sessionStorage.getItem("user"));
-        let updateBalance = await ServerConnection.users.getBalance(data.agregatorToken);
-        const { balance, bonus_global, bonus_horses, bonus_slot, bonus_sportbook } = updateBalance.data;
-        data.balance         = balance;
-        data.bonus_global    = bonus_global;
-        data.bonus_horses    = bonus_horses;
-        data.bonus_slot      = bonus_slot;
-        data.bonus_sportbook = bonus_sportbook;
-        data.bonus_sumTotal  = bonus_global + bonus_horses + bonus_slot + bonus_sportbook;
-        sessionStorage.setItem("user", JSON.stringify(data));
-        user = data;
-    }
+    const inputJustText = inputUtils.justTextValidator;
+    const inputJustNumbers = inputUtils.justNumbersValidator;
+    const inputAccountBank = inputUtils.validateAccountBank;
 
     async function checkWithdrawal() {
         loadWithdrawal = true;
@@ -62,36 +43,41 @@
     }
 
     async function validateWithdrawal() {
-        if(amount == 0 || amount == undefined) return onError("Ingrese un monto a retirar");
-        if(amount < infoUser.retiro_min) return onError("El retiro mínimo es "+infoUser.retiro_min+" "+user.currency);
-        if(amount > infoUser.retiro_max) return onError("El retiro maximo es "+infoUser.retiro_max+" "+user.currency);
-        if(amount > user.balance) return onError("No tienes saldo suficiente");
+        if(amount == 0 || amount == undefined) return onError(t("withdrawal.amount0"));
+        if(amount < infoUser.retiro_min) return onError(t("withdrawal.min")+infoUser.retiro_min+" "+user.currency);
+        if(amount > infoUser.retiro_max) return onError(t("withdrawal.max")+infoUser.retiro_max+" "+user.currency);
+        if(amount > user.balance) return onError(t("withdrawal.lowBalance"));
         let info = infoAccount.adicional;
         let account = infoAccount.numero_cta;
         let bank = infoAccount.banco;
-        if(!infoUser.documento || !info || !account || !bank) return onError("Todos los campos son obligatorios");
+        if(!infoUser.documento || !info || !account || !bank) return onError(t("msg.allObligatory"));
         try {
-            let data = await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,account,info, infoUser.documento);
-            updateBalance();
+            await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,account,info, infoUser.documento);
+            await getUpdateBalance(user);
+            user = JSON.parse(sessionStorage.getItem("user"));
             checkWithdrawal();
-            console.log(data);
         } catch (error) {
              onError(t("msg.contactSupport"));//falta detectar los errores
             console.log(error);
         }
     }
+
+    onMount(()=>{ checkWithdrawal(); });
 </script>
 <div class="modal-body">
     {#if loadWithdrawal}
         <div class="loading"><p></p><p></p><p></p></div>
     {:else}
         {#if pendingWithdrawal}
-           <p>Usted cuenta actualmente con una solicitud de retiro de :</p>
+           <b>Tú tienes actiualmente una solicitud de retiro de :</b>
            <p class="withdrawal__pending">{infoUser.bloqueo_fondos} {user.currency}</p>
-           <p>Si desea saber en que estado se encuentra su solicitud de retiro, puede comunicarse con nuestro centro de atención al cliente</p>
+           <div>
+                <p class=""></p>
+                <p>Si desea saber en que estado se encuentra su solicitud de retiro, puede comunicarse con nuestro centro de atención al cliente</p>
+           </div>
            {#if messageOptional}
            <p>{messageOptional}</p>
-           {/if}
+        {/if}
         {:else}
             <div class="withdrawal__amount">
                 <b>{user.currency}</b>
@@ -103,22 +89,22 @@
                 <p>Nombre completo:</p>
                 <p>Documento de identidad:</p>
                 <input type="text" class="ipt" bind:value={infoUser.nombre} disabled>
-                <input type="text" inputmode="numeric" class="ipt" bind:value={infoUser.documento} on:input={justNumbersValidate}>
+                <input type="text" inputmode="numeric" class="ipt" bind:value={infoUser.documento} on:input={inputJustNumbers} disabled={infoUser.documento}>
                 <p>Nombre de banco:</p>
                 <p>Nro de cuenta:</p>
 
                 {#if dataType != "static"}
-                    <input type="text" class="ipt" bind:value={infoAccount.banco} on:input={justTextValidate}>
+                    <input type="text" class="ipt" bind:value={infoAccount.banco} on:input={inputJustText}>
                 {:else}
                     <select class="slc" bind:value={infoAccount.banco}>
                         <option value="" disabled>Selecciona tu banco</option>
                         {#each banksNames as banks}
-                            <option value={banks.id}>{banks.name}</option>
+                            <option value={banks.id}>{banks.name}</option>  
                         {/each}
                     </select>
                 {/if}
 
-                <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={justNumbersAccountValidate}>
+                <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={inputAccountBank}>
                 <p>Información adicional:</p>
                 <p class="withdrawal__text--resalt">Verificación obligatoria</p>
 

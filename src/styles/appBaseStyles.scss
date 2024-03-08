@@ -14,6 +14,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
 @import './components/global';
 @import './components/placeholder-selectors';
 @import './components/functions';
+
 //@import "./components/modals";
 //@import './components/uglobal'; -solo activa cuando uses tu componente no
 //@import SELECCIONAS EL TIPO DE THEMA DE LOGIN QUE QUIERES AQUI
@@ -140,7 +141,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             
         }
         &.withdrawal{
-            @include withdrawalX__model__1(2);//este es general para x y w
+            @include withdrawalW__model__1(2);//este es general para x y w
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);  
         }
         &.chatLive{
@@ -291,7 +292,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
     }
     .ipt{
         $user:addColorIcon("user","969696");
-        $email:addColorIcon("email","969696");
+        $email:addColorIcon("email","99696");
         $key:addColorIcon("key","969696");
     
         &.icon--user{
@@ -306,7 +307,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
     }
 
     //.footer{
-    @include footer__model_1(4);
+    @include footer__model_1(4,1);//mid_columns, bottom_columns
     //}   
 }
 
