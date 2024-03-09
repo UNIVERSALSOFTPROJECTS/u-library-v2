@@ -65,7 +65,7 @@
         <div class="accordion {activePanel === 'panel3' ? 'active' : ''}">
             <button class="accordion__select" on:click={() => toggleAccordion('panel3')}>{t("footer.s_p")}</button>
             <div class="accordion__body">
-                <a href="https://assets.apiusoft.com/{platform}/t&c.pdf" target="_blank">{t("footer.s_p")}</a>
+                <a href="https://assets.apiusoft.com/{platform}/t&c.pdf" target="_blank">{t("footer.t_c")}</a>
                 <a href="https://assets.apiusoft.com/{platform}/p&p.pdf" target="_blank">{t("footer.p_p")}</a>
                 <a href="https://assets.apiusoft.com/{platform}/g&r.pdf" target="_blank">{t("footer.g_r")}</a>
                 <a href="https://assets.apiusoft.com/{platform}/p&a.pdf" target="_blank">{t("footer.p_a")}</a>
@@ -85,8 +85,8 @@
     </div>
 
     <div class="footer__container">
+        {#if payments.length != 0}
         <div class="footer__container--sub">
-            {#if payments.length != 0}
             <div class="footer__payments">
                 <b>{t("footer.paymethods")}</b>
                 <div class="footer__payments--imgs">
@@ -95,8 +95,10 @@
                     {/each}
                 </div>
             </div>
-            {/if}
         </div>
+        {/if}
+
+        {#if socials.length != 0 || email}
         <div class="footer__container--sub">
             {#if socials.length != 0}
             <div class="footer__social">    
@@ -108,13 +110,15 @@
                 </div>
             </div>
             {/if}
-
+            {#if email}
             <div class="footer__contact"> 
                 <b>{t("footer.contanct")}: </b>
                 <a href="mailto:{email}">{email}</a>
             </div>
+            {/if}
         </div>
-    
+        {/if}
+
         <div class="footer__container--sub">
             <div class="footer__imgs">
                 <img src="https://assets.apiusoft.com/generic_imgs/footer/powered.png" alt="powered-img">

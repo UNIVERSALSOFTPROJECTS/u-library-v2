@@ -728,6 +728,122 @@
     }
 }
 
+@mixin withdrawalW__model__1($nChats){
+    & .modal{
+        &-body {
+            padding: 1rem;
+            align-content: start;
+            width: 100%;
+            overflow: auto;
+        }
+        &-content{
+            max-width: 500px;
+        }
+        &-header{
+            background: $color-primary;
+        }
+        @include modalFullScreen("mobile");
+    }
+    & .withdrawal{
+        &__info{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.25rem;
+            align-items: center;
+            &--main{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 3rem;
+                padding: 1rem;
+                gap: 0.25rem;
+                border-radius: $borderR-btn;
+                border: 1px solid #fff;
+                align-items: center;
+            }
+            //@include structureInfo_1;
+        }
+        &__amount{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        &__code{
+            display: grid;
+            grid-template-columns: 0fr 1rem;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        &__copy{
+            @include bgIconCenter($copy,"default");   
+            background-color: $color-primary;
+            position: relative;
+        }
+        &__pending{
+            font-size: 30px;
+            font-weight: 700;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        &__copied{
+            position: absolute;
+            top: -2rem;
+            left: -0.5rem;
+            background: #35c900;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            border: 1px solid rgba(0,0,0,.2);
+            z-index: 100;
+        }
+        &__text{
+            &--resalt{
+                color: #00d2e4;
+            }
+        }
+        &__note{
+            & b{
+                color: #00d2e4;
+            }   
+        }
+        &__help{
+           text-align: center;
+           display: grid;
+           gap: 0.75rem;
+           &--btns{
+            display: grid;
+            @if($nChats == 2){
+                grid-template-columns: 8rem 8rem;
+            }
+            gap: 0.25rem;
+            justify-content: center;
+           }
+        }
+        &__balance{
+            padding: 1rem;
+            background: #494949;
+            border-radius: $borderR-btn;
+            text-align: center;
+            & span{
+                padding-left: 0.5rem;
+                font-size: $g-font-size + 2;
+            }
+        }
+    }
+    $card:addColorIcon("card","fff");
+    .btn{
+        &.verification{
+            @include elementIconPosition($card,"left");
+            background-color: #2783ff;  
+        }
+        &.chat{
+            @include elementIconPosition($chat,"left");
+            background-color: #4a4b53;  
+        }
+        &.Whatssap{
+            @include elementIconPosition($whatssap,"left");
+            background-color: #4a4b53;  
+        }
+    }
+}
+
 
 @mixin recoverpass__model_1() {
     & .modal {
@@ -1162,7 +1278,7 @@
     }
 }
 
-@mixin footer__model_1 ($columns){   
+@mixin footer__model_1 ($mid_columns,$bottom_columns){   
     .footer{
         display: grid;
         gap: 1rem;
@@ -1190,9 +1306,9 @@
         &__accordion{
             @media #{$landscape_pc} {
                 display: grid;
-                grid-template-columns: repeat($columns,1fr);
+                grid-template-columns: repeat($mid_columns,1fr);
                 gap: 5rem;
-                @if($columns == 1){
+                @if($mid_columns == 1){
                     justify-items: center;
                 }
             }
@@ -1205,7 +1321,7 @@
                 border-radius: 0;
                 @media #{$landscape_pc} {
                     background-image: none;
-                    @if($columns == 1){
+                    @if($mid_columns == 1){
                         text-align: center;
                     }
                 }
@@ -1216,7 +1332,7 @@
                 }
                 @media #{$landscape_pc} {
                     display: grid;
-                    @if($columns == 1){
+                    @if($mid_columns == 1){
                         justify-items: center;
                         grid-template-columns: repeat(5,1fr);
                         padding-top: 1rem;
@@ -1241,9 +1357,9 @@
             display: grid;
             gap: 1rem;
             @media #{$landscape_pc} {
-                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-columns: repeat($bottom_columns,1fr);
                 align-items: center;
-                @if($columns == 1){
+                @if($mid_columns == 1){
                     border-top: 1px solid #4a4b53;
                     padding-top: 1rem;
                 }
@@ -1252,11 +1368,13 @@
                 display: grid;
                 gap: 1rem;
                 @media #{$landscape_pc} {
-                    &:nth-child(1){
-                        order: 2;
-                    }
-                    &:nth-child(2){
-                        order: 3;
+                    @if($bottom_columns != 1){
+                        &:nth-child(1){
+                            order: 2;
+                        }
+                        &:nth-child(2){
+                            order: 3;
+                        }
                     }
                 }
             }
@@ -1306,7 +1424,9 @@
                 }
             }
             @media #{$landscape_pc} {
-                justify-content: start;
+                @if($bottom_columns != 1){
+                    justify-content: start;
+                }
                 flex-direction: row;
             }
         }
@@ -1315,7 +1435,9 @@
             gap: 0.5rem;
             text-align: center;
             @media #{$landscape_pc} {
-                text-align: start;
+                @if($bottom_columns != 1){
+                    text-align: start;
+                }
             }
         }
     }

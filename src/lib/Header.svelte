@@ -90,28 +90,28 @@
     //    typeAccount: []
     //};
     const configWithdrawal = {
-        dataType : "static",
+        dataType : "",
         messageOptional : "",
         formVerification : "https://forms.gle/5rRcbJVgE7n4F6Ro7",
         platform,
         banksNames: [
-            { id:"Banco Estado" , name:"Banco Estado" },
-            { id:"Banco Falabella" , name:"Banco Falabella" },
-            { id:"Banco Santander" , name:"Banco Santander" },
-            { id:"Banco de Chile(Edwards Citi)" , name:"Banco de Chile(Edwards Citi)" },
-            { id:"Banco BCI" , name:"Banco BCI" },
-            { id:"Scotiabank" , name:"Scotiabank" },
-            { id:"Banco Itaú" , name:"Banco Itaú" },
-            { id:"Coopeuch" , name:"Coopeuch" },
-            { id:"Banco Ripley" , name:"Banco Ripley" },
-            { id:"Banco BICE" , name:"Banco BICE" },
-            { id:"Tenpo" , name:"Tenpo" },
-            { id:"Banco Consorcio" , name:"Banco Consorcio" },
-            { id:"Banco Internacional" , name:"Banco Internacional" },
-            { id:"Mercado Pago" , name:"Mercado Pago" },
-            { id:"Prepago Los Héroes" , name:"Prepago Los Héroes" },
-            { id:"Superdigital" , name:"Superdigital" },
-            { id:"Tapp Caja Los Andes" , name:"Tapp Caja Los Andes" },
+           // { id:"Banco Estado" , name:"Banco Estado" },
+           // { id:"Banco Falabella" , name:"Banco Falabella" },
+           // { id:"Banco Santander" , name:"Banco Santander" },
+           // { id:"Banco de Chile(Edwards Citi)" , name:"Banco de Chile(Edwards Citi)" },
+           // { id:"Banco BCI" , name:"Banco BCI" },
+           // { id:"Scotiabank" , name:"Scotiabank" },
+           // { id:"Banco Itaú" , name:"Banco Itaú" },
+           // { id:"Coopeuch" , name:"Coopeuch" },
+           // { id:"Banco Ripley" , name:"Banco Ripley" },
+           // { id:"Banco BICE" , name:"Banco BICE" },
+           // { id:"Tenpo" , name:"Tenpo" },
+           // { id:"Banco Consorcio" , name:"Banco Consorcio" },
+           // { id:"Banco Internacional" , name:"Banco Internacional" },
+           // { id:"Mercado Pago" , name:"Mercado Pago" },
+           // { id:"Prepago Los Héroes" , name:"Prepago Los Héroes" },
+           // { id:"Superdigital" , name:"Superdigital" },
+           // { id:"Tapp Caja Los Andes" , name:"Tapp Caja Los Andes" },
         ],
         typeAccount: [
             { id:"Corriente", name:"Corriente" },
@@ -125,7 +125,7 @@
     const configFooter = {  
         platform,
         country : {name: "Chile", flag: "chl"},
-        isChat: true,
+        isChat: false,
         categoryGames: ["slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"],//globalCategoryGames,en 
         //"slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"
         payments: [
@@ -137,7 +137,7 @@
             //{name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
             //social: []//si no hay redes sociales
         ],
-        email:"info@coliseosport.com",
+        email:"",
         bonus:[ 
             {name:"Bono Deportivas"} 
         ],
@@ -244,6 +244,7 @@
     }
 
     onMount(()=>{
+       
         let currentUrl = window.location.href;
         console.log("domain",currentUrl);
         if(/resetPassword/.test(currentUrl)) {
@@ -253,6 +254,8 @@
             onOpenSignup();
         }
         if (sessionStorage.getItem("user")) {
+            user = JSON.parse(sessionStorage.getItem("user"))
+            console.log(user);
             updateTimeSession();
             setInterval(() => {
                 let timeNow = Math.floor(Date.now() / 1000);

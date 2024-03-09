@@ -482,7 +482,7 @@
 }
 @mixin notifier($position,$bg-success,$bg-error,$bg-warning){
     .notify{
-        position: absolute;
+        position: fixed;
         z-index: 9999;
         color: white;
         @if($position == "top-end"){
