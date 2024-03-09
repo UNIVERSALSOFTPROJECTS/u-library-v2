@@ -5,12 +5,12 @@
   export let user;
   export let loginModalOpen;
   export let GAMEAPI_URL;
-  //export let onCategoryChange;
+  export let onCategoryChange;
 
   //const conf = Configuration.getConfiguration();
   let sportbookWidgetsUrl = `${GAMEAPI_URL}/e-digtain/widget?domain=coliseo&language=es`;
   var regex = /^[a-zA-Z]/;
-  //let sportbookWidgetsUrl;
+  
 
 
   onMount(() => {
@@ -19,7 +19,7 @@
   
   $:{
     if (user && user.agregatorToken) {
-      //if (user) sportbookWidgetsUrl += "&token=" + user.agregatorToken;
+      if (user) sportbookWidgetsUrl += "&token=" + user.agregatorToken;
     }
   }
 
@@ -29,7 +29,7 @@
     } else if (event.data.event && !regex.test(event.data.event) ) {
       const eventInfo = event.data.event;
       const sportbookOptions = { gameid: "8042022_digitain", eventInfo };
-      //onCategoryChange("sportbook", sportbookOptions);
+      onCategoryChange("sportbook", sportbookOptions);
     }
   };
 </script>

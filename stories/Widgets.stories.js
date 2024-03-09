@@ -3,13 +3,14 @@ import DigtainWidget from '../src/lib/widgets/DigtainWidget.svelte'
 import init from './init';
 init.start();
 
+export let onCategoryChange
+
 
 let userState = 'logout';
 let active_view = 'sportbook';
 let user = {};
 let loginModalOpen = false;
 let modalOpened;
-
 let GAMEAPI_URL = 'https://apiuniversalsoft.com/api';
 
 
