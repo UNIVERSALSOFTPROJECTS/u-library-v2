@@ -105,17 +105,6 @@
     color: white;
 }
 
-%link{
-    cursor: pointer;
-    color: $color-primary;
-    background-color: transparent;
-    text-decoration: underline;
-    &:hover, &.active{
-        color: $color-primary;
-    }
-}
-
-
 @mixin modalFullScreen($screen){
     @if($screen == "mobile"){
         @media (max-width: $size-web) {

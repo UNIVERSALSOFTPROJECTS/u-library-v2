@@ -89,9 +89,6 @@ input[type=date] {
     .ipt{
         @extend %input;
     }
-    .link{
-        @extend %link;
-    }
     
     a{
         &.btn{
@@ -99,6 +96,10 @@ input[type=date] {
             align-items: center;
             justify-content: center;
             text-decoration: none;
+        }
+        b{
+            color: $color-primary;
+            text-decoration: underline;
         }
     }
 

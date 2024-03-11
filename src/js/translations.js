@@ -5,7 +5,7 @@ export default {
       "login.password": "Contraseña",
       "login.access": "Ingresar",
       "login.remember": "Recordar",
-      "login.signupHere": "¿Eres nuevo? Registrate aquí",
+      "login.signupHere": "¿Eres nuevo? <b>Registrate aquí</b>",
       "login.forgetPassword": "¿Olvidaste tu contraseña?",
       //---------------SINGUP-----------------------------
       "signup.title": "Registrate aquí",
@@ -23,9 +23,9 @@ export default {
       "signup.generateCode": "Generar código SMS",
       "signup.newCodeIn": "Nuevo código en",
       "signup.code": "Código",
-      "signup.acceptPandP": "Confirmo haber leído y aceptado los <b><span class='link'>Términos y condiciones</span></b> de {{platform}}.",
+      "signup.acceptPandP": "Confirmo haber leído y aceptado los <a href='https://assets.apiusoft.com/{{platform}}/t&c.pdf' target='_blank'><b>Términos y condiciones</b></a> de {{platform}}.",
       "signup.register": "Registrarse",
-      "signup.loginHere": "¿Ya tienes una cuenta? Ingresa aquí",
+      "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
       //---------------SINGUP/NAME CURRENCIES-----------------------------
       "currency.usd":"Dólar estadounidense",
       "currency.clp":"Peso chileno",
@@ -53,7 +53,7 @@ export default {
       "withdrawal.copied": "Copiado!",
       "withdrawal.info": "<p>Acercate a nuestras sucursales, para proceder con el retiro.</p><p><b>Nota:</b> No es necesario imprimir este ticket, solo debe identificar su usuario junto con el código de referencia.</p>",
       "withdrawal.withdraw": "Ingrese el monto a retirar",
-      "withdrawal.termsConditions": "Al solicitar su retiro usted esta aceptando los <b><span class='link'>Términos y Condiciones</span></b>",
+      "withdrawal.termsConditions": "Al solicitar su retiro usted esta aceptando los <b>Términos y Condiciones</b>",
       "withdrawal.request": "Solicitar retiro",
       //---------------NAME CAT GAMES-----------------------------
       "categoryGame.slot": "Casino",
@@ -103,7 +103,7 @@ export default {
         "login.password": "Mot de passe",
         "login.access": "Entrer dans",
         "login.remember": "Rappeler",
-        "login.signupHere": "Vous êtes nouveau? inscrivez-vous ici",
+        "login.signupHere": "Vous êtes nouveau? <b>Inscrivez-vous ici</b>",
         "login.forgetPassword": "Vous avez oublié votre mot de passe?",
         //---------------SINGUP-----------------------------
         "signup.title": "Inscrivez-vous ici",
@@ -121,9 +121,9 @@ export default {
         "signup.generateCode": "Générer un code SMS",
         "signup.newCodeIn": "Nouveau code dans",
         "signup.code": "Code",
-        "signup.acceptPandP": "Pour me convertir en client, acceptez les <b><span class='link'>Politiques de Confidentialité</span></b> de {{platform}}.",
+        "signup.acceptPandP": "Pour me convertir en client, acceptez les <a href='https://assets.apiusoft.com/{{platform}}/t&c.pdf' target='_blank'><b>Termes et Conditions</b></a> de {{platform}}.",
         "signup.register": "S'inscrire",
-        "signup.loginHere": "Avez-vous déjà un compte? Entrer ici",
+        "signup.loginHere": "Avez-vous déjà un compte? <b>Entrer ici</b>",
         //---------------SINGUP/NAME CURRENCIES-----------------------------
         "currency.usd":"Dollar américain",
         "currency.clp":"Peso chilien",
@@ -149,7 +149,7 @@ export default {
         "withdrawal.copied": "Copié!",
         "withdrawal.info": "<p>Come to Shop, to proceed with the withdrawal.</p><p><b>Note:</b> It is not necessary to print this ticket, You just have to identify your user along with the reference code.</p>",
         "withdrawal.withdraw": "Entrez le montant à retirer",
-        "withdrawal.termsConditions": "En demandant votre retrait, vous acceptez les <b><span class='link'>Termes et Conditions</span></b>",
+        "withdrawal.termsConditions": "En demandant votre retrait, vous acceptez les <b>Termes et Conditions</b>",
         "withdrawal.request": "Demander le retrait",
         //---------------MENSAJES-----------------------------
         "msg.sucessLogin": "Bienvenue en {{platform}}",

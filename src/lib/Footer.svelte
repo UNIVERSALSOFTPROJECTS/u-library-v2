@@ -1,4 +1,6 @@
 <script>
+    import {assetsUrl, assetsPayments, assetsFlags } from "../js/utils/assetsUtils";
+
     export let onCategoryChange;
     export let openChatLive;
     export let configFooter;
@@ -27,7 +29,7 @@
 <footer class="footer">
     <div class="footer__top">
         <button class="footer--lang">
-            <img src="https://assets.apiusoft.com/generic_imgs/flags/{country.flag}.png" alt="{country.name}-flag">
+            <img src="{assetsFlags}{country.flag}.png" alt="{country.name}-flag" loading="lazy">
             <span>{country.name}</span>
         </button>
         {#if isChat}
@@ -65,11 +67,11 @@
         <div class="accordion {activePanel === 'panel3' ? 'active' : ''}">
             <button class="accordion__select" on:click={() => toggleAccordion('panel3')}>{t("footer.s_p")}</button>
             <div class="accordion__body">
-                <a href="https://assets.apiusoft.com/{platform}/t&c.pdf" target="_blank">{t("footer.t_c")}</a>
-                <a href="https://assets.apiusoft.com/{platform}/p&p.pdf" target="_blank">{t("footer.p_p")}</a>
-                <a href="https://assets.apiusoft.com/{platform}/g&r.pdf" target="_blank">{t("footer.g_r")}</a>
-                <a href="https://assets.apiusoft.com/{platform}/p&a.pdf" target="_blank">{t("footer.p_a")}</a>
-                <a href="https://assets.apiusoft.com/{platform}/q&a.pdf" target="_blank">{t("footer.q_a")}</a>
+                <a href="{assetsUrl}{platform}/t&c.pdf" target="_blank">{t("footer.t_c")}</a>
+                <a href="{assetsUrl}{platform}/p&p.pdf" target="_blank">{t("footer.p_p")}</a>
+                <a href="{assetsUrl}{platform}/g&r.pdf" target="_blank">{t("footer.g_r")}</a>
+                <a href="{assetsUrl}{platform}/p&a.pdf" target="_blank">{t("footer.p_a")}</a>
+                <a href="{assetsUrl}{platform}/q&a.pdf" target="_blank">{t("footer.q_a")}</a>
             </div>
         </div>
         {#if bonus.length != 0}
@@ -77,7 +79,7 @@
             <button class="accordion__select" on:click={() => toggleAccordion('panel4')}>{t("footer.promotions")}</button>
             <div class="accordion__body">
                 {#each bonus as bono}
-                <a href="https://assets.apiusoft.com/{platform}/bonus_sportbook.pdf" target="_blank">{bono.name}</a>
+                <a href="{assetsUrl}{platform}/bonus_sportbook.pdf" target="_blank">{bono.name}</a>
                 {/each}
             </div>
         </div>
@@ -91,7 +93,7 @@
                 <b>{t("footer.paymethods")}</b>
                 <div class="footer__payments--imgs">
                     {#each payments as payment}
-                    <img src="https://assets.apiusoft.com/generic_imgs/payments/{payment.name}.png" alt="">
+                    <img src="{assetsPayments}{payment.name}.png" alt="payments-{payment.name}" loading="lazy">
                     {/each}
                 </div>
             </div>
@@ -121,8 +123,8 @@
 
         <div class="footer__container--sub">
             <div class="footer__imgs">
-                <img src="https://assets.apiusoft.com/generic_imgs/footer/powered.png" alt="powered-img">
-                <img src="https://assets.apiusoft.com/generic_imgs/footer/more18.png" alt="more18-img">
+                <img src="https://assets.apiusoft.com/generic_imgs/footer/powered.png" alt="powered-img" loading="lazy">
+                <img src="https://assets.apiusoft.com/generic_imgs/footer/more18.png" alt="more18-img" loading="lazy">
             </div>
             <div class="footer__bottom">
                 <p>{platform} {t("footer.declaration")}</p>

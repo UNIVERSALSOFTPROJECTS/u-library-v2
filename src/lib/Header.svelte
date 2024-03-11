@@ -129,12 +129,12 @@
         categoryGames: ["slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"],//globalCategoryGames,en 
         //"slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"
         payments: [
-            //{name: "KHIPU"},
-            //{name: "FLOW"},
+            {name: "KHIPU"},
+            {name: "FLOW"},
         ],
-        social: [ //ASEGURATO DE COLOCAR EL NOMBRE EN MINUSCULA Y EL ENLACE CORRECTO!!!
-            //{name:"facebook", url:"https://www.facebook.com/coliseosportoficial"},
-            //{name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
+        social: [ //ASEGURATO DE COLOCAR EL NOMBRE EN MINUSCULA Y EhenL ENLACE CORRECTO!!!
+            {name:"facebook", url:"https://www.facebook.com/coliseosportoficial"},
+            {name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
             //social: []//si no hay redes sociales
         ],
         email:"",

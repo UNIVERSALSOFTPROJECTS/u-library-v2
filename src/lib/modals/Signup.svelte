@@ -11,7 +11,6 @@
     export let configSignup;
     export let onOk;
     export let onError;
-    export let openPrivacyPolicies;
     export let t;
 
     let platform = configSignup.platform;
@@ -225,7 +224,7 @@
         <label for="chk_conditions"></label> 
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <div on:click={openPrivacyPolicies}>{@html t("signup.acceptPandP", {platform})}</div>
+        <p>{@html t("signup.acceptPandP", {platform})}</p>
     </div>
     <button type="button" class="btn signup" on:click={registerClick} disabled={loadSignup}>
         {#if loadSignup}
@@ -234,5 +233,5 @@
             {t("signup.register")}
         {/if}
     </button>
-    <button type="button" on:click={onOpenLogin} class="btn openLogin">{t("signup.loginHere")}</button>
+    <button type="button" on:click={onOpenLogin} class="btn openLogin">{@html t("signup.loginHere")}</button>
 </form>

@@ -141,7 +141,7 @@
         <p>{t("login.access")}</p>
       {/if}
     </button>
-    <button type="button" on:click={onOpenSignup} class="btn openSignup">{t("login.signupHere")}</button>
-    <button type="button" on:click={onOpenRecoverPassword} class="btn openForgotPass">{t("login.forgetPassword")}</button>
+    <button type="button" on:click={onOpenSignup} class="btn openSignup">{@html t("login.signupHere")}</button>
+    <button type="button" on:click={onOpenRecoverPassword} class="btn openForgotPass"><b>{t("login.forgetPassword")}</b></button>
   </form>
 </div>
