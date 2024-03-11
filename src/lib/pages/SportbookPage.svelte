@@ -18,7 +18,7 @@
   const edg_id = "8042022_digitain";
   const wt_id = "wintech_gaming";
   const nvb_id = "novusbet";
-  const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&lang=es&gameid=${edg_id}&m=${deviceiframe}`;
+  const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&lang=es&gameid=${edg_id}&m=${deviceiframe}&skin=generic`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const games = {
@@ -84,10 +84,8 @@
   };
 
   const openNovusbet = async () => {
-    
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.novusbet, options.gameToken) : baseUrlNovusbet;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
-
     if (userState == "loggedIn"){
       const {data} = await backend.game.getURLNovus(url);
       url = data.url
