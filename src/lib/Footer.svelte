@@ -1,5 +1,5 @@
 <script>
-    import {assetsUrl, assetsPayments, assetsFlags } from "../js/utils/assetsUtils";
+    import {assetsUrl, assetsPayments, assetsFlags, assetsFooter } from "../js/utils/assetsUtils";
 
     export let onCategoryChange;
     export let openChatLive;
@@ -9,6 +9,7 @@
     let country = configFooter.country;
     let isChat = configFooter.isChat;
     let categoryGames = configFooter.categoryGames;
+    let createdIn = configFooter.createdIn;
     let payments = configFooter.payments;
     let socials = configFooter.social;
     let email = configFooter.email;
@@ -17,6 +18,7 @@
     let linksChats = configFooter.linksChats;
     let activePanel = null;
 
+    const currentYear = new Date().getFullYear();
     const slots = ["slot", "slotlive", "crash", "scratch"];
     const sports = ["sportbook", "sportbooklive", "horses", "virtual"];
     
@@ -123,12 +125,12 @@
 
         <div class="footer__container--sub">
             <div class="footer__imgs">
-                <img src="https://assets.apiusoft.com/generic_imgs/footer/powered.png" alt="powered-img" loading="lazy">
-                <img src="https://assets.apiusoft.com/generic_imgs/footer/more18.png" alt="more18-img" loading="lazy">
+                <img src="{assetsFooter}powered.png" alt="powered-img" loading="lazy">
+                <img src="{assetsFooter}more18.png" alt="more18-img" loading="lazy">
             </div>
             <div class="footer__bottom">
                 <p>{platform} {t("footer.declaration")}</p>
-                <p>© 2024 {platform}</p>
+                <p>© {createdIn && createdIn != currentYear?`${createdIn+" - "+currentYear}`:currentYear} {platform}</p>
             </div>
         </div>
     </div>

@@ -126,6 +126,7 @@
         platform,
         country : {name: "Chile", flag: "chl"},
         isChat: false,
+        createdIn: 2023,
         categoryGames: ["slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"],//globalCategoryGames,en 
         //"slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"
         payments: [
