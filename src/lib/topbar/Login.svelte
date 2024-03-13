@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import ServerConnection from "../../js/server";
+  import { getUpdateBalance } from '../../js/utils/serverUtils';
   import notify from "../../js/notify";
 
   export let onOk;
@@ -50,7 +51,6 @@
       else data = await ServerConnection.u_user.login(username, password);
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
-      //Formatear la propiedad "bonus" con el updatebalance
       if(data.claims){
         let date = new Date();
         date.setDate(date.getDate() + 1);
@@ -59,16 +59,8 @@
         data.playerId = data.id;
         delete data.claims;
       }
-
-      let updateBalance = await ServerConnection.users.getBalance(data.agregatorToken);
-      const { balance, bonus_global, bonus_horses, bonus_slot, bonus_sportbook } = updateBalance.data;
-      data.balance         = balance;
-      data.bonus_global    = bonus_global;
-      data.bonus_horses    = bonus_horses;
-      data.bonus_slot      = bonus_slot;
-      data.bonus_sportbook = bonus_sportbook;
-      data.bonus_sumTotal  = bonus_global + bonus_horses + bonus_slot + bonus_sportbook;
-      sessionStorage.setItem("user", JSON.stringify(data));
+      //Formatear la propiedad "bonus" con el updatebalance
+      await getUpdateBalance(data);
       onOk(data);
     } catch (error) {
       console.log("error: ", error);
@@ -123,7 +115,7 @@
 
 <div class="modal-body" on:submit={avoidSubmit}>
   <div class="login__title">{t("login.title")}</div>
-  <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-{platform}"/>
+  <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-{platform}" loading="eager"/>
   <div></div>
   <form class="login__form">
     {#if isOauth}

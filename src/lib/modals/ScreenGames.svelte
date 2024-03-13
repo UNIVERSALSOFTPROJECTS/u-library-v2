@@ -36,7 +36,7 @@
                     {#if loadIframe}
                         <b class="loading"><b><b></b></b></b>
                     {/if}
-                    <iframe on:load={()=>{loadIframe = false;}} width="100%" height="100%" src={url_game} frameborder="0" title="modalGame"></iframe>
+                    <iframe on:load={()=>{loadIframe = false;}} width="100%" height="100%" src='https://apiuniversalsoft.com/api/launch?gameid=vs243lionsgold&p=pg&b=Pragmatic Play&m=wb&sessionid=8697156863640hrk1jxfyqwaxgvwzm6mxvojncm3khuygum8xo2p5fxd7zcahpobm5layh4l8bqdgtwvepzp8walkz7swwll1b9qekymh76i5hn8dtaag36unsmswponswaxkyftotlad' frameborder="0" title="modalGame"></iframe>
                 </div>
             </div>
         </div>

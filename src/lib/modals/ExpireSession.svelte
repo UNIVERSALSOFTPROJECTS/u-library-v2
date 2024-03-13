@@ -11,6 +11,7 @@
         if (time < 0) { 
             clearInterval(interval);
             time = 0;
+            sessionStorage.setItem('activeModal', 'expiredSession');
             onLogout();
         }
     }

@@ -1,6 +1,6 @@
 import ServerConnection from "../server";
 
-export const getUpdateBalance = async(user) => {
+export const getUpdateBalance = async (user) => {
     let updateBalance = await ServerConnection.users.getBalance(user.agregatorToken);
     const { balance, bonus_global, bonus_horses, bonus_slot, bonus_sportbook } = updateBalance.data;
     user.balance         = balance;

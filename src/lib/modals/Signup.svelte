@@ -1,11 +1,11 @@
 <script>
     import ServerConnection from "../../js/server";
+    import inputUtils from "../../js/utils/inputUtils";
     import DropdowPrefix from '../dropdown/DropdowPrefix.svelte';
     import DropdownDate from '../dropdown/DropdownDate.svelte';
     import DropdownCurrencies from '../dropdown/DropdownCurrencies.svelte';
     import InputPassword from '../input/InputPassword.svelte';
     import { onMount } from 'svelte';
-
 
     export let onOpenLogin;
     export let configSignup;
@@ -44,15 +44,13 @@
     let term_conditions;
     let currency;
 
-
-    
-
     //validations imput -utils JS
-    const justTextValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\p{L}\s]/gu, "") }
-    const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
-    const notWhiteSpace = (e) =>{ e.target.value = e.target.value.replace(/[^\S+$]/g, "") }
+    const inputJustText = inputUtils.justTextValidator;
+    const inputJustNumbers = inputUtils.justNumbersValidator;
+    const notWhiteSpace = inputUtils.notWhiteSpace;
 
     function counterResendSms() {
+        onOk(t("msg.sendSms"));
         activeSMS = true;
         minutes = 2;
         seconds = 0;
@@ -75,12 +73,7 @@
         try {
             loadSms = true;
             let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
-            if (preRegister) {
-                onOk(t("msg.sendSms"));
-                counterResendSms();
-            }else{
-                smscode = data.smscode;
-            }
+            preRegister ? counterResendSms() : smscode = data.smscode;
         } catch (error) {
             if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = t("msg.phoneFormat");
@@ -101,6 +94,7 @@
             }
         } catch (error) {
             onError(t("msg.incorrectCodeAgent"));
+            loadSignup = false;
         }
     }
 
@@ -110,7 +104,7 @@
             let emailvalid = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(email);
             if (!emailvalid) return onError(t("msg.emailInvalid"));
         }
-        if (password.length <= 5) return onError(t("msg.passwordMin5"));
+        if (password.length < 5) return onError(t("msg.passwordMin5"));
         if(!smscode && preRegister){
             return onError(t("msg.codeVerification"));
         }else if(!preRegister){
@@ -160,7 +154,7 @@
   
 <form class="modal-body" on:submit={avoidSubmit}>
     <b>{t("signup.infoPersonal")}</b>
-    <form><input type="text" class="ipt icon--user" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={justTextValidate}></form>
+    <form><input type="text" class="ipt icon--user" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={inputJustText}></form>
     <div class="signup__container--date">
         <p>{t("signup.birthday")}</p>
         <div class="signup__date">
@@ -192,9 +186,9 @@
             {:else}
                 <p>{t("signup.codeAgent")}</p>
                 <div class="signup__codeAgent">
-                    <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" bind:value={codeAgent} on:input={justNumbersValidate}>
+                    <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" bind:value={codeAgent} on:input={inputJustNumbers}>
                     <div>-</div>
-                    <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" on:input={justNumbersValidate}>
+                    <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" on:input={inputJustNumbers}>
                 </div>
             {/if}
         </div>
@@ -216,14 +210,12 @@
                 {/if}
             {/if}
         </button>
-        <input type="number" class="ipt" min="0" placeholder={t("signup.code")} autocomplete="off" bind:value={smscode} on:input={justNumbersValidate}>
+        <input type="number" class="ipt" min="0" placeholder={t("signup.code")} autocomplete="off" bind:value={smscode} on:input={inputJustNumbers}>
     </div>
     {/if}
     <div class="signup__conditions">   
         <input type="checkbox" id="chk_conditions" bind:checked={term_conditions}/>
         <label for="chk_conditions"></label> 
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <!-- svelte-ignore a11y-no-static-element-interactions -->
         <p>{@html t("signup.acceptPandP", {platform})}</p>
     </div>
     <button type="button" class="btn signup" on:click={registerClick} disabled={loadSignup}>
