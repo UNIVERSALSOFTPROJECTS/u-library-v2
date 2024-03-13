@@ -245,7 +245,6 @@
     }
 
     onMount(()=>{
-       
         let currentUrl = window.location.href;
         console.log("domain",currentUrl);
         if(/resetPassword/.test(currentUrl)) {
@@ -254,96 +253,24 @@
         }else if (/afiliado/.test(currentUrl)) {//afiliadocolisosport
             onOpenSignup();
         }
-
         if (sessionStorage.getItem("user")) {
             user = JSON.parse(sessionStorage.getItem("user"))
-
             updateTimeSession();
-            //timerExpireSession();
-        }else{
-            //detectar en el sessionStorage si existe el statusModal = "expiredSession" pra mostrarel modal erspectivo
-            //y si este existe solo eliminarlo cuando se le da click en "OK" al mensaje Ò que se elimine en automatico luego de 5 seg
-            //este tiene que ser un siubmoda si o si al aparecer
         }
     }); 
 
 
 
-
-//function timerExpireSession() {
-//    let sessionTimer;
-//    clearInterval(sessionTimer);
-//    sessionTimer = setTimeout(() => {
-//    let timeNow = Math.floor(Date.now() / 1000);
-//    let timeSession = parseInt(sessionStorage.getItem("expireSession"),10);
-//    //if (timeNow > timeSession){
-//        console.log("abrir modal de expiracion");
-//
-//        detectActivityUser("detecting")
-//        document.addEventListener('mousemove', detectActivityUser);
-//        document.addEventListener('keydown', detectActivityUser);
-//        document.addEventListener('touchstart', detectActivityUser);
-//
-//       
-// }, 5000);//29  oko que solo ocurre 1 vez cada 36 seg //}, 1800000);//30min //}, 1740000);//30min
-//}
-
-
-//let balanceTimer;
-//
-//const detectActivityUser = (status) =>{
-//    if (status == "detecting") {
-//        balanceTimer = setTimeout(() => { compareBalance(); }, 10000);//600000
-//    }else{
-//        clearTimeout(balanceTimer);
-//        document.removeEventListener('mousemove',detectActivityUser);
-//        document.removeEventListener('keydown',detectActivityUser);
-//        document.removeEventListener('touchstart',detectActivityUser);
-//        updateTimeSession();
-//        timerExpireSession();
-//    }
-//    
-//}
-
-//const compareBalance = async() =>{
-//    let oldBalance = JSON.parse(sessionStorage.getItem("user")).balance;
-//    await getUpdateBalance(user);
-//    let newBalance = JSON.parse(sessionStorage.getItem("user")).balance;
-//    console.log("oldBalance",oldBalance,"newBalance",newBalance);
-//    if (oldBalance == newBalance) {
-//        onOpenExpireSession();
-//        //tambien podemos poner un mensaje de "actividad detectada puedes continuar jugando"
-//        // y ya no tendriamos que poner lo de abajo!!!
-//
-//        //esto ase que le ya no se reinicie el contado hasta dar click
-//       // document.removeEventListener('mousemove',detectActivityUser);
-//       // document.removeEventListener('keydown',detectActivityUser);
-//       // document.removeEventListener('touchstart',detectActivityUser);
-//    }else{
-//        console.log("ejecutando euodate time");
-//        updateTimeSession();
-//        timerExpireSession();
-//
-//    }
-//}
-
-
     const updateTimeSession = async() =>{
         expireSessionModalOpen = false;
+        let user = JSON.parse(sessionStorage.getItem("user"))
+        let oldBalance = user.balance;
         setTimeout( async() => {
-            let oldBalance = JSON.parse(sessionStorage.getItem("user")).balance;
             await getUpdateBalance(user);
             let newBalance = JSON.parse(sessionStorage.getItem("user")).balance;
-            oldBalance == newBalance? onOpenExpireSession() : updateTimeSession();
+            oldBalance == newBalance ? onOpenExpireSession() : updateTimeSession();
         }, 1800000);
     }
-
-
-
-
-
-
-
 
 
     const onCategoryChange = (param) => {

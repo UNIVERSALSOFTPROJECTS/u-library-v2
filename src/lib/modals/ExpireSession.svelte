@@ -21,7 +21,7 @@
 </script>
 
 <div class="modal-body">
-    <img class="expireSession__logo" src="https://assets.apiusoft.com/{platform}/logo.png" alt="logo-{platform}">
+    <img class="expireSession__logo" src="https://assets.apiusoft.com/{platform}/logo.png" alt="logo-{platform}" loading="eager">
     <p class="expireSession__title">¿Sigues ahí?</p>
     <button class="btn continue" on:click={updateTimeSession}>Continuar jugando</button>
     <p class="expireSession__text">Su sesión expira en <b>{time}</b>s</p>
