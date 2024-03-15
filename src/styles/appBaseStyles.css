@@ -87,6 +87,10 @@ input[type=date]::-webkit-calendar-picker-indicator {
   justify-content: center;
   text-decoration: none;
 }
+.Coliseosport a b {
+  color: #f54b00;
+  text-decoration: underline;
+}
 .Coliseosport :focus, .Coliseosport :focus-visible {
   outline: 0;
 }
@@ -338,16 +342,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .Coliseosport .info.ipt {
   border: 1px solid black;
-}
-
-.Coliseosport .link {
-  cursor: pointer;
-  color: #f54b00;
-  background-color: transparent;
-  text-decoration: underline;
-}
-.Coliseosport .link:hover, .Coliseosport .active.link {
-  color: #f54b00;
 }
 
 .Coliseosport .modal.login .login__ipt--pass, .Coliseosport .modal.signup .signup__container--pass {
@@ -691,7 +685,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 .Coliseosport .notify {
-  position: absolute;
+  position: fixed;
   z-index: 9999;
   color: white;
   top: 0;
@@ -921,8 +915,15 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 .Coliseosport .btn.openSignup, .Coliseosport .btn.openForgotPass, .Coliseosport .btn.openLogin {
   background: transparent;
-  text-decoration: underline;
   height: 30px;
+  padding: 0;
+  width: auto;
+}
+.Coliseosport .btn.openSignup b, .Coliseosport .btn.openForgotPass b, .Coliseosport .btn.openLogin b {
+  color: #f54b00;
+}
+.Coliseosport .btn.openSignup b:hover, .Coliseosport .btn.openForgotPass b:hover, .Coliseosport .btn.openLogin b:hover {
+  text-decoration: underline;
 }
 .Coliseosport .icon--chat {
   background-image: url("data:image/svg+xml,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M0.634277 12C0.634277 5.37258 5.65701 0 11.8529 0C18.0487 0 23.0714 5.37258 23.0714 12C23.0714 18.6274 18.0487 24 11.8529 24C5.65701 24 0.634277 18.6274 0.634277 12Z' fill='%2300B900'/><path d='M12.0398 5.60001C8.22544 5.60001 5.1217 8.27448 5.1217 11.5619C5.1217 14.509 7.58289 16.9772 10.9074 17.4439C11.1328 17.4954 11.4394 17.6016 11.517 17.8061C11.5867 17.9919 11.5626 18.2829 11.5392 18.4705C11.5392 18.4705 11.4581 18.9889 11.4406 19.0993C11.4105 19.285 11.3016 19.8257 12.0398 19.4953C12.7782 19.1649 16.024 17.0041 17.4754 15.23C18.4777 14.0624 18.9579 12.8776 18.9579 11.5619C18.9579 8.27448 15.8546 5.60001 12.0398 5.60001Z' fill='white'/></svg>");
@@ -1752,7 +1753,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 @media (orientation: landscape) and (min-width: 1023.99px) {
   .Coliseosport .footer__container {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
   }
 }
