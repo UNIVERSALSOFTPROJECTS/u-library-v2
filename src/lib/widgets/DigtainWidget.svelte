@@ -8,7 +8,7 @@
   export let onCategoryChange;
 
   //const conf = Configuration.getConfiguration();
-  let sportbookWidgetsUrl = `${GAMEAPI_URL}/e-digtain/widget?domain=coliseo&language=es`;
+  let sportbookWidgetsUrl = `${GAMEAPI_URL}/e-digtain/widget?domain=coliseo&language=es&skin=generic`;
   var regex = /^[a-zA-Z]/;
   
 
