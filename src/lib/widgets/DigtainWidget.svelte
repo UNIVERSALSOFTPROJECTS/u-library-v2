@@ -39,7 +39,7 @@
       console.log("params init", params);
       let iframe = await Bootstrapper.boot(params, { name: "TopMatches" });
       console.log("iframe",iframe);
-      //await addTopMatchesEventsListeners(iframe);
+      await addTopMatchesEventsListeners(iframe);
     }
 
     function addTopMatchesEventsListeners(topMatches) {
@@ -47,8 +47,7 @@
         // Para escuchar la carga del widget de los mejores partidos
       });
       topMatches.addEventListener('navigateToEvent', async function (messageEvent) {
-        if (messageEvent) onWidgetEventClick(messageEvent.data);
-
+        //if (messageEvent) onWidgetEventClick(messageEvent.data);
       });
     }
     
