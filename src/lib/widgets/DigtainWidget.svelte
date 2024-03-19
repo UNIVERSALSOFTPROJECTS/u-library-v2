@@ -47,17 +47,17 @@
         // Para escuchar la carga del widget de los mejores partidos
       });
       topMatches.addEventListener('navigateToEvent', async function (messageEvent) {
-        //if (messageEvent) onWidgetEventClick(messageEvent.data);
+        if (messageEvent) onWidgetEventClick(messageEvent.data);
       });
     }
     
     const onWidgetEventClick = (event) => {
       if (token == '-') loginModalOpen = true;
-      else{
+      /*else{
         const eventInfo = event;
         const sportbookOptions = { gameid: "8042022_digitain", eventInfo };
         onCategoryChange("sportbook", sportbookOptions);
-      }
+      }*/
     }
 </script>
 
