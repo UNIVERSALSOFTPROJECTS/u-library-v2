@@ -36,9 +36,7 @@
   });
 
   async function init(params) {
-      console.log("params init", params);
       let iframe = await Bootstrapper.boot(params, { name: "TopMatches" });
-      console.log("iframe",iframe);
       await addTopMatchesEventsListeners(iframe);
     }
 
@@ -56,7 +54,6 @@
       else{
         const eventInfo = event;
         const sportbookOptions = { gameid: "8042022_digitain", eventInfo };
-        console.log("options", sportbookOptions);
         onCategoryChange("sportbook", sportbookOptions);
       }
     }
