@@ -57,7 +57,7 @@
         const eventInfo = event;
         const sportbookOptions = { gameid: "8042022_digitain", eventInfo };
         console.log("options", sportbookOptions);
-        //onCategoryChange("sportbook", sportbookOptions);
+        onCategoryChange("sportbook", sportbookOptions);
       }
     }
 </script>
