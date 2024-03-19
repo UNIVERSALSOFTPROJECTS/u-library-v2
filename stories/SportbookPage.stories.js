@@ -9,10 +9,10 @@ let active_view = 'sportbook';
 let user = {};
 let loginModalOpen = false;
 let options = {
-  gameid: '8042022_digitain',
-  gameToken: '3560310552255cc0ytmcbwfm92k46skltmk6yvu5ntbskoodxunyny50qfxcgxl3rm89qqhcbtv55tj7t2uyhdvszs0fd1bcqmlwzq7xxks49wtkym5npwmwzj3gtx9dwsysirug74p8k'
+  gameid: 'novusbet',
+  gameToken: '8697156863640wfuryxnmmgioshgplcxrevkvby9dbs1eq0961qbvrmu6uvzpqnyfdgcce7u6cbtlseeam0fjisgusasaoktjlwnvsa0ij32xqox5v5asxfitbw0hdjdfnht3fke8adxf'
 };
-let GAMEAPI_URL = 'http://localhost:5000/';
+let GAMEAPI_URL = 'https://apiuniversalsoft.com/api';
 let modalOpened;
 
 
