@@ -50,6 +50,7 @@
     }
     
     const onWidgetEventClick = (event) => {
+      console.log("token",token);
       if (token == '-') loginModalOpen = true;
       else{
         const eventInfo = event;
