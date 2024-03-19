@@ -52,13 +52,13 @@
     }
     
     const onWidgetEventClick = (event) => {
-      console.log("event",event);
       if (token == '-') loginModalOpen = true;
-      /*else{
+      else{
         const eventInfo = event;
         const sportbookOptions = { gameid: "8042022_digitain", eventInfo };
-        onCategoryChange("sportbook", sportbookOptions);
-      }*/
+        console.log("options", sportbookOptions);
+        //onCategoryChange("sportbook", sportbookOptions);
+      }
     }
 </script>
 
