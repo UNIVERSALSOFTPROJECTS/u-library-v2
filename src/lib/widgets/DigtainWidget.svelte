@@ -6,6 +6,7 @@
   export let loginModalOpen;
   export let onCategoryChange;
   export let clientCode;
+
   let DG_SERVER="https://sport.apiuniversalsoft.com";
   let SPORT_PARTNERID = '9553dcb3-fbe5-4041-9366-e89fd120cc91';
   const DG_SCRIPT = `/js/partner/bootstrapper.min.js`;
@@ -32,27 +33,13 @@
       params.token = token;
     }
     init(params);
-    //window.addEventListener("message", receiveMessage, false);
   });
 
-  $: {
-    
-  }
-
-  /*const receiveMessage = (event) => {
-    if (event.data == "onNologinBet") {
-      loginModalOpen = true;
-    } else if (event.data.event && !regex.test(event.data.event) ) {
-      const eventInfo = event.data.event;
-      const sportbookOptions = { gameid: "8042022_digitain", eventInfo };
-      onCategoryChange("sportbook", sportbookOptions);
-    }
-  };*/
-
-
   async function init(params) {
+      console.log("params init", params);
       let iframe = await Bootstrapper.boot(params, { name: "TopMatches" });
-      await addTopMatchesEventsListeners(iframe);
+      console.log("iframe",iframe);
+      //await addTopMatchesEventsListeners(iframe);
     }
 
     function addTopMatchesEventsListeners(topMatches) {
@@ -77,7 +64,6 @@
 
 
 
-<div>
-  <div id="top-application-container"></div>
-</div>
+<div id="top-application-container"></div>
+
 
