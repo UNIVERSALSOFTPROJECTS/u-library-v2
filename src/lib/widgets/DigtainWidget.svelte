@@ -35,6 +35,14 @@
     init(params);
   });
 
+  $:{
+    console.log("widgetUser:", user)
+    if (user && user.agregatorToken) {
+      token=user.agregatorToken;
+      params.token = token;
+    }
+  }
+
   async function init(params) {
       let iframe = await Bootstrapper.boot(params, { name: "TopMatches" });
       await addTopMatchesEventsListeners(iframe);
