@@ -36,7 +36,6 @@
   });
 
   $:{
-    console.log("widgetUser:", user)
     if (user && user.agregatorToken) {
       token=user.agregatorToken;
       params.token = token;
@@ -58,7 +57,6 @@
     }
     
     const onWidgetEventClick = (event) => {
-      console.log("token",token);
       if (token == '-') loginModalOpen = true;
       else{
         const eventInfo = event;
