@@ -24,8 +24,7 @@ input[type=date] {
     background-image: url("#{$calendar}");// ewsto puede ser un mixin, tambibne se us aen el input
     background-repeat: no-repeat;
     background-size: #{$g-font-size + 4};
-    padding-right: 2rem;
-    background-position: right 0.5rem center;
+    background-position: right 0.25rem center;
     &::-webkit-calendar-picker-indicator {
         background:0 0;
     }
