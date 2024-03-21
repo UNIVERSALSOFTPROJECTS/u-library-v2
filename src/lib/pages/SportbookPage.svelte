@@ -48,7 +48,7 @@
   }
   
   onMount(()=>{
-    window.addEventListener("message", receiveMessage, false);
+    //window.addEventListener("message", receiveMessage, false);
     document.body.style.overflow="hidden";
   });
 
@@ -62,11 +62,11 @@
     else if (options.gameid == nvb_id) openNovusbet();
   }
 
-  const receiveMessage = (event) => {
+  /*const receiveMessage = (event) => {
     if (event.data == "onNologinBet") {
       loginModalOpen = true;
     }
-  };
+  };*/
 
 
   const openWintech = async () => {
