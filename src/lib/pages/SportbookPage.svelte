@@ -1,4 +1,5 @@
 <script>
+	import DigtainSportBook from './../sportbooks/DigtainSportBook.svelte';
   import { onDestroy, onMount } from "svelte";
   import ut from '../../js/util';
   import backend from '../../js/server'
@@ -9,6 +10,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
+  export let clientCode;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -55,8 +57,8 @@
   }
 
   async function openSport() {
-    if (options.gameid == edg_id)openDigtain();
-    else if (options.gameid == wt_id) openWintech();
+    //if (options.gameid == edg_id)openDigtain();
+    if (options.gameid == wt_id) openWintech();
     else if (options.gameid == nvb_id) openNovusbet();
     console.log("openSport:", sportbookGameUrl);
   }
@@ -67,7 +69,7 @@
     }
   };
 
-  const openDigtain = async () => {
+  /*const openDigtain = async () => {
     let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.digtain, options.gameToken) : guestURLdigtain;
     url += active_view == "sportbooklive" ? "&currentgame=live" : "&currentgame=PreMatch";
     if(options.eventInfo){
@@ -75,7 +77,7 @@
       url += "&eventInfo=" +eventInfo;
     }
     sportbookGameUrl = url;
-  };
+  };*/
 
   const openWintech = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.wintech, options.gameToken) : baseUrlWintech;
@@ -102,7 +104,14 @@
 </script>
 
 <div class="sportbook-content">
-  {#if sportbookGameUrl != ""}
+  {#if edg_id == '8042022_digitain'}
+    <DigtainSportBook
+      {user}
+      bind:loginModalOpen
+      bind:clientCode
+      bind:options 
+    />
+  {:else}
     <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
   {/if}
 </div>
