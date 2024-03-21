@@ -74,6 +74,7 @@
   onDestroy(async () => {
     let {data} = await backend.users.getBalance(user.agregatorToken);
     user.balance = data.balance;
+    document.getElementById("betslip-root-inner").removeAttribute("id");
   })
 
 </script>
