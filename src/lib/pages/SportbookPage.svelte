@@ -16,6 +16,7 @@
   let mode = ut.isMobile() ? "mb" : "wb";
   let deviceiframe = mode;
   let page = active_view == "sportbooklive" ? "live" : "sport";
+  let internalPage = active_view == "sportbooklive" ? "live" : "preMatch"
 
   const edg_id = "8042022_digitain";
   const wt_id = "wintech_gaming";
@@ -110,7 +111,7 @@
       bind:loginModalOpen
       bind:clientCode
       bind:options
-      bind:active_view
+      bind:internalPage
     />
   {:else}
     <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />

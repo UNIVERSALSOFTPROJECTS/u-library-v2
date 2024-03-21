@@ -8,7 +8,7 @@
   export let loginModalOpen;
   export let clientCode;
   export let options
-  export let active_view = 'sportbook';
+  export let internalPage;
 
   const DG_SCRIPT = `/js/partner/bootstrapper.min.js`;
   let deviceiframe =  ut.isMobile() ? "mb" : "wb";
@@ -16,7 +16,6 @@
   let SPORT_PARTNERID = '9553dcb3-fbe5-4041-9366-e89fd120cc91';
   let token = '-';
   let eventInfo = '';
-  let internalPage = 'PreMacth'
   const mode = 'LatinoView';
 
   
