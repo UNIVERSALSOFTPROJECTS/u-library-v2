@@ -50,7 +50,6 @@
   onMount(()=>{
     window.addEventListener("message", receiveMessage, false);
     document.body.style.overflow="hidden";
-    console.log("openSport1:", options, options.gameid);
   });
 
   $: {
@@ -61,7 +60,6 @@
     //if (options.gameid == edg_id)openDigtain();
     if (options.gameid == wt_id) openWintech();
     else if (options.gameid == nvb_id) openNovusbet();
-    console.log("openSport:", sportbookGameUrl);
   }
 
   const receiveMessage = (event) => {
@@ -70,15 +68,6 @@
     }
   };
 
-  /*const openDigtain = async () => {
-    let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.digtain, options.gameToken) : guestURLdigtain;
-    url += active_view == "sportbooklive" ? "&currentgame=live" : "&currentgame=PreMatch";
-    if(options.eventInfo){
-      const eventInfo=JSON.stringify(mode == "wb"?options.eventInfo:options.eventInfo.Id);
-      url += "&eventInfo=" +eventInfo;
-    }
-    sportbookGameUrl = url;
-  };*/
 
   const openWintech = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.wintech, options.gameToken) : baseUrlWintech;
@@ -100,6 +89,7 @@
   onDestroy(async () => {
     let {data} = await backend.users.getBalance(user.agregatorToken);
     user.balance = data.balance;
+    document.body.style.overflow="scroll";
   })
 
 </script>
