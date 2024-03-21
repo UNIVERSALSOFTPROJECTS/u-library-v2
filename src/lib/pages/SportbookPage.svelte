@@ -109,7 +109,8 @@
       {user}
       bind:loginModalOpen
       bind:clientCode
-      bind:options 
+      bind:options
+      bind:active_view
     />
   {:else}
     <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />

@@ -11,7 +11,6 @@ let options = {
   gameid: '8042022_digitain',
 }
 
-
 let GAMEAPI_URL = 'https://apiuniversalsoft.com/api';
 let modalOpened;
 let clientCode = 'GOLD'
@@ -22,11 +21,6 @@ export default {
   title: 'SportbookPage',
   component: SportbookPage,
 };
-
-
-
-
-
 
 export const SportbookPage_ = () => ({
   Component: SportbookPage,

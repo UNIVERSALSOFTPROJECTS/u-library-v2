@@ -8,8 +8,9 @@
   export let loginModalOpen;
   export let clientCode;
   export let options
-  const DG_SCRIPT = `/js/partner/bootstrapper.min.js`;
+  export let active_view = 'sportbook';
 
+  const DG_SCRIPT = `/js/partner/bootstrapper.min.js`;
   let deviceiframe =  ut.isMobile() ? "mb" : "wb";
   let DG_SERVER="https://sport.apiuniversalsoft.com";
   let SPORT_PARTNERID = '9553dcb3-fbe5-4041-9366-e89fd120cc91';
@@ -36,7 +37,6 @@
     }
     params.server = DG_SERVER;
     params.sportPartner = SPORT_PARTNERID;
-    console.log("Options:", options);
     if(options.eventInfo){
       eventInfo = JSON.stringify(deviceiframe == "wb"?options.eventInfo:options.eventInfo.Id);
     }
