@@ -36,9 +36,9 @@
     }
     params.server = DG_SERVER;
     params.sportPartner = SPORT_PARTNERID;
-    /*if(options.eventInfo){
+    if(options.eventInfo){
       eventInfo = JSON.stringify(deviceiframe == "wb"?options.eventInfo:options.eventInfo.Id);
-    }*/
+    }
     if (token == '-') params.login = function () { loginModalOpen = true; }
     if (eventInfo != '') { openSpecificMatch(params, mode, eventInfo); }
     else if (internalPage == 'live'){openLive(params, mode)}
@@ -55,7 +55,8 @@
   const openSpecificMatch = async (params, mode, event) => {
       event = JSON.parse(event);
       let latinoView = await Bootstrapper.boot(params, { name:mode });
-      latinoView.navigateTo(`event-details?champ=${event.champ}&country=${event.country}&event=${event.Id}&sport=${event.sport}&supertip=0&live=${event.isLive}`);
+      latinoView.navigateTo("/live" );
+      //latinoView.navigateTo(`event-details?champ=${event.champ}&country=${event.country}&event=${event.Id}&sport=${event.sport}&supertip=0&live=${event.isLive}`);
     }
 
     const openLive = async (params, mode) => {
