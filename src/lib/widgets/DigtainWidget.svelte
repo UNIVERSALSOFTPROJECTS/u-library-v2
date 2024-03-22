@@ -60,7 +60,7 @@
       if (token == '-') loginModalOpen = true;
       else{
         const eventInfo = event;
-        const sportbookOptions = { gameid: "8042022_digitain" };
+        const sportbookOptions = { gameid: "8042022_digitain", eventInfo};
         onCategoryChange("sportbook", sportbookOptions);
       }
     }

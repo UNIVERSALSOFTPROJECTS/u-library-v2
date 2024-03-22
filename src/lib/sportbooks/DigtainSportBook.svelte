@@ -36,9 +36,9 @@
     }
     params.server = DG_SERVER;
     params.sportPartner = SPORT_PARTNERID;
-    if(options.eventInfo){
+    /*if(options.eventInfo){
       eventInfo = JSON.stringify(deviceiframe == "wb"?options.eventInfo:options.eventInfo.Id);
-    }
+    }*/
     if (token == '-') params.login = function () { loginModalOpen = true; }
     if (eventInfo != '') { openSpecificMatch(params, mode, eventInfo); }
     else if (internalPage == 'live'){openLive(params, mode)}
