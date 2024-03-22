@@ -21,7 +21,7 @@
   const edg_id = "8042022_digitain";
   const wt_id = "wintech_gaming";
   const nvb_id = "novusbet";
-  const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&lang=es&gameid=${edg_id}&m=${deviceiframe}&skin=generic`;
+  //const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&lang=es&gameid=${edg_id}&m=${deviceiframe}&skin=generic`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const games = {
@@ -48,7 +48,6 @@
   }
   
   onMount(()=>{
-    //window.addEventListener("message", receiveMessage, false);
     document.body.style.overflow="hidden";
   });
 
@@ -57,16 +56,10 @@
   }
 
   async function openSport() {
-    //if (options.gameid == edg_id)openDigtain();
     if (options.gameid == wt_id) openWintech();
     else if (options.gameid == nvb_id) openNovusbet();
   }
 
-  /*const receiveMessage = (event) => {
-    if (event.data == "onNologinBet") {
-      loginModalOpen = true;
-    }
-  };*/
 
 
   const openWintech = async () => {
