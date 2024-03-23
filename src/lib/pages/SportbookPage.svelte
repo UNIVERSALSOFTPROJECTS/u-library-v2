@@ -10,7 +10,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
-  export let clientCode;
+  //export let clientCode;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -21,7 +21,7 @@
   const edg_id = "8042022_digitain";
   const wt_id = "wintech_gaming";
   const nvb_id = "novusbet";
-  //const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&lang=es&gameid=${edg_id}&m=${deviceiframe}&skin=generic`;
+  const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&lang=es&gameid=${edg_id}&m=${deviceiframe}&skin=generic`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const games = {
@@ -48,6 +48,7 @@
   }
   
   onMount(()=>{
+    window.addEventListener("message", receiveMessage, false);
     document.body.style.overflow="hidden";
   });
 
@@ -55,12 +56,27 @@
     openSport();
   }
 
+  const receiveMessage = (event) => {
+    if (event.data == "onNologinBet") {
+      loginModalOpen = true;
+    }
+  };
+
   async function openSport() {
-    if (options.gameid == wt_id) openWintech();
+    if (options.gameid == edg_id)openDigtain();
+    else if (options.gameid == wt_id) openWintech();
     else if (options.gameid == nvb_id) openNovusbet();
   }
 
-
+   const openDigtain = async () => {
+    let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.digtain, options.gameToken) : guestURLdigtain;
+    url += active_view == "sportbooklive" ? "&currentgame=live" : "&currentgame=PreMatch";
+    if(options.eventInfo){
+      const eventInfo=JSON.stringify(mode == "wb"?options.eventInfo:options.eventInfo.Id);
+      url += "&eventInfo=" +eventInfo;
+    }
+    sportbookGameUrl = url;
+  };
 
   const openWintech = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.wintech, options.gameToken) : baseUrlWintech;
@@ -88,7 +104,7 @@
 </script>
 
 <div class="sportbook-content">
-  {#if edg_id == '8042022_digitain'}
+  <!--{#if edg_id == '8042022_digitain'}
     <DigtainSportBook
       {user}
       bind:loginModalOpen
@@ -96,9 +112,9 @@
       bind:options
       bind:internalPage
     />
-  {:else}
-    <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
-  {/if}
+  {:else}-->
+  <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
+  
 </div>
 
 <style>
