@@ -55,8 +55,7 @@
   const openSpecificMatch = async (params, mode, event) => {
       event = JSON.parse(event);
       let latinoView = await Bootstrapper.boot(params, { name:mode });
-      latinoView.navigateTo("/live" );
-      //latinoView.navigateTo(`event-details?champ=${event.champ}&country=${event.country}&event=${event.Id}&sport=${event.sport}&supertip=0&live=${event.isLive}`);
+      latinoView.navigateTo(`event-details?champ=${event.champ}&country=${event.country}&event=${event.Id}&sport=${event.sport}&supertip=0&live=${event.isLive}`);
     }
 
     const openLive = async (params, mode) => {
