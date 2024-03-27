@@ -104,7 +104,7 @@
 </script>
 
 <div class="sportbook-content">
-  {#if edg_id == '8042022_digitain'}
+  {#if options.gameid == edg_id}
     <DigtainSportBook
       {user}
       bind:loginModalOpen
