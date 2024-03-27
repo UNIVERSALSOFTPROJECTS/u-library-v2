@@ -10,7 +10,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
-  //export let clientCode;
+  export let clientCode;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -104,7 +104,7 @@
 </script>
 
 <div class="sportbook-content">
-  <!--{#if edg_id == '8042022_digitain'}
+  {#if edg_id == '8042022_digitain'}
     <DigtainSportBook
       {user}
       bind:loginModalOpen
@@ -112,9 +112,9 @@
       bind:options
       bind:internalPage
     />
-  {:else}-->
+  {:else}
   <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
-  
+  {/if}
 </div>
 
 <style>
