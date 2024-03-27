@@ -59,7 +59,7 @@
     }
 
     const openLive = async (params, mode) => {
-      let latinoView = await Bootstrapper.boot(params, { name: mode });
+      let latinoView = await Bootstrapper.bootIframe(params, { name: mode });
       latinoView.navigateTo("/live" );
       latinoView.addEventListener("onNavigate", function (event) {
         console.log(event.data);
