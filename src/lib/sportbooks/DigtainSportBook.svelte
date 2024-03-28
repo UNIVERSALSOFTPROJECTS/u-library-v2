@@ -16,7 +16,7 @@
   let SPORT_PARTNERID = '9553dcb3-fbe5-4041-9366-e89fd120cc91';
   let token = '-';
   let eventInfo = '';
-  const mode = 'LatinoView';
+  let mode = deviceiframe == 'wb'? 'LatinoView':'Mobile';
 
   
 
