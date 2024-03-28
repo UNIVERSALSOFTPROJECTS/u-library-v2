@@ -80,7 +80,7 @@
 
   const openWintech = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.wintech, options.gameToken) : baseUrlWintech;
-    url += active_view == "sportbooklive" ? "&currentgame=live" : "&currentgame=PreMatch";
+    url += active_view == "sportbooklive" ? "&currentgame=live" : "";
     sportbookGameUrl = url;
   };
 
