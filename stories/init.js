@@ -217,10 +217,10 @@ export default{
     start:()=>{
         ServerConnection.setConfig({
             platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
-            API:"https://lobby-bff.apiusoft.com",
-            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-            CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
-            CLIENT_CODE:"AAC1",
+            API:"https://lobby-bff-test.apiusoft.com",
+            GAMEAPI_URL:"https://test.apiuniversalsoft.com/api",
+            CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
+            CLIENT_CODE:"JU02",
             LOBBY_GAMES_API:"https://lobby.apiusoft.com",
             ASSETS:"https://assets.apiusoft.com",
            // WS_URL: "wss://lobby-bff-test.apiusoft.com/lobbybff",

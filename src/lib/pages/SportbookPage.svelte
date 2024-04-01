@@ -10,7 +10,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
-  export let clientCode;
+  //export let clientCode;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -50,6 +50,7 @@
   onMount(()=>{
     window.addEventListener("message", receiveMessage, false);
     document.body.style.overflow="hidden";
+    console.log("User", user);
   });
 
   $: {
@@ -81,14 +82,22 @@
   const openWintech = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.wintech, options.gameToken) : baseUrlWintech;
     url += active_view == "sportbooklive" ? "&currentgame=live" : "";
-    sportbookGameUrl = url;
+    if (userState == "loggedIn"){
+      console.log("url: " + url);
+      const {data} = await backend.game.getURLSport(url);
+      console.log("url2: " + data);
+      console.log("url3: " + data.url);
+      url = data.url
+    }
+    
+   sportbookGameUrl = url;
   };
 
   const openNovusbet = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.novusbet, options.gameToken) : baseUrlNovusbet;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     if (userState == "loggedIn"){
-      const {data} = await backend.game.getURLNovus(url);
+      const {data} = await backend.game.getURLSport(url);
       url = data.url
     }
     console.log("sportbookNovus: ", url);
@@ -104,7 +113,7 @@
 </script>
 
 <div class="sportbook-content">
-  {#if options.gameid == edg_id}
+  <!--{#if options.gameid == edg_id}
     <DigtainSportBook
       {user}
       bind:loginModalOpen
@@ -112,9 +121,9 @@
       bind:options
       bind:internalPage
     />
-  {:else}
+  {:else}-->
   <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
-  {/if}
+  <!--{/if}-->
 </div>
 
 <style>
