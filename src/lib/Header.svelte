@@ -10,6 +10,8 @@
     //import Withdrawal from './withdrawal/WithdrawalW.svelte';
     import WithdrawalW from './withdrawal/WithdrawalW.svelte';
     
+    import ProviderList from "./lists/ProviderList.svelte";
+
     import Footer from "./Footer.svelte";
     
     import ChatLive from "./modals/ChatLive.svelte";
@@ -24,7 +26,6 @@
     import RecoverPassword from "./topbar/RecoverPassword.svelte";
 
     import { getUpdateBalance } from "../js/utils/serverUtils";
-
     export let user = {};
     export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
@@ -50,9 +51,15 @@
     //Deposit Modal
     let notify = {};
 
+    let active_view = "home";
+
     function openTermsConditions() {
         console.log("abriendo openTermsConditions");
     }
+
+    let categoryGames = ["home","slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual","providers"];//sto es adptabale, el footer lo configura por si  componenente
+    //let categoryGames = ["home","horses"];//sto es adptabale, el footer lo configura por si  componenente
+    //aqui no estoy seguro si debe ir un objeto dentro de este array, o ahcer uno nuevoe juego top e insetarlo dentro de este
 
     //Update complete Balance and add sessionStorage
 
@@ -127,7 +134,7 @@
         country : {name: "Chile", flag: "chl"},
         isChat: false,
         createdIn: 2023,
-        categoryGames: ["slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"],//globalCategoryGames,en 
+        categoryGames,//globalCategoryGames,en 
         //"slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"
         payments: [
             {name: "KHIPU"},
@@ -272,9 +279,10 @@
         }, 1800000);
     }
 
-
-    const onCategoryChange = (param) => {
-        console.log(param);
+console.log("active_view",active_view);
+    const onCategoryChange = (category) => {
+        if (category == "horses") return onOpenLogin();
+        active_view = category;
     }
     const onOpenPromotions = () => {
         promotionsModalOpen = true;
@@ -290,13 +298,32 @@
         console.log("actualizando balance :v");
     }
     //FALTA EL CHECKUSELLOGUES, VER COMO SE IMPLEMENTARA AQUI ESO
+    // function noTouch(e) {
+    //     e.preventDefault();
+    // }
+    const topProviders = ["EVOLUTION","Habanero","Pragmatic Play","SPRIBE","Endorphina"];
 
+    function onOpenProviders(name) {
+        console.log(name);
+    }
+
+    if (window.matchMedia('(pointer: coarse)').matches) {//solo para evitar que en movile se pueda descargar imagenes , es un test de pruba
+        
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault(); // Evita que se muestre el menú contextual
+        });
+    }
+    import { assetsProvidersTop } from "../js/utils/assetsUtils";
 </script>
 
+<!-- on:contextmenu="{noTouch}" on:mousedown="{noTouch}" role="button" tabindex="0" -->
 <div class="{platform}">
     <header class="header {activeSession?'logued':''}">
         <button class="btn header__menu {isToggleOn?'is-open':''}" on:click={toggleMenuBar}><span></span></button>
-        <img class="header__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-main">
+        <picture>
+            <source media="(max-width: 1023px)" srcset="{assetsUrl}/{platform}/logo_mb.png">
+            <img class="header__logo" src="{assetsUrl}/{platform}/logo.png" alt="{platform}-logo" loading="eager">
+        </picture>
         <div></div>
         {#if activeSession}
             <div class="header__userdata">
@@ -320,6 +347,18 @@
             Notas: on:click|stopPropagation={onOpenLogin}, esto er apara los modale s pero el bug de los dropdow hizo que se descartara momentaneamente
         -->
     </header>
+
+    <div class="category">
+       <!-- los slot y depooooooooooooooooopueden cambiar de posisiocn como en el footer   si la longitud es 1 o 2 tiene un grid de 5 rem o mas
+        JO tambien quitariamos el menubar de caballos y sportbook es incencesario y ocupa mucho espacio :/
+    -->
+        {#each categoryGames as category}
+            <button class="btn category__game {active_view == category?'active':''}" on:click={()=>onCategoryChange(`${category}`)}>
+                <i class="icon--{category}"></i>
+                <b>{$t(`categoryGame.${category}`)}</b>
+            </button>
+        {/each}
+    </div>
 
     <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
@@ -359,6 +398,7 @@
         <ChatLive bind:chatLiveUrl/>
     </Modal>
 
+    <ProviderList {onOpenProviders} {topProviders} t={$t}/>
 
     {#if user}
         <ScreenGames bind:open={screenGamesOpen} bind:platform bind:url_game {updateBalance}/>

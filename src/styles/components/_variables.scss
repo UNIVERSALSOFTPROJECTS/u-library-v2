@@ -42,6 +42,8 @@ $bgc-primary: null;
 $bg-modal : #222;
 $bg-dropdown : #fff;
 $color-primary : #bd992a !default;
+$fill-primary : 'bd992a' !default;
+
 $color-primary-text:#333 !default;
 $color-primary-black:#c2a203 !default;
 $color-success : #004a14 !default;
@@ -58,8 +60,9 @@ $landscape_size_mobile: "(orientation: landscape) and (max-width: 1000px)";
 
 //reference crashgames css
 $landscape_mobile: "(orientation: landscape) and (max-width: 1023px)";
-$portrait_mobile: "(orientation: portrait) and (max-width: 419.99px)";// esta mal encima por que portrait es porheight?????? no se esta usando XDDD. que hago cone sta weasa
-$landscape_pc: "(orientation: landscape) and (min-width: 1023.99px)";
+$portrait_mobile: "(orientation: portrait) and (min-width: 319.99px)";// esta mal encima por que portrait es porheight?????? no se esta usando XDDD. que hago cone sta weasa
+$portrait_tablet: "(orientation: portrait) and (min-width: 767.99px) and (max-width: 1023.99px) and (min-height: 767.99px) and (max-height: 1395.99px)" ;//solo tablet, para uso de casos exepcionales
+$landscape_pc: "(orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px)";//esta buen por que es 1024px de todaws formas
 $landscape_pc_xl: "(orientation: landscape) and (min-width: 1599.99px)";
 $portrait_pc: "(orientation: portrait) and (min-height: 1200.99px)";
 //@if($theme == "light" and $g-color == null){
@@ -67,6 +70,8 @@ $portrait_pc: "(orientation: portrait) and (min-height: 1200.99px)";
 //} @else if($theme == "dark" and $g-color == null){1px solid
 //    $g-color : #fff;
 //}
+
+// el max     max-width: 1600px;  puede ser deeeeeeeeeeeeeeeee a 1800 y de hay usazr zoom para tdooo
 @if($page == "default-light"){
     $bgc-body   :#fff;
     $bgc-btn    : #fff;
@@ -95,6 +100,7 @@ $portrait_pc: "(orientation: portrait) and (min-height: 1200.99px)";
     $bgc-header : #202124;
     //$color-primary : #A61D24;
     $color-primary :  #f54b00;
+    $fill-primary :  'f54b00';
     $bgc-ipt: #ffF;
     $color-ipt:#000;
 

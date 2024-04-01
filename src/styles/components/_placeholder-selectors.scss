@@ -18,6 +18,7 @@
     border-radius: #{$borderR-btn};
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
 %buttonhover{
     position:relative;
     &:hover::after {
@@ -35,6 +36,12 @@
     @extend %configBtn;
     @extend %hover;
     @extend %disabled;
+}
+%nobtn{
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
 }
 %select{
     @extend %configBtn;
