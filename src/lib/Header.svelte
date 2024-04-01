@@ -313,7 +313,6 @@ console.log("active_view",active_view);
             e.preventDefault(); // Evita que se muestre el menú contextual
         });
     }
-    import { assetsProvidersTop } from "../js/utils/assetsUtils";
 </script>
 
 <!-- on:contextmenu="{noTouch}" on:mousedown="{noTouch}" role="button" tabindex="0" -->
