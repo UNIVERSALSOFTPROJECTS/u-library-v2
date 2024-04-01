@@ -82,13 +82,13 @@
   const openWintech = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.wintech, options.gameToken) : baseUrlWintech;
     url += active_view == "sportbooklive" ? "&currentgame=live" : "";
-    if (userState == "loggedIn"){
+    /*if (userState == "loggedIn"){
       console.log("url: " + url);
       const {data} = await backend.game.getURLSport(url);
       console.log("url2: " + data);
       console.log("url3: " + data.url);
       url = data.url
-    }
+    }*/
     
    sportbookGameUrl = url;
   };
@@ -97,7 +97,7 @@
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.novusbet, options.gameToken) : baseUrlNovusbet;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     if (userState == "loggedIn"){
-      const {data} = await backend.game.getURLSport(url);
+      const {data} = await backend.game.getURLNovus(url);
       url = data.url
     }
     console.log("sportbookNovus: ", url);
