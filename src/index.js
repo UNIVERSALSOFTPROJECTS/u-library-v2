@@ -17,6 +17,7 @@ export {default as SingupM} from "./lib/modals/SingupM.svelte";//temporales mies
 export {default as Signup} from "./lib/modals/Signup.svelte";//temporales miestras se unifica
 export {default as Promotions} from "./lib/modals/Promotions.svelte";
 export {default as ScreenGames} from "./lib/modals/ScreenGames.svelte";
+export {default as ProviderList} from "./lib/lists/ProviderList.svelte";
 export {default as Footer} from "./lib/Footer.svelte";
 export {default as ChatLive} from "./lib/modals/ChatLive.svelte";
 export {default as ExpireSession} from "./lib/modals/ExpireSession.svelte";
