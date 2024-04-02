@@ -10,7 +10,7 @@ let user = {
 let loginModalOpen = false;
 let userState = 'loggedIn';
 let options = {
-  gameid: 'wintech_gaming',
+  gameid: '8042022_digitain',
   gameToken: '9763140582081q1xvnkw2znptrjc6d4k6ej54nld5dpohutoug5phcbjganbuor7gppovpymlj6vkx5paje6fl4dhm6dxvwprfu8tzb8ife7vzbrqtvnxkglxl3risy7mzlqzn7ps0sox'
 }
 

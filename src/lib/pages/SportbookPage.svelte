@@ -107,7 +107,7 @@
 </script>
 
 <div class="sportbook-content">
-  {#if options.gameid == edg_id}
+  <!--{#if options.gameid == edg_id}
     <DigtainSportBook
       {user}
       bind:loginModalOpen
@@ -115,9 +115,9 @@
       bind:options
       bind:internalPage
     />
-  {:else}
+  {:else}-->
   <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
-  {/if}
+ <!-- {/if}-->
 </div>
 
 <style>
