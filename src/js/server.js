@@ -105,9 +105,7 @@ const ServerConnection = (() => {
           return await axios.get(url, { headers });
         },
         getURLNovus: (url) => {
-            
             return axios.get(url, { headers });
-           
         }
     }
 

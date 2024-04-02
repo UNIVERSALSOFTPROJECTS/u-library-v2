@@ -17,6 +17,7 @@
   let token = '-';
   let eventInfo = '';
   let mode = deviceiframe == 'wb'? 'LatinoView':'Mobile';
+  let overflowStyle = mode === 'Mobile' ? 'overflow: scroll;' : '';
 
   
 
@@ -39,6 +40,7 @@
     if(options.eventInfo){
       eventInfo = JSON.stringify(deviceiframe == "wb"?options.eventInfo:options.eventInfo.Id);
     }
+    console.log("token", token, params)
     if (token == '-') params.login = function () { loginModalOpen = true; }
     if (eventInfo != '') { openSpecificMatch(params, mode, eventInfo); }
     else if (internalPage == 'live'){openLive(params, mode)}
@@ -66,6 +68,7 @@
       });
     }
     const openPreMatch = async (params, mode) => {
+      console.log("Params: ", params);
       let latinoView = await Bootstrapper.bootIframe(params, { name: mode }, { height: "900px" });
       latinoView.navigateTo("/preMatch");
     }
@@ -80,7 +83,7 @@
 </script>
 
 <div class="sportbook-content">
-  <div id="application-container" style="height:100vh"></div>
+  <div id="application-container" style="height:100vh; {overflowStyle}"></div>
   
 </div>
 
