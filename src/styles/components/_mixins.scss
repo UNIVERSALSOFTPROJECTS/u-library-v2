@@ -51,20 +51,24 @@
 
 @mixin structureHeader($page,$width-web,$widht-mobile){
     display: grid;
-    @if($page == "latinosbet"){ 
-        grid-template-columns: auto 1fr 7rem 7rem;
-    }
-    @else if($page == "bitstarz"){ 
-        grid-template-columns: 40px auto 1fr 7rem 7rem;
-    }
-    @else if($page == "babieca"){ 
-        grid-template-columns: auto auto 1fr 6rem 6rem;
-    }
+    //@if($page == "latinosbet"){ 
+    //    grid-template-columns: auto 1fr 7rem 7rem;
+    //}
+    //@else if($page == "bitstarz"){ 
+    //    grid-template-columns: 40px auto 1fr 7rem 7rem;
+    //}
+    //@else if($page == "babieca"){ 
+       // grid-template-columns: auto auto 1fr 5.2rem 5.2rem;
+    //}
+    grid-template-columns: auto auto 1fr 5.2rem 5.2rem;
     align-items: center;
     height: $height-header;
     padding: 0 0.75rem;
     gap: 0.5rem;
     background: $bgc-header;
+    @media #{$landscape_pc} {
+        grid-template-columns: auto auto 1fr 7rem 7rem;
+    }
     &__logo{
         cursor: pointer;
         width: $width-web;
@@ -74,6 +78,9 @@
     }
     &.logued{
         grid-template-columns:  auto 1fr auto auto auto auto;
+    }
+    & .btn{
+        height: $ipt-height;
     }
     //estrucutura css de pagina -- de momento no lo colocaremos
     //@if($page == "latinosbet"){
@@ -110,8 +117,28 @@
     }@else if ($position == "left"){
         background-position: #{$position} 0.75rem center;
         padding-left: 2.5rem;
+    }@else if ($position == "center"){
+        background-size: contain; 
+        background-position: #{$position};
     }
 }
+
+//icon eye pass o otrer bg incons
+@mixin bgIconCenter($type-icon, $size){// defult size and personalized
+    @extend %button;
+    background-image: url("#{$type-icon}");
+    color: $color-ipt;
+    height: $ipt-height;
+    text-align: start;
+    background-repeat: no-repeat;
+    background-position: center;
+    @if($size == "default"){
+        background-size: #{$g-font-size + 2} ; 
+    }@else{
+        background-size: #{$size} ; 
+    }
+}
+
 
 //animations
 @mixin borderSquareAnimated($b-color1,$b-color2,$bg-color, $b-witdth){
@@ -326,21 +353,7 @@
     }
 }
 
-//icon eye pass o otrer bg incons
-@mixin bgIconCenter($type-icon, $size){// defult size and personalized
-    @extend %button;
-    background-image: url("#{$type-icon}");
-    color: $color-ipt;
-    height: $ipt-height;
-    text-align: start;
-    background-repeat: no-repeat;
-    background-position: center;
-    @if($size == "default"){
-        background-size: #{$g-font-size + 2} ; 
-    }@else{
-        background-size: #{$size} ; 
-    }
-}
+
 
 //animation-Load
 @mixin animateLoad_3points($bg,$size,$time,$height-anim){

@@ -55,7 +55,9 @@ export default {
       "withdrawal.withdraw": "Ingrese el monto a retirar",
       "withdrawal.termsConditions": "Al solicitar su retiro usted esta aceptando los <b>Términos y Condiciones</b>",
       "withdrawal.request": "Solicitar retiro",
+
       //---------------NAME CAT GAMES-----------------------------
+      "categoryGame.home": "Inicio",
       "categoryGame.slot": "Casino",
       "categoryGame.slotlive": "Casino en vivo",
       "categoryGame.crash": "Crash games",
@@ -64,6 +66,7 @@ export default {
       "categoryGame.sportbooklive": "Deportes en vivo",
       "categoryGame.horses": "Hipicas",
       "categoryGame.virtual": "Juegos virtuales",
+      "categoryGame.providers": "Proveedores",
       //---------------FOOTER-----------------------------
       "footer.s_p":"Seguridad y privacidad",
       "footer.t_c":"Términos y condiciones",
@@ -96,6 +99,8 @@ export default {
       "msg.codeVerification": "Ingrese el código de verificación",
       "msg.acceptTandC": "Debe aceptar los términos y condiciones",
       "msg.confirmedChangePassword": "Se ha confirmado el cambio de contraseña",
+       //---------------Provider list-----------------------------
+      "provider.playNow":"Juega ahora",
     },
     fr: {
         "login.title": "Bienvenue en",

@@ -29,7 +29,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
     .header{
         //babieca-golden
         //@include structureHeader('babieca',12rem,5rem);
-        @include structureHeader('babieca',6.5rem,6.5rem);
+        @include structureHeader('babieca',7.5rem,2.5rem);
         &__menu{
             @include dropdown-menu("normal");
         }
@@ -281,6 +281,69 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             }
         }
     }
+    .category{
+        display: grid;
+        grid-auto-columns: 6rem;
+        grid-auto-flow: column;
+        gap: 0.5rem;
+        height: 5.5rem;
+        margin: 1rem 0;
+        padding: 0 1rem;
+        overflow: auto;
+        overscroll-behavior: none;
+        @media #{$landscape_pc} {
+            &{
+                grid-auto-columns: 1fr;
+                justify-content: center;
+            }
+        }
+        & button{
+            background-color: #20252cb3;
+            border-radius: $borderR-btn * 2;
+        }
+        &__game{
+            $games: 'home', 'slot', 'slotlive','crash','scratch','virtual','sportbook','sportbooklive','providers','horses';
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 0.35rem;
+            & i {
+                width: 100%;
+                max-width: 3.25rem;
+                height: 2rem;
+            }
+            @each $game in $games {
+                & .icon--#{$game} {
+                    @include elementIconPosition(addColorIcon(#{$game},'fff'),"center");
+                }
+            }
+            &:hover,&.active{
+                filter: none;
+                background: linear-gradient(180deg, transparent, transparent, transparent, transparent, transparent, transparent, transparent, $color-primary);
+                background-color: rgba($color-primary, 0.20);
+                & b{
+                    animation: neonText 2s infinite alternate cubic-bezier(.455,.03,.515,.955);
+                    @keyframes neonText {
+                        0% {
+                            text-shadow: 0 0 10px rgba(255,255,255,.5),0 0 20px rgba(255,255,255,.5),0 0 22px rgba(255,255,255,.5),0 0 40px rgba(66,220,219,0),0 0 60px rgba(66,220,219,0),0 0 80px rgba(66,220,219,0),0 0 100px rgba(66,220,219,0),0 0 140px rgba(66,220,219,0),0 0 200px rgba(66,220,220,0)
+                        }
+                        to {
+                            text-shadow: 0 0 2px rgba(255,255,255,.5),0 0 8px rgba(255,255,255,.5),0 0 10px rgba(255,255,255,0),0 0 20px rgba(66,220,220,0),0 0 30px rgba(66,220,220,0),
+                        }
+                    }
+                }
+            }
+            &.active{
+                @each $game in $games {
+                    & .icon--#{$game} {
+                        @include elementIconPosition(addColorIcon(#{$game},$fill-primary),"center");
+                    }
+                }
+            }
+        }
+    }
     .dropdown{
         &.idiom{
             *{
@@ -298,18 +361,81 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         }
     }
     .ipt{
-        $user:addColorIcon("user","969696");
-        $email:addColorIcon("email","969696");
-        $key:addColorIcon("key","969696");
-    
-        &.icon--user{
-            @include elementIconPosition($user,"left");  
+        $icons: 'user', 'email', 'password';
+        @each $icon in $icons {
+            &.icon--#{$icon} {
+                @include elementIconPosition(addColorIcon(#{$icon},"969696"),"left");
+            }
         }
-        &.icon--email{
-            @include elementIconPosition($email,"left");
+    }
+
+    .providerlist{
+        &__provider{
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(2, minmax(0, 300px));
+            padding: 1rem;
+            margin: 0 auto;
+            max-width: max-content;
+            @media #{$landscape_mobile}, #{$portrait_tablet} {
+                grid-template-columns: repeat(4, minmax(0, 300px));
+            }
+            @media #{$landscape_pc} {
+                gap: 1.5rem;
+                padding: 2rem;
+                grid-template-columns: repeat(5, minmax(0, 300px));
+            }
         }
-        &.icon--password{
-            @include elementIconPosition($key,"left");
+        &__slide{
+            @extend %nobtn;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 0 rgba($color-primary, 0);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            &:hover {
+                box-shadow: 0 0 2rem rgba($color-primary, .7);
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+                & img{
+                    transform: rotateX(-10deg) rotateY(10deg);
+                    transform: scale(1.05);
+                    transition: transform 0.3s ease-in-out;
+                }
+            }
+            &:nth-child(5){
+                display: none;  
+            }
+            @media #{$landscape_pc} {
+                &:nth-child(5){
+                    display: block;  
+                }
+            }
+        }
+        &__parallax{
+            position: relative;
+            display: flex;
+            justify-content: center;
+        
+        }
+        //el bpody tiene soom a aprtir de 100. pero pax que comienza desde 1800 0 1920 aunque redudnate ese 200 xddd
+        &__playnow{
+            position: absolute;
+            bottom: 1rem;
+            width: auto;
+            background-color: $color-primary;
+            font-weight: 700;
+            padding: 0.5rem;
+            border-radius: $borderR-btn;
+            text-transform: uppercase;
+            @media #{$landscape_pc} {
+                bottom: 2rem;
+                padding: 0.5rem 1.25rem;
+            }
+        }
+        &__img{
+            height: auto;
+            max-width: 100%;
+            vertical-align: middle;
+            transition: transform .3s ease-out;
+            border-radius: $borderR-btn * 2;
         }
     }
 

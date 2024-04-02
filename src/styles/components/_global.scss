@@ -24,20 +24,25 @@ input[type=date] {
     background-image: url("#{$calendar}");// ewsto puede ser un mixin, tambibne se us aen el input
     background-repeat: no-repeat;
     background-size: #{$g-font-size + 4};
-    background-position: right 0.25rem center;
+    background-position: right 0.5rem center;
     &::-webkit-calendar-picker-indicator {
         background:0 0;
     }
 }
 
-
-
 //input[type=checkbox] {
 //   cursor: pointer;
 //}
 
+img{
+    -webkit-touch-callout: none; /* Desactiva el menú contextual en Safari */
+}
+
 #{$body},body,p,ul{
     margin: 0;
+}
+p,b,span,a,li *,button{ //default size safari
+    line-height: 1;
 }
 
 .btn{
@@ -52,6 +57,7 @@ input[type=date] {
         background-repeat: no-repeat;
     }
 }
+
 
 #{$body}{    //PROHIBIDO AGREGAR body aqui mismo!!!, DAÑAS ABSOLUTAMENTE TODOS los styles de las marcas blancas
     overscroll-behavior: none; /*eliminar el efecto scroll extendido fuera del body en safari*/
