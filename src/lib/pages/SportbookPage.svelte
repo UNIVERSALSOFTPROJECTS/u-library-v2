@@ -49,8 +49,6 @@
   
   onMount(()=>{
     window.addEventListener("message", receiveMessage, false);
-    document.body.style.overflow="hidden";
-    console.log("User", user);
   });
 
   $: {
@@ -82,15 +80,10 @@
   const openWintech = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.wintech, options.gameToken) : baseUrlWintech;
     url += active_view == "sportbooklive" ? "&currentgame=live" : "";
-    console.log("url==>", url);
     if (userState == "loggedIn"){
-      console.log("url: " + url);
       const {data} = await backend.game.getURLNovus(url);
-      console.log("url2: " + data);
-      console.log("url3: " + data.url);
       url = data.url
     }
-    
    sportbookGameUrl = url;
   };
 
