@@ -10,7 +10,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
-  //export let clientCode;
+  export let clientCode;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -49,8 +49,6 @@
   
   onMount(()=>{
     window.addEventListener("message", receiveMessage, false);
-    document.body.style.overflow="hidden";
-    console.log("User", user);
   });
 
   $: {
@@ -82,14 +80,10 @@
   const openWintech = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.wintech, options.gameToken) : baseUrlWintech;
     url += active_view == "sportbooklive" ? "&currentgame=live" : "";
-    /*if (userState == "loggedIn"){
-      console.log("url: " + url);
-      const {data} = await backend.game.getURLSport(url);
-      console.log("url2: " + data);
-      console.log("url3: " + data.url);
+    if (userState == "loggedIn"){
+      const {data} = await backend.game.getURLNovus(url);
       url = data.url
-    }*/
-    
+    }
    sportbookGameUrl = url;
   };
 
@@ -123,7 +117,7 @@
     />
   {:else}-->
   <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
-  <!--{/if}-->
+ <!-- {/if}-->
 </div>
 
 <style>
