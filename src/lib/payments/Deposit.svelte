@@ -37,7 +37,7 @@
             const {data} = await ServerConnection.wallet.getPayMethods(user.token);
             bankPayments = data.filter((e) => e.virtual == 0);
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
-            data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre; });
+            data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
             payMethods = data;
             loadDeposit = false;
 		} catch (error) {
@@ -116,7 +116,7 @@
                 <button class="btn deposit__type" on:click={closePayMethod}>
                     <img src="{url_global}/payments/{paySelected.img}.png" alt="paymethod-{paySelected.img}">
                     <div>
-                        <b>{paySelected.img}</b>
+                        <b>{paySelected.name_pay}</b>
                         <p class="deposit__limits">{paySelected.min} {paySelected.iso} - {paySelected.max} {paySelected.iso}</p>
                     </div>
                     <div class="deposit__arrow bottom"></div>
