@@ -100,7 +100,9 @@ export default {
       "msg.acceptTandC": "Debe aceptar los términos y condiciones",
       "msg.confirmedChangePassword": "Se ha confirmado el cambio de contraseña",
        //---------------Provider list-----------------------------
-      "provider.playNow":"Juega ahora",
+       "provider.playNow":"Juega ahora",
+       //---------------Profile-----------------------------
+       "profile.title":"Perfil de usuario",
     },
     fr: {
         "login.title": "Bienvenue en",

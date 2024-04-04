@@ -95,7 +95,7 @@
                 <b>{t("footer.paymethods")}</b>
                 <div class="footer__payments--imgs">
                     {#each payments as payment}
-                    <img src="{assetsPayments}{payment.name}.png" alt="payments-{payment.name}" loading="lazy">
+                    <img src="{assetsPayments}{payment}.png" alt="payments-{payment}" loading="lazy">
                     {/each}
                 </div>
             </div>

@@ -7,6 +7,7 @@
     //import Signup from './modals/SingupXg.svelte';
     import Signup from './modals/Signup.svelte';
     import Deposit from './payments/Deposit.svelte';
+    import Profile from "./modals/Profile.svelte";
     //import Withdrawal from './withdrawal/WithdrawalW.svelte';
     import WithdrawalW from './withdrawal/WithdrawalW.svelte';
     
@@ -20,12 +21,15 @@
 
     import ScreenGames from "./modals/ScreenGames.svelte";
 
+    //import xdddd from "./modals/ProfileUser.Svelte";
+
     import utils from '../js/util';
     import { onMount } from 'svelte';
     import { ServerConnection } from '..';
     import RecoverPassword from "./topbar/RecoverPassword.svelte";
 
     import { getUpdateBalance } from "../js/utils/serverUtils";
+
     export let user = {};
     export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
@@ -42,7 +46,8 @@
     let signupModalOpen = false;
     let depositModalOpen = false;
     let withdrawalModalOpen = false;
-    let expireSessionModalOpen = false;
+    let expireSessionModalOpen = false; 
+    let profileModalOpen = false; 
 
     let modalOpened;
     let subModalOpened;
@@ -136,10 +141,7 @@
         createdIn: 2023,
         categoryGames,//globalCategoryGames,en 
         //"slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"
-        payments: [
-            {name: "KHIPU"},
-            {name: "FLOW"},
-        ],
+        payments: ["KHIPU","FLOW"],
         social: [ //ASEGURATO DE COLOCAR EL NOMBRE EN MINUSCULA Y EhenL ENLACE CORRECTO!!!
             {name:"facebook", url:"https://www.facebook.com/coliseosportoficial"},
             {name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
@@ -288,6 +290,10 @@ console.log("active_view",active_view);
         promotionsModalOpen = true;
         modalOpened = "promotions";
     }
+    const onOpenProfile = () => {
+        profileModalOpen = true;
+        modalOpened = "profile";
+    }
 
     const onLogout = () => {
         alert("cierre de sesion");
@@ -346,7 +352,6 @@ console.log("active_view",active_view);
             Notas: on:click|stopPropagation={onOpenLogin}, esto er apara los modale s pero el bug de los dropdow hizo que se descartara momentaneamente
         -->
     </header>
-
     <div class="category">
        <!-- los slot y depooooooooooooooooopueden cambiar de posisiocn como en el footer   si la longitud es 1 o 2 tiene un grid de 5 rem o mas
         JO tambien quitariamos el menubar de caballos y sportbook es incencesario y ocupa mucho espacio :/
@@ -362,6 +367,7 @@ console.log("active_view",active_view);
     <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
     <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button>
+    <button class="btn signup" on:click={onOpenProfile}>Abrir prefil</button>
 
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
@@ -388,9 +394,9 @@ console.log("active_view",active_view);
     <Modal bind:open={promotionsModalOpen} bind:modalOpened title="Promociones">
         <Promotions {configPromotions} />
     </Modal>
-    
-    <Modal bind:open={expireSessionModalOpen} bind:subModalOpened>
-        <ExpireSession {updateTimeSession} bind:platform  {onLogout}/>
+
+    <Modal bind:open={profileModalOpen} bind:modalOpened>
+        <Profile bind:user />
     </Modal>
 
     <Modal bind:open={chatLiveModalOpen} bind:subModalOpened title="Chat en vivo">

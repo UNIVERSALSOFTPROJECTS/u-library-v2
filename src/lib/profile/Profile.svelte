@@ -124,6 +124,7 @@
   const onDepositError = async (error) => {
     notify.error(error);
   };
+  
   const onDepositOk = async (data) => {
     depositModalOpen = false;
     notify.success(data);
