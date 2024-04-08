@@ -48,7 +48,9 @@
   }
   
   onMount(()=>{
+
     window.addEventListener("message", receiveMessage, false);
+    console.log("receiveMessage:", receiveMessage);
   });
 
   $: {
@@ -58,7 +60,9 @@
   const receiveMessage = (event) => {
     if (event.data == "onNologinBet") {
       loginModalOpen = true;
+      
     }
+    console.log("estado:", loginModalOpen);
   };
 
   async function openSport() {
