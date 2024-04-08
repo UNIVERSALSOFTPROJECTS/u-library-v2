@@ -136,10 +136,10 @@
   }
   @media only screen and (min-width: 1200px) {
     .sportbook-content{
-      width: 100vw;
+      width: 98.9vw;
     }
     .sportbook-iframe {
-      width: 100vw;    
+      width: 100%;    
       height: 100vh;
     }
   }
