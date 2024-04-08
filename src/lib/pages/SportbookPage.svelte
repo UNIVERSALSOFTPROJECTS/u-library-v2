@@ -10,7 +10,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
-  export let clientCode;
+  //export let clientCode;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
