@@ -125,7 +125,7 @@
 </div>
 
 <style>
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 1199px) {
     .sportbook-content{
       width: 100%;
     }
