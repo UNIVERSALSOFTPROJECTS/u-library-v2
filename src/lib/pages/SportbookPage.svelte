@@ -10,7 +10,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
-  export let clientCode;
+  //export let clientCode;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -48,7 +48,9 @@
   }
   
   onMount(()=>{
+
     window.addEventListener("message", receiveMessage, false);
+    console.log("receiveMessage:", receiveMessage);
   });
 
   $: {
@@ -58,7 +60,9 @@
   const receiveMessage = (event) => {
     if (event.data == "onNologinBet") {
       loginModalOpen = true;
+      
     }
+    console.log("estado:", loginModalOpen);
   };
 
   async function openSport() {
@@ -121,7 +125,7 @@
 </div>
 
 <style>
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 1199px) {
     .sportbook-content{
       width: 100%;
     }
@@ -132,10 +136,10 @@
   }
   @media only screen and (min-width: 1200px) {
     .sportbook-content{
-      width: 100vw;
+      width: 98.9vw;
     }
     .sportbook-iframe {
-      width: 100vw;    
+      width: 100%;    
       height: 100vh;
     }
   }
