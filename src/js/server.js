@@ -46,11 +46,11 @@ const ServerConnection = (() => {
             return await axios.post(url, payload, { headers });
         },
         getPayMethods: async (userToken) => {
-            let url = conf.API + "/paymethods/" + userToken
+            let url = conf.API + "/paymethods/" + userToken;
             return await axios.get(url, { headers });
         },
         getPayLink: async (token, amount, type) => {
-            let url = conf.API + "/getpaylink/"
+            let url = conf.API + "/getpaylink/";
             return await axios.post(url, { token, amount, type }, { headers });
         },
     }
@@ -66,13 +66,13 @@ const ServerConnection = (() => {
         },
         preRegister: (username, email, phone, platform) => {
             let url = conf.API + "/user/preRegister";
-            //console.log("conf here: ",conf)
             if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, email, phone, org: conf.org, platform }
             return axios.post(url, payload, { headers });
         },
         login: (username, password) => {
-            let payload = { username, password }
+            if (!conf.org) throw "ORG_MANDATORY";
+            let payload = { username, password, org: conf.org }
             return axios.post(conf.API + "/login", payload, { headers });
         },//operatorId o codeAgent,son lo mismo
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
@@ -83,12 +83,14 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         resetPassword:(data)=>{
+            if (!conf.org) throw "ORG_MANDATORY";
             const url = window.origin+"/resetPassword";
-            let payload = { email:data.email, url  };
+            let payload = { email:data.email, url, org: conf.org };
             return axios.post(`${conf.API}/resetPassword`, payload, { headers });
         },
         confirmResetPassword:(temporalToken)=>{
-            let payload = { token:temporalToken };
+            if (!conf.org) throw "ORG_MANDATORY";
+            let payload = { token:temporalToken, org: conf.org };
             return axios.post(`${conf.API}/confirmResetPassword`, payload, { headers });
         },
         getMyAccount: (userToken)=>{

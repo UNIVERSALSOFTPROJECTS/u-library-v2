@@ -13,7 +13,8 @@
     let doctypes = configProfile.doctype;
     let exampleDoctype;
     let selectDoctype;
-    let isDataComplete = accountUser.dataComplete;
+    //let isDataComplete = accountUser.dataComplete;
+    let isDataComplete = false;
 
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
@@ -40,7 +41,7 @@
         else exampleDoctype = "";
     }
     onMount(async() => {
-        if (accountUser.document || accountUser.address || accountUser.city) isDataComplete = true;
+        //if (accountUser.document || accountUser.address || accountUser.city) isDataComplete = true;
         if (dataRequired && !isDataComplete) {
             selectDoctype = doctypes[0];
             changeDoctype();
