@@ -4,7 +4,7 @@
   import EventManager from "../../js/EventManager";
   import BalanceDesktop from "./Balance.svelte";
   import Security from "./Security.svelte";
-  import History from "../profile/History.svelte";
+  import History from "../profileU/History.svelte";
   import { DepositBank } from "../..";
   import ConfirmCashIn from "../payments/ConfirmCashIn.svelte";
   import Modal from "../Modal.svelte";

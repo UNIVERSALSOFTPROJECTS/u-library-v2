@@ -1,9 +1,13 @@
 <script>
     export let password;
 	export let t;
-	let showPassword = false;
-	const dataPassword = (e) =>{ password = e.target.value }
-	const togglePasswordHide = () => { showPassword =! showPassword }
+	
+	let hidePassword = true;
+	const togglePasswordHide = () => { hidePassword =! hidePassword }
 </script>
-<input class="ipt icon--password" type={showPassword ? 'text' : 'password'} autocomplete="off"  placeholder={t("login.password")} on:input={dataPassword}>
-<button type="button" class="btn {showPassword ? 'no-eye' : 'eye'}" name="passowrd" on:click={togglePasswordHide}></button>
+{#if hidePassword}
+	<input class="ipt icon--password" type="password" placeholder={t("login.password")} bind:value={password} autocomplete="off">
+{:else}
+	<input class="ipt icon--password" type="text" placeholder={t("login.password")} bind:value={password} autocomplete="off">
+{/if}
+<button type="button" class="btn {hidePassword ? 'no-eye' : 'eye'}" name="password" on:click={togglePasswordHide}></button>

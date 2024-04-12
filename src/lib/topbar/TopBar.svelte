@@ -7,7 +7,7 @@
   import { onMount } from "svelte";
   import { t} from "../../js/i18n";
   import Modal from "../Modal.svelte";
-  import Profile from "../profile/Profile.svelte";
+  import Profile from "../profileU/Profile.svelte";
   import NoLoginMenu from "./NoLoginMenu.svelte";
   import Login from "./Login.svelte";
   import { SingupW } from "../..";

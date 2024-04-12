@@ -51,8 +51,8 @@
     text-align: start;
     background-color: #e9e9e9;
     background-repeat: no-repeat;
-    background-position: right 0.5rem center;
-    background-size: #{$g-font-size - 2}; 
+    background-position: right 0.75rem center;
+    background-size: #{$g-font-size}; 
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -824,7 +824,7 @@
         }
     }
     $card:addColorIcon("card","fff");
-    .btn{
+    & .btn{
         &.verification{
             @include elementIconPosition($card,"left");
             background-color: #2783ff;  
@@ -836,6 +836,9 @@
         &.Whatssap{
             @include elementIconPosition($whatssap,"left");
             background-color: #4a4b53;  
+        }
+        &.withdrawal{
+            @extend %btn__signup_model_1;
         }
     }
 }
@@ -1194,6 +1197,10 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 0.1rem;
+            & .slc{
+                background-position: right 0.5rem center;
+                background-size: 12px;
+            }
         }
         &__mixed{
             display: grid;

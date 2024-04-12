@@ -98,11 +98,40 @@ export default {
       "msg.passwordMin5": "La contraseña debe tener 5 caracteres como mínimo",
       "msg.codeVerification": "Ingrese el código de verificación",
       "msg.acceptTandC": "Debe aceptar los términos y condiciones",
+      "msg.saveData": "Información guardada",
       "msg.confirmedChangePassword": "Se ha confirmado el cambio de contraseña",
+      "msg.duplicatedSession": "Se inicio sesión desde otro dispositivo!, cerrando sesión...",
+      "msg.passwordNotMatch": "Las contraseñas deben coincidir",
+      "msg.incorrectPass": "Contraseña actual incorrecta",
+      "msg.changePassSuccess": "Cambio de contraseña exitoso",
        //---------------Provider list-----------------------------
        "provider.playNow":"Juega ahora",
        //---------------Profile-----------------------------
        "profile.title":"Perfil de usuario",
+       "profile.personalData":"Datos personales",
+       "profile.username":"Nombre de usuario",
+       "profile.nameLastname":"Nombres y apellidos",
+       "profile.birthday": "Fecha de nacimiento",
+       "profile.email": "Correo electrónico",
+       "profile.phone": "Teléfono",
+       "profile.typeDoc": "Tipo de documento",
+       "profile.numberDoc": "Número de documento",
+       "profile.address": "Dirección",
+       "profile.city": "Ciudad",
+       "profile.save": "Guardar",
+       "profile.currentPass": "Contraseña actual",
+       "profile.newPass": "Contraseña nueva",
+       "profile.confirmNewPass": "Confirmar nueva contraseña",
+      //---------------Movements-----------------------------
+       "movements.noInformation": "No se encontro información",
+       "movements.results": "Resultados",
+       "movements.reference": "Referencia",
+       "movements.date": "Fecha",
+       "movements.operation": "Operación",
+       "movements.amount": "Monto",
+
+
+
     },
     fr: {
         "login.title": "Bienvenue en",

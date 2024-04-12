@@ -70,7 +70,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         &.login{
             background: #4a4b53;
         }
-        &.signup,&.withdrawal,&.send{
+        &.signup,&.send{
             @extend %btn__signup_model_1;
         }
         //se mandara a otra lugar esta wea
@@ -80,7 +80,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                 background: $color-primary;
             }
         }
-        &.deposit{
+        &.deposit, &.save{
             background: #37ae3c;
         }
         &.amount{
@@ -101,7 +101,24 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             font-weight: 700;
             background: #088f08;
             font-size: $g-font-size + 2;
-            width: 6rem;
+            transform: scale(1);
+            animation: pulse 2s infinite;
+            @keyframes pulse {
+                0% {
+                    transform: scale(.95);
+                    box-shadow: 0 0 #ffffffe6
+                }
+            
+                70% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0 10px #fff0
+                }
+            
+                to {
+                    transform: scale(.95);
+                    box-shadow: 0 0 #fff0
+                }
+            }
         }
         &.openSignup,&.openForgotPass,&.openLogin{//changeModal - se cambiara por este cuando se globalize
             background: transparent;
@@ -128,6 +145,12 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             border-radius: 100%;
             position: relative;
         }
+        &--atc{
+            @include bgIconCenter(addColorIcon("atc","fff"),"default");   
+            background-color:#C41D7F;
+            border-radius: 100%;
+            position: relative;
+        }
     }
     .modal{
         &.login{
@@ -145,6 +168,8 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                 &-body {
                     padding: 1rem;
                     width: 100%;
+                    overflow: auto;
+                    align-content: start;
                 }
                 &-content{
                     max-width: 1000px;
@@ -158,7 +183,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                 &__top{
                     gap: 0.5rem;
                     display: grid;
-                    grid-template-columns: 1fr 2.5rem;
+                    grid-template-columns: 1fr 2.5rem 2.5rem;
                 }
                 &__header{
                     display: grid;
@@ -172,15 +197,120 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     border-radius: $borderR-btn;
                 }
                 &__balance{
-                    background: #5c6066;
+                    display: flex;
+                    align-items: center;
+                    background-color: #5c6066;
                     padding: 0.5rem;
+                    color: #fff;
                     border-radius: $borderR-btn;
-                    b{
-                        font-size: $g-font-size - 2;
+                    height: $ipt-height;
+                    &.slc{
+                        background-image: url(addColorIcon("arrow_down","fff"));
+                    }
+                    //b{
+                    //    font-size: $g-font-size - 2;
+                    //}
+                }
+                &__transaction{
+                    display: flex;
+                    gap: 0.5rem;
+                }
+
+            }
+            & .userdata{
+                display: grid;
+                gap: 0.5rem;
+                &__form{
+                    display: grid;
+                    gap: 0.25rem;
+                }   
+            }
+            & .changePassword{
+                display: grid;
+                gap: 0.5rem;
+                max-width: 300px;
+                margin: 0 auto;
+                &__ipt{
+                    @extend %containerPassword;
+                }
+            }
+            & .movements{
+                display: grid;
+                gap: 0.5rem;
+                grid-template-rows: auto auto auto 100%;
+                &__consult{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 0.5rem;
+                    &--types{
+                        display: grid;
+                        grid-template-columns: repeat(2,1fr); 
+                        gap: 0.25rem;
+                        & .btn{
+                            &.consult{
+                                background: #42424c;
+                                &.active{
+                                    background: $color-primary;
+                                }
+                            }
+                        }
+                    }
+                }
+                &__empty{
+                    height: fit-content;
+                    border: 1px solid #fff;
+                    padding: 1rem;
+                    text-align: center;
+                }
+                &__totals{
+                    text-align: end;
+                }
+                &__transaction{
+                    display: grid;
+                    grid-template-columns: 3rem 1fr;
+                    background: #42424c;
+                    border: 1px solid #B0B0B0;
+                    gap: .25rem;
+                    border-radius: .25rem;
+                }
+                &__data{
+                    padding: 0.5rem;
+                }
+                &__info{
+                    display: grid;
+                    grid-template-columns: calc(65% - .5rem) calc(35% - .5rem);
+                    gap: .25rem 1rem;
+                    & *{
+                        word-wrap: break-word;
+                        text-overflow: ellipsis;
                     }
                 }
             }
+
+            & .btn{
+                &.withdrawal{
+                    background-color: red
+                }
+                &.logout{
+                    background-color: transparent;
+                    text-align: start;
+                    @include elementIconPosition(addColorIcon("logout","fff"),"right");
+                }
+                &.profile{
+                    background-color: transparent;
+                    text-align: start;
+                    @include elementIconPosition(addColorIcon("arrow_down","fff"),"right");
+                }
+                &.option{
+                    background: #C41D7F;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            } 
+            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
         }
+       
         
         &.signup{
             @extend %signup__model_1;
@@ -189,7 +319,6 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         &.deposit{
             @include deposit__model_1();            
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
-            
         }
         &.withdrawal{
             @include withdrawalW__model__1(2);//este es general para x y w

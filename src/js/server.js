@@ -14,25 +14,25 @@ const ServerConnection = (() => {
 
     const wallet = {
         checkPreviewWithdrawal: async (token) => {
-            var url = conf.API + `/checkRetailWithdrawal/${token}`;
+            let url = conf.API + `/checkRetailWithdrawal/${token}`;
             return await axios.get(url, { headers });
         },
         accountNumber: async (token) => {
-            var url = conf.API + `/accountNumber/${token}`;
+            let url = conf.API + `/accountNumber/${token}`;
             return await axios.get(url, { headers });
         },
         consultUserWeb: async (token) => {
-            var url = conf.API + `/numero_cuenta/${token}`;
+            let url = conf.API + `/numero_cuenta/${token}`;
             return await axios.get(url, { headers });
         },
         retailWithdrawal: async (token, amount) => {
-            var url = conf.API + "/retailWithdrawal";
-            var payload = { token, amount }
+            let url = conf.API + "/retailWithdrawal";
+            let payload = { token, amount }
             return await axios.post(url, payload, { headers });
         },
         depositRetail: async (token, cod) => {
-            var url = conf.API + "/wallet/depositRetail";
-            var payload = { token, cod }
+            let url = conf.API + "/wallet/depositRetail";
+            let payload = { token, cod }
             return axios.post(url, payload, { headers });
         },
         withdrawal_w: async (token, amount, bank, account, info, dni) => {
@@ -65,10 +65,10 @@ const ServerConnection = (() => {
             return axios.get(url, { headers });
         },
         preRegister: (username, email, phone, platform) => {
-            var url = conf.API + "/user/preRegister";
+            let url = conf.API + "/user/preRegister";
             //console.log("conf here: ",conf)
             if (!conf.org) throw "ORG_MANDATORY";
-            var payload = { username, email, phone, org: conf.org, platform }
+            let payload = { username, email, phone, org: conf.org, platform }
             return axios.post(url, payload, { headers });
         },
         login: (username, password) => {
@@ -78,18 +78,34 @@ const ServerConnection = (() => {
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
             if (!currency) throw "CURRENCY_MANDATORY";
             if (!conf.domain) throw "DOMAIN_MANDATORY";
-            var url = conf.API + "/user";
-            var payload = { username, name, phone, email, currency, password, date, smscode, country, operatorId, doctype: doctype, document: document, birthday: date, domain: conf.domain, usertype, platform, org: conf.org }
+            let url = conf.API + "/user";
+            let payload = { username, name, phone, email, currency, password, date, smscode, country, operatorId, doctype: doctype, document: document, birthday: date, domain: conf.domain, usertype, platform, org: conf.org }
             return axios.post(url, payload, { headers });
         },
         resetPassword:(data)=>{
             const url = window.origin+"/resetPassword";
-            var payload = { email:data.email, url  };
+            let payload = { email:data.email, url  };
             return axios.post(`${conf.API}/resetPassword`, payload, { headers });
         },
         confirmResetPassword:(temporalToken)=>{
-            var payload = { token:temporalToken };
+            let payload = { token:temporalToken };
             return axios.post(`${conf.API}/confirmResetPassword`, payload, { headers });
+        },
+        getMyAccount: (userToken)=>{
+            let url = conf.API +`/myaccount/`+ userToken;
+            return axios.get(url, { headers });
+        },
+        saveMyAccount: (user) =>{   
+            let payload =  user;
+            return axios.post(`${conf.API}/user/myAccount`, payload, { headers });
+        },
+        changePassword: (userToken, newPassword, oldpass)=>{
+            let payload = { userToken, newPassword, oldpass }
+            return axios.post(`${conf.API}/changepassword`, payload, { headers });
+        },
+        getMovements: (token, dateStringFrom, dateStringTo, filter)=>{
+            let url = conf.API+`/wallet/${token}/${dateStringFrom}/${dateStringTo}/${filter}/movements`;
+            return axios.get(url, { headers });
         }
     }
     const game = {

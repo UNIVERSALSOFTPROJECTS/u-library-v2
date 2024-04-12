@@ -16,6 +16,7 @@ const SocketConnector = (() => {
         });
 
         stompClient.onConnect = (frame) => {
+            console.log(frame);
             stompClient.subscribe('/user/queue/messages', (data) => {
                 //console.log("message", data.body);
                 if (data.body == "NEW_SESSION_OPENED") {

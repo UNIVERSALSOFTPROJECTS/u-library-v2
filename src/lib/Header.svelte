@@ -131,13 +131,13 @@
             { id:"Ahorros", name:"Ahorros" },
         ], 
         linksChats: [
-            {name: "Whatssap", url:"https://web.whatsapp.com/send?phone=56964783055"}
+            {name: "Whatsapp", url:"https://web.whatsapp.com/send?phone=56964783055"}
         ]
     };
     const configFooter = {  
         platform,
         country : {name: "Chile", flag: "chl"},
-        isChat: false,
+        isChat: true,
         createdIn: 2023,
         categoryGames,//globalCategoryGames,en 
         //"slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"
@@ -152,7 +152,7 @@
             {name:"Bono Deportivas"} 
         ],
         linksChats: [ 
-            //{name: "Whatssap", url:"https://web.whatsapp.com/send?phone=56964783055"} 
+            //{name: "Whatsapp", url:"https://web.whatsapp.com/send?phone=56964783055"} 
         ]
     };
     const configPromotions = {
@@ -160,6 +160,12 @@
         bonus:[
             {name:"spoortbook"}
         ],
+    };
+    const configProfile = {
+        id_banca: [] ,//cajero principal - almacena otros cajeros
+        id_ca: [6970],//caja dentro de un cajero principal
+        doctype:["RUT","DNI","Pasaporte"],
+        timezone:'America/Santiago',
     };
 
     let screenGamesOpen = false;
@@ -248,10 +254,22 @@
     const onRecoverPasswordOk = async (data)=>{
         notify = await utils.showNotify("success",data);
     }
+    const onProfileOk = async (data)=>{
+        notify = await utils.showNotify("success",data);
+    }
     const onRecoverPasswordError = async (error)=>{
         notify = {};
         notify = await utils.showNotify("error",error);
     }
+    const onProfileError = async (error)=>{
+        notify = {};
+        notify = await utils.showNotify("error",error);
+        if (error == $t("msg.duplicatedSession")){
+            onLogout();
+            profileModalOpen = false;
+        }
+    }
+
 
     onMount(()=>{
         let currentUrl = window.location.href;
@@ -263,7 +281,8 @@
             onOpenSignup();
         }
         if (sessionStorage.getItem("user")) {
-            user = JSON.parse(sessionStorage.getItem("user"))
+            user = JSON.parse(sessionStorage.getItem("user"));
+            activeSession = true;
             updateTimeSession();
         }
     }); 
@@ -296,7 +315,10 @@ console.log("active_view",active_view);
     }
 
     const onLogout = () => {
-        alert("cierre de sesion");
+        activeSession = false;
+        sessionStorage.removeItem("user");
+        location.reload();
+        //ServerConnector.disconnect();
     }
     let url_game = "";
     
@@ -371,7 +393,7 @@ console.log("active_view",active_view);
 
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
-        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword} {onOpenSignup}  bind:platform t={$t}/>
+        <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword} {onOpenSignup} bind:platform t={$t}/>
     </Modal>
 
     <Modal bind:open={resetpassModalOpen} bind:modalOpened title={$t("recoverPassword.title")} >
@@ -395,8 +417,8 @@ console.log("active_view",active_view);
         <Promotions {configPromotions} />
     </Modal>
 
-    <Modal bind:open={profileModalOpen} bind:modalOpened>
-        <Profile bind:user />
+    <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
+        <Profile {configProfile} onError={onProfileError} onOk={onProfileOk} bind:user t={$t}/>
     </Modal>
 
     <Modal bind:open={chatLiveModalOpen} bind:subModalOpened title="Chat en vivo">

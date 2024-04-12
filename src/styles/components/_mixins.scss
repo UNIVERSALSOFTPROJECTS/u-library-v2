@@ -77,7 +77,7 @@
             }
     }
     &.logued{
-        grid-template-columns:  auto 1fr auto auto auto auto;
+        grid-template-columns:  auto 1fr auto auto auto 6rem;
     }
     & .btn{
         height: $ipt-height;
