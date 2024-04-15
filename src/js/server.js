@@ -73,7 +73,7 @@ const ServerConnection = (() => {
         login: (username, password,org) => {
             if (!conf.org) throw "ORG_MANDATORY";//MAÑANA CAMBIAR ESTOOOO!!!!
             let payload = {};
-            if(org=""){
+            if(org==""){
                  payload = { username, password }
             }else{
                  payload = { username, password, org: conf.org }
