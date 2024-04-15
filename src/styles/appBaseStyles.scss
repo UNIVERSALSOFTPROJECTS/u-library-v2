@@ -280,10 +280,19 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     display: grid;
                     grid-template-columns: calc(65% - .5rem) calc(35% - .5rem);
                     gap: .25rem 1rem;
-                    & *{
-                        word-wrap: break-word;
-                        text-overflow: ellipsis;
-                    }
+                    //& *{
+                    //    word-wrap: break-word;
+                    //    text-overflow: ellipsis;
+                    //}
+                }
+                &__ref{
+                    display: grid;
+                    grid-template-columns: 3rem 2.5rem;
+                    align-items: center;
+                   & p{
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                   }
                 }
             }
 

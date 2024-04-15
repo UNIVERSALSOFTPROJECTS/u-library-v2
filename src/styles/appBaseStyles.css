@@ -1301,8 +1301,13 @@ p, b, span, a, li *, button {
   grid-template-columns: calc(65% - 0.5rem) calc(35% - 0.5rem);
   gap: 0.25rem 1rem;
 }
-.Coliseosport .modal.profile .movements__info * {
-  word-wrap: break-word;
+.Coliseosport .modal.profile .movements__ref {
+  display: grid;
+  grid-template-columns: 3rem 2.5rem;
+  align-items: center;
+}
+.Coliseosport .modal.profile .movements__ref p {
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 .Coliseosport .modal.profile .btn.withdrawal {
