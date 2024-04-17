@@ -70,14 +70,9 @@ const ServerConnection = (() => {
             let payload = { username, email, phone, org: conf.org, platform }
             return axios.post(url, payload, { headers });
         },
-        login: (username, password,org) => {
-            if (!conf.org) throw "ORG_MANDATORY";//MAÑANA CAMBIAR ESTOOOO!!!!
-            let payload = {};
-            if(org==""){
-                 payload = { username, password }
-            }else{
-                 payload = { username, password, org: conf.org }
-            }
+        login: (username, password) => {
+            if (!conf.org) throw "ORG_MANDATORY";
+            let payload = { username, password, org: conf.org }
             return axios.post(conf.API + "/login", payload, { headers });
         },//operatorId o codeAgent,son lo mismo
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
