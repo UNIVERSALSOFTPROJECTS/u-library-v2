@@ -64,8 +64,7 @@
                     {#if loadIframe}
                         <b class="loading"><b><b></b></b></b>
                     {/if}
-                    <!-- <iframe on:load={()=>{loadIframe = false;}} width="100%" height="100%" src={url_game} frameborder="0" title="modalGame"></iframe> -->
-                    <iframe on:load={()=>{loadIframe = false;}} width="100%" height="100%" src="https://apiuniversalsoft.com/api/launch?gameid=vs25wolfgold&p=pg&b=Pragmatic Play&m=wb&sessionid=1744573509896c0n3s2rpqqjnlorjyqm3a0zrtqohgj8ocxsaiisdtrfdcaa1ll44ayics1ymocgdd1epmvhwqwfyrksmapexkp3x38qbdo9o6pvtqk78nuu3bj6ugmpbzwfnpecrf38x" frameborder="0" title="modalGame"></iframe>
+                    <iframe on:load={()=>{loadIframe = false;}} width="100%" height="100%" src={url_game} frameborder="0" title="modalGame"></iframe>
                 </div>
             </div>
         </div>
