@@ -224,7 +224,6 @@ p, b, span, a, li *, button {
   color: white;
   background-color: #f54b00;
   font-size: 0.8rem;
-  width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
@@ -271,15 +270,15 @@ p, b, span, a, li *, button {
   border: 0;
 }
 
-.Coliseosport .slc:hover, .Coliseosport .footer__social--instagram:hover, .Coliseosport .footer__social--facebook:hover, .Coliseosport .footer--lang:hover, .Coliseosport .footer--chat:hover, .Coliseosport .modal.withdrawal .withdrawal__copy:hover, .Coliseosport .icon--atc:hover, .Coliseosport .icon--copy:hover, .Coliseosport .icon--chat:hover, .btn:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
+.Coliseosport .slc:hover, .Coliseosport .footer__social--instagram:hover, .Coliseosport .footer__social--facebook:hover, .Coliseosport .footer--lang:hover, .Coliseosport .footer--chat:hover, .Coliseosport .modal.screenGames .modal-header .btn.screen:hover, .Coliseosport .modal.withdrawal .withdrawal__copy:hover, .Coliseosport .icon--atc:hover, .Coliseosport .icon--copy:hover, .Coliseosport .icon--chat:hover, .btn:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
   filter: brightness(0.9);
 }
 
-.Coliseosport .ipt:disabled, .Coliseosport .footer__social--instagram:disabled, .Coliseosport .footer__social--facebook:disabled, .Coliseosport .footer--lang:disabled, .Coliseosport .footer--chat:disabled, .Coliseosport .modal.withdrawal .withdrawal__copy:disabled, .Coliseosport .icon--atc:disabled, .Coliseosport .icon--copy:disabled, .Coliseosport .icon--chat:disabled, .btn:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
+.Coliseosport .ipt:disabled, .Coliseosport .footer__social--instagram:disabled, .Coliseosport .footer__social--facebook:disabled, .Coliseosport .footer--lang:disabled, .Coliseosport .footer--chat:disabled, .Coliseosport .modal.screenGames .modal-header .btn.screen:disabled, .Coliseosport .modal.withdrawal .withdrawal__copy:disabled, .Coliseosport .icon--atc:disabled, .Coliseosport .icon--copy:disabled, .Coliseosport .icon--chat:disabled, .btn:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
   filter: brightness(0.7);
 }
 
-.accordion__select, .Coliseosport .slc, .Coliseosport .footer__social--instagram, .Coliseosport .footer__social--facebook, .Coliseosport .footer--lang, .Coliseosport .footer--chat, .Coliseosport .modal.withdrawal .withdrawal__copy, .Coliseosport .icon--atc, .Coliseosport .icon--copy, .Coliseosport .icon--chat, .btn, .Coliseosport .btn, .Coliseosport .btn.eye, .Coliseosport .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
+.accordion__select, .Coliseosport .slc, .Coliseosport .footer__social--instagram, .Coliseosport .footer__social--facebook, .Coliseosport .footer--lang, .Coliseosport .footer--chat, .Coliseosport .modal.screenGames .modal-header .btn.screen, .Coliseosport .modal.withdrawal .withdrawal__copy, .Coliseosport .icon--atc, .Coliseosport .icon--copy, .Coliseosport .icon--chat, .btn, .Coliseosport .btn, .Coliseosport .btn.eye, .Coliseosport .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
   cursor: pointer;
   font-size: inherit;
   width: 100%;
@@ -374,7 +373,7 @@ p, b, span, a, li *, button {
 
 .Coliseosport .modal.withdrawal .btn.withdrawal, .Coliseosport .btn.signup, .Coliseosport .btn.send {
   background: #f54b00;
-  box-shadow: 0 0 6px #f54b00, inset 0 -6px 10px #f54b00, inset 0 6px 10px hsla(0deg, 0%, 100%, 0.45), inset 0 0 11px #f54b00;
+  box-shadow: 0 0 6px #f54b00, inset 0 -6px 10px #f54b00, inset 0 6px 10px hsla(0, 0%, 100%, 0.45), inset 0 0 11px #f54b00;
   font-size: 16px;
   font-weight: 600;
 }
@@ -391,7 +390,6 @@ p, b, span, a, li *, button {
 }
 .Coliseosport .modal.recoverPassword .modal-body {
   padding: 1rem;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   max-width: 450px;
@@ -434,76 +432,55 @@ p, b, span, a, li *, button {
   border-radius: 0.0555em;
   background-color: transparent;
   transform-origin: center -0.2222em;
-  -webkit-animation: spinner-fade 1s infinite linear;
-          animation: spinner-fade 1s infinite linear;
+  animation: spinner-fade 1s infinite linear;
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(1) {
-  -webkit-animation-delay: 0s;
-          animation-delay: 0s;
+  animation-delay: 0s;
   transform: rotate(0deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.083s;
-          animation-delay: 0.083s;
+  animation-delay: 0.083s;
   transform: rotate(30deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.166s;
-          animation-delay: 0.166s;
+  animation-delay: 0.166s;
   transform: rotate(60deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(4) {
-  -webkit-animation-delay: 0.249s;
-          animation-delay: 0.249s;
+  animation-delay: 0.249s;
   transform: rotate(90deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(5) {
-  -webkit-animation-delay: 0.332s;
-          animation-delay: 0.332s;
+  animation-delay: 0.332s;
   transform: rotate(120deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(6) {
-  -webkit-animation-delay: 0.415s;
-          animation-delay: 0.415s;
+  animation-delay: 0.415s;
   transform: rotate(150deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(7) {
-  -webkit-animation-delay: 0.498s;
-          animation-delay: 0.498s;
+  animation-delay: 0.498s;
   transform: rotate(180deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(8) {
-  -webkit-animation-delay: 0.581s;
-          animation-delay: 0.581s;
+  animation-delay: 0.581s;
   transform: rotate(210deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(9) {
-  -webkit-animation-delay: 0.664s;
-          animation-delay: 0.664s;
+  animation-delay: 0.664s;
   transform: rotate(240deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(10) {
-  -webkit-animation-delay: 0.747s;
-          animation-delay: 0.747s;
+  animation-delay: 0.747s;
   transform: rotate(270deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(11) {
-  -webkit-animation-delay: 0.83s;
-          animation-delay: 0.83s;
+  animation-delay: 0.83s;
   transform: rotate(300deg);
 }
 .Coliseosport .modal.recoverPassword .recoverPassword__reset .loading p:nth-child(12) {
-  -webkit-animation-delay: 0.913s;
-          animation-delay: 0.913s;
+  animation-delay: 0.913s;
   transform: rotate(330deg);
-}
-@-webkit-keyframes spinner-fade {
-  0% {
-    background-color: #f54b00;
-  }
-  100% {
-    background-color: transparent;
-  }
 }
 @keyframes spinner-fade {
   0% {
@@ -518,7 +495,6 @@ p, b, span, a, li *, button {
 }
 
 .Coliseosport .modal.signup .modal-body {
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   padding: 1rem 1rem 2rem 1rem;
@@ -634,14 +610,6 @@ p, b, span, a, li *, button {
   /* Made by Jimmy Gillam */
   /* Checkmark style starts */
 }
-@-webkit-keyframes dothabottomcheck {
-  0% {
-    height: 0;
-  }
-  100% {
-    height: 10px;
-  }
-}
 @keyframes dothabottomcheck {
   0% {
     height: 0;
@@ -651,17 +619,6 @@ p, b, span, a, li *, button {
   }
 }
 @keyframes dothatopcheck {
-  0% {
-    height: 0;
-  }
-  50% {
-    height: 0;
-  }
-  100% {
-    height: 20px;
-  }
-}
-@-webkit-keyframes dothatopcheck {
   0% {
     height: 0;
   }
@@ -716,13 +673,11 @@ p, b, span, a, li *, button {
 .Coliseosport .modal.signup .signup__conditions input[type=checkbox]:checked + label::after,
 .Coliseosport .modal.signup .signup__conditions label.checked::after {
   height: 10px;
-  -webkit-animation: dothabottomcheck 0.2s ease 0s forwards;
   animation: dothabottomcheck 0.2s ease 0s forwards;
 }
 .Coliseosport .modal.signup .signup__conditions input[type=checkbox]:checked + label::before,
 .Coliseosport .modal.signup .signup__conditions label.checked::before {
   height: 24px;
-  -webkit-animation: dothatopcheck 0.4s ease 0s forwards;
   animation: dothatopcheck 0.4s ease 0s forwards;
 }
 .Coliseosport .modal.signup .signup__prefix {
@@ -824,16 +779,7 @@ p, b, span, a, li *, button {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  -webkit-animation: progress-bar 3s linear forwards;
-          animation: progress-bar 3s linear forwards;
-}
-@-webkit-keyframes progress-bar {
-  0% {
-    width: 100%;
-  }
-  100% {
-    width: 0;
-  }
+  animation: progress-bar 3s linear forwards;
 }
 @keyframes progress-bar {
   0% {
@@ -993,22 +939,7 @@ p, b, span, a, li *, button {
   background: #088f08;
   font-size: 16px;
   transform: scale(1);
-  -webkit-animation: pulse 2s infinite;
-          animation: pulse 2s infinite;
-}
-@-webkit-keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 rgba(255, 255, 255, 0.9019607843);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
-  }
-  to {
-    transform: scale(0.95);
-    box-shadow: 0 0 rgba(255, 255, 255, 0);
-  }
+  animation: pulse 2s infinite;
 }
 @keyframes pulse {
   0% {
@@ -1084,7 +1015,7 @@ p, b, span, a, li *, button {
 }
 .Coliseosport .modal.login .modal-body .btn.login {
   background: #f54b00;
-  box-shadow: 0 0 6px #f54b00, inset 0 -6px 10px #f54b00, inset 0 6px 10px hsla(0deg, 0%, 100%, 0.45), inset 0 0 11px #f54b00;
+  box-shadow: 0 0 6px #f54b00, inset 0 -6px 10px #f54b00, inset 0 6px 10px hsla(0, 0%, 100%, 0.45), inset 0 0 11px #f54b00;
 }
 @media (max-width: 1023px) {
   .Coliseosport .modal.login .modal-dialog {
@@ -1135,22 +1066,13 @@ p, b, span, a, li *, button {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Coliseosport .modal.login .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Coliseosport .modal.login .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
-}
-@-webkit-keyframes load_3p {
-  to {
-    opacity: 0.4;
-    transform: translate3d(0, 0.2rem, 0);
-  }
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -1169,16 +1091,13 @@ p, b, span, a, li *, button {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Coliseosport .modal.recoverPassword .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Coliseosport .modal.recoverPassword .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -1275,7 +1194,6 @@ p, b, span, a, li *, button {
   background: #f54b00;
 }
 .Coliseosport .modal.profile .movements__empty {
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   border: 1px solid #fff;
@@ -1348,16 +1266,13 @@ p, b, span, a, li *, button {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Coliseosport .modal.profile .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Coliseosport .modal.profile .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -1376,16 +1291,13 @@ p, b, span, a, li *, button {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Coliseosport .modal.signup .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Coliseosport .modal.signup .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -1516,7 +1428,6 @@ p, b, span, a, li *, button {
 }
 .Coliseosport .modal.deposit .deposit__types {
   display: grid;
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   border-radius: 0.25rem;
@@ -1598,16 +1509,13 @@ p, b, span, a, li *, button {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Coliseosport .modal.deposit .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Coliseosport .modal.deposit .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -1754,16 +1662,13 @@ p, b, span, a, li *, button {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Coliseosport .modal.withdrawal .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Coliseosport .modal.withdrawal .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -1838,16 +1743,13 @@ p, b, span, a, li *, button {
   height: 0.5rem;
   background: #fff;
   border-radius: 50%;
-  -webkit-animation: 0.5s load_3p infinite alternate;
-          animation: 0.5s load_3p infinite alternate;
+  animation: 0.5s load_3p infinite alternate;
 }
 .Coliseosport .modal.chatLive .loading p:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
-          animation-delay: 0.1s;
+  animation-delay: 0.1s;
 }
 .Coliseosport .modal.chatLive .loading p:nth-child(3) {
-  -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 @keyframes load_3p {
   to {
@@ -1888,6 +1790,9 @@ p, b, span, a, li *, button {
   width: 100%;
   align-content: normal;
 }
+.Coliseosport .modal.screenGames .modal-content.fullscreen {
+  min-height: 100vh;
+}
 .Coliseosport .modal.screenGames .modal-header {
   grid-template-columns: 3rem auto 3rem;
   justify-items: center;
@@ -1899,6 +1804,19 @@ p, b, span, a, li *, button {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z'/></svg>");
   width: 100%;
   height: 100%;
+}
+.Coliseosport .modal.screenGames .modal-header .btn.screen {
+  background-image: url("data:image/svg+xml,<svg  viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 9.00006L4 6.00006C4 4.89549 4.89543 4.00006 6 4.00006L9 4.00006' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M20 15.0001V18.0001C20 19.1046 19.1046 20.0001 18 20.0001H15' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M15 4.00006L18 4.00006C19.1046 4.00006 20 4.89549 20 6.00006L20 9.00006' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M9 20.0001L6 20.0001C4.89543 20.0001 4 19.1046 4 18.0001L4 15.0001' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><defs><clipPath><rect width='24' height='24' fill='%23fff'/></clipPath></defs></svg>");
+  color: #000;
+  height: 40px;
+  text-align: start;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 2rem;
+  background-color: transparent;
+}
+.Coliseosport .modal.screenGames .modal-header .btn.screen.full {
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 4.00012V7.00012C9 8.10469 8.10457 9.00012 7 9.00012H4' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M15 20.0001L15 17.0001C15 15.8956 15.8954 15.0001 17 15.0001L20 15.0001' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M20 9.00012L17 9.00012C15.8954 9.00012 15 8.10469 15 7.00012L15 4.00012' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M4 15.0001L7 15.0001C8.10457 15.0001 9 15.8956 9 17.0001L9 20.0001' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><defs><rect width='24' height='24' fill='%23fff'/></defs></svg>");
 }
 .Coliseosport .modal.screenGames .loading {
   position: absolute;
@@ -1920,8 +1838,7 @@ p, b, span, a, li *, button {
   border-radius: 50%;
   border: 3px solid transparent;
   border-top-color: #f54b00;
-  -webkit-animation: 2s spinner-rotate360 linear infinite;
-          animation: 2s spinner-rotate360 linear infinite;
+  animation: 2s spinner-rotate360 linear infinite;
 }
 .Coliseosport .modal.screenGames .loading b b::before, .Coliseosport .modal.screenGames .loading b b::after {
   content: "";
@@ -1935,8 +1852,7 @@ p, b, span, a, li *, button {
   right: 5px;
   bottom: 5px;
   border-top-color: #d8d8d8;
-  -webkit-animation: spinner-rotate360 2s linear infinite;
-          animation: spinner-rotate360 2s linear infinite;
+  animation: spinner-rotate360 2s linear infinite;
 }
 .Coliseosport .modal.screenGames .loading b b::after {
   top: 15px;
@@ -1944,16 +1860,7 @@ p, b, span, a, li *, button {
   right: 15px;
   bottom: 15px;
   border-top-color: #ff7233;
-  -webkit-animation: spinner-rotate360 1s linear infinite;
-          animation: spinner-rotate360 1s linear infinite;
-}
-@-webkit-keyframes spinner-rotate360 {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
+  animation: spinner-rotate360 1s linear infinite;
 }
 @keyframes spinner-rotate360 {
   from {
@@ -2108,16 +2015,7 @@ p, b, span, a, li *, button {
   background-color: rgba(245, 75, 0, 0.2);
 }
 .Coliseosport .category__game:hover b, .Coliseosport .category__game.active b {
-  -webkit-animation: neonText 2s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
-          animation: neonText 2s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
-}
-@-webkit-keyframes neonText {
-  0% {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 22px rgba(255, 255, 255, 0.5), 0 0 40px rgba(66, 220, 219, 0), 0 0 60px rgba(66, 220, 219, 0), 0 0 80px rgba(66, 220, 219, 0), 0 0 100px rgba(66, 220, 219, 0), 0 0 140px rgba(66, 220, 219, 0), 0 0 200px rgba(66, 220, 220, 0);
-  }
-  to {
-    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5), 0 0 8px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0), 0 0 20px rgba(66, 220, 220, 0), 0 0 30px rgba(66, 220, 220, 0);
-  }
+  animation: neonText 2s infinite alternate cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 @keyframes neonText {
   0% {
@@ -2236,7 +2134,6 @@ p, b, span, a, li *, button {
   grid-template-columns: repeat(2, minmax(0, 300px));
   padding: 1rem;
   margin: 0 auto;
-  max-width: -webkit-max-content;
   max-width: -moz-max-content;
   max-width: max-content;
 }
@@ -2467,5 +2364,4 @@ p, b, span, a, li *, button {
   background-position: left 0.75rem center;
   padding-left: 2.5rem;
   background-color: #4a4b53;
-}
-/*# sourceMappingURL=appBaseStyles.css.map */
+}/*# sourceMappingURL=appBaseStyles.css.map */

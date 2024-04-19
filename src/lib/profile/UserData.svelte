@@ -40,6 +40,11 @@
         else if(selectDoctype == "DNI") exampleDoctype = "Ejemplo: 47087611";
         else exampleDoctype = "";
     }
+
+
+
+//horaria POR IP????????????????????????
+
     onMount(async() => {
         //if (accountUser.document || accountUser.address || accountUser.city) isDataComplete = true;
         if (dataRequired && !isDataComplete) {

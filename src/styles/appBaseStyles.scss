@@ -412,6 +412,11 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     width: 100%;
                     align-content: normal;
                 }
+                &-content{
+                    &.fullscreen{
+                        min-height: 100vh;
+                    }
+                }
                 &-header{
                     grid-template-columns: 3rem auto 3rem;
                     justify-items: center;
@@ -422,6 +427,14 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                         background-image: url("#{$arrow-left}");
                         width: 100%;
                         height: 100%;
+                    }
+                    & .btn.screen{
+                        @include bgIconCenter(addColorIcon("screenFull","fff"), 2rem);
+                        background-color: transparent;
+                        &.full{
+                            $screen : addColorIcon("screenReduce","fff");
+                            background-image: url("#{$screen}");
+                        }
                     }
                 }
                 //@include modalFullScreen("mobile");
