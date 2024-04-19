@@ -73,8 +73,8 @@
                         <img src="{assetsUrl}{platform}/logo.png" alt="{platform}-logo" loading="eager">
                     </picture>
                     <div class="screenGames__options">
-                        <button class="btn screen {isFullscreen?'full':''}" on:click={toggleFullscreen} hidden={isMobileSafari}></button>
                         <button class="btn reload" on:click={reloadIframe}></button>
+                        <button class="btn screen {isFullscreen?'full':''}" on:click={toggleFullscreen} hidden={isMobileSafari}></button>
                     </div>
                 </div>
                 <div class="modal-body">
