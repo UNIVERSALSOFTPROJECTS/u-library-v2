@@ -401,39 +401,9 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                 @include modalFullScreen("mobile");
             }
         }
+
         &.screenGames{
-            & .modal {
-                &-dialog {
-                    margin: 0;
-                }
-                &-body {
-                    position: relative;
-                    max-width: 100%;
-                    width: 100%;
-                    align-content: normal;
-                }
-                &-header{
-                    grid-template-columns: 3rem auto 3rem;
-                    justify-items: center;
-                    & img{
-                        width: 6.5rem;
-                    }
-                    & .btn.close{
-                        background-image: url("#{$arrow-left}");
-                        width: 100%;
-                        height: 100%;
-                    }
-                    & .btn.screen{
-                        @include bgIconCenter(addColorIcon("screenFull","fff"), 2rem);
-                        background-color: transparent;
-                        &.full{
-                            $screen : addColorIcon("screenReduce","fff");
-                            background-image: url("#{$screen}");
-                        }
-                    }
-                }
-                //@include modalFullScreen("mobile");
-            }   
+            @include screenGames__model__1(2rem,6.5rem);//$logo_mb,$logo_pc
             @include animatedLoad_3linesRotate(#000,$color-primary,#d8d8d8,'');
         }
         &.expireSession{

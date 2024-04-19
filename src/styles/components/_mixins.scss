@@ -602,3 +602,66 @@
     align-items: center;
 }
 
+//COMPONENT
+@mixin screenGames__model__1($logo_mb,$logo_pc){
+    & .modal {
+        &-dialog {
+            margin: 0;
+        }
+        &-body {
+            position: relative;
+            max-width: 100%;
+            width: 100%;
+            align-content: normal;
+        }
+        &-header{
+            grid-template-columns: 6.5rem auto 6.5rem;
+            justify-items: center;
+            & picture{
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                & img{
+                    width: $logo_mb;
+                    @media #{$landscape_pc} {
+                        width: $logo_pc;
+                    }
+                }
+            }
+            &.safari{
+                grid-template-columns: 3rem auto 3rem;
+                & .screenGames{
+                    &__options{
+                        grid-template-columns: 1fr;
+                    }
+                }
+            }
+           
+            & .btn{
+                background-color: #404040;
+                &.close{
+                    @include bgIconCenter(addColorIcon("arrow_left","fff"), 2rem);
+                }
+                &.screen{
+                    @include bgIconCenter(addColorIcon("screenFull","fff"), 1.5rem);
+                    &.full{
+                        $screen : addColorIcon("screenReduce","fff");
+                        background-image: url("#{$screen}");
+                    }
+                }
+                &.reload{
+                    @include bgIconCenter(addColorIcon("reload","fff"), 1.5rem);
+                }
+            }
+        }
+        //@include modalFullScreen("mobile");
+    }   
+    & .screenGames{
+        &__options{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.25rem;
+            width: 100%;
+        }
+    }
+}

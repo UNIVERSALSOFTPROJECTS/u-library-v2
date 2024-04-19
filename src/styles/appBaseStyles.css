@@ -270,15 +270,15 @@ p, b, span, a, li *, button {
   border: 0;
 }
 
-.Coliseosport .slc:hover, .Coliseosport .footer__social--instagram:hover, .Coliseosport .footer__social--facebook:hover, .Coliseosport .footer--lang:hover, .Coliseosport .footer--chat:hover, .Coliseosport .modal.screenGames .modal-header .btn.screen:hover, .Coliseosport .modal.withdrawal .withdrawal__copy:hover, .Coliseosport .icon--atc:hover, .Coliseosport .icon--copy:hover, .Coliseosport .icon--chat:hover, .btn:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
+.Coliseosport .slc:hover, .Coliseosport .footer__social--instagram:hover, .Coliseosport .footer__social--facebook:hover, .Coliseosport .footer--lang:hover, .Coliseosport .footer--chat:hover, .Coliseosport .modal.screenGames .modal-header .btn.reload:hover, .Coliseosport .modal.screenGames .modal-header .btn.screen:hover, .Coliseosport .modal.screenGames .modal-header .btn.close:hover, .Coliseosport .modal.withdrawal .withdrawal__copy:hover, .Coliseosport .icon--atc:hover, .Coliseosport .icon--copy:hover, .Coliseosport .icon--chat:hover, .btn:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
   filter: brightness(0.9);
 }
 
-.Coliseosport .ipt:disabled, .Coliseosport .footer__social--instagram:disabled, .Coliseosport .footer__social--facebook:disabled, .Coliseosport .footer--lang:disabled, .Coliseosport .footer--chat:disabled, .Coliseosport .modal.screenGames .modal-header .btn.screen:disabled, .Coliseosport .modal.withdrawal .withdrawal__copy:disabled, .Coliseosport .icon--atc:disabled, .Coliseosport .icon--copy:disabled, .Coliseosport .icon--chat:disabled, .btn:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
+.Coliseosport .ipt:disabled, .Coliseosport .footer__social--instagram:disabled, .Coliseosport .footer__social--facebook:disabled, .Coliseosport .footer--lang:disabled, .Coliseosport .footer--chat:disabled, .Coliseosport .modal.screenGames .modal-header .btn.reload:disabled, .Coliseosport .modal.screenGames .modal-header .btn.screen:disabled, .Coliseosport .modal.screenGames .modal-header .btn.close:disabled, .Coliseosport .modal.withdrawal .withdrawal__copy:disabled, .Coliseosport .icon--atc:disabled, .Coliseosport .icon--copy:disabled, .Coliseosport .icon--chat:disabled, .btn:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
   filter: brightness(0.7);
 }
 
-.accordion__select, .Coliseosport .slc, .Coliseosport .footer__social--instagram, .Coliseosport .footer__social--facebook, .Coliseosport .footer--lang, .Coliseosport .footer--chat, .Coliseosport .modal.screenGames .modal-header .btn.screen, .Coliseosport .modal.withdrawal .withdrawal__copy, .Coliseosport .icon--atc, .Coliseosport .icon--copy, .Coliseosport .icon--chat, .btn, .Coliseosport .btn, .Coliseosport .btn.eye, .Coliseosport .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
+.accordion__select, .Coliseosport .slc, .Coliseosport .footer__social--instagram, .Coliseosport .footer__social--facebook, .Coliseosport .footer--lang, .Coliseosport .footer--chat, .Coliseosport .modal.screenGames .modal-header .btn.reload, .Coliseosport .modal.screenGames .modal-header .btn.screen, .Coliseosport .modal.screenGames .modal-header .btn.close, .Coliseosport .modal.withdrawal .withdrawal__copy, .Coliseosport .icon--atc, .Coliseosport .icon--copy, .Coliseosport .icon--chat, .btn, .Coliseosport .btn, .Coliseosport .btn.eye, .Coliseosport .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
   cursor: pointer;
   font-size: inherit;
   width: 100%;
@@ -1791,29 +1791,66 @@ p, b, span, a, li *, button {
   align-content: normal;
 }
 .Coliseosport .modal.screenGames .modal-header {
-  grid-template-columns: 3rem auto 3rem;
+  grid-template-columns: 6.5rem auto 6.5rem;
   justify-items: center;
 }
-.Coliseosport .modal.screenGames .modal-header img {
-  width: 6.5rem;
+.Coliseosport .modal.screenGames .modal-header picture {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.Coliseosport .modal.screenGames .modal-header picture img {
+  width: 2rem;
+}
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  .Coliseosport .modal.screenGames .modal-header picture img {
+    width: 6.5rem;
+  }
+}
+.Coliseosport .modal.screenGames .modal-header.safari {
+  grid-template-columns: 3rem auto 3rem;
+}
+.Coliseosport .modal.screenGames .modal-header.safari .screenGames__options {
+  grid-template-columns: 1fr;
+}
+.Coliseosport .modal.screenGames .modal-header .btn {
+  background-color: #404040;
 }
 .Coliseosport .modal.screenGames .modal-header .btn.close {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z'/></svg>");
-  width: 100%;
-  height: 100%;
-}
-.Coliseosport .modal.screenGames .modal-header .btn.screen {
-  background-image: url("data:image/svg+xml,<svg  viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 9.00006L4 6.00006C4 4.89549 4.89543 4.00006 6 4.00006L9 4.00006' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M20 15.0001V18.0001C20 19.1046 19.1046 20.0001 18 20.0001H15' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M15 4.00006L18 4.00006C19.1046 4.00006 20 4.89549 20 6.00006L20 9.00006' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M9 20.0001L6 20.0001C4.89543 20.0001 4 19.1046 4 18.0001L4 15.0001' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><defs><clipPath><rect width='24' height='24' fill='%23fff'/></clipPath></defs></svg>");
   color: #000;
   height: 40px;
   text-align: start;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 2rem;
-  background-color: transparent;
+}
+.Coliseosport .modal.screenGames .modal-header .btn.screen {
+  background-image: url("data:image/svg+xml,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M22 8V2H16' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M2 16V22H8' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M8 2H2V8' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M16 22H22V16' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  color: #000;
+  height: 40px;
+  text-align: start;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1.5rem;
 }
 .Coliseosport .modal.screenGames .modal-header .btn.screen.full {
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 4.00012V7.00012C9 8.10469 8.10457 9.00012 7 9.00012H4' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M15 20.0001L15 17.0001C15 15.8956 15.8954 15.0001 17 15.0001L20 15.0001' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M20 9.00012L17 9.00012C15.8954 9.00012 15 8.10469 15 7.00012L15 4.00012' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M4 15.0001L7 15.0001C8.10457 15.0001 9 15.8956 9 17.0001L9 20.0001' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/><defs><rect width='24' height='24' fill='%23fff'/></defs></svg>");
+  background-image: url("data:image/svg+xml,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M16 2V8H22' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M8 22V16H2' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M2 8H8V2' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M22 16H16V22' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+}
+.Coliseosport .modal.screenGames .modal-header .btn.reload {
+  background-image: url("data:image/svg+xml,<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M19.7102 7.29C17.5902 4.68 15.2502 3 12.0002 3C10.5502 3 9.17021 3.35 7.96021 3.96C5.60021 5.15 3.83021 7.35 3.22021 10' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M21 6V7.4V9H19.4H18L21 6Z' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M4.29004 16.71C6.41004 19.32 8.75004 21 12 21C13.45 21 14.83 20.65 16.04 20.04C18.4 18.85 20.17 16.65 20.78 14' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M3 18V16.6V15H4.6H6L3 18Z' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  color: #000;
+  height: 40px;
+  text-align: start;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1.5rem;
+}
+.Coliseosport .modal.screenGames .screenGames__options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  width: 100%;
 }
 .Coliseosport .modal.screenGames .loading {
   position: absolute;

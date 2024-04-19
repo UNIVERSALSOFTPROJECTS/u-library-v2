@@ -1,6 +1,7 @@
 <script>
     import { onDestroy, onMount } from "svelte";
     import { watchResize } from "svelte-watch-resize";
+    import { assetsUrl } from "../../js/utils/assetsUtils";
     import { isMobileSafari } from 'mobile-device-detect';
 
     export let open;
@@ -10,6 +11,7 @@
 
     let loadIframe = true;
     let isFullscreen = false;
+    let viewIframe = true;
     let heightModal;
 
     const resizeHeightModal = () => { heightModal = visualViewport.height; }
@@ -27,6 +29,11 @@
         if (document.fullscreenElement != null) toggleFullscreen();
         open = false;
     }   
+    const reloadIframe = () => { 
+        viewIframe = false;
+        loadIframe = true;
+        setTimeout(() => { viewIframe = true;}, 100);
+    }
    
     const toggleFullscreen = () => {
        setTimeout(() => { resizeHeightModal(); }, 100);
@@ -51,22 +58,34 @@
 
     $: statusModal(open);
 </script>
+
 {#if open}
     <div class="modal screenGames" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom} on:scroll={resizeHeightModal}>
         <div class="modal-dialog">
-            <div class="modal-content {isFullscreen?'fullscreen':''}" use:watchResize={resizeHeightModal} style="height:{heightModal}px">
-                <div class="modal-header">
-                    <button class="btn close" on:click={closeModal} />
-                    <img src="https://assets.apiusoft.com/{platform}/logo.png" alt="logo-{platform}">
-                    <button class="btn screen {isFullscreen?'full':''}" on:click={toggleFullscreen} hidden={isMobileSafari}></button>
+            <div class="modal-content" use:watchResize={resizeHeightModal} style="height:{heightModal}px">
+                <div class="modal-header {isMobileSafari?'safari':''}">
+                    <div class="screenGames__options">
+                        <button class="btn close" on:click={closeModal} />
+                        <div/>
+                    </div>
+                    <picture>
+                        <source media="(max-width: 1023px)" srcset="{assetsUrl}{platform}/logo_mb.png">
+                        <img src="{assetsUrl}{platform}/logo.png" alt="{platform}-logo" loading="eager">
+                    </picture>
+                    <div class="screenGames__options">
+                        <button class="btn screen {isFullscreen?'full':''}" on:click={toggleFullscreen} hidden={isMobileSafari}></button>
+                        <button class="btn reload" on:click={reloadIframe}></button>
+                    </div>
                 </div>
                 <div class="modal-body">
                     {#if loadIframe}
                         <b class="loading"><b><b></b></b></b>
                     {/if}
-                    <iframe on:load={()=>{loadIframe = false;}} width="100%" height="100%" src={url_game} frameborder="0" title="modalGame"></iframe>
+                    {#if viewIframe}
+                        <iframe  on:load={()=>{loadIframe = false;}} width="100%" height="100%" src={url_game} frameborder="0" title="modalGame"></iframe>
+                    {/if}
                 </div>
             </div>
         </div>
     </div>
-    {/if}
+{/if}
