@@ -412,11 +412,6 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     width: 100%;
                     align-content: normal;
                 }
-                &-content{
-                    &.fullscreen{
-                        min-height: 100vh;
-                    }
-                }
                 &-header{
                     grid-template-columns: 3rem auto 3rem;
                     justify-items: center;

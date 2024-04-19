@@ -1790,9 +1790,6 @@ p, b, span, a, li *, button {
   width: 100%;
   align-content: normal;
 }
-.Coliseosport .modal.screenGames .modal-content.fullscreen {
-  min-height: 100vh;
-}
 .Coliseosport .modal.screenGames .modal-header {
   grid-template-columns: 3rem auto 3rem;
   justify-items: center;

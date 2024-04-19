@@ -1,5 +1,7 @@
 <script>
+    import { onDestroy, onMount } from "svelte";
     import { watchResize } from "svelte-watch-resize";
+    import { isMobileSafari } from 'mobile-device-detect';
 
     export let open;
     export let platform;
@@ -9,7 +11,7 @@
     let loadIframe = true;
     let isFullscreen = false;
     let heightModal;
-    window.scrollTo(0, 1);
+
     const resizeHeightModal = () => { heightModal = visualViewport.height; }
     
     function statusModal(isActive) {
@@ -44,6 +46,9 @@
         }
     }
 
+    onMount(() => { window.addEventListener('resize', resizeHeightModal); });
+    onDestroy(() => { window.removeEventListener('resize', resizeHeightModal); });
+
     $: statusModal(open);
 </script>
 {#if open}
@@ -53,7 +58,7 @@
                 <div class="modal-header">
                     <button class="btn close" on:click={closeModal} />
                     <img src="https://assets.apiusoft.com/{platform}/logo.png" alt="logo-{platform}">
-                    <button class="btn screen {isFullscreen?'full':''}" on:click={toggleFullscreen}></button>
+                    <button class="btn screen {isFullscreen?'full':''}" on:click={toggleFullscreen} hidden={isMobileSafari}></button>
                 </div>
                 <div class="modal-body">
                     {#if loadIframe}
