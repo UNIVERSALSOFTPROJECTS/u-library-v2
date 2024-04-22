@@ -341,6 +341,12 @@ console.log("active_view",active_view);
             e.preventDefault(); // Evita que se muestre el menú contextual
         });
     }
+
+
+    async function getCurrencyId() {
+        let data = await ServerConnection.users.getCurrencyIdByCodeAgent("OP1CJTIENDA");
+        console.log(data);
+    }
 </script>
 
 <!-- on:contextmenu="{noTouch}" on:mousedown="{noTouch}" role="button" tabindex="0" -->
@@ -390,6 +396,7 @@ console.log("active_view",active_view);
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
     <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button>
     <button class="btn signup" on:click={onOpenProfile}>Abrir prefil</button>
+    <button class="btn signup" on:click={getCurrencyId}>detacat code agent</button>
 
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >

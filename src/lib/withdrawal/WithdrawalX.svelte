@@ -101,7 +101,7 @@
             </div>
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-static-element-interactions -->
-            <div on:click={openTermsConditions}>{@html t("withdrawal.termsConditions")}</div>
+            <div on:click={openTermsConditions}>{ t("withdrawal.termsConditions")}</div>
             <button class="btn deposit" on:click={validateWithdrawal}>{t("withdrawal.request")}</button>
         {/if}
     {/if}

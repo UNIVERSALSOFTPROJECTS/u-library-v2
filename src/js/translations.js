@@ -26,7 +26,7 @@ export default {
       "signup.acceptPandP": "Confirmo haber leído y aceptado los <a href='https://assets.apiusoft.com/{{platform}}/t&c.pdf' target='_blank'><b>Términos y condiciones</b></a> de {{platform}}.",
       "signup.register": "Registrarse",
       "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
-      //---------------SINGUP/NAME CURRENCIES-----------------------------
+      //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
       "currency.usd":"Dólar estadounidense",
       "currency.clp":"Peso chileno",
       "currency.cop":"Peso colombiano",
@@ -81,7 +81,7 @@ export default {
       "footer.declaration":"está sujeto a los términos y condiciones de este sitio web. Todos los derechos reservados.",
 
       //---------------MENSAJES-----------------------------
-      "msg.sucessLogin": "Bienvenido a {{platform}}",
+      "msg. sucessLogin": "Bienvenido a {{platform}}",
       "msg.sucessRegister": "Registro exitoso",
       "msg.allObligatory": "Todos los campos son obligatorios",
       "msg.pageMaintenance": "Página en mantenimiento, espere unos minutos",
@@ -164,7 +164,7 @@ export default {
         "currency.usd":"Dollar américain",
         "currency.clp":"Peso chilien",
         "currency.cop":"Peso colombien",
-        //---------------RECOVERPASSWORD-----------------------------
+        //---------------RECOVERPASSWORD----DISCARD-------------------------
         "recoverPassword.title":"Récupérer le mot de passe",
         "recoverPassword.email":"Entrer votre Email",
         "recoverPassword.send":"Envoyer",
@@ -174,6 +174,8 @@ export default {
         //---------------Withdrawal-----------------------------
         "withdrawal.title": "Retrait",
         "withdrawal.amount0": "Entrez un montant",
+        "withdrawal.min": "Le retrait minimum est ",
+        "withdrawal.max": "Le retrait maximum'est ",
         "withdrawal.lowBalance": "Solde insuffisant",
         "withdrawal.copyCode": "Utilisateur: {{user}}\nID: {{id}}\nCode de retrait: {{code}}",
         "withdrawal.generalData": "Données générales:",
@@ -187,6 +189,30 @@ export default {
         "withdrawal.withdraw": "Entrez le montant à retirer",
         "withdrawal.termsConditions": "En demandant votre retrait, vous acceptez les <b>Termes et Conditions</b>",
         "withdrawal.request": "Demander le retrait",
+
+         //---------------NAME CAT GAMES-----------------------------
+        "categoryGame.home": "Home",
+        "categoryGame.slot": "Casino",
+        "categoryGame.slotlive": "Casino en direct",
+        "categoryGame.crash": "Crash games",
+        "categoryGame.scratch": "Gratter et gagner",
+        "categoryGame.sportbook": "Sports",
+        "categoryGame.sportbooklive": "Sports en direct",
+        "categoryGame.horses": "Équitation",
+        "categoryGame.virtual": "Jeux virtuels",
+        "categoryGame.providers": "Fournisseurs",
+        //---------------FOOTER-----------------------------
+        "footer.s_p":"Sécurité et confidentialité",
+        "footer.t_c":"Termes & Conditions",
+        "footer.p_p":"Politique et confidentialité",
+        "footer.g_r":"Jeu responsable",
+        "footer.p_a":"Procédures LBC",
+        "footer.q_a":"Questions fréquentes",
+        "footer.promotions":"Promotions",
+        "footer.follow":"Suivez-nous sur",
+        "footer.paymethods":"Moyen de paiement",
+        "footer.contanct":"Contactez-nous",
+        "footer.declaration":"est soumis aux termes et conditions de ce site web. Tous droits réservés.",
         //---------------MENSAJES-----------------------------
         "msg.sucessLogin": "Bienvenue en {{platform}}",
         "msg.sucessRegister": "Inscription réussie",
@@ -205,8 +231,17 @@ export default {
         "msg.passwordMin5": "Le mot de passe doit comporter au moins 5 caractères",
         "msg.codeVerification": "Entrez le code de vérification",
         "msg.acceptTandC": "Vous devez accepter les Termes et Conditions",
+        "msg.saveData": "Informations enregistrées",
         "msg.confirmedChangePassword": "Changement de mot de passe confirmé",
-    },
+        "msg.duplicatedSession": "Je me suis connecté depuis un autre appareil !, je me déconnecte...",
+        "msg.passwordNotMatch": "Les mots de passe doivent correspondre",
+        "msg.incorrectPass": "Mot de passe actuel incorrect",
+        "msg.changePassSuccess": "Changement de mot de passe réussi",
+        //---------------Provider list-----------------------------
+        "provider.playNow":"Jouez maintenant",
+        //---------------TEXT GENERAL NO COMPONENT-----------------
+
+      },
     //solo para testear crashgames login autosaved
     br:{
       "login.title": "Bem-vindo a",
