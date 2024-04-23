@@ -81,6 +81,7 @@
       url += "&eventInfo=" +eventInfo;
     }
     sportbookGameUrl = url;
+    console.log("url====>",sportbookGameUrl);
   };
 
   const openWintech = async () => {
@@ -100,7 +101,6 @@
       const {data} = await backend.game.getURLNovus(url);
       url = data.url
     }
-    console.log("sportbookNovus: ", url);
     sportbookGameUrl = url;
   };
   
