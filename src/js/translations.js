@@ -67,6 +67,7 @@ export default {
       "categoryGame.horses": "Hipicas",
       "categoryGame.virtual": "Juegos virtuales",
       "categoryGame.providers": "Proveedores",
+      "categoryGame.estadisticR": "Estadísticas y resultados",
       //---------------FOOTER-----------------------------
       "footer.s_p":"Seguridad y privacidad",
       "footer.t_c":"Términos y condiciones",
@@ -129,8 +130,13 @@ export default {
        "movements.date": "Fecha",
        "movements.operation": "Operación",
        "movements.amount": "Monto",
-
-
+       //---------------HEADER-----------------------------
+       "header.myacc": "Mi cuenta",
+       "header.balance": "Saldo",
+       "header.balanceBonus": "Saldo Bono",
+       "header.logout": "Cerrar sesión",
+       "header.login": "Acceso",
+       "header.signup": "Registro",
 
     },
     fr: {
@@ -201,6 +207,7 @@ export default {
         "categoryGame.horses": "Équitation",
         "categoryGame.virtual": "Jeux virtuels",
         "categoryGame.providers": "Fournisseurs",
+        "categoryGame.estadisticR": "Statistiques et résultats",
         //---------------FOOTER-----------------------------
         "footer.s_p":"Sécurité et confidentialité",
         "footer.t_c":"Termes & Conditions",
@@ -240,7 +247,13 @@ export default {
         //---------------Provider list-----------------------------
         "provider.playNow":"Jouez maintenant",
         //---------------TEXT GENERAL NO COMPONENT-----------------
-
+        //---------------HEADER-----------------------------
+        "header.myacc": "Mon compte",
+        "header.balance": "Solde",
+        "header.balanceBonus": "Solde Bonus",
+        "header.logout": "Fermer la session",
+        "header.login": "Connexion",
+        "header.signup": "S'inscrire",
       },
     //solo para testear crashgames login autosaved
     br:{
