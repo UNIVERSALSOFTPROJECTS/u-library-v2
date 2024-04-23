@@ -11,6 +11,7 @@
   export let loginModalOpen;
   export let GAMEAPI_URL;
   //export let clientCode;
+  export let lang;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -48,7 +49,7 @@
   }
   
   onMount(()=>{
-
+    console.log("lang", lang)
     window.addEventListener("message", receiveMessage, false);
     console.log("receiveMessage:", receiveMessage);
   });
@@ -74,6 +75,7 @@
    const openDigtain = async () => {
     let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.digtain, options.gameToken) : guestURLdigtain;
     url += active_view == "sportbooklive" ? "&currentgame=live" : "&currentgame=PreMatch";
+    url += `&lang=${lang}`;
     if(options.eventInfo){
       const eventInfo=JSON.stringify(mode == "wb"?options.eventInfo:options.eventInfo.Id);
       url += "&eventInfo=" +eventInfo;
