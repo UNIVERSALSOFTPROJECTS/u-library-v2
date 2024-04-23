@@ -107,6 +107,8 @@ export default {
       "msg.changePassSuccess": "Cambio de contraseña exitoso",
        //---------------Provider list-----------------------------
        "provider.playNow":"Juega ahora",
+       "provider.startNow":"!Empieza ahora¡",
+       "provider.viewMore":"Ver más",
        //---------------Profile-----------------------------
        "profile.title":"Perfil de usuario",
        "profile.personalData":"Datos personales",
@@ -246,6 +248,8 @@ export default {
         "msg.changePassSuccess": "Changement de mot de passe réussi",
         //---------------Provider list-----------------------------
         "provider.playNow":"Jouez maintenant",
+        "provider.startNow":"Commencez maintenant!",
+        "provider.viewMore":"Voir plus",
         //---------------TEXT GENERAL NO COMPONENT-----------------
         //---------------HEADER-----------------------------
         "header.myacc": "Mon compte",
