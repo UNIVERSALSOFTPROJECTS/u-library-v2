@@ -272,7 +272,7 @@ export default {
         "header.login": "Connexion",
         "header.signup": "S'inscrire",
         //---------------game-----------------------------
-        "game.search": "Chercher",
+        "gameOptions.search": "Chercher",
         "gameOptions.menuGames": "Menus des jeux",
         "gameOptions.ALL": "Tous les Jeux",
         "gameOptions.POP": "Populaire ",
