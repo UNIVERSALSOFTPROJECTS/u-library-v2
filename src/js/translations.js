@@ -105,6 +105,7 @@ export default {
       "msg.passwordNotMatch": "Las contraseñas deben coincidir",
       "msg.incorrectPass": "Contraseña actual incorrecta",
       "msg.changePassSuccess": "Cambio de contraseña exitoso",
+      "msg.copied": "Copiado",
        //---------------Provider list-----------------------------
        "provider.playNow":"Juega ahora",
        "provider.startNow":"!Empieza ahora¡",
@@ -122,10 +123,12 @@ export default {
        "profile.address": "Dirección",
        "profile.city": "Ciudad",
        "profile.save": "Guardar",
+       "profile.changePass": "Cambiar contraseña",
        "profile.currentPass": "Contraseña actual",
        "profile.newPass": "Contraseña nueva",
        "profile.confirmNewPass": "Confirmar nueva contraseña",
-      //---------------Movements-----------------------------
+      
+       //---------------Movements-----------------------------
        "movements.noInformation": "No se encontro información",
        "movements.results": "Resultados",
        "movements.reference": "Referencia",
@@ -260,10 +263,29 @@ export default {
         "msg.passwordNotMatch": "Les mots de passe doivent correspondre",
         "msg.incorrectPass": "Mot de passe actuel incorrect",
         "msg.changePassSuccess": "Changement de mot de passe réussi",
+        "msg.copied": "Copié",
         //---------------Provider list-----------------------------
         "provider.playNow":"Jouez maintenant",
         "provider.startNow":"Commencez maintenant!",
         "provider.viewMore":"Voir plus",
+               //---------------Profile-----------------------------
+       "profile.title":"Profil de l'utilisateur",
+       "profile.personalData":"Informations personnelles",
+       "profile.username":"Nom d'utilisateur",
+       "profile.nameLastname":"Prénoms et noms",
+       "profile.birthday": "Date de naissance",
+       "profile.email": "Courrier électronique",
+       "profile.phone": "Téléphone",
+       "profile.typeDoc": "Type de document",
+       "profile.numberDoc": "Numéro de document",
+       "profile.address": "Adresse",
+       "profile.city": "Ville",
+       "profile.save": "sauvegarder",
+       "profile.changePass": "Changer le mot de passe",
+       "profile.currentPass": "Mot de passe actuel",
+       "profile.newPass": "nouveau mot de passe",
+       "profile.confirmNewPass": "Confirmer le nouveau mot de passe",
+      
         //---------------TEXT GENERAL NO COMPONENT-----------------
         //---------------HEADER-----------------------------
         "header.myacc": "Mon compte",
@@ -276,7 +298,7 @@ export default {
         "gameOptions.search": "Chercher",
         "gameOptions.menuGames": "Menus des jeux",
         "gameOptions.ALL": "Tous les Jeux",
-        "gameOptions.POP": "Populaire ",
+        "gameOptions.POP": "Populaire",
         "gameOptions.NEW": "Nouveaux jeux",
         "gameOptions.RULE": "Roulettes",
         "gameOptions.TABL": "Jeux de société",
