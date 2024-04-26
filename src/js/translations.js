@@ -129,12 +129,19 @@ export default {
        "profile.confirmNewPass": "Confirmar nueva contraseña",
       
        //---------------Movements-----------------------------
+       "movements.title": "Movimientos",
        "movements.noInformation": "No se encontro información",
        "movements.results": "Resultados",
        "movements.reference": "Referencia",
        "movements.date": "Fecha",
        "movements.operation": "Operación",
        "movements.amount": "Monto",
+       "movements.from": "Desde",
+       "movements.until": "Hasta",
+       "movements.all": "Todos",
+       "movements.deposits": "Depósitos",
+       "movements.withdrawals": "Retiros",
+       "movements.awards": "Premios",
        //---------------HEADER-----------------------------
        "header.myacc": "Mi cuenta",
        "header.balance": "Saldo",
@@ -285,7 +292,20 @@ export default {
        "profile.currentPass": "Mot de passe actuel",
        "profile.newPass": "nouveau mot de passe",
        "profile.confirmNewPass": "Confirmer le nouveau mot de passe",
-      
+      //---------------Movements-----------------------------
+      "movements.title": "Mouvements",
+      "movements.noInformation": "Aucune information trouvée",
+      "movements.results": "Résultats",
+      "movements.reference": "Référence",
+      "movements.date": "Date",
+      "movements.operation": "Opération",
+      "movements.amount": "Montant",
+      "movements.from": "Depuis",
+      "movements.until": "Jusqu'à",
+      "movements.all": "Tous",
+      "movements.deposits": "Dépôts",
+      "movements.withdrawals": "Retraits",
+      "movements.awards": "Prix",
         //---------------TEXT GENERAL NO COMPONENT-----------------
         //---------------HEADER-----------------------------
         "header.myacc": "Mon compte",
