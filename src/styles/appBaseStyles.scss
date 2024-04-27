@@ -602,5 +602,6 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
     //.footer{
     @include footer__model_1(4,3);//mid_columns, bottom_columns
     //}   
+     @include checkboxSwitch;
 }
 

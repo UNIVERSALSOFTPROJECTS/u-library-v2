@@ -18,8 +18,10 @@
     let userType = configSignup.userType;
     let countries = configSignup.countries;
     let currencies = configSignup.currencies;
-    let agentCodeType = configSignup.agentCodeType || '';
+    let agentCodeType = configSignup.agentCodeType || 'codeAgent';
     let preRegister = configSignup.preRegister == undefined?true:false;//solo si falla el proveedor de sms
+    let haveAfiliated = configSignup.haveAfiliated || false;
+    let isCheckedAfiliated = haveAfiliated;
     //loading
     let loadSms;
     let loadSignup;
@@ -123,7 +125,10 @@
          }
         try {
             loadSignup = true;
-            if(typeSignup === "codeAgent") await getCurrencyId();//Just if add codeagent
+            if(typeSignup === "codeAgent"){
+                codeAgent = agentCodeType == 'nameAfiliated'?"@"+codeAgent:codeAgent;
+                await getCurrencyId();//Just if add codeagent
+            }
             const {data} = await ServerConnection.users.register(username.trim(),name,country,country+phone, email, password, date, codeAgent,smscode,userType,platform,currency,doctype,document);
             data.username = username;
             data.password = password;
@@ -139,6 +144,10 @@
             loadSignup = false;
         }
     }
+    const toggleAgentCodeType = () =>{ 
+        agentCodeType = agentCodeType == "codeAgent"?"nameAfiliated":"codeAgent";
+        codeAgent = "";
+     }
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
     onMount(()=>{
@@ -151,7 +160,6 @@
         }
     });
 </script>
-  
 <form class="modal-body" on:submit={avoidSubmit}>
     <b>{t("signup.infoPersonal")}</b>
     <form><input type="text" class="ipt icon--user" placeholder={t("signup.nameLastname")} autocomplete="off" bind:value={name} on:input={inputJustText}></form>
@@ -180,16 +188,28 @@
     {:else if typeSignup === "selectCurrency"}
         <DropdownCurrencies {currencies} bind:currency bind:codeAgent t={t}/>
     {:else if typeSignup === "codeAgent"}
+        {#if agentCodeType !='url' && haveAfiliated}
+            <div>
+                <label for="afiliated">{t("signup.agent")}</label>
+                <input type="checkbox" id="afiliated" class="switch" bind:checked={isCheckedAfiliated} on:click={toggleAgentCodeType}>
+                <label for="afiliated">{t("signup.afiliated")}</label>
+            </div>
+        {/if}
         <div class="signup__container--agent">
             {#if agentCodeType=='url'}
                 <div></div>
             {:else}
-                <p>{t("signup.codeAgent")}</p>
-                <div class="signup__codeAgent">
-                    <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" bind:value={codeAgent} on:input={inputJustNumbers}>
-                    <div>-</div>
-                    <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" on:input={inputJustNumbers}>
-                </div>
+                {#if agentCodeType=='codeAgent'}
+                    <p>{t("signup.codeAgent")}</p>
+                    <div class="signup__codeAgent">
+                        <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" bind:value={codeAgent} on:input={inputJustNumbers}>
+                        <div>-</div>
+                        <input type="number" class="ipt" min="0" placeholder="0000" autocomplete="off" on:input={inputJustNumbers}>
+                    </div>
+                {:else if  agentCodeType=='nameAfiliated'}
+                    <p>{t("signup.afiliated")}</p>
+                    <input type="text" class="ipt" placeholder={t("signup.nameAfiliated")} autocomplete="off" bind:value={codeAgent}>
+                {/if}
             {/if}
         </div>
     {/if}

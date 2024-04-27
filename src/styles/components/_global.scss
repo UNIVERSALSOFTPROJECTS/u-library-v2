@@ -94,6 +94,9 @@ p,b,span,a,li *,button{ //default size safari
     .ipt{
         @extend %input;
     }
+    // .switch{
+    //     @include checkboxSwitch;
+    // }
     
     a{
         &.btn{

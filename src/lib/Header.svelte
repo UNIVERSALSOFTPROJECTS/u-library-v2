@@ -92,6 +92,8 @@
             {prefix:"+56",flag:"chl"},
             {prefix:"+51",flag:"pe"},
         ],
+        agentCodeType: "nameAfiliated", //para el codigo agiiado de manera directa
+        haveAfiliated: true, //para el codigo agiiado de manera directa
        // preRegister:false, //por defecto esta comentado, solo descomentar en caso falle el proveedor de sms
     };
     
