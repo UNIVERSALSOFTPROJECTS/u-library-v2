@@ -89,8 +89,8 @@
     </div>
 
     <div class="footer__container">
-        {#if payments.length != 0}
         <div class="footer__container--sub">
+            {#if payments.length != 0}
             <div class="footer__payments">
                 <b>{t("footer.paymethods")}</b>
                 <div class="footer__payments--imgs">
@@ -99,8 +99,10 @@
                     {/each}
                 </div>
             </div>
+            {:else}
+            <div></div>
+            {/if}
         </div>
-        {/if}
 
         {#if socials.length != 0 || email}
         <div class="footer__container--sub">
