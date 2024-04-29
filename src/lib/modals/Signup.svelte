@@ -174,7 +174,7 @@
     <form><input type="email" class="ipt icon--email" placeholder={t("signup.email")} autocomplete="off" bind:value={email}></form>
     <form><input type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}></form>
     <div class="signup__container--pass">
-        <InputPassword bind:password t={t}/>
+        <InputPassword bind:password {t}/>
     </div>
     <b>{t("signup.validation")}</b>
     {#if typeSignup === "mixed"}
