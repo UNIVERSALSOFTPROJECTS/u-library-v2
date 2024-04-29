@@ -20,8 +20,8 @@
     let currencies = configSignup.currencies;
     let agentCodeType = configSignup.agentCodeType || 'codeAgent';
     let preRegister = configSignup.preRegister == undefined?true:false;//solo si falla el proveedor de sms
-    let isCodeAgenteSwitch = configSignup.isCodeAgenteSwitch || false;
-    let isCheckedAfiliated = isCodeAgenteSwitch;
+    let isCodeAgentSwitch = configSignup.isCodeAgentSwitch || false;
+    let isCheckedAfiliated = isCodeAgentSwitch;
     //loading
     let loadSms;
     let loadSignup;
@@ -188,7 +188,7 @@
     {:else if typeSignup === "selectCurrency"}
         <DropdownCurrencies {currencies} bind:currency bind:codeAgent t={t}/>
     {:else if typeSignup === "codeAgent"}
-        {#if agentCodeType !='url' && isCodeAgenteSwitch}
+        {#if agentCodeType !='url' && isCodeAgentSwitch}
             <div>
                 <label for="afiliated">{t("signup.agent")}</label>
                 <input type="checkbox" id="afiliated" class="switch" bind:checked={isCheckedAfiliated} on:click={toggleAgentCodeType}>
