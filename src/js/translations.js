@@ -167,6 +167,10 @@ export default {
         "gameOptions.selectProviders": "Seleccionar proveedores",
         "gameOptions.favorites": "Favoritos",
         "gameOptions.new": "Nuevo",
+        //---------------expire-----------------------------
+        "expireSession.stillThere": "¿Sigues ahí?",
+        "expireSession.continuePlaying": "Continuar jugando",
+        "expireSession.expireIn": "Su sesión expira en",
       },
     fr: {
         "login.title": "Bienvenue en",
@@ -335,6 +339,10 @@ export default {
         "gameOptions.selectProviders": "Sélectionnez les fournisseurs",
         "gameOptions.favorites": "Favoris",
         "gameOptions.new": "Nouveau",
+        //---------------expire-----------------------------
+        "expireSession.stillThere": "Tu es toujours là?",
+        "expireSession.continuePlaying": "Continue de jouer",
+        "expireSession.expireIn": "Votre session expire dans",
       },
     //solo para testear crashgames login autosaved
     br:{

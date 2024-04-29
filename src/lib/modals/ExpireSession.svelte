@@ -3,6 +3,7 @@
     export let updateTimeSession;
     export let platform;
     export let onLogout;
+    export let t;
 
     let time = 60;
 
@@ -22,7 +23,7 @@
 
 <div class="modal-body">
     <img class="expireSession__logo" src="https://assets.apiusoft.com/{platform}/logo.png" alt="logo-{platform}" loading="eager">
-    <p class="expireSession__title">¿Sigues ahí?</p>
-    <button class="btn continue" on:click={updateTimeSession}>Continuar jugando</button>
-    <p class="expireSession__text">Su sesión expira en <b>{time}</b>s</p>
+    <p class="expireSession__title">{t("expireSession.stillThere")}</p>
+    <button class="btn continue" on:click={updateTimeSession}>{t( "expireSession.continuePlaying")}</button>
+    <p class="expireSession__text">{t("expireSession.expireIn")} <b>{time}</b>s</p>
 </div>
