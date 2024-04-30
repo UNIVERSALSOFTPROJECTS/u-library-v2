@@ -85,7 +85,7 @@ export default {
       "footer.declaration":"está sujeto a los términos y condiciones de este sitio web. Todos los derechos reservados.",
 
       //---------------MENSAJES-----------------------------
-      "msg. sucessLogin": "Bienvenido a {{platform}}",
+      "msg.sucessLogin": "Bienvenido a {{platform}}",
       "msg.sucessRegister": "Registro exitoso",
       "msg.allObligatory": "Todos los campos son obligatorios",
       "msg.pageMaintenance": "Página en mantenimiento, espere unos minutos",
