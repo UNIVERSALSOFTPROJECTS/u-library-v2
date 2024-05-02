@@ -12,6 +12,7 @@ let loggedUser = { agregatorToken: '2856783' };
 let user = {}
 let loginModalOpen = false;
 let clientCode
+let lang = 'fr';
 
 
 
@@ -28,13 +29,13 @@ const onCategoryChange = () => {
 
 export const DigtainSportBookGuestUser = () => ({
   Component: DigtainSportBook,
-  props: { user: {}, loginModalOpen, clientCode, onCategoryChange }
+  props: { user: {}, loginModalOpen, clientCode, onCategoryChange, lang }
 });
 
 
 export const DigtainSportBookloggetUser = () => ({
   Component: DigtainSportBook,
-  props: { user: loggedUser, loginModalOpen, clientCode, onCategoryChange }
+  props: { user: loggedUser, loginModalOpen, clientCode, onCategoryChange, lang }
 });
 
 
