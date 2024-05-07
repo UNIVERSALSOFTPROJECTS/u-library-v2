@@ -146,7 +146,7 @@
                   <td>{mov.txType} ({mov.paymentMethod?mov.paymentMethod:'' })
                   </td>
                   {#if mov.txType == "BET" || mov.txType == "WITHDRAW"}
-                    <td style="color: red;"> - {mov.amount.toFixed(2)}</td>
+                    <td style="color: red;">{mov.amount.toFixed(2)}</td>
                   {:else}
                     <td />
                   {/if}
