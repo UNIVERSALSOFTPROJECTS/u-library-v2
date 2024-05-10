@@ -24,19 +24,27 @@
     }
 
     const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
-    const resizeHeightModal = () => { if (open) heightModal = visualViewport.height; }
+
+    const resizeHeightModal = () => { 
+      if (open) {
+        let isLandscape = window.matchMedia("(orientation: landscape)").matches;
+        let inputIsFocused = document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA'; 
+        heightModal = isLandscape?"auto":(inputIsFocused? window.innerHeight:visualViewport.height)+"px"; 
+      }
+    }
 
     const interval = setInterval(resizeHeightModal, 250);
 
     $: statusModal(open);
 
     onDestroy(() => { clearInterval(interval); });
+    
 </script>
 
 {#if open}
-  <div class="{subModalOpened?'sub':''} modal {modalOpened || subModalOpened}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom} style="max-height:{heightModal}px">
+  <div class="{subModalOpened?'sub':''} modal {modalOpened || subModalOpened}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom} use:watchResize={resizeHeightModal} style="max-height:{heightModal}">
     <div class="modal-dialog {isMobile?'':'centered'}" transition:fly={{ y: -50, duration: 500 }}>
-      <div class="modal-content {!showHeader?'no-header':''}" use:watchResize={resizeHeightModal} style="max-height:{heightModal}px"> <!--  Error en APK de momento no se usara-->
+      <div class="modal-content {!showHeader?'no-header':''}" > <!--   Error en APK de momento no se usara-->
         {#if showHeader}
             <div class="modal-header">
             <div />
