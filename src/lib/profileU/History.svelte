@@ -139,14 +139,14 @@
             {#each movements.list as mov}
               {#if mov.status != 4}
                 <tr>
-                  <td>{mov.serial}</td>
+                  <td>{mov.trxId}</td>
                   <td>{moment(mov.created).format("YY-MM-DD HH:mm:ss")}</td>
                   <td>{mov.description}</td>
                   <td style="text-align:center;">{mov.game_name} ({mov.category} - {mov.brand})</td>
                   <td>{mov.txType} ({mov.paymentMethod?mov.paymentMethod:'' })
                   </td>
                   {#if mov.txType == "BET" || mov.txType == "WITHDRAW"}
-                    <td style="color: red;"> - {mov.amount.toFixed(2)}</td>
+                    <td style="color: red;">{mov.amount.toFixed(2)}</td>
                   {:else}
                     <td />
                   {/if}
