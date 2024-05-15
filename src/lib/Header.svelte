@@ -97,35 +97,32 @@
        // preRegister:false, //por defecto esta comentado, solo descomentar en caso falle el proveedor de sms
     };
     
-    //const configWithdrawal = {
-    //    dataType : "",
-    //    messageOptional : "",
-    //    banksNames: [],
-    //    typeAccount: []
-    //};
+   
     const configWithdrawal = {
+        id_banca: [] ,//disitribidor - almacena otros cajeros
+        id_ca: ["6970"],//caja dentro de un distribuidor principal
         dataType : "",
         messageOptional : "",
         formVerification : "https://forms.gle/5rRcbJVgE7n4F6Ro7",
         platform,
         banksNames: [
-           // { id:"Banco Estado" , name:"Banco Estado" },
-           // { id:"Banco Falabella" , name:"Banco Falabella" },
-           // { id:"Banco Santander" , name:"Banco Santander" },
-           // { id:"Banco de Chile(Edwards Citi)" , name:"Banco de Chile(Edwards Citi)" },
-           // { id:"Banco BCI" , name:"Banco BCI" },
-           // { id:"Scotiabank" , name:"Scotiabank" },
-           // { id:"Banco Itaú" , name:"Banco Itaú" },
-           // { id:"Coopeuch" , name:"Coopeuch" },
-           // { id:"Banco Ripley" , name:"Banco Ripley" },
-           // { id:"Banco BICE" , name:"Banco BICE" },
-           // { id:"Tenpo" , name:"Tenpo" },
-           // { id:"Banco Consorcio" , name:"Banco Consorcio" },
-           // { id:"Banco Internacional" , name:"Banco Internacional" },
-           // { id:"Mercado Pago" , name:"Mercado Pago" },
-           // { id:"Prepago Los Héroes" , name:"Prepago Los Héroes" },
-           // { id:"Superdigital" , name:"Superdigital" },
-           // { id:"Tapp Caja Los Andes" , name:"Tapp Caja Los Andes" },
+           { id:"Banco Estado" , name:"Banco Estado" },
+           { id:"Banco Falabella" , name:"Banco Falabella" },
+           { id:"Banco Santander" , name:"Banco Santander" },
+           { id:"Banco de Chile(Edwards Citi)" , name:"Banco de Chile(Edwards Citi)" },
+           { id:"Banco BCI" , name:"Banco BCI" },
+           { id:"Scotiabank" , name:"Scotiabank" },
+           { id:"Banco Itaú" , name:"Banco Itaú" },
+           { id:"Coopeuch" , name:"Coopeuch" },
+           { id:"Banco Ripley" , name:"Banco Ripley" },
+           { id:"Banco BICE" , name:"Banco BICE" },
+           { id:"Tenpo" , name:"Tenpo" },
+           { id:"Banco Consorcio" , name:"Banco Consorcio" },
+           { id:"Banco Internacional" , name:"Banco Internacional" },
+           { id:"Mercado Pago" , name:"Mercado Pago" },
+           { id:"Prepago Los Héroes" , name:"Prepago Los Héroes" },
+           { id:"Superdigital" , name:"Superdigital" },
+           { id:"Tapp Caja Los Andes" , name:"Tapp Caja Los Andes" },
         ],
         typeAccount: [
             { id:"Corriente", name:"Corriente" },
@@ -164,11 +161,25 @@
         ],
     };
     const configProfile = {
-        id_banca: [] ,//cajero principal - almacena otros cajeros
-        id_ca: [6970],//caja dentro de un cajero principal
+        id_banca: [] ,//disitribidor - almacena otros cajeros
+        id_ca: ["6970"],//caja dentro de un distribuidor principal
         doctype:["RUT","DNI","Pasaporte"],
-        timezone:'America/Santiago',
+        timezone:'America/Santiago',//for movementes
+        activePromotions: false,
     };
+    //DEPOSIT
+    const configDeposit = {
+        id_banca: [] ,//disitribidor - almacena otros cajeros
+        id_ca: ["6970"],//caja dentro de un distribuidor principal
+    }
+    //  const configWithdrawal = {
+    //     dataType : "",
+    //     messageOptional : "",
+    //     banksNames: [],
+    //     typeAccount: [],
+    //     linksChats: [],
+    // };
+    //RETIRO
 
     let screenGamesOpen = false;
 
@@ -196,8 +207,20 @@
 
     const onOpenExpireSession = () => { expireSessionModalOpen = true; subModalOpened = "expireSession"; chatLiveModalOpen = false; }
 
-    const onOpenDeposit = () => { depositModalOpen = true; modalOpened = "deposit" }
-    const onOpenWithdrawal = () => { withdrawalModalOpen = true; modalOpened = "withdrawal" }
+    const onOpenDeposit = () => { 
+        profileModalOpen = false; 
+        setTimeout(() => {
+            depositModalOpen = true; 
+            modalOpened = "deposit";  
+        }, 0);
+    }
+    const onOpenWithdrawal = () => { 
+        profileModalOpen = false; 
+        setTimeout(() => {
+            withdrawalModalOpen = true; 
+            modalOpened = "withdrawal"; 
+        }, 0);
+    }
     const toggleMenuBar = () => ( isToggleOn =! isToggleOn )
 
     //NOTA: SE CREARA UN onOk y un onError generico para aquellos modales que no necesiten motrar info adicional;
@@ -343,12 +366,6 @@ console.log("active_view",active_view);
             e.preventDefault(); // Evita que se muestre el menú contextual
         });
     }
-
-
-    async function getCurrencyId() {
-        let data = await ServerConnection.users.getCurrencyIdByCodeAgent("OP1CJTIENDA");
-        console.log(data);
-    }
 </script>
 
 <!-- on:contextmenu="{noTouch}" on:mousedown="{noTouch}" role="button" tabindex="0" -->
@@ -398,8 +415,6 @@ console.log("active_view",active_view);
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
     <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button>
     <button class="btn signup" on:click={onOpenProfile}>Abrir prefil</button>
-    <button class="btn signup" on:click={getCurrencyId}>detacat code agent</button>
-
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword} {onOpenSignup} bind:platform t={$t}/>
@@ -413,7 +428,7 @@ console.log("active_view",active_view);
         <Signup {configSignup} onOk={onSignupOk} onError={onSignupError} {onOpenLogin} t={$t}/>
     </Modal>
     <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
-        <Deposit bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError} />
+        <Deposit {configDeposit} bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError} />
     </Modal>
     <Modal bind:open={withdrawalModalOpen} bind:modalOpened title={$t("withdrawal.title")}>
         <!--
@@ -427,7 +442,7 @@ console.log("active_view",active_view);
     </Modal>
 
     <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
-        <Profile {configProfile} onError={onProfileError} onOk={onProfileOk} bind:user t={$t}/>
+        <Profile {configProfile} {onOpenWithdrawal} {onLogout} {onOpenDeposit} onError={onProfileError} onOk={onProfileOk} bind:user t={$t}/>
     </Modal>
 
     <Modal bind:open={chatLiveModalOpen} bind:subModalOpened title="Chat en vivo">

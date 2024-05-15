@@ -7,27 +7,25 @@
     export let onError;
     export let onOk;
     export let configProfile;
+    export let getMyAccount;
 
     let loadUserData;
-    let dataRequired = !configProfile.idWeb?true:false;
     let doctypes = configProfile.doctype;
     let exampleDoctype;
     let selectDoctype;
-    //let isDataComplete = accountUser.dataComplete;
-    let isDataComplete = false;
-
+    let isDataComplete =  accountUser.dataComplete;
+    
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
     const saveMyAccount = async()  =>{
-        if(!accountUser.document || !accountUser.address || !accountUser.city){
-           return onError(t("msg.allObligatory"));
-        }
+        if(isDataComplete) return onError(t("msg.allObligatory"));
         try {
             loadUserData = true;
             accountUser.doctype = selectDoctype;
             await ServerConnection.users.saveMyAccount(accountUser);
             isDataComplete = true;
             onOk(t("msg.saveData"));
+            getMyAccount();
         } catch (error) {
             console.log(error); 
             onError(t("msg.contactSupport"));
@@ -41,13 +39,8 @@
         else exampleDoctype = "";
     }
 
-
-
-//horaria POR IP????????????????????????
-
     onMount(async() => {
-        //if (accountUser.document || accountUser.address || accountUser.city) isDataComplete = true;
-        if (dataRequired && !isDataComplete) {
+        if (accountUser.isViewWeb && !isDataComplete) {
             selectDoctype = doctypes[0];
             changeDoctype();
         }
@@ -58,17 +51,17 @@
     <b>{t("profile.personalData")}</b>
     <form class="userdata__form" on:submit={avoidSubmit}>
         <p>{t("profile.username")}</p>
-        <input class="ipt" type="text" bind:value={accountUser.username} disabled>
         <p>{t("profile.nameLastname")}</p>
+        <input class="ipt" type="text" bind:value={accountUser.username} disabled>
         <input class="ipt" type="text" bind:value={accountUser.name} disabled>
         <p>{t("profile.email")}</p>
-        <input class="ipt" type="text" bind:value={accountUser.email} disabled>
         <p>{t("profile.birthday")}</p>
+        <input class="ipt" type="text" bind:value={accountUser.email} disabled>
         <input class="ipt" type="text" bind:value={accountUser.birthday} disabled>
         <p>{t("profile.phone")}</p>
+        {#if !accountUser.isViewWeb}<p></p>{:else}<p>{t("profile.typeDoc")}</p>{/if}
         <input class="ipt" type="text" bind:value={accountUser.phone} disabled>
-        {#if dataRequired}
-            <p>{t("profile.typeDoc")}</p>
+        {#if accountUser.isViewWeb}
             {#if accountUser.doctype}
             <input class="ipt" type="text" bind:value={accountUser.doctype} disabled>
             {:else}
@@ -79,21 +72,22 @@
             </select>
             {/if}
             <p>{t("profile.numberDoc")}</p>
-            <input class="ipt" type="text" placeholder={exampleDoctype} bind:value={accountUser.document} disabled={isDataComplete}>
             <p>{t("profile.address")}</p>
+            <input class="ipt" type="text" placeholder={exampleDoctype} bind:value={accountUser.document} disabled={isDataComplete}>
             <input class="ipt" type="text" bind:value={accountUser.address} disabled={isDataComplete}>
             <p>{t("profile.city")}</p>
+            <div></div>
             <input class="ipt" type="text" bind:value={accountUser.city} disabled={isDataComplete}>
             <div></div>
-            {#if !isDataComplete}
-                <button class="btn save" on:click={saveMyAccount} disabled={loadUserData}>
-                    {#if loadUserData}
-                        <div class="loading"><p></p><p></p><p></p></div>
-                    {:else}
-                        {t("profile.save")}
-                    {/if}
-                </button>
             {/if}
+        </form>
+        {#if !isDataComplete}
+            <button class="btn save" on:click={saveMyAccount} disabled={loadUserData}>
+                {#if loadUserData}
+                    <div class="loading"><p></p><p></p><p></p></div>
+                {:else}
+                    {t("profile.save")}
+                {/if}
+            </button>
         {/if}
-    </form>
 </div>

@@ -120,6 +120,9 @@
     }@else if ($position == "center"){
         background-size: contain; 
         background-position: #{$position};
+    }@else{
+        background-position: center;
+        background-size: $position;   
     }
 }
 

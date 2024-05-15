@@ -19,7 +19,6 @@ input{
 
 input[type=date] {
     -webkit-appearance: none;
-    -moz-appearance: none;  
     appearance: none;
     background-image: url("#{$calendar}");// ewsto puede ser un mixin, tambibne se us aen el input
     background-repeat: no-repeat;
@@ -28,7 +27,14 @@ input[type=date] {
     &::-webkit-calendar-picker-indicator {
         background:0 0;
     }
+    @-moz-document url-prefix() {//calendar firefox default
+        &{
+            background-image: none; 
+            padding-right: 0;
+        }
+    }
 }
+
 
 //input[type=checkbox] {
 //   cursor: pointer;

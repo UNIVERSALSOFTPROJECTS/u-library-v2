@@ -1,13 +1,17 @@
 <script>
     import ServerConnection from "../../js/server";
+    import { onMount } from "svelte";
+    import { assetsPayments } from "../../js/utils/assetsUtils";
+    import inputUtils from "../../js/utils/inputUtils";
+    import { currentDate } from "../../js/utils/formatUtils";
 
     export let user;
     export let onError;
     export let onOk;
     export let amountsFav;
+    export let configDeposit;
 
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
-    let url_global = "https://assets.apiusoft.com/generic_imgs";
     let loadDeposit = false;
     let iframeGateway;
     let sizeIframeGateway = '';//Pasarelas pueden variar de tamaño
@@ -16,7 +20,7 @@
     let bankPayments = [];
     let amountDeposit;
     let typeTranference;
-    let currentDate = new Date().toISOString().split('T')[0];
+    let date = currentDate();
     let detailsTranference = true;
     let bankDeposit = {
         reference:"",
@@ -25,11 +29,22 @@
         aditional:"",
         originBank:undefined,
         targetBankId:undefined,
-        date:currentDate,
+        date,
     };
     let paymentLink;
-    
-    getPayMethods();
+    let id_banca  = configDeposit.id_banca;
+    let id_ca  = configDeposit.id_ca;
+    let isLocked = true;
+
+    const inputJustNumbers = inputUtils.justNumbersValidator;
+
+    const detectLockedDeposit = () => {
+        if (id_banca.length === 0 && id_ca.length === 0) {
+            isLocked = true;
+        } else {
+            isLocked = !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
+        }
+    }
 
     async function getPayMethods() {
         try {
@@ -101,10 +116,19 @@
             else onError("Ocurrio un error, contactese con soporte");
     }
     
-    const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
+    onMount(async() => {
+        detectLockedDeposit();
+        if (!isLocked) getPayMethods(); 
+    });
 </script>
 
 <div class="modal-body {iframeGateway?'iframe':''} {sizeIframeGateway}">
+{#if isLocked}
+    <div class="deposit__message">
+        <div class="deposit__message--icon"></div>
+        <div class="deposit__message--text">Comuniquese con su cajero correspondiente para procesar su depósito.</div>
+    </div>
+{:else}
     {#if loadDeposit}
         <div class="loading"><p></p><p></p><p></p></div>
     {:else}
@@ -114,7 +138,7 @@
         {:else}
             {#if paySelected}
                 <button class="btn deposit__type" on:click={closePayMethod}>
-                    <img src="{url_global}/payments/{paySelected.img}.png" alt="paymethod-{paySelected.img}">
+                    <img src="{assetsPayments}{paySelected.img}.png" alt="paymethod-{paySelected.img}">
                     <div>
                         <b>{paySelected.name_pay}</b>
                         <p class="deposit__limits">{paySelected.min} {paySelected.iso} - {paySelected.max} {paySelected.iso}</p>
@@ -135,7 +159,7 @@
                         </div>
                         <div class="deposit__ipt">
                             <b>{paySelected.iso}</b>
-                            <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={justNumbersValidate}>
+                            <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers}>
                             <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar':'Depositar'}</button>
                         </div>
                     </div>
@@ -162,8 +186,8 @@
                         </select>
                         <p>Nro. de cuenta</p>
                         <p>Nro. de referencia</p>
-                        <input type="number" class="ipt" bind:value={bankDeposit.aditional} on:input={justNumbersValidate}>
-                        <input type="number" class="ipt" bind:value={bankDeposit.reference} on:input={justNumbersValidate}>
+                        <input type="number" class="ipt" bind:value={bankDeposit.aditional} on:input={inputJustNumbers}>
+                        <input type="number" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
                         <p>Monto</p>
                         <p>Fecha de transferencia</p>
                         <input type="text" class="ipt" bind:value={amountDeposit} disabled>
@@ -176,7 +200,7 @@
                 <div class="deposit__types">
                     {#each payMethods as paymethod}
                         <button class="btn deposit__type" on:click={() => openPayMethod(paymethod)}>
-                            <img src="{url_global}/payments/{paymethod.img}.png" alt="paymethod-{paymethod.img}">
+                            <img src="{assetsPayments}{paymethod.img}.png" alt="paymethod-{paymethod.img}">
                             <div>
                                 <b>{paymethod.name_pay}</b>
                                 <p class="deposit__limits">{paymethod.min} {paymethod.iso} - {paymethod.max} {paymethod.iso}</p>
@@ -188,4 +212,5 @@
             {/if}
         {/if}
     {/if}
+{/if}
 </div>
