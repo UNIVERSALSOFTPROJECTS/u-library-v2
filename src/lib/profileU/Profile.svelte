@@ -189,9 +189,7 @@
         <button
           on:click={showCashOut}
           class="profile btn btn_withdrawal"
-          title="Solicitar un retiro en efectivo.">
-          Retiro Efectivo
-        </button>
+          title="Solicitar un retiro en efectivo.">Retiro Efectivo</button>
         <button
           class="profile btn btn_deposit"
           title="Confirmar y activar un deposito en efectivo."
@@ -214,20 +212,10 @@
     {#if active_option == "MyProfile"}
       <div class="u-options My-acount">
         <div class="u-buttons-options">
-          <button
-            class="opc {active_section == 'balance' ? 'u-opc-select' : ''}"
-            on:click={() => {
-              active_section = "balance";
-            }}
-          >
+          <button class="opc {active_section == 'balance' ? 'u-opc-select' : ''}" on:click={() => {active_section = "balance";}}>
             <span>Saldo</span>
           </button>
-          <button
-            class="opc {active_section == 'MyData' ? 'u-opc-select' : ''}"
-            on:click={() => {
-              active_section = "MyData";
-            }}
-          >
+          <button class="opc {active_section == 'MyData' ? 'u-opc-select' : ''}"  on:click={() => { active_section = "MyData"; }} >
             <span>Mis Datos</span>
           </button>
           <button
