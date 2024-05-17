@@ -5,7 +5,7 @@
     import { stringToNumber } from "../../js/utils/formatUtils";
     import DropdownBonus from "../dropdown/DropdownBonus.svelte";
 
-    import UserData from "../profile/UserData.Svelte";
+    import UserData from "../profile/UserData.svelte";
     import ChangePassword from "../profile/ChangePassword.svelte";
     import Movements from "../profile/Movements.svelte"
 
