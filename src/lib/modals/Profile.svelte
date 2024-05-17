@@ -1,8 +1,9 @@
 <script>
     import { onMount } from "svelte";
     import { ServerConnection } from "../..";
-    
     import { getUpdateBalance } from '../../js/utils/serverUtils';
+    import { stringToNumber } from "../../js/utils/formatUtils";
+    import DropdownBonus from "../dropdown/DropdownBonus.svelte";
 
     import UserData from "../profile/UserData.Svelte";
     import ChangePassword from "../profile/ChangePassword.svelte";
@@ -16,16 +17,16 @@
     export let onOpenDeposit;
     export let onOpenWithdrawal;
     export let onLogout;
-    // export let activePromotions;
+    export let activePromotions;
 
     let accountUser = {};
     let activedBonus = [];
-    let bonusView = {};
+    let bonusView = {type: "total", value : user.bonus_sumTotal};
     let profileView = visualViewport.width > 1023 ? "movements":"";
     let timezone = configProfile.timezone;
     let id_banca  = configProfile.id_banca;
     let id_ca  = configProfile.id_ca;
-    let isLockedWithdrawal = true;
+    let isLockedWithdrawal = false;//falta ocualtar o mostrar le anuncion dependiendo si tien idbacan o idca
 
     const openSection = (section) => { profileView = section; }
 
@@ -63,9 +64,8 @@
             {type: "mega", value : user.bonus_global},
         ];
         let bonus_sumTotal = {type: "total", value : user.bonus_sumTotal};
-
-        activedBonus = bonuses.filter(bono => bono.value > 0);
-        bonusView = activedBonus.length > 1 ? bonus_sumTotal : activedBonus[0];
+        activedBonus = bonuses.filter(bono => stringToNumber(bono.value) > 0);
+        bonusView = activedBonus.length == 1 ? activedBonus[0]:bonus_sumTotal;
     }
 
     onMount(async() => {
@@ -87,27 +87,12 @@
                         <p>#{user.id}</p>
                     </div>
                 </div>
-                <button class="btn icon--atc"></button>
+                <!-- <button class="btn icon--atc"></button> -->
                 <button class="btn icon--copy" on:click={copyUser}></button>
             </div>
-            <div class="profile__balance">Saldo: {user.balance} {user.currency}</div>
-            <div class="{activedBonus.length > 1?'slc':''} profile__balance">
-                {#if activedBonus.length == 1}
-                    {t(`bonus.${bonusView.type}`)} : {bonusView.value} {user.currency}
-                {:else}
-                    {t("bonus.total")}: {user.bonus_sumTotal} {user.currency}
-                {/if}
-            </div>
-            {#if activedBonus.length > 1}
-            <div class="profile__bonuses">
-                    {#each activedBonus as bonus}
-                       <div>
-                            <span>{t(`bonus.${bonus.type}`)} :</span>
-                            <span> {bonus.value} {user.currency}</span>
-                       </div>
-                    {/each}
-                </div>
-            {/if}
+            <div class="profile__balance"><b>{t("header.balance")}</b> : {user.balance} {user.currency}</div>
+            <DropdownBonus bind:bonusView bind:activedBonus bind:currency={user.currency} {t}/>
+
             <div class="profile__transaction">
                 <button class="btn withdrawal {isLockedWithdrawal?'locked':''}"  on:click={onOpenWithdrawal} disabled={isLockedWithdrawal}>Retirar</button>
                 <button class="btn recharge" on:click={onOpenDeposit}>Recargar</button>
@@ -118,24 +103,24 @@
             </div>
             {/if}
         </div>
-        <button class="btn profile" on:click={() => openSection("profile")}><i class="icon--user"></i>Mi perfil</button>
-        <button class="btn profile" on:click={() => openSection("changePass")}><i class="icon--password"></i>Cambio de contraseña</button>
-        <button class="btn profile" on:click={() => openSection("movements")}><i class="icon--movements"></i>Historial de actividades</button>
+        <button class="btn profile" on:click={() => openSection("profile")}><i class="icon--user"></i>{t("profile.myProfile")}</button>
+        <button class="btn profile" on:click={() => openSection("changePass")}><i class="icon--password"></i>{t("profile.changePass")}</button>
+        <button class="btn profile" on:click={() => openSection("movements")}><i class="icon--movements"></i>{t("profile.recordMovement")}</button>
+        {#if activePromotions}
         <button class="btn profile"><i class="icon--bonus"></i>Bonos y promociones</button>
-        <!-- {#if activePromotions} -->
-        <!-- {/if} -->
-        <button class="btn logout icon--logout" on:click={onLogout}>Cerrar sesión</button>
+        {/if}
+        <button class="btn logout icon--logout" on:click={onLogout}>{t("header.logout")}</button>
     </div>
     {#if profileView !== ""} 
         <div class="profile__view">
         {#if profileView == "profile"} 
-            <button class="btn profile active" on:click={() => openSection("")}>Mi perfil</button>
+            <button class="btn profile active" on:click={() => openSection("")}>{t("profile.myProfile")}</button>
             <UserData {configProfile} {getMyAccount} bind:accountUser {ServerConnection} {onError} {onOk} {t}/>
         {:else if profileView == "changePass"}
-            <button class="btn profile active" on:click={() => openSection("")}>Cambio de contraseña</button>
+            <button class="btn profile active" on:click={() => openSection("")}>{t("profile.changePass")}</button>
             <ChangePassword bind:user {ServerConnection} {onError} {onOk} {t}/>
         {:else if profileView == "movements"}
-            <button class="btn profile active" on:click={() => openSection("")}>Movimientos</button>
+            <button class="btn profile active" on:click={() => openSection("")}>{t("profile.recordMovement")}</button>
             <Movements bind:user bind:timezone {ServerConnection} {onError} {onOk}{t}/>
         {/if}     
         </div>  

@@ -9,3 +9,6 @@ export const firstDayOfMonth = () =>{
 export const formatNumber = (number) => {
     return number.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
+export const stringToNumber = (string) => {
+    return parseInt(string.replace(/[^0-9.-]/g, ""));
+}

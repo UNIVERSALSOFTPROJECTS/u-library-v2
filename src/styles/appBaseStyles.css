@@ -12,7 +12,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   -webkit-appearance: none;
   margin: 0;
 }
-input:-internal-autofill-selected {
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-internal-autofill-selected {
   padding: 0.5rem !important;
 }
 
@@ -108,12 +108,6 @@ p, b, span, a, li *, button {
 .Coliseosport :focus, .Coliseosport :focus-visible {
   outline: 0;
 }
-.Coliseosport ::-webkit-scrollbar-thumb {
-  background: #f54b00;
-}
-.Coliseosport ::-webkit-scrollbar-track {
-  background: #202124;
-}
 
 /*h6, h5, h4, h3, h2, h1{
     margin: 0;
@@ -136,7 +130,7 @@ p, b, span, a, li *, button {
 }
 .modal-open {
   overflow: hidden;
-  padding-right: 15px;
+  padding-right: 10px;
 }
 .modal-dialog {
   position: relative;
@@ -276,15 +270,29 @@ p, b, span, a, li *, button {
   border: 0;
 }
 
-.Coliseosport .slc:hover, .Coliseosport .footer__social--instagram:hover, .Coliseosport .footer__social--facebook:hover, .Coliseosport .footer--lang:hover, .Coliseosport .footer--chat:hover, .Coliseosport .modal.screenGames .modal-header .btn.reload:hover, .Coliseosport .modal.screenGames .modal-header .btn.screen:hover, .Coliseosport .modal.screenGames .modal-header .btn.close:hover, .Coliseosport .modal.withdrawal .withdrawal__copy:hover, .Coliseosport .modal.profile .movements__ref .btn.copy:hover, .Coliseosport .modal.profile .profile__warning .icon--info:hover, .Coliseosport .icon--atc:hover, .Coliseosport .icon--copy:hover, .Coliseosport .icon--chat:hover, .btn:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  body::-webkit-scrollbar, .Coliseosport ::-webkit-scrollbar {
+    width: 10px;
+  }
+  body::-webkit-scrollbar-track, .Coliseosport ::-webkit-scrollbar-track {
+    background: #191a1b;
+  }
+  body::-webkit-scrollbar-thumb, .Coliseosport ::-webkit-scrollbar-thumb {
+    background: linear-gradient(20deg, #5c1c00, #8f2c00, #c23b00, #f54b00);
+    border-radius: 0.5rem;
+  }
+}
+
+.Coliseosport .slc:hover, .Coliseosport .footer__social--instagram:hover, .Coliseosport .footer__social--facebook:hover, .Coliseosport .footer--lang:hover, .Coliseosport .footer--chat:hover, .Coliseosport .modal.screenGames .modal-header .btn.reload:hover, .Coliseosport .modal.screenGames .modal-header .btn.screen:hover, .Coliseosport .modal.screenGames .modal-header .btn.close:hover, .Coliseosport .modal.withdrawal .withdrawal__copy:hover, .Coliseosport .icon--atc:hover, .Coliseosport .icon--copy:hover, .Coliseosport .icon--chat:hover, .Coliseosport .modal.profile .movements__ref .btn.copy:hover, .Coliseosport .modal.profile .profile__warning .icon--info:hover, .btn:hover, .modal .btn.eye:hover, .modal .btn.no-eye:hover {
   filter: brightness(0.9);
 }
 
-.Coliseosport .ipt:disabled, .Coliseosport .footer__social--instagram:disabled, .Coliseosport .footer__social--facebook:disabled, .Coliseosport .footer--lang:disabled, .Coliseosport .footer--chat:disabled, .Coliseosport .modal.screenGames .modal-header .btn.reload:disabled, .Coliseosport .modal.screenGames .modal-header .btn.screen:disabled, .Coliseosport .modal.screenGames .modal-header .btn.close:disabled, .Coliseosport .modal.withdrawal .withdrawal__copy:disabled, .Coliseosport .modal.profile .movements__ref .btn.copy:disabled, .Coliseosport .modal.profile .profile__warning .icon--info:disabled, .Coliseosport .icon--atc:disabled, .Coliseosport .icon--copy:disabled, .Coliseosport .icon--chat:disabled, .btn:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
+.Coliseosport .ipt:disabled, .Coliseosport .footer__social--instagram:disabled, .Coliseosport .footer__social--facebook:disabled, .Coliseosport .footer--lang:disabled, .Coliseosport .footer--chat:disabled, .Coliseosport .modal.screenGames .modal-header .btn.reload:disabled, .Coliseosport .modal.screenGames .modal-header .btn.screen:disabled, .Coliseosport .modal.screenGames .modal-header .btn.close:disabled, .Coliseosport .modal.withdrawal .withdrawal__copy:disabled, .Coliseosport .icon--atc:disabled, .Coliseosport .icon--copy:disabled, .Coliseosport .icon--chat:disabled, .Coliseosport .modal.profile .movements__ref .btn.copy:disabled, .Coliseosport .modal.profile .profile__warning .icon--info:disabled, .btn:disabled, .modal .btn.eye:disabled, .modal .btn.no-eye:disabled {
+  pointer-events: none;
   filter: brightness(0.7);
 }
 
-.accordion__select, .Coliseosport .slc, .Coliseosport .footer__social--instagram, .Coliseosport .footer__social--facebook, .Coliseosport .footer--lang, .Coliseosport .footer--chat, .Coliseosport .modal.screenGames .modal-header .btn.reload, .Coliseosport .modal.screenGames .modal-header .btn.screen, .Coliseosport .modal.screenGames .modal-header .btn.close, .Coliseosport .modal.withdrawal .withdrawal__copy, .Coliseosport .modal.profile .movements__ref .btn.copy, .Coliseosport .modal.profile .profile__warning .icon--info, .Coliseosport .icon--atc, .Coliseosport .icon--copy, .Coliseosport .icon--chat, .btn, .Coliseosport .btn, .Coliseosport .btn.eye, .Coliseosport .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
+.accordion__select, .Coliseosport .slc, .Coliseosport .footer__social--instagram, .Coliseosport .footer__social--facebook, .Coliseosport .footer--lang, .Coliseosport .footer--chat, .Coliseosport .modal.screenGames .modal-header .btn.reload, .Coliseosport .modal.screenGames .modal-header .btn.screen, .Coliseosport .modal.screenGames .modal-header .btn.close, .Coliseosport .modal.withdrawal .withdrawal__copy, .Coliseosport .icon--atc, .Coliseosport .icon--copy, .Coliseosport .icon--chat, .Coliseosport .modal.profile .movements__ref .btn.copy, .Coliseosport .modal.profile .profile__warning .icon--info, .btn, .Coliseosport .btn, .Coliseosport .btn.eye, .Coliseosport .btn.no-eye, .modal .btn.eye, .modal .btn.no-eye {
   cursor: pointer;
   font-size: inherit;
   width: 100%;
@@ -364,21 +372,23 @@ p, b, span, a, li *, button {
 .Coliseosport .info.ipt {
   border: 1px solid black;
 }
-@-moz-webkit {
-  .Coliseosport .ipt:disabled {
-    filter: 1;
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  @supports (-webkit-backdrop-filter: none) {
+    .Coliseosport .ipt:disabled {
+      filter: brightness(1);
+    }
   }
 }
 
-.Coliseosport .modal.profile .changePassword__ipt, .Coliseosport .modal.login .login__ipt--pass, .Coliseosport .modal.signup .signup__container--pass {
+.Coliseosport .modal.login .login__ipt--pass, .Coliseosport .modal.profile .changePassword__ipt, .Coliseosport .modal.signup .signup__container--pass {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 40px;
 }
-.Coliseosport .modal.profile .changePassword__ipt .ipt, .Coliseosport .modal.login .login__ipt--pass .ipt, .Coliseosport .modal.signup .signup__container--pass .ipt {
+.Coliseosport .modal.login .login__ipt--pass .ipt, .Coliseosport .modal.profile .changePassword__ipt .ipt, .Coliseosport .modal.signup .signup__container--pass .ipt {
   border-radius: 0.25rem 0 0 0.25rem;
 }
-.Coliseosport .modal.profile .changePassword__ipt .btn, .Coliseosport .modal.login .login__ipt--pass .btn, .Coliseosport .modal.signup .signup__container--pass .btn {
+.Coliseosport .modal.login .login__ipt--pass .btn, .Coliseosport .modal.profile .changePassword__ipt .btn, .Coliseosport .modal.signup .signup__container--pass .btn {
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
@@ -715,6 +725,449 @@ p, b, span, a, li *, button {
   text-transform: uppercase;
 }
 
+.Coliseosport .modal.profile .modal-body {
+  padding: 1rem;
+  width: 100%;
+  position: relative;
+  align-content: start;
+}
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  .Coliseosport .modal.profile .modal-body {
+    grid-template-columns: 15rem 1fr;
+    overflow: hidden;
+  }
+}
+.Coliseosport .modal.profile .modal-content {
+  max-width: 1000px;
+  max-height: 90vh;
+}
+.Coliseosport .modal.profile .modal-header {
+  grid-template-columns: 2.5rem 1fr 2.5rem;
+  justify-items: center;
+}
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  .Coliseosport .modal.profile .modal-header {
+    grid-template-columns: 5rem 1fr 2.5rem;
+    justify-items: inherit;
+  }
+}
+@media (max-width: 1023px) {
+  .Coliseosport .modal.profile .modal-dialog {
+    margin: 0;
+    grid-template-columns: auto;
+    max-width: 100%;
+  }
+  .Coliseosport .modal.profile .modal-content {
+    border-radius: 0;
+    height: 100vh;
+    max-width: 100%;
+  }
+}
+.Coliseosport .modal.profile .dropdown .slc, .Coliseosport .modal.profile .dropdown .btn {
+  background-color: #5c6066;
+}
+.Coliseosport .modal.profile .dropdown .slc > *, .Coliseosport .modal.profile .dropdown .btn > * {
+  color: #fff;
+}
+.Coliseosport .modal.profile .dropdown .slc {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+.Coliseosport .modal.profile .dropdown .btn {
+  pointer-events: none;
+  text-align: start;
+}
+.Coliseosport .modal.profile .dropdown .dropdown-menu {
+  background: #404040;
+  padding: 0.5rem;
+  display: grid;
+  gap: 0.6rem;
+  border: 1px solid #fff;
+}
+.Coliseosport .modal.profile .dropdown .dropdown-menu div {
+  display: flex;
+  justify-content: space-between;
+}
+.Coliseosport .modal.profile .profile__body {
+  display: grid;
+  gap: 0.75rem;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: auto;
+}
+.Coliseosport .modal.profile .profile__container {
+  display: grid;
+  gap: 0.5rem;
+}
+.Coliseosport .modal.profile .profile__bonuses {
+  background: #6b7482;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  display: grid;
+  gap: 0.5rem;
+}
+.Coliseosport .modal.profile .profile__bonuses div {
+  display: flex;
+  justify-content: space-between;
+}
+.Coliseosport .modal.profile .profile__top {
+  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 2.5rem;
+}
+.Coliseosport .modal.profile .profile__warning {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 0.5rem;
+  align-items: center;
+  border: 1px solid #00d2e4;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+.Coliseosport .modal.profile .profile__warning .icon--info {
+  background-image: url("data:image/svg+xml,<svg viewBox='-0.5 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 21.5C17.1086 21.5 21.25 17.3586 21.25 12.25C21.25 7.14137 17.1086 3 12 3C6.89137 3 2.75 7.14137 2.75 12.25C2.75 17.3586 6.89137 21.5 12 21.5Z' stroke='%2300d2e4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M12.9309 8.15005C12.9256 8.39231 12.825 8.62272 12.6509 8.79123C12.4767 8.95974 12.2431 9.05271 12.0008 9.05002C11.8242 9.04413 11.6533 8.98641 11.5093 8.884C11.3652 8.7816 11.2546 8.63903 11.1911 8.47415C11.1275 8.30927 11.1139 8.12932 11.152 7.95675C11.19 7.78419 11.278 7.6267 11.405 7.50381C11.532 7.38093 11.6923 7.29814 11.866 7.26578C12.0397 7.23341 12.2192 7.25289 12.3819 7.32181C12.5446 7.39072 12.6834 7.506 12.781 7.65329C12.8787 7.80057 12.9308 7.97335 12.9309 8.15005ZM11.2909 16.5301V11.1501C11.2882 11.0556 11.3046 10.9615 11.3392 10.8736C11.3738 10.7857 11.4258 10.7057 11.4922 10.6385C11.5585 10.5712 11.6378 10.518 11.7252 10.4822C11.8126 10.4464 11.9064 10.4286 12.0008 10.43C12.094 10.4299 12.1863 10.4487 12.272 10.4853C12.3577 10.5218 12.4352 10.5753 12.4997 10.6426C12.5642 10.7099 12.6143 10.7895 12.6472 10.8767C12.6801 10.9639 12.6949 11.0569 12.6908 11.1501V16.5301C12.6908 16.622 12.6727 16.713 12.6376 16.7979C12.6024 16.8828 12.5508 16.96 12.4858 17.025C12.4208 17.09 12.3437 17.1415 12.2588 17.1767C12.1738 17.2119 12.0828 17.23 11.9909 17.23C11.899 17.23 11.8079 17.2119 11.723 17.1767C11.6381 17.1415 11.5609 17.09 11.4959 17.025C11.4309 16.96 11.3793 16.8828 11.3442 16.7979C11.309 16.713 11.2909 16.622 11.2909 16.5301Z' fill='%2300d2e4'/></svg>");
+  color: #000;
+  height: 40px;
+  text-align: start;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+}
+.Coliseosport .modal.profile .profile__header {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+.Coliseosport .modal.profile .profile__img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25rem;
+}
+.Coliseosport .modal.profile .profile__view {
+  display: grid;
+  padding: 0.5rem;
+  width: 100%;
+  grid-template-rows: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  height: 100%;
+  background: #393939;
+  border-radius: 0.25rem;
+}
+@media (orientation: landscape) and (max-width: 1023px), (orientation: portrait) and (max-width: 1023px) {
+  .Coliseosport .modal.profile .profile__view {
+    position: absolute;
+    background: #222222;
+  }
+}
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  .Coliseosport .modal.profile .profile__view {
+    height: 77.5vh;
+  }
+}
+.Coliseosport .modal.profile .profile__balance {
+  display: flex;
+  align-items: center;
+  background-color: #5c6066;
+  padding: 0.5rem;
+  color: #fff;
+  border-radius: 0.25rem;
+  height: 40px;
+}
+.Coliseosport .modal.profile .profile__balance.slc {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z'/></svg>");
+}
+.Coliseosport .modal.profile .profile__transaction {
+  display: flex;
+  gap: 0.5rem;
+}
+.Coliseosport .modal.profile .userdata {
+  display: grid;
+  gap: 0.5rem;
+}
+.Coliseosport .modal.profile .userdata__form {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+}
+.Coliseosport .modal.profile .userdata .btn.save {
+  max-width: 10rem;
+  margin: 1rem auto;
+}
+.Coliseosport .modal.profile .changePassword {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.Coliseosport .modal.profile .movements {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-rows: auto auto auto 1fr;
+}
+.Coliseosport .modal.profile .movements.load {
+  grid-template-rows: auto auto 100%;
+}
+.Coliseosport .modal.profile .movements__consult {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #7a7a7d;
+}
+.Coliseosport .modal.profile .movements__empty {
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px solid #fff;
+  padding: 1rem;
+  text-align: center;
+}
+.Coliseosport .modal.profile .movements__concept {
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #fff;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
+}
+.Coliseosport .modal.profile .movements__totals {
+  text-align: end;
+}
+.Coliseosport .modal.profile .movements__ticket {
+  display: grid;
+  background: #42424c;
+  border: 1px solid #B0B0B0;
+  gap: 0.5rem;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+.Coliseosport .modal.profile .movements__transaction {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+.Coliseosport .modal.profile .movements__result {
+  display: grid;
+  gap: 0.5rem;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: auto;
+  overscroll-behavior: none;
+}
+@media (orientation: landscape) and (max-width: 1023px), (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 767.99px) and (max-width: 1023.99px) and (min-height: 767.99px) and (max-height: 1395.99px) {
+  .Coliseosport .modal.profile .movements__result {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.Coliseosport .modal.profile .movements__status {
+  background-color: #7c7c7c;
+  display: flex;
+  height: 3.5rem;
+  border-radius: 0.25rem;
+}
+.Coliseosport .modal.profile .movements__status.AP {
+  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160.91 170.41'><path d='M57.4,26.68c4.26,9,2.45,16.07-3.77,21.62A44.33,44.33,0,0,1,50.13,51a3.12,3.12,0,0,0-1.27,4,12.17,12.17,0,0,1,0,9.65c-.69,1.67.06,2.89,1.2,4.12,8.84,9.55,17.68,19.11,26.42,28.75,2.18,2.4,3.94,5.18,6.06,7.64.74.84,2,1.22,3,1.82.41.24,1,.42,1.2.79,2.17,3.38,4.28,6.8,6.53,10.39l-1.87,1.56c-4.42,3.57-8.86,7.11-13.23,10.73a7.8,7.8,0,0,0-2.07,2.58,99.28,99.28,0,0,0-4,9.44c-3.18,9.15-8.14,17.44-12.28,26.13-.76,1.59-2.22,1.75-3.77,1.75H12c-1.66,0-3.38.15-4.38-1.62s.06-3,.88-4.42c7.1-11.87,14.53-23.56,21.23-35.65,8.54-15.42,8.35-31.21.2-46.83-4.65-8.93-3.35-17.32,2-25.44a8.92,8.92,0,0,0,1.23-2.12A24.79,24.79,0,0,1,43.93,40.05C49.42,36.61,54,32.51,57.4,26.68ZM46.12,109.09c-2.06,0-3.29,1-3.54,2.54a3,3,0,0,0,2.52,3.51c4.85,1.3,9.49,3.17,13.2,6.58a54.9,54.9,0,0,1,6,7.17c1.13,1.47,2.65,2,4.15,1.22a3,3,0,0,0,1.32-4,16.35,16.35,0,0,0-1.27-2.32c-4.71-7.26-11.62-11.44-19.66-14C47.79,109.49,46.75,109.26,46.12,109.09Z'/><path d='M160.91,81.3c-2,6.47-4,12.7-5.71,19-1.79,6.55-3.26,13.18-4.94,19.76a1.9,1.9,0,0,1-1.31,1.14,11.41,11.41,0,0,1-8.34-2q-8.25-5.84-16.8-11.24c-7.54-4.77-15.15-9.43-23.74-12.61a10,10,0,0,1,.89-1.18q6.6-6.44,13.23-12.84c.29-.29.78-.48.91-.82,1-2.63,3.36-2.35,5.45-2.62,7-.9,13.9,0,20.82,1.09,5.94,1,12,1.45,17.95,2.15Z'/><path d='M91.41,103.63A25.83,25.83,0,0,1,94.52,101a2.69,2.69,0,0,1,2.22-.17c5.67,2.63,11.52,5,16.87,8.15,8.27,4.93,16,10.67,24.31,15.62,3.69,2.22,5.63,5.56,8.13,9-1.5,1-2.83,2.1-4.3,2.94-7.3,4.17-15.28,6.56-23.34,8.7-.44.11-1.33-.52-1.66-1q-8.66-13.73-17.23-27.51Z'/><path d='M7.25,4.58C20.92,8.26,33.36,4.78,45.84,0c.38,3.55.72,7,1.12,10.42.64,5.35,1.36,10.68,1.94,16a3.42,3.42,0,0,1-.74,2.48,24.63,24.63,0,0,1-4.7,4A40.74,40.74,0,0,0,31.09,44.24C22.48,31.45,13.8,18.89,7.25,4.58Z'/><path d='M109.16,77.54c-8.51,6.48-14.31,15.74-23,22.24-1.36-1.72-2.56-3.16-3.67-4.68a2.25,2.25,0,0,1-.2-1.31c.21-3.63,1.68-6.86,3.36-10a79.57,79.57,0,0,1,12-16.4,1.73,1.73,0,0,1,2.15-.5,11.29,11.29,0,0,1,7.06,6C107.61,74.42,108.34,75.88,109.16,77.54Z'/><path d='M65.71,76.19a21.18,21.18,0,0,0-2.6-2.68c-2.91-2-2.76-4.65-1.74-7.44a52,52,0,0,1,3.37-8C68,52.34,71.52,46.73,75,41.1c1-1.68,2-1.88,3.76-1s3.41,1.65,5.06,2.56A3.05,3.05,0,0,1,84.94,47c-4.22,6.7-8.42,13.42-12.67,20.1-1.26,2-2.64,3.92-4,5.85C67.51,74,66.65,75,65.71,76.19Z'/><path d='M89.19,51.48c2.8,1.25,5.49,2.32,6.2,5.55A5.51,5.51,0,0,1,94,62.41c-6.09,6.35-11.46,13.22-15.1,21.31-.68,1.51-1.24,3.07-1.93,4.8l-7.29-8.09c7.41-7.17,11.27-16.68,16.87-25C87.38,54.12,88.25,52.86,89.19,51.48Z'/><path d='M27.77,50.5c-7.88-5.64-15.24-11-21.87-17.43-4-3.83-4.73-8.76-5.9-14,3.62,1.65,6.93,3.14,10.22,4.69.34.15.57.58.79.92Q19.19,37.1,27.34,49.54A9,9,0,0,1,27.77,50.5Z'/><path d='M65.81,31a22.35,22.35,0,0,1,3.49,2.87,3.44,3.44,0,0,1,.24,4.29c-5.12,7.6-10,15.35-13.36,24-.24-2.24-.55-4.4-.64-6.57,0-.54.57-1.22,1.05-1.63,4.28-3.6,7.66-7.84,8.66-13.43C65.8,37.42,65.64,34.26,65.81,31Z'/><path d='M15.58,49.3l9.2,6.61c-.58,1.35-1.08,2.6-1.66,3.82-.15.3-.57.69-.85.67A37.45,37.45,0,0,1,18.05,60a1.25,1.25,0,0,1-.7-.85C16.76,56,16.22,52.88,15.58,49.3Z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+  background-size: 85%;
+}
+.Coliseosport .modal.profile .movements__status.DE {
+  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 376.26 374.71'><path d='M272.52,194.55v4.38c0,20.08-.21,40.17.07,60.25.23,16.71-5.48,31.11-16.4,43.35-7.14,8-10.72,16.88-10.31,27.54.19,5.11,0,10.23,0,15.34s-2.12,7.13-7,7.14q-52.57,0-105.15,0c-5,0-7.08-2.1-7.14-7-.07-5.61,0-11.22,0-16.84a32.44,32.44,0,0,0-9.62-23.59c-2.54-2.58-5-5.24-7.6-7.75-8.09-7.81-11.72-17.36-11.67-28.54.09-23.08,0-46.16,0-69.24v-5H83c-10.58,0-16.22-5.58-16.21-16.08q0-52.77.1-105.54c0-1.34,0-2.68,0-4.23H303.05c.07,1.35.19,2.65.19,4q.08,53.15.12,106.29c0,9.79-5.81,15.57-15.57,15.6C282.83,194.57,277.87,194.55,272.52,194.55Zm-134,145.8h95.43c0-2.71.17-5.2,0-7.66-1.26-15.7,4.42-28.75,14.89-40.12a40.15,40.15,0,0,0,9.83-18.26,65.9,65.9,0,0,0,1.85-14c.17-28.33.1-56.65.08-85,0-9.82-5.61-15.87-14.45-15.94-6.62-.05-14.27,4.84-14,15.49.31,12.47,0,24.95,0,37.43,0,8.4-1.24,9.56-9.71,10-16.88.86-30.06,8.19-38.91,22.8a66.58,66.58,0,0,0-8.91,26.75c-.47,3.84-3.14,6.08-6.53,5.71s-5.55-3-5.36-6.84a10.3,10.3,0,0,1,.28-2.22c1.87-6.7,3.17-13.64,5.77-20.05,7.63-18.79,20.84-31.67,41-36.48,3.35-.8,6.78-1.23,10.17-1.83V194.79H109.61v4.65c0,23.33.12,46.67-.07,70a24.49,24.49,0,0,0,6.29,17.09c2.88,3.28,5.86,6.47,9,9.53,9.31,9.17,13.72,20.31,13.69,33.29C138.48,333,138.49,336.54,138.49,340.35Zm82.65-176h-4.63q-48.84,0-97.67.06c-2.78,0-4.44-.46-5.56-3.41-2.48-6.51-7.48-10.67-13.82-13.45a4.6,4.6,0,0,1-2.36-3.35c-.17-12.35-.06-24.7-.16-37.06,0-2.11.69-3,2.63-3.77,6.36-2.4,11.22-6.68,13.6-13.06,1.18-3.16,2.89-3.58,5.8-3.58q65.29.12,130.61.06h4.27c2.37,7.11,6.31,13.42,13.47,15.6,5.86,1.78,6.26,5.12,5.88,9.84-.18,2.23,0,4.49,0,6.73v26.83l-11.64,5.69c3,3.48,5.56,6.34,7.73,8.82,3.14-.76,6.08-1.8,9.1-2.12,4.78-.51,6.74-2.15,6.76-7.07q.09-25.64,0-51.28c0-5-2.21-6.9-7.22-7-7-.09-11.85-4.39-12.66-11.21-.62-5.27-2.34-6.84-7.76-6.84q-73.17,0-146.33,0c-5.45,0-7.07,1.45-7.81,6.81-.9,6.59-4.85,10.47-11.48,11.29-5,.62-6.8,2.49-6.82,7.57q-.07,25.08,0,50.15c0,5.1,1.64,6.78,6.8,7.48,6.39.87,10.5,4.82,11.46,11s2.23,7.21,8.61,7.21q52,0,104,0c1.32,0,2.64-.13,3.83-.19C220.24,172.06,220.65,168.48,221.14,164.3Zm-69.92-38.84c0,19.5,14.36,33.94,34,34.07a34.16,34.16,0,0,0,34.1-33.95c0-18.57-15.61-34.31-34-34.21C165.79,91.49,151.27,106,151.22,125.46Z'/><path d='M315.5,122.14V68.46c2.82,0,5.63.06,8.43,0,4.4-.11,7.12-2.46,7.09-6s-2.72-5.79-7.16-5.94c-1,0-2,0-3,0H49.14c-1.25,0-2.5,0-3.74,0-3.92.28-6.28,2.61-6.2,6.05s2.44,5.68,6.43,5.84c3,.11,5.92,0,9.06,0v53.69H45.46c-6.49,0-13,0-19.47,0-4.92-.06-7-2.19-7.06-7.13q0-45.28,0-90.58c0-5.4,2.26-7.28,8.46-7.28H301q21.15,0,42.29,0c5.89,0,8,2,8,7.79q0,44.73,0,89.46c0,5.67-2,7.71-7.6,7.74C334.41,122.17,325.18,122.14,315.5,122.14Z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+  background-size: 85%;
+}
+.Coliseosport .modal.profile .movements__status.CWI {
+  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160.91 170.41'><path d='M15.06,112.48c.39-2.17.67-4.36,1.18-6.5,2.44-10.25,7.42-19.22,14-27.37A58.69,58.69,0,0,1,45.32,64.84a27.11,27.11,0,0,1,9.3-3.7c4.78-.84,9.09.59,13.2,2.82,6.5,3.53,11.69,8.6,16.3,14.29,6.75,8.33,11.85,17.52,14.32,28,1.47,6.28,1.7,12.57-.48,18.74-3.09,8.75-9.63,13.88-18.1,16.85-8.94,3.14-18.22,3.6-27.58,3.16a58.36,58.36,0,0,1-18.93-3.7c-9.14-3.65-15.49-9.83-17.65-19.73-.25-1.16-.43-2.33-.64-3.5Zm46.23,17c0-2.3.07-4.55,0-6.79a1.89,1.89,0,0,1,1.27-2.09A11.44,11.44,0,0,0,57.62,99a3.84,3.84,0,1,1,3.61-4.52c.05.2.08.4.12.62H69c-.32-5.28-3-8.77-7.74-10.81V76.05H53.63v8.23l-1.2.57a11.47,11.47,0,0,0,5,21.77,3.83,3.83,0,0,1,3.8,3.58,3.9,3.9,0,0,1-3.2,4,3.85,3.85,0,0,1-4.3-2.79c-.09-.31-.17-.63-.24-.9h-7.6c.29,4.64,2.35,8,6.41,10.1a1.9,1.9,0,0,1,1.31,2.07c-.1,2.27,0,4.56,0,6.83Z'/><path d='M86.17,68.69c4.58-3.62,9.36-6.73,15.25-7.61,4.56-.69,8.67.71,12.58,2.82,6.67,3.6,12,8.81,16.66,14.66,6.81,8.49,11.94,17.86,14.25,28.61a32.47,32.47,0,0,1-.51,17.38c-2.76,8.37-8.75,13.57-16.71,16.76a59.25,59.25,0,0,1-21.35,3.8c-4.25.06-8.5-.3-12.75-.48a14.64,14.64,0,0,1-1.48-.24l1.23-.93A33.23,33.23,0,0,0,107,118.57c.79-9.38-1.67-18.13-5.43-26.57A83,83,0,0,0,86.91,69.73l-.59-.66A1.66,1.66,0,0,1,86.17,68.69Z'/><path d='M57.47,30.23A18.91,18.91,0,0,1,71.9,37a2.46,2.46,0,0,0,1.8.93,11.12,11.12,0,0,1,9.57,7,10.08,10.08,0,0,1-1.88,11.27c-1.16,1.33-2.6,2.43-3.87,3.68-.59.57-1,.43-1.64,0A38.58,38.58,0,0,0,63.53,54c-6.83-1.79-13.23-.44-19.36,2.72-1.88,1-3.67,2.13-5.46,3.27-.56.36-1,.42-1.44-.05A52.69,52.69,0,0,1,33,55.8c-5.49-6.71-1-16.17,6.77-17.59A7.05,7.05,0,0,0,43.89,36,18.54,18.54,0,0,1,57.47,30.23Z'/><path d='M90.3,56.66a18.85,18.85,0,0,0-2.08-18.52,19.66,19.66,0,0,1,9.25-6.85,19,19,0,0,1,20.81,5.8,2.71,2.71,0,0,0,1.55.82A11.37,11.37,0,0,1,129.55,45a10.07,10.07,0,0,1-1.86,11.28c-1.16,1.34-2.59,2.45-3.87,3.69-.57.55-1,.46-1.64,0a38.4,38.4,0,0,0-12.48-6c-6.32-1.64-12.3-.53-18.1,2.16l-.93.43A1.93,1.93,0,0,1,90.3,56.66Z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+  background-size: 85%;
+}
+.Coliseosport .modal.profile .movements__status.RF {
+  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160.91 170.41'><path d='M155.15,154l-2.88-1.23c-6-2.65-12-5.27-18-8a14.27,14.27,0,0,0-6.67-1.23,22.64,22.64,0,0,1-13-2.79,12.93,12.93,0,0,1-6.79-11.58c-.07-9.39,0-18.78,0-28.17,0-3.57,2.51-6.13,5.77-6.08s5.59,2.59,5.62,6.08c0,5.69,0,11.38,0,17.06V120h4.9c0-.45.1-.86.1-1.26,0-6.26,0-12.52,0-18.78,0-5.76-3.5-9.5-9.38-10.05,0-.48-.06-1-.06-1.48q0-17.54,0-35.06c0-4.06,2.64-6.91,6.28-6.92a5.89,5.89,0,0,1,6,5.24q2.69,15.95,5.32,31.92c1.45,8.68,2.85,17.38,4.37,26.05a13.08,13.08,0,0,0,7.55,9.92c3.32,1.63,6.67,3.21,10,4.88a1.87,1.87,0,0,1,.93,1.33c0,9.24,0,18.47,0,27.71A3.9,3.9,0,0,1,155.15,154Z'/><path d='M6.19,141l13.65-7.21q15.75-8.3,31.53-16.56a2,2,0,0,0,1.28-2.16c-.09-1.87,0-3.75,0-5.63s.93-2.91,2.86-2.91q13.37,0,26.74,0c2,0,2.93.94,2.94,3q0,12,0,24.09c0,2-.94,2.95-3,2.95q-13.31,0-26.59,0c-2.05,0-2.94-.92-3-3,0-1.36,0-2.71,0-4.07a2.4,2.4,0,0,0-.11-.43L6.36,141.28Zm55.27-21.9V124h4.83v-4.86ZM76.29,124v-4.87H71.5V124Z'/><path d='M5.62,130.39,20.07,99c-2.46,0-4.68,0-6.9,0s-3.1-.89-3.11-3.15q0-10.64,0-21.27c0-2.25.88-3.12,3.14-3.12q14.39,0,28.77,0c2.25,0,3.14.88,3.14,3.12q0,10.63,0,21.27c0,2.26-.88,3.14-3.11,3.15-2.66,0-5.32.06-8,0a2.72,2.72,0,0,0-2.37,1.11Q19.26,114.85,6.81,129.52c-.3.35-.61.7-.92,1ZM25,82.87H20.19V87.7H25Zm10.05,0H30.19v4.76h4.87Z'/><path d='M96.76,61.46l3.34,6.72c.72,1.44,1.42,2.9,2.17,4.33a2.51,2.51,0,0,1-.41,3.29c-1.09,1-2.25.8-3.42,0C91.81,71.37,85.16,67,78.55,62.5a6,6,0,0,0-3.62-1.07c-4.75.06-9.49,0-14.24,0-3.52,0-5.56-2-5.56-5.51q0-17.07,0-34.12c0-3.42,2-5.44,5.48-5.44H99.73c3.4,0,5.47,2.05,5.47,5.44q0,17.07,0,34.12c0,3.51-2,5.49-5.56,5.51Zm-36.55-5c5.66,0,11.13-.05,16.61,0a5.69,5.69,0,0,1,2.88.88c4.08,2.61,8.09,5.34,12.13,8,.43.29.89.55,1.33.83a44.56,44.56,0,0,0-2.39-5.55c-1.24-2.55-.22-4.2,2.6-4.22,2.23,0,4.45,0,6.73,0V21.5H60.21Z'/><path d='M74.38,50.56l-5.67-5.7L75,39.05,68.8,33.13l5.45-5.41,5.9,6.17L86,27.48,91.51,33l-6,5.88,6.14,5.94-5.4,5.41-5.94-6.08Z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+  background-size: 85%;
+}
+.Coliseosport .modal.profile .movements__status.RE {
+  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160.91 170.41'><path d='M59.61,163.59c-.46-1.59-.8-3.17-1.37-4.67a23.57,23.57,0,0,0-17.4-15.34c-1.24-.31-1.81-.63-1.81-2q0-53.77,0-107.55c0-.4.06-.79.1-1.36h82.69v2.16q0,53.07,0,106.14c0,1.72-.47,2.29-2.21,2.75-9.36,2.51-15.36,8.5-17.83,17.94l-.52,2Zm32.26-62.13a13.32,13.32,0,0,0,10.06-5.69c2.28-3.11,3.3-3.83,6.95-4.78a3.21,3.21,0,0,0,2.61-3.38,3.13,3.13,0,0,0-2.59-3.19,8.12,8.12,0,0,0-2.41-.17,2.6,2.6,0,0,1-3.11-2,13.46,13.46,0,0,0-13.69-8.36A13.6,13.6,0,0,0,77.58,84a42,42,0,0,0-.71,4.78,6.83,6.83,0,0,1-6.32,5.82,7,7,0,0,1-7.36-6.51c-.26-3.71,2.6-6.84,6.62-7.25,2.37-.23,3.85-1.69,3.73-3.66s-1.73-3.36-4.11-3.2a13.17,13.17,0,0,0-12,8.5,2.48,2.48,0,0,1-2.8,1.81c-3.6-.08-5.34,1.16-5.27,3.52s1.72,3.42,5.23,3.35c1.44,0,2.23.25,2.83,1.77a13.52,13.52,0,0,0,14,8.53,13.69,13.69,0,0,0,12-10.4c.35-1.42.37-2.93.59-4.39a6.8,6.8,0,0,1,6.31-5.82,6.94,6.94,0,0,1,7.36,6.5c.27,3.72-2.6,6.85-6.62,7.26-2.37.23-3.84,1.68-3.72,3.66S89,101.47,91.87,101.46Z'/><path d='M128.9,73.81V60.11c2.14,0,4.16,0,6.17,0,6.56-.07,10.91-4.4,11-10.91,0-4.31,0-8.62,0-12.94a10.34,10.34,0,0,0-10.12-10.7c-.4,0-.81,0-1.21,0H26.28c-5.84,0-9.89,2.95-11.12,8.06a11.3,11.3,0,0,0-.26,2.6q0,6.57,0,13.14c0,6.28,4.38,10.64,10.68,10.77,2.08,0,4.17,0,6.41,0V73.79c-.57,0-1.09.11-1.61.12q-10.71,0-21.44,0c-3.19,0-4.45-1.24-4.45-4.39q0-26.7,0-53.39c0-3.16,1.26-4.4,4.44-4.4h143c3.29,0,4.52,1.24,4.52,4.53q0,26.6,0,53.19c0,3.19-1.25,4.45-4.39,4.46q-10.71,0-21.43,0C130.08,73.91,129.55,73.85,128.9,73.81Z'/><path d='M32,53.19c-2.37,0-4.59.09-6.8,0A3.33,3.33,0,0,1,21.8,49.6q-.07-6.76,0-13.54a3.28,3.28,0,0,1,3.36-3.55c2.2-.12,4.42,0,6.81,0Z'/><path d='M128.92,53.17V32.56c2.49,0,4.9-.14,7.29,0a3.05,3.05,0,0,1,2.89,3.32q.09,6.87,0,13.74a3.27,3.27,0,0,1-3.23,3.48C133.61,53.28,131.33,53.17,128.92,53.17Z'/><path d='M52.3,163.57H39.2V150.48C45,150.81,51.29,157,52.3,163.57Z'/><path d='M108.62,163.56c.91-6.42,7.15-12.63,13.1-13.11v13.11Z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+  background-size: 85%;
+}
+.Coliseosport .modal.profile .movements__status.BN {
+  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 334.46 321.73'><path d='m306.52,242.93c-.22,35.59-28.83,63.71-64.59,63.48-35.17-.22-63.48-28.96-63.38-64.34.09-34.91,29.25-63.84,64.23-63.73,35.34.11,63.96,29.1,63.74,64.59Zm-79.4-16.44c-.04-5.25,3.85-9.24,10.4-10.16,7.33-1.02,14.41-.38,19.99,5.21,3.02,3.03,5.04.04,6.76-1.24,2.06-1.53-.55-2.81-1.44-3.92-2.7-3.37-6.41-5.43-10.53-6.25-4.22-.84-7.16-2.01-6.1-7.24.56-2.76-1.73-2.63-3.6-2.67-1.89-.05-4.14-.24-3.62,2.56.97,5.19-2.08,6.18-6.16,7.31-9.94,2.74-14.63,10.51-12.76,19.88,1.84,9.23,8.74,12.83,16.71,15.14,4.77,1.38,9.9,1.36,14.44,3.68,5.06,2.57,7.59,6.45,6.94,10.99-.73,5.06-4.42,7.26-8.82,8.35-8.01,1.99-15.54,1.31-21.76-4.89-2.76-2.76-4.72.14-6.44,1.32-2.07,1.42.02,2.81,1.06,3.99,3.21,3.65,7.39,5.73,12,6.68,3.45.72,5.53,1.91,4.76,5.83-.61,3.1,1.31,3.57,3.79,3.68,2.44.12,4.03-.49,3.47-3.28-.9-4.5,1.68-5.4,5.38-6.27,9.01-2.11,13.99-8.74,13.84-17.53-.14-7.96-4.82-13.82-13.95-16.71-5.18-1.65-10.67-2.37-15.83-4.05-4.85-1.58-8.41-4.73-8.54-10.42Z'/><path d='m121.95,220.53c0,19.15-.09,38.31.08,57.46.03,3.53-.99,4.46-4.45,4.44-23.65-.14-47.3-.16-70.95.05-4,.04-4.56-1.37-4.55-4.88.12-35.14.09-70.28.05-105.42,0-2.43.99-5.13-2.93-6.39-1.92-.61-.95-3.9-.69-5.96.22-1.81,1.93-1.51,3.21-1.52,25.48-.03,50.96.03,76.44-.1,3.91-.02,3.76,2.28,3.76,4.87,0,19.15,0,38.31,0,57.46h.03Z'/><path d='m155.23,194.46c0,27.67-.08,55.33.09,82.99.02,3.9-.91,5.28-4.95,5-5.31-.37-10.68-.39-15.99,0-4.28.31-5.25-1.24-5.23-5.31.15-40,.1-79.99.1-119.99,0-13.83.19-27.67-.1-41.5-.12-5.46,1.16-9.62,5.1-13.73,8.36-8.72,7.83-8.73,15.91-.14,3.97,4.22,5.26,8.51,5.2,14.18-.28,26.16-.12,52.33-.12,78.49Z'/><path d='m181.63,91.56c22.31,0,43.08-.15,63.84.08,7.15.08,11.3,5.04,11.35,12.54.08,14.15-.05,28.3.13,42.44.05,3.58-1.24,4.48-4.65,4.47-28.47-.11-56.95-.12-85.42,0-3.54.02-4.45-1-4.35-4.54.28-9.79.1-19.58.1-29.82,2.48.55,3.43,2.38,4.67,3.74,6.28,6.88,12.48,13.84,18.79,20.7,3.89,4.23,5.33,4.18,9.24-.07,6.76-7.33,13.5-14.69,20.26-22.03,3.55-3.86,3.37-5.87-1.26-8.58-9.9-5.78-19.9-11.39-29.86-17.07-.55-.31-1.06-.7-2.83-1.87Z'/><path d='m121.91,117.01c0,10.52-.13,20.65.07,30.77.07,3.87-2.32,3.26-4.61,3.26-20.33,0-40.66.01-61,0-8,0-16-.13-24-.02-3,.04-4.48-.53-4.43-4.09.21-14.5,0-29,.16-43.49.08-7.48,3.95-11.79,11.27-11.88,20.33-.24,40.66-.09,60.99-.07.27,0,.55.25,1.22.59-3.02,2.81-6.66,4.3-9.97,6.24-7.17,4.21-14.41,8.3-21.68,12.35-3.99,2.22-4.06,4.89-1.2,8.01,6.97,7.62,14.04,15.15,20.94,22.84,3.1,3.46,5.65,3.22,8.65-.14,6.43-7.2,13.02-14.25,19.58-21.34.99-1.07,1.71-2.5,4.01-3.03Z'/><path d='m183.04,282.37c-6.36,0-11.84-.07-17.32.03-2.38.05-3.16-.83-3.15-3.22.11-39.13.19-78.26.14-117.39,0-3.06,1.15-3.55,3.79-3.54,23.81.05,47.63.06,71.44-.09,3.48-.02,4.58,1.03,4.53,4.53-.11,7.73.06,7.74-7.39,8.66-39.22,4.84-66.21,37.09-63.74,76.52.76,12.07,4.67,23.31,11.7,34.51Z'/><path d='m151.09,59.6c4.23-10.93,8.45-21.87,12.69-32.8.42-1.08.91-2.14,1.33-3.22,3.86-10.06,3.85-9.99,14.26-9.08,11.59,1.01,23.19,2.01,34.8,2.7,3.66.22,4.51,1.26,3.68,4.81-2.99,12.74-5.83,25.52-8.48,38.34-.62,3-1.73,4.02-4.86,4.16-13.46.6-26.9,1.5-40.34,2.37-1.84.12-3.67-.09-4.22-1.79-.58-1.76,1.59-2.19,2.67-2.97,8.75-6.35,17.55-12.63,26.37-18.88,2.07-1.46,4.3-2.33,1.98-5.68-2.33-3.36-4.07-2.12-6.45-.41-10.78,7.75-21.63,15.41-32.46,23.1-.32-.21-.64-.43-.96-.64Z'/><path d='m132.54,60.3c-10.94-7.8-21.87-15.62-32.83-23.4-1.68-1.19-3.21-2.94-5.37-.18-2.04,2.61-2.35,4.11.74,6.21,9.07,6.16,17.94,12.63,26.84,19.04,1.1.79,3.31,1.22,2.7,2.98-.65,1.91-2.68,2.11-4.66,1.98-13.27-.87-26.55-1.75-39.83-2.42-3.02-.15-4.32-1.18-4.93-4.19-2.67-13-5.53-25.97-8.47-38.91-.6-2.63-.56-3.98,2.69-4.19,14.1-.91,28.19-1.93,42.27-3.12,3.18-.27,4.6.59,5.75,3.72,5.16,13.97,10.68,27.8,16.07,41.68-.32.26-.64.52-.96.79Z'/><path d='m133.78,91.49c-13.09,14.35-25.31,27.68-37.44,41.09-1.72,1.9-2.89,2.23-4.71.11-4.33-5.03-8.84-9.92-13.33-14.8-1.52-1.66-1.36-2.59.66-3.74,12.71-7.2,25.23-14.74,38.08-21.66,4.75-2.56,10.32-.81,16.75-1Z'/><path d='m151.09,91.73c8.45-.31,15.34-.81,22.12,3.65,10.12,6.66,20.92,12.28,31.48,18.27,2.41,1.37,3.69,2.38,1.04,5-4.49,4.45-8.67,9.22-12.85,13.97-1.56,1.77-2.78,2.15-4.29.07-.58-.8-1.39-1.43-2.07-2.17-11.55-12.64-23.09-25.28-35.44-38.79Z'/><path d='m142.21,84.14c-5.82,0-11.64-.08-17.46.04-2.69.05-3.06-.97-2.35-3.31,2.36-7.79,11.24-14.21,19.81-14.17,8.65.04,17.56,6.33,19.99,14.02.77,2.45.53,3.61-2.52,3.5-5.81-.21-11.64-.06-17.46-.07Z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+  background-size: 85%;
+}
+.Coliseosport .modal.profile .movements__status.CB {
+  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 334.46 321.73'><path d='m111.58,258.77c4.56,4.6,9.08,9.2,13.64,13.77,2.1,2.11,4.24,4.19,6.4,6.24,3.43,3.26,4.17,7.5,3.18,11.69-1.09,4.63-4.48,7.75-9.25,8.63-3.61.66-7.18.08-10.03-2.64-6.59-6.3-13.21-12.56-19.74-18.92-7.06-6.87-14-13.87-21.08-20.72-5.28-5.1-5.47-12.62-.16-17.63,4.46-4.21,8.9-8.44,13.36-12.64,8.86-8.34,17.65-16.77,26.63-24.98,6.57-5.99,15.98-3.9,19.53,4.55,1.98,4.72.68,9.23-3.05,12.83-5.08,4.9-10.23,9.74-15.34,14.61-.13.12-.23.26-.36.42.54.55,1.2.34,1.78.34,14.87-.06,29.73-.32,44.6-.52,5.54-.07,11.1.38,16.63-.22,4.42-.48,8.88-.06,13.28-.46,4.9-.45,9.75-1.38,14.53-2.66,5.06-1.36,10.08-2.81,14.83-4.98,8.12-3.71,15.74-8.27,22.64-14.01,7.14-5.95,13.2-12.84,18.43-20.51,4.29-6.3,7.78-13.02,10.37-20.16,2.13-5.91,3.55-12,4.47-18.25.86-5.83,1.06-11.64,1.03-17.5-.03-5.86-.84-11.64-2.01-17.34-2.66-12.92-8.16-24.61-15.85-35.27-5.7-7.89-12.54-14.69-20.32-20.57-6.92-5.24-14.43-9.4-22.48-12.54-7.19-2.8-14.65-4.53-22.34-5.61-6.12-.86-12.19-.59-18.28-.58-4.84,0-9.6.93-14.34,1.99-5.2,1.16-10.27,2.66-15.17,4.71-8.88,3.72-17.07,8.52-24.59,14.62-8.18,6.64-14.96,14.39-20.53,23.24-4.34,6.89-7.75,14.23-10.2,22.02-2.77,8.81-4.19,17.8-4.06,27.04.1,6.41-3.04,11.36-9.11,12.94-5.62,1.47-11.28-.57-14.09-6.51-1.66-3.51-1.2-7.31-1-11.01.2-3.72.33-7.45.99-11.13.54-3.03.98-6.09,1.7-9.09,1.31-5.5,2.92-10.92,4.98-16.21,3.94-10.09,8.95-19.56,15.38-28.31,6.54-8.9,14.25-16.66,22.84-23.49,8.14-6.47,16.99-11.96,26.71-15.81,5.37-2.13,10.84-4.09,16.42-5.56,4.2-1.11,8.53-1.87,12.88-2.47,6.92-.95,13.84-1.57,20.82-1.38,4.41.12,8.78.74,13.17,1.29,4.37.55,8.66,1.42,12.89,2.48,4.1,1.04,8.15,2.36,12.13,3.78,4.33,1.55,8.56,3.35,12.65,5.5,14.85,7.8,27.71,18.06,38.31,31.06,8.19,10.04,14.52,21.22,19.2,33.3,2.33,6.01,4.15,12.23,5.33,18.56,1.96,10.53,3.02,21.16,1.97,31.91-.66,6.78-1.63,13.48-3.24,20.12-4.03,16.61-11.54,31.47-21.96,44.93-8.54,11.04-18.81,20.14-30.61,27.6-6.94,4.38-14.17,8.15-21.89,10.91-5.21,1.87-10.58,3.25-15.99,4.47-9.88,2.23-19.86,3.04-29.96,2.97-8.55-.07-17.11,0-25.65.29-12.98.44-25.96.43-38.95.41-.73,0-1.49-.08-2.06.45Z'/><path d='m140.26,167.28c-.32-6.88,4.78-12.09,10.28-13.43,4.79-1.17,9.18.1,13.06,3.42,5.43,4.63,11.71,7.36,19.01,6.89,2.18-.14,4.27-1.09,5.76-2.77,2.12-2.39,1.71-6.03-2.73-7.65-5.14-1.88-10.43-3.33-15.52-5.32-7.98-3.13-15.04-7.58-18.3-16.04-1.97-5.1-2.15-10.46-1.49-15.92.92-7.6,3.9-14.1,9.5-19.31,3.79-3.53,8.03-6.31,13.28-7.26,1.57-.29,2.6-1.09,2.79-3,.44-4.52,3.76-7.56,8.48-8.11,3.41-.4,7.59,2.71,8.86,6.58.15.47.58.96.51,1.38-.49,2.82,1.7,2.95,3.38,3.15,3.17.37,6.14,1.39,9.09,2.45,3.99,1.44,7.69,3.46,11.21,5.87,5.31,3.64,7.38,8.76,5.94,14.8-1.12,4.69-4.29,8.12-9.22,9.62-5.56,1.69-9.85-.22-14.02-3.87-4.77-4.18-10.46-5.63-16.69-3.63-1.44.46-2.65,1.58-2.96,3.07-.31,1.51.92,2.44,2.02,3.3,2.78,2.18,6.14,3,9.39,4.1,8.24,2.81,16.23,6.05,22.26,12.72,3.79,4.2,5.52,9.26,5.88,14.76.39,5.91-.02,11.72-2.34,17.35-2.24,5.43-6.08,9.26-10.83,12.37-3.71,2.43-7.77,4.18-11.92,5.7-.83.3-1.03.56-1.04,1.34-.08,5.6-3.51,9.16-8.42,9.75-4.48.54-9.5-3.56-9.58-7.76-.01-.75.28-1.7-1.06-1.73-3.8-.09-7.41-1.22-11.01-2.3-6.9-2.07-13.16-5.42-18.81-9.91-3.03-2.41-4.74-6.24-4.73-10.6Z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: center;
+  background-size: 85%;
+}
+.Coliseosport .modal.profile .movements__status.CWI {
+  background-color: #009300;
+}
+.Coliseosport .modal.profile .movements__status.BN {
+  background-color: #879300;
+}
+.Coliseosport .modal.profile .movements__status.AP {
+  background-color: #007793;
+}
+.Coliseosport .modal.profile .movements__status.DE {
+  background-color: #4CAF50;
+}
+.Coliseosport .modal.profile .movements__status.RF {
+  background-color: #8e4caf;
+}
+.Coliseosport .modal.profile .movements__status.RE {
+  background-color: #af4c4c;
+}
+.Coliseosport .modal.profile .movements__status.CB {
+  background-color: #4c57af;
+}
+.Coliseosport .modal.profile .movements__info {
+  display: grid;
+  grid-template-columns: calc(65% - 0.5rem) calc(35% - 0.5rem);
+  gap: 0.25rem 1rem;
+  align-items: center;
+}
+.Coliseosport .modal.profile .movements__ref {
+  display: grid;
+  grid-template-columns: minmax(5rem, 12rem) 2.5rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+.Coliseosport .modal.profile .movements__ref p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+.Coliseosport .modal.profile .movements__ref--text {
+  color: #a6a6a6;
+}
+.Coliseosport .modal.profile .movements__ref .btn.copy {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'><g><path d='M13.3332 0.833374H1.6665V14.1667H3.33317V2.50004H13.3332V0.833374ZM17.4998 4.16671H4.99984V19.1667H17.4998V4.16671ZM15.8332 17.5H6.6665V5.83337H15.8332V17.5Z' fill='white'/></g><defs><clipPath><rect width='20' height='20' fill='white'/></clipPath></defs></svg>");
+  color: #000;
+  height: 40px;
+  text-align: start;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px;
+  background-color: #676767;
+  border-radius: 100%;
+}
+.Coliseosport .modal.profile .btn.withdrawal {
+  background-color: red;
+}
+.Coliseosport .modal.profile .btn.withdrawal.locked {
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 14.5V16.5M7 10.0288C7.47142 10 8.05259 10 8.8 10H15.2C15.9474 10 16.5286 10 17 10.0288M7 10.0288C6.41168 10.0647 5.99429 10.1455 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C18.0057 10.1455 17.5883 10.0647 17 10.0288M7 10.0288V8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V10.0288' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+  padding-right: 0.5rem;
+}
+.Coliseosport .modal.profile .btn.logout {
+  text-align: start;
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M10 0H8V10H10V0ZM14.83 2.17L13.41 3.59C14.99 4.86 16 6.81 16 9C16 12.87 12.87 16 9 16C5.13 16 2 12.87 2 9C2 6.81 3.01 4.86 4.58 3.58L3.17 2.17C1.23 3.82 0 6.26 0 9C0 13.97 4.03 18 9 18C13.97 18 18 13.97 18 9C18 6.26 16.77 3.82 14.83 2.17Z' fill='%23fff'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.Coliseosport .modal.profile .btn.profile {
+  display: flex;
+  align-items: center;
+  text-align: start;
+  gap: 0.5rem;
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'><path fill='%23fff' d='M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.Coliseosport .modal.profile .btn.profile.active {
+  background-image: url("data:image/svg+xml,<svg  viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'><path fill='%23fff' d='M685.248 104.704a64 64 0 010 90.496L368.448 512l316.8 316.8a64 64 0 01-90.496 90.496L232.704 557.248a64 64 0 010-90.496l362.048-362.048a64 64 0 0190.496 0z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: left 0.75rem center;
+  padding-left: 2.5rem;
+  background-color: #ff6b29;
+}
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  .Coliseosport .modal.profile .btn.profile.active {
+    pointer-events: none;
+    background-image: none;
+    padding-left: 0.5rem;
+  }
+}
+.Coliseosport .modal.profile .btn.profile .icon--user {
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M11 4.16667C11 6.37581 9.20912 8.16667 6.99998 8.16667C4.79084 8.16667 2.99998 6.37581 2.99998 4.16667C2.99998 1.95753 4.79084 0.166672 6.99998 0.166672C9.20912 0.166672 11 1.95753 11 4.16667ZM9.66665 4.16667C9.66665 5.63943 8.47274 6.83334 6.99998 6.83334C5.52722 6.83334 4.33331 5.63943 4.33331 4.16667C4.33331 2.69391 5.52722 1.50001 6.99998 1.50001C8.47274 1.50001 9.66665 2.69391 9.66665 4.16667Z' fill='%23fff'/><path fill-rule='evenodd' clip-rule='evenodd' d='M7.00003 8.83334C5.04328 8.83334 3.63245 9.23923 2.62041 9.84783C1.60433 10.4589 1.03363 11.2483 0.718468 11.9387C0.452812 12.5207 0.573721 13.1138 0.926676 13.5364C1.26312 13.9392 1.78624 14.1667 2.33335 14.1667H11.6667C12.2137 14.1667 12.7369 13.9392 13.0733 13.5364C13.4263 13.1139 13.5472 12.5208 13.2815 11.9388C12.9664 11.2483 12.3957 10.4589 11.3796 9.84784C10.3676 9.23923 8.95679 8.83334 7.00003 8.83334ZM1.93141 12.4924C2.15018 12.0131 2.55204 11.4448 3.30755 10.9905C4.06708 10.5337 5.22683 10.1667 7.00003 10.1667C8.77324 10.1667 9.93298 10.5337 10.6925 10.9905C11.448 11.4448 11.8498 12.0131 12.0686 12.4924C12.0944 12.549 12.0933 12.583 12.0907 12.6004C12.0877 12.6202 12.078 12.6481 12.05 12.6816C11.9899 12.7536 11.8559 12.8333 11.6667 12.8333H2.33335C2.14406 12.8333 2.01009 12.7536 1.94998 12.6816C1.92199 12.6481 1.91226 12.6202 1.9093 12.6004C1.90671 12.583 1.90558 12.549 1.93141 12.4924Z' fill='%23fff'/></svg>");
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #d4380d;
+  border-radius: 100%;
+  background-size: inherit;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.Coliseosport .modal.profile .btn.profile .icon--password {
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'><g><path d='M7.96171 7.33265L8.07926 7.66667H8.43335H14.8334V9.33333H14H13.5V9.83333V12H11.8334V9.83333V9.33333H11.3334H8.43335H8.07926L7.96171 9.66735C7.48326 11.0269 6.18793 12 4.66669 12C2.73616 12 1.16669 10.4305 1.16669 8.5C1.16669 6.56948 2.73616 5 4.66669 5C6.18793 5 7.48326 5.97315 7.96171 7.33265ZM2.83335 8.5C2.83335 9.50948 3.65721 10.3333 4.66669 10.3333C5.67616 10.3333 6.50002 9.50948 6.50002 8.5C6.50002 7.49052 5.67616 6.66667 4.66669 6.66667C3.65721 6.66667 2.83335 7.49052 2.83335 8.5Z' stroke='%23fff'/></g><defs><clipPath ><rect width='16' height='16' fill='%23fff' transform='translate(0 0.5)'/></clipPath></defs></svg>");
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #d4380d;
+  border-radius: 100%;
+  background-size: inherit;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.Coliseosport .modal.profile .btn.profile .icon--movements {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15' fill='none'><path d='M7.91427 2.5144C5.07427 2.5144 2.77141 4.81726 2.77141 7.65726H1.05713L3.27999 9.88012L3.31999 9.96012L5.62856 7.65726H3.91427C3.91427 5.44583 5.70284 3.65726 7.91427 3.65726C10.1257 3.65726 11.9143 5.44583 11.9143 7.65726C11.9143 9.86869 10.1257 11.6573 7.91427 11.6573C6.81141 11.6573 5.81142 11.2058 5.09141 10.4801L4.27999 11.2915C5.21141 12.223 6.49142 12.8001 7.91427 12.8001C10.7543 12.8001 13.0571 10.4973 13.0571 7.65726C13.0571 4.81726 10.7543 2.5144 7.91427 2.5144ZM7.34284 5.37155V8.22869L9.77141 9.66869L10.2114 8.93155L8.19999 7.73726V5.37155H7.34284Z' fill='%23fff'/><clipPath><rect width='13.7143' height='13.7143' fill='%23fff'/></clipPath></svg>");
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #d4380d;
+  border-radius: 100%;
+  background-size: inherit;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.Coliseosport .modal.profile .btn.profile .icon--bonus {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15' fill='none'><path d='M11.9143 4.51423H10.6685C10.7314 4.33709 10.7714 4.1428 10.7714 3.9428C10.7714 2.99423 10.0057 2.22852 9.05711 2.22852C8.45711 2.22852 7.93711 2.53709 7.62854 2.99994L7.34283 3.3828L7.05711 2.99423C6.74854 2.53709 6.22854 2.22852 5.62854 2.22852C4.67997 2.22852 3.91425 2.99423 3.91425 3.9428C3.91425 4.1428 3.95425 4.33709 4.01711 4.51423H2.7714C2.13711 4.51423 1.63425 5.0228 1.63425 5.65709L1.62854 11.9428C1.62854 12.5771 2.13711 13.0857 2.7714 13.0857H11.9143C12.5485 13.0857 13.0571 12.5771 13.0571 11.9428V5.65709C13.0571 5.0228 12.5485 4.51423 11.9143 4.51423ZM9.05711 3.37137C9.3714 3.37137 9.62854 3.62852 9.62854 3.9428C9.62854 4.25709 9.3714 4.51423 9.05711 4.51423C8.74283 4.51423 8.48568 4.25709 8.48568 3.9428C8.48568 3.62852 8.74283 3.37137 9.05711 3.37137ZM5.62854 3.37137C5.94283 3.37137 6.19997 3.62852 6.19997 3.9428C6.19997 4.25709 5.94283 4.51423 5.62854 4.51423C5.31425 4.51423 5.05711 4.25709 5.05711 3.9428C5.05711 3.62852 5.31425 3.37137 5.62854 3.37137ZM11.9143 11.9428H2.7714V10.7999H11.9143V11.9428ZM11.9143 9.08566H2.7714V5.65709H5.67425L4.48568 7.27423L5.4114 7.9428L7.34283 5.31423L9.27425 7.9428L10.2 7.27423L9.0114 5.65709H11.9143V9.08566Z' fill='%23fff'/></svg>");
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #d4380d;
+  border-radius: 100%;
+  background-size: inherit;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.Coliseosport .modal.profile .btn.option {
+  background: #C41D7F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .Coliseosport .notify {
   position: fixed;
   z-index: 9999;
@@ -998,9 +1451,9 @@ p, b, span, a, li *, button {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 16px;
-  background-color: #C41D7F;
   border-radius: 100%;
-  position: relative;
+  background-color: #5b5b5b;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .Coliseosport .icon--atc {
   background-image: url("data:image/svg+xml,<svg viewBox='0 0 24 25' fill='none' xmlns='http://www.w3.org/2000/svg'><g><path d='M9 14.48C9.55228 14.48 10 14.0323 10 13.48C10 12.9277 9.55228 12.48 9 12.48C8.44772 12.48 8 12.9277 8 13.48C8 14.0323 8.44772 14.48 9 14.48Z' fill='%23fff'/><path d='M15 14.48C15.5523 14.48 16 14.0323 16 13.48C16 12.9277 15.5523 12.48 15 12.48C14.4477 12.48 14 12.9277 14 13.48C14 14.0323 14.4477 14.48 15 14.48Z' fill='%23fff'/><path d='M18 11.51C17.52 8.65998 15.04 6.47998 12.05 6.47998C9.01997 6.47998 5.75997 8.98998 6.01997 12.93C8.48997 11.92 10.35 9.71998 10.88 7.03998C12.19 9.66998 14.88 11.48 18 11.51Z' fill='%23fff'/><path d='M20.99 12.48C20.88 7.10998 16.68 3.47998 12 3.47998C7.39 3.47998 3.15 7.00998 3.01 12.48H2V18.48H5V12.67C5 8.83998 7.95 5.48998 11.78 5.37998C15.74 5.25998 19 8.43998 19 12.38V19.48H11V21.48H21V18.48H22V12.48H20.99Z' fill='%23fff'/></g><defs><clipPath><rect width='24' height='24' fill='%23fff' transform='translate(0 0.47998)'/></clipPath></defs></svg>");
@@ -1116,407 +1569,6 @@ p, b, span, a, li *, button {
     opacity: 0.4;
     transform: translate3d(0, 0.2rem, 0);
   }
-}
-.Coliseosport .modal.profile {
-  overflow: hidden;
-}
-.Coliseosport .modal.profile .modal-body {
-  padding: 1rem;
-  width: 100%;
-  position: relative;
-  align-content: start;
-}
-@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
-  .Coliseosport .modal.profile .modal-body {
-    grid-template-columns: 0fr 1fr;
-  }
-}
-.Coliseosport .modal.profile .modal-content {
-  max-width: 1000px;
-}
-.Coliseosport .modal.profile .modal-header {
-  grid-template-columns: 2.5rem 1fr 2.5rem;
-  justify-items: center;
-}
-@media (max-width: 1023px) {
-  .Coliseosport .modal.profile .modal-dialog {
-    margin: 0;
-    grid-template-columns: auto;
-    max-width: 100%;
-  }
-  .Coliseosport .modal.profile .modal-content {
-    border-radius: 0;
-    height: 100vh;
-    max-width: 100%;
-  }
-}
-.Coliseosport .modal.profile .profile__body {
-  display: grid;
-  gap: 0.75rem;
-  width: 100%;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-.Coliseosport .modal.profile .profile__container {
-  display: grid;
-  gap: 0.5rem;
-}
-.Coliseosport .modal.profile .profile__bonuses {
-  background: #6b7482;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  display: grid;
-  gap: 0.5rem;
-}
-.Coliseosport .modal.profile .profile__bonuses div {
-  display: flex;
-  justify-content: space-between;
-}
-.Coliseosport .modal.profile .profile__top {
-  gap: 0.5rem;
-  display: grid;
-  grid-template-columns: 1fr 2.5rem 2.5rem;
-}
-.Coliseosport .modal.profile .profile__warning {
-  display: grid;
-  grid-template-columns: 1.5rem 1fr;
-  gap: 0.5rem;
-  align-items: center;
-  border: 1px solid #00d2e4;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-}
-.Coliseosport .modal.profile .profile__warning .icon--info {
-  background-image: url("data:image/svg+xml,<svg viewBox='-0.5 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 21.5C17.1086 21.5 21.25 17.3586 21.25 12.25C21.25 7.14137 17.1086 3 12 3C6.89137 3 2.75 7.14137 2.75 12.25C2.75 17.3586 6.89137 21.5 12 21.5Z' stroke='%2300d2e4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/><path d='M12.9309 8.15005C12.9256 8.39231 12.825 8.62272 12.6509 8.79123C12.4767 8.95974 12.2431 9.05271 12.0008 9.05002C11.8242 9.04413 11.6533 8.98641 11.5093 8.884C11.3652 8.7816 11.2546 8.63903 11.1911 8.47415C11.1275 8.30927 11.1139 8.12932 11.152 7.95675C11.19 7.78419 11.278 7.6267 11.405 7.50381C11.532 7.38093 11.6923 7.29814 11.866 7.26578C12.0397 7.23341 12.2192 7.25289 12.3819 7.32181C12.5446 7.39072 12.6834 7.506 12.781 7.65329C12.8787 7.80057 12.9308 7.97335 12.9309 8.15005ZM11.2909 16.5301V11.1501C11.2882 11.0556 11.3046 10.9615 11.3392 10.8736C11.3738 10.7857 11.4258 10.7057 11.4922 10.6385C11.5585 10.5712 11.6378 10.518 11.7252 10.4822C11.8126 10.4464 11.9064 10.4286 12.0008 10.43C12.094 10.4299 12.1863 10.4487 12.272 10.4853C12.3577 10.5218 12.4352 10.5753 12.4997 10.6426C12.5642 10.7099 12.6143 10.7895 12.6472 10.8767C12.6801 10.9639 12.6949 11.0569 12.6908 11.1501V16.5301C12.6908 16.622 12.6727 16.713 12.6376 16.7979C12.6024 16.8828 12.5508 16.96 12.4858 17.025C12.4208 17.09 12.3437 17.1415 12.2588 17.1767C12.1738 17.2119 12.0828 17.23 11.9909 17.23C11.899 17.23 11.8079 17.2119 11.723 17.1767C11.6381 17.1415 11.5609 17.09 11.4959 17.025C11.4309 16.96 11.3793 16.8828 11.3442 16.7979C11.309 16.713 11.2909 16.622 11.2909 16.5301Z' fill='%2300d2e4'/></svg>");
-  color: #000;
-  height: 40px;
-  text-align: start;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 28px;
-}
-.Coliseosport .modal.profile .profile__header {
-  display: grid;
-  grid-template-columns: 2.5rem 1fr;
-  gap: 0.5rem;
-  align-items: center;
-}
-.Coliseosport .modal.profile .profile__img {
-  width: 100%;
-  height: 100%;
-  border-radius: 0.25rem;
-}
-.Coliseosport .modal.profile .profile__view {
-  display: grid;
-  padding: 0.5rem;
-  width: 100%;
-  grid-template-rows: auto 1fr;
-  gap: 1rem;
-  align-items: start;
-  height: 100%;
-  background: #393939;
-  border-radius: 0.25rem;
-}
-@media (orientation: landscape) and (max-width: 1023px), (orientation: portrait) and (max-width: 1023px) {
-  .Coliseosport .modal.profile .profile__view {
-    position: absolute;
-    background: #222222;
-  }
-}
-.Coliseosport .modal.profile .profile__balance {
-  display: flex;
-  align-items: center;
-  background-color: #5c6066;
-  padding: 0.5rem;
-  color: #fff;
-  border-radius: 0.25rem;
-  height: 40px;
-}
-.Coliseosport .modal.profile .profile__balance.slc {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23fff' d='M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z'/></svg>");
-}
-.Coliseosport .modal.profile .profile__transaction {
-  display: flex;
-  gap: 0.5rem;
-}
-.Coliseosport .modal.profile .userdata {
-  display: grid;
-  gap: 0.5rem;
-}
-.Coliseosport .modal.profile .userdata__form {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: 1fr 1fr;
-}
-.Coliseosport .modal.profile .userdata .btn.save {
-  max-width: 10rem;
-  margin: 1rem auto;
-}
-.Coliseosport .modal.profile .changePassword {
-  display: grid;
-  gap: 0.5rem;
-  max-width: 300px;
-  margin: 0 auto;
-}
-.Coliseosport .modal.profile .movements {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-rows: auto auto auto 1fr;
-}
-.Coliseosport .modal.profile .movements.load {
-  grid-template-rows: auto auto 100%;
-}
-.Coliseosport .modal.profile .movements__consult {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid #7a7a7d;
-}
-.Coliseosport .modal.profile .movements__empty {
-  height: -moz-fit-content;
-  height: fit-content;
-  border: 1px solid #fff;
-  padding: 1rem;
-  text-align: center;
-}
-.Coliseosport .modal.profile .movements__concept {
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid #fff;
-  word-break: break-all;
-}
-.Coliseosport .modal.profile .movements__totals {
-  text-align: end;
-}
-.Coliseosport .modal.profile .movements__ticket {
-  display: grid;
-  background: #42424c;
-  border: 1px solid #B0B0B0;
-  gap: 0.5rem;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-}
-.Coliseosport .modal.profile .movements__transaction {
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 0.5rem;
-  align-items: center;
-}
-.Coliseosport .modal.profile .movements__result {
-  display: grid;
-  gap: 0.5rem;
-  height: -moz-fit-content;
-  height: fit-content;
-  max-height: calc(100vh - 19rem);
-  overflow: auto;
-  overscroll-behavior: none;
-}
-@media (orientation: landscape) and (max-width: 1023px), (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
-  .Coliseosport .modal.profile .movements__result {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-.Coliseosport .modal.profile .movements__status {
-  background-color: #7c7c7c;
-  display: flex;
-  height: 3.5rem;
-  border-radius: 0.25rem;
-}
-.Coliseosport .modal.profile .movements__status.AP {
-  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160.91 170.41'><path d='M57.4,26.68c4.26,9,2.45,16.07-3.77,21.62A44.33,44.33,0,0,1,50.13,51a3.12,3.12,0,0,0-1.27,4,12.17,12.17,0,0,1,0,9.65c-.69,1.67.06,2.89,1.2,4.12,8.84,9.55,17.68,19.11,26.42,28.75,2.18,2.4,3.94,5.18,6.06,7.64.74.84,2,1.22,3,1.82.41.24,1,.42,1.2.79,2.17,3.38,4.28,6.8,6.53,10.39l-1.87,1.56c-4.42,3.57-8.86,7.11-13.23,10.73a7.8,7.8,0,0,0-2.07,2.58,99.28,99.28,0,0,0-4,9.44c-3.18,9.15-8.14,17.44-12.28,26.13-.76,1.59-2.22,1.75-3.77,1.75H12c-1.66,0-3.38.15-4.38-1.62s.06-3,.88-4.42c7.1-11.87,14.53-23.56,21.23-35.65,8.54-15.42,8.35-31.21.2-46.83-4.65-8.93-3.35-17.32,2-25.44a8.92,8.92,0,0,0,1.23-2.12A24.79,24.79,0,0,1,43.93,40.05C49.42,36.61,54,32.51,57.4,26.68ZM46.12,109.09c-2.06,0-3.29,1-3.54,2.54a3,3,0,0,0,2.52,3.51c4.85,1.3,9.49,3.17,13.2,6.58a54.9,54.9,0,0,1,6,7.17c1.13,1.47,2.65,2,4.15,1.22a3,3,0,0,0,1.32-4,16.35,16.35,0,0,0-1.27-2.32c-4.71-7.26-11.62-11.44-19.66-14C47.79,109.49,46.75,109.26,46.12,109.09Z'/><path d='M160.91,81.3c-2,6.47-4,12.7-5.71,19-1.79,6.55-3.26,13.18-4.94,19.76a1.9,1.9,0,0,1-1.31,1.14,11.41,11.41,0,0,1-8.34-2q-8.25-5.84-16.8-11.24c-7.54-4.77-15.15-9.43-23.74-12.61a10,10,0,0,1,.89-1.18q6.6-6.44,13.23-12.84c.29-.29.78-.48.91-.82,1-2.63,3.36-2.35,5.45-2.62,7-.9,13.9,0,20.82,1.09,5.94,1,12,1.45,17.95,2.15Z'/><path d='M91.41,103.63A25.83,25.83,0,0,1,94.52,101a2.69,2.69,0,0,1,2.22-.17c5.67,2.63,11.52,5,16.87,8.15,8.27,4.93,16,10.67,24.31,15.62,3.69,2.22,5.63,5.56,8.13,9-1.5,1-2.83,2.1-4.3,2.94-7.3,4.17-15.28,6.56-23.34,8.7-.44.11-1.33-.52-1.66-1q-8.66-13.73-17.23-27.51Z'/><path d='M7.25,4.58C20.92,8.26,33.36,4.78,45.84,0c.38,3.55.72,7,1.12,10.42.64,5.35,1.36,10.68,1.94,16a3.42,3.42,0,0,1-.74,2.48,24.63,24.63,0,0,1-4.7,4A40.74,40.74,0,0,0,31.09,44.24C22.48,31.45,13.8,18.89,7.25,4.58Z'/><path d='M109.16,77.54c-8.51,6.48-14.31,15.74-23,22.24-1.36-1.72-2.56-3.16-3.67-4.68a2.25,2.25,0,0,1-.2-1.31c.21-3.63,1.68-6.86,3.36-10a79.57,79.57,0,0,1,12-16.4,1.73,1.73,0,0,1,2.15-.5,11.29,11.29,0,0,1,7.06,6C107.61,74.42,108.34,75.88,109.16,77.54Z'/><path d='M65.71,76.19a21.18,21.18,0,0,0-2.6-2.68c-2.91-2-2.76-4.65-1.74-7.44a52,52,0,0,1,3.37-8C68,52.34,71.52,46.73,75,41.1c1-1.68,2-1.88,3.76-1s3.41,1.65,5.06,2.56A3.05,3.05,0,0,1,84.94,47c-4.22,6.7-8.42,13.42-12.67,20.1-1.26,2-2.64,3.92-4,5.85C67.51,74,66.65,75,65.71,76.19Z'/><path d='M89.19,51.48c2.8,1.25,5.49,2.32,6.2,5.55A5.51,5.51,0,0,1,94,62.41c-6.09,6.35-11.46,13.22-15.1,21.31-.68,1.51-1.24,3.07-1.93,4.8l-7.29-8.09c7.41-7.17,11.27-16.68,16.87-25C87.38,54.12,88.25,52.86,89.19,51.48Z'/><path d='M27.77,50.5c-7.88-5.64-15.24-11-21.87-17.43-4-3.83-4.73-8.76-5.9-14,3.62,1.65,6.93,3.14,10.22,4.69.34.15.57.58.79.92Q19.19,37.1,27.34,49.54A9,9,0,0,1,27.77,50.5Z'/><path d='M65.81,31a22.35,22.35,0,0,1,3.49,2.87,3.44,3.44,0,0,1,.24,4.29c-5.12,7.6-10,15.35-13.36,24-.24-2.24-.55-4.4-.64-6.57,0-.54.57-1.22,1.05-1.63,4.28-3.6,7.66-7.84,8.66-13.43C65.8,37.42,65.64,34.26,65.81,31Z'/><path d='M15.58,49.3l9.2,6.61c-.58,1.35-1.08,2.6-1.66,3.82-.15.3-.57.69-.85.67A37.45,37.45,0,0,1,18.05,60a1.25,1.25,0,0,1-.7-.85C16.76,56,16.22,52.88,15.58,49.3Z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: center;
-  background-size: 85%;
-}
-.Coliseosport .modal.profile .movements__status.DE {
-  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 376.26 374.71'><path d='M272.52,194.55v4.38c0,20.08-.21,40.17.07,60.25.23,16.71-5.48,31.11-16.4,43.35-7.14,8-10.72,16.88-10.31,27.54.19,5.11,0,10.23,0,15.34s-2.12,7.13-7,7.14q-52.57,0-105.15,0c-5,0-7.08-2.1-7.14-7-.07-5.61,0-11.22,0-16.84a32.44,32.44,0,0,0-9.62-23.59c-2.54-2.58-5-5.24-7.6-7.75-8.09-7.81-11.72-17.36-11.67-28.54.09-23.08,0-46.16,0-69.24v-5H83c-10.58,0-16.22-5.58-16.21-16.08q0-52.77.1-105.54c0-1.34,0-2.68,0-4.23H303.05c.07,1.35.19,2.65.19,4q.08,53.15.12,106.29c0,9.79-5.81,15.57-15.57,15.6C282.83,194.57,277.87,194.55,272.52,194.55Zm-134,145.8h95.43c0-2.71.17-5.2,0-7.66-1.26-15.7,4.42-28.75,14.89-40.12a40.15,40.15,0,0,0,9.83-18.26,65.9,65.9,0,0,0,1.85-14c.17-28.33.1-56.65.08-85,0-9.82-5.61-15.87-14.45-15.94-6.62-.05-14.27,4.84-14,15.49.31,12.47,0,24.95,0,37.43,0,8.4-1.24,9.56-9.71,10-16.88.86-30.06,8.19-38.91,22.8a66.58,66.58,0,0,0-8.91,26.75c-.47,3.84-3.14,6.08-6.53,5.71s-5.55-3-5.36-6.84a10.3,10.3,0,0,1,.28-2.22c1.87-6.7,3.17-13.64,5.77-20.05,7.63-18.79,20.84-31.67,41-36.48,3.35-.8,6.78-1.23,10.17-1.83V194.79H109.61v4.65c0,23.33.12,46.67-.07,70a24.49,24.49,0,0,0,6.29,17.09c2.88,3.28,5.86,6.47,9,9.53,9.31,9.17,13.72,20.31,13.69,33.29C138.48,333,138.49,336.54,138.49,340.35Zm82.65-176h-4.63q-48.84,0-97.67.06c-2.78,0-4.44-.46-5.56-3.41-2.48-6.51-7.48-10.67-13.82-13.45a4.6,4.6,0,0,1-2.36-3.35c-.17-12.35-.06-24.7-.16-37.06,0-2.11.69-3,2.63-3.77,6.36-2.4,11.22-6.68,13.6-13.06,1.18-3.16,2.89-3.58,5.8-3.58q65.29.12,130.61.06h4.27c2.37,7.11,6.31,13.42,13.47,15.6,5.86,1.78,6.26,5.12,5.88,9.84-.18,2.23,0,4.49,0,6.73v26.83l-11.64,5.69c3,3.48,5.56,6.34,7.73,8.82,3.14-.76,6.08-1.8,9.1-2.12,4.78-.51,6.74-2.15,6.76-7.07q.09-25.64,0-51.28c0-5-2.21-6.9-7.22-7-7-.09-11.85-4.39-12.66-11.21-.62-5.27-2.34-6.84-7.76-6.84q-73.17,0-146.33,0c-5.45,0-7.07,1.45-7.81,6.81-.9,6.59-4.85,10.47-11.48,11.29-5,.62-6.8,2.49-6.82,7.57q-.07,25.08,0,50.15c0,5.1,1.64,6.78,6.8,7.48,6.39.87,10.5,4.82,11.46,11s2.23,7.21,8.61,7.21q52,0,104,0c1.32,0,2.64-.13,3.83-.19C220.24,172.06,220.65,168.48,221.14,164.3Zm-69.92-38.84c0,19.5,14.36,33.94,34,34.07a34.16,34.16,0,0,0,34.1-33.95c0-18.57-15.61-34.31-34-34.21C165.79,91.49,151.27,106,151.22,125.46Z'/><path d='M315.5,122.14V68.46c2.82,0,5.63.06,8.43,0,4.4-.11,7.12-2.46,7.09-6s-2.72-5.79-7.16-5.94c-1,0-2,0-3,0H49.14c-1.25,0-2.5,0-3.74,0-3.92.28-6.28,2.61-6.2,6.05s2.44,5.68,6.43,5.84c3,.11,5.92,0,9.06,0v53.69H45.46c-6.49,0-13,0-19.47,0-4.92-.06-7-2.19-7.06-7.13q0-45.28,0-90.58c0-5.4,2.26-7.28,8.46-7.28H301q21.15,0,42.29,0c5.89,0,8,2,8,7.79q0,44.73,0,89.46c0,5.67-2,7.71-7.6,7.74C334.41,122.17,325.18,122.14,315.5,122.14Z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: center;
-  background-size: 85%;
-}
-.Coliseosport .modal.profile .movements__status.CWI {
-  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160.91 170.41'><path d='M15.06,112.48c.39-2.17.67-4.36,1.18-6.5,2.44-10.25,7.42-19.22,14-27.37A58.69,58.69,0,0,1,45.32,64.84a27.11,27.11,0,0,1,9.3-3.7c4.78-.84,9.09.59,13.2,2.82,6.5,3.53,11.69,8.6,16.3,14.29,6.75,8.33,11.85,17.52,14.32,28,1.47,6.28,1.7,12.57-.48,18.74-3.09,8.75-9.63,13.88-18.1,16.85-8.94,3.14-18.22,3.6-27.58,3.16a58.36,58.36,0,0,1-18.93-3.7c-9.14-3.65-15.49-9.83-17.65-19.73-.25-1.16-.43-2.33-.64-3.5Zm46.23,17c0-2.3.07-4.55,0-6.79a1.89,1.89,0,0,1,1.27-2.09A11.44,11.44,0,0,0,57.62,99a3.84,3.84,0,1,1,3.61-4.52c.05.2.08.4.12.62H69c-.32-5.28-3-8.77-7.74-10.81V76.05H53.63v8.23l-1.2.57a11.47,11.47,0,0,0,5,21.77,3.83,3.83,0,0,1,3.8,3.58,3.9,3.9,0,0,1-3.2,4,3.85,3.85,0,0,1-4.3-2.79c-.09-.31-.17-.63-.24-.9h-7.6c.29,4.64,2.35,8,6.41,10.1a1.9,1.9,0,0,1,1.31,2.07c-.1,2.27,0,4.56,0,6.83Z'/><path d='M86.17,68.69c4.58-3.62,9.36-6.73,15.25-7.61,4.56-.69,8.67.71,12.58,2.82,6.67,3.6,12,8.81,16.66,14.66,6.81,8.49,11.94,17.86,14.25,28.61a32.47,32.47,0,0,1-.51,17.38c-2.76,8.37-8.75,13.57-16.71,16.76a59.25,59.25,0,0,1-21.35,3.8c-4.25.06-8.5-.3-12.75-.48a14.64,14.64,0,0,1-1.48-.24l1.23-.93A33.23,33.23,0,0,0,107,118.57c.79-9.38-1.67-18.13-5.43-26.57A83,83,0,0,0,86.91,69.73l-.59-.66A1.66,1.66,0,0,1,86.17,68.69Z'/><path d='M57.47,30.23A18.91,18.91,0,0,1,71.9,37a2.46,2.46,0,0,0,1.8.93,11.12,11.12,0,0,1,9.57,7,10.08,10.08,0,0,1-1.88,11.27c-1.16,1.33-2.6,2.43-3.87,3.68-.59.57-1,.43-1.64,0A38.58,38.58,0,0,0,63.53,54c-6.83-1.79-13.23-.44-19.36,2.72-1.88,1-3.67,2.13-5.46,3.27-.56.36-1,.42-1.44-.05A52.69,52.69,0,0,1,33,55.8c-5.49-6.71-1-16.17,6.77-17.59A7.05,7.05,0,0,0,43.89,36,18.54,18.54,0,0,1,57.47,30.23Z'/><path d='M90.3,56.66a18.85,18.85,0,0,0-2.08-18.52,19.66,19.66,0,0,1,9.25-6.85,19,19,0,0,1,20.81,5.8,2.71,2.71,0,0,0,1.55.82A11.37,11.37,0,0,1,129.55,45a10.07,10.07,0,0,1-1.86,11.28c-1.16,1.34-2.59,2.45-3.87,3.69-.57.55-1,.46-1.64,0a38.4,38.4,0,0,0-12.48-6c-6.32-1.64-12.3-.53-18.1,2.16l-.93.43A1.93,1.93,0,0,1,90.3,56.66Z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: center;
-  background-size: 85%;
-}
-.Coliseosport .modal.profile .movements__status.RF {
-  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160.91 170.41'><path d='M155.15,154l-2.88-1.23c-6-2.65-12-5.27-18-8a14.27,14.27,0,0,0-6.67-1.23,22.64,22.64,0,0,1-13-2.79,12.93,12.93,0,0,1-6.79-11.58c-.07-9.39,0-18.78,0-28.17,0-3.57,2.51-6.13,5.77-6.08s5.59,2.59,5.62,6.08c0,5.69,0,11.38,0,17.06V120h4.9c0-.45.1-.86.1-1.26,0-6.26,0-12.52,0-18.78,0-5.76-3.5-9.5-9.38-10.05,0-.48-.06-1-.06-1.48q0-17.54,0-35.06c0-4.06,2.64-6.91,6.28-6.92a5.89,5.89,0,0,1,6,5.24q2.69,15.95,5.32,31.92c1.45,8.68,2.85,17.38,4.37,26.05a13.08,13.08,0,0,0,7.55,9.92c3.32,1.63,6.67,3.21,10,4.88a1.87,1.87,0,0,1,.93,1.33c0,9.24,0,18.47,0,27.71A3.9,3.9,0,0,1,155.15,154Z'/><path d='M6.19,141l13.65-7.21q15.75-8.3,31.53-16.56a2,2,0,0,0,1.28-2.16c-.09-1.87,0-3.75,0-5.63s.93-2.91,2.86-2.91q13.37,0,26.74,0c2,0,2.93.94,2.94,3q0,12,0,24.09c0,2-.94,2.95-3,2.95q-13.31,0-26.59,0c-2.05,0-2.94-.92-3-3,0-1.36,0-2.71,0-4.07a2.4,2.4,0,0,0-.11-.43L6.36,141.28Zm55.27-21.9V124h4.83v-4.86ZM76.29,124v-4.87H71.5V124Z'/><path d='M5.62,130.39,20.07,99c-2.46,0-4.68,0-6.9,0s-3.1-.89-3.11-3.15q0-10.64,0-21.27c0-2.25.88-3.12,3.14-3.12q14.39,0,28.77,0c2.25,0,3.14.88,3.14,3.12q0,10.63,0,21.27c0,2.26-.88,3.14-3.11,3.15-2.66,0-5.32.06-8,0a2.72,2.72,0,0,0-2.37,1.11Q19.26,114.85,6.81,129.52c-.3.35-.61.7-.92,1ZM25,82.87H20.19V87.7H25Zm10.05,0H30.19v4.76h4.87Z'/><path d='M96.76,61.46l3.34,6.72c.72,1.44,1.42,2.9,2.17,4.33a2.51,2.51,0,0,1-.41,3.29c-1.09,1-2.25.8-3.42,0C91.81,71.37,85.16,67,78.55,62.5a6,6,0,0,0-3.62-1.07c-4.75.06-9.49,0-14.24,0-3.52,0-5.56-2-5.56-5.51q0-17.07,0-34.12c0-3.42,2-5.44,5.48-5.44H99.73c3.4,0,5.47,2.05,5.47,5.44q0,17.07,0,34.12c0,3.51-2,5.49-5.56,5.51Zm-36.55-5c5.66,0,11.13-.05,16.61,0a5.69,5.69,0,0,1,2.88.88c4.08,2.61,8.09,5.34,12.13,8,.43.29.89.55,1.33.83a44.56,44.56,0,0,0-2.39-5.55c-1.24-2.55-.22-4.2,2.6-4.22,2.23,0,4.45,0,6.73,0V21.5H60.21Z'/><path d='M74.38,50.56l-5.67-5.7L75,39.05,68.8,33.13l5.45-5.41,5.9,6.17L86,27.48,91.51,33l-6,5.88,6.14,5.94-5.4,5.41-5.94-6.08Z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: center;
-  background-size: 85%;
-}
-.Coliseosport .modal.profile .movements__status.RE {
-  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160.91 170.41'><path d='M59.61,163.59c-.46-1.59-.8-3.17-1.37-4.67a23.57,23.57,0,0,0-17.4-15.34c-1.24-.31-1.81-.63-1.81-2q0-53.77,0-107.55c0-.4.06-.79.1-1.36h82.69v2.16q0,53.07,0,106.14c0,1.72-.47,2.29-2.21,2.75-9.36,2.51-15.36,8.5-17.83,17.94l-.52,2Zm32.26-62.13a13.32,13.32,0,0,0,10.06-5.69c2.28-3.11,3.3-3.83,6.95-4.78a3.21,3.21,0,0,0,2.61-3.38,3.13,3.13,0,0,0-2.59-3.19,8.12,8.12,0,0,0-2.41-.17,2.6,2.6,0,0,1-3.11-2,13.46,13.46,0,0,0-13.69-8.36A13.6,13.6,0,0,0,77.58,84a42,42,0,0,0-.71,4.78,6.83,6.83,0,0,1-6.32,5.82,7,7,0,0,1-7.36-6.51c-.26-3.71,2.6-6.84,6.62-7.25,2.37-.23,3.85-1.69,3.73-3.66s-1.73-3.36-4.11-3.2a13.17,13.17,0,0,0-12,8.5,2.48,2.48,0,0,1-2.8,1.81c-3.6-.08-5.34,1.16-5.27,3.52s1.72,3.42,5.23,3.35c1.44,0,2.23.25,2.83,1.77a13.52,13.52,0,0,0,14,8.53,13.69,13.69,0,0,0,12-10.4c.35-1.42.37-2.93.59-4.39a6.8,6.8,0,0,1,6.31-5.82,6.94,6.94,0,0,1,7.36,6.5c.27,3.72-2.6,6.85-6.62,7.26-2.37.23-3.84,1.68-3.72,3.66S89,101.47,91.87,101.46Z'/><path d='M128.9,73.81V60.11c2.14,0,4.16,0,6.17,0,6.56-.07,10.91-4.4,11-10.91,0-4.31,0-8.62,0-12.94a10.34,10.34,0,0,0-10.12-10.7c-.4,0-.81,0-1.21,0H26.28c-5.84,0-9.89,2.95-11.12,8.06a11.3,11.3,0,0,0-.26,2.6q0,6.57,0,13.14c0,6.28,4.38,10.64,10.68,10.77,2.08,0,4.17,0,6.41,0V73.79c-.57,0-1.09.11-1.61.12q-10.71,0-21.44,0c-3.19,0-4.45-1.24-4.45-4.39q0-26.7,0-53.39c0-3.16,1.26-4.4,4.44-4.4h143c3.29,0,4.52,1.24,4.52,4.53q0,26.6,0,53.19c0,3.19-1.25,4.45-4.39,4.46q-10.71,0-21.43,0C130.08,73.91,129.55,73.85,128.9,73.81Z'/><path d='M32,53.19c-2.37,0-4.59.09-6.8,0A3.33,3.33,0,0,1,21.8,49.6q-.07-6.76,0-13.54a3.28,3.28,0,0,1,3.36-3.55c2.2-.12,4.42,0,6.81,0Z'/><path d='M128.92,53.17V32.56c2.49,0,4.9-.14,7.29,0a3.05,3.05,0,0,1,2.89,3.32q.09,6.87,0,13.74a3.27,3.27,0,0,1-3.23,3.48C133.61,53.28,131.33,53.17,128.92,53.17Z'/><path d='M52.3,163.57H39.2V150.48C45,150.81,51.29,157,52.3,163.57Z'/><path d='M108.62,163.56c.91-6.42,7.15-12.63,13.1-13.11v13.11Z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: center;
-  background-size: 85%;
-}
-.Coliseosport .modal.profile .movements__status.BN {
-  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 334.46 321.73'><path d='m306.52,242.93c-.22,35.59-28.83,63.71-64.59,63.48-35.17-.22-63.48-28.96-63.38-64.34.09-34.91,29.25-63.84,64.23-63.73,35.34.11,63.96,29.1,63.74,64.59Zm-79.4-16.44c-.04-5.25,3.85-9.24,10.4-10.16,7.33-1.02,14.41-.38,19.99,5.21,3.02,3.03,5.04.04,6.76-1.24,2.06-1.53-.55-2.81-1.44-3.92-2.7-3.37-6.41-5.43-10.53-6.25-4.22-.84-7.16-2.01-6.1-7.24.56-2.76-1.73-2.63-3.6-2.67-1.89-.05-4.14-.24-3.62,2.56.97,5.19-2.08,6.18-6.16,7.31-9.94,2.74-14.63,10.51-12.76,19.88,1.84,9.23,8.74,12.83,16.71,15.14,4.77,1.38,9.9,1.36,14.44,3.68,5.06,2.57,7.59,6.45,6.94,10.99-.73,5.06-4.42,7.26-8.82,8.35-8.01,1.99-15.54,1.31-21.76-4.89-2.76-2.76-4.72.14-6.44,1.32-2.07,1.42.02,2.81,1.06,3.99,3.21,3.65,7.39,5.73,12,6.68,3.45.72,5.53,1.91,4.76,5.83-.61,3.1,1.31,3.57,3.79,3.68,2.44.12,4.03-.49,3.47-3.28-.9-4.5,1.68-5.4,5.38-6.27,9.01-2.11,13.99-8.74,13.84-17.53-.14-7.96-4.82-13.82-13.95-16.71-5.18-1.65-10.67-2.37-15.83-4.05-4.85-1.58-8.41-4.73-8.54-10.42Z'/><path d='m121.95,220.53c0,19.15-.09,38.31.08,57.46.03,3.53-.99,4.46-4.45,4.44-23.65-.14-47.3-.16-70.95.05-4,.04-4.56-1.37-4.55-4.88.12-35.14.09-70.28.05-105.42,0-2.43.99-5.13-2.93-6.39-1.92-.61-.95-3.9-.69-5.96.22-1.81,1.93-1.51,3.21-1.52,25.48-.03,50.96.03,76.44-.1,3.91-.02,3.76,2.28,3.76,4.87,0,19.15,0,38.31,0,57.46h.03Z'/><path d='m155.23,194.46c0,27.67-.08,55.33.09,82.99.02,3.9-.91,5.28-4.95,5-5.31-.37-10.68-.39-15.99,0-4.28.31-5.25-1.24-5.23-5.31.15-40,.1-79.99.1-119.99,0-13.83.19-27.67-.1-41.5-.12-5.46,1.16-9.62,5.1-13.73,8.36-8.72,7.83-8.73,15.91-.14,3.97,4.22,5.26,8.51,5.2,14.18-.28,26.16-.12,52.33-.12,78.49Z'/><path d='m181.63,91.56c22.31,0,43.08-.15,63.84.08,7.15.08,11.3,5.04,11.35,12.54.08,14.15-.05,28.3.13,42.44.05,3.58-1.24,4.48-4.65,4.47-28.47-.11-56.95-.12-85.42,0-3.54.02-4.45-1-4.35-4.54.28-9.79.1-19.58.1-29.82,2.48.55,3.43,2.38,4.67,3.74,6.28,6.88,12.48,13.84,18.79,20.7,3.89,4.23,5.33,4.18,9.24-.07,6.76-7.33,13.5-14.69,20.26-22.03,3.55-3.86,3.37-5.87-1.26-8.58-9.9-5.78-19.9-11.39-29.86-17.07-.55-.31-1.06-.7-2.83-1.87Z'/><path d='m121.91,117.01c0,10.52-.13,20.65.07,30.77.07,3.87-2.32,3.26-4.61,3.26-20.33,0-40.66.01-61,0-8,0-16-.13-24-.02-3,.04-4.48-.53-4.43-4.09.21-14.5,0-29,.16-43.49.08-7.48,3.95-11.79,11.27-11.88,20.33-.24,40.66-.09,60.99-.07.27,0,.55.25,1.22.59-3.02,2.81-6.66,4.3-9.97,6.24-7.17,4.21-14.41,8.3-21.68,12.35-3.99,2.22-4.06,4.89-1.2,8.01,6.97,7.62,14.04,15.15,20.94,22.84,3.1,3.46,5.65,3.22,8.65-.14,6.43-7.2,13.02-14.25,19.58-21.34.99-1.07,1.71-2.5,4.01-3.03Z'/><path d='m183.04,282.37c-6.36,0-11.84-.07-17.32.03-2.38.05-3.16-.83-3.15-3.22.11-39.13.19-78.26.14-117.39,0-3.06,1.15-3.55,3.79-3.54,23.81.05,47.63.06,71.44-.09,3.48-.02,4.58,1.03,4.53,4.53-.11,7.73.06,7.74-7.39,8.66-39.22,4.84-66.21,37.09-63.74,76.52.76,12.07,4.67,23.31,11.7,34.51Z'/><path d='m151.09,59.6c4.23-10.93,8.45-21.87,12.69-32.8.42-1.08.91-2.14,1.33-3.22,3.86-10.06,3.85-9.99,14.26-9.08,11.59,1.01,23.19,2.01,34.8,2.7,3.66.22,4.51,1.26,3.68,4.81-2.99,12.74-5.83,25.52-8.48,38.34-.62,3-1.73,4.02-4.86,4.16-13.46.6-26.9,1.5-40.34,2.37-1.84.12-3.67-.09-4.22-1.79-.58-1.76,1.59-2.19,2.67-2.97,8.75-6.35,17.55-12.63,26.37-18.88,2.07-1.46,4.3-2.33,1.98-5.68-2.33-3.36-4.07-2.12-6.45-.41-10.78,7.75-21.63,15.41-32.46,23.1-.32-.21-.64-.43-.96-.64Z'/><path d='m132.54,60.3c-10.94-7.8-21.87-15.62-32.83-23.4-1.68-1.19-3.21-2.94-5.37-.18-2.04,2.61-2.35,4.11.74,6.21,9.07,6.16,17.94,12.63,26.84,19.04,1.1.79,3.31,1.22,2.7,2.98-.65,1.91-2.68,2.11-4.66,1.98-13.27-.87-26.55-1.75-39.83-2.42-3.02-.15-4.32-1.18-4.93-4.19-2.67-13-5.53-25.97-8.47-38.91-.6-2.63-.56-3.98,2.69-4.19,14.1-.91,28.19-1.93,42.27-3.12,3.18-.27,4.6.59,5.75,3.72,5.16,13.97,10.68,27.8,16.07,41.68-.32.26-.64.52-.96.79Z'/><path d='m133.78,91.49c-13.09,14.35-25.31,27.68-37.44,41.09-1.72,1.9-2.89,2.23-4.71.11-4.33-5.03-8.84-9.92-13.33-14.8-1.52-1.66-1.36-2.59.66-3.74,12.71-7.2,25.23-14.74,38.08-21.66,4.75-2.56,10.32-.81,16.75-1Z'/><path d='m151.09,91.73c8.45-.31,15.34-.81,22.12,3.65,10.12,6.66,20.92,12.28,31.48,18.27,2.41,1.37,3.69,2.38,1.04,5-4.49,4.45-8.67,9.22-12.85,13.97-1.56,1.77-2.78,2.15-4.29.07-.58-.8-1.39-1.43-2.07-2.17-11.55-12.64-23.09-25.28-35.44-38.79Z'/><path d='m142.21,84.14c-5.82,0-11.64-.08-17.46.04-2.69.05-3.06-.97-2.35-3.31,2.36-7.79,11.24-14.21,19.81-14.17,8.65.04,17.56,6.33,19.99,14.02.77,2.45.53,3.61-2.52,3.5-5.81-.21-11.64-.06-17.46-.07Z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: center;
-  background-size: 85%;
-}
-.Coliseosport .modal.profile .movements__status.CB {
-  background-image: url("data:image/svg+xml,<svg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 334.46 321.73'><path d='m111.58,258.77c4.56,4.6,9.08,9.2,13.64,13.77,2.1,2.11,4.24,4.19,6.4,6.24,3.43,3.26,4.17,7.5,3.18,11.69-1.09,4.63-4.48,7.75-9.25,8.63-3.61.66-7.18.08-10.03-2.64-6.59-6.3-13.21-12.56-19.74-18.92-7.06-6.87-14-13.87-21.08-20.72-5.28-5.1-5.47-12.62-.16-17.63,4.46-4.21,8.9-8.44,13.36-12.64,8.86-8.34,17.65-16.77,26.63-24.98,6.57-5.99,15.98-3.9,19.53,4.55,1.98,4.72.68,9.23-3.05,12.83-5.08,4.9-10.23,9.74-15.34,14.61-.13.12-.23.26-.36.42.54.55,1.2.34,1.78.34,14.87-.06,29.73-.32,44.6-.52,5.54-.07,11.1.38,16.63-.22,4.42-.48,8.88-.06,13.28-.46,4.9-.45,9.75-1.38,14.53-2.66,5.06-1.36,10.08-2.81,14.83-4.98,8.12-3.71,15.74-8.27,22.64-14.01,7.14-5.95,13.2-12.84,18.43-20.51,4.29-6.3,7.78-13.02,10.37-20.16,2.13-5.91,3.55-12,4.47-18.25.86-5.83,1.06-11.64,1.03-17.5-.03-5.86-.84-11.64-2.01-17.34-2.66-12.92-8.16-24.61-15.85-35.27-5.7-7.89-12.54-14.69-20.32-20.57-6.92-5.24-14.43-9.4-22.48-12.54-7.19-2.8-14.65-4.53-22.34-5.61-6.12-.86-12.19-.59-18.28-.58-4.84,0-9.6.93-14.34,1.99-5.2,1.16-10.27,2.66-15.17,4.71-8.88,3.72-17.07,8.52-24.59,14.62-8.18,6.64-14.96,14.39-20.53,23.24-4.34,6.89-7.75,14.23-10.2,22.02-2.77,8.81-4.19,17.8-4.06,27.04.1,6.41-3.04,11.36-9.11,12.94-5.62,1.47-11.28-.57-14.09-6.51-1.66-3.51-1.2-7.31-1-11.01.2-3.72.33-7.45.99-11.13.54-3.03.98-6.09,1.7-9.09,1.31-5.5,2.92-10.92,4.98-16.21,3.94-10.09,8.95-19.56,15.38-28.31,6.54-8.9,14.25-16.66,22.84-23.49,8.14-6.47,16.99-11.96,26.71-15.81,5.37-2.13,10.84-4.09,16.42-5.56,4.2-1.11,8.53-1.87,12.88-2.47,6.92-.95,13.84-1.57,20.82-1.38,4.41.12,8.78.74,13.17,1.29,4.37.55,8.66,1.42,12.89,2.48,4.1,1.04,8.15,2.36,12.13,3.78,4.33,1.55,8.56,3.35,12.65,5.5,14.85,7.8,27.71,18.06,38.31,31.06,8.19,10.04,14.52,21.22,19.2,33.3,2.33,6.01,4.15,12.23,5.33,18.56,1.96,10.53,3.02,21.16,1.97,31.91-.66,6.78-1.63,13.48-3.24,20.12-4.03,16.61-11.54,31.47-21.96,44.93-8.54,11.04-18.81,20.14-30.61,27.6-6.94,4.38-14.17,8.15-21.89,10.91-5.21,1.87-10.58,3.25-15.99,4.47-9.88,2.23-19.86,3.04-29.96,2.97-8.55-.07-17.11,0-25.65.29-12.98.44-25.96.43-38.95.41-.73,0-1.49-.08-2.06.45Z'/><path d='m140.26,167.28c-.32-6.88,4.78-12.09,10.28-13.43,4.79-1.17,9.18.1,13.06,3.42,5.43,4.63,11.71,7.36,19.01,6.89,2.18-.14,4.27-1.09,5.76-2.77,2.12-2.39,1.71-6.03-2.73-7.65-5.14-1.88-10.43-3.33-15.52-5.32-7.98-3.13-15.04-7.58-18.3-16.04-1.97-5.1-2.15-10.46-1.49-15.92.92-7.6,3.9-14.1,9.5-19.31,3.79-3.53,8.03-6.31,13.28-7.26,1.57-.29,2.6-1.09,2.79-3,.44-4.52,3.76-7.56,8.48-8.11,3.41-.4,7.59,2.71,8.86,6.58.15.47.58.96.51,1.38-.49,2.82,1.7,2.95,3.38,3.15,3.17.37,6.14,1.39,9.09,2.45,3.99,1.44,7.69,3.46,11.21,5.87,5.31,3.64,7.38,8.76,5.94,14.8-1.12,4.69-4.29,8.12-9.22,9.62-5.56,1.69-9.85-.22-14.02-3.87-4.77-4.18-10.46-5.63-16.69-3.63-1.44.46-2.65,1.58-2.96,3.07-.31,1.51.92,2.44,2.02,3.3,2.78,2.18,6.14,3,9.39,4.1,8.24,2.81,16.23,6.05,22.26,12.72,3.79,4.2,5.52,9.26,5.88,14.76.39,5.91-.02,11.72-2.34,17.35-2.24,5.43-6.08,9.26-10.83,12.37-3.71,2.43-7.77,4.18-11.92,5.7-.83.3-1.03.56-1.04,1.34-.08,5.6-3.51,9.16-8.42,9.75-4.48.54-9.5-3.56-9.58-7.76-.01-.75.28-1.7-1.06-1.73-3.8-.09-7.41-1.22-11.01-2.3-6.9-2.07-13.16-5.42-18.81-9.91-3.03-2.41-4.74-6.24-4.73-10.6Z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: center;
-  background-size: 85%;
-}
-.Coliseosport .modal.profile .movements__status.CWI {
-  background-color: #009300;
-}
-.Coliseosport .modal.profile .movements__status.BN {
-  background-color: #879300;
-}
-.Coliseosport .modal.profile .movements__status.AP {
-  background-color: #007793;
-}
-.Coliseosport .modal.profile .movements__status.DE {
-  background-color: #4CAF50;
-}
-.Coliseosport .modal.profile .movements__status.RF {
-  background-color: #8e4caf;
-}
-.Coliseosport .modal.profile .movements__status.RE {
-  background-color: #af4c4c;
-}
-.Coliseosport .modal.profile .movements__status.CB {
-  background-color: #4c57af;
-}
-.Coliseosport .modal.profile .movements__info {
-  display: grid;
-  grid-template-columns: calc(65% - 0.5rem) calc(35% - 0.5rem);
-  gap: 0.25rem 1rem;
-  align-items: center;
-}
-.Coliseosport .modal.profile .movements__ref {
-  display: grid;
-  grid-template-columns: minmax(5rem, 12rem) 2.5rem;
-  align-items: center;
-  gap: 0.5rem;
-}
-.Coliseosport .modal.profile .movements__ref p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-wrap: nowrap;
-}
-.Coliseosport .modal.profile .movements__ref--text {
-  color: #a6a6a6;
-}
-.Coliseosport .modal.profile .movements__ref .btn.copy {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'><g><path d='M13.3332 0.833374H1.6665V14.1667H3.33317V2.50004H13.3332V0.833374ZM17.4998 4.16671H4.99984V19.1667H17.4998V4.16671ZM15.8332 17.5H6.6665V5.83337H15.8332V17.5Z' fill='white'/></g><defs><clipPath><rect width='20' height='20' fill='white'/></clipPath></defs></svg>");
-  color: #000;
-  height: 40px;
-  text-align: start;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 16px;
-  background-color: #676767;
-  border-radius: 100%;
-}
-.Coliseosport .modal.profile .btn.withdrawal {
-  background-color: red;
-}
-.Coliseosport .modal.profile .btn.withdrawal.locked {
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 14.5V16.5M7 10.0288C7.47142 10 8.05259 10 8.8 10H15.2C15.9474 10 16.5286 10 17 10.0288M7 10.0288C6.41168 10.0647 5.99429 10.1455 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C18.0057 10.1455 17.5883 10.0647 17 10.0288M7 10.0288V8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V10.0288' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: left 0.75rem center;
-  padding-left: 2.5rem;
-  padding-left: 0.5rem;
-}
-.Coliseosport .modal.profile .btn.logout {
-  text-align: start;
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M10 0H8V10H10V0ZM14.83 2.17L13.41 3.59C14.99 4.86 16 6.81 16 9C16 12.87 12.87 16 9 16C5.13 16 2 12.87 2 9C2 6.81 3.01 4.86 4.58 3.58L3.17 2.17C1.23 3.82 0 6.26 0 9C0 13.97 4.03 18 9 18C13.97 18 18 13.97 18 9C18 6.26 16.77 3.82 14.83 2.17Z' fill='%23fff'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: right 0.75rem center;
-  padding-right: 2.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-.Coliseosport .modal.profile .btn.profile {
-  display: flex;
-  align-items: center;
-  text-align: start;
-  gap: 0.5rem;
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'><path fill='%23fff' d='M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 16px;
-  background-position: right 0.75rem center;
-  padding-right: 2.5rem;
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-.Coliseosport .modal.profile .btn.profile.active {
-  background-image: url("data:image/svg+xml,<svg  viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'><path fill='%23fff' d='M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8 316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496z'/></svg>");
-  background-color: #ff6b29;
-}
-@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
-  .Coliseosport .modal.profile .btn.profile.active {
-    pointer-events: none;
-    background-image: none;
-  }
-}
-.Coliseosport .modal.profile .btn.profile .icon--user {
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' clip-rule='evenodd' d='M11 4.16667C11 6.37581 9.20912 8.16667 6.99998 8.16667C4.79084 8.16667 2.99998 6.37581 2.99998 4.16667C2.99998 1.95753 4.79084 0.166672 6.99998 0.166672C9.20912 0.166672 11 1.95753 11 4.16667ZM9.66665 4.16667C9.66665 5.63943 8.47274 6.83334 6.99998 6.83334C5.52722 6.83334 4.33331 5.63943 4.33331 4.16667C4.33331 2.69391 5.52722 1.50001 6.99998 1.50001C8.47274 1.50001 9.66665 2.69391 9.66665 4.16667Z' fill='%23fff'/><path fill-rule='evenodd' clip-rule='evenodd' d='M7.00003 8.83334C5.04328 8.83334 3.63245 9.23923 2.62041 9.84783C1.60433 10.4589 1.03363 11.2483 0.718468 11.9387C0.452812 12.5207 0.573721 13.1138 0.926676 13.5364C1.26312 13.9392 1.78624 14.1667 2.33335 14.1667H11.6667C12.2137 14.1667 12.7369 13.9392 13.0733 13.5364C13.4263 13.1139 13.5472 12.5208 13.2815 11.9388C12.9664 11.2483 12.3957 10.4589 11.3796 9.84784C10.3676 9.23923 8.95679 8.83334 7.00003 8.83334ZM1.93141 12.4924C2.15018 12.0131 2.55204 11.4448 3.30755 10.9905C4.06708 10.5337 5.22683 10.1667 7.00003 10.1667C8.77324 10.1667 9.93298 10.5337 10.6925 10.9905C11.448 11.4448 11.8498 12.0131 12.0686 12.4924C12.0944 12.549 12.0933 12.583 12.0907 12.6004C12.0877 12.6202 12.078 12.6481 12.05 12.6816C11.9899 12.7536 11.8559 12.8333 11.6667 12.8333H2.33335C2.14406 12.8333 2.01009 12.7536 1.94998 12.6816C1.92199 12.6481 1.91226 12.6202 1.9093 12.6004C1.90671 12.583 1.90558 12.549 1.93141 12.4924Z' fill='%23fff'/></svg>");
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-color: #d4380d;
-  border-radius: 100%;
-  background-size: inherit;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.Coliseosport .modal.profile .btn.profile .icon--password {
-  background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 17' fill='none' xmlns='http://www.w3.org/2000/svg'><g><path d='M7.96171 7.33265L8.07926 7.66667H8.43335H14.8334V9.33333H14H13.5V9.83333V12H11.8334V9.83333V9.33333H11.3334H8.43335H8.07926L7.96171 9.66735C7.48326 11.0269 6.18793 12 4.66669 12C2.73616 12 1.16669 10.4305 1.16669 8.5C1.16669 6.56948 2.73616 5 4.66669 5C6.18793 5 7.48326 5.97315 7.96171 7.33265ZM2.83335 8.5C2.83335 9.50948 3.65721 10.3333 4.66669 10.3333C5.67616 10.3333 6.50002 9.50948 6.50002 8.5C6.50002 7.49052 5.67616 6.66667 4.66669 6.66667C3.65721 6.66667 2.83335 7.49052 2.83335 8.5Z' stroke='%23fff'/></g><defs><clipPath ><rect width='16' height='16' fill='%23fff' transform='translate(0 0.5)'/></clipPath></defs></svg>");
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-color: #d4380d;
-  border-radius: 100%;
-  background-size: inherit;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.Coliseosport .modal.profile .btn.profile .icon--movements {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15' fill='none'><path d='M7.91427 2.5144C5.07427 2.5144 2.77141 4.81726 2.77141 7.65726H1.05713L3.27999 9.88012L3.31999 9.96012L5.62856 7.65726H3.91427C3.91427 5.44583 5.70284 3.65726 7.91427 3.65726C10.1257 3.65726 11.9143 5.44583 11.9143 7.65726C11.9143 9.86869 10.1257 11.6573 7.91427 11.6573C6.81141 11.6573 5.81142 11.2058 5.09141 10.4801L4.27999 11.2915C5.21141 12.223 6.49142 12.8001 7.91427 12.8001C10.7543 12.8001 13.0571 10.4973 13.0571 7.65726C13.0571 4.81726 10.7543 2.5144 7.91427 2.5144ZM7.34284 5.37155V8.22869L9.77141 9.66869L10.2114 8.93155L8.19999 7.73726V5.37155H7.34284Z' fill='%23fff'/><clipPath><rect width='13.7143' height='13.7143' fill='%23fff'/></clipPath></svg>");
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-color: #d4380d;
-  border-radius: 100%;
-  background-size: inherit;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.Coliseosport .modal.profile .btn.profile .icon--bonus {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15' fill='none'><path d='M11.9143 4.51423H10.6685C10.7314 4.33709 10.7714 4.1428 10.7714 3.9428C10.7714 2.99423 10.0057 2.22852 9.05711 2.22852C8.45711 2.22852 7.93711 2.53709 7.62854 2.99994L7.34283 3.3828L7.05711 2.99423C6.74854 2.53709 6.22854 2.22852 5.62854 2.22852C4.67997 2.22852 3.91425 2.99423 3.91425 3.9428C3.91425 4.1428 3.95425 4.33709 4.01711 4.51423H2.7714C2.13711 4.51423 1.63425 5.0228 1.63425 5.65709L1.62854 11.9428C1.62854 12.5771 2.13711 13.0857 2.7714 13.0857H11.9143C12.5485 13.0857 13.0571 12.5771 13.0571 11.9428V5.65709C13.0571 5.0228 12.5485 4.51423 11.9143 4.51423ZM9.05711 3.37137C9.3714 3.37137 9.62854 3.62852 9.62854 3.9428C9.62854 4.25709 9.3714 4.51423 9.05711 4.51423C8.74283 4.51423 8.48568 4.25709 8.48568 3.9428C8.48568 3.62852 8.74283 3.37137 9.05711 3.37137ZM5.62854 3.37137C5.94283 3.37137 6.19997 3.62852 6.19997 3.9428C6.19997 4.25709 5.94283 4.51423 5.62854 4.51423C5.31425 4.51423 5.05711 4.25709 5.05711 3.9428C5.05711 3.62852 5.31425 3.37137 5.62854 3.37137ZM11.9143 11.9428H2.7714V10.7999H11.9143V11.9428ZM11.9143 9.08566H2.7714V5.65709H5.67425L4.48568 7.27423L5.4114 7.9428L7.34283 5.31423L9.27425 7.9428L10.2 7.27423L9.0114 5.65709H11.9143V9.08566Z' fill='%23fff'/></svg>");
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-color: #d4380d;
-  border-radius: 100%;
-  background-size: inherit;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.Coliseosport .modal.profile .btn.option {
-  background: #C41D7F;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .Coliseosport .modal.profile .loading {
   display: flex;

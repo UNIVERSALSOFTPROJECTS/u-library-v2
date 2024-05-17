@@ -23,7 +23,7 @@
         filter = type;
         try {
             loadMovements = true;
-            let response = await ServerConnection.users.getMovements(user.token, dateFrom, dateTo,newFilter?'TT':filter);                    
+            let response = await ServerConnection.users.getMovements(user.token, dateFrom, dateTo, newFilter?'TT':filter);                    
             const betsAll = {
                 'TTW': o => /-WIN-|PREMIO/.test(o.tipo_operacion),
                 'AP': o => /-BET-|AP/.test(o.tipo_operacion),
@@ -58,10 +58,10 @@
         navigator.clipboard.writeText(message);
     }
 
-    const resizeHeightModal = () => { 
+    const resizeHeightModal = () => {
         let isLandscape = window.matchMedia("(orientation: landscape)").matches;
         let sizePC = visualViewport.width > 1023;
-        heightModal = visualViewport.height + (sizePC?-220:(isLandscape?210:0));
+        heightModal = (sizePC? 82+"vh":(visualViewport.height + (isLandscape?180:0))+ "px") ;
      }
 
     onMount(async() => { getMovements(filter) });
@@ -93,7 +93,7 @@
             <b class="movements__empty">{t("movements.noInformation")}</b>
         {:else}
             <div class="movements__totals">{movements.length} {t("movements.results")}</div>
-            <div class="movements__result" use:watchResize={resizeHeightModal} style="max-height: calc({heightModal}px - 18.75rem);">
+            <div class="movements__result" use:watchResize={resizeHeightModal} style="max-height: calc({heightModal} - 18.75rem);">
                 {#each movements as mov}
                     <div  class="movements__ticket"> 
                         <b class="movements__concept">{mov.tipo_operacion}</b>

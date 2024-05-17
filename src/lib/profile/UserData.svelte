@@ -18,7 +18,7 @@
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
     const saveMyAccount = async()  =>{
-        if(isDataComplete) return onError(t("msg.allObligatory"));
+        if(!isDataComplete) return onError(t("msg.allObligatory"));
         try {
             loadUserData = true;
             accountUser.doctype = selectDoctype;
@@ -81,7 +81,7 @@
             <div></div>
             {/if}
         </form>
-        {#if !isDataComplete}
+        {#if !isDataComplete && accountUser.isViewWeb}
             <button class="btn save" on:click={saveMyAccount} disabled={loadUserData}>
                 {#if loadUserData}
                     <div class="loading"><p></p><p></p><p></p></div>
