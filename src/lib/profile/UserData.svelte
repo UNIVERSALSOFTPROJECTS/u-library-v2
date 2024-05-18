@@ -18,7 +18,9 @@
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
     const saveMyAccount = async()  =>{
-        if(!isDataComplete) return onError(t("msg.allObligatory"));
+        if(!accountUser.document || !accountUser.address || !accountUser.city){
+            return onError(t("msg.allObligatory"));
+        }
         try {
             loadUserData = true;
             accountUser.doctype = selectDoctype;
