@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import ServerConnection from "../../js/server";
-  import { getUpdateBalance } from '../../js/utils/serverUtils';
+  import { getUpdateBalance, getUpdateBalanceUniversal } from '../../js/utils/serverUtils';
   import notify from "../../js/notify";
 
   export let onOk;
@@ -60,7 +60,8 @@
         delete data.claims;
       }
       //Formatear la propiedad "bonus" con el updatebalance
-      await getUpdateBalance(data);
+      if (userGateway == "neco") await getUpdateBalance(data);
+      else await getUpdateBalanceUniversal(data);
       onOk(data);
     } catch (error) {
       console.log("error: ", error);
