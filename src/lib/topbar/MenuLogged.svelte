@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import DropdownBonus from "../dropdown/DropdownBonus.svelte";
 
   export let user = {};
@@ -21,32 +22,12 @@
       />
       <table class="user">
         <div class="user-content">
-          <tr>
-            <th class="codigo" style="color: white;"
-              >{user.username} 
-              <br>#{user.serial}</th
-            >
-            
-          </tr>
+          <tr> <th class="codigo" style="color: white;" >{user.username}  <br>#{user.serial}</th></tr>
           <tr>
             <td>
-              <button
-                class="title-user"
-                style="padding-left: 1rem;"
-                on:click={onOpenMyAccount}
-              >
-                Mi cuenta
+              <button class="title-user" style="padding-left: 1rem;" on:click={onOpenMyAccount} > Mi cuenta
                 <div>
-                  <svg
-                    class="arrow-ic s-pLY60ePxNKjT"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="#fff"
-                    viewBox="0 0 24 24"
-                    ><path
-                      d="M11.178 19.569a.998.998 0 0 0 1.644 0l9-13A.999.999 0 0 0 21 5H3a1.002 1.002 0 0 0-.822 1.569l9 13z"
-                      class="s-pLY60ePxNKjT"
-                    /></svg
-                  >
+                  <svg class="arrow-ic s-pLY60ePxNKjT" xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 24 24"><path d="M11.178 19.569a.998.998 0 0 0 1.644 0l9-13A.999.999 0 0 0 21 5H3a1.002 1.002 0 0 0-.822 1.569l9 13z" class="s-pLY60ePxNKjT"/></svg>
                 </div>
               </button>
             </td>
@@ -63,7 +44,6 @@
         </tr>
         <tr>
           <td>{user.balance} <span class="currency">{user.currency}</span> </td>
-          <td><DropdownBonus bind:bonus={user.bonus}></DropdownBonus></td>
         </tr>
       </table>
     </div>

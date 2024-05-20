@@ -160,7 +160,7 @@
     <div class="profile personaldata__userbalance">
       <div class="u-balance">
         <span>Saldo</span>
-        <div class="u-label">{user.currency} {user.balance.toFixed(2)}</div>
+        <div class="u-label">{user.currency} {user.balance}</div>
       </div>
       {#if user.bonus && user.bonus.length >0}
         {#each user.bonus as bono}

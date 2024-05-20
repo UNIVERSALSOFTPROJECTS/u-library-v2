@@ -2,6 +2,7 @@ import  Login from '../src/lib/topbar/Login.svelte';
 import init from './init';
 init.start();
 
+let modalOpened;
 let assetsUrl ='https://assets.apiusoft.com/coliseosport';
 export default {
   title: 'LOGIN',
