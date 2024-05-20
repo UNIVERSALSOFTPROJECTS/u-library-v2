@@ -1,5 +1,6 @@
 <script>
     import {assetsUrl, assetsPayments, assetsFlags, assetsFooter } from "../js/utils/assetsUtils";
+    import { detectSubdomain } from "../js/utils/formatUtils";
 
     export let onCategoryChange;
     export let openChatLive;
@@ -15,8 +16,10 @@
     let email = configFooter.email;
     let platform = configFooter.platform;
     let bonus = configFooter.bonus;
+    let viewLogoUS = configFooter.viewLogoUS;
     let linksChats = configFooter.linksChats;
     let activePanel = null;
+    let route = detectSubdomain() || t("idiom");
 
     const currentYear = new Date().getFullYear();
     const slots = ["slot", "slotlive", "crash", "scratch"];
@@ -44,7 +47,7 @@
             <a class="btn footer--chat {linksChat.name}" target="_blank" href={linksChat.url}>{linksChat.name}</a>
         {/each}
     </div>
-    <div class="footer__accordion">
+    <div class="footer__accordion {bonus.length != 0?'bonus':''}">
         {#if categorySlot.length != 0}
         <div class="accordion {activePanel === 'panel1' ? 'active' : ''}">
             <button class="accordion__select" on:click={() => toggleAccordion('panel1')}>{t("categoryGame.slot")}</button>
@@ -69,11 +72,11 @@
         <div class="accordion {activePanel === 'panel3' ? 'active' : ''}">
             <button class="accordion__select" on:click={() => toggleAccordion('panel3')}>{t("footer.s_p")}</button>
             <div class="accordion__body">
-                <a href="{assetsUrl}{platform}/{t("idiom")}/t&c.pdf" target="_blank">{t("footer.t_c")}</a>
-                <a href="{assetsUrl}{platform}/{t("idiom")}/p&p.pdf" target="_blank">{t("footer.p_p")}</a>
-                <a href="{assetsUrl}{platform}/{t("idiom")}/g&r.pdf" target="_blank">{t("footer.g_r")}</a>
-                <a href="{assetsUrl}{platform}/{t("idiom")}/p&a.pdf" target="_blank">{t("footer.p_a")}</a>
-                <a href="{assetsUrl}{platform}/{t("idiom")}/q&a.pdf" target="_blank">{t("footer.q_a")}</a>
+                <a href="{assetsUrl}{platform}/{route}/t&c.pdf" target="_blank">{t("footer.t_c")}</a>
+                <a href="{assetsUrl}{platform}/{route}/p&p.pdf" target="_blank">{t("footer.p_p")}</a>
+                <a href="{assetsUrl}{platform}/{route}/g&r.pdf" target="_blank">{t("footer.g_r")}</a>
+                <a href="{assetsUrl}{platform}/{route}/p&a.pdf" target="_blank">{t("footer.p_a")}</a>
+                <a href="{assetsUrl}{platform}/{route}/q&a.pdf" target="_blank">{t("footer.q_a")}</a>
             </div>
         </div>
         {#if bonus.length != 0}
@@ -81,14 +84,14 @@
             <button class="accordion__select" on:click={() => toggleAccordion('panel4')}>{t("footer.promotions")}</button>
             <div class="accordion__body">
                 {#each bonus as bono}
-                <a href="{assetsUrl}{platform}/{t("idiom")}/bonus_sportbook.pdf" target="_blank">{bono.name}</a>
+                <a href="{assetsUrl}{platform}/{route}/bonus_sportbook.pdf" target="_blank">{bono.name}</a>
                 {/each}
             </div>
         </div>
         {/if}
     </div>
 
-    <div class="footer__container">
+    <div class="footer__container {payments.length == 0 && socials.length == 0 && !email?'info':''}">
         <div class="footer__container--sub">
             {#if payments.length != 0}
             <div class="footer__payments">
@@ -127,7 +130,9 @@
 
         <div class="footer__container--sub">
             <div class="footer__imgs">
+                {#if viewLogoUS}
                 <img src="{assetsFooter}powered.png" alt="powered-img" loading="lazy">
+                {/if}
                 <img src="{assetsFooter}more18.png" alt="more18-img" loading="lazy">
             </div>
             <div class="footer__bottom">

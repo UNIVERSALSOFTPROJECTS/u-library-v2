@@ -140,19 +140,22 @@
         createdIn: 2024,
         categoryGames,//globalCategoryGames,en 
         //"slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"
-        payments: ["KHIPU","FLOW"],
+        payments: [
+            // "KHIPU","FLOW"
+        ],
         social: [ //ASEGURATO DE COLOCAR EL NOMBRE EN MINUSCULA Y EhenL ENLACE CORRECTO!!!
-            {name:"facebook", url:"https://www.facebook.com/coliseosportoficial"},
-            {name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
+            // {name:"facebook", url:"https://www.facebook.com/coliseosportoficial"},
+            // {name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
             //social: []//si no hay redes sociales
         ],
         email:"",
         bonus:[ 
-            {name:"Bono Deportivas"} 
+            // {name:"Bono Deportivas"} 
         ],
         linksChats: [ 
             //{name: "Whatsapp", url:"https://web.whatsapp.com/send?phone=56964783055"} 
-        ]
+        ],
+        viewLogoUS : true,
     };
     const configPromotions = {
         platform,

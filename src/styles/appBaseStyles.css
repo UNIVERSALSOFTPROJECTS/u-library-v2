@@ -2603,7 +2603,7 @@ p, b, span, a, li *, button {
   justify-content: center;
 }
 .Coliseosport .footer--lang, .Coliseosport .footer--chat {
-  background: #4a4b53;
+  background: #50535a;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2618,19 +2618,23 @@ p, b, span, a, li *, button {
 @media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
   .Coliseosport .footer__accordion {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 5rem;
+  }
+  .Coliseosport .footer__accordion.bonus {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 .Coliseosport .footer .accordion__select {
   font-weight: 600;
   background-color: transparent;
-  border-bottom: 1px solid #4a4b53;
+  border-bottom: 1px solid #5c5f68;
   border-radius: 0;
 }
 @media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
   .Coliseosport .footer .accordion__select {
     background-image: none;
+    pointer-events: none;
   }
 }
 .Coliseosport .footer .accordion__body a {
@@ -2663,6 +2667,17 @@ p, b, span, a, li *, button {
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
   }
+}
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  .Coliseosport .footer__container.info {
+    grid-template-columns: 1fr;
+  }
+}
+.Coliseosport .footer__container.info .footer__imgs {
+  justify-content: center;
+}
+.Coliseosport .footer__container.info .footer__bottom {
+  text-align: center;
 }
 .Coliseosport .footer__container--sub {
   display: grid;

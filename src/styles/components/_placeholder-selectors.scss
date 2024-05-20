@@ -1344,12 +1344,12 @@
     }
 }
 
-@mixin footer__model_1 ($mid_columns,$bottom_columns){   
+@mixin footer__model_1 ($bgc){   
     .footer{
         display: grid;
         gap: 1rem;
         padding: 1rem;
-        background-color: $bgc-header;
+        background-color: $bgc;
         &__top{
             display: flex;
             gap: 1rem;
@@ -1357,7 +1357,7 @@
         }
         &--lang, &--chat{
             @extend %button;
-            background: #4a4b53;
+            background: lighten($bgc, 20%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1372,10 +1372,10 @@
         &__accordion{
             @media #{$landscape_pc} {
                 display: grid;
-                grid-template-columns: repeat($mid_columns,1fr);
+                grid-template-columns: repeat(3,1fr);
                 gap: 5rem;
-                @if($mid_columns == 1){
-                    justify-items: center;
+                &.bonus{
+                    grid-template-columns: repeat(4,1fr);
                 }
             }
         }
@@ -1383,13 +1383,11 @@
             &__select{
                 font-weight: 600;
                 background-color: transparent;
-                border-bottom: 1px solid #4a4b53;
+                border-bottom: 1px solid lighten($bgc,25%);
                 border-radius: 0;
                 @media #{$landscape_pc} {
                     background-image: none;
-                    @if($mid_columns == 1){
-                        text-align: center;
-                    }
+                    pointer-events: none;
                 }
             }
             &__body{
@@ -1398,11 +1396,6 @@
                 }
                 @media #{$landscape_pc} {
                     display: grid;
-                    @if($mid_columns == 1){
-                        justify-items: center;
-                        grid-template-columns: repeat(5,1fr);
-                        padding-top: 1rem;
-                    }
                 }
             }
         }
@@ -1423,24 +1416,32 @@
             display: grid;
             gap: 1rem;
             @media #{$landscape_pc} {
-                grid-template-columns: repeat($bottom_columns,1fr);
+                grid-template-columns: repeat(3,1fr);
                 align-items: center;
-                @if($mid_columns == 1){
-                    border-top: 1px solid #4a4b53;
-                    padding-top: 1rem;
+            }
+            &.info{
+                @media #{$landscape_pc} {
+                    grid-template-columns: 1fr;
+                }
+                & .footer{
+                    &__imgs{
+                        justify-content: center;
+                    }
+                    &__bottom{
+                        text-align: center;
+                    }
                 }
             }
+    
             &--sub{
                 display: grid;
                 gap: 1rem;
                 @media #{$landscape_pc} {
-                    @if($bottom_columns != 1){
-                        &:nth-child(1){
-                            order: 2;
-                        }
-                        &:nth-child(2){
-                            order: 3;
-                        }
+                    &:nth-child(1){
+                        order: 2;
+                    }
+                    &:nth-child(2){
+                        order: 3;
                     }
                 }
             }
@@ -1490,9 +1491,7 @@
                 }
             }
             @media #{$landscape_pc} {
-                @if($bottom_columns != 1){
-                    justify-content: start;
-                }
+                justify-content: start;
                 flex-direction: row;
             }
         }
@@ -1501,9 +1500,7 @@
             gap: 0.5rem;
             text-align: center;
             @media #{$landscape_pc} {
-                @if($bottom_columns != 1){
-                    text-align: start;
-                }
+                text-align: start;
             }
         }
     }
