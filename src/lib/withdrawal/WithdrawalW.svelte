@@ -155,7 +155,7 @@
                 <div class="withdrawal__help">
                     <p>¿Necesitas ayuda?</p>
                     <div class="withdrawal__help--btns">
-                        <button type="button" class="btn chat" on:click={openChatLive}>Chat en vivo</button>
+                        <!-- <button type="button" class="btn chat" on:click={openChatLive}>Chat en vivo</button> -->
                         {#each linksChats as linksChat}
                             <a class="btn {linksChat.name}" target="_blank" href={linksChat.url}>{linksChat.name}</a>
                         {/each}
