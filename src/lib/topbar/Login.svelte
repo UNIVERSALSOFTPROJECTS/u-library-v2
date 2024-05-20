@@ -8,7 +8,7 @@
   export let onError;
   export let assetsUrl;
   export let platform;
-  export let userGateway = "neco"; //neco/universal
+  export let userGateway = "universal"; //neco/universal
   export let onOpenRecoverPassword;
   export let onOpenSignup;  
   export let t;//traduccion
@@ -46,8 +46,8 @@
     try {
       loadLogin = true;
       let data;
-      if (userGateway == "neco")
-        data = await ServerConnection.users.login(username, password);
+      console.log("UserGateway: ", userGateway)
+      if (userGateway == "neco") data = await ServerConnection.users.login(username, password);
       else data = await ServerConnection.u_user.login(username, password);
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
@@ -60,7 +60,7 @@
         delete data.claims;
       }
       //Formatear la propiedad "bonus" con el updatebalance
-      if (userGateway == "neco") await getUpdateBalance(data);
+      if (userGateway == "neco") await  getUpdateBalance(data);
       else await getUpdateBalanceUniversal(data);
       onOk(data);
     } catch (error) {
