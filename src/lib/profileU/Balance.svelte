@@ -9,7 +9,7 @@
       <span class="u-title-info">SALDO</span>
     </div>
     <div class="u-info-balance">
-      <div class="u-title-balance">{user.currency} {user.balance.toFixed(2)}</div>
+      <div class="u-title-balance">{user.currency} {user.balance}</div>
     </div>
   </div>
 </div>

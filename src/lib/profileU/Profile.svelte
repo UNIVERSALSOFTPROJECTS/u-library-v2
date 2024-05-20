@@ -21,7 +21,8 @@
   export let onLogout;
   export let showModalProfile;
   export let limitAmount;
-   const logout = () => {
+  
+  const logout = () => {
     //FALTA ir a Bancked a destruir session
     onLogout();
   };
@@ -167,11 +168,10 @@
           {#if bono.amount > 0}
             <div class="u-balance">
               <span>Bono {bono.name}</span>
-              <div class="u-label">{bono.currencyISO} {bono.amount.toFixed(2)}</div>
+              <div class="u-label">{bono.currencyISO} {bono.amount}</div>
             </div>
           {/if}
         {/each}
-      
       {/if}
       <div class="profile personaldata balance">
         <button
