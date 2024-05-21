@@ -1344,8 +1344,9 @@
     }
 }
 
-@mixin footer__model_1 ($bgc){   
+@mixin footer__model_1 ($bgc,$hover-a){   
     .footer{
+        position: relative;
         display: grid;
         gap: 1rem;
         padding: 1rem;
@@ -1391,8 +1392,17 @@
                 }
             }
             &__body{
-                & a{
+                & a, & .btn{
                     padding: 0.5rem;
+                    text-decoration: none;
+                    @media #{$landscape_pc} {
+                        width: fit-content;
+                    }
+                    &:hover{
+                        color: $hover-a;
+                        filter: brightness(1);
+                        font-weight: 700;
+                    }
                 }
                 @media #{$landscape_pc} {
                     display: grid;
@@ -1505,7 +1515,7 @@
         }
     }
     .btn{
-        &.Whatssap{
+        &.Whatsapp{
             @include elementIconPosition($whatssap,"left");
             background-color: #4a4b53;  
         }

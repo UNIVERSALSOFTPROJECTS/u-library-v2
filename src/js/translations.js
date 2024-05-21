@@ -27,7 +27,7 @@ export default {
       "signup.generateCode": "Generar código SMS",
       "signup.newCodeIn": "Nuevo código en",
       "signup.code": "Código",
-      "signup.acceptPandP": "Confirmo haber leído y aceptado los <a href='https://assets.apiusoft.com/{{platform}}/t&c.pdf' target='_blank'><b>Términos y condiciones</b></a> de {{platform}}.",
+      "signup.acceptPandP": "Confirmo haber leído y aceptado los <a href='{{routePDF}}/signup_t&c.pdf' target='_blank'><b>Términos y condiciones</b></a> de {{platform}}.",
       "signup.register": "Registrarse",
       "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
       //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
@@ -237,7 +237,7 @@ export default {
         "signup.generateCode": "Générer un code SMS",
         "signup.newCodeIn": "Nouveau code dans",
         "signup.code": "Code",
-        "signup.acceptPandP": "Pour me convertir en client, acceptez les <a href='https://assets.apiusoft.com/{{platform}}/t&c.pdf' target='_blank'><b>Termes et Conditions</b></a> de {{platform}}.",
+        "signup.acceptPandP": "Pour me convertir en client, acceptez les <a href='{{routePDF}}/signup_t&c.pdf' target='_blank'><b>Termes et Conditions</b></a> de {{platform}}.",
         "signup.register": "S'inscrire",
         "signup.loginHere": "Avez-vous déjà un compte? <b>Entrer ici</b>",
         //---------------SINGUP/NAME CURRENCIES-----------------------------
