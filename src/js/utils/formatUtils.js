@@ -13,10 +13,10 @@ export const formatNumber = (number) => {
 export const stringToNumber = (string) => {
     return parseInt(string.replace(/[^0-9.-]/g, ""));
 }
-export const detectSubdomain = () => {
+export const detectSubdomain = (idiom) => {
     let hostname = window.location.hostname;
     let parts = hostname.split('.');
     let subdomain = parts.slice(0, -2).join('.');
-    if (subdomain == "www") subdomain = "";
+    if (subdomain == "www" || subdomain == "") subdomain = idiom;
     return subdomain;
 }

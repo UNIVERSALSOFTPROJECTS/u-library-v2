@@ -1,5 +1,5 @@
 <script>
-    import {assetsUrl, assetsPayments, assetsFlags, assetsFooter } from "../js/utils/assetsUtils";
+    import {assetsPayments, assetsFlags, assetsFooter,assetsPDF } from "../js/utils/assetsUtils";
     import { detectSubdomain } from "../js/utils/formatUtils";
 
     export let onCategoryChange;
@@ -19,7 +19,9 @@
     let viewLogoUS = configFooter.viewLogoUS;
     let linksChats = configFooter.linksChats;
     let activePanel = null;
-    let route = detectSubdomain() || t("idiom");
+    let route = detectSubdomain(t("idiom"));
+    let routePDF = assetsPDF(platform,route);
+   
 
     const currentYear = new Date().getFullYear();
     const slots = ["slot", "slotlive", "crash", "scratch"];
@@ -72,11 +74,11 @@
         <div class="accordion {activePanel === 'panel3' ? 'active' : ''}">
             <button class="accordion__select" on:click={() => toggleAccordion('panel3')}>{t("footer.s_p")}</button>
             <div class="accordion__body">
-                <a href="{assetsUrl}{platform}/{route}/t&c.pdf" target="_blank">{t("footer.t_c")}</a>
-                <a href="{assetsUrl}{platform}/{route}/p&p.pdf" target="_blank">{t("footer.p_p")}</a>
-                <a href="{assetsUrl}{platform}/{route}/g&r.pdf" target="_blank">{t("footer.g_r")}</a>
-                <a href="{assetsUrl}{platform}/{route}/p&a.pdf" target="_blank">{t("footer.p_a")}</a>
-                <a href="{assetsUrl}{platform}/{route}/q&a.pdf" target="_blank">{t("footer.q_a")}</a>
+                <a href="{routePDF}/t&c.pdf" target="_blank">{t("footer.t_c")}</a>
+                <a href="{routePDF}/p&p.pdf" target="_blank">{t("footer.p_p")}</a>
+                <a href="{routePDF}/g&r.pdf" target="_blank">{t("footer.g_r")}</a>
+                <a href="{routePDF}/p&a.pdf" target="_blank">{t("footer.p_a")}</a>
+                <a href="{routePDF}/q&a.pdf" target="_blank">{t("footer.q_a")}</a>
             </div>
         </div>
         {#if bonus.length != 0}
@@ -84,7 +86,7 @@
             <button class="accordion__select" on:click={() => toggleAccordion('panel4')}>{t("footer.promotions")}</button>
             <div class="accordion__body">
                 {#each bonus as bono}
-                <a href="{assetsUrl}{platform}/{route}/bonus_sportbook.pdf" target="_blank">{bono.name}</a>
+                <a href="{routePDF}/bonus_sportbook.pdf" target="_blank">{bono.name}</a>
                 {/each}
             </div>
         </div>

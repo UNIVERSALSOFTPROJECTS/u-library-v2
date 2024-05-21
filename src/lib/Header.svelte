@@ -144,13 +144,13 @@
             // "KHIPU","FLOW"
         ],
         social: [ //ASEGURATO DE COLOCAR EL NOMBRE EN MINUSCULA Y EhenL ENLACE CORRECTO!!!
-            // {name:"facebook", url:"https://www.facebook.com/coliseosportoficial"},
-            // {name:"instagram", url:"https://www.instagram.com/coliseosportoficial"},
+            // {name:"faceb", url:"https://wwwook", url:"https://www.facebook.com/coliseosportoficial"},
+            // {name:"instagram.instagram.com/coliseosportoficial"},
             //social: []//si no hay redes sociales
         ],
         email:"",
         bonus:[ 
-            // {name:"Bono Deportivas"} 
+            {name:"Bono Deportivas"} 
         ],
         linksChats: [ 
             //{name: "Whatsapp", url:"https://web.whatsapp.com/send?phone=56964783055"} 
