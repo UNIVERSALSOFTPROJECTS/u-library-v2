@@ -1370,6 +1370,9 @@
                 border-radius: $borderR-btn * 0.75;
             }
         }
+        &--lang{
+            pointer-events: none;
+        }
         &__accordion{
             @media #{$landscape_pc} {
                 display: grid;

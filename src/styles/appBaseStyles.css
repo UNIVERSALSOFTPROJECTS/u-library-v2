@@ -2616,6 +2616,9 @@ p, b, span, a, li *, button {
   height: 20px;
   border-radius: 0.1875rem;
 }
+.Coliseosport .footer--lang {
+  pointer-events: none;
+}
 @media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
   .Coliseosport .footer__accordion {
     display: grid;

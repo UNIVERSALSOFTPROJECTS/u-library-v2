@@ -47,7 +47,7 @@
       loadLogin = true;
       let data;
       console.log("UserGateway: ", userGateway)
-      if (userGateway == "neco") data = await ServerConnection.users.login(username, password);
+      if (userGateway == "universal") data = await ServerConnection.users.login(username, password);
       else data = await ServerConnection.u_user.login(username, password);
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
