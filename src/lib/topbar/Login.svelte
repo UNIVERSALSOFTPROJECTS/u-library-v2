@@ -8,7 +8,7 @@
   export let onError;
   export let assetsUrl;
   export let platform;
-  export let userGateway = "universal"; //neco/universal
+  export let userGateway = "neco"; //neco/universal
   export let onOpenRecoverPassword;
   export let onOpenSignup;  
   export let t;//traduccion
