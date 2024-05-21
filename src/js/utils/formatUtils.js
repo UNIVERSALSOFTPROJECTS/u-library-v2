@@ -7,7 +7,6 @@ export const firstDayOfMonth = () =>{
     return currentDate.toISOString().split('T')[0]; 
 }
 export const formatNumber = (number) => {
-    console.log('formatNumber', number);
     return number.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 export const stringToNumber = (string) => {
