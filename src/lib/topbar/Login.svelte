@@ -60,7 +60,7 @@
         delete data.claims;
       }
       //Formatear la propiedad "bonus" con el updatebalance
-      if (userGateway == "neco") await  getUpdateBalance(data);
+      if (userGateway == "universal") await  getUpdateBalance(data);
       else await getUpdateBalanceUniversal(data);
       onOk(data);
     } catch (error) {
