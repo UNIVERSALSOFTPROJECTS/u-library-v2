@@ -41,12 +41,10 @@
   });
 
   async function loginClick() {
-    if (!username || !password)
-      return onError(t("msg.allObligatory"));
+    if (!username || !password) return onError(t("msg.allObligatory"));
     try {
       loadLogin = true;
       let data;
-      console.log("UserGateway: ", userGateway)
       if (userGateway == "neco") data = await ServerConnection.users.login(username, password);
       else data = await ServerConnection.u_user.login(username, password);
       data = data.data;
@@ -60,8 +58,7 @@
         delete data.claims;
       }
       //Formatear la propiedad "bonus" con el updatebalance
-      if (userGateway == "neco") await  getUpdateBalance(data);
-      else await getUpdateBalanceUniversal(data);
+      if (userGateway == "neco") await getUpdateBalance(data);
       onOk(data);
     } catch (error) {
       console.log("error: ", error);

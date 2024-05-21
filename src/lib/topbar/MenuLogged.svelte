@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import DropdownBonus from "../dropdown/DropdownBonus.svelte";
+  import DropdownBonusUniversal from "../dropdown/DropdownBonusUniversal.svelte";
 
   export let user = {};
   export let onLogout;
@@ -10,16 +11,16 @@
     //FALTA ir a Bancked a destruir session
     onLogout();
   };
+
+  onMount(()=>{
+    console.log("user=====>",user)
+  })
 </script>
 
 <div class="profile-content">
   <div class="u-user-profile">
     <div class="user-profile">
-      <img
-        class="usericon1 s-pLY60ePxNKjT"
-        src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png"
-        alt=""
-      />
+      <img class="usericon1 s-pLY60ePxNKjT" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png" alt=""/>
       <table class="user">
         <div class="user-content">
           <tr> <th class="codigo" style="color: white;" >{user.username}  <br>#{user.serial}</th></tr>
@@ -44,6 +45,7 @@
         </tr>
         <tr>
           <td>{user.balance} <span class="currency">{user.currency}</span> </td>
+          <DropdownBonusUniversal bind:bonus={user.bonus} {user}></DropdownBonusUniversal>
         </tr>
       </table>
     </div>
