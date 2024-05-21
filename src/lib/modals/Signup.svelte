@@ -5,6 +5,8 @@
     import DropdownDate from '../dropdown/DropdownDate.svelte';
     import DropdownCurrencies from '../dropdown/DropdownCurrencies.svelte';
     import InputPassword from '../input/InputPassword.svelte';
+    import { detectSubdomain } from "../../js/utils/formatUtils";
+    import { assetsPDF } from "../../js/utils/assetsUtils";
     import { onMount } from 'svelte';
 
     export let onOpenLogin;
@@ -45,6 +47,8 @@
     let document;
     let term_conditions;
     let currency;
+    let route = detectSubdomain(t("idiom"));
+    let routePDF = assetsPDF(platform,route);
 
     //validations imput -utils JS
     const inputJustText = inputUtils.justTextValidator;
@@ -236,7 +240,7 @@
     <div class="signup__conditions">   
         <input type="checkbox" id="chk_conditions" bind:checked={term_conditions}/>
         <label for="chk_conditions"></label> 
-        <p>{@html t("signup.acceptPandP", {platform})}</p>
+        <p>{@html t("signup.acceptPandP", {routePDF,platform})}</p>
     </div>
     <button type="button" class="btn signup" on:click={registerClick} disabled={loadSignup}>
         {#if loadSignup}

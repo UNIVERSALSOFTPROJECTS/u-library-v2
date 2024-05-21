@@ -187,7 +187,7 @@ import SocketConnector from '../src/js/SocketConnector'
 //    }
 //}
 
-/*export default{
+export default{
    start:()=>{
       ServerConnection.setConfig({
            API:"https://lobby-bff.apiusoft.com",
@@ -211,27 +211,27 @@ import SocketConnector from '../src/js/SocketConnector'
            WS_URL:"ws://localhost:5000",
        })
    }
-}*/
-
-export default{
-    start:()=>{
-        ServerConnection.setConfig({
-        platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
-        API:"https://lobby-bff-test.apiusoft.com",
-        GAMEAPI_URL:"https://test.apiuniversalsoft.com/api",
-        CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
-        CLIENT_CODE:"JU02",
-        LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-            ASSETS:"https://assets.apiusoft.com",
-        // WS_URL: "wss://lobby-bff-test.apiusoft.com/lobbybff",
-            WS_URL:"ws://192.168.1.95/lobbybff",
-            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-            country:"+56",
-            operatorId:"123",
-            domain:"https://apuestadepana.com/",
-            assetsUrl:"https://assets.apiusoft.com",
-            org:"CLS",
-            currency:7,//PEN
-        })
-    }
 }
+
+// export default{
+//     start:()=>{
+//         ServerConnection.setConfig({
+//         platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
+//         API:"https://lobby-bff-test.apiusoft.com",
+//         GAMEAPI_URL:"https://test.apiuniversalsoft.com/api",
+//         CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
+//         CLIENT_CODE:"JU02",
+//         LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+//             ASSETS:"https://assets.apiusoft.com",
+//         // WS_URL: "wss://lobby-bff-test.apiusoft.com/lobbybff",
+//             WS_URL:"ws://192.168.1.95/lobbybff",
+//             ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+//             country:"+56",
+//             operatorId:"123",
+//             domain:"https://apuestadepana.com/",
+//             assetsUrl:"https://assets.apiusoft.com",
+//             org:"CLS",
+//             currency:7,//PEN
+//         })
+//     }
+// }

@@ -14,7 +14,8 @@
     let filter = "TT";
     let loadMovements = false;
     let movements = [];
-    let dateFrom = firstDayOfMonth();
+    // let dateFrom = firstDayOfMonth();
+    let dateFrom = currentDate();
     let dateTo = currentDate();
     let heightModal;
 
@@ -74,6 +75,11 @@
         <input class="ipt" type="date" bind:value={dateFrom}>
         <input class="ipt" type="date" bind:value={dateTo}>
         <select class="slc"  bind:value={filter}>
+            <!-- <option value="">Hoy</option>
+            <option value="">Ayer</option>
+            <option value="">Últimos 7 días</option>
+            <option value="">Últimos 30 días</option>
+            <option value="">Este mes</option> -->
             <option value="TT">{t("movements.all")}</option>
             <option value="TTW">{t("movements.awards")}</option>
             <option value="AP">{t("movements.bets")}</option>
