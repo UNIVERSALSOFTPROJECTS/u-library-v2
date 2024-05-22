@@ -11,12 +11,12 @@ const SocketConnector = (() => {
         stompClient = new Client({
             brokerURL: conf.WS_URL,
             connectHeaders: { username},
-            debug: function (str) { console.log(str); },
+            debug: function (str) { /*console.log(str);*/ },
             reconnectDelay: 2500,
         });
 
         stompClient.onConnect = (frame) => {
-            console.log(frame);
+            console.log("iframe===========>",frame);
             stompClient.subscribe('/user/queue/messages', (data) => {
                 console.log("message", data);
                 if (data.body == "NEW_SESSION_OPENED") {
