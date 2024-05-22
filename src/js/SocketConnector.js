@@ -18,7 +18,7 @@ const SocketConnector = (() => {
         stompClient.onConnect = (frame) => {
             console.log(frame);
             stompClient.subscribe('/user/queue/messages', (data) => {
-                //console.log("message", data.body);
+                console.log("message", data);
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
