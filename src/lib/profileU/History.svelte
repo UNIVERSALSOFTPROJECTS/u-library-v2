@@ -143,18 +143,8 @@
                   <td>{moment(mov.created).format("YY-MM-DD HH:mm:ss")}</td>
                   <td>{mov.description}</td>
                   <td style="text-align:center;">{mov.game_name} ({mov.category} - {mov.brand})</td>
-                  <td>{mov.txType} ({mov.paymentMethod?mov.paymentMethod:'' })
-                  </td>
-                  {#if mov.txType == "BET" || mov.txType == "WITHDRAW"}
-                    <td style="color: red;">{mov.amount.toFixed(2)}</td>
-                  {:else}
-                    <td />
-                  {/if}
-                  {#if mov.txType === "WIN" || mov.txType == "DEPOSIT"}
-                    <td style="color: green;">{mov.amount.toFixed(2)}</td>
-                  {:else}
-                    <td />
-                  {/if}
+                  <td>{mov.txType} ({mov.paymentMethod?mov.paymentMethod:'' })</td>
+                  <td style="color: {mov.amount < 0 ? 'red' : 'green'};">{mov.amount.toFixed(2)}</td>
                   <td>{mov.balanceType}</td>
                   <td>{mov.newBalance.toFixed(2)}</td>
                 </tr>
