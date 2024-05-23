@@ -729,6 +729,7 @@ p, b, span, a, li *, button {
   padding: 1rem;
   width: 100%;
   position: relative;
+  gap: 0;
   align-content: start;
 }
 @media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
@@ -794,6 +795,7 @@ p, b, span, a, li *, button {
   height: -moz-fit-content;
   height: fit-content;
   overflow: auto;
+  padding-right: 0.75rem;
 }
 .Coliseosport .modal.profile .profile__container {
   display: grid;
@@ -2786,7 +2788,6 @@ p, b, span, a, li *, button {
   background-size: 16px;
   background-position: left 0.75rem center;
   padding-left: 2.5rem;
-  background-color: #4a4b53;
 }
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
   .Coliseosport input[type=checkbox] {

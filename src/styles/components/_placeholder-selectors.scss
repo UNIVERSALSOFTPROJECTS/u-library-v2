@@ -1520,7 +1520,6 @@
     .btn{
         &.Whatsapp{
             @include elementIconPosition($whatssap,"left");
-            background-color: #4a4b53;  
         }
     }
 }
@@ -1531,9 +1530,8 @@
             padding: 1rem;
             width: 100%;
             position: relative;
-            // overflow: auto;
+            gap: 0;
             align-content: start;
-            // overscroll-behavior: none;
             @media #{$landscape_pc} {
                 grid-template-columns: 15rem 1fr;
                 overflow: hidden;
@@ -1586,6 +1584,7 @@
             width: 100%;
             height: fit-content;
             overflow: auto;
+            padding-right: 0.75rem;
         }
         &__container{
             display: grid;
@@ -1624,6 +1623,13 @@
             grid-template-columns: 2.5rem 1fr;
             gap: 0.5rem;
             align-items: center;
+            & div{
+                @media #{$landscape_pc} {
+                    width: 8.5rem;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
         }
         &__img{
             width: 100%;

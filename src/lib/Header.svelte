@@ -282,12 +282,12 @@
     const onRecoverPasswordOk = async (data)=>{
         notify = await utils.showNotify("success",data);
     }
-    const onProfileOk = async (data)=>{
-        notify = await utils.showNotify("success",data);
-    }
     const onRecoverPasswordError = async (error)=>{
         notify = {};
         notify = await utils.showNotify("error",error);
+    }
+    const onProfileOk = async (data)=>{
+        notify = await utils.showNotify("success",data);
     }
     const onProfileError = async (error)=>{
         notify = {};
