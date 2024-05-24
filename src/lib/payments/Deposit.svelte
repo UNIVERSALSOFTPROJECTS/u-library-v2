@@ -39,11 +39,7 @@
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
     const detectLockedDeposit = () => {
-        if (id_banca.length === 0 && id_ca.length === 0) {
-            isLocked = true;
-        } else {
-            isLocked = !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
-        }
+        isLocked = !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
     }
 
     async function getPayMethods() {
@@ -74,13 +70,13 @@
                     loadDeposit = true;
                     paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
                     iframeGateway = paymentLink.data.link;
-                    let navigatorFirefox = navigator.userAgent.toLocaleLowerCase().includes('firefox');//firefox solo hace ventana emergente
-                    if (pay.cta == "payku" || navigatorFirefox) { location.href = iframeGateway; }//esta pasarela no permite iframe
-                    else{
-                        sizeIframeGateway = iframeGateway.includes("izypay")?"small":"";//actualmente solo izypay presenta este tamaño
-                        amountDeposit = '';
-                        loadDeposit = false;
-                    }
+                    location.href = iframeGateway; 
+                    // if (pay.cta != "izypay") {}
+                    // else{
+                    //     sizeIframeGateway = iframeGateway.includes("izypay")?"small":"";//actualmente solo izypay presenta este tamaño
+                    //     amountDeposit = '';
+                    //     loadDeposit = false;
+                    // }
                 } catch (error) {
                     onError("Ocurrio un error, contactese con soporte");
                     loadDeposit = false;
