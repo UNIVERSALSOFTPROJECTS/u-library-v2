@@ -45,7 +45,7 @@
         </tr>
         <tr>
           <td>{user.balance} <span class="currency">{user.currency}</span> </td>
-          <DropdownBonusUniversal bind:bonus={user.bonus} {user}></DropdownBonusUniversal>
+          <!--<DropdownBonusUniversal bind:bonus={user.bonus} {user}></DropdownBonusUniversal>-->
         </tr>
       </table>
     </div>

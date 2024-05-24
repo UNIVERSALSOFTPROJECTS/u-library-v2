@@ -9,6 +9,7 @@
         userState = "logout";
         active_view = "home";
         sessionStorage.removeItem("user");
+        console.log("sessionStorage.removeItem=======");
         setTimeout(() => { location.reload();}, 3000);
     });
 </script>

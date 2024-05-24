@@ -3,6 +3,7 @@ const EventManager = (() => {
     const eventHandlers = {};
 
     const publish = (type, event) => {
+        console.log("Publicando")
         event.type = type
         if (!event.type) {
             console.error("Unable to publish event without type:")
