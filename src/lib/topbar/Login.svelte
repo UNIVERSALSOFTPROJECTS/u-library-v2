@@ -107,7 +107,6 @@
     }
     notify.loading(false);
   }
-
   const avoidSubmit = (e) =>{ e.preventDefault(); }
 </script>
 
