@@ -124,7 +124,7 @@
     active_view = "home";
     sessionStorage.removeItem("user");
     showModalProfile = false;
-    location.reload();
+    //location.reload();
     document.body.style.overflow = "hidden";
   };
 
