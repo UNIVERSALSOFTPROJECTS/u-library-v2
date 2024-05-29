@@ -40,9 +40,8 @@
 
     const resizeHeightModal = () => { 
       let isLandscape = window.matchMedia("(orientation: landscape)").matches;
-      // heightModal = innerHeight - (isLandscape && innerHeight < 400?100:400) ; 
-      heightModal = innerHeight - (isLandscape?150:400) ; 
-      // console.log(heightModal);
+      let sizePC = visualViewport.width > 1023;
+      heightModal = sizePC?400:(innerHeight - (isLandscape?150:400)) ; 
     }
 
     onMount(() => { window.addEventListener('resize', resizeHeightModal); });
