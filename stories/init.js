@@ -187,14 +187,16 @@ import SocketConnector from '../src/js/SocketConnector'
 //    }
 //}
 
-export default{
+export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
    start:()=>{
       ServerConnection.setConfig({
            API:"https://lobby-bff.apiusoft.com",
            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
            CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
            CLIENT_CODE:"AAC1",
+           CLIENT_ID: "21",
            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+           API_GAMES_NODE: "https://prod-nd.apiusoft.com",
            ASSETS:"https://assets.apiusoft.com",
            WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",

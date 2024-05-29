@@ -70,7 +70,7 @@
                     loadDeposit = true;
                     paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
                     iframeGateway = paymentLink.data.link;
-                    location.href = iframeGateway; 
+                    location.href = iframeGateway;
                     // if (pay.cta != "izypay") {}
                     // else{
                     //     sizeIframeGateway = iframeGateway.includes("izypay")?"small":"";//actualmente solo izypay presenta este tamaño

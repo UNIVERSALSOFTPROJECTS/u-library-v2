@@ -344,7 +344,7 @@ p,b,span,a,li *,button{ //default size safari
         list-style: none;
         background: $bg-dropdown;
         background-clip: padding-box;
-        border-radius: 0.25rem;
+        border-radius: $borderR-btn; // cuando tiene border en lugar de 0.25 e es 0.3rem
         & .btn {
             text-align: left;
         }

@@ -7,7 +7,6 @@
     export let open;
     export let modalOpened = "";
     export let title = "";
-    export let showHeader = true;
     export let subModalOpened = "";
 
     let heightModal;
@@ -32,34 +31,24 @@
     }
     
     const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
-    const interval = setInterval(resizeHeightModal, 250);
+
     $: statusModal(open);
-    onDestroy(() => { clearInterval(interval); });
+
+    onMount(() => { window.addEventListener('resize', resizeHeightModal); });
+    onDestroy(() => { window.removeEventListener('resize', resizeHeightModal); });
 </script>
 
 {#if open}
     <div class="{subModalOpened?'sub':''} modal {modalOpened || subModalOpened}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom} use:watchResize={resizeHeightModal}>
         <div class="modal-dialog {isMobile?'':'centered'}" transition:fly={{ y: -50, duration: 500 }}>
-        <div class="modal-content {!showHeader?'no-header':''}" style="max-height:{heightModal}">
-            {#if showHeader}
-                <div class="modal-header">
-                <div />
-                <div>{title}</div>
-                <button class="btn close" on:click={() => (open = false)} />
-                </div>
-                {/if}
+        <div class="modal-content" style="max-height:{heightModal}">
+            <div class="modal-header">
+            <div />
+            <div>{title}</div>
+            <button class="btn close" on:click={() => (open = false)} />
+            </div>
             <slot />
         </div>
         </div>
     </div>
 {/if}
-<style>
-  .no-header{
-    display: flex;
-    background: none;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    overflow: inherit;
-  }
-</style>
