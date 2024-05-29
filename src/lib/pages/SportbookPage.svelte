@@ -86,7 +86,7 @@
     console.log("OPENBBQ:");
     let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.bbq, options.gameToken) : guestURLBBQ;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
-    url += `&lang=${lang}`;
+    url += `&lang=${lang}&r=url`;
     if (userState == "loggedIn"){
       const {data} = await backend.game.getURLNovus(url);
       url = data.url
