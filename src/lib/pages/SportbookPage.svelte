@@ -10,6 +10,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
+  export let GAME_JAVA_API_URL;
   //export let clientCode;
   export let lang = 'es';
 
@@ -24,6 +25,7 @@
   const nvb_id = "novusbet";
   const bbq_id = "sport-betbuq"
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
+  const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}&lang=${lang}`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const games = {
@@ -34,7 +36,7 @@
       mode,
     },
     'bbq':{
-      provider: "bbq",
+      provider: "plq",
       brand: "BetBuq",
       gameid: bbq_id,
       mode,
@@ -81,7 +83,8 @@
   }
 
   const openBBQ = async () => {
-    let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.bbq, options.gameToken) : guestURLdigtain;
+    console.log("OPENBBQ:");
+    let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.bbq, options.gameToken) : guestURLBBQ;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     url += `&lang=${lang}`;
     if (userState == "loggedIn"){
