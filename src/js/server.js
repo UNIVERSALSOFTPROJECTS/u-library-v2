@@ -113,16 +113,32 @@ const ServerConnection = (() => {
     const game = {
         getBrandList: (category) => {
             let mode = utils.isMobile() ? "mb" : "wb";
-            var url = conf.API + `/brands?m=${mode}`;
+            let url = conf.API + `/brands?m=${mode}`;
             url += category != "all" ? "&c=" + category : ""
             return axios.get(url, { headers });
         },
         authInGame: async (agregatorToken) => {
-          var url = conf.API+`/authInGame/${agregatorToken}`;
+          let url = conf.API+`/authInGame/${agregatorToken}`;
           console.log(url,"desde server");
           return await axios.get(url, { headers });
         },
         getURLNovus: (url) => {
+            return axios.get(url, { headers });
+        },
+        getGameList: (category, section, page=1, currency='USD', xpage=20)=>{
+            let mode = utils.isMobile()?"mb":"wb";
+            let url=conf.API+`/games?c=${category}&m=${mode}&page=${page}&xpage=${xpage}&curr=${currency}`;
+            if( typeof section =='object' && section.brand ) url += `&b=${section.brand}`;
+            else if( typeof section =='object' && section.search ) url += `&g=${section.search}`;
+            else if(section=="TOP") url += `&o=200000`;
+            else if(section=="POP") url += `&o=100000`;
+            else if(section=="NEW") url += `&n=true`;
+            else if( /BACC|RLIV|BJLIV|MWLIV|LOTTO|SICBO|TVLIV|DROP|CLASS|RULE|TABL|MEGA|FAST/.test(section)) url += `&t=${section}`; 
+            return axios.get(url, { headers });
+        },
+        getGamesTypeSlot: ()=>{
+            let mode = utils.isMobile()?"mb":"wb";
+            let url = `${conf.API_GAMES_NODE}/lobby/gameTypesByClient?cat=slot&type=${mode}&client=${conf.CLIENT_ID}`;
             return axios.get(url, { headers });
         }
     }

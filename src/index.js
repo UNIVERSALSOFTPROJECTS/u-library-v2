@@ -37,6 +37,7 @@ export { default as AlertTokenExpired } from './lib/topbar/AlertRefreshToken.sve
 export { default as DuplicatedSessionListener } from './lib/DuplicatedSessionListener.svelte';
 export { default as DigtainWidget } from './lib/widgets/DigtainWidget.svelte';
 export { default as DigtainSportBook } from './lib/sportbooks/DigtainSportBook.svelte';
+export {default as DropdownSearch} from './lib/dropdown/DropdownSearch.svelte';
 
 
 

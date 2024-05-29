@@ -748,7 +748,7 @@ p, b, span, a, li *, button {
 }
 @media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
   .Coliseosport .modal.profile .modal-header {
-    grid-template-columns: 5rem 1fr 2.5rem;
+    grid-template-columns: 4.5rem 1fr 2.5rem;
     justify-items: inherit;
   }
 }
@@ -771,7 +771,7 @@ p, b, span, a, li *, button {
   color: #fff;
 }
 .Coliseosport .modal.profile .dropdown .slc {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 1024 1024' class='icon' xmlns='http://www.w3.org/2000/svg'><path fill='%23fff' d='M104.704 338.752a64 64 0 0190.496 0l316.8 316.8 316.8-316.8a64 64 0 0190.496 90.496L557.248 791.296a64 64 0 01-90.496 0L104.704 429.248a64 64 0 010-90.496z'/></svg>");
 }
 .Coliseosport .modal.profile .dropdown .btn {
   pointer-events: none;
@@ -795,7 +795,11 @@ p, b, span, a, li *, button {
   height: -moz-fit-content;
   height: fit-content;
   overflow: auto;
-  padding-right: 0.75rem;
+}
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  .Coliseosport .modal.profile .profile__body {
+    padding-right: 0.75rem;
+  }
 }
 .Coliseosport .modal.profile .profile__container {
   display: grid;
@@ -840,6 +844,13 @@ p, b, span, a, li *, button {
   grid-template-columns: 2.5rem 1fr;
   gap: 0.5rem;
   align-items: center;
+}
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  .Coliseosport .modal.profile .profile__header div {
+    width: 8.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 .Coliseosport .modal.profile .profile__img {
   width: 100%;
@@ -1168,6 +1179,9 @@ p, b, span, a, li *, button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.Coliseosport .modal.profile .btn.save {
+  background: #088f08;
 }
 
 .Coliseosport .notify {
@@ -2299,14 +2313,66 @@ p, b, span, a, li *, button {
 .Coliseosport .modal.expireSession .btn.continue {
   background-color: #f54b00;
 }
+.Coliseosport .page .loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #202124;
+}
+.Coliseosport .page .loading b {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Coliseosport .page .loading b b {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #f54b00;
+  animation: 2s spinner-rotate360 linear infinite;
+}
+.Coliseosport .page .loading b b::before, .Coliseosport .page .loading b b::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid transparent;
+}
+.Coliseosport .page .loading b b::before {
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-top-color: #d8d8d8;
+  animation: spinner-rotate360 2s linear infinite;
+}
+.Coliseosport .page .loading b b::after {
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-top-color: #ff7233;
+  animation: spinner-rotate360 1s linear infinite;
+}
+@keyframes spinner-rotate360 {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
 .Coliseosport .category {
   display: grid;
   grid-auto-columns: 6rem;
   grid-auto-flow: column;
   gap: 0.5rem;
-  height: 5.5rem;
-  margin: 1rem 0;
-  padding: 0 1rem;
+  height: 5rem;
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
   overflow: auto;
   overscroll-behavior: none;
 }
@@ -2331,7 +2397,7 @@ p, b, span, a, li *, button {
 .Coliseosport .category__game i {
   width: 100%;
   max-width: 3.25rem;
-  height: 2rem;
+  height: 1.75rem;
 }
 .Coliseosport .category__game .icon--home {
   background-image: url("data:image/svg+xml,<svg viewBox='0 0 31 26' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12.5834 25.1667V16.4167H18.4167V25.1667H25.7084V13.5H30.0834L15.5 0.375L0.916687 13.5H5.29169V25.1667H12.5834Z' fill='%23fff'/></svg>");
@@ -2488,6 +2554,84 @@ p, b, span, a, li *, button {
   background-size: 16px;
   background-size: contain;
   background-position: center;
+}
+.Coliseosport .filters {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.Coliseosport .filters .slc, .Coliseosport .filters input[type=search] {
+  border: 1px solid #f54b00;
+  background-color: #3d3f44;
+  color: #fff;
+}
+.Coliseosport .filters .slc {
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 1024 1024' class='icon' xmlns='http://www.w3.org/2000/svg'><path fill='%23f54b00' d='M104.704 338.752a64 64 0 0190.496 0l316.8 316.8 316.8-316.8a64 64 0 0190.496 90.496L557.248 791.296a64 64 0 01-90.496 0L104.704 429.248a64 64 0 010-90.496z'/></svg>");
+}
+.Coliseosport .filters .slc.active {
+  background-image: url("data:image/svg+xml,<svg viewBox='0 0 1024 1024' class='icon' xmlns='http://www.w3.org/2000/svg'><path fill='%23f54b00' d='M104.704 685.248a64 64 0 0090.496 0l316.8-316.8 316.8 316.8a64 64 0 0090.496-90.496L557.248 232.704a64 64 0 00-90.496 0L104.704 594.752a64 64 0 000 90.496z'/></svg>");
+}
+.Coliseosport .filters input[type=search] {
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='11' cy='11' r='7' fill='none' stroke='%23f54b00' stroke-width='2'/><line x1='20' y1='23' x2='15' y2='17' stroke='%23f54b00' stroke-width='2'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 16px;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+}
+.Coliseosport .filters--menu {
+  display: grid;
+  grid-auto-flow: column;
+  overflow: auto;
+  overscroll-behavior: none;
+  gap: 0.5rem;
+  white-space: pre;
+}
+.Coliseosport .filters--menu .btn {
+  border: 1px solid #f54b00;
+  background-color: #3d3f44;
+  color: #fff;
+  padding: 0.75rem;
+}
+.Coliseosport .filters .dropdown input[type=search] {
+  border: 0;
+  background-color: #33353a;
+  border-bottom: 1px solid #f54b00;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+.Coliseosport .filters .dropdown-menu {
+  border: 1px solid #f54b00;
+  border-radius: 0.3rem;
+}
+.Coliseosport .filters .dropdown-menu .btn {
+  background-color: #3d3f44;
+  border-bottom: 1px solid #f54b00;
+  border-radius: 0;
+}
+.Coliseosport .filters .dropdown-list {
+  overflow: auto;
+  overscroll-behavior: none;
+}
+.Coliseosport .listGame {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+@media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
+  .Coliseosport .listGame {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.Coliseosport .listGame__bottom {
+  display: grid;
+  grid-template-columns: 1fr 2.5rem;
+  gap: 0.5rem;
+}
+.Coliseosport .listGame__bottom p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .Coliseosport .dropdown.idiom * {
   color: black;

@@ -201,7 +201,7 @@ export default {
         "gameOptions.MEGAW": "Megaways",
         "gameOptions.CLAS": "Otros juegos",
         "gameOptions.FAST": "Juegos de habilidad",
-        "gameOptions.selectProviders": "Seleccionar proveedores",
+        "gameOptions.selectProviders": "Seleccionar proveedor",
         "gameOptions.favorites": "Favoritos",
         "gameOptions.new": "Nuevo",
         //---------------expire-----------------------------
@@ -410,7 +410,7 @@ export default {
         "gameOptions.MEGAW": "Megaways",
         "gameOptions.CLAS": "D'autres jeux",
         "gameOptions.FAST": "Jeux d'habilité",
-        "gameOptions.selectProviders": "Sélectionnez les fournisseurs",
+        "gameOptions.selectProviders": "Sélectionnez les fournisseur",
         "gameOptions.favorites": "Favoris",
         "gameOptions.new": "Nouveau",
         //---------------expire-----------------------------

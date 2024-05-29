@@ -30,6 +30,10 @@
 
     import { getUpdateBalance } from "../js/utils/serverUtils";
 
+    //pages
+    import HorsesPage from "./pages/HorsesPage.svelte";
+    import SlotPage from "./pages/SlotPage.svelte";
+
     export let user = {};
     export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
@@ -55,6 +59,11 @@
     let isToggleOn = false;
     //Deposit Modal
     let notify = {};
+
+    //horses page
+    let theme = "dark-orange";
+
+
 
     let active_view = "home";
 
@@ -328,11 +337,14 @@
         }, 1800000);
     }
 
-console.log("active_view",active_view);
+
+
     const onCategoryChange = (category) => {
-        if (category == "horses") return onOpenLogin();
+        if (category == "horses" && !user) return onOpenLogin();
         active_view = category;
+        console.log("active_view",active_view);
     }
+
     const onOpenPromotions = () => {
         promotionsModalOpen = true;
         modalOpened = "promotions";
@@ -385,12 +397,12 @@ console.log("active_view",active_view);
                 <img src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png" alt="">
                 <div>
                     <div class="header__userid">{user.username} #{user.id}</div>
-                    <div class="header__account">Mi cuenta</div>
+                    <div class="header__account" on:click={onOpenProfile}>Mi cuenta</div>
                 </div>
             </div>
             <div class="header__balance">
                 <p>{user.currency} {user.balance}</p>
-                <p class="header__bono">Bono {user.currency} {user.bonus_sumTotal}</p>
+                <p class="header__bono" on:click={onOpenProfile}>Bono {user.currency} {user.bonus_sumTotal}</p>
             </div>
             <button class="btn recharge" on:click={onOpenDeposit}>Recargar</button>
         {:else}
@@ -402,6 +414,7 @@ console.log("active_view",active_view);
             Notas: on:click|stopPropagation={onOpenLogin}, esto er apara los modale s pero el bug de los dropdow hizo que se descartara momentaneamente
         -->
     </header>
+
     <div class="category">
        <!-- los slot y depooooooooooooooooopueden cambiar de posisiocn como en el footer   si la longitud es 1 o 2 tiene un grid de 5 rem o mas
         JO tambien quitariamos el menubar de caballos y sportbook es incencesario y ocupa mucho espacio :/
@@ -414,10 +427,25 @@ console.log("active_view",active_view);
         {/each}
     </div>
 
-    <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
+
+    <!-- <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
     <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
-    <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button>
-    <button class="btn signup" on:click={onOpenProfile}>Abrir prefil</button>
+    <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button> -->
+    {#if /sportbook|sportbooklive|horses/.test(active_view)}
+        <!-- <p>El valor de active_view coincide con uno de los patrones.{active_view}</p> -->
+        {#if active_view == "horses"}
+            <HorsesPage bind:user bind:theme t={$t}/>
+        {/if}
+        {:else}
+            {#if active_view == "slot"}
+                <SlotPage  t={$t}/>
+                {:else}
+                <ProviderList {onOpenProviders} {topProviders} t={$t}/>
+            {/if}
+        
+            <Footer {configFooter} {onCategoryChange} {openChatLive} t={$t}/>
+    {/if}
+
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >
         <Login onOk={onLoginOk} onError={onLoginError} {assetsUrl} {onOpenRecoverPassword} {onOpenSignup} bind:platform t={$t}/>
@@ -430,35 +458,37 @@ console.log("active_view",active_view);
     <Modal bind:open={signupModalOpen} bind:modalOpened title={$t("signup.title")}>
         <Signup {configSignup} onOk={onSignupOk} onError={onSignupError} {onOpenLogin} t={$t}/>
     </Modal>
-    <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
-        <Deposit {configDeposit} bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError} />
-    </Modal>
-    <Modal bind:open={withdrawalModalOpen} bind:modalOpened title={$t("withdrawal.title")}>
-        <!--
-            OJO el configWithdrawal es solo para retiro W {configWithdrawal}
-        -->
-        <WithdrawalW {configWithdrawal}  bind:user {openChatLive} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
-    </Modal>
+
 
     <Modal bind:open={promotionsModalOpen} bind:modalOpened title="Promociones">
         <Promotions {configPromotions} />
     </Modal>
 
-    <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
-        <Profile {configProfile} {onOpenWithdrawal} {onLogout} {onOpenDeposit} onError={onProfileError} onOk={onProfileOk} bind:user t={$t}/>
-    </Modal>
 
     <Modal bind:open={chatLiveModalOpen} bind:subModalOpened title="Chat en vivo">
         <ChatLive bind:chatLiveUrl/>
     </Modal>
 
-    <ProviderList {onOpenProviders} {topProviders} t={$t}/>
+
 
     {#if user}
+        <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
+            <Deposit {configDeposit} bind:user bind:amountsFav onOk={onDepositOk} onError={onDepositError} />
+        </Modal>
+
+        <Modal bind:open={withdrawalModalOpen} bind:modalOpened title={$t("withdrawal.title")}>
+            <!-- OJO el configWithdrawal es solo para retiro W {configWithdrawal} -->
+            <WithdrawalW {configWithdrawal}  bind:user {openChatLive} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
+        </Modal>
+
+        <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
+            <Profile {configProfile} {onOpenWithdrawal} {onLogout} {onOpenDeposit} onError={onProfileError} onOk={onProfileOk} bind:user t={$t}/>
+        </Modal>
+
         <ScreenGames bind:open={screenGamesOpen} bind:platform bind:url_game {updateBalance}/>
     {/if}
 
-    <Footer {configFooter} {onCategoryChange} {openChatLive} t={$t}/>
+
     
     
     <Notifier bind:notify/>
