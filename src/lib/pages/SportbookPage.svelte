@@ -10,6 +10,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
+  export let GAME_JAVA_API_URL;
   //export let clientCode;
   export let lang = 'es';
 
@@ -22,7 +23,9 @@
   const edg_id = "8042022_digitain";
   const wt_id = "wintech_gaming";
   const nvb_id = "novusbet";
+  const bbq_id = "sport-betbuq"
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
+  const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const games = {
@@ -30,6 +33,12 @@
       provider: "edg",
       brand: "Digtain Sports Book",
       gameid: edg_id,
+      mode,
+    },
+    'bbq':{
+      provider: "plq",
+      brand: "BetBuq",
+      gameid: bbq_id,
       mode,
     },
     'wintech':{
@@ -70,9 +79,22 @@
     if (options.gameid == edg_id)openDigtain();
     else if (options.gameid == wt_id) openWintech();
     else if (options.gameid == nvb_id) openNovusbet();
+    else if (options.gameid == bbq_id) openBBQ();
   }
 
-   const openDigtain = async () => {
+  const openBBQ = async () => {
+    console.log("OPENBBQ:");
+    let url =userState == "loggedIn"? ut.getGameURL(GAME_JAVA_API_URL, games.bbq, options.gameToken) : guestURLBBQ;
+    url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
+    url += `&lang=${lang}`;
+    if (userState == "loggedIn"){
+      const {data} = await backend.game.getURLNovus(url);
+      url = data.url
+    }
+   sportbookGameUrl = url;
+  }
+
+  const openDigtain = async () => {
     let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.digtain, options.gameToken) : guestURLdigtain;
     url += active_view == "sportbooklive" ? "&currentgame=live" : "&currentgame=PreMatch";
     url += `&lang=${lang}`;
