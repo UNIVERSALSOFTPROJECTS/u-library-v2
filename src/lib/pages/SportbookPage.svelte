@@ -25,7 +25,7 @@
   const nvb_id = "novusbet";
   const bbq_id = "sport-betbuq"
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
-  const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}&lang=${lang}`;
+  const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const games = {
