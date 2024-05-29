@@ -84,7 +84,7 @@
 
   const openBBQ = async () => {
     console.log("OPENBBQ:");
-    let url =userState == "loggedIn"? ut.getGameURL(GAME_JAVA_API_URL, games.bbq, options.gameToken) : guestURLBBQ;
+    let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.bbq, options.gameToken) : guestURLBBQ;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     url += `&lang=${lang}`;
     if (userState == "loggedIn"){
