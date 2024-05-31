@@ -55,7 +55,10 @@
         <div class="dropdown-list" style="max-height:{heightModal - 42}px">
             {#each dataSearched as option}
             {#if option.id != 0 && option.name.toLowerCase().includes(searchData.toLowerCase())}
-                <button class="btn" on:click={() => selectOption(option.code)}>{option.code} ({option.total})</button>
+                <button class="btn" on:click={() => selectOption(option.code)}>
+                    <p>{option.code}</p>
+                    <p>({option.total})</p>
+                </button>
             {/if}
             {/each}
         </div>
