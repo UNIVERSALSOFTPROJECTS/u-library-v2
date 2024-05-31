@@ -27,6 +27,7 @@ export {default as CashOut } from './lib/withdrawal/CashOut.svelte';
 export {default as DepositBank } from './lib/payments/BankDeposit.svelte';
 export {default as WithdrawalBank } from './lib/withdrawal/WithdrawalBank.svelte';
 export {default as WithdrawalX } from './lib/withdrawal/WithdrawalX.svelte';
+export {default as WithdrawalBillX } from './lib/withdrawal/WithdrawalBillX.svelte';
 export {default as WithdrawalW } from './lib/withdrawal/WithdrawalW.svelte';
 export {default as TopBar } from './lib/topbar/TopBar.svelte';
 export {default as SportbookPage } from './lib/pages/SportbookPage.svelte';
@@ -35,7 +36,7 @@ export {default as RecoverPassword } from './lib/topbar/RecoverPassword.svelte';
 export {default as BillCollector} from './lib/BillCollector.svelte';
 export { default as AlertTokenExpired } from './lib/topbar/AlertRefreshToken.svelte';
 export { default as DuplicatedSessionListener } from './lib/DuplicatedSessionListener.svelte';
-export { default as DigtainWidget } from './lib/widgets/DigtainWidget.svelte';
+export { default as DigtainWidget } from './lib/widgets/DigtainWidget.svelte';  
 export { default as DigtainSportBook } from './lib/sportbooks/DigtainSportBook.svelte';
 export {default as DropdownSearch} from './lib/dropdown/DropdownSearch.svelte';
 
