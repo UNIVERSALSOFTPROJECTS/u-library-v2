@@ -9,7 +9,7 @@
     export let t;
 
     let pendingWithdrawal;
-    let amount;
+    let amount = Math.floor(user.balance * 10) / 10;
     let loadWithdrawal = true;
     let isCopied = false;
 
@@ -41,7 +41,7 @@
     }
  
     async function validateWithdrawal() {
-        if (amount === 0 || amount === "" || amount === undefined) return onError(t("withdrawal.amount0"));
+        if (amount === 0 || amount === undefined) return onError(t("withdrawal.amount0"));
         if (user.balance < amount) return onError(t("withdrawal.lowBalance"));
         try {
             let data = await ServerConnection.wallet.retailWithdrawal(user.token, amount);
@@ -115,8 +115,7 @@
         {:else}
             <p>{t("withdrawal.withdraw")}</p>
             <div class="withdrawal__amount">
-                <input type="number" min="1" class="ipt" bind:value={amount} on:input={justNumbersValidate} placeholder={t("withdrawal.amount0")}>
-                <b>{user.currency}</b>
+                <b>{amount} {user.currency}</b>
             </div>
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-static-element-interactions -->
