@@ -115,7 +115,8 @@
         {:else}
             <p>{t("withdrawal.withdraw")}</p>
             <div class="withdrawal__amount">
-                <b>{amount} {user.currency}</b>
+                <input type="number" min="1" class="ipt" bind:value={amount} on:input={justNumbersValidate} placeholder={t("withdrawal.amount0")}>
+                <b>{user.currency}</b>
             </div>
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-static-element-interactions -->
