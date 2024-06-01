@@ -68,8 +68,9 @@
 
 
     const printTicketWithdrawal = (data) => {
-      console.log("enviando a billColector dese printer:", data);
-      if(window.chrome){
+        if(window.chrome){
+            data.action='printWithdrawInvoice';
+            console.log("enviando a billColector dese printer:", data);
           window.chrome.webview.postMessage(data);
       }
 	}
