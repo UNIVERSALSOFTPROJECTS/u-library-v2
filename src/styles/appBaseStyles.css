@@ -2604,6 +2604,9 @@ p, b, span, a, li *, button {
   border-radius: 0.3rem;
 }
 .Coliseosport .filters .dropdown-menu .btn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-transform: uppercase;
   background-color: #3d3f44;
   border-bottom: 1px solid #f54b00;
   border-radius: 0;

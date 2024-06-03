@@ -16,7 +16,6 @@
     let email = configFooter.email;
     let platform = configFooter.platform;
     let bonus = configFooter.bonus;
-    let viewLogoUS = configFooter.viewLogoUS;
     let linksChats = configFooter.linksChats;
     let activePanel = null;
     let route = detectSubdomain(t("idiom"));
@@ -132,9 +131,6 @@
 
         <div class="footer__container--sub">
             <div class="footer__imgs">
-                {#if viewLogoUS}
-                <img src="{assetsFooter}powered.png" alt="powered-img" loading="lazy">
-                {/if}
                 <img src="{assetsFooter}more18.png" alt="more18-img" loading="lazy">
             </div>
             <div class="footer__bottom">

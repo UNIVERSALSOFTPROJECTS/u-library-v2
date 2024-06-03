@@ -402,6 +402,9 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     border: 1px solid $color-primary;
                     border-radius: 0.3rem;
                     & .btn{
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        text-transform: uppercase;
                         background-color: lighten($bgc-header, 12%);
                         border-bottom: 1px solid $color-primary;
                         border-radius: 0;

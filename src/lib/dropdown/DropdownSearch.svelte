@@ -6,8 +6,8 @@
     export let onSelectBrand;
     export let t;
 
+    let heightModal;
     let searchData = "";
-
     let selectedOption = t("gameOptions.selectProviders");
     let isDropdownOpen = false;
     
@@ -19,7 +19,7 @@
     function selectOption(option) {
       onSelectBrand(option)
       selectedOption = option;
-      isDropdownOpen = false;
+      isDropdownOpen = false;   
     }
     
     onMount(() => {
@@ -36,13 +36,10 @@
       };
     });
 
-    let heightModal;
-
     const resizeHeightModal = () => { 
       let isLandscape = window.matchMedia("(orientation: landscape)").matches;
-      // heightModal = innerHeight - (isLandscape && innerHeight < 400?100:400) ; 
-      heightModal = innerHeight - (isLandscape?150:400) ; 
-      // console.log(heightModal);
+      let sizePC = visualViewport.width > 1023;
+      heightModal = sizePC?400:(innerHeight - (isLandscape?150:400)) ; 
     }
 
     onMount(() => { window.addEventListener('resize', resizeHeightModal); });
@@ -58,7 +55,10 @@
         <div class="dropdown-list" style="max-height:{heightModal - 42}px">
             {#each dataSearched as option}
             {#if option.id != 0 && option.name.toLowerCase().includes(searchData.toLowerCase())}
-                <button class="btn" on:click={() => selectOption(option.code)}>{option.code}</button>
+                <button class="btn" on:click={() => selectOption(option.code)}>
+                    <p>{option.code}</p>
+                    <p>({option.total})</p>
+                </button>
             {/if}
             {/each}
         </div>
