@@ -68,6 +68,7 @@ const ServerConnection = (() => {
             let url = conf.API + "/user/preRegister";
             if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, email, phone, org: conf.org, platform }
+            console.log("RETURN",payload);
             return axios.post(url, payload, { headers });
         },
         login: (username, password) => {
