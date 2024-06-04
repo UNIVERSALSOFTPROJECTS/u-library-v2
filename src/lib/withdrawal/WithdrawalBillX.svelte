@@ -9,7 +9,8 @@
     export let t;
 
     let pendingWithdrawal;
-    let amount = Math.floor(user.balance * 10) / 10;
+    // let amount = Math.floor(user.balance * 10) / 10;
+    let amount = 1;
     let loadWithdrawal = true;
     let isCopied = false;
 
@@ -92,31 +93,27 @@
         <div class="loading"><p></p><p></p><p></p></div>
         {:else}
         {#if pendingWithdrawal && pendingWithdrawal.monto>0}
-            <b>{t("withdrawal.generalData")}</b>
+            <img class="logo" src="https://assets.apiusoft.com/crashgames/logo.png" alt="">
+            <b>Pago de retiro</b>
             <div class="withdrawal__info">
-                <b>{t("withdrawal.user")}</b>
+                <b>Usuario:</b>
                 <p> {user.username}</p>
                 <b>{t("withdrawal.id")}</b>
                 <p> {user.id}</p>   
-                <b>{t("withdrawal.dateHour")}</b>
-                <p> {moment.unix(pendingWithdrawal.efecha).format("DD/MM/YYYY")} - {moment.unix(pendingWithdrawal.efecha).format("HH:mm")}</p>   
-            </div>
-            <div class="withdrawal__info--main">
-                <b>{t("withdrawal.code")}</b>
-                <p>{pendingWithdrawal.codigo}</p>
+                <b>PIN:</b>
+                <p>000{pendingWithdrawal.codigo}</p>
+                <b>Fecha:</b>
+                <p> {moment.unix(pendingWithdrawal.efecha).format("DD/MM/YYYY")}</p>   
+                <b>Hora:</b>
+                <p>{moment.unix(pendingWithdrawal.efecha).format("HH:mm")}</p>
                 <b>{t("withdrawal.amount")}</b>
                 <p>{pendingWithdrawal.monto} {user.currency}</p>
-                <button class="btn withdrawal__copy" on:click={copyCodeWhitdrawal}>
-                    {#if isCopied}
-                    <div class="withdrawal__copied">{t("withdrawal.copied")}</div>
-                    {/if}
-                </button>
             </div>
-            {@html t("withdrawal.info")}
+            <img class="barcode" src="https://assets.apiusoft.com/generic_imgs/utils/barcode.webp" alt="">
         {:else}
             <p>{t("withdrawal.withdraw")}</p>
             <div class="withdrawal__amount">
-                <input type="number" min="1" class="ipt" bind:value={amount} on:input={justNumbersValidate} placeholder={t("withdrawal.amount0")}>
+                {amount}
                 <b>{user.currency}</b>
             </div>
             <!-- svelte-ignore a11y-click-events-have-key-events -->

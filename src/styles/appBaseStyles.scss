@@ -179,6 +179,26 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         &.withdrawal{
             @include withdrawalW__model__1(2);//este es general para x y w
             @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);  
+            & img {
+                &.logo{
+                    width: 12rem;
+                    margin: 0 auto;
+                }
+                &.barcode{
+                    width: 15rem;
+                    margin: 0 auto;
+                    height: 4rem;
+                    filter: invert(100%) sepia(2%) saturate(5726%) hue-rotate(223deg) brightness(117%) contrast(102%);
+                }
+            }
+            & .modal{
+                &-body {
+
+                    font-size: 25px;
+                    justify-items: center;
+                    gap: 1.5rem;
+                }
+            }
         }
         &.chatLive{
             @media #{$landscape_pc} {
@@ -402,9 +422,10 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                     border: 1px solid $color-primary;
                     border-radius: 0.3rem;
                     & .btn{
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
+                        gap: 0.5rem;
                         text-transform: uppercase;
+                        display: flex;
+                        justify-content: space-between;
                         background-color: lighten($bgc-header, 12%);
                         border-bottom: 1px solid $color-primary;
                         border-radius: 0;
