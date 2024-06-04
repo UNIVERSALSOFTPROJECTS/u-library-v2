@@ -66,6 +66,7 @@ const ServerConnection = (() => {
         },
         preRegister: (username, email, phone, platform) => {
             console.log('RegisterXD', username, email, phone, platform);
+            console.log("CONFIG API", conf.API);
             let url = conf.API + "/user/preRegister";
             console.log('URL', url);
             if (!conf.org) throw "ORG_MANDATORY";
