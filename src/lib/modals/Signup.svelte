@@ -78,7 +78,7 @@
         if(!name || !date || !email || !username || !password || !phone) return onError(t("msg.allObligatory"));
         try {
             loadSms = true;
-            console.log("ENTRANDO AL PREREGISTRO")
+            console.log("ENTRANDO AL PREREGISTRO", username.trim(), email, country+phone, platform)
             let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
             console.log("SALIENDO AL PREREGISTRO")
             preRegister ? counterResendSms() : smscode = data.smscode;
