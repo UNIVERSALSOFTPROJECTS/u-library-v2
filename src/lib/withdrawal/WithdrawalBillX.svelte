@@ -142,7 +142,7 @@
                 <button class="btn keyboard" on:click={() => agregarNumero('7')}>7</button>
                 <button class="btn keyboard" on:click={() => agregarNumero('8')}>8</button>
                 <button class="btn keyboard" on:click={() => agregarNumero('9')}>9</button>
-                <button class="btn keyboard"on:click={cleanPassword}>ALL</button>
+                <button class="btn keyboard"on:click={cleanPassword}>Total</button>
                 <button class="btn keyboard" on:click={() => agregarNumero(0)}>0</button>
                 <button class="btn keyboard" on:click={eliminarUltimoCaracter}>
                     <svg width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
