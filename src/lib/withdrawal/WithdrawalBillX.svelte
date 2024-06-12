@@ -103,7 +103,7 @@
     onMount(()=>{ getPendingWithdrawal(); })
 </script>
 
-<div class="modal-body {pendingWithdrawal && pendingWithdrawal.monto>0?'noPending':''}">
+<div class="modal-body {pendingWithdrawal && pendingWithdrawal.monto>0?'':'noPending'}">
     {#if loadWithdrawal}
         <div class="loading"><p></p><p></p><p></p></div>
         {:else}
@@ -125,7 +125,7 @@
                 <p>{pendingWithdrawal.monto} {user.currency}</p>
             </div>
             <img class="barcode" src="https://assets.apiusoft.com/generic_imgs/utils/barcode.webp" alt="">
-        {:else}>
+        {:else}
             <p>Saldo total: {user.balance}</p>
             <p>{t("withdrawal.withdraw")}</p>
             <div class="withdrawal__amount">
