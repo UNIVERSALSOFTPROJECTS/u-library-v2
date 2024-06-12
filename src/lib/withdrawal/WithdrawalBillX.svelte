@@ -103,8 +103,8 @@
     onMount(()=>{ getPendingWithdrawal(); })
 </script>
 
-<div class="modal-body">
-    <!--{#if loadWithdrawal}
+<div class="modal-body {pendingWithdrawal && pendingWithdrawal.monto>0?'noPending':''}">
+    {#if loadWithdrawal}
         <div class="loading"><p></p><p></p><p></p></div>
         {:else}
         {#if pendingWithdrawal && pendingWithdrawal.monto>0}
@@ -125,7 +125,7 @@
                 <p>{pendingWithdrawal.monto} {user.currency}</p>
             </div>
             <img class="barcode" src="https://assets.apiusoft.com/generic_imgs/utils/barcode.webp" alt="">
-        {:else}-->
+        {:else}>
             <p>Saldo total: {user.balance}</p>
             <p>{t("withdrawal.withdraw")}</p>
             <div class="withdrawal__amount">
@@ -154,6 +154,6 @@
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-static-element-interactions -->
             <button class="btn deposit" on:click={validateWithdrawal}>{t("withdrawal.request")}</button>
-        <!--{/if}
-    {/if}-->
+        {/if}
+    {/if}
 </div>
