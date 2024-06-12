@@ -19,6 +19,9 @@
         let resp = await ServerConnection.wallet.checkPreviewWithdrawal(user.token);
         if(resp.data.monto) pendingWithdrawal = resp.data; // si tiene monto quiere decir que tiene un retiro pendiente
         loadWithdrawal = false;
+        setTimeout(() => {
+            onOk("ticketBill");
+        }, 5000);
        } catch (error) {
             onError(t("msg.contactSupport"));//falta detectar los errores
             console.log(error);
