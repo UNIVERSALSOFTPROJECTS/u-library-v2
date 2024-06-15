@@ -152,6 +152,7 @@
                 <a href="https://assets.apiusoft.com/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
                 <div class="withdrawal__note"><b>Nota:</b>Asegúrate de completar <b>tu verificación de identidad</b> para poder proceder con el <b>retiro de tu dinero.</b> Sin esta verificación, <b>no podremos procesar tu solicitud.</b> Además, ten en cuenta que si tienes un bono activo y realizas un retiro, este se perderá.</div>
                 <button class="btn withdrawal" on:click={validateWithdrawal}>Solicitar retiro</button>
+                {#if linksChats.length != 0}
                 <div class="withdrawal__help">
                     <p>¿Necesitas ayuda?</p>
                     <div class="withdrawal__help--btns">
@@ -161,6 +162,7 @@
                         {/each}
                     </div>
                 </div>
+                {/if}
             {/if}
         {/if}
     {/if}
