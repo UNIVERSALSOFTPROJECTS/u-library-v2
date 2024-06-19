@@ -7,7 +7,9 @@
     export let onCategoryChange;
 
     let bannerDefault = [{"url_w":"https://assets.apiusoft.com/Latinsport21/bn_w_caballos2.png","url_m":"https://assets.apiusoft.com/Latinsport21/bn_m_caballos.png","dateFrom": "","dateUntil": "","category":"horses"}];
-    let banners = [];
+    let bannersJSON = [];
+    let filteredBanners = [];
+
     const today = (new Date());
     today.setHours(0,0,0,0);
 
@@ -18,37 +20,38 @@
 
     register();
 
-    
     async function getBanners() {
-            const url = 'https://assetsapiusoft.s3.us-west-2.amazonaws.com/generic_imgs/configBanners.json';  // URL del archivo JSON
+        const url = 'https://assetsapiusoft.s3.us-west-2.amazonaws.com/generic_imgs/configBanners.json';  // URL del archivo JSON
 
-            try {
-                const response = await axios.get(url);
-                banners = response.data;
-            } catch (error) {
-                console.error('Error fetching JSON:', error);
-            }
-    }     
-    getBanners();  
+        try {
+            const response = await axios.get(url);
+            bannersJSON = response.data;
+        } catch (error) {
+            console.error('Error fetching JSON:', error);
+        }
+        let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
+        //let subdomain = "cl";
 
+        let detectPage = bannersJSON.filter((e) => e.page == platform)[0];
 
-        //let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
+        let allBanners;
+        //if JSON have error charge default image
+        try {
+            allBanners = detectPage.banners.filter((d) => d.country == subdomain)[0].banners;
+        } catch (error) {
+            filteredBanners = bannerDefault;
+        }
 
-        let subdomain = "cl";
-
-        console.log(banners);
-        let detectPage = banners.filter((e) => e.page == platform)[0];
-        let allBanners = detectPage.banners.filter((d) => d.country == subdomain)[0].banners;
-
-        let filteredBanners = allBanners.filter( o => {
+        filteredBanners = allBanners.filter( o => {
             const dateFrom = parseDate(o.dateFrom) || "";
             const dateUntil = parseDate(o.dateUntil) || "";
             return !(dateFrom < today && dateUntil < today);
         });
 
         if (filteredBanners.length == 0) { filteredBanners = bannerDefault; }
+    }     
 
-        console.log(filteredBanners);
+    getBanners();  
 </script>
 
 <div>
