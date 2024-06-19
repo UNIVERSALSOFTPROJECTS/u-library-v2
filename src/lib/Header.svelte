@@ -14,6 +14,8 @@
     
     import ProviderList from "./lists/ProviderList.svelte";
 
+    import Banners from "./Banners.svelte";
+
     import Footer from "./Footer.svelte";
     
     import ChatLive from "./modals/ChatLive.svelte";
@@ -415,6 +417,10 @@
             Notas: on:click|stopPropagation={onOpenLogin}, esto er apara los modale s pero el bug de los dropdow hizo que se descartara momentaneamente
         -->
     </header>
+
+    
+    
+    <Banners bind:platform/>
 
     <div class="category">
        <!-- los slot y depooooooooooooooooopueden cambiar de posisiocn como en el footer   si la longitud es 1 o 2 tiene un grid de 5 rem o mas

@@ -5,7 +5,7 @@
     import DropdownDate from '../dropdown/DropdownDate.svelte';
     import DropdownCurrencies from '../dropdown/DropdownCurrencies.svelte';
     import InputPassword from '../input/InputPassword.svelte';
-    import { detectSubdomain } from "../../js/utils/formatUtils";
+    import { detectIdiomPage } from "../../js/utils/formatUtils";
     import { assetsPDF } from "../../js/utils/assetsUtils";
     import { onMount } from 'svelte';
 
@@ -47,7 +47,7 @@
     let document;
     let term_conditions;
     let currency;
-    let route = detectSubdomain(t("idiom"));
+    let route = detectIdiomPage(t("idiom"));
     let routePDF = assetsPDF(platform,route);
 
     //validations imput -utils JS

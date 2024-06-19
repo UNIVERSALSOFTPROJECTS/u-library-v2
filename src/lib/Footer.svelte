@@ -1,6 +1,6 @@
 <script>
     import {assetsPayments, assetsFlags, assetsFooter,assetsPDF } from "../js/utils/assetsUtils";
-    import { detectSubdomain } from "../js/utils/formatUtils";
+    import { detectIdiomPage } from "../js/utils/formatUtils";
 
     export let onCategoryChange;
     export let openChatLive;
@@ -18,7 +18,7 @@
     let bonus = configFooter.bonus;
     let linksChats = configFooter.linksChats;
     let activePanel = null;
-    let route = detectSubdomain(t("idiom"));
+    let route = detectIdiomPage(t("idiom"));
     let routePDF = assetsPDF(platform,route);
    
 

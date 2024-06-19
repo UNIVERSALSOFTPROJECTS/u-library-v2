@@ -605,6 +605,13 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
         }
     }
 
+
+    swiper-container::after{
+
+        box-shadow: 0 40px 90px 120px #2e3136;
+    
+}
+
     //.footer{
     $hover-a:lighten($color-primary, 5%);
     @include footer__model_1($bgc-header,$hover-a);
