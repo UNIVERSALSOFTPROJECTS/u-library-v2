@@ -42,7 +42,7 @@
             filteredBanners = bannerDefault;
         }finally{
             if (filteredBanners.length == 0) { filteredBanners = bannerDefault; }
-           // bannersLoading = false;
+            bannersLoading = false;
         }        
     }     
     register();
@@ -68,12 +68,10 @@
 </div>
 
 <style lang="scss">
-    @import '../styles/components/variables';
-    @import '../styles/components/mixins';
     .banners{
         position: relative;
         height: 102.67vw; 
-        @media #{$landscape_pc} {
+        @media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
             height: 52.1vw;
         }
         & swiper{
@@ -88,7 +86,7 @@
                     width: 100%;
                     bottom: 62px;
                     z-index: 1;
-                    box-shadow: 0 40px 90px 120px $bgc-body;
+                    box-shadow: 0 40px 90px 120px var(--bg-body);
                 }
             }
             &-slide{
@@ -101,12 +99,12 @@
             }
         }
     }
-    
+
     .loading {
         height: 100%;
         position: absolute;
         width: 100%;
-        background: $bgc-body;
+        background: var(--bg-body);
         z-index: 2;
         display: flex;
         align-items: center;
@@ -117,7 +115,7 @@
             height: 2.5em;
             border: 0.4em solid transparent;
             border-color: #ffffff63;
-            border-top-color: $color-primary;
+            border-top-color: var(--color-primary);
             border-radius: 50%;
             animation: spinner_circular 1s linear infinite;
         }
