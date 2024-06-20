@@ -6,9 +6,12 @@
     export let platform;
     export let onCategoryChange;
 
+    const urlJSON = 'https://assetsapiusoft.s3.us-west-2.amazonaws.com/generic_imgs/configBanners.json';
     let bannerDefault = [{"url_w":"https://assets.apiusoft.com/Latinsport21/bn_w_caballos2.png","url_m":"https://assets.apiusoft.com/Latinsport21/bn_m_caballos.png","dateFrom": "","dateUntil": "","category":"horses"}];
     let bannersJSON = [];
     let filteredBanners = [];
+    let bannersLoading = true;
+    let allBanners;
 
     const today = (new Date());
     today.setHours(0,0,0,0);
@@ -18,43 +21,39 @@
         return new Date(year, month - 1, day);
     }
 
-    register();
-
     async function getBanners() {
-        const url = 'https://assetsapiusoft.s3.us-west-2.amazonaws.com/generic_imgs/configBanners.json';  // URL del archivo JSON
-
         try {
-            const response = await axios.get(url);
+            const response = await axios.get(urlJSON);
             bannersJSON = response.data;
         } catch (error) {
             console.error('Error fetching JSON:', error);
         }
         let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
         //let subdomain = "cl";
-
-        let detectPage = bannersJSON.filter((e) => e.page == platform)[0];
-
-        let allBanners;
-        //if JSON have error charge default image
         try {
+            let detectPage = bannersJSON.filter((e) => e.page == platform)[0];
             allBanners = detectPage.banners.filter((d) => d.country == subdomain)[0].banners;
-        } catch (error) {
-            filteredBanners = bannerDefault;
-        }
-
-        filteredBanners = allBanners.filter( o => {
+            filteredBanners = allBanners.filter( o => {
             const dateFrom = parseDate(o.dateFrom) || "";
             const dateUntil = parseDate(o.dateUntil) || "";
             return !(dateFrom < today && dateUntil < today);
         });
-
-        if (filteredBanners.length == 0) { filteredBanners = bannerDefault; }
+        } catch (error) {
+            filteredBanners = bannerDefault;
+        }finally{
+            if (filteredBanners.length == 0) { filteredBanners = bannerDefault; }
+            bannersLoading = false;
+        }        
     }     
-
+    
+    register();
     getBanners();  
 </script>
 
-<div>
+<div class="banners">
+    {#if bannersLoading}
+        <div class="loading"><p></p></div>  
+    {/if}
     <swiper-container class="swiper-container__banners" speed={1500} autoplay-delay={10000} loop={true}>
         {#each filteredBanners as banner}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -69,24 +68,9 @@
     </swiper-container>
 </div>
 
-<style>
-    .swiper-container__banners{
-        width: 100%;
-        height:100%;
-        overflow: hidden;
-    }
-    .swiper-container__banners::after{
-        content: "";
-        position: absolute;
-        height: 0;
-        width: 100%;
-        bottom: 62px;
-        z-index: 1;
-    }
-    swiper-slide img{
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+<style lang="scss">
+    @import '../styles/components/variables';
+    @import '../styles/components/mixins';
+    @include banners_component_theme_1();
+    @include animatedLoad_circular();
 </style>

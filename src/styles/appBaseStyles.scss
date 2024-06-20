@@ -1,3 +1,9 @@
+:root{
+    --bg-body: #313233;
+    --color-primary: #f54b00;
+}
+
+
 //$body  : ".Babieca"; //nombre de la pagina
 //$page : "Babieca";//default-light || default-dark
 //$body  : ".DemoPlatform" ; //nombre de la pagina
@@ -7,7 +13,7 @@ $page : "Coliseosport" !default;//default-light || default-dark
 //$body : ".Jetbet24"; //nombre de la pagina
 //$page : "Jetbet24"; //default-light || default-dark
 $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep8v.jpg";
-@import './components/variables';
+@import './components/variables_test';
 @import "./components/mixins";
 
 
@@ -606,11 +612,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
     }
 
 
-    swiper-container::after{
 
-        box-shadow: 0 40px 90px 120px #2e3136;
-    
-}
 
     //.footer{
     $hover-a:lighten($color-primary, 5%);
