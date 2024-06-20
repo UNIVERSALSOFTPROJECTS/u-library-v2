@@ -422,36 +422,38 @@
     
     <Banners bind:platform/>
 
-    <div class="category">
-       <!-- los slot y depooooooooooooooooopueden cambiar de posisiocn como en el footer   si la longitud es 1 o 2 tiene un grid de 5 rem o mas
-        JO tambien quitariamos el menubar de caballos y sportbook es incencesario y ocupa mucho espacio :/
-    -->
-        {#each categoryGames as category}
-            <button class="btn category__game {active_view == category?'active':''}" on:click={()=>onCategoryChange(`${category}`)}>
-                <i class="icon--{category}"></i>
-                <b>{$t(`categoryGame.${category}`)}</b>
-            </button>
-        {/each}
+    <div>
+        <div class="category">
+            <!-- los slot y depooooooooooooooooopueden cambiar de posisiocn como en el footer   si la longitud es 1 o 2 tiene un grid de 5 rem o mas
+             JO tambien quitariamos el menubar de caballos y sportbook es incencesario y ocupa mucho espacio :/
+         -->
+             {#each categoryGames as category}
+                 <button class="btn category__game {active_view == category?'active':''}" on:click={()=>onCategoryChange(`${category}`)}>
+                     <i class="icon--{category}"></i>
+                     <b>{$t(`categoryGame.${category}`)}</b>
+                 </button>
+             {/each}
+         </div>
+     
+     
+         <!-- <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
+         <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
+         <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button> -->
+         {#if /sportbook|sportbooklive|horses/.test(active_view)}
+             <!-- <p>El valor de active_view coincide con uno de los patrones.{active_view}</p> -->
+             {#if active_view == "horses"}
+                 <HorsesPage bind:user bind:theme t={$t}/>
+             {/if}
+             {:else}
+                 {#if active_view == "slot"}
+                     <SlotPage  t={$t}/>
+                     {:else}
+                     <ProviderList {onOpenProviders} {topProviders} t={$t}/>
+                 {/if}
+             
+                 <Footer {configFooter} {onCategoryChange} {openChatLive} t={$t}/>
+         {/if}
     </div>
-
-
-    <!-- <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
-    <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
-    <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button> -->
-    {#if /sportbook|sportbooklive|horses/.test(active_view)}
-        <!-- <p>El valor de active_view coincide con uno de los patrones.{active_view}</p> -->
-        {#if active_view == "horses"}
-            <HorsesPage bind:user bind:theme t={$t}/>
-        {/if}
-        {:else}
-            {#if active_view == "slot"}
-                <SlotPage  t={$t}/>
-                {:else}
-                <ProviderList {onOpenProviders} {topProviders} t={$t}/>
-            {/if}
-        
-            <Footer {configFooter} {onCategoryChange} {openChatLive} t={$t}/>
-    {/if}
 
 
     <Modal bind:open={loginModalOpen} bind:modalOpened >

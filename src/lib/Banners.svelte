@@ -42,10 +42,9 @@
             filteredBanners = bannerDefault;
         }finally{
             if (filteredBanners.length == 0) { filteredBanners = bannerDefault; }
-            bannersLoading = false;
+           // bannersLoading = false;
         }        
     }     
-    
     register();
     getBanners();  
 </script>
@@ -71,6 +70,62 @@
 <style lang="scss">
     @import '../styles/components/variables';
     @import '../styles/components/mixins';
-    @include banners_component_theme_1();
-    @include animatedLoad_circular();
+    .banners{
+        position: relative;
+        height: 102.67vw; 
+        @media #{$landscape_pc} {
+            height: 52.1vw;
+        }
+        & swiper{
+            &-container{
+                width: 100%;
+                height:100%;
+                overflow: hidden;
+                &::after{
+                    content: "";
+                    position: absolute;
+                    height: 0;
+                    width: 100%;
+                    bottom: 62px;
+                    z-index: 1;
+                    box-shadow: 0 40px 90px 120px $bgc-body;
+                }
+            }
+            &-slide{
+                img{
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+    
+    .loading {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        background: $bgc-body;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        & p{
+            pointer-events: none;
+            width: 2.5em;
+            height: 2.5em;
+            border: 0.4em solid transparent;
+            border-color: #ffffff63;
+            border-top-color: $color-primary;
+            border-radius: 50%;
+            animation: spinner_circular 1s linear infinite;
+        }
+    }
+
+    @keyframes spinner_circular {
+        100% {
+            transform: rotate(360deg)
+        }
+    }
 </style>
