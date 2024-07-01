@@ -420,7 +420,7 @@
 
     
     
-    <Banners bind:platform/>
+    <Banners bind:platform {onCategoryChange}/>
 
     <div>
         <div class="category">

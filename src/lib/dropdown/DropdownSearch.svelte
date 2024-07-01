@@ -51,7 +51,7 @@
     <button class="slc {isDropdownOpen?'active':''}" on:click={toggleDropdown}>{selectedOption}</button>
     {#if isDropdownOpen}
     <div class="dropdown-menu" use:watchResize={resizeHeightModal} style="max-height:{heightModal}px">
-        <input type="search" class="ipt" bind:value={searchData} placeholder="Buscar proveedor">
+        <input type="search" class="ipt" bind:value={searchData} placeholder={t("gameOptions.searchProvider")}>
         <div class="dropdown-list" style="max-height:{heightModal - 42}px">
             {#each dataSearched as option}
             {#if option.id != 0 && option.name.toLowerCase().includes(searchData.toLowerCase())}

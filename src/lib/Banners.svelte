@@ -28,17 +28,20 @@
         } catch (error) {
             console.error('Error fetching JSON:', error);
         }
-        let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
-        //let subdomain = "cl";
+        // let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
+        let subdomain = "www";
         try {
-            let detectPage = bannersJSON.filter((e) => e.page == platform)[0];
+            let detectPage = bannersJSON.filter((e) => e.page == "Latinsport21")[0];
+            console.log(detectPage);
             allBanners = detectPage.banners.filter((d) => d.country == subdomain)[0].banners;
+            console.log(allBanners);
             filteredBanners = allBanners.filter( o => {
             const dateFrom = parseDate(o.dateFrom) || "";
             const dateUntil = parseDate(o.dateUntil) || "";
             return !(dateFrom < today && dateUntil < today);
         });
         } catch (error) {
+            console.log(error);
             filteredBanners = bannerDefault;
         }finally{
             if (filteredBanners.length == 0) { filteredBanners = bannerDefault; }

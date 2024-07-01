@@ -204,6 +204,7 @@ export default {
         "gameOptions.selectProviders": "Seleccionar proveedor",
         "gameOptions.favorites": "Favoritos",
         "gameOptions.new": "Nuevo",
+        "gameOptions.searchProvider": "Buscar proveedor",
         //---------------expire-----------------------------
         "expireSession.stillThere": "¿Sigues ahí?",
         "expireSession.continuePlaying": "Continuar jugando",
@@ -413,6 +414,7 @@ export default {
         "gameOptions.selectProviders": "Sélectionnez les fournisseur",
         "gameOptions.favorites": "Favoris",
         "gameOptions.new": "Nouveau",
+        "gameOptions.searchProvider": "Rechercher fournisseur",
         //---------------expire-----------------------------
         "expireSession.stillThere": "Tu es toujours là?",
         "expireSession.continuePlaying": "Continue de jouer",
