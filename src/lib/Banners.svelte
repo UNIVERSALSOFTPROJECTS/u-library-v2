@@ -28,8 +28,8 @@
         } catch (error) {
             console.error('Error fetching JSON:', error);
         }
-        // let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
-        let subdomain = "www";
+        let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
+        // let subdomain = "www";
         try {
             let detectPage = bannersJSON.filter((e) => e.page == "Latinsport21")[0];
             console.log(detectPage);
