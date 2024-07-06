@@ -6,6 +6,7 @@
 	export let configLogin;
 	export let onOk;
 	export let onError;
+	export let onOpenRecoverPassword;
 	export let t;//traduccion
 
 	const changeIdiom = configLogin.changeIdiom;
@@ -83,6 +84,6 @@
 				<p>{t("login.access")}</p>
 			{/if}
 		</button>
-		<button type="button" class="btn openForgotPass"><b>{t("login.forgetPassword")}</b></button>
+		<button type="button" on:click={onOpenRecoverPassword} class="btn openForgotPass"><b>{t("login.forgetPassword")}</b></button>
     </form>
 </div>
