@@ -1,4 +1,4 @@
-<script>
++<script>
     import ServerConnection from "../../js/server";
     import inputUtils from "../../js/utils/inputUtils";
     import DropdowPrefix from '../dropdown/DropdowPrefix.svelte';
@@ -79,7 +79,7 @@
         try {
             loadSms = true;
             console.log("ENTRANDO AL PREREGISTRO", username.trim(), email, country+phone, platform)
-            let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
+            let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,"email");
             console.log("SALIENDO AL PREREGISTRO")
             preRegister ? counterResendSms() : smscode = data.smscode;
         } catch (error) {
@@ -155,6 +155,11 @@
         agentCodeType = agentCodeType == "codeAgent"?"nameAfiliated":"codeAgent";
         codeAgent = "";
      }
+     const toggleCodeVerificationType = () =>{ 
+
+        // agentCodeType = agentCodeType == "codeAgent"?"nameAfiliated":"codeAgent";
+        // codeAgent = "";
+     }
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
     onMount(()=>{
@@ -198,7 +203,7 @@
         {#if agentCodeType !='url' && isCodeAgentSwitch}
             <div>
                 <label for="afiliated">{t("signup.agent")}</label>
-                <input type="checkbox" id="afiliated" class="switch" bind:checked={isCheckedAfiliated} on:click={toggleAgentCodeType}>
+                <input type="checkbox" id="afiliated" class="switch" bind:checked={isCheckedAfiliated} on:click={toggleCodeVerificationType}>
                 <label for="afiliated">{t("signup.afiliated")}</label>
             </div>
         {/if}
@@ -224,7 +229,13 @@
         <DropdowPrefix {countries} bind:country/>
         <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone}>
     </div>
-    {#if preRegister} 
+    {#if preRegister}
+    <b>Verificación</b>
+    <div>
+        <label for="afiliated">SMS</label>
+        <input type="checkbox" id="afiliated" class="switch" bind:checked={isCheckedAfiliated} on:click={toggleAgentCodeType}>
+        <label for="afiliated">Email</label>
+    </div>
     <div class="signup__sms">
         <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
             {#if activeSMS}

@@ -83,5 +83,6 @@
 				<p>{t("login.access")}</p>
 			{/if}
 		</button>
+		<button type="button" class="btn openForgotPass"><b>{t("login.forgetPassword")}</b></button>
     </form>
 </div>

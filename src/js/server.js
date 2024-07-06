@@ -64,13 +64,11 @@ const ServerConnection = (() => {
             let url = conf.API + `/retailAgents/${id}/currencies`;
             return axios.get(url, { headers });
         },
-        preRegister: (username, email, phone, platform) => {
-            console.log('RegisterXD', username, email, phone, platform);
-            console.log("CONFIG API", conf.API);
+        preRegister: (username, email, phone, platform, channel) => {
             let url = conf.API + "/user/preRegister";
             console.log('URL', url);
             if (!conf.org) throw "ORG_MANDATORY";
-            let payload = { username, email, phone, org: conf.org, platform }
+            let payload = { username, email, phone, org: conf.org, platform, channel }
             console.log("RETURN",payload);
             return axios.post(url, payload, { headers });
         },

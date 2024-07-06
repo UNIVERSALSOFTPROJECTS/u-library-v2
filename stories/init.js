@@ -160,51 +160,23 @@ import SocketConnector from '../src/js/SocketConnector'
 //        })
 //    }
 //}
-export default{
-   start:()=>{
-      ServerConnection.setConfig({
-           API:"https://lobby-bff.apiusoft.com",
-           GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-           CLIENT_AUTH:"086C6928CB443C361BC72F05JETBET24086C",
-           CLIENT_CODE:"086C",
-           platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
-           LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-           ASSETS:"https://assets.apiusoft.com",
-           WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
-           ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-           country:"+214",
-           operatorId:"123",
-           domain:"https://jetbet24.co/",
-           assetsUrl:"https://assets.apiusoft.com",
-           org:"J24",
-           //currency:9,//PEN
-      })
-   },
-   startSocket:()=>{
-       SocketConnector.setConfig({
-           WS_URL:"ws://localhost:5000",
-       })
-   }
-}
-
-// export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
+// export default{
 //    start:()=>{
 //       ServerConnection.setConfig({
 //            API:"https://lobby-bff.apiusoft.com",
 //            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-//            CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
-//            CLIENT_CODE:"AAC1",
-//            CLIENT_ID: "21",
+//            CLIENT_AUTH:"086C6928CB443C361BC72F05JETBET24086C",
+//            CLIENT_CODE:"086C",
+//            platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
 //            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-//            API_GAMES_NODE: "https://prod-nd.apiusoft.com",
 //            ASSETS:"https://assets.apiusoft.com",
 //            WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
 //            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-//            country:"+56",
+//            country:"+214",
 //            operatorId:"123",
-//            domain:"http://coliseosport.com/",
+//            domain:"https://jetbet24.co/",
 //            assetsUrl:"https://assets.apiusoft.com",
-//            org:"CLS",
+//            org:"J24",
 //            //currency:9,//PEN
 //       })
 //    },
@@ -214,6 +186,34 @@ export default{
 //        })
 //    }
 // }
+
+export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
+   start:()=>{
+      ServerConnection.setConfig({
+           API:"https://lobby-bff-test.apiusoft.com",
+           GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+           CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
+           CLIENT_CODE:"AAC1",
+           CLIENT_ID: "21",
+           LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+           API_GAMES_NODE: "https://prod-nd.apiusoft.com",
+           ASSETS:"https://assets.apiusoft.com",
+           WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
+           ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+           country:"+56",
+           operatorId:"123",
+           domain:"http://coliseosport.com/",
+           assetsUrl:"https://assets.apiusoft.com",
+           org:"CLS",
+           //currency:9,//PEN
+      })
+   },
+   startSocket:()=>{
+       SocketConnector.setConfig({
+           WS_URL:"ws://localhost:5000",
+       })
+   }
+}
 
 // export default{
 //     start:()=>{
