@@ -84,6 +84,6 @@
 				<p>{t("login.access")}</p>
 			{/if}
 		</button>
-		<button type="button" on:click={onOpenRecoverPassword} class="btn openForgotPass"><b>{t("login.forgetPassword")}</b></button>
+		<!-- <button type="button" on:click={onOpenRecoverPassword} class="btn openForgotPass"><b>{t("login.forgetPassword")}</b></button> -->
     </form>
 </div>
