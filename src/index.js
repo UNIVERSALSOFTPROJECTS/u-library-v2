@@ -17,7 +17,7 @@ export {default as SingupW} from "./lib/modals/SingupW.svelte";//temporales mies
 export {default as SingupM} from "./lib/modals/SingupM.svelte";//temporales miestras se unifica - una vez ser termine de pasa todos al registro global eliminar
 export {default as Signup} from "./lib/modals/Signup.svelte";//temporales miestras se unifica
 export {default as Profile} from "./lib/modals/Profile.svelte";
-export {default as changePassword} from "./lib/profile/ChangePassword.svelte";
+export {default as ChangePassword} from "./lib/profile/ChangePassword.svelte";
 export {default as Promotions} from "./lib/modals/Promotions.svelte";
 export {default as ScreenGames} from "./lib/modals/ScreenGames.svelte";
 export {default as ProviderList} from "./lib/lists/ProviderList.svelte";
