@@ -79,7 +79,7 @@
         try {
             loadSms = true;
             console.log("ENTRANDO AL PREREGISTRO", username.trim(), email, country+phone, platform)
-            let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform);
+            let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,"email");
             console.log("SALIENDO AL PREREGISTRO")
             preRegister ? counterResendSms() : smscode = data.smscode;
         } catch (error) {
@@ -154,6 +154,11 @@
     const toggleAgentCodeType = () =>{ 
         agentCodeType = agentCodeType == "codeAgent"?"nameAfiliated":"codeAgent";
         codeAgent = "";
+     }
+     const toggleCodeVerificationType = () =>{ 
+
+        // agentCodeType = agentCodeType == "codeAgent"?"nameAfiliated":"codeAgent";
+        // codeAgent = "";
      }
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 

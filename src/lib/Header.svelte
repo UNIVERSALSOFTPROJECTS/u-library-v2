@@ -40,7 +40,7 @@
     export let user = {};
     export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
-    export let platform;//usado para storybook
+     let platform = "Habanawin";//usado para storybook
     //DEPOSITOS MONTOS FAVORITOS
     export let amountsFav = [5000, 10000, 30000, 50000];
     //export let amountsFav = [50, 100, 300, 500];
@@ -387,7 +387,7 @@
 </script>
 
 <!-- on:contextmenu="{noTouch}" on:mousedown="{noTouch}" role="button" tabindex="0" -->
-<div class="{platform}">
+<div class="Coliseosport">
     <header class="header {activeSession?'logued':''}">
         <button class="btn header__menu {isToggleOn?'is-open':''}" on:click={toggleMenuBar}><span></span></button>
         <picture>

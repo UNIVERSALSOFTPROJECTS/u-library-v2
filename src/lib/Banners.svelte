@@ -12,43 +12,43 @@
     let filteredBanners = [];
     let bannersLoading = true;
     let allBanners;
+     // let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
+     let subdomain = "wwww";
 
     const today = (new Date());
     today.setHours(0,0,0,0);
 
-    function parseDate(dateStr) {
-        const [day, month, year] = dateStr.split('-');
-        return new Date(year, month - 1, day);
+    function parseDate(date) {
+        const [day, month, year] = date.split('-');
+        const valueDate = (date == "" ? "" : new Date(year, month - 1, day));
+        return valueDate;
     }
 
     async function getBanners() {
         try {
             const response = await axios.get(urlJSON);
             bannersJSON = response.data;
-        } catch (error) {
-            console.error('Error fetching JSON:', error);
-        }
-        let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
-        // let subdomain = "www";
-        try {
+             // let detectPage = bannersJSON.filter((e) => e.page == platform)[0];
             let detectPage = bannersJSON.filter((e) => e.page == "Latinsport21")[0];
             console.log(detectPage);
-            allBanners = detectPage.banners.filter((d) => d.country == subdomain)[0].banners;
+            // console.log(subdomain);
+            allBanners = detectPage.banners.filter((d) => d.country == "www")[0].banners;
+                filteredBanners = allBanners.filter( o => {
+                const dateFrom = parseDate(o.dateFrom);   
+                const dateUntil = parseDate(o.dateUntil);
+                return (dateFrom <= today && dateUntil >= today || dateFrom == "" && dateUntil == "");
+            });
             console.log(allBanners);
-            filteredBanners = allBanners.filter( o => {
-            const dateFrom = parseDate(o.dateFrom) || "";
-            const dateUntil = parseDate(o.dateUntil) || "";
-            return !(dateFrom < today && dateUntil < today);
-        });
         } catch (error) {
-            console.log(error);
+            console.error('Error fetching JSON or filter:', error);
             filteredBanners = bannerDefault;
         }finally{
             if (filteredBanners.length == 0) { filteredBanners = bannerDefault; }
             bannersLoading = false;
-        }        
+            register();
+        }
     }     
-    register();
+
     getBanners();  
 </script>
 
@@ -56,7 +56,7 @@
     {#if bannersLoading}
         <div class="loading"><p></p></div>  
     {/if}
-    <swiper-container class="swiper-container__banners" speed={1500} autoplay-delay={10000} loop={true}>
+    <swiper-container class="swiper-container__banners" speed={1500} autoplay-delay={10000} loop={true} effect="fade">
         {#each filteredBanners as banner}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-static-element-interactions -->
