@@ -58,7 +58,7 @@
     const notWhiteSpace = inputUtils.notWhiteSpace;
 
     function counterResendSms() {
-        onOk(t("msg.sendSms"));
+        onOk(channel=="sms"?t("msg.sendSms"):t("msg.sendEmail"));
         activeSMS = true;
         minutes = 2;
         seconds = 0;
