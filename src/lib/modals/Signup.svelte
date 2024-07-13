@@ -158,6 +158,7 @@
         codeAgent = "";
      }
      const toggleCodeVerificationType = () =>{ 
+        isCheckedVertification = !isCheckedVertification;
         channel = isCheckedVertification ? "email":"sms";
      }
     const avoidSubmit = (e) =>{ e.preventDefault(); }
