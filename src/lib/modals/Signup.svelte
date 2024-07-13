@@ -24,6 +24,7 @@
     let preRegister = configSignup.preRegister == undefined?true:false;//solo si falla el proveedor de sms
     let isCodeAgentSwitch = configSignup.isCodeAgentSwitch || false;
     let isCheckedAfiliated = isCodeAgentSwitch;
+    let isCheckedVertification = false;
     //loading
     let loadSms;
     let loadSignup;
@@ -47,6 +48,7 @@
     let document;
     let term_conditions;
     let currency;
+    let channel = "sms";
     let route = detectIdiomPage(t("idiom"));
     let routePDF = assetsPDF(platform,route);
 
@@ -79,7 +81,7 @@
         try {
             loadSms = true;
             console.log("ENTRANDO AL PREREGISTRO", username.trim(), email, country+phone, platform)
-            let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,"email");
+            let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,channel);
             console.log("SALIENDO AL PREREGISTRO")
             preRegister ? counterResendSms() : smscode = data.smscode;
         } catch (error) {
@@ -156,9 +158,7 @@
         codeAgent = "";
      }
      const toggleCodeVerificationType = () =>{ 
-
-        // agentCodeType = agentCodeType == "codeAgent"?"nameAfiliated":"codeAgent";
-        // codeAgent = "";
+        channel = isCheckedVertification ? "email":"sms";
      }
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
@@ -230,6 +230,12 @@
         <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone}>
     </div>
     {#if preRegister} 
+    <b>Verificación</b>
+    <div>
+        <label for="vericitation">SMS</label>
+        <input type="checkbox" id="vericitation" class="switch" bind:checked={isCheckedVertification} on:click={toggleCodeVerificationType}>
+        <label for="vericitation">Email</label>
+    </div>
     <div class="signup__sms">
         <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
             {#if activeSMS}
