@@ -30,6 +30,7 @@ export default {
       "signup.acceptPandP": "Confirmo haber leído y aceptado los <a href='{{routePDF}}/signup_t&c.pdf' target='_blank'><b>Términos y condiciones</b></a> de {{platform}}.",
       "signup.register": "Registrarse",
       "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
+      "signup.verification": "Verificación",
       //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
       "currency.usd":"Dólar estadounidense",
       "currency.clp":"Peso chileno",
@@ -242,6 +243,7 @@ export default {
         "signup.acceptPandP": "Pour me convertir en client, acceptez les <a href='{{routePDF}}/signup_t&c.pdf' target='_blank'><b>Termes et Conditions</b></a> de {{platform}}.",
         "signup.register": "S'inscrire",
         "signup.loginHere": "Avez-vous déjà un compte? <b>Entrer ici</b>",
+        "signup.verification": "Vérifier",
         //---------------SINGUP/NAME CURRENCIES-----------------------------
         "currency.usd":"Dollar américain",
         "currency.clp":"Peso chilien",

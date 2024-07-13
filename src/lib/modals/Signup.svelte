@@ -231,11 +231,11 @@
         <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone}>
     </div>
     {#if preRegister} 
-    <b>Verificación</b>
+    <b>{t("signup.verification")}</b>
     <div>
         <label for="vericitation">SMS</label>
         <input type="checkbox" id="vericitation" class="switch" bind:checked={isCheckedVertification} on:click={toggleCodeVerificationType}>
-        <label for="vericitation">Email</label>
+        <label for="vericitation">E-mail</label>
     </div>
     <div class="signup__sms">
         <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
