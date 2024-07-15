@@ -77,7 +77,8 @@
     }
 
     async function preRegisterClick(){
-        if(!name || !date || !email || !username || !password || !phone || typeSignup === "codeAgent" && !codeAgent) return onError(t("msg.allObligatory"));
+        if(!name || !date || !email || !username || !password || !phone || 
+        typeSignup === "codeAgent" && !codeAgent || typeSignup === "selectCurrency" && !codeAgent) return onError(t("msg.allObligatory"));
         try {
             loadSms = true;
             let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,channel);
