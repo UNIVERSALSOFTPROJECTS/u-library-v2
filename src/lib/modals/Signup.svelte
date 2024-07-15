@@ -77,15 +77,12 @@
     }
 
     async function preRegisterClick(){
-        if(!name || !date || !email || !username || !password || !phone) return onError(t("msg.allObligatory"));
+        if(!name || !date || !email || !username || !password || !phone || typeSignup === "codeAgent" && !codeAgent) return onError(t("msg.allObligatory"));
         try {
             loadSms = true;
-            console.log("ENTRANDO AL PREREGISTRO", username.trim(), email, country+phone, platform)
             let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,channel);
-            console.log("SALIENDO AL PREREGISTRO")
             preRegister ? counterResendSms() : smscode = data.smscode;
         } catch (error) {
-            console.log("error: ",error)
             if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = t("msg.phoneFormat");
             else if(error.response.data.message == 'El usuario  ya existe' || error.response.data.message == '{resp=Err, Id=1, Msg=Usuario ya Exite}') error = t("msg.userExist");
