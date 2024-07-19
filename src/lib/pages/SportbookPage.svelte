@@ -23,7 +23,8 @@
   const edg_id = "8042022_digitain";
   const wt_id = "wintech_gaming";
   const nvb_id = "novusbet";
-  const bbq_id = "sport-betbuq"
+  const bbq_id = "sport-betbuq";
+  const pnc_id = "902-pinnacle";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
@@ -53,8 +54,13 @@
       provider: "nvb",
       brand: "Novus Bet",
       mode
+    },
+    'pinnacle':{
+      gameid: pnc_id,
+      provider: "pnc",
+      brand: "Pinnacle",
+      mode,
     }
-
   }
   
   onMount(()=>{
@@ -80,14 +86,23 @@
     else if (options.gameid == wt_id) openWintech();
     else if (options.gameid == nvb_id) openNovusbet();
     else if (options.gameid == bbq_id) openBBQ();
+    else if (options.gameid == pnc_id) openPinnacle();
   }
 
-  const openBBQ = async () => {
-    console.log("OPENBBQ:");
+  const openPinnacle = async () => { 
+    let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.pinnacle, options.gameToken) : guestURLBBQ;
+    url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
+    url += `&lang=${lang}&r=url`;
+    const {data} = await backend.game.getURLs(url);
+    url = data.url
+   sportbookGameUrl = url;
+  }
+
+  const openBBQ = async () => { 
     let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.bbq, options.gameToken) : guestURLBBQ;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     url += `&lang=${lang}&r=url`;
-    const {data} = await backend.game.getURLNovus(url);
+    const {data} = await backend.game.getURL(url);
     url = data.url
    sportbookGameUrl = url;
   }

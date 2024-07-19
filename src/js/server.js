@@ -124,7 +124,7 @@ const ServerConnection = (() => {
           console.log(url,"desde server");
           return await axios.get(url, { headers });
         },
-        getURLNovus: (url) => {
+        getURL: (url) => {
             return axios.get(url, { headers });
         },
         getGameList: (category, section, page=1, currency='USD', xpage=20)=>{
