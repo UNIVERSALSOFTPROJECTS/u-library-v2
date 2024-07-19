@@ -58,7 +58,7 @@
     const notWhiteSpace = inputUtils.notWhiteSpace;
 
     function counterResendSms() {
-        onOk(t("msg.sendSms"));
+        onOk(channel=="sms"?t("msg.sendSms"):t("msg.sendEmail"));
         activeSMS = true;
         minutes = 2;
         seconds = 0;
@@ -77,15 +77,13 @@
     }
 
     async function preRegisterClick(){
-        if(!name || !date || !email || !username || !password || !phone) return onError(t("msg.allObligatory"));
+        if(!name || !date || !email || !username || !password || !phone || 
+        typeSignup === "codeAgent" && !codeAgent || typeSignup === "selectCurrency" && !codeAgent) return onError(t("msg.allObligatory"));
         try {
             loadSms = true;
-            console.log("ENTRANDO AL PREREGISTRO", username.trim(), email, country+phone, platform)
             let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,channel);
-            console.log("SALIENDO AL PREREGISTRO")
             preRegister ? counterResendSms() : smscode = data.smscode;
         } catch (error) {
-            console.log("error: ",error)
             if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = t("msg.phoneFormat");
             else if(error.response.data.message == 'El usuario  ya existe' || error.response.data.message == '{resp=Err, Id=1, Msg=Usuario ya Exite}') error = t("msg.userExist");
@@ -158,6 +156,7 @@
         codeAgent = "";
      }
      const toggleCodeVerificationType = () =>{ 
+        isCheckedVertification = !isCheckedVertification;
         channel = isCheckedVertification ? "email":"sms";
      }
     const avoidSubmit = (e) =>{ e.preventDefault(); }
@@ -230,11 +229,11 @@
         <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone}>
     </div>
     {#if preRegister} 
-    <b>Verificación</b>
+    <b>{t("signup.verification")}</b>
     <div>
         <label for="vericitation">SMS</label>
         <input type="checkbox" id="vericitation" class="switch" bind:checked={isCheckedVertification} on:click={toggleCodeVerificationType}>
-        <label for="vericitation">Email</label>
+        <label for="vericitation">E-mail</label>
     </div>
     <div class="signup__sms">
         <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>

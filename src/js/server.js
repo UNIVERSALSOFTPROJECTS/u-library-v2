@@ -73,7 +73,7 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         login: (username, password) => {
-            if (!conf.org) throw "ORG_MANDATORY";
+            // if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, password, org: conf.org }
             return axios.post(conf.API + "/login", payload, { headers });
         },//operatorId o codeAgent,son lo mismo
