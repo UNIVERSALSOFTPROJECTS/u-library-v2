@@ -25,6 +25,8 @@
   const nvb_id = "novusbet";
   const bbq_id = "sport-betbuq";
   const pnc_id = "902-pinnacle";
+  const bw3_id = "betsw3_2024";
+  const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home"
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}`;
@@ -62,6 +64,13 @@
       brand: "Pinnacle",
       mode,
       id: 124761
+    },
+    'BetW3':{
+      gameid: pnc_id,
+      provider: "betsw3",
+      brand: "BETSW3",
+      mode,
+      id: 125072
     }
   }
   
@@ -89,6 +98,7 @@
     else if (options.gameid == nvb_id) openNovusbet();
     else if (options.gameid == bbq_id) openBBQ();
     else if (options.gameid == pnc_id) openPinnacle();
+    else if (options.gameid == bw3_id) openBetsW3();
   }
 
   const openPinnacle = async () => { 
@@ -99,6 +109,15 @@
       const {data} = await backend.game.getURLNovus(url);
       url = data.url
     }
+    sportbookGameUrl = url;
+  }
+
+  const openBetsW3 = async () => { 
+    let url =userState == "loggedIn"? ut.getGameURLPinnacle(GAMEAPI_URL, games.BetW3, options.gameToken) : guestURLbetw3;
+    url += active_view == "sportbooklive" ? "&sport_view=live" : "sport_view=sport";
+    url += `&lang=${lang}&r=url`;
+    const {data} = await backend.game.getURLNovus(url);
+    url = data.url
     sportbookGameUrl = url;
   }
 

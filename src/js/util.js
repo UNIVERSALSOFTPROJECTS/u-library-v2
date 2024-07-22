@@ -24,8 +24,8 @@ const utils = (() => {
       let url = gameapi_url +`/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}&game_multiple=true`;
       return url;
     }
-  const getGameURLPinnacle = (gameapi_url, game, usertoken) => {
-    let url = gameapi_url + `/launch?gameid=${game.id}&m=${game.mode}&sessionid=${usertoken}`;
+  const getGameURLTest = (gameapi_url, game, usertoken) => {
+    let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
     return url;
   }
     const isMobile= () => {//tengo una manera mas reducida de hacer esto
@@ -115,6 +115,6 @@ const utils = (() => {
     });
   };
 
-  return { loadScript, isJson, initDropdown, showNotify, sleep, checkSetIsFav, getImgUrl, getProviderImgUrl, getGameURL, isMobile, dateDiffInDays, getAge, setUrlPage, categoryAllowedChange, getGameURLPinnacle } ;
+  return { loadScript, isJson, initDropdown, showNotify, sleep, checkSetIsFav, getImgUrl, getProviderImgUrl, getGameURL, isMobile, dateDiffInDays, getAge, setUrlPage, categoryAllowedChange, getGameURLTest } ;
 })()
 export default utils
