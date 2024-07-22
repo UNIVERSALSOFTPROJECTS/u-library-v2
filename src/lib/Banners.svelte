@@ -12,8 +12,7 @@
     let filteredBanners = [];
     let bannersLoading = true;
     let allBanners;
-     // let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
-     let subdomain = "wwww";
+    let subdomain = detectSubdomain() == ""?"www":detectSubdomain();
 
     const today = (new Date());
     today.setHours(0,0,0,0);
@@ -28,11 +27,8 @@
         try {
             const response = await axios.get(urlJSON);
             bannersJSON = response.data;
-             // let detectPage = bannersJSON.filter((e) => e.page == platform)[0];
-            let detectPage = bannersJSON.filter((e) => e.page == "Latinsport21")[0];
-            console.log(detectPage);
-            // console.log(subdomain);
-            allBanners = detectPage.banners.filter((d) => d.country == "www")[0].banners;
+            let detectPage = bannersJSON.filter((e) => e.page == platform)[0];
+            allBanners = detectPage.banners.filter((d) => d.country == subdomain)[0].banners;
                 filteredBanners = allBanners.filter( o => {
                 const dateFrom = parseDate(o.dateFrom);   
                 const dateUntil = parseDate(o.dateUntil);
