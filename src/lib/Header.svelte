@@ -15,6 +15,7 @@
     import ProviderList from "./lists/ProviderList.svelte";
 
     import Banners from "./Banners.svelte";
+    import ProvidersPage from "./pages/ProvidersPage.svelte";
 
     import Footer from "./Footer.svelte";
     
@@ -40,7 +41,7 @@
     export let user = {};
     export let assetsUrl;
    // export let platform = "Babieca";//usado para storybook
-     let platform = "Habanawin";//usado para storybook
+    export let platform;//usado para storybook
     //DEPOSITOS MONTOS FAVORITOS
     export let amountsFav = [5000, 10000, 30000, 50000];
     //export let amountsFav = [50, 100, 300, 500];
@@ -56,6 +57,8 @@
     let expireSessionModalOpen = false; 
     let profileModalOpen = false; 
 
+    let providerModalOpen = false
+
     let modalOpened;
     let subModalOpened;
 
@@ -65,6 +68,7 @@
 
     //horses page
     let theme = "dark-orange";
+
 
 
 
@@ -344,7 +348,12 @@
 
     const onCategoryChange = (category) => {
         if (category == "horses" && !user) return onOpenLogin();
-        active_view = category;
+        if (category == "providers") {
+            providerModalOpen = true;
+            modalOpened = category;
+        }else{
+            active_view = category;
+        }
         console.log("active_view",active_view);
     }
 
@@ -374,8 +383,8 @@
     // }
     const topProviders = ["EVOLUTION","Habanero","Pragmatic Play","SPRIBE","Endorphina"];
 
-    function onOpenProviders(name) {
-        console.log(name);
+    function onOpenProviders(name,view) {
+        console.log(name, view);
     }
 
     if (window.matchMedia('(pointer: coarse)').matches) {//solo para evitar que en movile se pueda descargar imagenes , es un test de pruba
@@ -384,10 +393,13 @@
             e.preventDefault(); // Evita que se muestre el menú contextual
         });
     }
+
+
+
 </script>
 
 <!-- on:contextmenu="{noTouch}" on:mousedown="{noTouch}" role="button" tabindex="0" -->
-<div class="Coliseosport">
+<div class={platform}>
     <header class="header {activeSession?'logued':''}">
         <button class="btn header__menu {isToggleOn?'is-open':''}" on:click={toggleMenuBar}><span></span></button>
         <picture>
@@ -419,8 +431,9 @@
     </header>
 
     
-    
+    {#if active_view != "providers"}
     <Banners bind:platform {onCategoryChange}/>
+    {/if}
 
     <div>
         <div class="category">
@@ -434,22 +447,18 @@
                  </button>
              {/each}
          </div>
-     
-     
-         <!-- <button class="btn signup" on:click={onOpenPromotions}>Promociones</button>
-         <button class="btn signup" on:click={onOpenWithdrawal}>RetiroX</button>
-         <button class="btn signup" on:click={onOpenGame}>ABRIR JUEGO</button> -->
+
          {#if /sportbook|sportbooklive|horses/.test(active_view)}
              <!-- <p>El valor de active_view coincide con uno de los patrones.{active_view}</p> -->
              {#if active_view == "horses"}
                  <HorsesPage bind:user bind:theme t={$t}/>
              {/if}
              {:else}
-                 {#if active_view == "slot"}
-                     <SlotPage  t={$t}/>
-                     {:else}
-                     <ProviderList {onOpenProviders} {topProviders} t={$t}/>
-                 {/if}
+                {#if active_view == "slot"}
+                    <SlotPage  t={$t}/>
+                {:else}
+                    <ProviderList {onOpenProviders} {topProviders} t={$t}/>
+                {/if}
              
                  <Footer {configFooter} {onCategoryChange} {openChatLive} t={$t}/>
          {/if}
@@ -476,6 +485,10 @@
 
     <Modal bind:open={chatLiveModalOpen} bind:subModalOpened title="Chat en vivo">
         <ChatLive bind:chatLiveUrl/>
+    </Modal>
+
+    <Modal bind:open={providerModalOpen} bind:modalOpened title={$t("categoryGame.providers")}>
+        <ProvidersPage bind:categoryGames {onOpenProviders} t={$t}/>
     </Modal>
 
 

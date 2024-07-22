@@ -190,7 +190,7 @@ import SocketConnector from '../src/js/SocketConnector'
 export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
    start:()=>{
       ServerConnection.setConfig({
-           API:"https://lobby-bff-test.apiusoft.com",
+           API:"https://lobby-bff.apiusoft.com",
            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
            CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
            CLIENT_CODE:"AAC1",
@@ -198,7 +198,7 @@ export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", p
            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
            API_GAMES_NODE: "https://prod-nd.apiusoft.com",
            ASSETS:"https://assets.apiusoft.com",
-           WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
+           WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
            country:"+56",
            operatorId:"123",
@@ -214,6 +214,34 @@ export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", p
        })
    }
 }
+
+// export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
+//     start:()=>{
+//        ServerConnection.setConfig({
+//             API:"https://lobby-bff.apiusoft.com",
+//             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+//             CLIENT_AUTH:"50DA9A125986F573C0EUNIVERSALRACE123",
+//             CLIENT_CODE:"50DA",
+//             CLIENT_ID: "11",
+//             LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+//             API_GAMES_NODE: "https://prod-nd.apiusoft.com",
+//             ASSETS:"https://assets.apiusoft.com",
+//             WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
+//             ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+//             country:"+56",
+//             operatorId:"123",
+//             domain:"http://coliseosport.com/",
+//             assetsUrl:"https://assets.apiusoft.com",
+//             org:"",
+//             //currency:9,//PEN
+//        })
+//     },
+//     startSocket:()=>{
+//         SocketConnector.setConfig({
+//             WS_URL:"ws://localhost:5000",
+//         })
+//     }
+//  }
 
 // export default{
 //     start:()=>{
