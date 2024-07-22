@@ -98,7 +98,6 @@
       url += `&lang=${lang}&r=url`;
       const {data} = await backend.game.getURLNovus(url);
       url = data.url
-     sportbookGameUrl = url;
     }
     sportbookGameUrl = url;
   }
