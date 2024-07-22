@@ -25,6 +25,7 @@
   const nvb_id = "novusbet";
   const bbq_id = "sport-betbuq";
   const pnc_id = "902-pinnacle";
+  const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home"
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
@@ -91,7 +92,7 @@
   }
 
   const openPinnacle = async () => { 
-    let url =userState == "loggedIn"? ut.getGameURLPinnacle(GAMEAPI_URL, games.pinnacle, options.gameToken) : guestURLBBQ;
+    let url =userState == "loggedIn"? ut.getGameURLPinnacle(GAMEAPI_URL, games.pinnacle, options.gameToken) : guestURLpinnacle;
     url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
     url += `&lang=${lang}&r=url`;
     const {data} = await backend.game.getURLNovus(url);
