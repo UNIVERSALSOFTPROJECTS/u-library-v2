@@ -93,11 +93,14 @@
 
   const openPinnacle = async () => { 
     let url =userState == "loggedIn"? ut.getGameURLPinnacle(GAMEAPI_URL, games.pinnacle, options.gameToken) : guestURLpinnacle;
-    url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
-    url += `&lang=${lang}&r=url`;
-    const {data} = await backend.game.getURLNovus(url);
-    url = data.url
-   sportbookGameUrl = url;
+    if (userState == "loggedIn"){
+      url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
+      url += `&lang=${lang}&r=url`;
+      const {data} = await backend.game.getURLNovus(url);
+      url = data.url
+     sportbookGameUrl = url;
+    }
+    sportbookGameUrl = url;
   }
 
   const openBBQ = async () => { 
