@@ -55,7 +55,7 @@
         <div class="dropdown-list" style="max-height:{heightModal - 42}px">
             {#each dataSearched as option}
             {#if option.id != 0 && option.name.toLowerCase().includes(searchData.toLowerCase())}
-                <button class="btn" on:click={() => selectOption(option.code)}>
+                <button class="btn {selectedOption == option.code?'active':''}" on:click={() => selectOption(option.code)}>
                     <p>{option.code}</p>
                     <p>({option.total})</p>
                 </button>
