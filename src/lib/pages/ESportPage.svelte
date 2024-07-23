@@ -37,10 +37,6 @@
     if (options.gameid == pnc_id) openPinnacle();
   }
 
-  onMount(()=>{
-    onOpenGame();
-  })
-
   const openPinnacle = async () => { 
     let url =userState == "loggedIn"? ut.getGameURLTest(GAMEAPI_URL, games.pinnacle, options.gameToken) : guestURLpinnacle;
     if (userState == "loggedIn"){
@@ -53,8 +49,6 @@
   }
 
   onDestroy(async () => {
-    let chatModal = document.getElementById("chat-application");
-    chatModal.style.display="block";
     let {data} = await backend.getBalance(user.agregatorToken);
     user.balance = data.balance;
   })
