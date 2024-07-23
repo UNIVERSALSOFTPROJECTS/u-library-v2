@@ -41,7 +41,6 @@
     let url =userState == "loggedIn"? ut.getGameURLTest(GAMEAPI_URL, games.pinnacle, options.gameToken) : guestURLpinnacle;
     if (userState == "loggedIn"){
       url += active_view == "esports" ? "&sport_view=e-sports" : "";
-      url += `&lang=${lang}&r=url`;
       const {data} = await backend.game.getURLNovus(url);
       url = data.url
     }
