@@ -49,8 +49,10 @@
   }
 
   onDestroy(async () => {
-    let {data} = await backend.getBalance(user.agregatorToken);
-    user.balance = data.balance;
+    if (userState == "loggedIn"){
+        let {data} = await backend.getBalance(user.agregatorToken);
+        user.balance = data.balance;
+    }
   })
   
 </script>
