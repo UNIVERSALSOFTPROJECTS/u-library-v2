@@ -18,7 +18,7 @@
   let deviceiframe = mode;
   let sport_view = active_view == "esports" ? "e-sports" : "";
   const pnc_id = "902-pinnacle";
-  const guestURLpinnacle = "https://fv-wngcxtx.oreo88.com/en/esports-hub/"
+  const guestURLpinnacle = "https://fv-wngcxtx.oreo88.com/es/esports-hub/"
   const games = {
     'pinnacle':{
       gameid: pnc_id,

@@ -27,6 +27,7 @@
   const pnc_id = "902-pinnacle";
   const bw3_id = "betsw3_2024";
   const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
+  const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home"
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}`;
@@ -113,15 +114,18 @@
   }
 
   const openBetsW3 = async () => { 
-    let url =userState == "loggedIn"? ut.getGameURLTest(GAMEAPI_URL, games.BetW3, options.gameToken) : guestURLbetw3;
-    if (userState == "loggedIn"){
-    url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
-    url += `&lang=${lang}&r=url`;
-    const {data} = await backend.game.getURLNovus(url);
-    url = data.url
+    let url;
+    if (userState == "loggedIn") {
+        url = ut.getGameURLTest(GAMEAPI_URL, games.BetW3, options.gameToken);
+        url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
+        url += `&lang=${lang}&r=url`;
+        const { data } = await backend.game.getURLNovus(url);
+        url = data.url;
+    } else {
+        url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3;
     }
     sportbookGameUrl = url;
-  }
+}
 
   const openBBQ = async () => { 
     let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.bbq, options.gameToken) : guestURLBBQ;
