@@ -2,7 +2,7 @@
     import Modal from "../Modal.svelte";
     export let t;
     let disconnectModalOpen = false;
-    let modalOpened = "disconnect";
+    let subModalOpened = "disconnect";
 
     function handleOffline() {
         disconnectModalOpen = true;
@@ -11,7 +11,7 @@
     window.addEventListener("offline", handleOffline);
 </script>
 
-<Modal bind:open={disconnectModalOpen} bind:modalOpened>
+<Modal bind:open={disconnectModalOpen} bind:subModalOpened>
     <div class="modal-body">
         <svg
             width="4rem"
