@@ -43,7 +43,7 @@ export { default as DuplicatedSessionListener } from './lib/DuplicatedSessionLis
 export { default as DigtainWidget } from './lib/widgets/DigtainWidget.svelte';  
 export { default as DigtainSportBook } from './lib/sportbooks/DigtainSportBook.svelte';
 export {default as DropdownSearch} from './lib/dropdown/DropdownSearch.svelte';
-export {default as DisconnectNetwork } from './lib/modals/DisconnectNetwork.svelte'
+export {default as LostConnection } from './lib/modals/LostConnection.svelte'
 
 
 

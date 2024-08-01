@@ -112,6 +112,8 @@ export default {
     "msg.incorrectPass": "Contraseña actual incorrecta",
     "msg.changePassSuccess": "Cambio de contraseña exitoso",
     "msg.copied": "Copiado",
+    "msg.lostConnection": "Se perdió la conexión a internet",
+    "msg.refresh": "Actualizar",
     //---------------Provider list-----------------------------
     "provider.playNow": "Juega ahora",
     "provider.startNow": "!Empieza ahora¡",
@@ -214,6 +216,7 @@ export default {
 
     //---------------crashgame_text-----------------------------
     "header.reload": "Recargar",
+    "header.bonus": "Bono",
     // ------------------------------
     "app.playNow": "¡Jugar ahora!",
     "app.preview": "Anterior",
@@ -370,6 +373,9 @@ export default {
     "msg.incorrectPass": "Mot de passe actuel incorrect",
     "msg.changePassSuccess": "Changement de mot de passe réussi",
     "msg.copied": "Copié",
+    "msg.lostConnection": "conexão perdida",
+    "msg.refresh": "mise à jour",
+
     //---------------Provider list-----------------------------
     "provider.playNow": "Jouez maintenant",
     "provider.startNow": "Commencez maintenant!",
@@ -551,6 +557,8 @@ export default {
     "msg.incorrectPass": "Senha atual incorreta",
     "msg.changePassSuccess": "Alteração de senha bem-sucedida",
     "msg.copied": "Copiado",
+    "msg.lostConnection": "A conexão com a Internet foi perdida",
+    "msg.refresh": "Atualizar",
 
     //---------------HEADER-----------------------------
     "header.balance": "Saldo",

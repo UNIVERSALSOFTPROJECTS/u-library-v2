@@ -1,10 +1,11 @@
 <script>
     import Modal from "../Modal.svelte";
+    export let t;
     let disconnectModalOpen = false;
     let modalOpened = "disconnect";
 
     function handleOffline() {
-        disconnectModalOpen = true;        
+        disconnectModalOpen = true;
     }
 
     window.addEventListener("offline", handleOffline);
@@ -33,12 +34,12 @@
                 stroke-linecap="round"
             />
         </svg>
-        <b class="disconnect_tittle">Se perdió la conexion a internet</b>
+        <b class="disconnect_tittle">{t("msg.lostConnection")}</b>
         <button
             class="btn disconnect__btn"
             on:click={() => {
                 location.reload();
-            }}>Refrescar</button
+            }}>{t("msg.refresh")}</button
         >
     </div>
 </Modal>

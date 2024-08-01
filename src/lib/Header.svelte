@@ -33,11 +33,11 @@
     import RecoverPassword from "./topbar/RecoverPassword.svelte";
 
     import { getUpdateBalance } from "../js/utils/serverUtils";
-    import DisconnectNetwork from "./modals/DisconnectNetwork.svelte";
 
     //pages
     import HorsesPage from "./pages/HorsesPage.svelte";
     import SlotPage from "./pages/SlotPage.svelte";
+    import LostConnection from "./modals/LostConnection.svelte";
 
     export let user = {};
     export let assetsUrl;
@@ -585,9 +585,7 @@
         <ProvidersPage bind:categoryGames {onOpenProviders} t={$t} />
     </Modal>
 
-   <DisconnectNetwork>
-    
-   </DisconnectNetwork>
+    <LostConnection t={$t}></LostConnection>
 
     {#if user}
         <Modal bind:open={depositModalOpen} bind:modalOpened title="Depósito">
