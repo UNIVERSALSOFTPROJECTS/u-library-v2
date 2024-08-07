@@ -8,7 +8,7 @@ export default {
     "login.remember": "Recordar",
     "login.signupHere": "¿Eres nuevo? <b>Registrate aquí</b>",
     "login.forgetPassword": "¿Olvidaste tu contraseña?",
-    "login.autoserviceError": "Ocurrio un error, si el problema persiste contacte con soporte.",
+    "login.autoserviceError": "Ocurrió un error, si el problema persiste contacte con soporte.",
     //---------------SINGUP-----------------------------
     "signup.title": "Registrate aquí",
     "signup.infoPersonal": "Información personal",
