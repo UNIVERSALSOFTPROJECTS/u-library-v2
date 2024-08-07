@@ -65,7 +65,7 @@
 			timerLogin = setTimeout(function() { loginClick(); }, 5000);
 		}
 	});
-
+	
 	$:cancelAutologin(autoLogin);
 </script>
 
@@ -74,7 +74,7 @@
 	{#if isAutoserviceError}
 		<div class="login__autoservice error">
 			<p>{t("login.autoserviceError")}</p>
-			<button class="btn update">{t("msg.refresh")}</button>
+			<button class="btn" on:click={()=>location.reload()}>{t("msg.refresh")}</button>
 		</div>
 	{:else}
 		<div class="login__autoservice">
