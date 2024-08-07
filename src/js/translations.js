@@ -8,6 +8,7 @@ export default {
     "login.remember": "Recordar",
     "login.signupHere": "¿Eres nuevo? <b>Registrate aquí</b>",
     "login.forgetPassword": "¿Olvidaste tu contraseña?",
+    "login.autoserviceError": "Ocurrio un error, si el problema persiste contacte con soporte.",
     //---------------SINGUP-----------------------------
     "signup.title": "Registrate aquí",
     "signup.infoPersonal": "Información personal",
@@ -270,6 +271,7 @@ export default {
     "login.remember": "Rappeler",
     "login.signupHere": "Vous êtes nouveau? <b>Inscrivez-vous ici</b>",
     "login.forgetPassword": "Vous avez oublié votre mot de passe?",
+    "login.autoserviceError": "Une erreur s'est produite, si le problème persiste, contactez le support.",
     //---------------SINGUP-----------------------------
     "signup.title": "Inscrivez-vous ici",
     "signup.infoPersonal": "Informations personnelles",
@@ -531,6 +533,7 @@ export default {
     "login.access": "Entrar",
     "login.remember": "Lembrar",
     "login.forgetPassword": "Você esqueceu sua senha?",
+    "login.autoserviceError": "Ocorreu um erro. Se o problema persistir, entre em contato com o suporte.",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Bem-vindo a {{platform}}",
     "msg.duplicateSession": "Sessão duplicada, saindo...",

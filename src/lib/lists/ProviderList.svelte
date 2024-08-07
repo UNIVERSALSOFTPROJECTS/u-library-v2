@@ -3,6 +3,7 @@
     export let onOpenProviders;
     export let topProviders;
     export let t;
+    // topProviders no puede ser un array, ahora debe ser un objeto con su name code y category para saber a que categoria de juego enviarte.
 </script>
 <div class="providerlist">
     <div class="providerlist__provider">

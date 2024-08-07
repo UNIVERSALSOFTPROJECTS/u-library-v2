@@ -13,10 +13,13 @@
 	const platform = configLogin.platform;
 	const assetsUrl = configLogin.assetsUrl;
 	let  idioms = configLogin.idioms;
+	let typeView = localStorage.getItem('typeView') || "";
 	let password;
 	let username;
 	let loadLogin = false;
 	let autoLogin = localStorage.getItem('autoSaved')?true:false;
+	let isAutoservice = autoLogin && typeView == "autoservice";
+	let isAutoserviceError = false;
 	let timerLogin;
 
 	async function loginClick(){
@@ -38,11 +41,19 @@
 			console.log("error: ", error);
 			if (error.message == "Network Error" || error.response.data.message.includes("Connection refused"))
 				error = t("msg.pageMaintenance");
-			else if(error.response.data.message == "NECO_LOGIN_FAILED")
+			else if(error.response.data.message == "NECO_LOGIN_FAILED" || error.response.data.message == "LOGIN_ERROR")
 				error = t("msg.incorrectUserPass");
 			else error = t("msg.contactSupport");
 			onError(error);
 			loadLogin = false;
+			if (isAutoservice) isAutoserviceError = true;
+		}
+	}
+
+	function cancelAutologin(status) {
+		if (!status){
+			clearTimeout(timerLogin);
+			localStorage.removeItem('autoSaved');
 		}
 	}
 
@@ -51,20 +62,29 @@
 			let userSaved = JSON.parse(localStorage.getItem('autoSaved'));
 			username = userSaved[0].user;
 			password = userSaved[0].pass;
-			timerLogin = setTimeout(function() { loginClick(); }, 10000);
+			timerLogin = setTimeout(function() { loginClick(); }, 5000);
 		}
 	});
 
-	function cancelAutologin(status) {
-		if (!status){
-			clearTimeout(timerLogin);
-			localStorage.removeItem('autoSaved');
-		}
-	}
 	$:cancelAutologin(autoLogin);
 </script>
 
+{#if isAutoservice}
 <div class="modal-body">
+	{#if isAutoserviceError}
+		<div class="login__autoservice error">
+			<p>{t("login.autoserviceError")}</p>
+			<button class="btn update">{t("msg.refresh")}</button>
+		</div>
+	{:else}
+		<div class="login__autoservice">
+			<p>{t("lobby.loading")}</p>
+			<div class="loading"><p></p><p></p><p></p></div>
+		</div>
+	{/if}
+</div>
+{/if}
+<div class="modal-body {isAutoservice?'autoservice':''}">
   	<div class="login__title">{t("login.title")}</div>
     <img class="login__logo" src="{assetsUrl}/{platform}/logo.png" alt="logo-main">
     <div></div>
