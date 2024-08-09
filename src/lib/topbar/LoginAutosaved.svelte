@@ -62,7 +62,7 @@
 			let userSaved = JSON.parse(localStorage.getItem('autoSaved'));
 			username = userSaved[0].user;
 			password = userSaved[0].pass;
-			timerLogin = setTimeout(function() { loginClick(); }, 5000);
+			timerLogin = setTimeout(function() { loginClick(); }, typeView == "autoservice"?2000:10000);
 		}
 	});
 	

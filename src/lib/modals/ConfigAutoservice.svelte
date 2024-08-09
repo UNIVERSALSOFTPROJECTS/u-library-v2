@@ -34,6 +34,10 @@
         localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
         modalOpen = false;
         onOk(t("autoservice.configSaved"));
+        setTimeout(() => {
+            sessionStorage.removeItem("user");
+            location.reload();
+        }, 1000);
     }
 
     //open Modal with specials keys

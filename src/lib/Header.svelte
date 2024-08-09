@@ -1,8 +1,8 @@
 <script>
     import { t, locale, locales } from "../js/i18n";
     import Notifier from "./Notifier.svelte";
-    import Login from "./topbar/Login.svelte";
-    //import LoginAutosaved from './topbar/LoginAutosaved.svelte';
+    // import Login from "./topbar/Login.svelte";
+    import LoginAutosaved from './topbar/LoginAutosaved.svelte';
     import Modal from "../lib/Modal.svelte";
     //import Signup from './modals/SingupXg.svelte';
     import Signup from "./modals/Signup.svelte";
@@ -38,6 +38,8 @@
     import HorsesPage from "./pages/HorsesPage.svelte";
     import SlotPage from "./pages/SlotPage.svelte";
     import LostConnection from "./modals/LostConnection.svelte";
+
+    import ConfigAutoservice from "./modals/ConfigAutoservice.svelte";
 
     export let user = {};
     export let assetsUrl;
@@ -434,6 +436,27 @@
             e.preventDefault(); // Evita que se muestre el menú contextual
         });
     }
+
+    let typeView = "autoservice";
+    const configLogin = {
+    platform,
+    typeView,
+    assetsUrl: "https://assets.apiusoft.com",
+    idioms: [{ id: "es" }, { id: "br" }, { id: "fr" }],
+    changeIdiom: function (idiom) {
+      $locale = idiom;
+      localStorage.setItem("idiom", idiom);
+    },
+  };
+
+  const onOk = async (msg) => {
+        notify = {};
+        notify = await utils.showNotify("success", msg);
+    };
+    const onError = async (msg) => {
+        notify = {};
+        notify = await utils.showNotify("error", msg);
+    };
 </script>
 
 <!-- on:contextmenu="{noTouch}" on:mousedown="{noTouch}" role="button" tabindex="0" -->
@@ -527,7 +550,7 @@
     </div>
 
     <Modal bind:open={loginModalOpen} bind:modalOpened>
-        <Login
+        <!-- <Login
             onOk={onLoginOk}
             onError={onLoginError}
             {assetsUrl}
@@ -535,7 +558,14 @@
             {onOpenSignup}
             bind:platform
             t={$t}
-        />
+        /> -->
+        <LoginAutosaved
+        {configLogin}
+        onOk={onLoginOk}
+        onError={onLoginError}
+        {onOpenRecoverPassword}
+        t={$t}
+      />
     </Modal>
 
     <Modal
@@ -633,6 +663,8 @@
             {updateBalance}
         />
     {/if}
+
+    <ConfigAutoservice {onOk} {onError} {configLogin} t={$t}/>
 
     <Notifier bind:notify />
 </div>
