@@ -123,9 +123,12 @@ const ServerConnection = (() => {
           console.log(url,"desde server");
           return await axios.get(url, { headers });
         },
-        getURL: async (url) => {
-            const response = await axios.get(url);
-            return response.data;
+        // getURL: async (url) => {
+        //     const response = await axios.get(url);
+        //     return response.data;
+        // },
+        getURL: (url) => {
+            return axios.get(url, { headers });
         },
         getGameList: (category, section, page=1, currency='USD', xpage=20)=>{
             let url=conf.API+`/games?c=${category}&m=wb&page=${page}&xpage=${xpage}&curr=${currency}`;

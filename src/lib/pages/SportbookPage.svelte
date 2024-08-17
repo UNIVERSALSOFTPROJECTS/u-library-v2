@@ -107,7 +107,7 @@
     if (userState == "loggedIn"){
       url += active_view == "sportbooklive" ? "&sport_view=" : "&sport_view=sports";
       url += `&lang=${lang}&r=url`;
-      const {data} = await backend.game.getURLNovus(url);
+      const {data} = await backend.game.getURL(url);
       url = data.url
     }
     sportbookGameUrl = url;
@@ -119,7 +119,7 @@
         url = ut.getGameURLTest(GAMEAPI_URL, games.BetW3, options.gameToken);
         url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
         url += `&lang=${lang}&r=url`;
-        const { data } = await backend.game.getURLNovus(url);
+        const { data } = await backend.game.getURL(url);
         url = data.url;
     } else {
         url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3;
@@ -131,7 +131,7 @@
     let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.bbq, options.gameToken) : guestURLBBQ;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     url += `&lang=${lang}&r=url`;
-    const {data} = await backend.game.getURLNovus(url);
+    const {data} = await backend.game.getURL(url);
     url = data.url
    sportbookGameUrl = url;
   }
@@ -151,7 +151,7 @@
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.wintech, options.gameToken) : baseUrlWintech;
     url += active_view == "sportbooklive" ? "&currentgame=live" : "";
     if (userState == "loggedIn"){
-      const {data} = await backend.game.getURLNovus(url);
+      const {data} = await backend.game.getURL(url);
       url = data.url
     }
    sportbookGameUrl = url;
@@ -161,7 +161,7 @@
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.novusbet, options.gameToken) : baseUrlNovusbet;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     if (userState == "loggedIn"){
-      const {data} = await backend.game.getURLNovus(url);
+      const {data} = await backend.game.getURL(url);
       url = data.url
     }
     sportbookGameUrl = url;
