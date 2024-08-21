@@ -25,7 +25,7 @@ const utils = (() => {
       return url;
     }
   const getGameURLTest = (gameapi_url, game, usertoken) => {
-    let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
+    let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}&view=ESPORTS-HUB`;
     return url;
   }
     const isMobile= () => {//tengo una manera mas reducida de hacer esto
