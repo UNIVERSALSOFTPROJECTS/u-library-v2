@@ -40,7 +40,7 @@
   const openPinnacle = async () => { 
     let url =userState == "loggedIn"? ut.getGameURLTest(GAMEAPI_URL, games.pinnacle, options.gameToken) : guestURLpinnacle;
     if (userState == "loggedIn"){
-      url += active_view == "esports" ? "&sport_view=e-sports" : "";
+      url += active_view == "esports" ? "&view=ESPORTS-HUB" : "";
       const data = await backend.game.getURL(url);
       url = data.url
     }
