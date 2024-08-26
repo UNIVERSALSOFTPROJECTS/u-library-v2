@@ -33,7 +33,7 @@
     cargarScript();
   }
 
-  cargarScript(`${universalScript}/pinnacle/PinnacleScript.js`, function() {
+  cargarScript(`${universalScript}/pinnacle/PinnacleTestScript.js`, function() {
     console.log('El script se ha cargado exitosamente.');
     openSport();
   });
