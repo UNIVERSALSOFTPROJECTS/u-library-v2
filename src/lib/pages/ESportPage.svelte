@@ -11,7 +11,8 @@
   export let options;
   export let GAMEAPI_URL;
   //export let clientCode;
-  export let lang = 'es';
+  export let universalScript;
+  export const lang = 'es';
 
   let esportsGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -29,13 +30,27 @@
   }
 
   $: {
-    openSport();
+    cargarScript();
   }
 
-  onMount(()=>{
-    console.log("Options E-SPORTS: ", options);
-    
-  })
+  cargarScript(`${universalScript}/pinnacle/PinnacleScript.js`, function() {
+    console.log('El script se ha cargado exitosamente.');
+    openSport();
+  });
+
+  function cargarScript(url, callback) {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+
+    // Ejecuta el callback cuando el script se ha cargado
+    script.onload = function() {
+        if (callback) callback();
+    };
+
+    // Agrega el script al documento
+    document.head.appendChild(script);
+  }
 
   async function openSport() {
     if (options.gameid == pnc_id) openPinnacle();
