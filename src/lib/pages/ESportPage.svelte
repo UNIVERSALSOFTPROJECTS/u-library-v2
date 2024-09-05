@@ -11,12 +11,12 @@
   export let options;
   export let GAMEAPI_URL;
   //export let clientCode;
-  export let lang = 'es';
+  export let universalScript;
+  export const lang = 'es';
 
   let esportsGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
   let deviceiframe = mode;
-  let sport_view = active_view == "esports" ? "e-sports" : "";
   const pnc_id = "902-pinnacle";
   const guestURLpinnacle = "https://fv-wngcxtx.oreo88.com/es/esports-hub/"
   const games = {
@@ -30,7 +30,26 @@
   }
 
   $: {
+    cargarScript();
+  }
+
+  cargarScript(`${universalScript}/pinnacle/PinnacleTestScript.js`, function() {
+    console.log('El script se ha cargado exitosamente.');
     openSport();
+  });
+
+  function cargarScript(url, callback) {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+
+    // Ejecuta el callback cuando el script se ha cargado
+    script.onload = function() {
+        if (callback) callback();
+    };
+
+    // Agrega el script al documento
+    document.head.appendChild(script);
   }
 
   async function openSport() {
@@ -40,8 +59,8 @@
   const openPinnacle = async () => { 
     let url =userState == "loggedIn"? ut.getGameURLTest(GAMEAPI_URL, games.pinnacle, options.gameToken) : guestURLpinnacle;
     if (userState == "loggedIn"){
-      url += active_view == "esports" ? "&sport_view=e-sports" : "";
-      const {data} = await backend.game.getURLNovus(url);
+      url += active_view == "esports" ? "&view=ESPORTS-HUB" : "";
+      const data = await backend.game.getURL(url);
       url = data.url
     }
     esportsGameUrl = url;
