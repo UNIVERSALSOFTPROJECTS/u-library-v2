@@ -43,8 +43,10 @@
     //open Modal with specials keys
     document.addEventListener('keydown', (e) => {
         if (e.key === 'F2') f2Pressed = true;
-        if (f2Pressed && e.key === 'r' || e.key === 'R'){
+        
+        if (f2Pressed && e.key === 'r' || f2Pressed &&  e.key === 'R'){
             modalOpen = true;
+            f2Pressed = false
             viewDataConfig();
         }
         if (e.key !== 'F2' && e.key !== 'r')  f2Pressed = false;
