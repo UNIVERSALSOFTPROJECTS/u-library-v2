@@ -141,6 +141,8 @@ export default {
     "profile.myProfile": "Mi perfil",
     "profile.changePass": "Cambio de contraseña",
     "profile.recordMovement": "Historial de movimientos",
+    "profile.withdrawal": "Retirar",
+    "profile.recharge": "Recargar",
 
     //---------------Bonus-----------------------------
     "bonus.total": "Saldo bono",
@@ -408,6 +410,8 @@ export default {
     "profile.myProfile": "Mon profil",
     "profile.changePass": "Changement de mot de passe",
     "profile.recordMovement": "Histoire du mouvement",
+    "profile.withdrawal": "Retirer",
+    "profile.recharge": "Recharger",
     //---------------Bonus-----------------------------
     "bonus.total": "Solde bonus",
     "bonus.horse": "Bonus équitation",
@@ -632,6 +636,8 @@ export default {
      "profile.myProfile": "Mi perfil",
      "profile.changePass": "Cambio de contraseña",
      "profile.recordMovement": "Historial de movimientos",
+     "profile.withdrawal": "Retirada",
+     "profile.recharge": "Recarregue",
  
      //---------------Bonus-----------------------------
      "bonus.total": "Saldo bono",

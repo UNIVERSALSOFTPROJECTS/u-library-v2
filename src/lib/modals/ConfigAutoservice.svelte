@@ -46,7 +46,7 @@
         
         if (f2Pressed && e.key === 'r' || f2Pressed &&  e.key === 'R'){
             modalOpen = true;
-            f2Pressed = false
+            f2Pressed = false;
             viewDataConfig();
         }
         if (e.key !== 'F2' && e.key !== 'r')  f2Pressed = false;

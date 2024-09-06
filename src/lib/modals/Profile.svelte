@@ -94,8 +94,8 @@
             <DropdownBonus bind:bonusView bind:activedBonus bind:currency={user.currency} {t}/>
 
             <div class="profile__transaction">
-                <button class="btn withdrawal {isLockedWithdrawal?'locked':''}"  on:click={onOpenWithdrawal} disabled={isLockedWithdrawal}>Retirar</button>
-                <button class="btn recharge" on:click={onOpenDeposit}>Recargar</button>
+                <button class="btn withdrawal {isLockedWithdrawal?'locked':''}"  on:click={onOpenWithdrawal} disabled={isLockedWithdrawal}>{t("profile.withdrawal")}</button>
+                <button class="btn recharge" on:click={onOpenDeposit}>{t("profile.recharge")}</button>
             </div>
             {#if isLockedWithdrawal}
             <div class="profile__warning">
