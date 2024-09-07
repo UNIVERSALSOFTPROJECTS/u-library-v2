@@ -16,12 +16,14 @@ const SocketConnector = (() => {
         });
 
         stompClient.onConnect = (frame) => {
-            console.log("iframe===========>",frame);
+            console.log("onConnect Socket",frame);
             stompClient.subscribe('/user/queue/messages', (data) => {
                 console.log("message", data);
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
+                } else if (/UPDATE_BALANCE/.test(data.body)) {
+                    EventManager.publish("update_balance", {})
                 }
 
             });
@@ -47,7 +49,7 @@ const SocketConnector = (() => {
     }
 
     function connect(user) {
-        console.log(`Opening WS connection with   ${conf.BALANCE_WS}/change-balance`)
+        console.log(`Opening WS connection with ${conf.BALANCE_WS}/change-balance`)
         stompClient = new Client({
             brokerURL: conf.BALANCE_WS + '/change-balance',
             connectHeaders: {
