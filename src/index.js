@@ -36,7 +36,7 @@ export {default as TopBar } from './lib/topbar/TopBar.svelte';
 export { default as SportbookPage } from './lib/pages/SportbookPage.svelte';
 export { default as ESportPage } from './lib/pages/ESportPage.svelte';
 export { default as BalanceSocketListener } from './lib/BalanceSocketListener.svelte';
-export { default as UpdateBalanceSocketListener } from './lib/UpdateBalanceSocketListener.svelte';
+export { default as UpdateBalanceListener } from './lib/UpdateBalanceListener.svelte';
 export {default as RecoverPassword } from './lib/topbar/RecoverPassword.svelte';
 export {default as BillCollector} from './lib/BillCollector.svelte';
 export { default as AlertTokenExpired } from './lib/topbar/AlertRefreshToken.svelte';
