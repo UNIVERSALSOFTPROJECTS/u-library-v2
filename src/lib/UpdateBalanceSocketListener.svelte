@@ -17,20 +17,9 @@
         EventManager.subscribe("update_balance", (data)=>{
             let msg = "SALDO ACTUALIZADO";
             notify.success(msg);
-            getBalance(user.agregatorToken);
+            onChangeBalance();
         });
     })
-
-    const getBalance=async(token)=>{
-        try {
-            if(!token) alert("TOKEN NOT_FOUND");
-            const {data} =  await server.users.getBalance(token);
-            user.balance = data.balance;
-            if (onChangeBalance) onChangeBalance();
-        } catch (error) {
-            notify.error("No se pudo consultar Balance");
-        }
-    }
 </script>
 
 <Notifier />
