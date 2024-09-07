@@ -20,7 +20,7 @@
     ]
 
     const getAllGames = async () => {
-        const resp = await ServerConnection.game.getGameList("slot");
+        const resp = await ServerConnection.game.getGameList("slot");//OJO que cuando este logueado debe traer el user.currency!!!
         dataAllGames = resp.data;
     }
     
