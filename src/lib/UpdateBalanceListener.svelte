@@ -10,7 +10,6 @@
     export let onChangeBalance;
 
     
-    SocketConnector.connect(user);
 
     onMount( ()=>{
         notify.setEM(EventManager);
@@ -18,7 +17,7 @@
             let msg = "SALDO ACTUALIZADO";
             notify.success(msg);
 
-            //onChangeBalance();
+            onChangeBalance();
         });
     })
 </script>
