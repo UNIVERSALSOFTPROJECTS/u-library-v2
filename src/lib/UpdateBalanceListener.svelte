@@ -17,7 +17,8 @@
         EventManager.subscribe("update_balance", (data)=>{
             let msg = "SALDO ACTUALIZADO";
             notify.success(msg);
-            onChangeBalance();
+
+            //onChangeBalance();
         });
     })
 </script>
