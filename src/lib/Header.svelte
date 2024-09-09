@@ -9,8 +9,8 @@
     import Deposit from "./payments/Deposit.svelte";
     import Profile from "./modals/Profile.svelte";
     //import Withdrawal from './withdrawal/WithdrawalW.svelte';
-    // import WithdrawalW from './withdrawal/WithdrawalW.svelte';
-    import WithdrawalBillX from "./withdrawal/WithdrawalBillX.svelte";
+    import WithdrawalW from './withdrawal/WithdrawalW.svelte';
+    // import WithdrawalBillX from "./withdrawal/WithdrawalBillX.svelte";
 
     import ProviderList from "./lists/ProviderList.svelte";
 
@@ -634,13 +634,13 @@
             title={$t("withdrawal.title")}
         >
             <!-- OJO el configWithdrawal es solo para retiro W {configWithdrawal} -->
-            <!-- <WithdrawalW {configWithdrawal}  bind:user {openChatLive} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/> -->
-            <WithdrawalBillX
+            <WithdrawalW {configWithdrawal}  bind:user {openChatLive} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
+            <!-- <WithdrawalBillX
                 bind:user
                 onOk={onWithdrawalOk}
                 onError={onWithdrawalError}
                 t={$t}
-            />
+            /> -->
         </Modal>
 
         <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
