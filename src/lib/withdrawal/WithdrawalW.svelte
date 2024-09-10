@@ -20,6 +20,7 @@
     let formVerification = configWithdrawal.formVerification;
     let linksChats = configWithdrawal.linksChats;
     let pendingWithdrawal;
+    let typeView = configWithdrawal.typeView;
     let amount;
     let loadWithdrawal = true;
     let infoUser = {};
@@ -107,6 +108,12 @@
                 <p>{t('withdrawal.availableBalance')}: {user.balance} {user.currency}</p>
                 <p>{t('withdrawal.min')} {infoUser.retiro_min || 0} {user.currency} y {t('withdrawal.max')} {infoUser.retiro_max || 0} {user.currency}</p>
                 <div class="withdrawal__info">
+                    {#if typeView == "payMobile"}
+                    <p>{t('withdrawal.phoneNumber')}</p>
+                    <p>{t('withdrawal.additionalInformation')}</p>
+                    <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={inputAccountBank}>
+                    <input type="text" class="ipt" bind:value={infoAccount.adicional}>
+                    {:else}
                     <p>{t('profile.fullname')}</p>
                     <p>{t('profile.dni')}</p>
                     <input type="text" class="ipt" bind:value={infoUser.nombre} disabled>
@@ -145,6 +152,7 @@
                     {/if}
                     {#if formVerification}
                         <a class="btn verification" href={formVerification} target="_blank">{t('deposit.identityVerification')}</a>
+                    {/if}
                     {/if}
 
                     

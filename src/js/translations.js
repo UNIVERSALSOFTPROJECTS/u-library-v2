@@ -72,6 +72,7 @@ export default {
     "withdrawal.reminderCompleteVerification": "<b>Nota:</b>Asegúrate de completar <b>tu verificación de identidad</b> para poder proceder con el <b>retiro de tu dinero.</b> Sin esta verificación, <b>no podremos procesar tu solicitud.</b> Además, ten en cuenta que si tienes un bono activo y realizas un retiro, este se perderá.",
     "withdrawal.needHelp": "¿Necesitas ayuda?",
     "withdrawal.time" : "Horario de retiro",
+    "withdrawal.phoneNumber" : "Número de teléfono",
 
     //---------------NAME CAT GAMES-----------------------------
     "categoryGame.home": "Inicio",
@@ -322,7 +323,11 @@ export default {
     "deposit.terms": "Todos los depósitos serán acreditado a su cuenta en moneda local.Al depositar dinero a su cuenta, usted acepta automáticamente la versión mas reciente de los <a href='https://assets.apiusoft.com/365fortuna/t&c.pdf' target='_blank'style='color:red;'>términos y condiciones</a>",
     "deposit.important": "IMPORTANTE",
     "deposit.acceptTerms": "Acepto que al enviar el formulario estoy de acuerdo con los términos y condiciones de la Página web",
-    "deposit.confirmRecharge" : "Confirmar Recarga"
+    "deposit.confirmRecharge" : "Confirmar Recarga",
+    "deposit.direct" : "Directa",
+    "deposit.paymentGateway" : "Pasarela de pago",
+    "deposit.semiAutomatic" : "Semi-automático",
+    "deposit.automatic" : "Automatic"
 
   },
   fr: {
@@ -398,6 +403,7 @@ export default {
     "withdrawal.reminderCompleteVerification": "<b>Remarque :</b>Assurez-vous de compléter <b>votre vérification d'identité</b> afin de procéder au <b>retrait de votre argent.</b> Sans cette vérification, <b>nous ne pourra pas traiter votre demande.</b>Veuillez également noter que si vous disposez d'un bonus actif et effectuez un retrait, celui-ci sera perdu.",
     "withdrawal.needHelp": "Avez-vous besoin d'aide ?",
     "withdrawal.time" : "Heure de ramassage",
+    "withdrawal.phoneNumber" : "Numéro de téléphone",
 
     //---------------NAME CAT GAMES-----------------------------
     "categoryGame.home": "Home",
@@ -651,7 +657,11 @@ export default {
     "deposit.terms": "Tous les dépôts seront crédités sur votre compte en devise locale. En déposant de l'argent sur votre compte, vous acceptez automatiquement la version la plus récente de la cible <a href='https://assets.apiusoft.com/365fortuna/t&c.pdf'. ='_blank'style='color:red;'>termes et conditions</a>",
     "deposit.important": "IMPORTANTE",
     "deposit.acceptTerms": "J'accepte qu'en envoyant le formulaire j'accepte les termes et conditions du Site",
-    "deposit.confirmRecharge" : "Confirmer la recharge"
+    "deposit.confirmRecharge" : "Confirmer la recharge",
+    "deposit.direct" : "Direct",
+    "deposit.paymentGateway" : "Passerelle de paiement",
+    "deposit.semiAutomatic" : "Semi-automatique",
+    "deposit.automatic" : "Automatique"
   },
   //solo para testear crashgames login autosaved
   br: {
@@ -879,6 +889,7 @@ export default {
     "withdrawal.reminderCompleteVerification": "<b>Observação:</b>Certifique-se de concluir <b>sua verificação de identidade</b> para prosseguir com a <b>retirada de seu dinheiro.</b> Sem essa verificação, <b>vamos não será capaz de processar sua solicitação.</b>Além disso, observe que se você tiver um bônus ativo e fizer um saque, ele será perdido.",
     "withdrawal.needHelp": "Você precisa de ajuda?",
     "withdrawal.time" : "Horário de retirada",
+    "withdrawal.phoneNumber" : "Número de telefone",
 
     //---------------NAME CAT GAMES-----------------------------
     "categoryGame.home": "Home",
@@ -945,6 +956,10 @@ export default {
     "deposit.terms": "Todos os depósitos serão creditados em sua conta na moeda local. Ao depositar dinheiro em sua conta, você aceita automaticamente a versão mais recente do alvo <a href='https://assets.apiusoft.com/365fortuna/t&c.pdf'. ='_blank'style='color:red;'>termos e condições</a>",
     "deposit.important": "IMPORTANTE",
     "deposit.acceptTerms": "Aceito que ao enviar o formulário concordo com os termos e condições do Site",
-    "deposit.confirmRecharge" : "Confirmar recarga"
+    "deposit.confirmRecharge" : "Confirmar recarga",
+    "deposit.direct" : "Direto",
+    "deposit.paymentGateway" : "Gateway de pagamento",
+    "deposit.semiAutomatic" : "Semiautomático",
+    "deposit.automatic" : "Automático"
   },
 };

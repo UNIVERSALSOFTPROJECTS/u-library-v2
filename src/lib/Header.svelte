@@ -130,6 +130,7 @@
         dataType: "",
         messageOptional: "",
         formVerification: "",
+        typeView : "payMobile",
         // formVerification: "https://forms.gle/5rRcbJVgE7n4F6Ro7",
         platform,
         banksNames: [
@@ -224,7 +225,7 @@
     };
     // fin de registro m
     //IDIOMAR!!!
-    $locale = "es"; //Actualmente solo "es" y "fr"
+    $locale = "fr"; //Actualmente solo "es" y "fr"
 
     const onOpenRecoverPassword = () => {
         loginModalOpen = false;

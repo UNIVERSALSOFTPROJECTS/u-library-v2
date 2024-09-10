@@ -145,8 +145,8 @@
                 {#if detailsTranference}
                     <b>{t('deposit.details')}:</b>
                     <div class="deposit__info">
-                        <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'?'Directa':'Pasarela de pago'}</p>
-                        <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'?'Semi-automático':'Automático'}</p>
+                        <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
+                        <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
                     </div>
                     <div class="deposit__gateway">
                         <div class="deposit__mounts">
@@ -157,7 +157,7 @@
                         <div class="deposit__ipt">
                             <b>{paySelected.iso}</b>
                             <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers}>
-                            <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar':'Depositar'}</button>
+                            <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t('deposit.disposeOn')}</button>
                         </div>
                     </div>
                 {:else}
