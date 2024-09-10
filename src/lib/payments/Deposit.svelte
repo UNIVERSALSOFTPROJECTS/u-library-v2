@@ -10,6 +10,7 @@
     export let onOk;
     export let amountsFav;
     export let configDeposit;
+    export let t;
 
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
     let loadDeposit = false;
@@ -108,8 +109,8 @@
             bankDeposit.amount = amountDeposit;
             let {data} = await ServerConnection.wallet.bankDeposit(user.token,bankDeposit);//siempre es STATUS 200, si hay errores del server colocar el try catch
             if (data.msg === "DEPOSITO_OK") onOk("Depósito exitoso");
-            else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError("Depósito cancelado, tiene una solicitud pendiente");
-            else onError("Ocurrio un error, contactese con soporte");
+            else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
+            else onError(t('msg.contactSupport'));
     }
     
     onMount(async() => {
@@ -122,7 +123,7 @@
 {#if isLocked}
     <div class="deposit__message">
         <div class="deposit__message--icon"></div>
-        <div class="deposit__message--text">Comuniquese con su cajero correspondiente para procesar su depósito.</div>
+        <div class="deposit__message--text">{t('deposit.cachierSupport')}.</div>
     </div>
 {:else}
     {#if loadDeposit}
@@ -142,10 +143,10 @@
                     <div class="deposit__arrow bottom"></div>
                 </button>
                 {#if detailsTranference}
-                    <b>Detalles:</b>
+                    <b>{t('deposit.details')}:</b>
                     <div class="deposit__info">
-                        <p>Tipo de transferencia:</p><p>{typeTranference == 'bank'?'Directa':'Pasarela de pago'}</p>
-                        <p>Tiempo de procesamiento:</p><p>{typeTranference == 'bank'?'Semi-automático':'Automático'}</p>
+                        <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'?'Directa':'Pasarela de pago'}</p>
+                        <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'?'Semi-automático':'Automático'}</p>
                     </div>
                     <div class="deposit__gateway">
                         <div class="deposit__mounts">
@@ -160,39 +161,39 @@
                         </div>
                     </div>
                 {:else}
-                    <p>Paso 1: Realiza un depósito a la siguiente cuenta.</p>
+                    <p>{t('deposit.step1')}.</p>
                     <div class="deposit__details">
-                        <b>Titular:</b>
+                        <b>{t('deposit.holder')}:</b>
                         <p>{paySelected.nombre}</p>
-                        <b>Nro de Cuenta:</b>
+                        <b>{t('deposit.numBankAccount')}:</b>
                         <p>{paySelected.cta['ncuenta']}</p>
                         <b>CCI:</b>
                         <p>{paySelected.cta['cci']}</p>
                     </div>
-                    <p>Paso 2: Llena la información del depósito realizado.</p>
+                    <p>{t('deposit.step2')}.</p>
                     <div class="deposit__info">
-                        <p>Banco de destino</p>
-                        <p>Banco de origen</p>
+                        <p>{t('deposit.destinationBank')}</p>
+                        <p>{t('deposit.originBank')}</p>
                         <input type="text" class="ipt" value={paySelected.banco} disabled>
                         <select class="slc" bind:value={bankDeposit.targetBankId}>
-                            <option value="0" selected disabled>Seleccionar banco</option>
+                            <option value="0" selected disabled>{t('deposit.chooseBank')}</option>
                             {#each bankPayments as bank}
                                 <option value={bank.id}>{bank.banco}</option>
                             {/each}  
                         </select>
-                        <p>Nro. de cuenta</p>
-                        <p>Nro. de referencia</p>
+                        <p>{t('deposit.numAccount')}</p>
+                        <p>{t('deposit.numReference')}</p>
                         <input type="number" class="ipt" bind:value={bankDeposit.aditional} on:input={inputJustNumbers}>
                         <input type="number" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
-                        <p>Monto</p>
-                        <p>Fecha de transferencia</p>
+                        <p>{t('withdrawal.amount')}</p>
+                        <p>{t('deposit.transferDate')}</p>
                         <input type="text" class="ipt" bind:value={amountDeposit} disabled>
                         <input type="date" class="ipt" bind:value={bankDeposit.date}>
                     </div>
                     <button class="btn deposit" on:click={validateDepositBank}>Depositar</button>
                 {/if}
             {:else}
-                <b>Elige tu método de pago favorito:</b>
+                <b>{t('deposit.choosePayMethod')}:</b>
                 <div class="deposit__types">
                     {#each payMethods as paymethod}
                         <button class="btn deposit__type" on:click={() => openPayMethod(paymethod)}>

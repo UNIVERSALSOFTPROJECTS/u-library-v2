@@ -625,6 +625,7 @@
                 bind:amountsFav
                 onOk={onDepositOk}
                 onError={onDepositError}
+                t={$t}
             />
         </Modal>
 
