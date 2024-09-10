@@ -127,9 +127,13 @@
 
                     <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={inputAccountBank}>
                     <p>{t('withdrawal.additionalInformation')}:</p>
+                    {#if formVerification}
                     <p class="withdrawal__text--resalt">{t('withdrawal.mandatoryVerification')}</p>
+                    {:else}
+                    <p></p>
+                    {/if}
 
-                    {#if dataType != "static"}
+                    {#if dataType != "static"}      
                         <input type="text" class="ipt" bind:value={infoAccount.adicional}>
                     {:else}
                         <select class="slc" bind:value={infoAccount.adicional}>
@@ -149,8 +153,11 @@
                     <p><b>{t('withdrawal.time')}:</b> {infoUser.horarios}</p>
                 {/if}
 
+                {#if formVerification}
                 <a href="https://assets.apiusoft.com/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
-                <div class="withdrawal__note">{t('withdrawal.reminderCompleteVerification')}</div>
+                <div class="withdrawal__note">{@html t('withdrawal.reminderCompleteVerification')}</div>
+                {/if}
+
                 <button class="btn withdrawal" on:click={validateWithdrawal}>{t('withdrawal.request')}</button>
                 {#if linksChats.length != 0}
                 <div class="withdrawal__help">

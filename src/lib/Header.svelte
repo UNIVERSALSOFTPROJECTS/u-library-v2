@@ -129,7 +129,8 @@
         id_ca: ["6970"], //caja dentro de un distribuidor principal
         dataType: "",
         messageOptional: "",
-        formVerification: "https://forms.gle/5rRcbJVgE7n4F6Ro7",
+        formVerification: "",
+        // formVerification: "https://forms.gle/5rRcbJVgE7n4F6Ro7",
         platform,
         banksNames: [
             { id: "Banco Estado", name: "Banco Estado" },
