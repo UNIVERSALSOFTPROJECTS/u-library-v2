@@ -5,7 +5,7 @@ export {default as LoginAutosaved} from "./lib/topbar/LoginAutosaved.svelte";
 export {default as Deposit} from "./lib/payments/Deposit.svelte";
 export {default as ServerConnection} from "./js/server";
 export {default as SocketConnector} from "./js/SocketConnector";
-
+export {default as EventManager } from "./js/EventManager";
 export { default as Utils } from "./js/util";
 export { default as UserHelper } from "./js/UserHelper";
 export {default as translate} from "./js/translations";
@@ -45,7 +45,7 @@ export { default as DigtainWidget } from './lib/widgets/DigtainWidget.svelte';
 export { default as DigtainSportBook } from './lib/sportbooks/DigtainSportBook.svelte';
 export {default as DropdownSearch} from './lib/dropdown/DropdownSearch.svelte';
 export {default as LostConnection } from './lib/modals/LostConnection.svelte';
-export {default as ConfigAutoservice } from './lib/modals/ConfigAutoservice.svelte';
+export { default as ConfigAutoservice } from './lib/modals/ConfigAutoservice.svelte';
 
 
 
