@@ -20,7 +20,7 @@
     let formVerification = configWithdrawal.formVerification;
     let linksChats = configWithdrawal.linksChats;
     let pendingWithdrawal;
-    let typeView = configWithdrawal.typeView;
+    let typeView = configWithdrawal.typeView || "";
     let amount;
     let loadWithdrawal = true;
     let infoUser = {};
@@ -60,10 +60,17 @@
         if(amount < infoUser.retiro_min) return onError(t("withdrawal.min")+infoUser.retiro_min+" "+user.currency);
         if(amount > infoUser.retiro_max) return onError(t("withdrawal.max")+infoUser.retiro_max+" "+user.currency);
         if(amount > user.balance) return onError(t("withdrawal.lowBalance"));
-        let info = infoAccount.adicional;
+        let info = infoAccount.adicional || "";
         let account = infoAccount.numero_cta;
         let bank = infoAccount.banco;
-        if(!infoUser.documento || !info || !account || !bank) return onError(t("msg.allObligatory"));
+        
+        if(typeView === "payMobile"){
+            if(!infoUser.document){infoUser.document === ""}
+            if(!infoUser.bank){infoUser.bank === ""}
+            if(!account) return onError(t("msg.allObligatory"));
+        }else{
+            if(!infoUser.documento || !info || !account || !bank) return onError(t("msg.allObligatory"));
+        }
         try {
             await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,account,info, infoUser.documento);
             await getUpdateBalance(user);
@@ -79,6 +86,8 @@
         detectLockedDeposit();
         if (!isLocked) checkWithdrawal(); 
     });
+    console.log("tipeView: ", );
+    
 </script>
 <div class="modal-body {isLocked?'locked':''}">
     {#if isLocked}
