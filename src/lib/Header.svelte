@@ -65,6 +65,7 @@
     let modalOpened;
     let subModalOpened;
 
+    let chatLiveUrl = "https://tawk.to/chat/65845e7d70c9f2407f824709/1hi6h274h";
     let isToggleOn = false;
     //Deposit Modal
     let notify = {};
@@ -200,6 +201,7 @@
         doctype: ["RUT", "DNI", "Pasaporte"],
         timezone: "America/Santiago", //for movementes
         activePromotions: false,
+        chatLiveUrl,
     };
     //DEPOSIT
     const configDeposit = {
@@ -217,7 +219,7 @@
 
     let screenGamesOpen = false;
 
-    let chatLiveUrl = "https://tawk.to/chat/65845e7d70c9f2407f824709/1hi6h274h";
+    
     let chatLiveModalOpen = false;
     const openChatLive = () => {
         chatLiveModalOpen = true;
@@ -225,7 +227,7 @@
     };
     // fin de registro m
     //IDIOMAR!!!
-    $locale = "fr"; //Actualmente solo "es" y "fr"
+    $locale = "es"; //Actualmente solo "es" y "fr"
 
     const onOpenRecoverPassword = () => {
         loginModalOpen = false;
@@ -651,6 +653,7 @@
                 {configProfile}
                 {onOpenWithdrawal}
                 {onLogout}
+                {openChatLive}
                 {onOpenDeposit}
                 onError={onProfileError}
                 onOk={onProfileOk}

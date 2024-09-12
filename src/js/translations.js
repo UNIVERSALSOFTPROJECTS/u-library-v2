@@ -155,7 +155,7 @@ export default {
     "profile.recordMovement": "Historial de movimientos",
     "profile.withdrawal": "Retirar",
     "profile.recharge": "Recargar",
-
+    "profile.support": "Soporte",
     // ------
     "profile.fullname" : "Nombre completo",
     "profile.dni" : "Documento de identidad",
@@ -486,6 +486,8 @@ export default {
     "profile.recordMovement": "Histoire du mouvement",
     "profile.withdrawal": "Retirer",
     "profile.recharge": "Recharger",
+    "profile.support": "Soutenir",
+    
 
     // ------
     "profile.fullname" : "Nom et prénom",
@@ -763,7 +765,7 @@ export default {
     "profile.recordMovement": "Historial de movimientos",
     "profile.withdrawal": "Retirada",
     "profile.recharge": "Recarregue",
-
+    "profile.support": "Suporte",
     // ------
     "profile.fullname" : "Nome completo",
     "profile.dni" : "Documento de identificação",
