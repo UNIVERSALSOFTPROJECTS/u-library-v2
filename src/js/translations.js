@@ -130,7 +130,7 @@ export default {
 
 
     //========== VLT NOTIFICATION MESSAGES ==========
-    "msg.lowBalance" : "NO CUENTA CON SALDO SUFICIENTE",
+    "msg.lowBalance" : "SALDO INSUFICIENTE",
     "msg.successfulProcess" : "¡EL PROCESO FUE REALIZADO CON EXITO!",
     "msg.fewPinDigits" : "EL CÓDIGO PIN DEBE SER DE 10 DIGITOS",
     "msg.wrongPin" : "TU CÓDIGO DE PIN ES INVÁLIDO",
