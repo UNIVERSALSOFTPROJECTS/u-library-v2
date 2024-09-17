@@ -11,7 +11,7 @@
   export let loginModalOpen;
   export let GAMEAPI_URL;
   export let GAME_JAVA_API_URL;
-  //export let clientCode;
+  export let CLIENT_CODE;
   export let lang = 'es';
 
   let sportbookGameUrl = '';
@@ -26,8 +26,11 @@
   const bbq_id = "sport-betbuq";
   const pnc_id = "902-pinnacle";
   const bw3_id = "betsw3_2024";
-  const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
-  const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
+  //const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
+  //const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
+  
+  const guestURLbetw3 = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration";
+  const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=86224&name=bets365#/?target=bets365-86224-integration";
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home"
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}`;
@@ -67,7 +70,7 @@
       id: 124761
     },
     'BetW3':{
-      gameid: pnc_id,
+      gameid: bw3_id,
       provider: "betsw3",
       brand: "BETSW3",
       mode,
@@ -116,13 +119,13 @@
   const openBetsW3 = async () => { 
     let url;
     if (userState == "loggedIn") {
-        url = ut.getGameURLTest(GAMEAPI_URL, games.BetW3, options.gameToken);
-        url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
-        url += `&lang=${lang}&r=url`;
-        const { data } = await backend.game.getURL(url);
-        url = data.url;
+      url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken);
+      url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
+      url += `&lang=${lang}&r=url`;
+      const { data } = await backend.game.getURL(url);
+      url = data.url;
     } else {
-        url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3;
+      url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3;
     }
     sportbookGameUrl = url;
 }
