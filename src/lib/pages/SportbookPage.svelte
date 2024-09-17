@@ -123,10 +123,14 @@
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
       const { data } = await backend.game.getURL(url);
+      console.log("Data", data);
+      
       url = data.url;
     } else {
       url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3;
     }
+    console.log("Sportbook", url);
+    
     sportbookGameUrl = url;
 }
 
