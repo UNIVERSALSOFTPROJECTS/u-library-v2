@@ -14,6 +14,7 @@
   export let user;
   export let onOk;
   export let onError;
+  export let t;
   let bankDeposit = {};
 
   let bankAccounts = [];
@@ -82,21 +83,21 @@
   <div class="deposit-body">
     <div class="deposit__header">
       <div>
-        <button class="deposit__btn-direct">Transferencias Directas</button>
+        <button class="deposit__btn-direct">($t("deposit.direct_transfers"))</button>
         <button disabled class="deposit__btn-direct {active_type_method=='TB'?'u-type-method':''}" on:click={()=>{  active_type_method="TB"}}>Pasarelas</button>
       </div>
       <button class="btn close" on:click={closeModal} ></button>
     </div>
     <div class="deposit__iframe">
       <div class="deposit__iframe__body">
-        <p> Envianos los datos del deposito bancario que realizaste para confirmarlo e ingresar el dinero del deposito a tu cuenta.</p>
+        <p>{t('deposit.confirmDeposit')}.</p>
         <table >
           <thead>
             <tr>
-              <th>BANCO</th>
-              <th>CUENTA</th>
-              <th>MONEDA</th>
-              <th>MIN</th>
+              <th>{t('deposit.bank')}</th>
+              <th>{t('deposit.account')}</th>
+              <th>{t('deposit.coin')}</th>
+              <th>MIN</th>  
               <th>MAX</th>
             </tr>
             </thead>
@@ -122,10 +123,10 @@
             </tbody>
           </table>
         <div class="deposit_data">
-          <span class="gb-title-data-deposit"><b>REGISTRO DE DATOS</b></span>
+          <span class="gb-title-data-deposit"><b>{t('deposit.dataRegister')}</b></span>
           <div class="deposit_data__info">
             <div >
-              <span>Fecha Transferencia</span>
+              <span>{t('deposit.transferDate')}</span>
               <input
                 class="ipt info"
                 type="date"
@@ -133,7 +134,7 @@
               />
             </div>
             <div >
-              <span>Cod.Operacion</span>
+              <span>{t('deposit.operationCode')}</span>
               <input
                 class="ipt info"
                 aria-label="refNumber"
@@ -143,7 +144,7 @@
               />
             </div>
             <div >
-              <span>Monto</span>
+              <span>{t('withdrawal.amount')}</span>
               <input
                 class="ipt info"
                 type="number"
@@ -155,7 +156,7 @@
       </div>
     </div>
     <div class="deposit__btn">
-      <button class="deposit__btn_pay" on:click={deposit}>DEPOSITAR</button>
+      <button class="deposit__btn_pay" on:click={deposit}>{t('deposit.disposeOn')}</button>
     </div>
   </div>
 

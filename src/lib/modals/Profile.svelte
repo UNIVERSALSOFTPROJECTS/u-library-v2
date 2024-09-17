@@ -17,6 +17,7 @@
     export let onOpenDeposit;
     export let onOpenWithdrawal;
     export let onLogout;
+    export let openChatLive;
     export let activePromotions;
 
     let accountUser = {};
@@ -26,6 +27,7 @@
     let timezone = configProfile.timezone;
     let id_banca  = configProfile.id_banca;
     let id_ca  = configProfile.id_ca;
+    let chatLiveUrl = configProfile.chatLiveUrl || "";
     let isLockedWithdrawal = false;//falta ocualtar o mostrar le anuncion dependiendo si tien idbacan o idca
 
     const openSection = (section) => { profileView = section; }
@@ -110,6 +112,9 @@
         <button class="btn profile"><i class="icon--bonus"></i>Bonos y promociones</button>
         {/if}
         <button class="btn logout icon--logout" on:click={onLogout}>{t("header.logout")}</button>
+        {#if chatLiveUrl}
+        <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
+        {/if}
     </div>
     {#if profileView !== ""} 
         <div class="profile__view">

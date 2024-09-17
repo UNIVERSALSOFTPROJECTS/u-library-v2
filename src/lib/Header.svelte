@@ -9,8 +9,8 @@
     import Deposit from "./payments/Deposit.svelte";
     import Profile from "./modals/Profile.svelte";
     //import Withdrawal from './withdrawal/WithdrawalW.svelte';
-    // import WithdrawalW from './withdrawal/WithdrawalW.svelte';
-    import WithdrawalBillX from "./withdrawal/WithdrawalBillX.svelte";
+    import WithdrawalW from './withdrawal/WithdrawalW.svelte';
+    // import WithdrawalBillX from "./withdrawal/WithdrawalBillX.svelte";
 
     import ProviderList from "./lists/ProviderList.svelte";
 
@@ -65,6 +65,7 @@
     let modalOpened;
     let subModalOpened;
 
+    let chatLiveUrl = "https://tawk.to/chat/65845e7d70c9f2407f824709/1hi6h274h";
     let isToggleOn = false;
     //Deposit Modal
     let notify = {};
@@ -129,7 +130,9 @@
         id_ca: ["6970"], //caja dentro de un distribuidor principal
         dataType: "",
         messageOptional: "",
-        formVerification: "https://forms.gle/5rRcbJVgE7n4F6Ro7",
+        formVerification: "",
+        typeView : "payMobile",
+        // formVerification: "https://forms.gle/5rRcbJVgE7n4F6Ro7",
         platform,
         banksNames: [
             { id: "Banco Estado", name: "Banco Estado" },
@@ -198,6 +201,7 @@
         doctype: ["RUT", "DNI", "Pasaporte"],
         timezone: "America/Santiago", //for movementes
         activePromotions: false,
+        chatLiveUrl,
     };
     //DEPOSIT
     const configDeposit = {
@@ -215,7 +219,7 @@
 
     let screenGamesOpen = false;
 
-    let chatLiveUrl = "https://tawk.to/chat/65845e7d70c9f2407f824709/1hi6h274h";
+    
     let chatLiveModalOpen = false;
     const openChatLive = () => {
         chatLiveModalOpen = true;
@@ -625,6 +629,7 @@
                 bind:amountsFav
                 onOk={onDepositOk}
                 onError={onDepositError}
+                t={$t}
             />
         </Modal>
 
@@ -634,13 +639,13 @@
             title={$t("withdrawal.title")}
         >
             <!-- OJO el configWithdrawal es solo para retiro W {configWithdrawal} -->
-            <!-- <WithdrawalW {configWithdrawal}  bind:user {openChatLive} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/> -->
-            <WithdrawalBillX
+            <WithdrawalW {configWithdrawal}  bind:user {openChatLive} onOk={onWithdrawalOk} onError={onWithdrawalError} t={$t}/>
+            <!-- <WithdrawalBillX
                 bind:user
                 onOk={onWithdrawalOk}
                 onError={onWithdrawalError}
                 t={$t}
-            />
+            /> -->
         </Modal>
 
         <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
@@ -648,6 +653,7 @@
                 {configProfile}
                 {onOpenWithdrawal}
                 {onLogout}
+                {openChatLive}
                 {onOpenDeposit}
                 onError={onProfileError}
                 onOk={onProfileOk}
