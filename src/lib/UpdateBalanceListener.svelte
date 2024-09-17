@@ -14,8 +14,8 @@
     onMount( ()=>{
         notify.setEM(EventManager);
         EventManager.subscribe("update_balance", (data)=>{
-            let msg = "SALDO ACTUALIZADO";
-            notify.success(msg);
+            // let msg = "SALDO ACTUALIZADO";
+            // notify.success(msg);
 
             onChangeBalance();
         });
