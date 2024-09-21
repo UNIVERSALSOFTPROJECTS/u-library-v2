@@ -18,7 +18,7 @@
 	let username;
 	let loadLogin = false;
 	let autoLogin = localStorage.getItem('autoSaved')?true:false;
-	let isAutoservice = autoLogin && typeView == "autoservice";
+	let isAutoservice = true;
 	let isAutoserviceError = false;
 	let timerLogin;
 
@@ -79,7 +79,12 @@
 	{:else}
 		<div class="login__autoservice">
 			<p>{t("lobby.loading")}</p>
-			<div class="loading"><p></p><p></p><p></p></div>
+			<!-- esto de momento es solo para mahcines -->
+			<div class="loading">
+				<div>
+				  <b><b><b><b><b><b><b><b><b><b><b></b></b></b></b></b></b></b></b></b></b></b>
+				</div>
+			</div>
 		</div>
 	{/if}
 </div>
