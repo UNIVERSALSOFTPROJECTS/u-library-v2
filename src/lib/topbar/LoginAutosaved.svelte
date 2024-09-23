@@ -18,7 +18,7 @@
 	let username;
 	let loadLogin = false;
 	let autoLogin = localStorage.getItem('autoSaved')?true:false;
-	let isAutoservice = true;
+	let isAutoservice = autoLogin && typeView == "autoservice";
 	let isAutoserviceError = false;
 	let timerLogin;
 

@@ -168,7 +168,7 @@
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.novusbet, options.gameToken) : baseUrlNovusbet;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     if (userState == "loggedIn"){
-      const {data} = await backend.game.getURL(url);
+      const data = await backend.game.getURL(url);
       url = data.url
     }
     sportbookGameUrl = url;
