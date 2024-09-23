@@ -21,12 +21,10 @@ const utils = (() => {
     }
     const getGameURL=(gameapi_url,game, usertoken)=>{
       let url = gameapi_url +`/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}&game_multiple=true`;
-      if (game.provider === 'betsw3') url += `&client_code=${game.client_code}`;
       return url;
     }
   const getGameURLTest = (gameapi_url, game, usertoken) => {
     let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
-    if (game.provider === 'betsw3') url += `&client_code=${game.client_code}`;
     return url;
   }
     const isMobile= () => {//tengo una manera mas reducida de hacer esto
