@@ -1,6 +1,9 @@
+import ServerConnection from "./server";
+
+
+
 const utils = (() => {
 
-  
   const showNotify = async(type, message) => {
     await sleep(0.1);
     let notify = { open: true, type, message };
@@ -22,6 +25,7 @@ const utils = (() => {
     }
     const getGameURL=(gameapi_url,game, usertoken)=>{
       let url = gameapi_url +`/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}&game_multiple=true`;
+      if (game.provider === 'betsw3') url += `client_code=${game.client_code}`;
       return url;
     }
   const getGameURLTest = (gameapi_url, game, usertoken) => {

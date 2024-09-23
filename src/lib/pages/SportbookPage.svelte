@@ -3,6 +3,7 @@
   import { onDestroy, onMount } from "svelte";
   import ut from '../../js/util';
   import backend from '../../js/server'
+  import { Client } from '@stomp/stompjs';
 
   export let userState;
   export let active_view
@@ -11,8 +12,8 @@
   export let loginModalOpen;
   export let GAMEAPI_URL;
   export let GAME_JAVA_API_URL;
-  export let CLIENT_CODE;
   export let lang = 'es';
+  export let CLIENT_CODE;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -74,7 +75,8 @@
       provider: "betsw3",
       brand: "BETSW3",
       mode,
-      id: 125072
+      id: 125072,
+      client_code: CLIENT_CODE
     }
   }
   
