@@ -179,7 +179,21 @@
 
     @else if($screen =="tablet") {}
 
-    @else if($screen =="pc") {}
+    @else if($screen =="pc") {
+        @media (min-width: $size-web) {
+            &-dialog {
+                margin: 0;
+                grid-template-columns: auto;
+                max-width: 100%;
+            }
+
+            &-content {
+                border-radius: 0;
+                height: 100vh;
+                max-width: 100%;
+            }
+        }
+    }
 
     @else if($screen =="all") {}
 
@@ -311,6 +325,7 @@
         }
 
         &-content {
+            min-height: 300px;
             border: 1px solid $color-primary;
             color: $g-text-color;
         }
@@ -376,7 +391,8 @@
         }
         &__autoservice{
             display: grid;
-            gap: 1rem;
+            grid-template-rows: 15rem 1fr;
+            // gap: 1rem;
             & p{
                 text-align: center;
                 font-size: $g-font-size * 2;

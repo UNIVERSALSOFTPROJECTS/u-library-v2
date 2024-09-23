@@ -78,13 +78,13 @@
 		</div>
 	{:else}
 		<div class="login__autoservice">
-			<p>{t("lobby.loading")}</p>
 			<!-- esto de momento es solo para mahcines -->
 			<div class="loading">
 				<div>
 				  <b><b><b><b><b><b><b><b><b><b><b></b></b></b></b></b></b></b></b></b></b></b>
 				</div>
 			</div>
+			<p>{t("lobby.loading")}</p>
 		</div>
 	{/if}
 </div>

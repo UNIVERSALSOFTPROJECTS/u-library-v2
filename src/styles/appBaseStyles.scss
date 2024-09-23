@@ -165,7 +165,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             //@include login__model_1(13rem);
             // @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
             .loading {
-                position: absolute;
+                // position: absolute;
                 top: 0;
                 left: 0;
                 display: flex;
@@ -175,7 +175,7 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
                 height: 100%;
                 margin: 0;
                 padding: 0;
-                background: linear-gradient(90deg, #000000 0%, #00253A 100%);
+                // background: linear-gradient(90deg, #000000 0%, #00253A 100%);
                 z-index: 1;
                 & div{
                     width: 12%;
