@@ -163,7 +163,51 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             // esto se tiene que convertir en un mixin , ya que las medidas de la imagen logo pueden variar mucho
             @include login__model_1(10rem);
             //@include login__model_1(13rem);
-            @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
+            // @include animateLoad_3points(#fff,0.5rem,0.5s,0.2rem);
+            .loading {
+                // position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                // background: linear-gradient(90deg, #000000 0%, #00253A 100%);
+                z-index: 1;
+                & div{
+                    width: 12%;
+                    height: 12%;
+                    position: fixed;
+                    & *{
+                        position: absolute;
+                        margin: 0;
+                        width: calc(100% - 2.5px);
+                        height: calc(100% - 2.5px);
+                        border: 0.25vh solid transparent;
+                        border-bottom-color: #31709d;
+                        border-top-color: #0094ff;
+                        border-right: thick;
+                        border-inline-start-style: none;
+                        border-radius: 100%;
+                        -webkit-animation: preloadSpinAnim 15s cubic-bezier(0.17, 0.49, 0.96, 0.76) infinite;
+                        animation: preloadSpinAnim 15s cubic-bezier(0.17, 0.49, 0.96, 0.76) infinite;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+            @keyframes preloadSpinAnim {
+                from {
+                    -webkit-transform: rotate(0deg);
+                    transform: rotate(0deg);
+                }
+                to {
+                    -webkit-transform: rotate(360deg);
+                    transform: rotate(360deg);
+                }
+                }
         }
         &.recoverPassword{
             @extend %recoverPassword__model_1;

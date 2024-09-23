@@ -1,8 +1,8 @@
 <script>
     import { t, locale, locales } from "../js/i18n";
     import Notifier from "./Notifier.svelte";
-    import Login from "./topbar/Login.svelte";
-    // import LoginAutosaved from './topbar/LoginAutosaved.svelte';
+    // import Login from "./topbar/Login.svelte";
+    import LoginAutosaved from './topbar/LoginAutosaved.svelte';
     import Modal from "../lib/Modal.svelte";
     //import Signup from './modals/SingupXg.svelte';
     import Signup from "./modals/Signup.svelte";
@@ -554,7 +554,7 @@
     </div>
 
     <Modal bind:open={loginModalOpen} bind:modalOpened>
-        <Login
+        <!-- <Login
             onOk={onLoginOk}
             onError={onLoginError}
             {assetsUrl}
@@ -562,14 +562,14 @@
             {onOpenSignup}
             bind:platform
             t={$t}
-        />
-        <!-- <LoginAutosaved
+        /> -->
+        <LoginAutosaved
         {configLogin}
         onOk={onLoginOk}
         onError={onLoginError}
         {onOpenRecoverPassword}
         t={$t}
-      /> -->
+      />
     </Modal>
 
     <Modal
