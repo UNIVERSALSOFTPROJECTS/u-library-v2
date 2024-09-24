@@ -3,6 +3,7 @@
   import { onDestroy, onMount } from "svelte";
   import ut from '../../js/util';
   import backend from '../../js/server'
+  import { Client } from '@stomp/stompjs';
 
   export let userState;
   export let active_view
@@ -11,8 +12,8 @@
   export let loginModalOpen;
   export let GAMEAPI_URL;
   export let GAME_JAVA_API_URL;
-  export let CLIENT_CODE;
   export let lang = 'es';
+  export let CLIENT_CODE;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -29,7 +30,9 @@
   //const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
   //const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
   
+  const guestURLbetw3PRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/?target=parleysport-86224-integration&token=123456789";
   const guestURLbetw3 = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
+  const guestURLbetw3LivePRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/?target=parleysport-86224-integration&token=123456789";
   const guestURLbetw3Live = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home"
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
@@ -123,14 +126,15 @@
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
       const data = await backend.game.getURL(url);
-      console.log("Data", data);
-      
       url = data.url;
     } else {
-      url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3;
+      if (CLIENT_CODE == 'BPEN') {
+        url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3;
+      } else {
+        url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
+      }
     }
     console.log("Sportbook", url);
-    
     sportbookGameUrl = url;
 }
 

@@ -1,6 +1,5 @@
 const utils = (() => {
 
-  
   const showNotify = async(type, message) => {
     await sleep(0.1);
     let notify = { open: true, type, message };

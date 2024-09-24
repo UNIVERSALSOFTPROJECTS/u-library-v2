@@ -128,6 +128,6 @@
             <button class="btn profile active" on:click={() => openSection("")}>{t("profile.recordMovement")}</button>
             <Movements bind:user bind:timezone {ServerConnection} {onError} {onOk}{t}/>
         {/if}     
-        </div>  
+        </div>
     {/if}       
 </div>

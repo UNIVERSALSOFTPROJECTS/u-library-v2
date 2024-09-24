@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { currentDate, firstDayOfMonth, formatNumber } from "../../js/utils/formatUtils";
+    import { currentDate, firstDayOfMonth, formatNumber, stringToNumber } from "../../js/utils/formatUtils";
     import { watchResize } from "svelte-watch-resize";
     import moment from "moment-timezone";
 
@@ -10,6 +10,9 @@
     export let onError;
     export let onOk;
     export let t;
+    export let typeView = "";
+    
+
 
     let filter = "TT";
     let loadMovements = false;
@@ -18,13 +21,15 @@
     let dateFrom = currentDate();
     let dateTo = currentDate();
     let heightModal;
+    let totalMonto = 0;
 
     const getMovements = async(type) =>{
         let newFilter = (/RF|TTW|AP|CB|DV|BN/.test(type));
         filter = type;
         try {
             loadMovements = true;
-            let response = await ServerConnection.users.getMovements(user.token, dateFrom, dateTo, newFilter?'TT':filter);                    
+            let response = await ServerConnection.users.getMovements(user.token, dateFrom, dateTo, newFilter?'TT':filter);            
+            
             const betsAll = {
                 'TTW': o => /-WIN-|PREMIO/.test(o.tipo_operacion),
                 'AP': o => /-BET-|AP/.test(o.tipo_operacion),
@@ -33,7 +38,9 @@
                 'BN': o =>/Bono/.test(o.tipo_operacion),
                 'DV': o =>/DEVOLUCION/.test(o.tipo_operacion),
             };
-            movements =  betsAll[type] ? response.data.filter(betsAll[type]) : response.data;
+            
+            movements =  betsAll[type] ? response.data.filter(betsAll[type]) : response.data;            
+            
             movements.map((m) => { 
                 m.hora_reg_timezone = moment(m.lfecha*1000).tz(timezone).format("YYYY-MM-DD HH:mm:ss");
                 m.opc = /-REFUND-/.test(m.tipo_operacion)?'RF':
@@ -42,7 +49,17 @@
                 m.type = (/Bono/.test(m.tipo_operacion)? 'BN':
                         (/DEVOLUCION/.test(m.tipo_operacion)?'RF':m.opc));
                 m.monto = formatNumber(m.monto);
-            });
+            });            
+            
+            // Obteniondo la suma de los montos si es DEPOSITO o RETIRO
+            totalMonto = 0
+            if(filter === "RE" || filter === "DE"){
+                movements.forEach(item => {
+                    totalMonto += stringToNumber(item.monto)                    
+                });
+                totalMonto = formatNumber(totalMonto)                
+                
+            }
         } catch (error) {
            if(error.response.data.errorCode == "OLD_TOKEN") error = t("msg.duplicatedSession");
            else error = t("msg.contactSupport");
@@ -98,7 +115,15 @@
         {#if !movements.length }
             <b class="movements__empty">{t("movements.noInformation")}</b>
         {:else}
-            <div class="movements__totals">{movements.length} {t("movements.results")}</div>
+        <!-- <div class="movements__totals">MONTO TOTAL: </div> -->
+            <div class="movements__totals">
+                {#if typeView === "machine" && totalMonto }
+                <div>
+                    MONTO TOTAL: {totalMonto}
+                </div>
+                {/if}
+                {movements.length} {t("movements.results")}
+            </div>
             <div class="movements__result" use:watchResize={resizeHeightModal} style="max-height: calc({heightModal} - 18.75rem);">
                 {#each movements as mov}
                     <div  class="movements__ticket"> 
