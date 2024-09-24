@@ -117,7 +117,7 @@
         {:else}
         <!-- <div class="movements__totals">MONTO TOTAL: </div> -->
             <div class="movements__totals">
-                {#if totalMonto }
+                {#if typeView === "machine" && totalMonto }
                 <div>
                     MONTO TOTAL: {totalMonto}
                 </div>
