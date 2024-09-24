@@ -15,6 +15,8 @@
     let f2Pressed = false;
     let username = "";
     let password = "";
+    let isWithdrawal = localStorage.getItem("btnWithdrawal")?true:false;
+    let isDeposit = localStorage.getItem("btnDeposit")?true:false;
 
     const viewDataConfig = () => {
         if (localStorage.getItem('autoSaved')) {
@@ -38,6 +40,15 @@
             sessionStorage.removeItem("user");
             location.reload();
         }, 1000);
+    }
+    const toggleBtnWithdrawal = () => {
+        isWithdrawal != isWithdrawal;
+        isWithdrawal?localStorage.removeItem("btnWithdrawal"):localStorage.setItem("btnWithdrawal", "active");
+        
+    }
+    const toggleBtnDeposit = () => {
+        isDeposit != isDeposit;
+        isDeposit?localStorage.removeItem("btnDeposit"):localStorage.setItem("btnDeposit", "active");
     }
 
     //open Modal with specials keys
@@ -66,6 +77,13 @@
         <div class="configAutoservice__type">
             <button class="btn {typeView == ""?'active':''}" on:click={()=>changeTypeView("")}>Web</button>
             <button class="btn {typeView == "autoservice"?'active':''}" on:click={()=>changeTypeView("autoservice")}>Autoservice</button>
+        </div>
+        <b>Botones</b>
+        <div class="configAutoservice__buttons">
+            <label for="deposit">Depósito</label> 
+            <input type="checkbox" class="switch" id="deposit" bind:checked={isDeposit} on:click={toggleBtnDeposit}>
+            <label for="withdrawal">Retiro</label> 
+            <input type="checkbox" class="switch" id="withdrawal" bind:checked={isWithdrawal} on:click={toggleBtnWithdrawal}>
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>
