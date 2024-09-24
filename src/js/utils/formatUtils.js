@@ -6,10 +6,10 @@ export const firstDayOfMonth = () =>{
     currentDate.setDate(1); 
     return currentDate.toISOString().split('T')[0]; 
 }
-export const formatNumber = (number) => {
+export const formatNumber = (number) => { //Cambiar nombre a "formatNumberToString"
     return number.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
-export const stringToNumber = (string) => {
+export const stringToNumber = (string) => { //Cambiar nombre a "formatStringToNumber"
     return parseInt(string.replace(/[^0-9.-]/g, ""));
 }
 export const detectSubdomain = () => {
