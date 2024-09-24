@@ -57,7 +57,8 @@
                 movements.forEach(item => {
                     totalMonto += stringToNumber(item.monto)                    
                 });
-                totalMonto = formatNumber(totalMonto)
+                totalMonto = formatNumber(totalMonto)                
+                
             }
         } catch (error) {
            if(error.response.data.errorCode == "OLD_TOKEN") error = t("msg.duplicatedSession");
@@ -116,7 +117,7 @@
         {:else}
         <!-- <div class="movements__totals">MONTO TOTAL: </div> -->
             <div class="movements__totals">
-                {#if typeView === "machine" && totalMonto }
+                {#if totalMonto }
                 <div>
                     MONTO TOTAL: {totalMonto}
                 </div>
