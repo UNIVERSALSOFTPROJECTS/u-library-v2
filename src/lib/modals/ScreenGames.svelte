@@ -20,6 +20,7 @@
         const body = document.body.classList;
         isActive ? body.add("modal-open"):body.remove("modal-open");
         loadIframe = true;
+        receiveMessage();
     }
 
     const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
@@ -27,7 +28,7 @@
     function receiveMessage(event) {
         console.log("Received message", event);
         if (event.data == "luckyspins_exit_game"  || event.data == "adm_exit_game") {
-        closeModal();
+            closeModal();
         } 
     }
 
