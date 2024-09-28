@@ -24,6 +24,12 @@
 
     const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
 
+    function receiveMessage(event) {
+    if (event.data == "luckyspins_exit_game"  || event.data == "adm_exit_game") {
+      closeModal();
+    } 
+  }
+
     const closeModal = () => { 
         updateBalance();
         if (document.fullscreenElement != null) toggleFullscreen();
@@ -53,7 +59,10 @@
         }
     }
 
-    onMount(() => { window.addEventListener('resize', resizeHeightModal); });
+    onMount(() => {
+        window.addEventListener('message', receiveMessage, false);
+        window.addEventListener('resize', resizeHeightModal); 
+    });
     onDestroy(() => { window.removeEventListener('resize', resizeHeightModal); });
 
     $: statusModal(open);
