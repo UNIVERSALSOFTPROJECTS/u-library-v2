@@ -20,7 +20,6 @@
         const body = document.body.classList;
         isActive ? body.add("modal-open"):body.remove("modal-open");
         loadIframe = true;
-        receiveMessage();
     }
 
     const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
