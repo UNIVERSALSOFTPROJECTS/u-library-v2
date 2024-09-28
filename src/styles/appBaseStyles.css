@@ -2669,6 +2669,11 @@ p, b, span, a, li *, button {
 .Coliseosport .modal.configAutoservice .configAutoservice__type .btn.active {
   background-color: #f54b00;
 }
+.Coliseosport .modal.configAutoservice .configAutoservice__buttons {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1rem;
+}
 .Coliseosport .page .loading {
   position: absolute;
   width: 100%;
