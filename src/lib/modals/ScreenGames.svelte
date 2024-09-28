@@ -25,10 +25,11 @@
     const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
 
     function receiveMessage(event) {
-    if (event.data == "luckyspins_exit_game"  || event.data == "adm_exit_game") {
-      closeModal();
-    } 
-  }
+        console.log("Received message", event);
+        if (event.data == "luckyspins_exit_game"  || event.data == "adm_exit_game") {
+        closeModal();
+        } 
+    }
 
     const closeModal = () => { 
         updateBalance();
