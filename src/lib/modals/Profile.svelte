@@ -126,7 +126,7 @@
             <ChangePassword bind:user {ServerConnection} {onError} {onOk} {t}/>
         {:else if profileView == "movements"}
             <button class="btn profile active" on:click={() => openSection("")}>{t("profile.recordMovement")}</button>
-            <Movements bind:user bind:timezone {ServerConnection} {onError} {onOk}{t}/>
+            <Movements bind:user bind:timezone typeView = "" {ServerConnection} {onError} {onOk}{t}/>
         {/if}     
         </div>
     {/if}       
