@@ -8,7 +8,7 @@ const ServerConnection = (() => {
 
     const setConfig = (config) => {
         conf = config;
-        headers = { "Content-Type": "application/json;charset=UTF-8", "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, "x-tenant": conf["x-tenant"], "Access-Control-Allow-Origin": '*', "Origin": conf.DOMAIN};
+        headers = { "Content-Type": "application/json", "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, "x-tenant": conf["x-tenant"], "Access-Control-Allow-Origin": "*"};
     }
 
 
