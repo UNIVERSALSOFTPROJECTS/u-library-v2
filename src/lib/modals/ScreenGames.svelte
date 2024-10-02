@@ -62,7 +62,6 @@
 
     onMount(() => {
         console.log("onMount");
-        
         window.addEventListener('message', receiveMessage, false);
         console.log("message", receiveMessage);
         
