@@ -134,10 +134,14 @@
             const depositos = await getMovements("DE");
 
             const totalDepositos = calculateMovementSum(depositos);
+            console.log(totalDepositos);
+            
             const totalRetiros = calculateMovementSum(retiros);
+            console.log(totalRetiros);
+            
             movements = [...retiros, ...depositos];
 
-            totalMonto = totalDepositos - totalRetiros;
+            totalMonto = totalDepositos + (totalRetiros);
 
             totalMonto = formatNumber(totalMonto);
         } else {
