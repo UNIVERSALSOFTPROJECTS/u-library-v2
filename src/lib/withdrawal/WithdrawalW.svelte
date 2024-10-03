@@ -41,19 +41,19 @@
         }
     }
 
-    // async function checkWithdrawal() {
-    //     loadWithdrawal = true;
-    //     try {
-    //         const {data} = await ServerConnection.wallet.accountNumber(user.token);
-    //         infoAccount = data.cuenta == null?infoAccount:data.cuenta[0];
-    //         infoUser = data.data[0];
-    //         pendingWithdrawal = infoUser.bloqueo_fondos?true:false;
-    //         loadWithdrawal = false;
-    //     } catch (error) {
-    //         onError(t("msg.contactSupport"));//falta detectar los errores
-    //         console.log(error);
-    //     }
-    // }
+    async function checkWithdrawal() {
+        loadWithdrawal = true;
+        try {
+            const {data} = await ServerConnection.wallet.accountNumber(user.token);
+            infoAccount = data.cuenta == null?infoAccount:data.cuenta[0];
+            infoUser = data.data[0];
+            pendingWithdrawal = infoUser.bloqueo_fondos?true:false;
+            loadWithdrawal = false;
+        } catch (error) {
+            onError(t("msg.contactSupport"));//falta detectar los errores
+            console.log(error);
+        }
+    }
 
     async function validateWithdrawal() {
         if(amount == 0 || amount == undefined) return onError(t("withdrawal.amount0"));
@@ -95,7 +95,7 @@
 
     onMount(()=>{ 
         detectLockedDeposit();
-        // if (!isLocked) checkWithdrawal(); 
+        if (!isLocked) checkWithdrawal(); 
     });
     console.log("tipeView: ", );
     
