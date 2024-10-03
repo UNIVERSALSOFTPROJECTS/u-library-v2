@@ -8,9 +8,8 @@ const ServerConnection = (() => {
 
     const setConfig = (config) => {
         conf = config;
-        headers = { "Content-Type": "application/json;charset=UTF-8", "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, "x-tenant": conf["x-tenant"], "origin": conf.DOMAIN};
+        headers = { "Content-Type": "application/json", "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, "x-tenant": conf["x-tenant"], "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "*", "Accept": "application/json"};
     }
-
 
     const wallet = {
         checkPreviewWithdrawal: async (token) => {
@@ -54,7 +53,6 @@ const ServerConnection = (() => {
             return await axios.post(url, { token, amount, type }, { headers });
         },
     }
-
     const users = {
         getBalance: (userToken) => {
             let url = conf.API + `/balance/${userToken}`;
@@ -142,8 +140,6 @@ const ServerConnection = (() => {
             return axios.get(url, { headers });
         }
     }
-
-
     /* PARA Universal User API */
     const u_wallet = {
         checkPendingCashout: async (token) => {
