@@ -83,6 +83,8 @@
                 let error;
                 if (data.msg == " Revisar Credencial Invalid receiver in  transaction. Recipient has to be registered with CPS in order to receive funds. For more information call Customer Services on {0}.") {
                     error = t("msg.phoneInvalid");
+                }else if (data.message == "INTERNAL_SERVER_ERROR"){
+                    error = t("msg.phoneInvalid");
                 }else{
                     error = t("msg.contactSupport");
                 }
