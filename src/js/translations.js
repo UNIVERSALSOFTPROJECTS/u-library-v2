@@ -127,6 +127,8 @@ export default {
     "msg.copied": "Copiado",
     "msg.lostConnection": "Se perdió la conexión a internet",
     "msg.refresh": "Actualizar",
+    "msg.phoneInvalid": "Número de teléfono invalido!",
+    "msg.withdrawalRequestSend": "Solicitud de retiro enviada!",
 
 
     //========== VLT NOTIFICATION MESSAGES ==========
@@ -465,7 +467,8 @@ export default {
     "msg.copied": "Copié",
     "msg.lostConnection": "conexão perdida",
     "msg.refresh": "mise à jour",
-
+    "msg.phoneInvalid": "Numéro de téléphone invalide!",
+    "msg.withdrawalRequestSend": "Demande de retrait envoyée!",
     //---------------Provider list-----------------------------
     "provider.playNow": "Jouez maintenant",
     "provider.startNow": "Commencez maintenant!",
@@ -745,6 +748,8 @@ export default {
     "msg.copied": "Copiado",
     "msg.lostConnection": "A conexão com a Internet foi perdida",
     "msg.refresh": "Atualizar",
+    "msg.phoneInvalid": "Número de telefone inválido!",
+    "msg.withdrawalRequestSend": "Pedido de saque enviado!",
     //---------------Provider list-----------------------------
     "provider.playNow": "Juega ahora",
     "provider.startNow": "!Empieza ahora¡",

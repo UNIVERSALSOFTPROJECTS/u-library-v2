@@ -22,7 +22,7 @@
     let pendingWithdrawal;
     let typeView = configWithdrawal.typeView || "";
     let amount;
-    let loadWithdrawal = true;
+    let loadWithdrawal = false;
     let infoUser = {};
     let infoAccount = { adicional:"", numero_cta:"", banco:"" };
     let id_banca  = configWithdrawal.id_banca;
@@ -41,19 +41,19 @@
         }
     }
 
-    async function checkWithdrawal() {
-        loadWithdrawal = true;
-        try {
-            const {data} = await ServerConnection.wallet.accountNumber(user.token);
-            infoAccount = data.cuenta == null?infoAccount:data.cuenta[0];
-            infoUser = data.data[0];
-            pendingWithdrawal = infoUser.bloqueo_fondos?true:false;
-            loadWithdrawal = false;
-        } catch (error) {
-            onError(t("msg.contactSupport"));//falta detectar los errores
-            console.log(error);
-        }
-    }
+    // async function checkWithdrawal() {
+    //     loadWithdrawal = true;
+    //     try {
+    //         const {data} = await ServerConnection.wallet.accountNumber(user.token);
+    //         infoAccount = data.cuenta == null?infoAccount:data.cuenta[0];
+    //         infoUser = data.data[0];
+    //         pendingWithdrawal = infoUser.bloqueo_fondos?true:false;
+    //         loadWithdrawal = false;
+    //     } catch (error) {
+    //         onError(t("msg.contactSupport"));//falta detectar los errores
+    //         console.log(error);
+    //     }
+    // }
 
     async function validateWithdrawal() {
         if(amount == 0 || amount == undefined) return onError(t("withdrawal.amount0"));
@@ -63,28 +63,39 @@
         let info = infoAccount.adicional || "";
         let account = infoAccount.numero_cta;
         let bank = infoAccount.banco;
-        
+        let prefixPayMobile = typeView === "payMobile"?"509":"";
         if(typeView === "payMobile"){
-            if(!infoUser.document){infoUser.document === ""}
-            if(!infoUser.bank){infoUser.bank === ""}
-            if(!account) return onError(t("msg.allObligatory"));
+            if(!infoUser.document){infoUser.document = ""}
+            if(!infoUser.bank){infoUser.bank = ""}
+            if(!account || !info) return onError(t("msg.allObligatory"));
         }else{
             if(!infoUser.documento || !info || !account || !bank) return onError(t("msg.allObligatory"));
         }
         try {
-            await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,account,info, infoUser.documento);
-            await getUpdateBalance(user);
-            user = JSON.parse(sessionStorage.getItem("user"));
-            checkWithdrawal();
-        } catch (error) {
-             onError(t("msg.contactSupport"));//falta detectar los errores
-            console.log(error);
+            loadWithdrawal = true;
+            let {data} = await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,prefixPayMobile+account,info, infoUser.documento);
+            
+            if(data.resp == "ok"){
+                await getUpdateBalance(user);
+                user = JSON.parse(sessionStorage.getItem("user"));
+                onOk("msg.withdrawalRequestSend");
+            }else{
+                let error;
+                if (data.msg == " Revisar Credencial Invalid receiver in  transaction. Recipient has to be registered with CPS in order to receive funds. For more information call Customer Services on {0}.") {
+                    error = t("msg.phoneInvalid");
+                }else{
+                    error = t("msg.contactSupport");
+                }
+                onError(error);//falta detectar los errores
+            }
+        } finally {
+            loadWithdrawal = false
         }
     }
 
     onMount(()=>{ 
         detectLockedDeposit();
-        if (!isLocked) checkWithdrawal(); 
+        // if (!isLocked) checkWithdrawal(); 
     });
     console.log("tipeView: ", );
     
@@ -96,9 +107,9 @@
             <div class="withdrawal__message--text">{t('withdrawal.cashierSupport')}</div>
         </div>
     {:else}
-        {#if loadWithdrawal}
+        <!-- {#if loadWithdrawal}
             <div class="loading"><p></p><p></p><p></p></div>
-        {:else}
+        {:else} -->
             {#if pendingWithdrawal}
             <b>{t('withdrawal.pendingWithdrawal')}:</b>
             <p class="withdrawal__pending">{infoUser.bloqueo_fondos} {user.currency}</p>
@@ -120,7 +131,11 @@
                     {#if typeView == "payMobile"}
                     <p>{t('withdrawal.phoneNumber')}</p>
                     <p>{t('withdrawal.additionalInformation')}</p>
-                    <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={inputAccountBank}>
+                    <!-- SOLO HAITI , SI EXISTEN MAS REFACTORIZAR TOO -->
+                    <div class="withdrawal__phone">
+                        <input type="telf" class="ipt" value="+509" disabled>
+                        <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={inputAccountBank}>
+                    </div>
                     <input type="text" class="ipt" bind:value={infoAccount.adicional}>
                     {:else}
                     <p>{t('profile.fullname')}</p>
@@ -175,7 +190,13 @@
                 <div class="withdrawal__note">{@html t('withdrawal.reminderCompleteVerification')}</div>
                 {/if}
 
-                <button class="btn withdrawal" on:click={validateWithdrawal}>{t('withdrawal.request')}</button>
+                <button class="btn withdrawal" on:click={validateWithdrawal} disabled={loadWithdrawal}> 
+                {#if loadWithdrawal}
+                    <div class="loading"><p></p><p></p><p></p></div>
+                {:else}
+                    <p> {t('withdrawal.request')}</p>
+                {/if}
+                </button>
                 {#if linksChats.length != 0}
                 <div class="withdrawal__help">
                     <p>{t('withdrawal.needHelp')}</p>
@@ -189,5 +210,5 @@
                 {/if}
             {/if}
         {/if}
-    {/if}
+    <!-- {/if} -->
 </div>

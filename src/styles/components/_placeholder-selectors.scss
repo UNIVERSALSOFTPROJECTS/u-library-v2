@@ -1101,6 +1101,18 @@
                 font-size: $g-font-size + 2;
             }
         }
+        &__phone{
+            display: grid;
+            grid-template-columns: 3.5rem 1fr;
+            & input {
+                &[type=telf]{
+                    border-radius: $borderR-btn 0 0 $borderR-btn;
+                }
+                &[type=text]{
+                    border-radius:0  $borderR-btn $borderR-btn 0;
+                }
+            }
+        }
     }
 
     $card: addColorIcon("card", "fff");

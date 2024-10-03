@@ -167,6 +167,9 @@
                 url: "https://web.whatsapp.com/send?phone=56964783055",
             },
         ],
+        countries: [
+            { prefix: "+509", flag: "ht" },
+        ]
     };
     const configFooter = {
         platform,
@@ -257,7 +260,10 @@
         expireSessionModalOpen = true;
         subModalOpened = "expireSession";
         chatLiveModalOpen = false;
+        console.log("Xddd");
+        
     };
+    
 
     const onOpenDeposit = () => {
         profileModalOpen = false;
@@ -371,6 +377,7 @@
             activeSession = true;
             updateTimeSession();
         }
+        // onOpenExpireSession();
     });
 
     const updateTimeSession = async () => {
@@ -668,6 +675,9 @@
             bind:url_game
             {updateBalance}
         />
+        <Modal bind:open={expireSessionModalOpen} bind:subModalOpened>
+            <ExpireSession {updateTimeSession} bind:platform  {onLogout} t={$t}/>
+        </Modal>
     {/if}
 
     <ConfigAutoservice {onOk} {onError} {configLogin} t={$t}/>
