@@ -136,7 +136,7 @@
         url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
       }
       else{
-        url =active_view == "sportbookllive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
+        url =active_view == "sportbooklive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
       }
     }
     console.log("Sportbook", url);
