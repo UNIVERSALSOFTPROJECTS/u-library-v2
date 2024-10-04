@@ -124,7 +124,7 @@
   const openBetsW3 = async () => { 
     let url;
     if (userState == "loggedIn") {
-      url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken);
+      url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
       const data = await backend.game.getURL(url);
@@ -138,6 +138,8 @@
       else{
         url =active_view == "sportbooklive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
       }
+      console.log("url",url);
+      
     }
     console.log("Sportbook", url);
     sportbookGameUrl = url;
