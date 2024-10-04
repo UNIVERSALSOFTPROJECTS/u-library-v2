@@ -4,6 +4,7 @@
     import ServerConnection from "../../js/server";
     import inputUtils from '../../js/utils/inputUtils';
     import { getUpdateBalance } from '../../js/utils/serverUtils';
+    import { stringToNumber, formatNumber } from '../../js/utils/formatUtils';
 
     export let user;
     export let configWithdrawal;
@@ -56,7 +57,7 @@
     }
 
     async function validateWithdrawal() {
-        if(amount == 0 || amount == undefined || amount == "" || amount == null) return onError(t("withdrawal.amount0"));
+        if(amount == 0 || amount == undefined) return onError(t("withdrawal.amount0"));
         if(amount < infoUser.retiro_min) return onError(t("withdrawal.min")+infoUser.retiro_min+" "+user.currency);
         if(amount > infoUser.retiro_max) return onError(t("withdrawal.max")+infoUser.retiro_max+" "+user.currency);
         if(amount > user.balance) return onError(t("withdrawal.lowBalance"));
@@ -97,11 +98,11 @@
 
     let activeInput = null;
     function agregarNumero(numero) {
-        console.log(numero,activeInput);
-        
         if (activeInput === 1) {
-            amount += numero;
-        }else if (activeInput === 2) {
+            let amounString = amount?amount+"":"";
+            amounString += numero;
+            amount = Number(amounString);
+        }else if (activeInput === 2) {  
             infoAccount.numero_cta += numero;
         } else if (activeInput === 3) {
             infoAccount.adicional += numero;
@@ -109,12 +110,30 @@
      
     }
     function eliminarUltimoCaracter() {
-        // if (password.length > 0) {
-        //     password = password.slice(0, -1);
-        // }
+        if (activeInput === 1) {
+            let amounString = amount?amount+"":"";
+               if (amounString.length > 0) {
+                    amounString = amounString.slice(0, -1);
+                    amount = Number(amounString);
+                }
+        }else if (activeInput === 2) {
+            if (infoAccount.numero_cta.length > 0) {
+                infoAccount.numero_cta = infoAccount.numero_cta.slice(0, -1);
+            }
+        } else if (activeInput === 3) {
+            if ( infoAccount.adicional.length > 0) {
+                 infoAccount.adicional =  infoAccount.adicional.slice(0, -1);
+            }
+        }
     }
     function cleanPassword() {
-        // password = "";
+        if (activeInput === 1) {
+            amount = "";
+        }else if (activeInput === 2) {  
+            infoAccount.numero_cta = "";
+        } else if (activeInput === 3) {
+            infoAccount.adicional = "";
+        }
     }
 
 
