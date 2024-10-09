@@ -34,7 +34,7 @@
   const guestURLbetw3LJLive ="https://betsamerica.betsw3.win/#/sport/?lang=spa&AuthToken=78140-504cb28edad6ad2f4fcff5d0b4b9&type=1"
   const guestURLbetw3PRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/?target=parleysport-86224-integration&token=123456789";
   const guestURLbetw3 = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
-  const guestURLbetw3LivePRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/?target=parleysport-86224-integration&token=123456789";
+  const guestURLbetw3LivePRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/live_ecuabets/?target=parleysport-86224-integration&token=123456789";
   const guestURLbetw3Live = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home"
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
@@ -124,7 +124,7 @@
   const openBetsW3 = async () => { 
     let url;
     if (userState == "loggedIn") {
-      url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken);
+      url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
       const data = await backend.game.getURL(url);
@@ -136,8 +136,10 @@
         url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
       }
       else{
-        url =active_view == "sportbookllive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
+        url =active_view == "sportbooklive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
       }
+      console.log("url",url);
+      
     }
     console.log("Sportbook", url);
     sportbookGameUrl = url;

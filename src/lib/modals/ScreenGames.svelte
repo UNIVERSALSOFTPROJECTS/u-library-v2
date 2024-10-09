@@ -25,17 +25,33 @@
     const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
 
     function receiveMessage(event) {
-        console.log("Received message", event);
-        if (event.data == "luckyspins_exit_game"  || event.data == "adm_exit_game") {
+        console.log("Received message from origin:", event.origin);
+        if (event.data === "luckyspins_exit_game" || event.data === "adm_exit_game") {
             closeModal();
-        } 
+        } else {
+            console.log("Unknown message received:", event.data);
+        }
     }
 
+
     const closeModal = () => { 
-        updateBalance();
-        if (document.fullscreenElement != null) toggleFullscreen();
-        open = false;
-    }   
+        console.log("Closing modal");
+        try {
+            updateBalance();
+            console.log("Balance updated");
+            if (document.fullscreenElement != null) {
+                console.log("Exiting fullscreen");
+                toggleFullscreen();
+            }
+            open = false;
+            console.log("Modal closed");
+        } catch (error) {
+            console.error("Error closing modal:", error);
+        }
+    };
+
+ 
+
     const reloadIframe = () => { 
         viewIframe = false;
         loadIframe = true;
@@ -61,13 +77,16 @@
     }
 
     onMount(() => {
-        console.log("onMount");
         window.addEventListener('message', receiveMessage, false);
-        console.log("message", receiveMessage);
-        
         window.addEventListener('resize', resizeHeightModal); 
     });
-    onDestroy(() => { window.removeEventListener('resize', resizeHeightModal); });
+    
+    onDestroy(() => {
+        window.removeEventListener('message', receiveMessage);
+        window.removeEventListener('resize', resizeHeightModal);
+        console.log("Cleaned up event listeners");
+    });
+
 
     $: statusModal(open);
 </script>
