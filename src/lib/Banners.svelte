@@ -5,6 +5,7 @@
 
     export let platform;
     export let onCategoryChange;
+    export let typeCarrusel;
 
     const urlJSON = 'https://assetsapiusoft.s3.us-west-2.amazonaws.com/generic_imgs/configBanners.json';
     let bannerDefault = [{"url_w":"https://assets.apiusoft.com/Latinsport21/bn_w_caballos2.png","url_m":"https://assets.apiusoft.com/Latinsport21/bn_m_caballos.png","dateFrom": "","dateUntil": "","category":"horses"}];
@@ -64,4 +65,6 @@
             </swiper-slide>
         {/each}
     </swiper-container>
-</div>
+    {#if typeCarrusel =="pagination"}
+    <div class="swiper-pagination"></div>
+    {/if}

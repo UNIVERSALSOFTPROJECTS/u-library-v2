@@ -4,6 +4,8 @@
   import ut from '../../js/util';
   import backend from '../../js/server'
   import { Client } from '@stomp/stompjs';
+  import utils from '../../js/util';
+
 
   export let userState;
   export let active_view
@@ -30,6 +32,8 @@
   //const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
   //const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
   
+  const guestURLbetw3LJLiveMobile ="https://mbetsamerica.betsw3.win/live/Soccer/?AuthToken=78140-504cb28edad6ad2f4fcff5d0b4b9"
+  const guestURLbetw3LJMobile= "https://mbetsamerica.betsw3.win/prematch/Soccer/?AuthToken=78140-504cb28edad6ad2f4fcff5d0b4b9"
   const guestURLbetw3LJ = "https://betsamerica.betsw3.win/#/sport/?lang=spa&AuthToken=78140-504cb28edad6ad2f4fcff5d0b4b9&type=0"
   const guestURLbetw3LJLive ="https://betsamerica.betsw3.win/#/sport/?lang=spa&AuthToken=78140-504cb28edad6ad2f4fcff5d0b4b9&type=1"
   const guestURLbetw3PRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/?target=parleysport-86224-integration&token=123456789";
@@ -136,7 +140,11 @@
         url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
       }
       else{
-        url =active_view == "sportbooklive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
+        if(utils.isMobile()){
+          url=active_view == "sportbooklive" ? guestURLbetw3LJLiveMobile: guestURLbetw3LJMobile;
+        } else {
+          url =active_view == "sportbooklive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
+        }
       }
       console.log("url",url);
       
