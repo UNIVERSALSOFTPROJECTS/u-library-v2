@@ -50,9 +50,9 @@
 </script>
 
 <div class="banners">
-    {#if bannersLoading}
+    <!-- {#if bannersLoading}
         <div class="loading"><p></p></div>  
-    {/if}
+    {/if} -->
     <swiper-container class="swiper-container__banners" speed={1500} autoplay-delay={10000} loop={true} effect="fade">
         {#each filteredBanners as banner}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -65,6 +65,7 @@
             </swiper-slide>
         {/each}
     </swiper-container>
-    {#if typeCarrusel =="pagination"}
-    <div class="swiper-pagination"></div>
-    {/if}
+    <!-- {#if typeCarrusel =="pagination"}
+    <div class="swiper-pagination"></div> -->
+    <!-- {/if} -->
+</div>
