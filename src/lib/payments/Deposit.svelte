@@ -70,6 +70,16 @@
                     paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
                     iframeGateway = paymentLink.data.link;
                     window.open(iframeGateway,"_blank",isMobile?"": windowPayment());
+                    if(window['chrome'] && window['chrome']['webview']?true:false){
+                        const message = {
+                            action: "isVKActive",
+                            configuration: {
+                                isVKOpen: true 
+                            }
+                        };
+                        // @ts-ignore
+                        window.chrome.webview.postMessage(message);
+                    }
                 } catch (error) {
                     onError(t("msg.contactSupport"));
                 }
