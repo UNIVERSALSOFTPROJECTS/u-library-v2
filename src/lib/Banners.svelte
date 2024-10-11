@@ -5,6 +5,7 @@
 
     export let platform;
     export let onCategoryChange;
+    export let typeCarrusel;
 
     const urlJSON = 'https://assetsapiusoft.s3.us-west-2.amazonaws.com/generic_imgs/configBanners.json';
     let bannerDefault = [{"url_w":"https://assets.apiusoft.com/Latinsport21/bn_w_caballos2.png","url_m":"https://assets.apiusoft.com/Latinsport21/bn_m_caballos.png","dateFrom": "","dateUntil": "","category":"horses"}];
@@ -49,9 +50,9 @@
 </script>
 
 <div class="banners">
-    {#if bannersLoading}
+    <!-- {#if bannersLoading}
         <div class="loading"><p></p></div>  
-    {/if}
+    {/if} -->
     <swiper-container class="swiper-container__banners" speed={1500} autoplay-delay={10000} loop={true} effect="fade">
         {#each filteredBanners as banner}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -64,4 +65,7 @@
             </swiper-slide>
         {/each}
     </swiper-container>
+    <!-- {#if typeCarrusel =="pagination"}
+    <div class="swiper-pagination"></div> -->
+    <!-- {/if} -->
 </div>
