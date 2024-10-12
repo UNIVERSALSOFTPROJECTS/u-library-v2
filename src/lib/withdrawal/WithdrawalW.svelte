@@ -14,7 +14,6 @@
     export let t;
 
     let platform = configWithdrawal.platform;
-    let dataType = configWithdrawal.dataType;
     let banksNames = configWithdrawal.banksNames;
     let typeAccount = configWithdrawal.typeAccount;
     let messageOptional = configWithdrawal.messageOptional;
@@ -198,7 +197,7 @@
                         <p>{t('deposit.bankName')}:</p>
                         <p>{t('deposit.numBankAccount')}:</p>
 
-                        {#if dataType != "static"}
+                        {#if banksNames.length == 0}
                             <input type="text" class="ipt" bind:value={infoAccount.banco} on:input={inputJustText}>
                         {:else}
                             <select class="slc" bind:value={infoAccount.banco}>
@@ -217,7 +216,7 @@
                         <p></p>
                         {/if}
 
-                        {#if dataType != "static"}      
+                        {#if typeAccount.length == 0}      
                             <input type="text" class="ipt" bind:value={infoAccount.adicional}>
                         {:else}
                             <select class="slc" bind:value={infoAccount.adicional}>
