@@ -4,6 +4,7 @@
     import { assetsPayments } from "../../js/utils/assetsUtils";
     import inputUtils from "../../js/utils/inputUtils";
     import { currentDate } from "../../js/utils/formatUtils";
+    import { isMobile } from "mobile-device-detect";
 
     export let user;
     export let onError;
@@ -15,7 +16,6 @@
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
     let loadDeposit = false;
     let iframeGateway;
-    let sizeIframeGateway = '';//Pasarelas pueden variar de tamaño
     let paySelected;
     let payMethods; 
     let bankPayments = [];
@@ -54,16 +54,14 @@
             loadDeposit = false;
 		} catch (error) {
             console.log(error);
-            if(user == null) error = "Sesión expirada!, cerrando sesión";//y hacer logout
-            else error = "Ocurrio un error, contactese con soporte";
-			onError(error);
+			onError(t("msg.contactSupport"));
             loadDeposit = false;
 		}
     }
 
    async function validateDeposit(pay){
-        if (amountDeposit < pay.min) return onError("El monto mínimo de depósito es "+pay.min+" "+ pay.iso);
-        else if(amountDeposit > pay.max) return onError("El monto máximo de depósito es "+pay.max+" "+ pay.iso);
+        if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
+        else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
         else{
             detailsTranference = false;
             if (typeTranference === 'gateway') {
@@ -71,19 +69,36 @@
                     loadDeposit = true;
                     paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
                     iframeGateway = paymentLink.data.link;
-                    location.href = iframeGateway;
-                    // if (pay.cta != "izypay") {}
-                    // else{
-                    //     sizeIframeGateway = iframeGateway.includes("izypay")?"small":"";//actualmente solo izypay presenta este tamaño
-                    //     amountDeposit = '';
-                    //     loadDeposit = false;
-                    // }
+                    window.open(iframeGateway,"_blank",isMobile?"": windowPayment());
+                    if(window['chrome'] && window['chrome']['webview']?true:false){
+                        const message = {
+                            action: "isVKActive",
+                            configuration: {
+                                isVKOpen: true 
+                            }
+                        };
+                        // @ts-ignore
+                        window.chrome.webview.postMessage(message);
+                    }
                 } catch (error) {
-                    onError("Ocurrio un error, contactese con soporte");
+                    onError(t("msg.contactSupport"));
+                }
+                finally{
+                    detailsTranference = true;
+                    amountDeposit = "";
                     loadDeposit = false;
                 }
             }
         }
+    }
+
+    const windowPayment = () => {
+        const width = 600;
+        const height = 600;
+        const left = (window.outerWidth - width) / 2 + window.screenX;
+        const top = (window.outerHeight - height) / 2 + window.screenY;
+        const windowSizePosition = `width=${width},height=${height},top=${top},left=${left}`;
+        return windowSizePosition;
     }
 
     const openPayMethod = (typePayment) => {
@@ -97,7 +112,6 @@
         amountDeposit = '';
         detailsTranference = true;
         iframeGateway = '';
-        sizeIframeGateway = '';
         bankDeposit.targetBankId=undefined;
         bankDeposit.aditional='';
         bankDeposit.reference='';
@@ -108,7 +122,7 @@
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
             let {data} = await ServerConnection.wallet.bankDeposit(user.token,bankDeposit);//siempre es STATUS 200, si hay errores del server colocar el try catch
-            if (data.msg === "DEPOSITO_OK") onOk("Depósito exitoso");
+            if (data.msg === "DEPOSITO_OK") onOk(t("deposit.successDeposit"));
             else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
             else onError(t('msg.contactSupport'));
     }
@@ -119,7 +133,7 @@
     });
 </script>
 
-<div class="modal-body {iframeGateway?'iframe':''} {sizeIframeGateway}">
+<div class="modal-body">
 {#if isLocked}
     <div class="deposit__message">
         <div class="deposit__message--icon"></div>
@@ -129,84 +143,79 @@
     {#if loadDeposit}
         <div class="loading"><p></p><p></p><p></p></div>
     {:else}
-        {#if iframeGateway}
-            <button class="btn return" on:click={closePayMethod}></button>
-            <iframe class="deposit__iframe" src="{iframeGateway}" frameborder="0" title="paymentGateway"></iframe>
-        {:else}
-            {#if paySelected}
-                <button class="btn deposit__type" on:click={closePayMethod}>
-                    <img src="{assetsPayments}{paySelected.img}.png" alt="paymethod-{paySelected.img}">
-                    <div>
-                        <b>{paySelected.name_pay}</b>
-                        <p class="deposit__limits">{paySelected.min} {paySelected.iso} - {paySelected.max} {paySelected.iso}</p>
-                    </div>
-                    <div class="deposit__arrow bottom"></div>
-                </button>
-                {#if detailsTranference}
-                    <b>{t('deposit.details')}:</b>
-                    <div class="deposit__info">
-                        <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
-                        <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
-                    </div>
-                    <div class="deposit__gateway">
-                        <div class="deposit__mounts">
-                            {#each amountsFav as amount}
-                                <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
-                            {/each}  
-                        </div>
-                        <div class="deposit__ipt">
-                            <b>{paySelected.iso}</b>
-                            <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers}>
-                            <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t('deposit.disposeOn')}</button>
-                        </div>
-                    </div>
-                {:else}
-                    <p>{t('deposit.step1')}.</p>
-                    <div class="deposit__details">
-                        <b>{t('deposit.holder')}:</b>
-                        <p>{paySelected.nombre}</p>
-                        <b>{t('deposit.numBankAccount')}:</b>
-                        <p>{paySelected.cta['ncuenta']}</p>
-                        <b>CCI:</b>
-                        <p>{paySelected.cta['cci']}</p>
-                    </div>
-                    <p>{t('deposit.step2')}.</p>
-                    <div class="deposit__info">
-                        <p>{t('deposit.destinationBank')}</p>
-                        <p>{t('deposit.originBank')}</p>
-                        <input type="text" class="ipt" value={paySelected.banco} disabled>
-                        <select class="slc" bind:value={bankDeposit.targetBankId}>
-                            <option value="0" selected disabled>{t('deposit.chooseBank')}</option>
-                            {#each bankPayments as bank}
-                                <option value={bank.id}>{bank.banco}</option>
-                            {/each}  
-                        </select>
-                        <p>{t('deposit.numAccount')}</p>
-                        <p>{t('deposit.numReference')}</p>
-                        <input type="number" class="ipt" bind:value={bankDeposit.aditional} on:input={inputJustNumbers}>
-                        <input type="number" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
-                        <p>{t('withdrawal.amount')}</p>
-                        <p>{t('deposit.transferDate')}</p>
-                        <input type="text" class="ipt" bind:value={amountDeposit} disabled>
-                        <input type="date" class="ipt" bind:value={bankDeposit.date}>
-                    </div>
-                    <button class="btn deposit" on:click={validateDepositBank}>Depositar</button>
-                {/if}
-            {:else}
-                <b>{t('deposit.choosePayMethod')}:</b>
-                <div class="deposit__types">
-                    {#each payMethods as paymethod}
-                        <button class="btn deposit__type" on:click={() => openPayMethod(paymethod)}>
-                            <img src="{assetsPayments}{paymethod.img}.png" alt="paymethod-{paymethod.img}">
-                            <div>
-                                <b>{paymethod.name_pay}</b>
-                                <p class="deposit__limits">{paymethod.min} {paymethod.iso} - {paymethod.max} {paymethod.iso}</p>
-                            </div>
-                            <div class="deposit__arrow right"></div>
-                        </button>
-                    {/each}
+        {#if paySelected}
+            <button class="btn deposit__type" on:click={closePayMethod}>
+                <img src="{assetsPayments}{paySelected.img}.png" alt="paymethod-{paySelected.img}">
+                <div>
+                    <b>{paySelected.name_pay}</b>
+                    <p class="deposit__limits">{paySelected.min} {paySelected.iso} - {paySelected.max} {paySelected.iso}</p>
                 </div>
+                <div class="deposit__arrow bottom"></div>
+            </button>
+            {#if detailsTranference}
+                <b>{t('deposit.details')}:</b>
+                <div class="deposit__info">
+                    <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
+                    <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
+                </div>
+                <div class="deposit__gateway">
+                    <div class="deposit__mounts">
+                        {#each amountsFav as amount}
+                            <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
+                        {/each}  
+                    </div>
+                    <div class="deposit__ipt">
+                        <b>{paySelected.iso}</b>
+                        <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers}>
+                        <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
+                    </div>
+                </div>
+            {:else}
+                <p>{t('deposit.step1')}.</p>
+                <div class="deposit__details">
+                    <b>{t('deposit.holder')}:</b>
+                    <p>{paySelected.nombre}</p>
+                    <b>{t('deposit.numBankAccount')}:</b>
+                    <p>{paySelected.cta['ncuenta']}</p>
+                    <b>CCI:</b>
+                    <p>{paySelected.cta['cci']}</p>
+                </div>
+                <p>{t('deposit.step2')}.</p>
+                <div class="deposit__info">
+                    <p>{t('deposit.destinationBank')}</p>
+                    <p>{t('deposit.originBank')}</p>
+                    <input type="text" class="ipt" value={paySelected.banco} disabled>
+                    <select class="slc" bind:value={bankDeposit.targetBankId}>
+                        <option value="0" selected disabled>{t('deposit.chooseBank')}</option>
+                        {#each bankPayments as bank}
+                            <option value={bank.id}>{bank.banco}</option>
+                        {/each}  
+                    </select>
+                    <p>{t('deposit.numAccount')}</p>
+                    <p>{t('deposit.numReference')}</p>
+                    <input type="number" class="ipt" bind:value={bankDeposit.aditional} on:input={inputJustNumbers}>
+                    <input type="number" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
+                    <p>{t('withdrawal.amount')}</p>
+                    <p>{t('deposit.transferDate')}</p>
+                    <input type="text" class="ipt" bind:value={amountDeposit} disabled>
+                    <input type="date" class="ipt" bind:value={bankDeposit.date}>
+                </div>
+                <button class="btn deposit" on:click={validateDepositBank}>{t("profile.recharge")}</button>
             {/if}
+        {:else}
+            <b>{t('deposit.choosePayMethod')}:</b>
+            <div class="deposit__types">
+                {#each payMethods as paymethod}
+                    <button class="btn deposit__type" on:click={() => openPayMethod(paymethod)}>
+                        <img src="{assetsPayments}{paymethod.img}.png" alt="paymethod-{paymethod.img}">
+                        <div>
+                            <b>{paymethod.name_pay}</b>
+                            <p class="deposit__limits">{paymethod.min} {paymethod.iso} - {paymethod.max} {paymethod.iso}</p>
+                        </div>
+                        <div class="deposit__arrow right"></div>
+                    </button>
+                {/each}
+            </div>
         {/if}
     {/if}
 {/if}

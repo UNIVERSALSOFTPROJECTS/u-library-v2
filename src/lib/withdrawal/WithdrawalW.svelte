@@ -51,6 +51,10 @@
             infoUser = data.data[0];
             pendingWithdrawal = infoUser.bloqueo_fondos?true:false;
             loadWithdrawal = false;
+            if(typeView === "payMobile"){// es para maquina y todos lausan por eso se limpia la data
+                infoAccount.adicional = "";
+                infoAccount.numero_cta = "";
+            }
         } catch (error) {
             onError(t("msg.contactSupport"));//falta detectar los errores
             console.log(error);
@@ -89,9 +93,8 @@
                 let error;
                 if (data.msg == " Revisar Credencial Invalid receiver in  transaction. Recipient has to be registered with CPS in order to receive funds. For more information call Customer Services on {0}.") {
                     error = t("msg.phoneInvalid");
-                }else if (data.message == "INTERNAL_SERVER_ERROR"){
-                    error = t("msg.phoneInvalid");
-                }else{
+                }
+                else{
                     error = t("msg.contactSupport");
                 }
                 onError(error);//falta detectar los errores

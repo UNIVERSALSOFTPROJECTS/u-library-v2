@@ -41,6 +41,7 @@
 
     import ConfigAutoservice from "./modals/ConfigAutoservice.svelte";
 
+
     export let user = {};
     export let assetsUrl;
     // export let platform = "Babieca";//usado para storybook
@@ -379,7 +380,7 @@
         }
         // onOpenExpireSession();
     });
-
+    
     const updateTimeSession = async () => {
         expireSessionModalOpen = false;
         let user = JSON.parse(sessionStorage.getItem("user"));
