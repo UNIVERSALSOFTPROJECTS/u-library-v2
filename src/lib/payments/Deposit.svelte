@@ -69,7 +69,7 @@
                     loadDeposit = true;
                     paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
                     iframeGateway = paymentLink.data.link;
-                    window.open(iframeGateway,"_blank",isMobile?"": windowPayment());
+                  
                     if(window['chrome'] && window['chrome']['webview']?true:false){
                         const message = {
                             action: "isVKActive",
@@ -77,8 +77,23 @@
                                 isVKOpen: true 
                             }
                         };
+                    
+                        const message2 = {
+                            action: "pop_up_window",
+                            configuration: {
+                                isPop_up: true ,
+                                height:600,
+                                width:600,
+                                url:iframeGateway
+                            }
+                        };
                         // @ts-ignore
                         window.chrome.webview.postMessage(message);
+                        // @ts-ignore
+                        window.chrome.webview.postMessage(message2);
+
+                    }else{
+                        window.open(iframeGateway,"_blank",isMobile?"": windowPayment());
                     }
                 } catch (error) {
                     onError(t("msg.contactSupport"));
