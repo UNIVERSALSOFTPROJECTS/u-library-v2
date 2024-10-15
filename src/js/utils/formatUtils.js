@@ -18,6 +18,12 @@ export const detectSubdomain = () => {
     let subdomain = parts.slice(0, -2).join('.');
     return subdomain;
 }
+export const detectDomain = () => {
+    let hostname = window.location.hostname;
+    let parts = hostname.split('.');
+    let domain = parts.slice(0, 1).join('.');
+    return domain;
+}
 export const detectIdiomPage = (idiom) => {
     let subdomain = detectSubdomain();
     if (subdomain == "www" || subdomain == "") subdomain = idiom;

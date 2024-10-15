@@ -295,6 +295,12 @@ export default {
     "autoservice.typeView": "Tipo de vista",
     "autoservice.language": "Idioma",
     "autoservice.configSaved": "Configuración guardada",
+    "autoservice.country": "País",
+    "autoservice.selectCountry": "Seleccionar país",
+    "autoservice.notAviable": "No disponible",
+    "autoservice.buttons": "Botones",
+    "autoservice.deposit": "Despósito",
+    "autoservice.withdrawal": "Retiro",
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
     "deposit.account": "CUENTA",
@@ -633,6 +639,12 @@ export default {
     "autoservice.typeView": "Type de vue",
     "autoservice.language": "Langage",
     "autoservice.configSaved": "Configuration enregistrée",
+    "autoservice.country": "Pays",
+    "autoservice.selectCountry": "Sélectionnez un pays",
+    "autoservice.notAviable": "Pas disponible",
+    "autoservice.buttons": "Boutons",
+    "autoservice.deposit": "Dépôt",
+    "autoservice.withdrawal": "Retrait",
 
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANQUE",
@@ -936,6 +948,12 @@ export default {
     "autoservice.typeView": "Tipo de visualização",
     "autoservice.language": "Linguagem",
     "autoservice.configSaved": "Configuração salva",
+    "autoservice.country": "País",
+    "autoservice.selectCountry": "Selecione o país",
+    "autoservice.notAviable": "Não disponível",
+    "autoservice.buttons": "Botões",
+    "autoservice.deposit": "Depósito",
+    "autoservice.withdrawal": "Retirada",
 
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",

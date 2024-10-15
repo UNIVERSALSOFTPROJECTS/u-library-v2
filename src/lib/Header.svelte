@@ -451,15 +451,26 @@
 
     let typeView = "autoservice";
     const configLogin = {
-    platform,
-    typeView,
-    assetsUrl: "https://assets.apiusoft.com",
-    idioms: [{ id: "es" }, { id: "br" }, { id: "fr" }],
-    changeIdiom: function (idiom) {
-      $locale = idiom;
-      localStorage.setItem("idiom", idiom);
-    },
-  };
+        platform,
+        typeView,
+        assetsUrl: "https://assets.apiusoft.com",
+        idioms: [{ id: "es" }, { id: "br" }, { id: "fr" }],
+        countries: [
+            // {name: "Perú", domain:"pe"},
+            // {name: "Ecuador", domain:"ec"},
+            // {name: "Colombia", domain:"co"},
+            // {name: "Guatemala", domain:"gt"},
+            // {name: "Estados Unidos", domain:"us"},
+            // {name: "Argentina", domain:"ar"},
+            // {name: "Brasil", domain:"br"},
+            // {name: "República Dominicana", domain:"do"},
+            // {name: "Venezuela", domain:"ve"},
+        ],
+        changeIdiom: function (idiom) {
+        $locale = idiom;
+        localStorage.setItem("idiom", idiom);
+        },
+    };
 
   const onOk = async (msg) => {
         notify = {};
