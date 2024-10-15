@@ -69,8 +69,8 @@
                     loadDeposit = true;
                     paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
                     iframeGateway = paymentLink.data.link;
-                  
-                    if(window['chrome'] && window['chrome']['webview']?true:false){
+                    let detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
+                    if(detecMachine){
                         const message = {
                             action: "isVKActive",
                             configuration: {
