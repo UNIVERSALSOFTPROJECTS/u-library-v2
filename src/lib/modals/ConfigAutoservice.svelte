@@ -36,19 +36,22 @@
     }
 
     const saveUser = () => {
-        if(username == "" || password == "" ) return onError(t("msg.allObligatory"));
-        localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
-        modalOpen = false;
+        if(username != "" || password != "" ){
+            localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
+            modalOpen = false;
+        }
         onOk(t("autoservice.configSaved"));
         setTimeout(() => {
-            if (subdomain == "") {
                 sessionStorage.removeItem("user");
+                localStorage.setItem("domain",subdomain);
+            if (subdomain == "") {
                 location.reload();
             }else{
-                localStorage.setItem("domain",subdomain);
                 window.location.href = `https://${subdomain}.${domain}`;
             }
         }, 1000);
+        
+
     }
     const toggleBtnWithdrawal = () => {
         isWithdrawal != isWithdrawal;
