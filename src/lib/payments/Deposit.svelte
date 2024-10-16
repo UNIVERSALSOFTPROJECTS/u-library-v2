@@ -36,6 +36,7 @@
     let id_banca  = configDeposit.id_banca;
     let id_ca  = configDeposit.id_ca;
     let isLocked = true;
+    const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -69,14 +70,9 @@
                     loadDeposit = true;
                     paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
                     iframeGateway = paymentLink.data.link;
-                    let detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
+                   
                     if(detecMachine){
-                        const message = {
-                            action: "isVKActive",
-                            configuration: {
-                                isVKOpen: true 
-                            }
-                        };
+                        openVirtualKeyboard();
                     
                         const message2 = {
                             action: "pop_up_window",
@@ -87,9 +83,6 @@
                                 url:iframeGateway
                             }
                         };
-                        // @ts-ignore
-                        window.chrome.webview.postMessage(message);
-                        // @ts-ignore
                         window.chrome.webview.postMessage(message2);
 
                     }else{
@@ -141,6 +134,18 @@
             else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
             else onError(t('msg.contactSupport'));
     }
+
+    const openVirtualKeyboard = () => {
+        if(detecMachine){
+            const message = {
+                action: "isVKActive",
+                configuration: {
+                    isVKOpen: true 
+                }
+            };
+            window.chrome.webview.postMessage(message);
+        }
+    }
     
     onMount(async() => {
         detectLockedDeposit();
@@ -181,7 +186,7 @@
                     </div>
                     <div class="deposit__ipt">
                         <b>{paySelected.iso}</b>
-                        <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers}>
+                        <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
                         <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
                     </div>
                 </div>
