@@ -1,7 +1,7 @@
 <script>
     import Modal from "../Modal.svelte";
     import DropdowIdiom from "../dropdown/DropdowIdiom.svelte";
-    import { detectDomain } from "../../js/utils/formatUtils";
+    import { detectDomain, detectSubdomain } from "../../js/utils/formatUtils";
 
     export let configLogin;
     export let onError;
@@ -20,7 +20,7 @@
     let isWithdrawal = localStorage.getItem("btnWithdrawal")?true:false;
     let isDeposit = localStorage.getItem("btnDeposit")?true:false;
     const domain = detectDomain();
-    let subdomain = localStorage.getItem("domain") || "";
+    let subdomain = detectSubdomain();
 
     const viewDataConfig = () => {
         if (localStorage.getItem('autoSaved')) {
