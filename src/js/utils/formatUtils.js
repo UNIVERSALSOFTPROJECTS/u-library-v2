@@ -21,7 +21,7 @@ export const detectSubdomain = () => {
 export const detectDomain = () => {
     let hostname = window.location.hostname;
     let parts = hostname.split('.');
-    let domain = parts.slice(0, 2).join('.');
+    let domain = parts.slice(-2).join('.');
     return domain;
 }
 export const detectIdiomPage = (idiom) => {
