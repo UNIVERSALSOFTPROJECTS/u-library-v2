@@ -74,6 +74,8 @@ export default {
     "withdrawal.time" : "Horario de retiro",
     "withdrawal.phoneNumber" : "Número de teléfono",
 
+    "withdrawal.successful_recharge": "Recarga Exitosa",
+
     //---------------NAME CAT GAMES-----------------------------
     "categoryGame.home": "Inicio",
     "categoryGame.slot": "Casino",
