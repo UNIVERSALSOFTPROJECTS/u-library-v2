@@ -5,6 +5,7 @@
     export let dataSearched;
     export let onSelectBrand;
     export let t;
+    export let category = null;
 
     let heightModal;
     let searchData = "";
@@ -17,7 +18,7 @@
     }
     
     function selectOption(option) {
-      onSelectBrand(option)
+      onSelectBrand(option, category)
       selectedOption = option;
       isDropdownOpen = false;   
     }

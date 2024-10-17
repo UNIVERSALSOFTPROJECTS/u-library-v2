@@ -1,6 +1,7 @@
 <script>
     import Modal from "../Modal.svelte";
     import DropdowIdiom from "../dropdown/DropdowIdiom.svelte";
+    import { detectDomain, detectSubdomain } from "../../js/utils/formatUtils";
 
     export let configLogin;
     export let onError;
@@ -9,6 +10,7 @@
 
     const changeIdiom = configLogin.changeIdiom;
 	let  idioms = configLogin.idioms;
+    let countries = configLogin.countries;
     let typeView = localStorage.getItem("typeView") || "";
     let modalOpen = false;
     let subModalOpened = "configAutoservice";
@@ -17,6 +19,8 @@
     let password = "";
     let isWithdrawal = localStorage.getItem("btnWithdrawal")?true:false;
     let isDeposit = localStorage.getItem("btnDeposit")?true:false;
+    const domain = detectDomain();
+    let subdomain = detectSubdomain();
 
     const viewDataConfig = () => {
         if (localStorage.getItem('autoSaved')) {
@@ -32,14 +36,22 @@
     }
 
     const saveUser = () => {
-        if(username == "" || password == "" ) return onError(t("msg.allObligatory"));
-        localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
-        modalOpen = false;
+        if(username != "" || password != "" ){
+            localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
+            modalOpen = false;
+        }
         onOk(t("autoservice.configSaved"));
         setTimeout(() => {
-            sessionStorage.removeItem("user");
-            location.reload();
+                sessionStorage.removeItem("user");
+                localStorage.setItem("domain",subdomain);
+            if (subdomain == "") {
+                location.reload();
+            }else{
+                window.location.href = `https://${subdomain}.${domain}`;
+            }
         }, 1000);
+        
+
     }
     const toggleBtnWithdrawal = () => {
         isWithdrawal != isWithdrawal;
@@ -71,18 +83,31 @@
             <input type="text" class="ipt icon--user" placeholder={t("login.user")} autocapitalize="off" bind:value={username}>
 		    <input type="text" class="ipt icon--password" placeholder={t("login.password")} autocomplete="off"  bind:value={password}>
         </div>
-        <b>{t("autoservice.language")}</b>
-        <DropdowIdiom bind:idioms {changeIdiom}/>
+        <div class="configAutoservice__country">
+            <b>{t("autoservice.language")}</b>
+            <b>{t("autoservice.country")}</b>
+            <DropdowIdiom bind:idioms {changeIdiom}/>
+            {#if countries.length != 0}
+            <select class="slc" bind:value={subdomain}>
+                <option value="" disabled>{t("autoservice.selectCountry")}</option>
+                {#each countries as country}
+                    <option value={country.domain}>{country.name}</option>
+                {/each}
+            </select>
+            {:else}
+            <input type="text" class="ipt" value={t("autoservice.notAviable")} disabled>
+            {/if}
+        </div>
         <b>{t("autoservice.typeView")}</b>
         <div class="configAutoservice__type">
             <button class="btn {typeView == ""?'active':''}" on:click={()=>changeTypeView("")}>Web</button>
             <button class="btn {typeView == "autoservice"?'active':''}" on:click={()=>changeTypeView("autoservice")}>Autoservice</button>
         </div>
-        <b>Botones</b>
+        <b>{t("autoservice.buttons")}</b>
         <div class="configAutoservice__buttons">
-            <label for="deposit">Depósito</label> 
+            <label for="deposit">{t("autoservice.deposit")}</label> 
             <input type="checkbox" class="switch" id="deposit" bind:checked={isDeposit} on:click={toggleBtnDeposit}>
-            <label for="withdrawal">Retiro</label> 
+            <label for="withdrawal">{t("autoservice.withdrawal")}</label> 
             <input type="checkbox" class="switch" id="withdrawal" bind:checked={isWithdrawal} on:click={toggleBtnWithdrawal}>
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
