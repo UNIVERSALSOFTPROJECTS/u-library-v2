@@ -48,7 +48,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 25%;
       height: 35%;
       padding: 0.5rem;
       border-radius: 0.4rem;
