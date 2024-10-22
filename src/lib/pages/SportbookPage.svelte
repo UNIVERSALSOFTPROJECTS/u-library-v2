@@ -198,21 +198,10 @@
     user.balance = data.balance;
     document.body.style.overflow="scroll";
   })
-
 </script>
 
 <div class="sportbook-content">
-  <!--{#if options.gameid == edg_id}
-    <DigtainSportBook
-      {user}
-      bind:loginModalOpen
-      bind:clientCode
-      bind:options
-      bind:internalPage
-    />
-  {:else}-->
   <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
- <!-- {/if}-->
 </div>
 
 <style>
