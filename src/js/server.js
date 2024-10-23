@@ -288,7 +288,7 @@ const ServerConnection = (() => {
 
     const u_game = {
         getGameURLTest: (gameapi_url, game, usertoken) => {
-            let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
+            let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`, { headers };
             return url;
         }
     }
