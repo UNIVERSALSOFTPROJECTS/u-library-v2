@@ -285,8 +285,15 @@ const ServerConnection = (() => {
             return axios.post(conf.API + "/api/casino/forgotPassword", payload_)
         }
     }
+
+    const u_game = {
+        getGameURLTest: (gameapi_url, game, usertoken) => {
+            let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
+            return axios.get(url, {headers});
+        }
+    }
     /* */
-    return { setConfig, wallet, users, game, u_user, u_wallet }
+    return { setConfig, wallet, users, game, u_user, u_wallet, u_game }
 
 })()
 
