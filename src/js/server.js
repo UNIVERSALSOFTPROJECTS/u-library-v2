@@ -287,10 +287,22 @@ const ServerConnection = (() => {
     }
 
     const u_game = {
-        getGameURLTest: (gameapi_url, game, usertoken) => {
-            let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
-            return url;
+        gameURLTest: async (game, usertoken) => {
+            // Construir la URL básica
+            let url = `${conf.GAMEAPI_URL}/launch?gameid=${game.id}&m=wb&p=${game.provider}&sessionid=${usertoken}`;
+
+            // Agregar el parámetro &view=ESPORTS-HUB si game.provider es igual a "pnc"
+            if (game.provider === "pnc") {
+                url += "&view=ESPORTS-HUB";
+            }
+
+            // Realizar la petición con la URL final
+            const response = await axios.get(url, { headers });
+
+            // Retornar la URL o la respuesta (según lo que esperes)
+            return response;
         }
+
     }
     /* */
     return { setConfig, wallet, users, game, u_user, u_wallet, u_game }
