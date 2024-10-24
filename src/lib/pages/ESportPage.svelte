@@ -57,11 +57,13 @@
   }
 
   const openPinnacle = async () => { 
-    let url_ =userState == "loggedIn"? backend.u_game.gameURLTest(games.pinnacle, options.gameToken) : guestURLpinnacle;
-    console.log("openE-SPORTS: ",url_);
-    
-    esportsGameUrl = url_.data.url
+    let url_ = userState == "loggedIn" ? await backend.u_game.gameURLTest(games.pinnacle, options.gameToken) : guestURLpinnacle;
+    console.log("openE-SPORTS: ", url_);
+    // Si está logueado, obtenemos la URL desde la respuesta; si no, usamos la URL de invitado
+    esportsGameUrl = userState == "loggedIn" && url_.data ? url_.data.url : url_;
+    console.log("esportsGameUrl: ", esportsGameUrl);
   }
+
 
   onDestroy(async () => {
     if (userState == "loggedIn"){
