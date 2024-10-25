@@ -18,7 +18,8 @@
   let mode = ut.isMobile() ? "mb" : "wb";
   let deviceiframe = mode;
   const pnc_id = "902-pinnacle";
-  const guestURLpinnacle = "https://fv-wngcxtx.oreo88.com/es/esports-hub/"
+  //const guestURLpinnacle = "https://fv-wngcxtx.oreo88.com/es/esports-hub/" //PRIMERA URL NO-LOGIN
+  const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/esports-hub/home"
   const games = {
     'pinnacle':{
       gameid: pnc_id,
