@@ -29,6 +29,8 @@
   const bbq_id = "sport-betbuq";
   const pnc_id = "902-pinnacle";
   const bw3_id = "betsw3_2024";
+  const panda_id = "1_SBO_1053_ThirdPartySportsBook";
+  const AFB_id = "0_SBO_1015_ThirdPartySportsBook";
   //const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
   //const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
   
@@ -84,7 +86,21 @@
       brand: "BETSW3",
       mode,
       id: 125072
-    }
+    },
+    'PandaSport':{
+      gameid: panda_id,
+      provider: "sbobet",
+      brand: "PANDASPORTS",
+      mode,
+      id: 21401
+    },
+    'AFBsports' : {
+      gameid: AFB_id,
+      provider: "sbobet",
+      brand: "AFB SPORTS",
+      mode,
+      id: 18500
+    },
   }
   
   onMount(()=>{
@@ -112,6 +128,8 @@
     else if (options.gameid == bbq_id) openBBQ();
     else if (options.gameid == pnc_id) openPinnacle();
     else if (options.gameid == bw3_id) openBetsW3();
+    else if (options.gameid == panda_id) openPandaSport();
+    else if (options.gameid == AFB_id) openAFBsports();
   }
 
   const openPinnacle = async () => { 
@@ -151,26 +169,29 @@
     }
     console.log("Sportbook", url);
     sportbookGameUrl = url;
-}
+  }
 
   const openBBQ = async () => { 
     let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.bbq, options.gameToken) : guestURLBBQ;
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     url += `&lang=${lang}&r=url`;
     const {data} = await backend.game.getURL(url);
-    url = data.url
-   sportbookGameUrl = url;
+    url = data.url 
+    sportbookGameUrl = url;
   }
 
   const openDigtain = async () => {
     let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.digtain, options.gameToken) : guestURLdigtain;
     url += active_view == "sportbooklive" ? "&currentgame=live" : "&currentgame=PreMatch";
     url += `&lang=${lang}`;
+    console.log("openDigtainOptions", options);
     if(options.eventInfo){
       const eventInfo=JSON.stringify(mode == "wb"?options.eventInfo:options.eventInfo.Id);
       url += "&eventInfo=" +eventInfo;
     }
     sportbookGameUrl = url;
+    console.log("url", sportbookGameUrl);
+    
   };
 
   const openWintech = async () => {
