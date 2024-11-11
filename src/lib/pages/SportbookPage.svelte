@@ -134,7 +134,7 @@
       const data = await backend.game.getURL(url);
       url = data.url;
     } else {
-      if (CLIENT_CODE == 'BPEN') {
+      if (CLIENT_CODE == 'BPEN'|| CLIENT_CODE == 'BUSD') {
         url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3;
       } else if (CLIENT_CODE == "PRLS") {
         url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
