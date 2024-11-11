@@ -30,6 +30,9 @@
     const categorySport = categoryGames.filter(a => sports.includes(a));
 
     const toggleAccordion = (panel) => { activePanel = activePanel === panel ? null : panel; };
+
+    console.log("configFooter: ", configFooter);
+    
 </script>
 
 <footer class="footer">

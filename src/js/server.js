@@ -122,7 +122,7 @@ const ServerConnection = (() => {
           return await axios.get(url, { headers });
         },
         getURL: async (url) => {
-            const response = await axios.get(url);
+            const response = await axios.get(url, {headers});
             return response.data;
         },
         getGameList: (category, section, page=1, currency='USD', xpage=20)=>{
@@ -285,8 +285,27 @@ const ServerConnection = (() => {
             return axios.post(conf.API + "/api/casino/forgotPassword", payload_)
         }
     }
+
+    const u_game = {
+        gameURLTest: async (game, usertoken) => {
+            // Construir la URL básica
+            let url = `${conf.GAMEAPI_URL}/launch?gameid=${game.id}&m=wb&p=${game.provider}&sessionid=${usertoken}`;
+
+            // Agregar el parámetro &view=ESPORTS-HUB si game.provider es igual a "pnc"
+            if (game.provider === "pnc") {
+                url += "&view=ESPORTS-HUB";
+            }
+
+            // Realizar la petición con la URL final
+            const response = await axios.get(url, { headers });
+
+            // Retornar la URL o la respuesta (según lo que esperes)
+            return response;
+        }
+
+    }
     /* */
-    return { setConfig, wallet, users, game, u_user, u_wallet }
+    return { setConfig, wallet, users, game, u_user, u_wallet, u_game }
 
 })()
 

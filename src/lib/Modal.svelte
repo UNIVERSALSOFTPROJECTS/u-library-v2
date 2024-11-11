@@ -43,9 +43,9 @@
         <div class="modal-dialog {isMobile?'':'centered'}" transition:fly={{ y: -50, duration: 500 }}>
         <div class="modal-content" style="max-height:{heightModal}">
             <div class="modal-header">
-            <div />
-            <div>{title}</div>
-            <button class="btn close" on:click={() => (open = false)} />
+                <div />
+                <div>{title}</div>
+                <button class="btn close" on:click={() => (open = false)} />
             </div>
             <slot />
         </div>

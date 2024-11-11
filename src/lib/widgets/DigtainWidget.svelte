@@ -22,7 +22,8 @@
   const regex = /^[a-zA-Z]/;
 
   onMount(async() => {
-    await ut.loadScript(DG_SERVER + DG_SCRIPT)
+    await ut.loadScript(DG_SERVER + DG_SCRIPT);
+    console.log("Loaded Widgets", DG_SERVER, DG_SCRIPT, clientCode);
     switch(clientCode){
       case 'AAC1': DG_SERVER = 'sport.coliseosport.com'; SPORT_PARTNERID = 'b9e013bc-5556-4c44-9cab-1ed0d8821a7d'; break;
     }
@@ -44,10 +45,13 @@
 
   async function init(params) {
       let iframe = await Bootstrapper.boot(params, { name: "TopMatches" });
+      console.log("iframe Widgets: ", iframe);
+      
       await addTopMatchesEventsListeners(iframe);
     }
 
     function addTopMatchesEventsListeners(topMatches) {
+      console.log("topMatches", topMatches);
       topMatches.addEventListener('page-loaded', function handlePageLoad() {
         // Para escuchar la carga del widget de los mejores partidos
       });

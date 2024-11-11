@@ -18,14 +18,15 @@
   let mode = ut.isMobile() ? "mb" : "wb";
   let deviceiframe = mode;
   const pnc_id = "902-pinnacle";
-  const guestURLpinnacle = "https://fv-wngcxtx.oreo88.com/es/esports-hub/"
+  //const guestURLpinnacle = "https://fv-wngcxtx.oreo88.com/es/esports-hub/" //PRIMERA URL NO-LOGIN
+  const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/esports-hub/home"
   const games = {
     'pinnacle':{
       gameid: pnc_id,
       provider: "pnc",
       brand: "Pinnacle",
       mode,
-      id: 124761
+      id: 351
     },
   }
 
@@ -57,14 +58,13 @@
   }
 
   const openPinnacle = async () => { 
-    let url =userState == "loggedIn"? ut.getGameURLTest(GAMEAPI_URL, games.pinnacle, options.gameToken) : guestURLpinnacle;
-    if (userState == "loggedIn"){
-      url += active_view == "esports" ? "&view=ESPORTS-HUB" : "";
-      const data = await backend.game.getURL(url);
-      url = data.url
-    }
-    esportsGameUrl = url;
+    let url_ = userState == "loggedIn" ? await backend.u_game.gameURLTest(games.pinnacle, options.gameToken) : guestURLpinnacle;
+    console.log("openE-SPORTS: ", url_);
+    // Si está logueado, obtenemos la URL desde la respuesta; si no, usamos la URL de invitado
+    esportsGameUrl = userState == "loggedIn" && url_.data ? url_.data.url : url_;
+    console.log("esportsGameUrl: ", esportsGameUrl);
   }
+
 
   onDestroy(async () => {
     if (userState == "loggedIn"){

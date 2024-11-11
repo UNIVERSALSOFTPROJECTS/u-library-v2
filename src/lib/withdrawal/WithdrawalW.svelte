@@ -64,7 +64,8 @@
         if(amount == 0 || amount == undefined) return onError(t("withdrawal.amount0"));
         if(amount < infoUser.retiro_min) return onError(t("withdrawal.min")+infoUser.retiro_min+" "+user.currency);
         if(amount > infoUser.retiro_max) return onError(t("withdrawal.max")+infoUser.retiro_max+" "+user.currency);
-        if(amount > user.balance) return onError(t("withdrawal.lowBalance"));
+        //refactorizar esto ya quo searar logia de pasarelas machine de pasarelas web
+        if(stringToNumber(amount) > stringToNumber(user.balance)) return onError(t("withdrawal.lowBalance"));
         let info = infoAccount.adicional || "";
         let account = infoAccount.numero_cta;
         let bank = infoAccount.banco;
@@ -83,11 +84,17 @@
             if(data.resp == "ok"){
                 await getUpdateBalance(user);
                 user = JSON.parse(sessionStorage.getItem("user"));
-                loadWithdrawalW = true;
-                setTimeout(() => {
-                    loadWithdrawalW = false;
+                //esto sguro es de HTG CRASHGAMES, DIVIRI LOIGIC CON E PAYMOBILE
+                if (typeView === "payMobile") {
+                    
+                    loadWithdrawalW = true;
+                    setTimeout(() => {
+                        loadWithdrawalW = false;
+                        onOk(t("msg.withdrawalRequestSend"));
+                    }, 10000);
+                }else{
                     onOk(t("msg.withdrawalRequestSend"));
-                }, 10000);
+                }
             }else{
                 let error;
                 if (data.msg == " Revisar Credencial Invalid receiver in  transaction. Recipient has to be registered with CPS in order to receive funds. For more information call Customer Services on {0}.") {

@@ -135,7 +135,6 @@ $media-small: 960px;
     &.content {
         display: grid;
         grid-template-columns: 30% 70%;
-        width: 80%;
         height: 80vh;
     }
 
@@ -234,7 +233,6 @@ $media-small: 960px;
     }
     &.information--data{
         height: 100%;
-        padding-top: 2rem;
     }
 
 }

@@ -24,6 +24,8 @@
     }
     
     onMount(() => {
+      console.log("categoryBrands: ",category);
+      
       function handleClickOutside(event) {
         if (!event.target.closest('.dropdown')) {
           isDropdownOpen = false;
