@@ -153,6 +153,8 @@
       url += `&lang=${lang}&r=url`;
       const data = await backend.game.getURL(url);
       url = data.url;
+      console.log(CLIENT_CODE,"code");
+      
     } else {
       if (CLIENT_CODE == 'BPEN'|| CLIENT_CODE == 'BUSD') {
         url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3; 
@@ -168,7 +170,8 @@
           url=active_view == "sportbooklive" ? guestURLbetw3LJLiveMobile: guestURLbetw3LJMobile;
         } else {
           url =active_view == "sportbooklive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
-        }
+        } 
+
       }
       console.log("url",url);
       
