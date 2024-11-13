@@ -152,10 +152,8 @@
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
       const data = await backend.game.getURL(url);
-      url = data.url;
-      console.log(CLIENT_CODE,"code");
-      
-    } else {
+      url = data.url;      
+    } else  {    console.log(CLIENT_CODE,"code");
       if (CLIENT_CODE == 'BPEN'|| CLIENT_CODE == 'BUSD') {
         url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3; 
         }
