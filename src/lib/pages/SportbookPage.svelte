@@ -147,17 +147,20 @@
 
   const openBetsW3 = async () => { 
     let url;
+    console.log(CLIENT_CODE,"code");
     if (userState == "loggedIn") {
       url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
       const data = await backend.game.getURL(url);
       url = data.url;      
-    } else  {    console.log(CLIENT_CODE,"code");
+    } else  {
       if (CLIENT_CODE == 'BPEN'|| CLIENT_CODE == 'BUSD') {
         url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3; 
         }
         else if (CLIENT_CODE == "GAWN") {
+          console.log("sportbookliveGANW");
+          
           url = active_view == "sportbooklive" ? guestURLbetw3GWLive : guestURLbetw3GW;
         }
         else if (CLIENT_CODE == "PRLS") {
