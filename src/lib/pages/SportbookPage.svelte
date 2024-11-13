@@ -34,6 +34,8 @@
   //const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
   //const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
   
+  const guestURLbetw3GWLive="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=live"
+  const guestURLbetw3GW="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=prematch"
   const guestURLbetw3LJLiveMobile ="https://mbetsamerica.betsw3.win/live/Soccer/?auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9"
   const guestURLbetw3LJMobile= "https://mbetsamerica.betsw3.win/prematch/Soccer/?auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9"
   const guestURLbetw3LJ = "https://betsamerica.betsw3.win/#/sport/?lang=spa&auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9&type=0"
@@ -153,8 +155,12 @@
       url = data.url;
     } else {
       if (CLIENT_CODE == 'BPEN'|| CLIENT_CODE == 'BUSD') {
-        url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3;
-      } else if (CLIENT_CODE == "PRLS") {
+        url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3; 
+        }
+        else if (CLIENT_CODE == "GAWN") {
+          url = active_view == "sportbooklive" ? guestURLbetw3GWLive : guestURLbetw3GW;
+        }
+        else if (CLIENT_CODE == "PRLS") {
         url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
       }
       else{
