@@ -68,10 +68,15 @@
     document.addEventListener('keydown', (e) => {
         //just venezuela tv with android Mobile , specuak key "*"" 
         if (isMobile) {
-            if (e.key === '*') {
-                modalOpen = true;
-                viewDataConfig();
-            }
+                        document.querySelectorAll('input').forEach((input) => {
+                input.addEventListener('input', (e) => {
+                    if (isMobile && e.target.value.includes('*')) {
+                        modalOpen = true;
+                        viewDataConfig();
+                        e.target.value = e.target.value.replace('*', ''); // Opcional: elimina el asterisco
+                    }
+                });
+});
         }else{
             if (e.key === 'F2') f2Pressed = true;
             
