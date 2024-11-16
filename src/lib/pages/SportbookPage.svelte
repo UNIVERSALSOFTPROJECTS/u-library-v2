@@ -16,6 +16,8 @@
   export let GAME_JAVA_API_URL;
   export let lang = 'es';
   export let CLIENT_CODE;
+  console.log(user,"sportbook");
+  
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
