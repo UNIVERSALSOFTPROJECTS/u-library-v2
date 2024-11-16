@@ -2,6 +2,7 @@
     import Modal from "../Modal.svelte";
     import DropdowIdiom from "../dropdown/DropdowIdiom.svelte";
     import { detectDomain, detectSubdomain } from "../../js/utils/formatUtils";
+    import { isMobile } from "mobile-device-detect";
 
     export let configLogin;
     export let onError;
@@ -65,14 +66,27 @@
 
     //open Modal with specials keys
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'F2') f2Pressed = true;
-        
-        if (f2Pressed && e.key === 'r' || f2Pressed &&  e.key === 'R'){
-            modalOpen = true;
-            f2Pressed = false;
-            viewDataConfig();
+        //just venezuela tv with android Mobile , specuak key "*"" 
+        if (isMobile) {
+                        document.querySelectorAll('input').forEach((input) => {
+                input.addEventListener('input', (e) => {
+                    if (isMobile && e.target.value.includes('*')) {
+                        modalOpen = true;
+                        viewDataConfig();
+                        e.target.value = e.target.value.replace('*', ''); // Opcional: elimina el asterisco
+                    }
+                });
+});
+        }else{
+            if (e.key === 'F2') f2Pressed = true;
+            
+            if (f2Pressed && e.key === 'r' || f2Pressed &&  e.key === 'R'){
+                modalOpen = true;
+                f2Pressed = false;
+                viewDataConfig();
+            }
+            if (e.key !== 'F2' && e.key !== 'r')  f2Pressed = false;
         }
-        if (e.key !== 'F2' && e.key !== 'r')  f2Pressed = false;
     });
 </script>
 
