@@ -35,9 +35,9 @@
   }
 
   const openFirst = async () => { 
-    let url =userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken) : guestURLfirst;
+    let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken) : guestURLfirst;
     if (userState == "loggedIn"){
-      const {data} = await backend.game.getURL(url);
+      const data = await backend.game.getURL(url);
       url = data.url
     }
     console.log("urlSportBook: ",url);
