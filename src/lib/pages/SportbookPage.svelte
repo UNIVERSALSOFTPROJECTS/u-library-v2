@@ -42,7 +42,8 @@
   const guestURLbetw3 = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
   const guestURLbetw3LivePRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/live_ecuabets/?target=parleysport-86224-integration&token=123456789";
   const guestURLbetw3Live = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
-  const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home"
+
+  const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${mode}`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
@@ -128,8 +129,6 @@
     else if (options.gameid == bbq_id) openBBQ();
     else if (options.gameid == pnc_id) openPinnacle();
     else if (options.gameid == bw3_id) openBetsW3();
-    else if (options.gameid == panda_id) openPandaSport();
-    else if (options.gameid == AFB_id) openAFBsports();
   }
 
   const openPinnacle = async () => { 
@@ -224,7 +223,7 @@
     let {data} = await backend.users.getBalance(user.agregatorToken);
     user.balance = data.balance;
     document.body.style.overflow="scroll";
-  })
+  });
 </script>
 
 <div class="sportbook-content">
