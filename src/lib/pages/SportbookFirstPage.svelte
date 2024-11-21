@@ -4,7 +4,6 @@
   import ut from '../../js/util';
   import backend from '../../js/server'
 
-
   export let userState;
   export let user;
   export let options;
@@ -48,7 +47,7 @@
     user.balance = data.balance;
     document.body.style.overflow="scroll";
   });
-  
+
 </script>
 
 <div class="sportbook-content">
