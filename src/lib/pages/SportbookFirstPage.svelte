@@ -40,6 +40,7 @@
       const {data} = await backend.game.getURL(url);
       url = data.url
     }
+    console.log("urlSportBook: ",url);
     sportbookGameUrl = url;
   }
 
