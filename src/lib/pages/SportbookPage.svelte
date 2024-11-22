@@ -4,7 +4,6 @@
   import ut from '../../js/util';
   import backend from '../../js/server'
   import { Client } from '@stomp/stompjs';
-  import utils from '../../js/util';
 
 
   export let userState;
@@ -16,10 +15,11 @@
   export let GAME_JAVA_API_URL;
   export let lang = 'es';
   export let CLIENT_CODE;
+  console.log(user,"sportbook");
+  
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
-  let deviceiframe = mode;
   let page = active_view == "sportbooklive" ? "live" : "sport";
   let internalPage = active_view == "sportbooklive" ? "live" : "preMatch"
 
@@ -44,9 +44,10 @@
   const guestURLbetw3 = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
   const guestURLbetw3LivePRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/live_ecuabets/?target=parleysport-86224-integration&token=123456789";
   const guestURLbetw3Live = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
-  const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home"
-  const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${deviceiframe}&skin=generic&`;
-  const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${deviceiframe}`;
+
+  const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
+  const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
+  const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${mode}`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const games = {
@@ -130,8 +131,6 @@
     else if (options.gameid == bbq_id) openBBQ();
     else if (options.gameid == pnc_id) openPinnacle();
     else if (options.gameid == bw3_id) openBetsW3();
-    else if (options.gameid == panda_id) openPandaSport();
-    else if (options.gameid == AFB_id) openAFBsports();
   }
 
   const openPinnacle = async () => { 
@@ -147,7 +146,7 @@
 
   const openBetsW3 = async () => { 
     let url;
-    console.log(CLIENT_CODE,"code");
+    console.log(mode,"mode");
     if (userState == "loggedIn") {
       url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
@@ -159,15 +158,13 @@
         url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3; 
         }
         else if (CLIENT_CODE == "GAWN") {
-          console.log("sportbookliveGANW");
-          
           url = active_view == "sportbooklive" ? guestURLbetw3GWLive : guestURLbetw3GW;
         }
         else if (CLIENT_CODE == "PRLS") {
         url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
       }
       else{
-        if(utils.isMobile()){
+        if(mode = 'mb'){
           url=active_view == "sportbooklive" ? guestURLbetw3LJLiveMobile: guestURLbetw3LJMobile;
         } else {
           url =active_view == "sportbooklive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
@@ -228,7 +225,7 @@
     let {data} = await backend.users.getBalance(user.agregatorToken);
     user.balance = data.balance;
     document.body.style.overflow="scroll";
-  })
+  });
 </script>
 
 <div class="sportbook-content">

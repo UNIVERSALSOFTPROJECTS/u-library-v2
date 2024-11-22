@@ -35,6 +35,7 @@ export {default as WithdrawalBillX } from './lib/withdrawal/WithdrawalBillX.svel
 export {default as WithdrawalW } from './lib/withdrawal/WithdrawalW.svelte';
 export {default as TopBar } from './lib/topbar/TopBar.svelte';
 export { default as SportbookPage } from './lib/pages/SportbookPage.svelte';
+export { default as SportbookFirstPage } from './lib/pages/SportbookFirstPage.svelte';
 export { default as ESportPage } from './lib/pages/ESportPage.svelte';
 export { default as BalanceSocketListener } from './lib/BalanceSocketListener.svelte';
 export { default as UpdateBalanceListener } from './lib/UpdateBalanceListener.svelte';
@@ -47,6 +48,7 @@ export { default as DigtainSportBook } from './lib/sportbooks/DigtainSportBook.s
 export {default as DropdownSearch} from './lib/dropdown/DropdownSearch.svelte';
 export {default as LostConnection } from './lib/modals/LostConnection.svelte';
 export { default as ConfigAutoservice } from './lib/modals/ConfigAutoservice.svelte';
+
 
 
 
