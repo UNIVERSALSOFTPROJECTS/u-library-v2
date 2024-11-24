@@ -65,7 +65,7 @@
         if(amount < infoUser.retiro_min) return onError(t("withdrawal.min")+infoUser.retiro_min+" "+user.currency);
         if(amount > infoUser.retiro_max) return onError(t("withdrawal.max")+infoUser.retiro_max+" "+user.currency);
         //refactorizar esto ya quo searar logia de pasarelas machine de pasarelas web
-        if(stringToNumber(amount) > stringToNumber(infoUser.retiro_min)) return onError(t("withdrawal.lowBalance"));
+        if(stringToNumber(amount) > stringToNumber(infoUser.balance)) return onError(t("withdrawal.lowBalance"));
         let info = infoAccount.adicional || "";
         let account = infoAccount.numero_cta;
         let bank = infoAccount.banco;
@@ -184,7 +184,7 @@
                         <b>{user.currency}</b>
                         <input type="text" class="ipt" placeholder="Ingrese el monto aquí" bind:value={amount} on:focus={() => activeInput = 1}>
                     </div>
-                    <p>{t('withdrawal.availableBalance')}: {infoUser.retiro_min} {user.currency}</p>
+                    <p>{t('withdrawal.availableBalance')}: {infoUser.balance} {user.currency}</p>
                     <p>{t('withdrawal.min')} {infoUser.retiro_min || 0} {user.currency} y {t('withdrawal.max')} {infoUser.retiro_max || 0} {user.currency}</p>
                     <div class="withdrawal__info">
                         {#if typeView == "payMobile"}
