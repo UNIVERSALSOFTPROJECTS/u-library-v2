@@ -14,7 +14,7 @@
 
   const first_id = "first_2024";
 
-  const guestURLfirst = "https://prod20370-150256248.442hattrick.com/?operatorToken=";
+  const guestURLfirst = "https://prod20370-150256248.442hattrick.com";
   
   const games = {
     'first':{
