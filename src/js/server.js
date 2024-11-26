@@ -139,6 +139,13 @@ const ServerConnection = (() => {
             let url = `${conf.API_GAMES_NODE}/lobby/gameTypesByClient?cat=slot&type=wb&client=${conf.CLIENT_ID}`;
             return axios.get(url, { headers });
         }
+        ,
+        getTopGames: async () => {
+            let url = conf.API + `/top-games`;
+            const response = await axios.get(url, { headers });
+            console.log("res? ", response);
+            return response;
+        }
     }
     /* PARA Universal User API */
     const u_wallet = {
