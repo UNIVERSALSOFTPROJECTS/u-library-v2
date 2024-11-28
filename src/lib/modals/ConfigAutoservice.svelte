@@ -76,7 +76,7 @@
         // if (isMobile) {
                         document.querySelectorAll('input').forEach((input) => {
                 input.addEventListener('input', (e) => {
-                    if (isMobile && e.target.value.includes('*')) {
+                    if (e.target.value.includes('*')) {
                         modalOpen = true;
                         viewDataConfig();
                         e.target.value = e.target.value.replace('*', ''); // Opcional: elimina el asterisco
