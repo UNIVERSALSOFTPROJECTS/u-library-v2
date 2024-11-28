@@ -303,6 +303,7 @@ export default {
     "autoservice.buttons": "Botones",
     "autoservice.deposit": "Despósito",
     "autoservice.withdrawal": "Retiro",
+    "autoservice.version" : "Versión Lite",
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
     "deposit.account": "CUENTA",
@@ -647,6 +648,7 @@ export default {
     "autoservice.buttons": "Boutons",
     "autoservice.deposit": "Dépôt",
     "autoservice.withdrawal": "Retrait",
+    "autoservice.version" : "Version allégée",
 
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANQUE",
@@ -956,6 +958,7 @@ export default {
     "autoservice.buttons": "Botões",
     "autoservice.deposit": "Depósito",
     "autoservice.withdrawal": "Retirada",
+    "autoservice.version" : "Versão Lite",
 
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",

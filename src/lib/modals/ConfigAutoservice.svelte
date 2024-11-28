@@ -20,6 +20,7 @@
     let password = "";
     let isWithdrawal = localStorage.getItem("btnWithdrawal")?true:false;
     let isDeposit = localStorage.getItem("btnDeposit")?true:false;
+    let isLiteVersion = localStorage.getItem("btnLiteVersion")?true:false;
     const domain = detectDomain();
     let subdomain = detectSubdomain();
 
@@ -62,6 +63,11 @@
     const toggleBtnDeposit = () => {
         isDeposit != isDeposit;
         isDeposit?localStorage.removeItem("btnDeposit"):localStorage.setItem("btnDeposit", "active");
+    }
+
+    const toggleBtnLiteVersion = () => {
+        isLiteVersion != isLiteVersion;
+        isLiteVersion?localStorage.removeItem("btnLiteVersion"):localStorage.setItem("btnLiteVersion", "active");
     }
 
     //open Modal with specials keys
@@ -123,6 +129,8 @@
             <input type="checkbox" class="switch" id="deposit" bind:checked={isDeposit} on:click={toggleBtnDeposit}>
             <label for="withdrawal">{t("autoservice.withdrawal")}</label> 
             <input type="checkbox" class="switch" id="withdrawal" bind:checked={isWithdrawal} on:click={toggleBtnWithdrawal}>
+            <label for="version">{t("autoservice.version")}</label> 
+            <input type="checkbox" class="switch" id="version" bind:checked={isLiteVersion} on:click={toggleBtnLiteVersion}>
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>
