@@ -73,7 +73,7 @@
     //open Modal with specials keys
     document.addEventListener('keydown', (e) => {
         //just venezuela tv with android Mobile , specuak key "*"" 
-        if (isMobile) {
+        // if (isMobile) {
                         document.querySelectorAll('input').forEach((input) => {
                 input.addEventListener('input', (e) => {
                     if (isMobile && e.target.value.includes('*')) {
@@ -83,7 +83,7 @@
                     }
                 });
 });
-        }else{
+        // }else{
             if (e.key === 'F2') f2Pressed = true;
             
             if (f2Pressed && e.key === 'r' || f2Pressed &&  e.key === 'R'){
@@ -92,7 +92,7 @@
                 viewDataConfig();
             }
             if (e.key !== 'F2' && e.key !== 'r')  f2Pressed = false;
-        }
+        // }
     });
 </script>
 
