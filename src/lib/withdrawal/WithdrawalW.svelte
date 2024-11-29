@@ -64,8 +64,12 @@
         if(amount == 0 || amount == undefined) return onError(t("withdrawal.amount0"));
         if(amount < infoUser.retiro_min) return onError(t("withdrawal.min")+infoUser.retiro_min+" "+user.currency);
         if(amount > infoUser.retiro_max) return onError(t("withdrawal.max")+infoUser.retiro_max+" "+user.currency);
+
+        
+
         //refactorizar esto ya quo searar logia de pasarelas machine de pasarelas web
-        if(stringToNumber(amount) > stringToNumber(infoUser.balance)) return onError(t("withdrawal.lowBalance"));
+        // esto es nmber directo infoUser.balance
+        if(stringToNumber(amount) > infoUser.balance) return onError(t("withdrawal.lowBalance"));
         let info = infoAccount.adicional || "";
         let account = infoAccount.numero_cta;
         let bank = infoAccount.banco;

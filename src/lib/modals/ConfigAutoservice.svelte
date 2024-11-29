@@ -20,6 +20,7 @@
     let password = "";
     let isWithdrawal = localStorage.getItem("btnWithdrawal")?true:false;
     let isDeposit = localStorage.getItem("btnDeposit")?true:false;
+    let isLiteVersion = localStorage.getItem("btnLiteVersion")?true:false;
     const domain = detectDomain();
     let subdomain = detectSubdomain();
 
@@ -64,20 +65,25 @@
         isDeposit?localStorage.removeItem("btnDeposit"):localStorage.setItem("btnDeposit", "active");
     }
 
+    const toggleBtnLiteVersion = () => {
+        isLiteVersion != isLiteVersion;
+        isLiteVersion?localStorage.removeItem("btnLiteVersion"):localStorage.setItem("btnLiteVersion", "active");
+    }
+
     //open Modal with specials keys
     document.addEventListener('keydown', (e) => {
         //just venezuela tv with android Mobile , specuak key "*"" 
-        if (isMobile) {
+        // if (isMobile) {
                         document.querySelectorAll('input').forEach((input) => {
                 input.addEventListener('input', (e) => {
-                    if (isMobile && e.target.value.includes('*')) {
+                    if (e.target.value.includes('*')) {
                         modalOpen = true;
                         viewDataConfig();
                         e.target.value = e.target.value.replace('*', ''); // Opcional: elimina el asterisco
                     }
                 });
 });
-        }else{
+        // }else{
             if (e.key === 'F2') f2Pressed = true;
             
             if (f2Pressed && e.key === 'r' || f2Pressed &&  e.key === 'R'){
@@ -86,7 +92,7 @@
                 viewDataConfig();
             }
             if (e.key !== 'F2' && e.key !== 'r')  f2Pressed = false;
-        }
+        // }
     });
 </script>
 
@@ -123,6 +129,8 @@
             <input type="checkbox" class="switch" id="deposit" bind:checked={isDeposit} on:click={toggleBtnDeposit}>
             <label for="withdrawal">{t("autoservice.withdrawal")}</label> 
             <input type="checkbox" class="switch" id="withdrawal" bind:checked={isWithdrawal} on:click={toggleBtnWithdrawal}>
+            <label for="version">{t("autoservice.version")}</label> 
+            <input type="checkbox" class="switch" id="version" bind:checked={isLiteVersion} on:click={toggleBtnLiteVersion}>
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>

@@ -128,7 +128,7 @@
 
     const configWithdrawal = {
         id_banca: [], //disitribidor - almacena otros cajeros
-        id_ca: ["6970"], //caja dentro de un distribuidor principal
+        id_ca: ["6970","6546"], //caja dentro de un distribuidor principal
         dataType: "",
         messageOptional: "",
         formVerification: "",
