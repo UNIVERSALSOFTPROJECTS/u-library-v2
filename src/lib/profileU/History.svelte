@@ -65,6 +65,7 @@
         ...filters, 
         token:user.token
       }
+      console.log("params1", params);
       let { data } = await backend.u_wallet.transactions(params);
       movements = data;
       movements.list.map((m) => {

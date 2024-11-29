@@ -196,6 +196,7 @@ const ServerConnection = (() => {
             return await axios.post(url, payload, { headers });
         },
         transactions: async (params,) => {
+            console.log("Params",params);
             headers['token'] = params.token;
             let url = conf.API + "/api/casino/wallet/transactions?playerId="+ params.playerId+"&page=" + params.page+"&xpage="+ params.xpage + "&from=" + params.from + "&to=" + params.to + "&filter=" + params.type;
             return await axios.get(url, { headers });
