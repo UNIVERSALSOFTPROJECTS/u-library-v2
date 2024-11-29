@@ -24,15 +24,11 @@
   };
 
   onMount(() => {
-    console.log("user", user);
     let actualDate = moment();
     let dateRest = actualDate.subtract(0, "days");
     filters.from = dateRest.format("YYYY-MM-DD");
     filters.to = moment().format("YYYY-MM-DD");
     promise = getMovements();
-    filters.playerId = user.playerId;
-    console.log("Filters", filters);
-    
   });
 
   const convertDateTimeZone = (lfecha) => {
@@ -62,7 +58,8 @@
   const getMovements = async () => {
     if(filters.type == "") delete filters.type;
     try { let params = {
-        ...filters, 
+        ...filters,
+        playerId: user.playerId,
         token:user.token
       }
       console.log("params1", params);
