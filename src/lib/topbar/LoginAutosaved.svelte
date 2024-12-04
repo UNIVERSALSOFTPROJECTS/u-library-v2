@@ -30,7 +30,11 @@
 			loadLogin = true
 			let data ;
 			data = await ServerConnection.users.login(username,password);
+			console.log("data? ", data);
+			
 			data = data.data;
+			console.log("data.data? ", data);
+			
 			if (data.username=='')throw("USER_NOT_FOUND");
 			let date = new Date();
       		date.setDate(date.getDate() + 1);
