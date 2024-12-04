@@ -27,6 +27,7 @@ const UserHelper = (() => {
 
     const connectToLobbySocket = (user, conf) => {
         console.log("CONGIH", conf);
+        console.log("UserHelper-conf? ", conf);
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${user.serial}`, conf); //conecta al websocket.
     };
