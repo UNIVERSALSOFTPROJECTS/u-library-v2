@@ -27,6 +27,8 @@
 		
 		if(!username || !password ) return onError(t("msg.allObligatory"));
 		try {
+			console.log("tryIn");
+			
 			loadLogin = true
 			let data ;
 			data = await ServerConnection.users.login(username,password);
