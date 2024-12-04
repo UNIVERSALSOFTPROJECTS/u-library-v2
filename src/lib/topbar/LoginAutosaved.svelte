@@ -45,6 +45,9 @@
 			onOk(data);
 		} catch (error) {
 			console.log("error: ", error);
+			// @ts-ignore
+			console.log("data-error? ", data);
+			
 			if (error.message == "Network Error" || error.response.data.message.includes("Connection refused"))
 				error = t("msg.pageMaintenance");
 			else if(error.response.data.message == "NECO_LOGIN_FAILED" || error.response.data.message == "LOGIN_ERROR")
