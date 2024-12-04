@@ -4,6 +4,9 @@ import utils from './util'
 let conf;
 let headers = {};
 
+console.log("conf? ", conf);
+
+
 const ServerConnection = (() => {
 
     const setConfig = (config) => {

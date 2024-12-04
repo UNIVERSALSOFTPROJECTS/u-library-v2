@@ -23,6 +23,8 @@
 	let timerLogin;
 
 	async function loginClick(){
+		console.log("entras");
+		
 		if(!username || !password ) return onError(t("msg.allObligatory"));
 		try {
 			loadLogin = true
