@@ -4,8 +4,6 @@ import utils from './util'
 let conf;
 let headers = {};
 
-console.log("conf? ", conf);
-
 
 const ServerConnection = (() => {
 
@@ -74,13 +72,6 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         login: (username, password) => {
-            console.log("user? ", username);
-            console.log("pass? ", password);
-            console.log("conf? ", conf);
-            console.log("org? ", conf.org);
-            
-            
-            
             // if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, password, org: conf.org }
             return axios.post(conf.API + "/login", payload, { headers });

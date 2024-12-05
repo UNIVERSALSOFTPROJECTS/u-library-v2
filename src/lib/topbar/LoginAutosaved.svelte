@@ -23,19 +23,14 @@
 	let timerLogin;
 
 	async function loginClick(){
-		console.log("entras");
 		
 		if(!username || !password ) return onError(t("msg.allObligatory"));
 		try {
-			console.log("tryIn");
-			
 			loadLogin = true
 			let data ;
 			data = await ServerConnection.users.login(username,password);
-			console.log("data? ", data);
 			
 			data = data.data;
-			console.log("data.data? ", data);
 			
 			if (data.username=='')throw("USER_NOT_FOUND");
 			let date = new Date();
@@ -47,9 +42,6 @@
 			onOk(data);
 		} catch (error) {
 			console.log("error: ", error);
-			// @ts-ignore
-			console.log("data-error? ", data);
-			
 			if (error.message == "Network Error" || error.response.data.message.includes("Connection refused"))
 				error = t("msg.pageMaintenance");
 			else if(error.response.data.message == "NECO_LOGIN_FAILED" || error.response.data.message == "LOGIN_ERROR")
