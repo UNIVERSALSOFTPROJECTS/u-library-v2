@@ -89,9 +89,13 @@
     openSport();
   }
 
-  async function openSport() {
-    openBetsW3();
-  }
+    async function openSport() {
+        openBetsW3();
+    }
+
+    const RESELLER = ()=> {
+        console.log("RESELLER enviando");
+    }
 
     const openBetsW3 = async () => {
         let url;
@@ -105,6 +109,7 @@
                 url = data.url;
             } else {
                 url = resolveGuestURL(CLIENT_CODE, active_view, mode);
+                RESELLER();
             }
             console.log("Sportbook", url);
             sportbookGameUrl = url;
