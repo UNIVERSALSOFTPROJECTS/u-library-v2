@@ -145,7 +145,10 @@
     }
     sportbookGameUrl = url;
   }
-
+function RESELLER (params) {
+  console.log("RESELLER enviando");
+  
+}
   const openBetsW3 = async () => { 
     let url;
     console.log(mode,"mode");
@@ -165,7 +168,7 @@
         else if (CLIENT_CODE == "PRLS") {
         // url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
         url = active_view == "sportbooklive" ? guestURLbetw3bt1Live : guestURLbetw3bt1;
-
+        RESELLER();
       }
 
       else{
