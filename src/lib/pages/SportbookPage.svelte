@@ -34,6 +34,8 @@
   //const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
   //const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
   
+  const guestURLbetw3bt1Live="https://sports.jcasino.live/#/live_ecuabets/?target=betsson1-86224-integration"
+  const guestURLbetw3bt1="https://sports.jcasino.live/#/?target=betsson1-86224-integration"
   const guestURLbetw3GWLive="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=live"
   const guestURLbetw3GW="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=prematch"
   const guestURLbetw3LJLiveMobile ="https://mbetsamerica.betsw3.win/live/Soccer/?auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9"
@@ -161,8 +163,11 @@
           url = active_view == "sportbooklive" ? guestURLbetw3GWLive : guestURLbetw3GW;
         }
         else if (CLIENT_CODE == "PRLS") {
-        url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
+        // url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
+        url = active_view == "sportbooklive" ? guestURLbetw3bt1Live : guestURLbetw3bt1;
+
       }
+
       else{
         if(mode = 'mb'){
           url=active_view == "sportbooklive" ? guestURLbetw3LJLiveMobile: guestURLbetw3LJMobile;
