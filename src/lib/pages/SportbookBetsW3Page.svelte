@@ -107,6 +107,8 @@
                 url += `&lang=${lang}&r=url`;
                 const data = await backend.game.getURL(url);
                 url = data.url;
+                console.log("CONSOLE LOG", url);
+                
             } else {
                 url = resolveGuestURL(CLIENT_CODE, active_view, mode);
                 RESELLER();

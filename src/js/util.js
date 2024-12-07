@@ -20,7 +20,7 @@ const utils = (() => {
       return `${assets}/us_img_brands/${game.brand}.png` 
     }
     const getGameURL=(gameapi_url,game, usertoken)=>{
-      let url = gameapi_url +`/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}&game_multiple=true`;
+      let url = gameapi_url +`/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}`;
       return url;
     }
   const getGameURLTest = (gameapi_url, game, usertoken) => {
