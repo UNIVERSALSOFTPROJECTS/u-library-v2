@@ -109,8 +109,8 @@
                 url = data.url;
             } else {
                 url = resolveGuestURL(CLIENT_CODE, active_view, mode);
-                RESELLER();
-            }
+              }
+              RESELLER();
             sportbookGameUrl = url;
         } catch (error) {
            console.log("Sportbook Error",error);  
