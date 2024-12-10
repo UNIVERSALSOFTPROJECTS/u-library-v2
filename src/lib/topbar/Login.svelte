@@ -63,8 +63,10 @@
       let data;
       let utype = 1;
       debugger;
+      console.log("Current domain:", location.href);
       if (location.href.includes("terminal.")) {
         utype = 2;
+        console.log("Entered terminal condition, utype:", utype);
       }
       if (userGateway == "neco")
         data = await ServerConnection.users.login(username, password, utype);
