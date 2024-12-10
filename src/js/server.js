@@ -74,6 +74,7 @@ const ServerConnection = (() => {
         login: (username, password, utype =1) => {
             // if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, password, org: conf.org, utype }
+            console.log("RETURN", payload);
             return axios.post(conf.API + "/login", payload, { headers });
         },//operatorId o codeAgent,son lo mismo
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
