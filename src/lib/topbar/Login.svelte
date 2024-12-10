@@ -61,15 +61,12 @@
     try {
       loadLogin = true;
       let data;
-      let utype = 1;
-      debugger;
-      console.log("Current domain:", location.href);
+      let userType = 1;
       if (location.href.includes("terminal.")) {
-        utype = 2;
-        console.log("Entered terminal condition, utype:", utype);
+        userType = 2;
       }
       if (userGateway == "neco")
-        data = await ServerConnection.users.login(username, password, utype);
+        data = await ServerConnection.users.login(username, password, userType);
       else data = await ServerConnection.u_user.login(username, password);
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
