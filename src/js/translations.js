@@ -301,7 +301,7 @@ export default {
     "autoservice.selectCountry": "Seleccionar país",
     "autoservice.notAviable": "No disponible",
     "autoservice.buttons": "Botones",
-    "autoservice.deposit": "Despósito",
+    "autoservice.deposit": "Depósito",
     "autoservice.withdrawal": "Retiro",
     "autoservice.version" : "Versión Lite",
     // ------------------- BankDeposit --------------------------- \\
