@@ -139,13 +139,18 @@ export default {
     "msg.fewPinDigits": "EL CÓDIGO PIN DEBE SER DE 10 DIGITOS",
     "msg.wrongPin": "TU CÓDIGO DE PIN ES INVÁLIDO",
     //------------------------- JUST FOR VLT  ----------------------------//
-    "loby.userName": "Nombre",
-    //---
+    "common.userName": "Nombre",
     "common.enterPin": "Ingrese Pin",
     "common.withdrawal": "Cobrar",
     "common.recharge": "Recargar",
     "common.keepPlaying": "Seguir Jugando",
     "common.search": "Buscar",
+    "common.inactivityDetected": "Se detecto inactividad en el juego",
+    "common.wantToContinue": "¿Desea continuar?",
+    "common.accept" : "Si",
+    //---
+    "withdraw.selectToClaim": "Seleccione 'COBRAR' para reclamar su premio",
+    "withdraw.pending": "Usted tiene un retiro pendiente, por favor retire su premio",
     //---
     "searcherGames.title": "Buscar Juegos",
     "searcherGames.noData": "No hay datos en la busqueda",
@@ -1166,13 +1171,19 @@ export default {
     "msg.wrongPin": "YOUR PIN CODE IS INVALID",
 
     //------------------------- JUST FOR VLT  ----------------------------//
-    "loby.userName": "Name",
+    "lobby.userName": "Name",
     //---
     "common.enterPin": "Enter PIN",
     "common.withdrawal": "Withdraw",
     "common.recharge": "Recharge",
     "common.keepPlaying": "Keep Playing",
     "common.search": "Search",
+    "common.inactivityDetected": "Inactivity detected in the game",
+    "common.wantToContinue": "Do you want to continue?",
+    "common.accept" : "Yes",
+    //---
+    "withdraw.selectToClaim": "Select 'WITHDRAW' to claim your prize",
+    "withdraw.pending": "You have a pending withdrawal, please claim your prize",
     //---
     "searcherGames.title": "Search Games",
     "searcherGames.noData": "No data in search",
