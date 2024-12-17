@@ -1171,7 +1171,7 @@ export default {
     "msg.wrongPin": "YOUR PIN CODE IS INVALID",
 
     //------------------------- JUST FOR VLT  ----------------------------//
-    "lobby.userName": "Name",
+    "common.userName": "Name",
     //---
     "common.enterPin": "Enter PIN",
     "common.withdrawal": "Withdraw",
