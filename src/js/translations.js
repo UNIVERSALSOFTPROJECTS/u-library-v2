@@ -1006,7 +1006,7 @@ export default {
     "deposit.semiAutomatic" : "Semiautomático",
     "deposit.automatic" : "Automático"
   },
-  en : {
+  en: {
     "login.title": "Welcome to",
     "login.user": "User or email",
     "login.password": "Password",
@@ -1135,7 +1135,7 @@ export default {
     "msg.lowBalance": "INSUFFICIENT BALANCE",
     "msg.successfulProcess": "THE PROCESS WAS SUCCESSFULLY COMPLETED!",
     "msg.fewPinDigits": "THE PIN CODE MUST BE 10 DIGITS",
-    "msg.wrongPin": "YOUR PIN CODE IS INVALID"
+    "msg.wrongPin": "YOUR PIN CODE IS INVALID",
     //---------------Provider list-----------------------------
     "provider.playNow": "Play now",
     "provider.startNow": "Start now!",
@@ -1255,7 +1255,7 @@ export default {
     "lobby.loading": "Loading",
     "lobby.gameInProgress": "The game is already in progress",
     "lobby.chooseOtherGame": "Please choose another game",
-    "lobby.understood": "Understood"
+    "lobby.understood": "Understood",
     //-----------------------------------------------------------
     "profile.copyCode": "User: {{user}}\nId: {{id}}",
     "profile.balance": "Balance",

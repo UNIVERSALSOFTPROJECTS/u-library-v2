@@ -454,7 +454,7 @@
         platform,
         typeView,
         assetsUrl: "https://assets.apiusoft.com",
-        idioms: [{ id: "es" }, { id: "br" }, { id: "fr" }],
+        idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }],
         countries: [
             // {name: "Perú", domain:"pe"},
             // {name: "Ecuador", domain:"ec"},
