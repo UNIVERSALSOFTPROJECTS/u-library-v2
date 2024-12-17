@@ -138,6 +138,19 @@ export default {
     "msg.successfulProcess" : "¡EL PROCESO FUE REALIZADO CON EXITO!",
     "msg.fewPinDigits" : "EL CÓDIGO PIN DEBE SER DE 10 DIGITOS",
     "msg.wrongPin" : "TU CÓDIGO DE PIN ES INVÁLIDO",
+    //------------------------- JUST FOR VLT  ----------------------------//
+    "loby.userName" : "Nombre",
+    //---
+    "common.enterPin" : "Ingrese Pin",
+    "common.withdrawal" : "Cobrar",
+    "common.recharge" : "Recargar",
+    "common.keepPlaying" : "Seguir Jugando",
+    "common.search" : "Buscar",
+    //---
+    "searcherGames.title" : "Buscar Juegos",
+    "searcherGames.noData" : "No hay datos en la busqueda",
+    //---
+    "configGames.title" : "Configuración de juego",
 
     //---------------Provider list-----------------------------
     "provider.playNow": "Juega ahora",
