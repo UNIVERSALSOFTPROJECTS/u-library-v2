@@ -12,6 +12,8 @@
   export let CLIENT_CODE;
   
 
+  const domain = window.location.hostname;
+
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
 
@@ -110,7 +112,9 @@
             } else {
                 url = resolveGuestURL(CLIENT_CODE, active_view, mode);
               }
-              RESELLER();
+              if (!domain.includes('terminal')) {
+                RESELLER();
+              }
             sportbookGameUrl = url;
         } catch (error) {
            console.log("Sportbook Error",error);  
