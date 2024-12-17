@@ -71,8 +71,8 @@ export default {
     "withdrawal.mandatoryVerification": "Verificación obligatoria",
     "withdrawal.reminderCompleteVerification": "<b>Nota:</b>Asegúrate de completar <b>tu verificación de identidad</b> para poder proceder con el <b>retiro de tu dinero.</b> Sin esta verificación, <b>no podremos procesar tu solicitud.</b> Además, ten en cuenta que si tienes un bono activo y realizas un retiro, este se perderá.",
     "withdrawal.needHelp": "¿Necesitas ayuda?",
-    "withdrawal.time" : "Horario de retiro",
-    "withdrawal.phoneNumber" : "Número de teléfono",
+    "withdrawal.time": "Horario de retiro",
+    "withdrawal.phoneNumber": "Número de teléfono",
 
     "withdrawal.successful_recharge": "Recarga Exitosa",
 
@@ -134,23 +134,23 @@ export default {
 
 
     //========== VLT NOTIFICATION MESSAGES ==========
-    "msg.lowBalance" : "SALDO INSUFICIENTE",
-    "msg.successfulProcess" : "¡EL PROCESO FUE REALIZADO CON EXITO!",
-    "msg.fewPinDigits" : "EL CÓDIGO PIN DEBE SER DE 10 DIGITOS",
-    "msg.wrongPin" : "TU CÓDIGO DE PIN ES INVÁLIDO",
+    "msg.lowBalance": "SALDO INSUFICIENTE",
+    "msg.successfulProcess": "¡EL PROCESO FUE REALIZADO CON EXITO!",
+    "msg.fewPinDigits": "EL CÓDIGO PIN DEBE SER DE 10 DIGITOS",
+    "msg.wrongPin": "TU CÓDIGO DE PIN ES INVÁLIDO",
     //------------------------- JUST FOR VLT  ----------------------------//
-    "loby.userName" : "Nombre",
+    "loby.userName": "Nombre",
     //---
-    "common.enterPin" : "Ingrese Pin",
-    "common.withdrawal" : "Cobrar",
-    "common.recharge" : "Recargar",
-    "common.keepPlaying" : "Seguir Jugando",
-    "common.search" : "Buscar",
+    "common.enterPin": "Ingrese Pin",
+    "common.withdrawal": "Cobrar",
+    "common.recharge": "Recargar",
+    "common.keepPlaying": "Seguir Jugando",
+    "common.search": "Buscar",
     //---
-    "searcherGames.title" : "Buscar Juegos",
-    "searcherGames.noData" : "No hay datos en la busqueda",
+    "searcherGames.title": "Buscar Juegos",
+    "searcherGames.noData": "No hay datos en la busqueda",
     //---
-    "configGames.title" : "Configuración de juego",
+    "configGames.title": "Configuración de juego",
 
     //---------------Provider list-----------------------------
     "provider.playNow": "Juega ahora",
@@ -182,8 +182,8 @@ export default {
     "profile.recharge": "Recargar",
     "profile.support": "Soporte",
     // ------
-    "profile.fullname" : "Nombre completo",
-    "profile.dni" : "Documento de identidad",
+    "profile.fullname": "Nombre completo",
+    "profile.dni": "Documento de identidad",
 
     //---------------Bonus-----------------------------
     "bonus.total": "Saldo bono",
@@ -316,7 +316,7 @@ export default {
     "autoservice.buttons": "Botones",
     "autoservice.deposit": "Depósito",
     "autoservice.withdrawal": "Retiro",
-    "autoservice.version" : "Versión Lite",
+    "autoservice.version": "Versión Lite",
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
     "deposit.account": "CUENTA",
@@ -336,12 +336,12 @@ export default {
     "deposit.pendingRequest": "Depósito cancelado, tiene una solicitud pendiente",
     "deposit.successDeposit": "Depósito exitoso",
     "deposit.cachierSupport": "Comuniquese con su cajero correspondiente para procesar su depósito",
-    "deposit.details" : "Detalles",
+    "deposit.details": "Detalles",
     "deposit.typeTransfer": "Tipo de transferencia",
     "deposit.processingTime": "Tiempo de procesamiento",
     "deposit.step1": "Paso 1: Realiza un depósito a la siguiente cuenta",
     "deposit.step2": "Paso 2: Llena la información del depósito realizado",
-    "deposit.holder" : "Titular",
+    "deposit.holder": "Titular",
     "deposit.destinationBank": "Banco de destino",
     "deposit.originBank": "Banco de origen",
     "deposit.numAccount": "Nro. de cuenta",
@@ -357,11 +357,11 @@ export default {
     "deposit.terms": "Todos los depósitos serán acreditado a su cuenta en moneda local.Al depositar dinero a su cuenta, usted acepta automáticamente la versión mas reciente de los <a href='https://assets.apiusoft.com/365fortuna/t&c.pdf' target='_blank'style='color:red;'>términos y condiciones</a>",
     "deposit.important": "IMPORTANTE",
     "deposit.acceptTerms": "Acepto que al enviar el formulario estoy de acuerdo con los términos y condiciones de la Página web",
-    "deposit.confirmRecharge" : "Confirmar Recarga",
-    "deposit.direct" : "Directa",
-    "deposit.paymentGateway" : "Pasarela de pago",
-    "deposit.semiAutomatic" : "Semi-automático",
-    "deposit.automatic" : "Automatic"
+    "deposit.confirmRecharge": "Confirmar Recarga",
+    "deposit.direct": "Directa",
+    "deposit.paymentGateway": "Pasarela de pago",
+    "deposit.semiAutomatic": "Semi-automático",
+    "deposit.automatic": "Automatic"
 
   },
   fr: {
@@ -436,8 +436,8 @@ export default {
     "withdrawal.mandatoryVerification": "Vérification obligatoire",
     "withdrawal.reminderCompleteVerification": "<b>Remarque :</b>Assurez-vous de compléter <b>votre vérification d'identité</b> afin de procéder au <b>retrait de votre argent.</b> Sans cette vérification, <b>nous ne pourra pas traiter votre demande.</b>Veuillez également noter que si vous disposez d'un bonus actif et effectuez un retrait, celui-ci sera perdu.",
     "withdrawal.needHelp": "Avez-vous besoin d'aide ?",
-    "withdrawal.time" : "Heure de ramassage",
-    "withdrawal.phoneNumber" : "Numéro de téléphone",
+    "withdrawal.time": "Heure de ramassage",
+    "withdrawal.phoneNumber": "Numéro de téléphone",
 
     //---------------NAME CAT GAMES-----------------------------
     "categoryGame.home": "Home",
@@ -493,6 +493,21 @@ export default {
     "msg.refresh": "mise à jour",
     "msg.phoneInvalid": "Numéro de téléphone invalide!",
     "msg.withdrawalRequestSend": "Demande de retrait envoyée!",
+
+    //------------------------- JUST FOR VLT  ----------------------------//
+    "loby.userName": "Nom",
+    //---
+    "common.enterPin": "Entrez le code PIN",
+    "common.withdrawal": "Retirer",
+    "common.recharge": "Recharger",
+    "common.keepPlaying": "Continuer à jouer",
+    "common.search": "Rechercher",
+    //---
+    "searcherGames.title": "Rechercher des jeux",
+    "searcherGames.noData": "Aucune donnée dans la recherche",
+    //---
+    "configGames.title": "Configuration du jeu",
+
     //---------------Provider list-----------------------------
     "provider.playNow": "Jouez maintenant",
     "provider.startNow": "Commencez maintenant!",
@@ -522,11 +537,11 @@ export default {
     "profile.withdrawal": "Retirer",
     "profile.recharge": "Recharger",
     "profile.support": "Soutenir",
-    
+
 
     // ------
-    "profile.fullname" : "Nom et prénom",
-    "profile.dni" : "Pièce d'identité",
+    "profile.fullname": "Nom et prénom",
+    "profile.dni": "Pièce d'identité",
 
     //---------------Bonus-----------------------------
     "bonus.total": "Solde bonus",
@@ -661,7 +676,7 @@ export default {
     "autoservice.buttons": "Boutons",
     "autoservice.deposit": "Dépôt",
     "autoservice.withdrawal": "Retrait",
-    "autoservice.version" : "Version allégée",
+    "autoservice.version": "Version allégée",
 
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANQUE",
@@ -682,12 +697,12 @@ export default {
     "deposit.pendingRequest": "Dépôt annulé, vous avez une demande en attente",
     "deposit.successDeposit": "Dépôt réussi",
     "deposit.cachierSupport": "Contactez votre caissier approprié pour traiter votre dépôt",
-    "deposit.details" : "Détails",
+    "deposit.details": "Détails",
     "deposit.typeTransfer": "Type de transfert",
-    "deposit.processingTime":"Temps de traitement",
+    "deposit.processingTime": "Temps de traitement",
     "deposit.step1": "Étape 1 : Effectuez un dépôt sur le compte suivant",
     "deposit.step2": "Étape 2 : Remplissez les informations de dépôt",
-    "deposit.holder" : "Titulaire",
+    "deposit.holder": "Titulaire",
     "deposit.destinationBank": "Banque cible",
     "deposit.originBank": "Banque d'accueil",
     "deposit.numAccount": "Numéro de compte",
@@ -703,11 +718,11 @@ export default {
     "deposit.terms": "Tous les dépôts seront crédités sur votre compte en devise locale. En déposant de l'argent sur votre compte, vous acceptez automatiquement la version la plus récente de la cible <a href='https://assets.apiusoft.com/365fortuna/t&c.pdf'. ='_blank'style='color:red;'>termes et conditions</a>",
     "deposit.important": "IMPORTANTE",
     "deposit.acceptTerms": "J'accepte qu'en envoyant le formulaire j'accepte les termes et conditions du Site",
-    "deposit.confirmRecharge" : "Confirmer la recharge",
-    "deposit.direct" : "Direct",
-    "deposit.paymentGateway" : "Passerelle de paiement",
-    "deposit.semiAutomatic" : "Semi-automatique",
-    "deposit.automatic" : "Automatique"
+    "deposit.confirmRecharge": "Confirmer la recharge",
+    "deposit.direct": "Direct",
+    "deposit.paymentGateway": "Passerelle de paiement",
+    "deposit.semiAutomatic": "Semi-automatique",
+    "deposit.automatic": "Automatique"
   },
   //solo para testear crashgames login autosaved
   br: {
@@ -813,8 +828,8 @@ export default {
     "profile.recharge": "Recarregue",
     "profile.support": "Suporte",
     // ------
-    "profile.fullname" : "Nome completo",
-    "profile.dni" : "Documento de identificação",
+    "profile.fullname": "Nome completo",
+    "profile.dni": "Documento de identificação",
 
     //---------------Bonus-----------------------------
     "bonus.total": "Saldo bono",
@@ -938,8 +953,8 @@ export default {
     "withdrawal.mandatoryVerification": "Verificação obrigatória",
     "withdrawal.reminderCompleteVerification": "<b>Observação:</b>Certifique-se de concluir <b>sua verificação de identidade</b> para prosseguir com a <b>retirada de seu dinheiro.</b> Sem essa verificação, <b>vamos não será capaz de processar sua solicitação.</b>Além disso, observe que se você tiver um bônus ativo e fizer um saque, ele será perdido.",
     "withdrawal.needHelp": "Você precisa de ajuda?",
-    "withdrawal.time" : "Horário de retirada",
-    "withdrawal.phoneNumber" : "Número de telefone",
+    "withdrawal.time": "Horário de retirada",
+    "withdrawal.phoneNumber": "Número de telefone",
 
     //---------------NAME CAT GAMES-----------------------------
     "categoryGame.home": "Home",
@@ -971,7 +986,7 @@ export default {
     "autoservice.buttons": "Botões",
     "autoservice.deposit": "Depósito",
     "autoservice.withdrawal": "Retirada",
-    "autoservice.version" : "Versão Lite",
+    "autoservice.version": "Versão Lite",
 
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
@@ -992,12 +1007,12 @@ export default {
     "deposit.pendingRequest": "Depósito cancelado, você tem uma solicitação pendente",
     "deposit.successDeposit": "Depósito bem sucedido",
     "deposit.cachierSupport": "Entre em contato com o caixa apropriado para processar seu depósito",
-    "deposit.details" : "Detalhes",
+    "deposit.details": "Detalhes",
     "deposit.typeTransfer": "Tipo de transferência",
     "deposit.processing": "Tempo de processamento",
     "deposit.step1": "Passo 1: Faça um depósito na seguinte conta",
     "deposit.step2": "Passo 2: Preencha as informações de depósito",
-    "deposit.holder" : "Titular",
+    "deposit.holder": "Titular",
     "deposit.destinationBank": "Banco alvo",
     "deposit.originBank": "Banco doméstico",
     "deposit.numAccount": "Número de conta",
@@ -1013,11 +1028,11 @@ export default {
     "deposit.terms": "Todos os depósitos serão creditados em sua conta na moeda local. Ao depositar dinheiro em sua conta, você aceita automaticamente a versão mais recente do alvo <a href='https://assets.apiusoft.com/365fortuna/t&c.pdf'. ='_blank'style='color:red;'>termos e condições</a>",
     "deposit.important": "IMPORTANTE",
     "deposit.acceptTerms": "Aceito que ao enviar o formulário concordo com os termos e condições do Site",
-    "deposit.confirmRecharge" : "Confirmar recarga",
-    "deposit.direct" : "Direto",
-    "deposit.paymentGateway" : "Gateway de pagamento",
-    "deposit.semiAutomatic" : "Semiautomático",
-    "deposit.automatic" : "Automático"
+    "deposit.confirmRecharge": "Confirmar recarga",
+    "deposit.direct": "Direto",
+    "deposit.paymentGateway": "Gateway de pagamento",
+    "deposit.semiAutomatic": "Semiautomático",
+    "deposit.automatic": "Automático"
   },
   en: {
     "login.title": "Welcome to",
@@ -1149,6 +1164,22 @@ export default {
     "msg.successfulProcess": "THE PROCESS WAS SUCCESSFULLY COMPLETED!",
     "msg.fewPinDigits": "THE PIN CODE MUST BE 10 DIGITS",
     "msg.wrongPin": "YOUR PIN CODE IS INVALID",
+
+    //------------------------- JUST FOR VLT  ----------------------------//
+    "loby.userName": "Name",
+    //---
+    "common.enterPin": "Enter PIN",
+    "common.withdrawal": "Withdraw",
+    "common.recharge": "Recharge",
+    "common.keepPlaying": "Keep Playing",
+    "common.search": "Search",
+    //---
+    "searcherGames.title": "Search Games",
+    "searcherGames.noData": "No data in search",
+    //---
+    "configGames.title": "Game Configuration",
+
+
     //---------------Provider list-----------------------------
     "provider.playNow": "Play now",
     "provider.startNow": "Start now!",
