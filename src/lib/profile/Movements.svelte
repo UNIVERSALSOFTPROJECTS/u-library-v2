@@ -158,12 +158,12 @@
         const betsAll = {
             TTW: (o) => /-WIN-|PREMIO/.test(o.tipo_operacion),
             AP: (o) => /-BET-|AP/.test(o.tipo_operacion),
-            RF: (o) => /-REFUND-/.test(o.tipo_operacion),
+            RF: (o) => /-REFUND-|-LIBERA-/.test(o.tipo_operacion),
             CB: (o) => /CASHBACK/.test(o.tipo_operacion),
             BN: (o) => /Bono/.test(o.tipo_operacion),
             DV: (o) => /DEVOLUCION/.test(o.tipo_operacion),
             BAP: (o) =>
-                /-WIN-|-BET-|-AP-|-PREMIO-|-REFUND-/.test(o.tipo_operacion),
+                /-WIN-|-BET-|-AP-|-PREMIO-|-REFUND-|-LIBERA-/.test(o.tipo_operacion),
         };
 
         movements = betsAll[type] ? movements.filter(betsAll[type]) : movements;
@@ -172,7 +172,7 @@
             m.hora_reg_timezone = moment(m.lfecha * 1000)
                 .tz(timezone)
                 .format("YYYY-MM-DD HH:mm:ss");
-            m.opc = /-REFUND-/.test(m.tipo_operacion)
+            m.opc = /-REFUND-|-LIBERA-/.test(m.tipo_operacion)
                 ? "RF"
                 : /-BET-|AP/.test(m.tipo_operacion)
                   ? "AP"
