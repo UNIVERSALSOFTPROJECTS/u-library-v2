@@ -25,6 +25,10 @@
       id:93326
     }
   }
+
+  onMount(()=>{
+    console.log("UserState", userState);
+  });
   
   $: {
     openSport();
