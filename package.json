@@ -6,6 +6,10 @@
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
+  "files": [
+    "lib",
+    "styles"
+  ],
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "npm run build",
