@@ -2,7 +2,8 @@
   "name": "u-library-sass",
   "private": true,
   "files": [
-    "src/styles"
+    "src/styles",
+    "dist/index.js"
   ],
   "version": "0.0.1",
   "type": "module",
