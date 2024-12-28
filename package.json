@@ -1,11 +1,21 @@
 {
   "name": "u-library-sass",
-  "private": true,
+  "private": false,
+  "files": [
+    "styles/"
+  ],
   "version": "0.0.1",
   "type": "module",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./styles": "./styles/components"
+  },
   "scripts": {
     "build": "rollup -c",
     "prepublishOnly": "npm run build",
