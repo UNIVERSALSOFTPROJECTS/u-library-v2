@@ -1,6 +1,9 @@
 {
   "name": "u-library-sass",
   "private": true,
+  "files": [
+    "src"
+  ],
   "version": "0.0.1",
   "type": "module",
   "svelte": "src/index.js",
