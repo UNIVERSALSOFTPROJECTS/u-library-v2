@@ -62,7 +62,7 @@
       loadLogin = true;
       let data;
       let userType = 1;
-      if (location.href.includes("terminal.")) {
+      if (location.href.includes("terminal")) {
         userType = 2;
       }
       if (userGateway == "neco")
