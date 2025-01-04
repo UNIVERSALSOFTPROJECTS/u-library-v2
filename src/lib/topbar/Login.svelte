@@ -61,11 +61,11 @@
     try {
       loadLogin = true;
       let data;
-      let utype = 1;
+      let userType = 1;
       if (location.href.includes("terminal")) {
-        utype = 2;
+        userType = 2;
       }
-      if (userGateway == "neco") data = await ServerConnection.users.login(username, password, utype);
+      if (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType);
       else data = await ServerConnection.u_user.login(username, password);
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
