@@ -12,8 +12,12 @@ const ServerConnection = (() => {
         headers = {
             "Content-Type": "application/json",
             "clientAuth": conf.CLIENT_AUTH,
+            "client": conf.CLIENT_CODE
             "x-tenant": conf["x-tenant"],
-            "Accept": "application/json"
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Accept": "*"
         };
     }
 
