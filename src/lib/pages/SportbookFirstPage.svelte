@@ -8,13 +8,17 @@
   export let user;
   export let options;
   export let GAMEAPI_URL;
+  export let CLIENT_CODE;
 
   let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
 
   const first_id = "first_2024";
 
-  const guestURLfirst = "https://prod20370-150256248.freethrow777.com";
+  const guestURLs = {
+    LATI: "https://prod20370-152474279.freethrow777.com", 
+    default: "https://prod20370-150256248.freethrow777.com",
+  };
   
   const games = {
     'first':{
@@ -39,13 +43,19 @@
   }
 
   const openFirst = async () => { 
-    let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken) : guestURLfirst;
-    if (userState == "loggedIn"){
-      const data = await backend.game.getURL(url);
-      url = data.url
+    let url;
+    try {
+      if (userState == "loggedIn"){
+        url = ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken)
+        const data = await backend.game.getURL(url);
+        url = data.url
+      }else{
+        url = guestURLs[CLIENT_CODE] || guestURLs.default;
+      }
+      sportbookGameUrl = url;
+    } catch (error) {
+      console.log("Sportbook Error",error);
     }
-    console.log("urlSportBook: ",url);
-    sportbookGameUrl = url;
   }
 
   onDestroy(async () => {
