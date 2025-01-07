@@ -17,7 +17,7 @@ const ServerConnection = (() => {
             "Accept": "application/json"
         };
     }
-    }
+    
 
     const wallet = {
         checkPreviewWithdrawal: async (token) => {
