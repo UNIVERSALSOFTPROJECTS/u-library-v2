@@ -9,12 +9,15 @@ const ServerConnection = (() => {
 
     const setConfig = (config) => {
         conf = config;
-        headers = { "Content-Type": "application/json", "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, "x-tenant": conf["x-tenant"], 
-            "Access-Control-Allow-Origin": "*", 
-            "Access-Control-Allow-Methods": "*",
+        headers = {
+            "Content-Type": "application/json",
+            "clientAuth": conf.CLIENT_AUTH,
+            "x-tenant": conf["x-tenant"],
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "*",
             "Access-Control-Allow-Headers": "*",
-            "Accept": "application/json"};
+            "Accept": "application/json"
+        };
     }
 
     const wallet = {
@@ -81,7 +84,7 @@ const ServerConnection = (() => {
             let payload = { username, password, org: conf.org, userType }
             console.log("login", payload);
             return axios.post(conf.API + "/login", payload, { headers });
-        },//operatorId o codeAgent,son lo mismo
+        },
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
             if (!currency) throw "CURRENCY_MANDATORY";
             if (!conf.domain) throw "DOMAIN_MANDATORY";
