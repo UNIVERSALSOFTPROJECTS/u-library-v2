@@ -125,7 +125,7 @@
           url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken);
           url += active_view === "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
           url += `&lang=${lang}&r=url`;
-          if (CLIENT_CODE == 'PRLS') url += `&window_multiple=true`;
+          if (CLIENT_CODE == 'PRLS') url += `&game_multiple=true`;
           const data = await backend.game.getURL(url);
           url = data.url;
         } else {
