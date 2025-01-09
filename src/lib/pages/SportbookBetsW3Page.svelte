@@ -125,17 +125,14 @@
           url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken);
           url += active_view === "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
           url += `&lang=${lang}&r=url`;
-          if (CLIENT_CODE == 'BSPE') url += `&window_multiple=true`;
+          if (CLIENT_CODE == 'PRSL') url += `&window_multiple=true`;
           const data = await backend.game.getURL(url);
           url = data.url;
         } else {
             url = resolveGuestURL(CLIENT_CODE, active_view, mode);
         }
-        if (!domain.includes('terminal') || domain.includes('vista') ) {
-            RESELLER();
-            console.log("===================> RESELEER EXISTE");
-            
-        }
+        if (!domain.includes('terminal') || domain.includes('vista') ) RESELLER();
+        
         sportbookGameUrl = url;
       } catch (error) {
           console.log("Sportbook Error",error);  
