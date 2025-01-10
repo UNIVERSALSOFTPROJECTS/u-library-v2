@@ -322,6 +322,7 @@ export default {
     "autoservice.deposit": "Depósito",
     "autoservice.withdrawal": "Retiro",
     "autoservice.version": "Versión Lite",
+    "autoservice.printerType": "Tipo impresora",
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
     "deposit.account": "CUENTA",
@@ -682,6 +683,7 @@ export default {
     "autoservice.deposit": "Dépôt",
     "autoservice.withdrawal": "Retrait",
     "autoservice.version": "Version allégée",
+    "autoservice.printerType" : "Type d'imprimante",
 
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANQUE",
@@ -992,6 +994,7 @@ export default {
     "autoservice.deposit": "Depósito",
     "autoservice.withdrawal": "Retirada",
     "autoservice.version": "Versão Lite",
+    "autoservice.printerType": "Tipo de impressora",
 
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
@@ -1356,6 +1359,7 @@ export default {
     "autoservice.deposit": "Deposit",
     "autoservice.withdrawal": "Withdrawal",
     "autoservice.version": "Lite Version",
+    "autoservice.printerType": "Printer Type",
     // ------------------- BankDeposit ---------------------------
     "deposit.bank": "BANK",
     "deposit.account": "ACCOUNT",
