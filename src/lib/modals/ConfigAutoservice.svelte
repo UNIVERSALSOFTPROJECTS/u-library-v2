@@ -72,7 +72,8 @@
     }
     const toggPrinterType = () => {
         is58mm != is58mm;
-        is58mm?localStorage.setItem("papezSize", ""):localStorage.setItem("paperSize", "58mm");
+        // is58mm?localStorage.setItem("papezSize", ""):localStorage.setItem("paperSize", "58mm");
+        localStorage.setItem("paperSize", is58mm ? "58mm" : "");
     }
 
     //open Modal with specials keys
