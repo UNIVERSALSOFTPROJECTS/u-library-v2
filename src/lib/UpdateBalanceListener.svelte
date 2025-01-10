@@ -12,6 +12,9 @@
     
 
     onMount( ()=>{
+        console.log("user: ", user);
+        console.log("onChangeBalance: ", onChangeBalance);
+        
         // notify.setEM(EventManager);
         EventManager.subscribe("update_balance", (data)=>{
             // let msg = "SALDO ACTUALIZADO";
