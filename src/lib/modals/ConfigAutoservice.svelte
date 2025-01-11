@@ -21,7 +21,6 @@
     let isWithdrawal = localStorage.getItem("btnWithdrawal")?true:false;
     let isDeposit = localStorage.getItem("btnDeposit")?true:false;
     let isLiteVersion = localStorage.getItem("btnLiteVersion")?true:false;
-    let is58mm = localStorage.getItem("paperSize")?true:false;
     const domain = detectDomain();
     let subdomain = detectSubdomain();
 
@@ -67,13 +66,8 @@
     }
 
     const toggleBtnLiteVersion = () => {
-        isLiteVersion != isLiteVersion;
+        isLiteVersion != isLiteVersion; 
         isLiteVersion?localStorage.removeItem("btnLiteVersion"):localStorage.setItem("btnLiteVersion", "active");
-    }
-    const toggPrinterType = () => {
-        is58mm != is58mm;
-        // is58mm?localStorage.setItem("papezSize", ""):localStorage.setItem("paperSize", "58mm");
-        localStorage.setItem("paperSize", is58mm ? "58mm" : "");
     }
 
     //open Modal with specials keys
@@ -137,8 +131,6 @@
             <input type="checkbox" class="switch" id="withdrawal" bind:checked={isWithdrawal} on:click={toggleBtnWithdrawal}>
             <label for="version">{t("autoservice.version")}</label> 
             <input type="checkbox" class="switch" id="version" bind:checked={isLiteVersion} on:click={toggleBtnLiteVersion}>
-            <label for="version">{t("autoservice.printerType")}</label> 
-            <input type="checkbox" class="switch" id="version" bind:checked={is58mm} on:click={toggPrinterType}>
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>
