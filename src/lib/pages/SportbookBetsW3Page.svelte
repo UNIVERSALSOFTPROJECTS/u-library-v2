@@ -10,11 +10,12 @@
   export let GAMEAPI_URL;
   export let lang = 'es';
   export let CLIENT_CODE;
+  export let sportbookGameUrl = "";
   
 
   const domain = window.location.hostname;
 
-  let sportbookGameUrl = '';
+  // let sportbookGameUrl = '';
   let mode = ut.isMobile() ? "mb" : "wb";
 
  
@@ -124,7 +125,7 @@
         if (userState === "loggedIn") {
           url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken);
           url += active_view === "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
-          url += `&lang=${lang}&r=url`;
+          url += `&lang=${lang}&r=url`;  
           if (CLIENT_CODE == 'PRLS') url += `&game_multiple=true`;
           const data = await backend.game.getURL(url);
           url = data.url;
@@ -133,7 +134,6 @@
         }
         if (!domain.includes('terminal') || domain.includes('vista') ) RESELLER();
         sportbookGameUrl = url;
-        localStorage.setItem('sportbookGameUrl', sportbookGameUrl);
       } catch (error) {
           console.log("Sportbook Error",error);  
       }
