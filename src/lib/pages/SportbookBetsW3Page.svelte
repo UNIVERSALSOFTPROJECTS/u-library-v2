@@ -132,8 +132,8 @@
             url = resolveGuestURL(CLIENT_CODE, active_view, mode);
         }
         if (!domain.includes('terminal') || domain.includes('vista') ) RESELLER();
-        
         sportbookGameUrl = url;
+        localStorage.setItem('sportbookGameUrl', sportbookGameUrl);
       } catch (error) {
           console.log("Sportbook Error",error);  
       }
