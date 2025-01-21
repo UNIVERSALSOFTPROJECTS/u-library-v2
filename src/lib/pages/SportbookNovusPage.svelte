@@ -34,16 +34,12 @@
 
   const openNovusbet = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games, options.gameToken) : baseUrlNovusbet;
-    console.log("url getGame" + url);
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     if (userState == "loggedIn"){
       const data = await backend.game.getURL(url);
-      console.log("urlNovus Data", data);
       url = data.URL
-      console.log("urlNovus", url);
     }
     sportbookGameUrl = url;
-    console.log("urlNovus", sportbookGameUrl);
   };
   
   onDestroy(async () => {
