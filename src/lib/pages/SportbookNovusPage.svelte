@@ -39,7 +39,7 @@
     if (userState == "loggedIn"){
       const data = await backend.game.getURL(url);
       console.log("urlNovus Data", data);
-      url = data.url
+      url = data.URL
       console.log("urlNovus", url);
     }
     sportbookGameUrl = url;
