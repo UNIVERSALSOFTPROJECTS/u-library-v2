@@ -37,6 +37,7 @@ export {default as TopBar } from './lib/topbar/TopBar.svelte';
 export { default as SportbookPage } from './lib/pages/SportbookPage.svelte';
 export { default as SportbookFirstPage } from './lib/pages/SportbookFirstPage.svelte';
 export { default as SportbookBetsW3Page } from './lib/pages/SportbookBetsW3Page.svelte';
+export { default as SportbookNovusPage } from './lib/pages/SportbookNovusPage.svelte';
 export { default as ESportPage } from './lib/pages/ESportPage.svelte';
 export { default as BalanceSocketListener } from './lib/BalanceSocketListener.svelte';
 export { default as UpdateBalanceListener } from './lib/UpdateBalanceListener.svelte';
