@@ -225,8 +225,10 @@ function RESELLER (params) {
     if (userState == "loggedIn"){
       const data = await backend.game.getURL(url);
       url = data.url
+      console.log("urlNovus", url);
     }
     sportbookGameUrl = url;
+    console.log("urlNovus", sportbookGameUrl);
   };
   
   onDestroy(async () => {
