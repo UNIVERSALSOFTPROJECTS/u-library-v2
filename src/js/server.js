@@ -127,7 +127,7 @@ const ServerConnection = (() => {
             return axios.get(url, { headers });
         },
         authInGame: async (agregatorToken) => {
-          let url = conf.API+`/authInGame/${agregatorToken}`;
+          let url = conf.API_KS+`/authInGame/${agregatorToken}`;
           console.log(url,"desde server");
           return await axios.get(url, { headers });
         },
