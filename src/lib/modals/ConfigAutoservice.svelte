@@ -42,6 +42,10 @@
             localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
             modalOpen = false;
         }
+        if (subdomain == "") {
+            onError(t("autoservice.selectCountry"));
+            return;
+        }
         onOk(t("autoservice.configSaved"));
         setTimeout(() => {
                 sessionStorage.removeItem("user");
