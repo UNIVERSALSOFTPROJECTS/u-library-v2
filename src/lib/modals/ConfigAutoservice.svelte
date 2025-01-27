@@ -40,13 +40,18 @@
     const saveUser = () => {
         if(username != "" || password != "" ){
             localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
-            modalOpen = false;
+           
         }
         if (subdomain == "") {
             onError(t("autoservice.selectCountry"));
             return;
         }
         onOk(t("autoservice.configSaved"));
+
+        if(username != "" || password != "") {
+            modalOpen = false;
+        }
+
         setTimeout(() => {
                 sessionStorage.removeItem("user");
                 localStorage.setItem("domain",subdomain);
