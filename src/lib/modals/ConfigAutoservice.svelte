@@ -38,19 +38,16 @@
     }
 
     const saveUser = () => {
-        if(username != "" || password != "" ){
-            localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
-           
-        }
-        if (subdomain == "") {
+        if (subdomain == "" && window.location.href != "https://machinevlt.shop/") {
             onError(t("autoservice.selectCountry"));
             return;
         }
-        onOk(t("autoservice.configSaved"));
-
-        if(username != "" || password != "") {
+        if(username != "" || password != "" ){
+            localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
             modalOpen = false;
+           
         }
+        onOk(t("autoservice.configSaved"));
 
         setTimeout(() => {
                 sessionStorage.removeItem("user");
