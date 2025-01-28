@@ -83,9 +83,8 @@
     } catch (error) {
       console.log("error: ", error);
       if (
-        error.message == "Network Error" 
-        // ||
-        // error.response.data.message.includes("Connection refused")
+        error.message == "Network Error" ||
+        error.response.data.message.includes("Connection refused")
       )
         error = t("msg.pageMaintenance");
       else if (
