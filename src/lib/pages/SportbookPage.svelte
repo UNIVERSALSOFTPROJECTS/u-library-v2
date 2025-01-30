@@ -53,7 +53,7 @@
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${mode}`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
-  const baseUrlWin365 = `https://prod20370-154306407.442hattrick.com`;
+  const baseUrlWin365 = `https://prod20370-154306407.freethrow777.com`;
 
   const games = {
     'digtain':{
