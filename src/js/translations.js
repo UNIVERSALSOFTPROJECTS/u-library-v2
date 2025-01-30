@@ -888,9 +888,12 @@ export default {
     "movements.timezone": "Zona Horaria",
 
     //---------------HEADER-----------------------------
+    "header.myacc": "Minha conta",
     "header.balance": "Saldo",
-    "header.reload": "Recarregar",
-    "header.bonus": "Bônus",
+    "header.balanceBonus": "Saldo Bono",
+    "header.logout": "Encerrar sessão",
+    "header.login": "Acesso",
+    "header.signup": "Registro",
     //---------------APP-----------------------------
     "app.playNow": " ¡Jogar agora!",
     "app.preview": "Anterior",
