@@ -738,6 +738,7 @@ export default {
     "login.password": "Senha",
     "login.access": "Entrar",
     "login.remember": "Lembrar",
+    "login.signupHere": "É novo? <b>Registar aqui</b>",
     "login.forgetPassword": "Você esqueceu sua senha?",
     "login.autoserviceError": "Ocorreu um erro. Se o problema persistir, entre em contato com o suporte.",
     //---------------SINGUP-----------------------------
