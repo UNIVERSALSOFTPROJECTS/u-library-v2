@@ -91,27 +91,27 @@ import SocketConnector from '../src/js/SocketConnector'
 //
 
 
-export default{
-    start:()=>{
-        ServerConnection.setConfig({
-            platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
-            API:"https://lobby-bff.apiusoft.com",
-            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-            CLIENT_AUTH:"ADPNAPUESTADEPANA9APUESTADEPANA92023",
-            CLIENT_CODE:"ADPN",
-            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-            ASSETS:"https://assets.apiusoft.com",
-            WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
-            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-            country:"+56",
-            operatorId:"123",
-            domain:"https://apuestadepana.com/",
-            assetsUrl:"https://assets.apiusoft.com",
-            org:"ADP",
-            currency:7,//PEN
-        })
-    }
-}
+// export default{
+//     start:()=>{
+//         ServerConnection.setConfig({
+//             platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
+//             API:"https://lobby-bff.apiusoft.com",
+//             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+//             CLIENT_AUTH:"ADPNAPUESTADEPANA9APUESTADEPANA92023",
+//             CLIENT_CODE:"ADPN",
+//             LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+//             ASSETS:"https://assets.apiusoft.com",
+//             WS_URL:"wss://lobby-bff-test.apiusoft.com/lobbybff",
+//             ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+//             country:"+56",
+//             operatorId:"123",
+//             domain:"https://apuestadepana.com/",
+//             assetsUrl:"https://assets.apiusoft.com",
+//             org:"ADP",
+//             currency:7,//PEN
+//         })
+//     }
+// }
 
 //export default{
 //    start:()=>{
@@ -187,36 +187,36 @@ export default{
 //    }
 // }
 
-// export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
-//    start:()=>{
-//       ServerConnection.setConfig({
-//            API:"https://lobby-bff.apiusoft.com",
-//            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-//         //    CLIENT_AUTH:"DJTHDAJARTCHGAMES7DARAJATECHGAMES7123",
-//         //    CLIENT_CODE:"DJTH",
-//            CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
-//            CLIENT_CODE:"AAC1",
-//            CLIENT_ID: "21",
-//            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-//            API_GAMES_NODE: "https://prod-nd.apiusoft.com",
-//            ASSETS:"https://assets.apiusoft.com",
-//            WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
-//            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-//            country:"+56",
-//            operatorId:"123",
-//            domain:"http://coliseosport.com/",
-//            assetsUrl:"https://assets.apiusoft.com",
-//         //    org:"DJTH",
-//            org:"CLS",
-//            //currency:9,//PEN
-//       })
-//    },
-//    startSocket:()=>{
-//        SocketConnector.setConfig({
-//            WS_URL:"ws://localhost:5000",
-//        })
-//    }
-// }
+export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
+   start:()=>{
+      ServerConnection.setConfig({
+           API:"https://lobby-bff.apiusoft.com",
+           GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+        //    CLIENT_AUTH:"DJTHDAJARTCHGAMES7DARAJATECHGAMES7123",
+        //    CLIENT_CODE:"DJTH",
+           CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
+           CLIENT_CODE:"AAC1",
+           CLIENT_ID: "21",
+           LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+           API_GAMES_NODE: "https://prod-nd.apiusoft.com",
+           ASSETS:"https://assets.apiusoft.com",
+           WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
+           ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+           country:"+56",
+           operatorId:"123",
+           domain:"http://coliseosport.com/",
+           assetsUrl:"https://assets.apiusoft.com",
+        //    org:"DJTH",
+           org:"CLS",
+           //currency:9,//PEN
+      })
+   },
+   startSocket:()=>{
+       SocketConnector.setConfig({
+           WS_URL:"ws://localhost:5000",
+       })
+   }
+}
 
 // export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
 //     start:()=>{

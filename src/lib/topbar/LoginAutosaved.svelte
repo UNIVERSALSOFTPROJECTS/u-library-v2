@@ -21,6 +21,7 @@
 	let isAutoservice = autoLogin && typeView == "autoservice";
 	let isAutoserviceError = false;
 	let timerLogin;
+	let typeError = "";
 
 	async function loginClick(){
 		
@@ -44,8 +45,10 @@
 			console.log("error: ", error);
 			if (error.message == "Network Error" || error.response.data.message.includes("Connection refused"))
 				error = t("msg.pageMaintenance");
-			else if(error.response.data.message == "NECO_LOGIN_FAILED" || error.response.data.message == "LOGIN_ERROR")
+			else if(error.response.data.message == "NECO_LOGIN_FAILED" || error.response.data.message == "LOGIN_ERROR"){
 				error = t("msg.incorrectUserPass");
+				typeError = "incorrectUserPass";
+			}
 			else error = t("msg.contactSupport");
 			onError(error);
 			loadLogin = false;
@@ -76,7 +79,9 @@
 <div class="modal-body">
 	{#if isAutoserviceError}
 		<div class="login__autoservice error">
-			<p>{t("login.autoserviceError")}</p>
+			<p>
+				{typeError == 'incorrectUserPass'? t("msg.incorrectUserPass"): t("login.autoserviceError")}
+			</p>
 			<button class="btn" on:click={()=>location.reload()}>{t("msg.refresh")}</button>
 		</div>
 	{:else}
