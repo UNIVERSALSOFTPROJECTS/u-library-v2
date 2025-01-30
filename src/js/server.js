@@ -82,8 +82,8 @@ const ServerConnection = (() => {
         login: (username, password, userType) => {
             // if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, password, org: conf.org, userType }
-            console.log("login", payload);
-            return axios.post(conf.API + "/login", payload, { headers });
+
+            return axios.post(conf.API_KS + "/login", payload, { headers });
         },
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
             if (!currency) throw "CURRENCY_MANDATORY";
@@ -127,12 +127,12 @@ const ServerConnection = (() => {
             return axios.get(url, { headers });
         },
         authInGame: async (agregatorToken) => {
-          let url = conf.API+`/authInGame/${agregatorToken}`;
+          let url = conf.API_KS+`/authInGame/${agregatorToken}`;
           console.log(url,"desde server");
           return await axios.get(url, { headers });
         },
         getURL: async (url) => {
-            const response = await axios.get(url, {headers});
+            const response = await axios.get(url);
             return response.data;
         },
         getGameList: (category, section, page=1, currency='USD', xpage=20)=>{
@@ -244,7 +244,7 @@ const ServerConnection = (() => {
         login: (username, password) => {
             let payload = { username, password }
             console.log("headers", headers);
-            return axios.post(conf.API + "/api/casino/login", payload, { headers });
+            return axios.post(conf.API + "/login", payload, { headers });
 
         },
         register: (payload) => {

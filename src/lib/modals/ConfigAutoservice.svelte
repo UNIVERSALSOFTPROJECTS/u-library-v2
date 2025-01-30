@@ -38,11 +38,17 @@
     }
 
     const saveUser = () => {
+        if (subdomain == "" && window.location.href != "https://machinevlt.shop/") {
+            onError(t("autoservice.selectCountry"));
+            return;
+        }
         if(username != "" || password != "" ){
             localStorage.setItem('autoSaved',`[{"user":"${username}", "pass":"${password}"}]`)
             modalOpen = false;
+           
         }
         onOk(t("autoservice.configSaved"));
+
         setTimeout(() => {
                 sessionStorage.removeItem("user");
                 localStorage.setItem("domain",subdomain);
