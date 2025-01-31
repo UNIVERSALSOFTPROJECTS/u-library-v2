@@ -502,7 +502,6 @@ export default {
     "msg.successfulProcess": "LE PROCESSUS S'EST DÉROULÉ AVEC SUCCÈS !",
     "msg.fewPinDigits": "LE CODE PIN DOIT ÊTRE COMPOSÉ DE 10 CHIFFRES",
     "msg.wrongPin": "VOTRE CODE PIN N'EST PAS VALIDE",
-    
 
     //------------------------- JUST FOR VLT  ----------------------------//
     "loby.userName": "Nom",
