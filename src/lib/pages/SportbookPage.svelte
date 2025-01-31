@@ -31,6 +31,7 @@
   const bw3_id = "betsw3_2024";
   const panda_id = "1_SBO_1053_ThirdPartySportsBook";
   const AFB_id = "0_SBO_1015_ThirdPartySportsBook";
+  const frst_id = "first_2024";
   //const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
   //const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
   
@@ -52,6 +53,8 @@
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${mode}`;
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
+  const baseUrlWin365 = `https://prod20370-154306407.freethrow777.com`;
+
   const games = {
     'digtain':{
       provider: "edg",
@@ -106,6 +109,13 @@
       mode,
       id: 18500
     },
+    'first':{
+      gameid: frst_id,
+      provider: "first",
+      brand: "FIRST",
+      mode,
+      id:93326
+    }
   }
   
   onMount(()=>{
@@ -133,6 +143,23 @@
     else if (options.gameid == bbq_id) openBBQ();
     else if (options.gameid == pnc_id) openPinnacle();
     else if (options.gameid == bw3_id) openBetsW3();
+    else if (options.gameid == frst_id) openFirst();
+  }
+
+  const openFirst = async () => { 
+    let url;
+    try {
+      if (userState == "loggedIn"){
+        url = ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken)
+        const data = await backend.game.getURL(url);
+        url = data.url
+      }else{
+        url = baseUrlWin365;
+      }
+      sportbookGameUrl = url;
+    } catch (error) {
+      console.log("Sportbook Error",error);
+    }
   }
 
   const openPinnacle = async () => { 

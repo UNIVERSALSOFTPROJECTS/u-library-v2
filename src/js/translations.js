@@ -738,6 +738,7 @@ export default {
     "login.password": "Senha",
     "login.access": "Entrar",
     "login.remember": "Lembrar",
+    "login.signupHere": "É novo? <b>Registar aqui</b>",
     "login.forgetPassword": "Você esqueceu sua senha?",
     "login.autoserviceError": "Ocorreu um erro. Se o problema persistir, entre em contato com o suporte.",
     //---------------SINGUP-----------------------------
@@ -887,9 +888,12 @@ export default {
     "movements.timezone": "Zona Horaria",
 
     //---------------HEADER-----------------------------
+    "header.myacc": "Minha conta",
     "header.balance": "Saldo",
-    "header.reload": "Recarregar",
-    "header.bonus": "Bônus",
+    "header.balanceBonus": "Saldo Bono",
+    "header.logout": "Encerrar sessão",
+    "header.login": "Acesso",
+    "header.signup": "Registro",
     //---------------APP-----------------------------
     "app.playNow": " ¡Jogar agora!",
     "app.preview": "Anterior",
