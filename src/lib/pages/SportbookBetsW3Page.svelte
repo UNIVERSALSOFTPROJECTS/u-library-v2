@@ -30,11 +30,8 @@
     const guestURLPROW = "https://sports.jcasino.live/?target=86224&name=betsson2#/?target=betsson2-86224-integration&view=live";
     const guestURLPROWLive = "https://sports.jcasino.live/?target=86224&name=betsson2#/?target=betsson2-86224-integration&view=live";
 
-    const guestURLPROG = "https://sports.jcasino.live/?target=86224&name=betsamerica#/?target=betsamerica-86224-integration";
-    const guestURLPROGLive = "https://sports.jcasino.live/?target=86224&name=betsamerica#/?target=betsamerica-86224-integration&view=live";
-
-    const guestURLLJLiveMobile ="https://mbetsamerica.betsw3.win/live/Soccer/?auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9";
-    const guestURLLJMobile= "https://mbetsamerica.betsw3.win/prematch/Soccer/?auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9";
+    const guestURLPROG = "https://sports2.jcasino.live/?target=86224&name=betsamerica#/?target=betsamerica-86224-integration&token=123456789";
+    const guestURLPROGLive = "https://sports2.jcasino.live/?target=86224&name=betsamerica#/?target=betsamerica-86224-integration&token=123456789";
 
     const guestURLLJ = "https://betsamerica.betsw3.win/#/sport/?lang=spa&auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9&type=0";
     const guestURLLJLive ="https://betsamerica.betsw3.win/#/sport/?lang=spa&auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9&type=1";
@@ -72,15 +69,10 @@
         default: guestURLbt1,
       },
       default: {
-        live: {
-          mb: guestURLLJLiveMobile,
-          wb: guestURLLJLive,
+        live: guestURLLJLive,
+        default: guestURLLJ
         },
-        default: {
-          mb: guestURLLJMobile,
-          wb: guestURLLJ,
-        },
-      },
+  
     };
 
     const resolveGuestURL = (clientCode, view, mode) => {
