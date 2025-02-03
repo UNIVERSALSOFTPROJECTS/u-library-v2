@@ -498,7 +498,10 @@ export default {
     "msg.lostConnection": "conexão perdida",
     "msg.refresh": "mise à jour",
     "msg.phoneInvalid": "Numéro de téléphone invalide!",
-    "msg.withdrawalRequestSend": "Demande de retrait envoyée!",
+    "msg.withdrawalRequestSend": "Demande de retrait envoyée!", 
+    "msg.successfulProcess": "LE PROCESSUS S'EST DÉROULÉ AVEC SUCCÈS !",
+    "msg.fewPinDigits": "LE CODE PIN DOIT ÊTRE COMPOSÉ DE 10 CHIFFRES",
+    "msg.wrongPin": "VOTRE CODE PIN N'EST PAS VALIDE",
 
     //------------------------- JUST FOR VLT  ----------------------------//
     "loby.userName": "Nom",
