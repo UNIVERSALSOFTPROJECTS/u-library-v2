@@ -135,8 +135,11 @@
 
  
   onDestroy(async () => {
-    let {data} = await backend.users.getBalance(user.agregatorToken);
-    user.balance = data.balance;
+    // solo actualizaremos el balance si el usuario está logueado
+    if(user.agregatorToken){
+      let {data} = await backend.users.getBalance(user.agregatorToken);
+      user.balance = data.balance;
+    }
     document.body.style.overflow="scroll";
   });
 </script>
