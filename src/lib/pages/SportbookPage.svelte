@@ -39,10 +39,8 @@
   const guestURLbetw3bt1="https://sports.jcasino.live/#/?target=betsson1-86224-integration&token=123456789"
   const guestURLbetw3GWLive="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=live"
   const guestURLbetw3GW="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=prematch"
-  const guestURLbetw3LJLiveMobile ="https://mbetsamerica.betsw3.win/live/Soccer/?auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9"
-  const guestURLbetw3LJMobile= "https://mbetsamerica.betsw3.win/prematch/Soccer/?auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9"
-  const guestURLbetw3LJ = "https://betsamerica.betsw3.win/#/sport/?lang=spa&auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9&type=0"
-  const guestURLbetw3LJLive ="https://betsamerica.betsw3.win/#/sport/?lang=spa&auth_token=78140-504cb28edad6ad2f4fcff5d0b4b9&type=1"
+  const guestURLbetw3LJ = "https://sports2.jcasino.live/?target=86224&name=betsamerica#/live_ecuabets/?target=betsamerica-86224-integration&token=123456789"
+  const guestURLbetw3LJLive ="https://sports2.jcasino.live/?target=86224&name=betsamerica#/?target=betsamerica-86224-integration&token=123456789"
   const guestURLbetw3PRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/?target=parleysport-86224-integration&token=123456789";
   const guestURLbetw3 = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
   const guestURLbetw3LivePRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/live_ecuabets/?target=parleysport-86224-integration&token=123456789";
@@ -199,11 +197,8 @@ function RESELLER (params) {
       }
 
       else{
-        if(mode = 'mb'){
-          url=active_view == "sportbooklive" ? guestURLbetw3LJLiveMobile: guestURLbetw3LJMobile;
-        } else {
-          url =active_view == "sportbooklive" ? guestURLbetw3LJLive: guestURLbetw3LJ;
-        } 
+        url = active_view == "sportbooklive" ? guestURLbetw3LJ : guestURLbetw3LJLive;
+
 
       }
       console.log("url",url);
