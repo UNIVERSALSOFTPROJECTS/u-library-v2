@@ -4,11 +4,12 @@ import ServerConnection from './server';
 const UserHelper = (() => {
 
     const checkAndLoadUserLogged = async (conf) => {
-
         let user = null;
         const u = sessionStorage.getItem("user");
+        console.log("USER", u);
         if (u) {
             let user_ = JSON.parse(u);
+            console.log("userLooged", user_);
             user = user_;
             let data;
             if (conf.CLIENT_CODE == 'JU02') {
@@ -20,8 +21,8 @@ const UserHelper = (() => {
             user.balance = data.data.balance;
             //console.log("userLooged CONF", conf);
             connectToLobbySocket(user, conf);
-
         }
+        console.log("user", user);
         return user;
     };
 
