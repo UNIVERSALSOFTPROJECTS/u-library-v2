@@ -6,6 +6,7 @@ import SocketConnector from '../src/js/SocketConnector'
     start:()=>{
         ServerConnection.setConfig({
             API:"https://lobby-bff-test.apiusoft.com",
+            API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
             CLIENT_AUTH:"JU02TOMCAT00023423JAVA009DEMOPLATFORM123",
             CLIENT_CODE:"JU02",
@@ -29,6 +30,7 @@ import SocketConnector from '../src/js/SocketConnector'
 //    start:()=>{
 //        ServerConnection.setConfig({
 //            API:"https://lobby-bff.apiusoft.com",
+// API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
 //            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
 //            CLIENT_AUTH:"GAWNGANAWIN2024GANA20GANAWIN2024WINGWIN",
 //            CLIENT_CODE:"GAWN",
@@ -51,8 +53,8 @@ import SocketConnector from '../src/js/SocketConnector'
 //    start:()=>{
 //        ServerConnection.setConfig({
 //            API:"https://lobby-bff.apiusoft.com",
+// API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
 //            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-//            API:"https://lobby-bff.apiusoft.com",
 //            CLIENT_AUTH:"A12D3853C2C0A95F6C4HIPICASBABIEC",
 //            CLIENT_CODE:"A12D",
 //            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
@@ -72,6 +74,7 @@ import SocketConnector from '../src/js/SocketConnector'
 //    start:()=>{
 //        ServerConnection.setConfig({
 //            API:"https://lobby-bff.apiusoft.com",
+// API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
 //            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
 //            CLIENT_AUTH:"GOLD21GOLDENBET4A19028GOLDENBET1",
 //            CLIENT_CODE:"GOLD",
@@ -96,6 +99,7 @@ import SocketConnector from '../src/js/SocketConnector'
 //         ServerConnection.setConfig({
 //             platformId:'58dc8282-ab26-4e2d-9235-be4a3e2be91d',
 //             API:"https://lobby-bff.apiusoft.com",
+// API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
 //             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
 //             CLIENT_AUTH:"ADPNAPUESTADEPANA9APUESTADEPANA92023",
 //             CLIENT_CODE:"ADPN",
@@ -117,6 +121,7 @@ import SocketConnector from '../src/js/SocketConnector'
 //    start:()=>{
 //        ServerConnection.setConfig({
 //            API:"https://lobby-bff.apiusoft.com",
+// API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
 //            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
 //            CLIENT_AUTH:"ADPNAPUESTADEPANA9APUESTADEPANA92023",
 //            CLIENT_CODE:"ADPN",
@@ -144,6 +149,7 @@ import SocketConnector from '../src/js/SocketConnector'
 //    start:()=>{
 //        ServerConnection.setConfig({
 //            API:"https://lobby-bff.apiusoft.com",
+// API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
 //            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
 //            CLIENT_AUTH:"DRVY23SUPERDERVY423SUPERDERVY",
 //            CLIENT_CODE:"DRVY",
@@ -164,6 +170,7 @@ import SocketConnector from '../src/js/SocketConnector'
 //    start:()=>{
 //       ServerConnection.setConfig({
 //            API:"https://lobby-bff.apiusoft.com",
+// API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
 //            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
 //            CLIENT_AUTH:"086C6928CB443C361BC72F05JETBET24086C",
 //            CLIENT_CODE:"086C",
@@ -191,6 +198,7 @@ export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", p
    start:()=>{
       ServerConnection.setConfig({
            API:"https://lobby-bff.apiusoft.com",
+           API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
         //    CLIENT_AUTH:"DJTHDAJARTCHGAMES7DARAJATECHGAMES7123",
         //    CLIENT_CODE:"DJTH",
@@ -222,6 +230,7 @@ export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", p
 //     start:()=>{
 //        ServerConnection.setConfig({
 //             API:"https://lobby-bff.apiusoft.com",
+// API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
 //             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
 //             CLIENT_AUTH:"50DA9A125986F573C0EUNIVERSALRACE123",
 //             CLIENT_CODE:"50DA",
