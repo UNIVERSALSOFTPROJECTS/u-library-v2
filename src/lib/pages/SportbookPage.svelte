@@ -39,8 +39,8 @@
   const guestURLbetw3bt1="https://sports.jcasino.live/#/?target=betsson1-86224-integration&token=123456789"
   const guestURLbetw3GWLive="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=live"
   const guestURLbetw3GW="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=prematch"
-  const guestURLbetw3LJ = "https://sports2.jcasino.live/?target=86224&name=betsamerica#/live_ecuabets/?target=betsamerica-86224-integration"
-  const guestURLbetw3LJLive ="https://sports2.jcasino.live/?target=86224&name=betsamerica#/?target=betsamerica-86224-integration"
+  const guestURLbetw3LJ = "https://sports2.jcasino.live/?target=86224&name=betsamerica#/live_ecuabets/?target=betsamerica-86224-integration&token=123456789"
+  const guestURLbetw3LJLive ="https://sports2.jcasino.live/?target=86224&name=betsamerica#/?target=betsamerica-86224-integration&token=123456789"
   const guestURLbetw3PRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/?target=parleysport-86224-integration&token=123456789";
   const guestURLbetw3 = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
   const guestURLbetw3LivePRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/live_ecuabets/?target=parleysport-86224-integration&token=123456789";
