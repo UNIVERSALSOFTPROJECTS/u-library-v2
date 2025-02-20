@@ -135,7 +135,7 @@ export default {
 
     //========== VLT NOTIFICATION MESSAGES ==========
     "msg.lowBalance": "SALDO INSUFICIENTE",
-    "msg.successfulProcess": "¡EL PROCESO FUE REALIZADO CON EXITO!",
+    "msg.successfulProcess": "¡Saldo acreditado con éxito! Verifique su balance y, si no está actualizado, recargue el juego.",
     "msg.fewPinDigits": "EL CÓDIGO PIN DEBE SER DE 10 DIGITOS",
     "msg.wrongPin": "TU CÓDIGO DE PIN ES INVÁLIDO",
     //------------------------- JUST FOR VLT  ----------------------------//
@@ -499,7 +499,7 @@ export default {
     "msg.refresh": "mise à jour",
     "msg.phoneInvalid": "Numéro de téléphone invalide!",
     "msg.withdrawalRequestSend": "Demande de retrait envoyée!", 
-    "msg.successfulProcess": "LE PROCESSUS S'EST DÉROULÉ AVEC SUCCÈS !",
+    "msg.successfulProcess": "¡Saldo acreditado con éxito! Vérifiez votre équilibre et, si vous n'êtes pas actualisé, relancez le jeu.",
     "msg.fewPinDigits": "LE CODE PIN DOIT ÊTRE COMPOSÉ DE 10 CHIFFRES",
     "msg.wrongPin": "VOTRE CODE PIN N'EST PAS VALIDE",
 
@@ -1176,7 +1176,7 @@ export default {
     "msg.phoneInvalid": "Invalid phone number!",
     "msg.withdrawalRequestSend": "Withdrawal request sent!",
     "msg.lowBalance": "INSUFFICIENT BALANCE",
-    "msg.successfulProcess": "THE PROCESS WAS SUCCESSFULLY COMPLETED!",
+    "msg.successfulProcess": "¡Saldo acreditado con exito! Check your balance and if it is not updated, reload the game.",
     "msg.fewPinDigits": "THE PIN CODE MUST BE 10 DIGITS",
     "msg.wrongPin": "YOUR PIN CODE IS INVALID",
 
