@@ -39,6 +39,9 @@
     const guestURL = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
     const guestURLLive = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
 
+    const guestURLsWin365 = "https://sports2.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration";
+    const guestURLsLiveWin365 = "https://sports2.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration";
+
     const guestURLs = {
       BPEN: {
         live: guestURLLive,
@@ -71,8 +74,11 @@
       default: {
         live: guestURLLJLive,
         default: guestURLLJ
-        },
-  
+      },
+      defaultWin365: {
+        live : guestURLsLiveWin365,
+        default : guestURLsWin365
+      }
     };
 
     const resolveGuestURL = (clientCode, view, mode) => {
