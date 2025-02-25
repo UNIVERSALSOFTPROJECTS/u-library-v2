@@ -21,8 +21,10 @@
  
     const bw3_id = "betsw3_2024";
     
-    const guestURLbt1Live="https://sports.jcasino.live/#/live_ecuabets/?target=betsson1-86224-integration&token=123456789";
-    const guestURLbt1="https://sports.jcasino.live/#/?target=betsson1-86224-integration&token=123456789";
+    const guestURLbt1Live="https://sports2.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration";
+    // const guestURLbt1Live="https://sports.jcasino.live/#/live_ecuabets/?target=betsson1-86224-integration&token=123456789";
+    const guestURLbt1="https://sports2.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration";
+    // const guestURLbt1="https://sports.jcasino.live/#/?target=betsson1-86224-integration&token=123456789";
 
     const guestURLPOIILive="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=live";
     const guestURLPOII="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=prematch";
@@ -38,9 +40,6 @@
 
     const guestURL = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
     const guestURLLive = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
-
-    const guestURLsWin365 = "https://sports2.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration";
-    const guestURLsLiveWin365 = "https://sports2.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration";
 
     const guestURLs = {
       BPEN: {
@@ -74,11 +73,8 @@
       default: {
         live: guestURLLJLive,
         default: guestURLLJ
-      },
-      defaultWin365: {
-        live : guestURLsLiveWin365,
-        default : guestURLsWin365
-      }
+        },
+  
     };
 
     const resolveGuestURL = (clientCode, view, mode) => {
