@@ -77,12 +77,12 @@
     }
 
     onMount(() => {
-        // window.addEventListener('message', receiveMessage, false);
+        window.addEventListener('message', receiveMessage, false);
         window.addEventListener('resize', resizeHeightModal); 
     });
     
     onDestroy(() => {
-        // window.removeEventListener('message', receiveMessage);
+        window.removeEventListener('message', receiveMessage);
         window.removeEventListener('resize', resizeHeightModal);
         console.log("Cleaned up event listeners");
     });
