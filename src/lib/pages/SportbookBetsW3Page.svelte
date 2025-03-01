@@ -21,8 +21,10 @@
  
     const bw3_id = "betsw3_2024";
     
-    const guestURLbt1Live="https://sports.jcasino.live/#/live_ecuabets/?target=betsson1-86224-integration&token=123456789";
-    const guestURLbt1="https://sports.jcasino.live/#/?target=betsson1-86224-integration&token=123456789";
+    const guestURLbt1Live="https://sports2.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=live&token=123456789";
+    // const guestURLbt1Live="https://sports.jcasino.live/#/live_ecuabets/?target=betsson1-86224-integration&token=123456789";
+    const guestURLbt1="https://sports2.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&token=123456789";
+    // const guestURLbt1="https://sports.jcasino.live/#/?target=betsson1-86224-integration&token=123456789";
 
     const guestURLPOIILive="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=live";
     const guestURLPOII="https://sports.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=prematch";
