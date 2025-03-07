@@ -89,7 +89,8 @@
         error = t("msg.pageMaintenance");
       else if (
         error.response.data.message == "NECO_LOGIN_FAILED" ||
-        error.response.data.message == "LOGIN_ERROR"
+        error.response.data.message == "LOGIN_ERROR" || 
+        error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
       )
         error = t("msg.incorrectUserPass");
       else error = t("msg.contactSupport"); //si aparece esto, es un tipo de error nuevo y se tieneque debbugear
