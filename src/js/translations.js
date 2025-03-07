@@ -31,7 +31,7 @@ export default {
     "signup.acceptPandP": "Confirmo haber leído y aceptado los <a href='{{routePDF}}/signup_t&c.pdf' target='_blank'><b>Términos y condiciones</b></a> de {{platform}}.",
     "signup.register": "Registrarse",
     "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
-    "signup.verification": "Verificación",
+    "signup.verification": "Generar codigo de verificación para activar cuenta",
     //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
     "currency.usd": "Dólar estadounidense",
     "currency.clp": "Peso chileno",
@@ -766,7 +766,7 @@ export default {
     "signup.acceptPandP": "Confirmo haber leído y aceptado los <a href='{{routePDF}}/signup_t&c.pdf' target='_blank'><b>Términos y condiciones</b></a> de {{platform}}.",
     "signup.register": "Registrarse",
     "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
-    "signup.verification": "Verificación",
+    "signup.verification": "Generar codigo de verificación para activar cuenta",
     //---------------FOOTER-----------------------------
     "footer.s_p": "Seguridad y privacidad",
     "footer.t_c": "Términos y condiciones",
