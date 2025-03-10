@@ -21,6 +21,7 @@
     let isWithdrawal = localStorage.getItem("btnWithdrawal")?true:false;
     let isDeposit = localStorage.getItem("btnDeposit")?true:false;
     let isLiteVersion = localStorage.getItem("btnLiteVersion")?true:false;
+    let isVirtualKeyboard = localStorage.getItem("btnVirtualKeyboard")?true:false;
     const domain = detectDomain();
     let subdomain = detectSubdomain();
 
@@ -74,6 +75,10 @@
     const toggleBtnLiteVersion = () => {
         isLiteVersion != isLiteVersion; 
         isLiteVersion?localStorage.removeItem("btnLiteVersion"):localStorage.setItem("btnLiteVersion", "active");
+    }
+    const toggleBtnsVirtualKeyboard = () => {
+        isVirtualKeyboard != isVirtualKeyboard; 
+        isVirtualKeyboard?localStorage.removeItem("btnVirtualKeyboard"):localStorage.setItem("btnVirtualKeyboard", "active");
     }
 
     //open Modal with specials keys
@@ -137,6 +142,8 @@
             <input type="checkbox" class="switch" id="withdrawal" bind:checked={isWithdrawal} on:click={toggleBtnWithdrawal}>
             <label for="version">{t("autoservice.version")}</label> 
             <input type="checkbox" class="switch" id="version" bind:checked={isLiteVersion} on:click={toggleBtnLiteVersion}>
+            <label for="keyboard">{t("autoservice.virtualKeyboard")}</label> 
+            <input type="checkbox" class="switch" id="keyboard" bind:checked={isVirtualKeyboard} on:click={toggleBtnsVirtualKeyboard}>
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>

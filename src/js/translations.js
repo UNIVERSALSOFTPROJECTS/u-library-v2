@@ -31,7 +31,7 @@ export default {
     "signup.acceptPandP": "Confirmo haber leído y aceptado los <a href='{{routePDF}}/signup_t&c.pdf' target='_blank'><b>Términos y condiciones</b></a> de {{platform}}.",
     "signup.register": "Registrarse",
     "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
-    "signup.verification": "Verificación",
+    "signup.verification": "Generar codigo de verificación para activar cuenta",
     //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
     "currency.usd": "Dólar estadounidense",
     "currency.clp": "Peso chileno",
@@ -323,6 +323,7 @@ export default {
     "autoservice.withdrawal": "Retiro",
     "autoservice.version": "Versión Lite",
     "autoservice.printerType": "Tipo impresora",
+    "autoservice.virtualKeyboard": "Teclado virtual",
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
     "deposit.account": "CUENTA",
@@ -687,6 +688,7 @@ export default {
     "autoservice.withdrawal": "Retrait",
     "autoservice.version": "Version allégée",
     "autoservice.printerType" : "Type d'imprimante",
+    "autoservice.virtualKeyboard": "Clavier virtuel",
 
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANQUE",
@@ -766,7 +768,7 @@ export default {
     "signup.acceptPandP": "Confirmo haber leído y aceptado los <a href='{{routePDF}}/signup_t&c.pdf' target='_blank'><b>Términos y condiciones</b></a> de {{platform}}.",
     "signup.register": "Registrarse",
     "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
-    "signup.verification": "Verificación",
+    "signup.verification": "Generar codigo de verificación para activar cuenta",
     //---------------FOOTER-----------------------------
     "footer.s_p": "Seguridad y privacidad",
     "footer.t_c": "Términos y condiciones",
@@ -1002,7 +1004,7 @@ export default {
     "autoservice.withdrawal": "Retirada",
     "autoservice.version": "Versão Lite",
     "autoservice.printerType": "Tipo de impressora",
-
+    "autoservice.virtualKeyboard": "Teclado virtual",
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
     "deposit.account": "CONTA",
@@ -1367,6 +1369,7 @@ export default {
     "autoservice.withdrawal": "Withdrawal",
     "autoservice.version": "Lite Version",
     "autoservice.printerType": "Printer Type",
+    "autoservice.virtualKeyboard": "Virtual Keyboard",
     // ------------------- BankDeposit ---------------------------
     "deposit.bank": "BANK",
     "deposit.account": "ACCOUNT",
