@@ -86,7 +86,6 @@ const ServerConnection = (() => {
         login: (username, password, userType) => {
             // if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, password, org: conf.org, userType }
-
             return axios.post(conf.API + "/login", payload, { headers });
         },
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
@@ -161,6 +160,33 @@ const ServerConnection = (() => {
             else if(section=="NEW") url += `&n=true`;
             else if( /BACC|RLIV|BJLIV|MWLIV|LOTTO|SICBO|TVLIV|DROP|CLASS|RULE|TABL|MEGA|FAST/.test(section)) url += `&t=${section}`; 
             return axios.get(url, { headers });
+        },
+        getGameListV2: async (category, section, page = 1, currency = 'USD', xpage = 20) => {
+            let url = `${conf.API}/games?c=${category}&page=${page}&xpage=${xpage}`;
+            if (section !== "ALL") {
+                // Verificar si `section` contiene un filtro de búsqueda
+                if (typeof section === 'object') {
+                    if (section.searchAll) {
+                        url += `&a=${section.searchAll}`;
+                    } else if (section.search) {
+                        url += `&g=${section.search}`;
+                    }
+                }
+                // Otras condiciones para secciones específicas
+                if (/BACC|TABLE|MEGAW|INDI|VIRT|DICE|SINGLE|RULE|RLIV|BINGO|BJLIV|MWLIV|LOTTO|SICBO|TVLIV|DROP|CLAS|FAST/.test(section)) {
+                    url += `&t=${section}`;
+                } else if (section === "TOP") {
+                    url += "&o=200000";
+                } else if (section === "POP") {
+                    url += "&o=100000";
+                } else if (section === "NEW") {
+                    url += "&n=true";
+                } else if (section && typeof section !== 'object') {
+                    url += `&b=${section}`;
+                }
+            }
+            const response = await axios.get(url, { headers });
+            return response.data;
         },
         getGamesTypeSlot: ()=>{
             let url = `${conf.API_GAMES_NODE}/lobby/gameTypesByClient?cat=slot&type=wb&client=${conf.CLIENT_ID}`;
