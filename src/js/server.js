@@ -19,7 +19,6 @@ const ServerConnection = (() => {
         };
     }
     
-
     const wallet = {
         checkPreviewWithdrawal: async (token) => {
             let url = conf.API + `/checkRetailWithdrawal/${token}`;
@@ -54,7 +53,7 @@ const ServerConnection = (() => {
             return await axios.post(url, payload, { headers });
         },
         getPayMethods: async (userToken) => {
-            let url = conf.API_KS + "/paymethods/" + userToken;
+            let url = conf.API + "/paymethods/" + userToken;
             return await axios.get(url, { headers });
         },
         getPayLink: async (token, amount, type) => {
@@ -66,6 +65,11 @@ const ServerConnection = (() => {
         getBalance: (userToken) => {
             let url = conf.API + `/balance/${userToken}`;
             return axios.get(url, { headers });
+        },
+        authInGame: async (agregatorToken) => {
+            let url = conf.API;
+            const response = await axios.get(`${url}/authInGame/${agregatorToken}`, { headers });
+            return response.data;
         },
         getCurrencyIdByCodeAgent: (id) => {
             let url = conf.API + `/retailAgents/${id}/currencies`;
@@ -83,7 +87,7 @@ const ServerConnection = (() => {
             // if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, password, org: conf.org, userType }
 
-            return axios.post(conf.API_KS + "/login", payload, { headers });
+            return axios.post(conf.API + "/login", payload, { headers });
         },
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
             if (!currency) throw "CURRENCY_MANDATORY";
@@ -122,12 +126,25 @@ const ServerConnection = (() => {
     }
     const game = {
         getBrandList: (category) => {
-            let url = conf.API_KS + `/brands?m=wb`;
+            let url = conf.API + `/brands?m=wb`;
             url += category != "all" ? "&c=" + category : ""
             return axios.get(url, { headers });
         },
+        gameTypes: async () => {
+            const response = await axios.get(`${conf.API}/gameTypes?c=slot&m=wb`, { headers });
+            return response.data;
+        },
+        getFavGames: async (userToken, category) => {
+            const response = await axios.get(`${conf.API}/favs?c=${category}&m=wb&t=${userToken}`, { headers });
+            return response.data;
+        },
+        saveFav: async (userToken, gameId, action) => {
+            const payload = { action, g: gameId, t: userToken };
+            const response = await axios.post(`${conf.API}/saveFavs`, payload, { headers });
+            return response.data;
+        },
         authInGame: async (agregatorToken) => {
-          let url = conf.API_KS+`/authInGame/${agregatorToken}`;
+          let url = conf.API+`/authInGame/${agregatorToken}`;
           console.log(url,"desde server");
           return await axios.get(url, { headers });
         },
@@ -136,7 +153,7 @@ const ServerConnection = (() => {
             return response.data;
         },
         getGameList: (category, section, page=1, currency='USD', xpage=20)=>{
-            let url=conf.API_KS+`/games?c=${category}&m=wb&page=${page}&xpage=${xpage}&curr=${currency}`;
+            let url=conf.API+`/games?c=${category}&m=wb&page=${page}&xpage=${xpage}&curr=${currency}`;
             if( typeof section =='object' && section.brand ) url += `&b=${section.brand}`;
             else if( typeof section =='object' && section.search ) url += `&g=${section.search}`;
             else if(section=="TOP") url += `&o=200000`;
