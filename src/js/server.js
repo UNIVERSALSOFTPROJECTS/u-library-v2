@@ -11,7 +11,9 @@ const ServerConnection = (() => {
         conf = config;
         headers = {
             "Content-Type": "application/json;charset=UTF-8", 
-            "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
+            "clientAuth": conf.CLIENT_AUTH, 
+            "client": conf.CLIENT_CODE, 
+            ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "*",
             "Access-Control-Allow-Headers": "*",
@@ -62,18 +64,18 @@ const ServerConnection = (() => {
         },
     }
     const users = {
-        getBalance: (userToken) => {
-            let url = conf.API + `/balance/${userToken}`;
-            return axios.get(url, { headers });
+        getBalance:  async(userToken) => {
+            const response = await axios.get(`${conf.API}/balance/${userToken}`, { headers });
+            return response.data;
         },
         authInGame: async (agregatorToken) => {
             let url = conf.API;
             const response = await axios.get(`${url}/authInGame/${agregatorToken}`, { headers });
             return response.data;
         },
-        getCurrencyIdByCodeAgent: (id) => {
-            let url = conf.API + `/retailAgents/${id}/currencies`;
-            return axios.get(url, { headers });
+        getCurrencyIdByCodeAgent: async(id) => {
+            const response = await axios.get(`${conf.API}/retailAgents/${id}/currencies`, { headers });
+            return response.data;
         },
         preRegister: (username, email, phone, platform, channel) => {
             let url = conf.API + "/user/preRegister";
@@ -101,40 +103,48 @@ const ServerConnection = (() => {
             let payload = { email:data.email, url, org: conf.org };
             return axios.post(`${conf.API}/resetPassword`, payload, { headers });
         },
-        confirmResetPassword:(temporalToken)=>{
+        confirmResetPassword:async(temporalToken)=>{
             if (!conf.org) throw "ORG_MANDATORY";
             let payload = { token:temporalToken, org: conf.org };
-            return axios.post(`${conf.API}/confirmResetPassword`, payload, { headers });
+            const response = await axios.post(`${conf.API}/confirmResetPassword`, payload, { headers });
+            return response.data;
         },
-        getMyAccount: (userToken)=>{
+        getMyAccount: async(userToken)=>{
             let url = conf.API +`/myaccount/`+ userToken;
-            return axios.get(url, { headers });
+            const response = await axios.get(url, { headers });
+            return response.data;
         },
-        saveMyAccount: (user) =>{   
+        saveMyAccount: async(user) =>{   
             let payload =  user;
-            return axios.post(`${conf.API}/user/myAccount`, payload, { headers });
+            const response = await axios.post(`${conf.API}/user/myAccount`, payload, { headers });
+            return response.data;
         },
-        changePassword: (userToken, newPassword, oldpass)=>{
+        changePassword: async(userToken, newPassword, oldpass)=>{
             let payload = { userToken, newPassword, oldpass }
-            return axios.post(`${conf.API}/changepassword`, payload, { headers });
+            const response = await axios.post(`${conf.API}/changepassword`, payload, { headers });
+            return response.data;
         },
-        getMovements: (token, dateStringFrom, dateStringTo, filter)=>{
+        getMovements: async(token, dateStringFrom, dateStringTo, filter)=>{
             let url = conf.API+`/wallet/${token}/${dateStringFrom}/${dateStringTo}/${filter}/movements`;
-            return axios.get(url, { headers });
+            const response = await axios.get(url, { headers });
+            return response.data;
         }
     }
     const game = {
-        getBrandList: (category) => {
-            let url = conf.API_KS + `/brands?m=wb`;
-            url += category != "all" ? "&c=" + category : ""
-            return axios.get(url, { headers });
+        getBrandList: async (category) => {
+            let url = `${conf.API_KS}/brands?m=wb`;
+            if (category !== "all") {
+                url += `&c=${category}`;
+            }
+            const response = await axios.get(url, { headers });
+            return response.data;
         },
         gameTypes: async () => {
             const response = await axios.get(`${conf.API}/gameTypes?c=slot&m=wb`, { headers });
             return response.data;
         },
         getFavGames: async (userToken, category) => {
-            const response = await axios.get(`${conf.API}/favs?c=${category}&m=wb&t=${userToken}`, { headers });
+            const response = await axios.get(`${conf.API}/favs?cat=${category}&m=wb&t=${userToken}`, { headers });
             return response.data;
         },
         saveFav: async (userToken, gameId, action) => {
@@ -144,8 +154,8 @@ const ServerConnection = (() => {
         },
         authInGame: async (agregatorToken) => {
           let url = conf.API_KS+`/authInGame/${agregatorToken}`;
-          console.log(url,"desde server");
-          return await axios.get(url, { headers });
+          const response = await axios.get(url, { headers });
+          return response.data;
         },
         getURL: async (url) => {
             const response = await axios.get(url);
