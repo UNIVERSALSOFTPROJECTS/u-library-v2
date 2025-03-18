@@ -196,7 +196,7 @@
                     <b>{t('deposit.holder')}:</b>
                     <p>{paySelected.nombre}</p>
                     <b>{t('deposit.numBankAccount')}:</b>
-                    <p>{paySelected.cta['ncuenta']}</p>
+                    <p>{paySelected.cta}</p>
                     <b>CCI:</b>
                     <p>{paySelected.cta['cci']}</p>
                 </div>
