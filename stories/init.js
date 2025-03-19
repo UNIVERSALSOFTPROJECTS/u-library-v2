@@ -202,8 +202,8 @@ export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", p
            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
         //    CLIENT_AUTH:"DJTHDAJARTCHGAMES7DARAJATECHGAMES7123",
         //    CLIENT_CODE:"DJTH",
-           CLIENT_AUTH:"AAC12563B97C4A111804COLISEOSPORT",
-           CLIENT_CODE:"AAC1",
+           CLIENT_AUTH:"LATILATINSPORT213073LS212023USOFT",
+           CLIENT_CODE:"LATI",
            CLIENT_ID: "21",
            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
            API_GAMES_NODE: "https://prod-nd.apiusoft.com",
@@ -215,7 +215,7 @@ export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", p
            domain:"http://coliseosport.com/",
            assetsUrl:"https://assets.apiusoft.com",
         //    org:"DJTH",
-           org:"CLS",
+           org:"L21",
            //currency:9,//PEN
       })
    },
