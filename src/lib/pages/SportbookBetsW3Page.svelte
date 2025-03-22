@@ -41,6 +41,9 @@
     const guestURL = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
     const guestURLLive = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
 
+    const guestURLurco ="https://sports2.jcasino.live/?target=86224&name=couniversalrace#/main_ecuabets"
+    const guestURLurcoLive ="https://sports2.jcasino.live/?target=86224&name=couniversalrace#/live_ecuabets"
+
     const guestURLs = {
       BPEN: {
         live: guestURLLive,
@@ -69,6 +72,10 @@
       BSPE: {
         live: guestURLbt1Live,
         default: guestURLbt1,
+      },
+      URCO:{
+        live: guestURLurcoLive,
+        default: guestURLurco,
       },
       default: {
         live: guestURLLJLive,
