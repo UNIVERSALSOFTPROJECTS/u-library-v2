@@ -57,7 +57,7 @@ const ServerConnection = (() => {
             return await axios.get(url, { headers });
         },
         getPayLink: async (token, amount, type) => {
-            let url = conf.API + "/getpaylink/";
+            let url = conf.API_KS + "/getpaylink/";
             return await axios.post(url, { token, amount, type }, { headers });
         },
     }
