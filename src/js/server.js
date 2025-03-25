@@ -119,7 +119,7 @@ const ServerConnection = (() => {
             return axios.post(`${conf.API}/changepassword`, payload, { headers });
         },
         getMovements: (token, dateStringFrom, dateStringTo, filter)=>{
-            let url = conf.API+`/wallet/${token}/${dateStringFrom}/${dateStringTo}/${filter}/movements`;
+            let url = conf.API_KS+`/wallet/${token}/${dateStringFrom}/${dateStringTo}/${filter}/movements`;
             return axios.get(url, { headers });
         }
     }
