@@ -57,7 +57,7 @@ const ServerConnection = (() => {
             return await axios.get(url, { headers });
         },
         getPayLink: async (token, amount, type) => {
-            let url = conf.API + "/getpaylink/";
+            let url = conf.API_KS + "/getpaylink/";
             return await axios.post(url, { token, amount, type }, { headers });
         },
     }
@@ -119,7 +119,7 @@ const ServerConnection = (() => {
             return axios.post(`${conf.API}/changepassword`, payload, { headers });
         },
         getMovements: (token, dateStringFrom, dateStringTo, filter)=>{
-            let url = conf.API+`/wallet/${token}/${dateStringFrom}/${dateStringTo}/${filter}/movements`;
+            let url = conf.API_KS+`/wallet/${token}/${dateStringFrom}/${dateStringTo}/${filter}/movements`;
             return axios.get(url, { headers });
         }
     }
@@ -146,6 +146,12 @@ const ServerConnection = (() => {
           let url = conf.API_KS+`/authInGame/${agregatorToken}`;
           console.log(url,"desde server");
           return await axios.get(url, { headers });
+        },
+        getGameURL: async (gameapi_url, game, usertoken, modeGame) => {
+            let mode = game.provider === "gr" ? modeGame : game.mode;
+            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${mode}&sessionid=${usertoken}&game_multiple=true`;
+            let response = await axios.get(url, { headers });
+            return response.data;
         },
         getURL: async (url) => {
             const response = await axios.get(url);
