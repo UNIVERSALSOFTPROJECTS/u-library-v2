@@ -147,9 +147,9 @@ const ServerConnection = (() => {
           console.log(url,"desde server");
           return await axios.get(url, { headers });
         },
-        getGameURL: async (gameapi_url, game, usertoken, modeGame) => {
+        getGameURL: async (gameapi_url, game, usertoken, modeGame,multiple_view=true) => {
             let mode = game.provider === "gr" ? modeGame : game.mode;
-            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${mode}&sessionid=${usertoken}&game_multiple=true`;
+            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${mode}&sessionid=${usertoken}&game_multiple=${multiple_view}`;
             let response = await axios.get(url, { headers });
             return response.data;
         },
