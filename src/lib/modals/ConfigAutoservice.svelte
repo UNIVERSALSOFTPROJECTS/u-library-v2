@@ -10,6 +10,7 @@
     export let t;
 
     const changeIdiom = configLogin.changeIdiom;
+    const openBillCollector = configLogin.openBillCollector;
 	let  idioms = configLogin.idioms;
     let countries = configLogin.countries;
     let typeView = localStorage.getItem("typeView") || "";
@@ -144,6 +145,8 @@
             <input type="checkbox" class="switch" id="version" bind:checked={isLiteVersion} on:click={toggleBtnLiteVersion}>
             <label for="keyboard">{t("autoservice.virtualKeyboard")}</label> 
             <input type="checkbox" class="switch" id="keyboard" bind:checked={isVirtualKeyboard} on:click={toggleBtnsVirtualKeyboard}>
+            <div>Billetero</div>
+            <button class="btn billCollector" on:click={openBillCollector}>Abrir</button>
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>
