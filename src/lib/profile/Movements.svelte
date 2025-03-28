@@ -49,7 +49,7 @@
                 error = t("msg.duplicatedSession");
             else error = t("msg.contactSupport");
             onError(error);
-            return {"no data"};
+            return {};
         } finally {
             loadMovements = false;
         }
