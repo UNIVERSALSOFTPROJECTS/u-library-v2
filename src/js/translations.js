@@ -324,6 +324,8 @@ export default {
     "autoservice.version": "Versión Lite",
     "autoservice.printerType": "Tipo impresora",
     "autoservice.virtualKeyboard": "Teclado virtual",
+    "autoservice.wallet": "Billetero",
+    "autoservice.open": "Abrir",
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
     "deposit.account": "CUENTA",
@@ -689,7 +691,8 @@ export default {
     "autoservice.version": "Version allégée",
     "autoservice.printerType" : "Type d'imprimante",
     "autoservice.virtualKeyboard": "Clavier virtuel",
-
+    "autoservice.wallet": "Portefeuille",
+    "autoservice.open": "Ouvrir",
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANQUE",
     "deposit.account": "COMPTE",
@@ -1005,6 +1008,8 @@ export default {
     "autoservice.version": "Versão Lite",
     "autoservice.printerType": "Tipo de impressora",
     "autoservice.virtualKeyboard": "Teclado virtual",
+    "autoservice.wallet": "Carteira",
+    "autoservice.open": "Abrir",
     // ------------------- BankDeposit --------------------------- \\
     "deposit.bank": "BANCO",
     "deposit.account": "CONTA",
@@ -1370,6 +1375,8 @@ export default {
     "autoservice.version": "Lite Version",
     "autoservice.printerType": "Printer Type",
     "autoservice.virtualKeyboard": "Virtual Keyboard",
+    "autoservice.wallet": "Wallet",
+    "autoservice.open": "Open",
     // ------------------- BankDeposit ---------------------------
     "deposit.bank": "BANK",
     "deposit.account": "ACCOUNT",
