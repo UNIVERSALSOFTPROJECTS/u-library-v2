@@ -214,7 +214,7 @@
     >
     <div
       class="cf-turnstile"
-      data-sitekey="yourSitekey"
+      data-sitekey="0x4AAAAAABDhqfAGuyXzfu4q"
       data-callback="handleTurnstileResponse"
     ></div>
     <button
