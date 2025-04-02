@@ -86,7 +86,7 @@ const ServerConnection = (() => {
         login: (username, password, userType) => {
             // if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, password, org: conf.org, userType }
-            return axios.post(conf.API_KS + "/login", payload, { headers });
+            return axios.post(conf.API_KS_AUTH + "/login", payload, { headers });
         },
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
             if (!currency) throw "CURRENCY_MANDATORY";

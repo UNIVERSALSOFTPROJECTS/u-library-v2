@@ -199,6 +199,7 @@ export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", p
       ServerConnection.setConfig({
            API:"https://lobby-bff.apiusoft.com",
            API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
+           API_KS_AUTH: "https://srv-prod-ks.apiusoft.com/lobby-bff-auth",
            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
         //    CLIENT_AUTH:"DJTHDAJARTCHGAMES7DARAJATECHGAMES7123",
         //    CLIENT_CODE:"DJTH",
