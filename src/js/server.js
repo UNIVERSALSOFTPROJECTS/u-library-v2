@@ -107,16 +107,16 @@ const ServerConnection = (() => {
             return axios.post(`${conf.API}/confirmResetPassword`, payload, { headers });
         },
         getMyAccount: (userToken)=>{
-            let url = conf.API +`/myaccount/`+ userToken;
+            let url = conf.API_KS +`/myaccount/`+ userToken;
             return axios.get(url, { headers });
         },
         saveMyAccount: (user) =>{   
             let payload =  user;
-            return axios.post(`${conf.API}/user/myAccount`, payload, { headers });
+            return axios.post(`${conf.API_KS}/user/myAccount`, payload, { headers });
         },
         changePassword: (userToken, newPassword, oldpass)=>{
             let payload = { userToken, newPassword, oldpass }
-            return axios.post(`${conf.API}/changepassword`, payload, { headers });
+            return axios.post(`${conf.API_KS}/changepassword`, payload, { headers });
         },
         getMovements: (token, dateStringFrom, dateStringTo, filter)=>{
             let url = conf.API_KS+`/wallet/${token}/${dateStringFrom}/${dateStringTo}/${filter}/movements`;
