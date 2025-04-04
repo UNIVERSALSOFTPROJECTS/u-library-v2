@@ -22,7 +22,8 @@
   let username = "";
   let loadLogin = false;
   let showPassword = false;
-  let isVerified = false;
+  const isLocalhost = window.location.hostname === "localhost";
+  let isVerified = isLocalhost?true:false;
   let turnstileToken = "";
 
   let userGmail;
@@ -196,7 +197,9 @@
         on:click={togglePasswordHide}
       ></button>
     </div>
+    {#if !isLocalhost}
     <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:callback={(e) => handleVerify(e.detail)} />
+    {/if}
     <button
       type="button"
       class="btn login"
