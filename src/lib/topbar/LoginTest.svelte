@@ -218,7 +218,7 @@
       type="button"
       on:click={onOpenRecoverPassword}
       class="btn openForgotPass"
-      ></button><b>{t("login.forgetPassword")}</b></button
+      ><b>{t("login.forgetPassword")}</b></button
     >
   </form>
 </div>
