@@ -37,7 +37,7 @@
     if (e.charCode === 13) loginClick();
   };
 
-  function handleTurnstileResponse(token) {
+  function handleVerify(token) {
     turnstileToken = token;
     isVerified = true;
   }
@@ -194,7 +194,7 @@
         on:click={togglePasswordHide}
       ></button>
     </div>
-    <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q" callback="handleTurnstileResponse" />
+    <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:verify={(e) => handleVerify(e.detail)} />
     <button
       type="button"
       class="btn login"
