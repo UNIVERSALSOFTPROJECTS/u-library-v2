@@ -38,6 +38,8 @@
   };
 
   function handleVerify(token) {
+    console.log("tokentokentokentoken",token);
+    
     turnstileToken = token;
     isVerified = true;
   }
@@ -194,7 +196,7 @@
         on:click={togglePasswordHide}
       ></button>
     </div>
-    <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:verify={(e) => handleVerify(e.detail)} />
+    <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:callback={(e) => handleVerify(e.detail)} />
     <button
       type="button"
       class="btn login"
