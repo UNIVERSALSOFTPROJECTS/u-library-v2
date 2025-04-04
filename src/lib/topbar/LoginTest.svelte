@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import ServerConnection from "../../js/server";
-  import Turnstile from "turnstile-svelte";
+  import { Turnstile } from "svelte-turnstile";
   import {
     getUpdateBalance,
     getUpdateBalanceUniversal,
