@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import ServerConnection from "../../js/server";
+  import Turnstile from "turnstile-svelte";
   import {
     getUpdateBalance,
     getUpdateBalanceUniversal,
@@ -193,10 +194,11 @@
         on:click={togglePasswordHide}
       ></button>
     </div>
+    <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q" callback="handleTurnstileResponse" />
     <button
       type="button"
       class="btn login"
-      disabled={loadLogin}
+      disabled={loadLogin || !isVerified}
       on:click={loginClick}
     >
       {#if loadLogin}
@@ -212,16 +214,11 @@
     <button type="button" on:click={onOpenSignup} class="btn openSignup"
       >{@html t("login.signupHere")}</button
     >
-    <div
-      class="cf-turnstile"
-      data-sitekey="0x4AAAAAABDhqfAGuyXzfu4q"
-      data-callback="handleTurnstileResponse"
-    ></div>
     <button
       type="button"
       on:click={onOpenRecoverPassword}
       class="btn openForgotPass"
-      disabled={!isVerified}><b>{t("login.forgetPassword")}</b></button
+      ></button><b>{t("login.forgetPassword")}</b></button
     >
   </form>
 </div>
