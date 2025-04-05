@@ -91,7 +91,7 @@ const ServerConnection = (() => {
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
             if (!currency) throw "CURRENCY_MANDATORY";
             if (!conf.domain) throw "DOMAIN_MANDATORY";
-            let url = conf.API + "/user";
+            let url = conf.API_KS + "/user";
             let payload = { username, name, phone, email, currency, password, date, smscode, country, operatorId, doctype: doctype, document: document, birthday: date, domain: conf.domain, usertype, platform, org: conf.org }
             return axios.post(url, payload, { headers });
         },
