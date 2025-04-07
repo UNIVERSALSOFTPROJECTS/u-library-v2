@@ -76,7 +76,7 @@ const ServerConnection = (() => {
             return axios.get(url, { headers });
         },
         preRegister: (username, email, phone, platform, channel) => {
-            let url = conf.API + "/user/preRegister";
+            let url = conf.API_KS + "/user/preRegister";
             console.log('URL', url);
             if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, email, phone, org: conf.org, platform, channel }
