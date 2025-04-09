@@ -249,7 +249,7 @@
                     {/if}
 
                     {#if formVerification}
-                    <a href="https://assets.apiusoft.com/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
+                    <!-- <a href="https://assets.apiusoft.com/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a> -->
                     <div class="withdrawal__note">{@html t('withdrawal.reminderCompleteVerification')}</div>
                     {/if}
                     {#if typeView === "payMobile"}
