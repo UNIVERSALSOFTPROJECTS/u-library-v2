@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import ServerConnection from "../../js/server";
+  import { Turnstile } from "svelte-turnstile";
   import {
     getUpdateBalance,
     getUpdateBalanceUniversal,
@@ -16,11 +17,15 @@
   export let onOpenSignup;
   export let t; //traduccion
   export let isOauth = false;
+  export let siteKey;
 
   let password = "";
   let username = "";
   let loadLogin = false;
   let showPassword = false;
+  const isLocalhost = window.location.hostname === "localhost";
+  let isVerified = isLocalhost?true:false;
+  let turnstileToken = "";
 
   let userGmail;
 
@@ -33,6 +38,11 @@
   const loginEnter = (e) => {
     if (e.charCode === 13) loginClick();
   };
+
+  const handleVerify = (token) => {
+    turnstileToken = token;
+    isVerified = true;
+  }
 
   onMount(() => {
     loadScript("https://accounts.google.com/gsi/client")
@@ -186,6 +196,9 @@
         on:click={togglePasswordHide}
       ></button>
     </div>
+    {#if !isLocalhost && siteKey}
+    <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)} />
+    {/if}
     <button
       type="button"
       class="btn login"
