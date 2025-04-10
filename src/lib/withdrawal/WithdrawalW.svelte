@@ -248,8 +248,8 @@
                         <p><b>{t('withdrawal.time')}:</b> {infoUser.horarios}</p>
                     {/if}
 
+                    <a href="https://assets.apiusoft.com/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
                     {#if formVerification}
-                    <!-- <a href="https://assets.apiusoft.com/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a> -->
                     <div class="withdrawal__note">{@html t('withdrawal.reminderCompleteVerification')}</div>
                     {/if}
                     {#if typeView === "payMobile"}
