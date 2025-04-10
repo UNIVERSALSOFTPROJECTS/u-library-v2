@@ -35,8 +35,10 @@
     let paymentLink;
     let id_banca  = configDeposit.id_banca;
     let id_ca  = configDeposit.id_ca;
+    let isTest  = configDeposit.isTest || "";
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
+    let base64Image;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -129,7 +131,7 @@
         if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '') return onError("Todos los campos son obligatorios"); 
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
-            let {data} = await ServerConnection.wallet.bankDeposit(user.token,bankDeposit);//siempre es STATUS 200, si hay errores del server colocar el try catch
+            let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
             if (data.msg === "DEPOSITO_OK") onOk(t("deposit.successDeposit"));
             else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
             else onError(t('msg.contactSupport'));
@@ -146,7 +148,19 @@
             window.chrome.webview.postMessage(message);
         }
     }
-    
+
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                base64Image = reader.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+        
     onMount(async() => {
         detectLockedDeposit();
         if (!isLocked) getPayMethods(); 
@@ -219,6 +233,11 @@
                     <p>{t('deposit.transferDate')}</p>
                     <input type="text" class="ipt" bind:value={amountDeposit} disabled>
                     <input type="date" class="ipt" bind:value={bankDeposit.date}>
+                    {#if isTest}
+                        <p>subir voucher</p>
+                        <p></p>
+                        <input type="file" accept="image/*" on:change={handleFileChange} style="width: 100%;" />
+                    {/if}
                 </div>
                 <button class="btn deposit" on:click={validateDepositBank}>{t("profile.recharge")}</button>
             {/if}
