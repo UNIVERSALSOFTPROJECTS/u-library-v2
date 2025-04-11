@@ -1378,7 +1378,6 @@ export default {
     "autoservice.virtualKeyboard": "Virtual Keyboard",
     "autoservice.wallet": "Wallet",
     "autoservice.open": "Open",
-
     // ------------------- BankDeposit ---------------------------
     "deposit.bank": "BANK",
     "deposit.account": "ACCOUNT",

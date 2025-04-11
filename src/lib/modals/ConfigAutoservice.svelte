@@ -146,7 +146,10 @@
             <label for="keyboard">{t("autoservice.virtualKeyboard")}</label> 
             <input type="checkbox" class="switch" id="keyboard" bind:checked={isVirtualKeyboard} on:click={toggleBtnsVirtualKeyboard}>
             <div>{t("autoservice.wallet")}</div>
-            <button class="btn wallet" on:click={openBillCollector}>{t("autoservice.open")}</button>
+            <button class="btn wallet" on:click={() => {
+                openBillCollector();
+                modalOpen = false;
+              }}>{t("autoservice.open")}</button>
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>
