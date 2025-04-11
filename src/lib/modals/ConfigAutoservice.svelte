@@ -9,6 +9,7 @@
     export let onOk;
     export let t;
 
+    const openBillCollector = configLogin.openBillCollector;
     const changeIdiom = configLogin.changeIdiom;
 	let  idioms = configLogin.idioms;
     let countries = configLogin.countries;
@@ -144,6 +145,8 @@
             <input type="checkbox" class="switch" id="version" bind:checked={isLiteVersion} on:click={toggleBtnLiteVersion}>
             <label for="keyboard">{t("autoservice.virtualKeyboard")}</label> 
             <input type="checkbox" class="switch" id="keyboard" bind:checked={isVirtualKeyboard} on:click={toggleBtnsVirtualKeyboard}>
+            <div>{t("autoservice.wallet")}</div>
+            <button class="btn wallet" on:click={openBillCollector}>{t("autoservice.open")}</button>
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>
