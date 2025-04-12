@@ -66,7 +66,7 @@ const ServerConnection = (() => {
             let url = conf.API + `/balance/${userToken}`;
             return axios.get(url, { headers });
         },
-        authInGame: async (agregatorToken, balance) => {
+        authInGame: async (agregatorToken) => {
             let url = conf.API_KS;
             const response = await axios.get(`${url}/authInGame/${agregatorToken}`, { headers });
             return response.data;
