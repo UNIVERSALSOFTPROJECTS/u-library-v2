@@ -47,7 +47,7 @@ const ServerConnection = (() => {
             let url = conf.API + "/withdrawal";
             return await axios.post(url, payload, { headers });
         },
-        bankDeposit: async (token, bankDeposit,base64Image) => {
+        bankDeposit: async (token, bankDeposit,base64Image = "") => {
             let payload = { ...bankDeposit, token, base64Image }
             let url = conf.API_KS + "/wallet/bankDeposit";
             return await axios.post(url, payload, { headers });
