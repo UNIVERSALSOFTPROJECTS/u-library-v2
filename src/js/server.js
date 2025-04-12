@@ -72,6 +72,7 @@ const ServerConnection = (() => {
                 ...headers,
                 Balance: balance
             };
+            console.log("customHeaders",customHeaders)
             const response = await axios.get(url, { headers:customHeaders });
             return response.data;
         },
