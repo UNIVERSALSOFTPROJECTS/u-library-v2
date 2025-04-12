@@ -67,13 +67,8 @@ const ServerConnection = (() => {
             return axios.get(url, { headers });
         },
         authInGame: async (agregatorToken, balance) => {
-            let url = conf.API_KS + `/authInGame/${agregatorToken}`;
-            const customHeaders = {
-                ...headers,
-                Balance: balance
-            };
-            console.log("customHeaders",customHeaders)
-            const response = await axios.get(url, { headers:customHeaders });
+            let url = conf.API_KS;
+            const response = await axios.get(`${url}/authInGame/${agregatorToken}`, { headers });
             return response.data;
         },
         getCurrencyIdByCodeAgent: (id) => {
