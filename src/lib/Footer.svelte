@@ -101,7 +101,7 @@
             <!-- esto es el gcb es solo para universalrace -->
             {#if isGCB != ""}
                 <div class="footer__gcb">
-                    <a href={isGCB}>
+                    <a href={isGCB} target="_blank">
                         <img src="https://seal.cgcb.info/1c0246df-1aa7-485a-a24c-21ae5e730000" alt="img-cetificate" loading="lazy">
                     </a>
                 </div>
