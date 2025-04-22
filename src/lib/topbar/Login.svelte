@@ -39,8 +39,8 @@
     if (e.charCode === 13) loginClick();
   };
 
-  const handleVerify = (token) => {
-    console.log("tokentokentokentoken ",token);
+  const handleVerify = (token,all) => {
+    console.log("tokentokentokentoken ",all);
     turnstileToken = token;
     isVerified = true;
   }
@@ -199,7 +199,7 @@
       ></button>
     </div>
     {#if !isLocalhost && siteKey}
-    <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)} />
+    <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail,e)} />
     {/if}
     <button
       type="button"
