@@ -14,6 +14,7 @@
     let payments = configFooter.payments;
     let socials = configFooter.social;
     let email = configFooter.email;
+    let isGCB = configFooter.isGCB || "";
     let platform = configFooter.platform;
     let bonus = configFooter.bonus;
     let linksChats = configFooter.linksChats;
@@ -97,6 +98,14 @@
 
     <div class="footer__container {payments.length == 0 && socials.length == 0 && !email?'info':''}">
         <div class="footer__container--sub">
+            <!-- esto es el gcb es solo para universalrace -->
+            {#if isGCB != ""}
+                <div class="footer__gcb">
+                    <a href={isGCB}>
+                        <img src="https://seal.cgcb.info/1c0246df-1aa7-485a-a24c-21ae5e730000" alt="img-cetificate" loading="lazy">
+                    </a>
+                </div>
+            {/if}
             {#if payments.length != 0}
             <div class="footer__payments">
                 <b>{t("footer.paymethods")}</b>
