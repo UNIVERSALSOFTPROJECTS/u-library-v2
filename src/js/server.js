@@ -83,9 +83,10 @@ const ServerConnection = (() => {
             console.log("RETURN",payload);
             return axios.post(url, payload, { headers });
         },
-        login: (username, password, userType) => {
+        login: (username, password, userType,turnstileToken = null) => {
             // if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, password, org: conf.org, userType }
+            headers['cf-turnstile-response'] = turnstileToken;
             return axios.post("https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login", payload, { headers });
         },
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
