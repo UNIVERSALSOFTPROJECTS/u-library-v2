@@ -742,6 +742,7 @@ export default {
   },
   //solo para testear crashgames login autosaved
   br: {
+    "idiom": "br",
     "login.title": "Bem-vindo a",
     "login.user": "Utilizador",
     "login.password": "Senha",
@@ -1058,6 +1059,7 @@ export default {
     "deposit.automatic": "Automático"
   },
   en: {
+    "idiom": "en",
     "login.title": "Welcome to",
     "login.user": "User or email",
     "login.password": "Password",
