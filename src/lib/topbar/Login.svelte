@@ -26,6 +26,8 @@
   const isLocalhost = window.location.hostname === "localhost";
   let isVerified = isLocalhost?true:false;
   let turnstileToken = "";
+  let turnstileError = false;
+
 
   let userGmail;
 
@@ -102,9 +104,15 @@
         error.response.data.message == "NECO_LOGIN_FAILED" ||
         error.response.data.message == "LOGIN_ERROR" || 
         error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
-      )
-        error = t("msg.incorrectUserPass");
+      ) {
+        error = t("msg.incorrectUserPass") 
+        turnstileError = true
+        setTimeout(() => {
+          turnstileError = false
+        }, 1000);
+      }
       else error = t("msg.contactSupport"); //si aparece esto, es un tipo de error nuevo y se tieneque debbugear
+    
       onError(error);
       loadLogin = false;
     }
@@ -197,7 +205,7 @@
         on:click={togglePasswordHide}
       ></button>
     </div>
-    {#if !isLocalhost && siteKey}
+    {#if !isLocalhost && siteKey && !turnstileError}
     <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)} />
     {/if}
     <button
