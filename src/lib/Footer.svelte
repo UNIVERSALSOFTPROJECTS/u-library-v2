@@ -103,7 +103,7 @@
             {#if isGCB != ""}
             <div class="footer__container--sub1">
                 <div class="footer__container-sub">{t("footer.disclaimer")}</div>
-                <div class="footer__container-sub1">
+                <div class="footer__container__gcb">
                     <a href={isGCB} target="_blank">
                         <img src="https://seal.cgcb.info/1c0246df-1aa7-485a-a24c-21ae5e730000" alt="img-cetificate" loading="lazy">
                     </a>

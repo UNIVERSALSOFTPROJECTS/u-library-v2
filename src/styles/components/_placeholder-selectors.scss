@@ -1747,16 +1747,16 @@
             }
 
             &__gcb{
-                display: grid;
+                display: flex;
                 gap: 1rem;
                 align-items: center;
-                align-content: center;
+                text-align: center;
             }
 
             &--sub1 {
                 display: flex;
                 gap: 1rem;
-                flex-direction: row-reverse;
+                flex-direction: row;
                 align-items: center;
                 // align-items: center;
                 align-content: center;
