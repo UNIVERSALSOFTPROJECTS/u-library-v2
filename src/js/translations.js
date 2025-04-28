@@ -100,7 +100,7 @@ export default {
     "footer.paymethods": "Métodos de pago",
     "footer.contanct": "Contáctanos",
     "footer.declaration": "está sujeto a los términos y condiciones de este sitio web. Todos los derechos reservados.",
-    "footer.disclaimer": "universalRace.net es operado por Games & More B.V., registrado bajo el número 149948 en Hanchi Snoa 19, Edificio Trias, Curazao. Este sitio web tiene licencia y está regulado por GCB (Junta de Control de Juegos de Curazao) bajo la licencia No. OGL/2023/121/0086.",
+    "footer.disclaimer": "universalrace.net es operado por Games & More B.V., registrado bajo el número 149948 en Hanchi Snoa 19, Edificio Trias, Curazao. Este sitio web tiene licencia y está regulado por GCB (Junta de Control de Juegos de Curazao) bajo la licencia No. OGL/2023/121/0086.",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Bienvenido a {{platform}}",
     "msg.sucessRegister": "Registro exitoso",
