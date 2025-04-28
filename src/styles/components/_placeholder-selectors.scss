@@ -1633,6 +1633,8 @@
             justify-content: center;
         }
 
+
+
         &--lang,
         &--chat {
             @extend %button;
@@ -1744,9 +1746,78 @@
                 }
             }
 
+            &__gcb{
+                display: grid;
+                gap: 1rem;
+                align-items: center;
+                align-content: center;
+            }
+
+            &--sub1 {
+                display: flex;
+                gap: 1rem;
+                flex-direction: row-reverse;
+                align-items: center;
+                // align-items: center;
+                align-content: center;
+                max-width: 570px;
+                margin: auto;
+
+                @media #{$landscape_pc} {
+                    &:nth-child(1) {
+                        order: 2;
+                    }
+
+                    &:nth-child(2) {
+                        order: 3;
+                    }
+                }
+            }
+
             &--sub {
                 display: grid;
                 gap: 1rem;
+                align-items: center;
+                align-content: center;
+
+                @media #{$landscape_pc} {
+                    &:nth-child(1) {
+                        order: 2;
+                    }
+
+                    &:nth-child(2) {
+                        order: 3;
+                    }
+                }
+            }
+
+            &-sub{
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                text-align: center;
+                font-size: 13px;
+                // padding-right: 10%;
+                // padding-left: 10%;
+                // padding-left: ;
+
+                @media #{$landscape_pc} {
+                    &:nth-child(1) {
+                        order: 2;
+                    }
+
+                    &:nth-child(2) {
+                        order: 3;
+                    }
+                }
+            }
+
+            &-sub1{
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                text-align: center;
+                // padding-right: 50px;
 
                 @media #{$landscape_pc} {
                     &:nth-child(1) {
