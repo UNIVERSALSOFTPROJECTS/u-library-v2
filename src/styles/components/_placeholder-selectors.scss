@@ -1747,10 +1747,10 @@
             }
 
             &__gcb{
-                display: flex;
-                gap: 1rem;
-                align-items: center;
-                text-align: center;
+                margin: auto;
+                img{
+                    width: 80px;
+                }
             }
 
             &--sub1 {
