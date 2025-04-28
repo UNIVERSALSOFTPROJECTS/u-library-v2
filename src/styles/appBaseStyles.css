@@ -3290,6 +3290,10 @@ p, b, span, a, li *, button {
   display: grid;
   gap: 1rem;
 }
+.Coliseosport .footer__container-sub{
+  display: grid;
+  gap: 1rem;
+}
 @media (orientation: landscape) and (min-width: 1023.99px), (orientation: portrait) and (min-width: 1023.99px) {
   .Coliseosport .footer__container--sub:nth-child(1) {
     order: 2;

@@ -194,6 +194,7 @@
             //{name: "Whatsapp", url:"https://web.whatsapp.com/send?phone=56964783055"}
         ],
         viewLogoUS: true,
+        isGCB: "x",
     };
     const configPromotions = {
         platform,
