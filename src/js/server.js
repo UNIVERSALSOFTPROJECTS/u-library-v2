@@ -151,7 +151,7 @@ const ServerConnection = (() => {
         },
         getGameURL: async (gameapi_url, game, usertoken, modeGame) => {
             let mode = game.provider === "gr" ? modeGame : game.mode;
-            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${mode}&sessionid=${usertoken}&game_multiple=true`;
+            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${mode}&sessionid=${usertoken}`;
             let response = await axios.get(url, { headers });
             return response.data;
         },
