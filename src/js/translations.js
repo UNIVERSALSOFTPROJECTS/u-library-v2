@@ -88,6 +88,7 @@ export default {
     "categoryGame.virtual": "Juegos virtuales",
     "categoryGame.providers": "Proveedores",
     "categoryGame.estadisticR": "Estadísticas y resultados",
+    "categoryGame.lottery": "LOTERIA",
     //---------------FOOTER-----------------------------
     "footer.s_p": "Seguridad y privacidad",
     "footer.t_c": "Términos y condiciones",
@@ -467,6 +468,7 @@ export default {
     "categoryGame.virtual": "Jeux virtuels",
     "categoryGame.providers": "Fournisseurs",
     "categoryGame.estadisticR": "Statistiques et résultats",
+    "categoryGame.lottery": "LOTTERY",
     //---------------FOOTER-----------------------------
     "footer.s_p": "Sécurité et confidentialité",
     "footer.t_c": "Termes & Conditions",
@@ -1002,6 +1004,7 @@ export default {
     "categoryGame.virtual": "Jeux virtuels",
     "categoryGame.providers": "Fournisseurs",
     "categoryGame.estadisticR": "Statistiques et résultats",
+    "categoryGame.lottery": "LOTERIE",
     //---------------RECOVERPASSWORD-----------------------------
     "recoverPassword.title": "Você esqueceu sua senha?",
     "recoverPassword.email": "Digite seu e-mail",
