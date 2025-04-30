@@ -45,7 +45,7 @@
         {#if isChat}
         <button class="footer--chat" on:click={openChatLive}>
             <i class="icon--chat"></i>
-            <span>Chat en vivo</span>
+            <span>{t("footer.chatOnLive")}</span>
         </button>
         {/if}
         {#each linksChats as linksChat}
