@@ -265,10 +265,7 @@ export default {
     "gameResults.resultOf": "RESULTADO DE",
     "gameResults.games": "Juegos",
     "gameResults.allGames": "Todos los Juegos",
-    "gameResults.slotlive": "RESULTADO DE",
-    "gameResults.resultOf": "RESULTADO DE",
-    "gameResults.resultOf": "RESULTADO DE",
-
+    "gameResults.onlyFavorites": "Mostrar sólo favoritos",
     //---------------expire-----------------------------
     "expireSession.stillThere": "¿Sigues ahí?",
     "expireSession.continuePlaying": "Continuar jugando",
@@ -638,6 +635,11 @@ export default {
     "gameOptions.favorites": "Favoris",
     "gameOptions.new": "Nouveau",
     "gameOptions.searchProvider": "Rechercher fournisseur",
+    //---------------results-----------------------------
+    "gameResults.resultOf": "RÉSULTAT DE",
+    "gameResults.games": "Jeux",
+    "gameResults.allGames": "Tous les jeux",
+    "gameResults.onlyFavorites": "Favoris uniquement",
     //---------------expire-----------------------------
     "expireSession.stillThere": "Tu es toujours là?",
     "expireSession.continuePlaying": "Continue de jouer",
@@ -1327,6 +1329,11 @@ export default {
     "gameOptions.favorites": "Favorites",
     "gameOptions.new": "New",
     "gameOptions.searchProvider": "Search provider",
+    //---------------results-----------------------------
+    "gameResults.resultOf": "RESULT OF",
+    "gameResults.games": "Games",
+    "gameResults.allGames": "All Games",
+    "gameResults.onlyFavorites": "Show only favorites",
     //---------------expire-----------------------------
     "expireSession.stillThere": "Are you still there?",
     "expireSession.continuePlaying": "Continue playing",
