@@ -38,7 +38,9 @@
     showPassword = !showPassword;
   };
   const loginEnter = (e) => {
-    if (e.charCode === 13) loginClick();
+    if (e.charCode === 13){
+      isVerified?loginClick():"";
+    } ;
   };
 
   const handleVerify = (details) => {
