@@ -1,5 +1,6 @@
 //export {default as Header} from "./lib/Header.svelte";
 export {default as Login} from "./lib/topbar/Login.svelte";
+export {default as HorsesPage} from "./lib/pages/HorsesPage.svelte";
 export {default as LoginTest} from "./lib/topbar/LoginTest.svelte";
 export {default as Pagination} from "./lib/Pagination.svelte";
 export {default as LoginAutosaved} from "./lib/topbar/LoginAutosaved.svelte";

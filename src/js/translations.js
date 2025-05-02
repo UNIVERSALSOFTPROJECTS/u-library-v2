@@ -89,6 +89,7 @@ export default {
     "categoryGame.providers": "Proveedores",
     "categoryGame.estadisticR": "Estadísticas y resultados",
     "categoryGame.lottery": "LOTERIA",
+    "categoryGame.all": "TODOS",
     //---------------FOOTER-----------------------------
     "footer.s_p": "Seguridad y privacidad",
     "footer.t_c": "Términos y condiciones",
@@ -469,6 +470,7 @@ export default {
     "categoryGame.providers": "Fournisseurs",
     "categoryGame.estadisticR": "Statistiques et résultats",
     "categoryGame.lottery": "LOTTERY",
+    "categoryGame.all": "TOUS",
     //---------------FOOTER-----------------------------
     "footer.s_p": "Sécurité et confidentialité",
     "footer.t_c": "Termes & Conditions",
@@ -1159,6 +1161,8 @@ export default {
     "categoryGame.virtual": "Virtual games",
     "categoryGame.providers": "Providers",
     "categoryGame.estadisticR": "Statistics and results",
+    "categoryGame.lottery": "LOTTERY",
+    "categoryGame.all": "ALL",
     //---------------FOOTER-----------------------------
     "footer.s_p": "Security and privacy",
     "footer.t_c": "Terms and conditions",
