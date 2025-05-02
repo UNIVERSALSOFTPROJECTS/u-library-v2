@@ -202,6 +202,7 @@
     };
     const configProfile = {
         id_banca: [], //disitribidor - almacena otros cajeros
+        idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }], //idiomas disponibles
         id_ca: ["6970"], //caja dentro de un distribuidor principal
         doctype: ["RUT", "DNI", "Pasaporte"],
         timezone: "America/Santiago", //for movementes

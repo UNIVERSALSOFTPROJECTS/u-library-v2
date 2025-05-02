@@ -4,7 +4,7 @@
     import { getUpdateBalance } from '../../js/utils/serverUtils';
     import { stringToNumber } from "../../js/utils/formatUtils";
     import DropdownBonus from "../dropdown/DropdownBonus.svelte";
-
+    import DropdowIdiom from "../dropdown/DropdowIdiom.svelte";
     import UserData from "../profile/UserData.svelte";
     import ChangePassword from "../profile/ChangePassword.svelte";
     import Movements from "../profile/Movements.svelte"
@@ -19,7 +19,8 @@
     export let onLogout;
     export let openChatLive;
     export let activePromotions;
-
+    const changeIdiom = configProfile.changeIdiom;
+	let  idioms = configProfile.idioms;
     let accountUser = {};
     let activedBonus = [];
     let bonusView = {type: "total", value : user.bonus_sumTotal};
@@ -114,6 +115,9 @@
         <button class="btn logout icon--logout" on:click={onLogout}>{t("header.logout")}</button>
         {#if chatLiveUrl}
         <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
+        {/if}
+        {#if idioms}
+        <DropdowIdiom bind:idioms {changeIdiom}/>
         {/if}
     </div>
     {#if profileView !== ""} 
