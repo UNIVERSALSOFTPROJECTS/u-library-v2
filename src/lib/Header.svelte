@@ -208,6 +208,10 @@
         timezone: "America/Santiago", //for movementes
         activePromotions: false,
         chatLiveUrl,
+        changeIdiom: function (idiom) {
+        $locale = idiom;
+        localStorage.setItem("idiom", idiom);
+        },
     };
     //DEPOSIT
     const configDeposit = {

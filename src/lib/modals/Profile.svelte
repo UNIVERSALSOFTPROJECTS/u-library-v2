@@ -116,9 +116,9 @@
         {#if chatLiveUrl}
         <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
         {/if}
-        <!-- {#if idioms} -->
+        {#if changeIdiom}
         <DropdowIdiom bind:idioms {changeIdiom}/>
-        <!-- {/if} -->
+        {/if}
     </div>
     {#if profileView !== ""} 
         <div class="profile__view">
