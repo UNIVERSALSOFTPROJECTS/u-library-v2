@@ -30,12 +30,14 @@
   </button>
   {#if isDropdownOpen}
     <div class="dropdown-menu">
+      {#if idioms && idioms.length}
         {#each idioms as idiom}
           <button type="button" class="btn" on:click={() => selectOption(idiom.id)}>
             <img src="{url_global}/flags/{idiom.id}.png" alt="{idiom.id}-country">
             {idiom.id}
           </button>
         {/each}
+        {/if}
     </div>
   {/if}
 </div>
