@@ -673,6 +673,7 @@
             /> -->
         </Modal>
 
+        {#if user && configProfile}
         <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
             <Profile
                 {configProfile}
@@ -686,6 +687,7 @@
                 t={$t}
             />
         </Modal>
+        {/if}
 
         <ScreenGames
             bind:open={screenGamesOpen}
