@@ -20,7 +20,8 @@
     export let openChatLive;
     export let activePromotions;
     const changeIdiom = configProfile.changeIdiom;
-	let  idioms = configProfile.idioms;
+	let  idioms = [];
+    $: idioms = configProfile.idioms ?? [];
     let accountUser = {};
     let activedBonus = [];
     let bonusView = {type: "total", value : user.bonus_sumTotal};
