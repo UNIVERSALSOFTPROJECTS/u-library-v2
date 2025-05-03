@@ -14,14 +14,17 @@
     changeIdiom(idiomSelected);
     isDropdownOpen = false;
   }
-  
+  console.log("idiomas recibidos: ", idioms);
   const toggleDropdown = () => { isDropdownOpen = !isDropdownOpen }
   
   onMount(() => {
       const handleClickOutside = (e) => { if (!e.target.closest('.dropdown.idiom')) isDropdownOpen = false }
       document.addEventListener('click', handleClickOutside);
       return () => { document.removeEventListener('click', handleClickOutside) };
-  });
+      
+      console.log("idiomas recibidos: ", idioms);
+ 
+ });
 </script>
   
 <div class="dropdown idiom">
