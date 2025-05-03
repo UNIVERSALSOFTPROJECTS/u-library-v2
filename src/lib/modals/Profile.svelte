@@ -120,7 +120,7 @@
         <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
         {/if}
         <!-- {#if idioms} -->
-        <DropdowIdiom bind:idioms {changeIdiom}/>
+        <DropdowIdiom {idioms} {changeIdiom}/>
         <!-- {/if} -->
     </div>
     {#if profileView !== ""} 
