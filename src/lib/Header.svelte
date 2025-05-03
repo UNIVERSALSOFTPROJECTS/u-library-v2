@@ -213,6 +213,8 @@
         localStorage.setItem("idiom", idiom);
         },
     };
+    console.log("Idiomas del configProfile: ", configProfile.idioms);
+    
     //DEPOSIT
     const configDeposit = {
         id_banca: ["2918"], //disitribidor - almacena otros cajeros
