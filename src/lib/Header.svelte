@@ -370,9 +370,9 @@
             profileModalOpen = false;
         }
     };
-
+    console.log("🧩 Idiomas disponibles en Header:", configProfile?.idioms);
     onMount(() => {
-        console.log("Idiomas del configProfile: ", configProfile.idioms);
+        console.log("🧩 Idiomas disponibles en Header:", configProfile?.idioms);
         let currentUrl = window.location.href;
         console.log("domain", currentUrl);
         if (/resetPassword/.test(currentUrl)) {
