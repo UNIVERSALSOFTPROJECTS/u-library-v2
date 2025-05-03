@@ -6,8 +6,9 @@
 
   let isDropdownOpen = false;
   let url_global = "https://assets.apiusoft.com/generic_imgs";
-  let idiomDefault = idioms.find(idiom => idiom.id === localStorage.getItem('idiom'));
-  
+  // let idiomDefault = idioms.find(idiom => idiom.id === localStorage.getItem('idiom'));
+  let idiomDefault = (idioms ?? []).find(idiom => idiom.id === localStorage.getItem('idiom')) || {id: "es"};
+
   function selectOption(idiomSelected) {
     idiomDefault = idioms.find(idiom => idiom.id === idiomSelected);
     changeIdiom(idiomSelected);
