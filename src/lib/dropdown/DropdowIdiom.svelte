@@ -15,11 +15,11 @@
     changeIdiom(idiomSelected);
     isDropdownOpen = false;
   }
-  console.log("Idiomas del DropdowIdiom: ", configProfile.idioms);
+  // console.log("Idiomas del DropdowIdiom: ", configProfile.idioms);
   const toggleDropdown = () => { isDropdownOpen = !isDropdownOpen }
   
   onMount(() => {
-     console.log("Idiomas del DropdowIdiom: ", configProfile.idioms);
+     console.log("Idiomas del DropdowIdiom: ", idioms);
 
       const handleClickOutside = (e) => { if (!e.target.closest('.dropdown.idiom')) isDropdownOpen = false }
       document.addEventListener('click', handleClickOutside);
