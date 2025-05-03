@@ -73,9 +73,9 @@
         activedBonus = bonuses.filter(bono => stringToNumber(bono.value) > 0);
         bonusView = activedBonus.length == 1 ? activedBonus[0]:bonus_sumTotal;
     }
-    console.log("Idiomas del Profile: ", configProfile.idioms);
+    console.log("Idiomas del Profile: ", idioms);
     onMount(async() => {
-        console.log("Idiomas del Profile: ", configProfile.idioms);
+        console.log("Idiomas del Profile: ", idioms);
         await getMyAccount();
         await getUpdateBalance(user);
         getUpdateBonuses();
@@ -121,7 +121,7 @@
         <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
         {/if}
         <!-- {#if idioms} -->
-        <DropdowIdiom {idioms} {changeIdiom}/>
+        <DropdowIdiom {configProfile} idioms={configProfile.idioms} changeIdiom={configProfile.changeIdiom}/>
         <!-- {/if} -->
     </div>
     {#if profileView !== ""} 
