@@ -416,6 +416,10 @@
         modalOpened = "promotions";
     };
     const onOpenProfile = () => {
+        console.log("configProfile from u-library: ", configProfile);
+        console.log("user from u-library: ", user);
+        
+        
         profileModalOpen = true;
         modalOpened = "profile";
     };
