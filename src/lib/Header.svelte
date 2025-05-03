@@ -213,7 +213,7 @@
         localStorage.setItem("idiom", idiom);
         },
     };
-    console.log("Idiomas del configProfile: ", configProfile.idioms);
+    // console.log("Idiomas del configProfile: ", configProfile.idioms);
     
     //DEPOSIT
     const configDeposit = {
@@ -459,6 +459,9 @@
     }
 
     let typeView = "autoservice";
+
+
+
     const configLogin = {
         platform,
         typeView,
@@ -686,8 +689,6 @@
                 {onOpenDeposit}
                 onError={onProfileError}
                 onOk={onProfileOk}
-                idioms={configProfile.idioms}
-                changeIdiom={configProfile.changeIdiom}
                 bind:user
                 t={$t}
             />

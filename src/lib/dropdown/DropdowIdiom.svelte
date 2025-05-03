@@ -3,7 +3,6 @@
 
   export let idioms;
   export let changeIdiom;
-  export let configProfile;
 
   let isDropdownOpen = false;
   let url_global = "https://assets.apiusoft.com/generic_imgs";
@@ -14,8 +13,9 @@
     idiomDefault = idioms.find(idiom => idiom.id === idiomSelected);
     changeIdiom(idiomSelected);
     isDropdownOpen = false;
+    console.log("idiom desde Dropdown", idioms);
+    
   }
-  // console.log("Idiomas del DropdowIdiom: ", configProfile.idioms);
   const toggleDropdown = () => { isDropdownOpen = !isDropdownOpen }
   
   onMount(() => {

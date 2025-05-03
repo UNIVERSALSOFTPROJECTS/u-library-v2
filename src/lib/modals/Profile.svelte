@@ -19,11 +19,8 @@
     export let onLogout;
     export let openChatLive;
     export let activePromotions;
-    export let idioms;
-    export let changeIdiom;
-    // const changeIdiom = configProfile.changeIdiom;
-	// let  idioms = [];
-    // $: idioms = configProfile.idioms ?? [];
+    let idioms = configProfile.idioms;
+    const changeIdiom = configProfile.changeIdiom;
     let accountUser = {};
     let activedBonus = [];
     let bonusView = {type: "total", value : user.bonus_sumTotal};
@@ -117,12 +114,14 @@
         <button class="btn profile"><i class="icon--bonus"></i>Bonos y promociones</button>
         {/if}
         <button class="btn logout icon--logout" on:click={onLogout}>{t("header.logout")}</button>
-        {#if chatLiveUrl}
-        <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
-        {/if}
-        <!-- {#if idioms} -->
-        <DropdowIdiom {configProfile} idioms={configProfile.idioms} changeIdiom={configProfile.changeIdiom}/>
-        <!-- {/if} -->
+        <div class="btn bottom">
+            {#if chatLiveUrl}
+            <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
+            {/if}
+            {#if idioms.length !== 0}
+            <DropdowIdiom bind:idioms {changeIdiom}/>
+            {/if}
+        </div>
     </div>
     {#if profileView !== ""} 
         <div class="profile__view">
