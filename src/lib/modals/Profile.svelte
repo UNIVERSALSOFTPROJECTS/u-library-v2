@@ -73,8 +73,9 @@
         activedBonus = bonuses.filter(bono => stringToNumber(bono.value) > 0);
         bonusView = activedBonus.length == 1 ? activedBonus[0]:bonus_sumTotal;
     }
-
+    console.log("Idiomas del Profile: ", configProfile.idioms);
     onMount(async() => {
+        console.log("Idiomas del Profile: ", configProfile.idioms);
         await getMyAccount();
         await getUpdateBalance(user);
         getUpdateBonuses();

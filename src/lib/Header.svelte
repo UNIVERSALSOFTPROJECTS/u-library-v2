@@ -372,6 +372,7 @@
     };
 
     onMount(() => {
+        console.log("Idiomas del configProfile: ", configProfile.idioms);
         let currentUrl = window.location.href;
         console.log("domain", currentUrl);
         if (/resetPassword/.test(currentUrl)) {

@@ -3,6 +3,7 @@
 
   export let idioms;
   export let changeIdiom;
+  export let configProfile;
 
   let isDropdownOpen = false;
   let url_global = "https://assets.apiusoft.com/generic_imgs";
@@ -14,16 +15,16 @@
     changeIdiom(idiomSelected);
     isDropdownOpen = false;
   }
-  console.log("idiomas recibidos: ", idioms);
+  console.log("Idiomas del DropdowIdiom: ", configProfile.idioms);
   const toggleDropdown = () => { isDropdownOpen = !isDropdownOpen }
   
   onMount(() => {
+     console.log("Idiomas del DropdowIdiom: ", configProfile.idioms);
+
       const handleClickOutside = (e) => { if (!e.target.closest('.dropdown.idiom')) isDropdownOpen = false }
       document.addEventListener('click', handleClickOutside);
       return () => { document.removeEventListener('click', handleClickOutside) };
-      
-      console.log("idiomas recibidos: ", idioms);
- 
+       
  });
 </script>
   
