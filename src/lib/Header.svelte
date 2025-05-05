@@ -202,16 +202,16 @@
     };
     const configProfile = {
         id_banca: [], //disitribidor - almacena otros cajeros
-        idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }], //idiomas disponibles
+        // idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }], //idiomas disponibles
         id_ca: ["6970"], //caja dentro de un distribuidor principal
         doctype: ["RUT", "DNI", "Pasaporte"],
         timezone: "America/Santiago", //for movementes
         activePromotions: false,
         chatLiveUrl,
-        changeIdiom: function (idiom) {
-        $locale = idiom;
-        localStorage.setItem("idiom", idiom);
-        },
+        // changeIdiom: function (idiom) {
+        //     $locale = idiom;
+        //     localStorage.setItem("idiom", idiom);
+        // },
     };
     // console.log("Idiomas del configProfile: ", configProfile.idioms);
     

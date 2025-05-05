@@ -19,8 +19,8 @@
     export let onLogout;
     export let openChatLive;
     export let activePromotions;
-    let idioms = configProfile.idioms || {};
-    const changeIdiom = configProfile.changeIdiom;
+    let idioms = configProfile.idioms || [];
+    const changeIdiom = configProfile.changeIdiom || (() => {});
     let accountUser = {};
     let activedBonus = [];
     let bonusView = {type: "total", value : user.bonus_sumTotal};
