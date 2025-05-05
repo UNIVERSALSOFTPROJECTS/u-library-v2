@@ -19,7 +19,7 @@
     export let onLogout;
     export let openChatLive;
     export let activePromotions;
-    let idioms = configProfile.idioms;
+    let idioms = configProfile.idioms || {};
     const changeIdiom = configProfile.changeIdiom;
     let accountUser = {};
     let activedBonus = [];
