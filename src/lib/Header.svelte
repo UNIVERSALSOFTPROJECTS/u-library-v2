@@ -212,6 +212,7 @@
         // localStorage.setItem("idiom", idiom);
         // },
     };
+
     const configIdiom = {
         idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }], //idiomas disponibles
         changeIdiom: function (idiom) {
