@@ -202,17 +202,23 @@
     };
     const configProfile = {
         id_banca: [], //disitribidor - almacena otros cajeros
-        idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }], //idiomas disponibles
         id_ca: ["6970"], //caja dentro de un distribuidor principal
         doctype: ["RUT", "DNI", "Pasaporte"],
         timezone: "America/Santiago", //for movementes
         activePromotions: false,
         chatLiveUrl,
+        // changeIdiom: function (idiom) {
+        // $locale = idiom;
+        // localStorage.setItem("idiom", idiom);
+        // },
+    };
+    const configIdiom = {
+        idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }], //idiomas disponibles
         changeIdiom: function (idiom) {
         $locale = idiom;
         localStorage.setItem("idiom", idiom);
         },
-    };
+    }
     // console.log("Idiomas del configProfile: ", configProfile.idioms);
     
     //DEPOSIT
@@ -682,7 +688,9 @@
         {#if user && configProfile}
         <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
             <Profile
+                {configIdiom}
                 {configProfile}
+                activePromotions
                 {onOpenWithdrawal}
                 {onLogout}
                 {openChatLive}

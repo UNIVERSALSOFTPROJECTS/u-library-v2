@@ -14,13 +14,14 @@
     export let onOk;
     export let t;
     export let configProfile;
+    export let configIdiom;
     export let onOpenDeposit;
     export let onOpenWithdrawal;
     export let onLogout;
     export let openChatLive;
     export let activePromotions;
-    let idioms = configProfile.idioms;
-    const changeIdiom = configProfile.changeIdiom;
+    let idioms = configIdiom.idioms;
+    const changeIdiom = configIdiom.changeIdiom;
     let accountUser = {};
     let activedBonus = [];
     let bonusView = {type: "total", value : user.bonus_sumTotal};
