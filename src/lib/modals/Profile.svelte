@@ -60,7 +60,6 @@
 
     const getUpdateBonuses = () => {
         user = JSON.parse(sessionStorage.getItem("user"));
-
         let bonuses = [
             {type: "horse", value : user.bonus_horses},
             {type: "slot", value : user.bonus_slot},
@@ -71,14 +70,12 @@
         activedBonus = bonuses.filter(bono => stringToNumber(bono.value) > 0);
         bonusView = activedBonus.length == 1 ? activedBonus[0]:bonus_sumTotal;
     }
-    console.log("Idiomas del Profile: ", idioms);
+
     onMount(async() => {
-        console.log("Idiomas del Profile: ", idioms);
         await getMyAccount();
         await getUpdateBalance(user);
         getUpdateBonuses();
     });
-
 </script>
 
 <div class="modal-body">

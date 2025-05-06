@@ -149,9 +149,10 @@ const ServerConnection = (() => {
           console.log(url,"desde server");
           return await axios.get(url, { headers });
         },
-        getGameURL: async (gameapi_url, game, usertoken, modeGame) => {
+        getGameURL: async (gameapi_url, game, usertoken, modeGame, type_view = "") => {
             let mode = game.provider === "gr" ? modeGame : game.mode;
-            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${mode}&sessionid=${usertoken}`;
+            let isMultipleView = type_view === "multiple" ? "&game_multiple=true" : "";
+            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${mode}&sessionid=${usertoken}${isMultipleView}`;
             let response = await axios.get(url, { headers });
             return response.data;
         },
