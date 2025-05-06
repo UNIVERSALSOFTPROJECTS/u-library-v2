@@ -207,20 +207,15 @@
         timezone: "America/Santiago", //for movementes
         activePromotions: false,
         chatLiveUrl,
-        // changeIdiom: function (idiom) {
-        // $locale = idiom;
-        // localStorage.setItem("idiom", idiom);
-        // },
     };
 
-    const configIdiom = {
-        idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }], //idiomas disponibles
-        changeIdiom: function (idiom) {
-        $locale = idiom;
-        localStorage.setItem("idiom", idiom);
-        },
-    }
-    // console.log("Idiomas del configProfile: ", configProfile.idioms);
+    // const configIdiom = {
+    //     idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }], //idiomas disponibles
+    //     changeIdiom: function (idiom) {
+    //     $locale = idiom;
+    //     localStorage.setItem("idiom", idiom);
+    //     },
+    // }
     
     //DEPOSIT
     const configDeposit = {
@@ -688,8 +683,9 @@
 
         {#if user && configProfile}
         <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
+            
             <Profile
-                {configIdiom}
+                
                 {configProfile}
                 activePromotions
                 {onOpenWithdrawal}

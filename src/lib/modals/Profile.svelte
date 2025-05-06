@@ -14,7 +14,7 @@
     export let onOk;
     export let t;
     export let configProfile;
-    export let configIdiom;
+    export let configIdiom = {};
     export let onOpenDeposit;
     export let onOpenWithdrawal;
     export let onLogout;
