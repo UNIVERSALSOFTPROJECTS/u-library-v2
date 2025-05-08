@@ -225,22 +225,6 @@
         {/if}
       </button>
     {/if}
-    <button
-      type="button"
-      class="btn login"
-      disabled={loadLogin || !isVerified || turnstileError}
-      on:click={loginClick}
-    >
-      {#if loadLogin}
-        <div class="loading">
-          <p />
-          <p />
-          <p />
-        </div>
-      {:else}
-        <p>{t("login.access")}</p>
-      {/if}
-    </button>
     <button type="button" on:click={onOpenSignup} class="btn openSignup"
       >{@html t("login.signupHere")}</button
     >
