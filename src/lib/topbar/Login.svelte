@@ -208,24 +208,24 @@
       ></button>
     </div>
     {#if !isLocalhost && siteKey && !turnstileError}
-    <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)} />
+      <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)} />
+      <button type="button" class="btn login" disabled={loadLogin || !isVerified} on:click={loginClick}>
+        {#if loadLogin}
+          <div class="loading"><p /><p /><p /></div>
+        {:else}
+          <p>{t("login.access")}</p>
+        {/if}
+      </button>
+    {:else}
+      <button type="button" class="btn login" on:click={loginClick}>
+        {#if loadLogin}
+          <div class="loading"><p /><p /><p /></div>
+        {:else}
+          <p>{t("login.access")}</p>
+        {/if}
+      </button>
     {/if}
-    <button
-      type="button"
-      class="btn login"
-      disabled={loadLogin || !isVerified || !siteKey}
-      on:click={loginClick}
-    >
-      {#if loadLogin}
-        <div class="loading">
-          <p />
-          <p />
-          <p />
-        </div>
-      {:else}
-        <p>{t("login.access")}</p>
-      {/if}
-    </button>
+   
     <button type="button" on:click={onOpenSignup} class="btn openSignup"
       >{@html t("login.signupHere")}</button
     >
