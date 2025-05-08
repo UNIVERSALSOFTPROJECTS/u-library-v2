@@ -213,7 +213,7 @@
     <button
       type="button"
       class="btn login"
-      disabled={loadLogin || !isVerified}
+      disabled={loadLogin || !isVerified || !siteKey}
       on:click={loginClick}
     >
       {#if loadLogin}
