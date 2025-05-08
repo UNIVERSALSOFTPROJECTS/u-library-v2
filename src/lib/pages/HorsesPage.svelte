@@ -7,9 +7,22 @@
     export let t;
 
     let heightModal;
+    let heightBlockSum = 0;
     let loadIframe = true;
 
-    const resizeHeightModal = () => { heightModal = visualViewport.height - 164; }// header + menucategory
+    function detectBlockSum() {
+        let header = document.getElementById("user-header");
+        let navbar = document.getElementById("navbar-container");
+        if (header && navbar) {
+            heightBlockSum =  header.offsetHeight + navbar.offsetHeight;
+        }else {
+            heightBlockSum = 164;
+        }
+        return heightBlockSum;
+    }
+
+
+    const resizeHeightModal = () => { heightModal = visualViewport.height - detectBlockSum(); }// header + menucategory
 
     let url = `https://universalrace.net/new/cliente_api/apisoft_home.php?tk=${user.token}&ba=${user.balance}&lang=${t("idiom")}&theme=${theme}`;
 
