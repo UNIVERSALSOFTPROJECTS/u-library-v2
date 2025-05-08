@@ -265,7 +265,7 @@
         <button
             class="btn deposit"
             on:click={() => filterMovemets(filter)}
-            disabled={loadMovements}>Buscar</button
+            disabled={loadMovements}>{t("common.search")}</button
         >
     </div>
     {#if loadMovements}

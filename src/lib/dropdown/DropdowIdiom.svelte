@@ -6,21 +6,26 @@
 
   let isDropdownOpen = false;
   let url_global = "https://assets.apiusoft.com/generic_imgs";
-  let idiomDefault = idioms.find(idiom => idiom.id === localStorage.getItem('idiom'));
-  
+  // let idiomDefault = idioms.find(idiom => idiom.id === localStorage.getItem('idiom'));
+  let idiomDefault = (idioms ?? []).find(idiom => idiom.id === localStorage.getItem('idiom')) || {id: "es"};
+
   function selectOption(idiomSelected) {
     idiomDefault = idioms.find(idiom => idiom.id === idiomSelected);
     changeIdiom(idiomSelected);
     isDropdownOpen = false;
+    console.log("idiom desde Dropdown", idioms);
+    
   }
-  
   const toggleDropdown = () => { isDropdownOpen = !isDropdownOpen }
   
   onMount(() => {
+     console.log("Idiomas del DropdowIdiom: ", idioms);
+
       const handleClickOutside = (e) => { if (!e.target.closest('.dropdown.idiom')) isDropdownOpen = false }
       document.addEventListener('click', handleClickOutside);
       return () => { document.removeEventListener('click', handleClickOutside) };
-  });
+       
+ });
 </script>
   
 <div class="dropdown idiom">
@@ -29,12 +34,14 @@
   </button>
   {#if isDropdownOpen}
     <div class="dropdown-menu">
+      {#if idioms && idioms.length}
         {#each idioms as idiom}
           <button type="button" class="btn" on:click={() => selectOption(idiom.id)}>
             <img src="{url_global}/flags/{idiom.id}.png" alt="{idiom.id}-country">
             {idiom.id}
           </button>
         {/each}
+        {/if}
     </div>
   {/if}
 </div>

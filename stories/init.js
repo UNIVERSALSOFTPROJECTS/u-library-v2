@@ -194,38 +194,72 @@ import SocketConnector from '../src/js/SocketConnector'
 //    }
 // }
 
+// export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
+//    start:()=>{
+//       ServerConnection.setConfig({
+//            API:"https://lobby-bff.apiusoft.com",
+//            API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
+//            API_KS_AUTH: "https://srv-prod-ks.apiusoft.com/lobby-bff-auth",
+//            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+//         //    CLIENT_AUTH:"DJTHDAJARTCHGAMES7DARAJATECHGAMES7123",
+//         //    CLIENT_CODE:"DJTH",
+//            CLIENT_AUTH:"LATILATINSPORT213073LS212023USOFT",
+//            CLIENT_CODE:"LATI",
+//            CLIENT_ID: "21",
+//            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+//            API_GAMES_NODE: "https://prod-nd.apiusoft.com",
+//            ASSETS:"https://assets.apiusoft.com",
+//            WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
+//            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+//            country:"+56",
+//            operatorId:"123",
+//            domain:"http://coliseosport.com/",
+//            assetsUrl:"https://assets.apiusoft.com",
+//         //    org:"DJTH",
+//            org:"L21",
+//            //currency:9,//PEN
+//       })
+//    },
+//    startSocket:()=>{
+//        SocketConnector.setConfig({
+//            WS_URL:"ws://localhost:5000",
+//        })
+//    }
+// }
+
+
 export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
-   start:()=>{
-      ServerConnection.setConfig({
-           API:"https://lobby-bff.apiusoft.com",
-           API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
-           API_KS_AUTH: "https://srv-prod-ks.apiusoft.com/lobby-bff-auth",
-           GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-        //    CLIENT_AUTH:"DJTHDAJARTCHGAMES7DARAJATECHGAMES7123",
-        //    CLIENT_CODE:"DJTH",
-           CLIENT_AUTH:"LATILATINSPORT213073LS212023USOFT",
-           CLIENT_CODE:"LATI",
-           CLIENT_ID: "21",
-           LOBBY_GAMES_API:"https://lobby.apiusoft.com",
-           API_GAMES_NODE: "https://prod-nd.apiusoft.com",
-           ASSETS:"https://assets.apiusoft.com",
-           WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
-           ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
-           country:"+56",
-           operatorId:"123",
-           domain:"http://coliseosport.com/",
-           assetsUrl:"https://assets.apiusoft.com",
-        //    org:"DJTH",
-           org:"L21",
-           //currency:9,//PEN
-      })
-   },
-   startSocket:()=>{
-       SocketConnector.setConfig({
-           WS_URL:"ws://localhost:5000",
+    start:()=>{
+       ServerConnection.setConfig({
+            API:"https://lobby-bff.apiusoft.com",
+            API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
+            API_KS_AUTH: "https://srv-prod-ks.apiusoft.com/lobby-bff-auth",
+            GAMEAPI_URL:"https://apiuniversalsoft.com/api",
+         //    CLIENT_AUTH:"DJTHDAJARTCHGAMES7DARAJATECHGAMES7123",
+         //    CLIENT_CODE:"DJTH",
+            CLIENT_AUTH:"URCOUNIVERSALRCOLUNIVERSALRACECOLOMBIA123",
+            CLIENT_CODE:"URCO",
+            CLIENT_ID: "159",
+            LOBBY_GAMES_API:"https://lobby.apiusoft.com",
+            API_GAMES_NODE: "https://prod-nd.apiusoft.com",
+            ASSETS:"https://assets.apiusoft.com",
+            WS_URL:"wss://lobby-bff.apiusoft.com/lobbybff",
+            ASSETS_GLOBAL:"https://assets.apiusoft.com/generic_imgs",
+            country:"+56",
+            operatorId:"123",
+            domain:"http://co.universalrace.net",
+            assetsUrl:"https://assets.apiusoft.com",
+         //    org:"DJTH",
+            org:"URCO",
+            //currency:9,//PEN
        })
-   }
-}
+    },
+    startSocket:()=>{
+        SocketConnector.setConfig({
+            WS_URL:"ws://localhost:5000",
+        })
+    }
+ }
 
 // export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", pra los demas
 //     start:()=>{

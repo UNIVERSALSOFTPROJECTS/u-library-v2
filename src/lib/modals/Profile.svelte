@@ -4,7 +4,7 @@
     import { getUpdateBalance } from '../../js/utils/serverUtils';
     import { stringToNumber } from "../../js/utils/formatUtils";
     import DropdownBonus from "../dropdown/DropdownBonus.svelte";
-
+    import DropdowIdiom from "../dropdown/DropdowIdiom.svelte";
     import UserData from "../profile/UserData.svelte";
     import ChangePassword from "../profile/ChangePassword.svelte";
     import Movements from "../profile/Movements.svelte"
@@ -14,12 +14,14 @@
     export let onOk;
     export let t;
     export let configProfile;
+    export let configIdiom = {};
     export let onOpenDeposit;
     export let onOpenWithdrawal;
     export let onLogout;
     export let openChatLive;
     export let activePromotions;
-
+    let idioms = configIdiom.idioms || [];
+    const changeIdiom = configIdiom.changeIdiom || (() => {});
     let accountUser = {};
     let activedBonus = [];
     let bonusView = {type: "total", value : user.bonus_sumTotal};
@@ -58,7 +60,6 @@
 
     const getUpdateBonuses = () => {
         user = JSON.parse(sessionStorage.getItem("user"));
-
         let bonuses = [
             {type: "horse", value : user.bonus_horses},
             {type: "slot", value : user.bonus_slot},
@@ -75,7 +76,6 @@
         await getUpdateBalance(user);
         getUpdateBonuses();
     });
-
 </script>
 
 <div class="modal-body">
@@ -112,9 +112,14 @@
         <button class="btn profile"><i class="icon--bonus"></i>Bonos y promociones</button>
         {/if}
         <button class="btn logout icon--logout" on:click={onLogout}>{t("header.logout")}</button>
-        {#if chatLiveUrl}
-        <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
-        {/if}
+        <div class="btn bottom">
+            {#if chatLiveUrl}
+            <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
+            {/if}
+            {#if idioms.length !== 0}
+            <DropdowIdiom bind:idioms {changeIdiom}/>
+            {/if}
+        </div>
     </div>
     {#if profileView !== ""} 
         <div class="profile__view">

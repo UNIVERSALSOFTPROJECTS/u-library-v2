@@ -208,6 +208,15 @@
         activePromotions: false,
         chatLiveUrl,
     };
+
+    // const configIdiom = {
+    //     idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }], //idiomas disponibles
+    //     changeIdiom: function (idiom) {
+    //     $locale = idiom;
+    //     localStorage.setItem("idiom", idiom);
+    //     },
+    // }
+    
     //DEPOSIT
     const configDeposit = {
         id_banca: ["2918"], //disitribidor - almacena otros cajeros
@@ -363,8 +372,9 @@
             profileModalOpen = false;
         }
     };
-
+    console.log("🧩 Idiomas disponibles en Header:", configProfile?.idioms);
     onMount(() => {
+        console.log("🧩 Idiomas disponibles en Header:", configProfile?.idioms);
         let currentUrl = window.location.href;
         console.log("domain", currentUrl);
         if (/resetPassword/.test(currentUrl)) {
@@ -451,6 +461,9 @@
     }
 
     let typeView = "autoservice";
+
+
+
     const configLogin = {
         platform,
         typeView,
@@ -668,9 +681,13 @@
             /> -->
         </Modal>
 
+        {#if user && configProfile}
         <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
+            
             <Profile
+                
                 {configProfile}
+                activePromotions
                 {onOpenWithdrawal}
                 {onLogout}
                 {openChatLive}
@@ -681,6 +698,7 @@
                 t={$t}
             />
         </Modal>
+        {/if}
 
         <ScreenGames
             bind:open={screenGamesOpen}
