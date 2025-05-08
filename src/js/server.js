@@ -63,7 +63,7 @@ const ServerConnection = (() => {
     }
     const users = {
         getBalance: (userToken) => {
-            let url = conf.API + `/balance/${userToken}`;
+            let url = conf.API_KS + `/balance/${userToken}`;
             return axios.get(url, { headers });
         },
         authInGame: async (agregatorToken) => {
@@ -149,10 +149,9 @@ const ServerConnection = (() => {
           console.log(url,"desde server");
           return await axios.get(url, { headers });
         },
-        getGameURL: async (gameapi_url, game, usertoken, modeGame, type_view = "") => {
+        getGameURL: async (gameapi_url, game, usertoken, modeGame) => {
             let mode = game.provider === "gr" ? modeGame : game.mode;
-            let isMultipleView = type_view === "multiple" ? "&game_multiple=true" : "";
-            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${mode}&sessionid=${usertoken}${isMultipleView}`;
+            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${mode}&sessionid=${usertoken}&game_multiple=true`;
             let response = await axios.get(url, { headers });
             return response.data;
         },
