@@ -101,12 +101,12 @@ const ServerConnection = (() => {
             if (!conf.org) throw "ORG_MANDATORY";
             const url = window.origin+"/resetPassword";
             let payload = { email:data.email, url, org: conf.org };
-            return axios.post(`${conf.API}/resetPassword`, payload, { headers });
+            return axios.post(`${conf.API_KS}/resetPassword`, payload, { headers });
         },
         confirmResetPassword:(temporalToken)=>{
             if (!conf.org) throw "ORG_MANDATORY";
             let payload = { token:temporalToken, org: conf.org };
-            return axios.post(`${conf.API}/confirmResetPassword`, payload, { headers });
+            return axios.post(`${conf.API_KS}/confirmResetPassword`, payload, { headers });
         },
         getMyAccount: (userToken)=>{
             let url = conf.API_KS +`/myaccount/`+ userToken;
