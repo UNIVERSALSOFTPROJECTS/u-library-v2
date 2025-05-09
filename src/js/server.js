@@ -72,7 +72,7 @@ const ServerConnection = (() => {
             return response.data;
         },
         getCurrencyIdByCodeAgent: (id) => {
-            let url = conf.API + `/retailAgents/${id}/currencies`;
+            let url = conf.API_KS + `/retailAgents/${id}/currencies`;
             return axios.get(url, { headers });
         },
         preRegister: (username, email, phone, platform, channel) => {
