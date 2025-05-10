@@ -89,7 +89,8 @@
             <button class="accordion__select" on:click={() => toggleAccordion('panel4')}>{t("footer.promotions")}</button>
             <div class="accordion__body">
                 {#each bonus as bono}
-                <a href="{routePDF}/bonus_horses.pdf" target="_blank">{bono.name}</a>
+                <!-- <a href="{routePDF}/bonus_horses.pdf" target="_blank">{bono.name}</a> -->
+                <a href="{routePDF}/{bono.name}.pdf"target="_blank">{bono.name}</a>
                 {/each}
             </div>
         </div>
