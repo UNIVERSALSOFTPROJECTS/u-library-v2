@@ -22,7 +22,7 @@
     }
 
     if (!user) {
-        window.location.href = window.location.hostname;
+        window.location.href = `${window.location.protocol}//${window.location.hostname}`;
     }
 
 
