@@ -21,6 +21,10 @@
         return heightBlockSum;
     }
 
+    if (!user) {
+        window.location.href = `${window.location.protocol}//${window.location.hostname}`;
+    }
+
 
     const resizeHeightModal = () => { heightModal = visualViewport.height - detectBlockSum(); }// header + menucategory
 
@@ -32,7 +36,7 @@
 
 <div class="page" use:watchResize={resizeHeightModal}>
 {#if loadIframe}
-    <b class="loading"><b><b></b></b></b>
+    <b class="loading"><b><b></b></b></b>   
 {/if}
     <iframe on:load={()=>{loadIframe = false;}} style="height:{heightModal+"px"}"  src={url}  width="100%" frameborder="0" title="horsesIframe"></iframe>
 </div>
