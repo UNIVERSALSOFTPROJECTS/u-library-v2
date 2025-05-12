@@ -21,7 +21,7 @@ const ServerConnection = (() => {
     
     const wallet = {
         checkPreviewWithdrawal: async (token) => {
-            let url = conf.API + `/checkRetailWithdrawal/${token}`;
+            let url = conf.API_KS + `/checkRetailWithdrawal/${token}`;
             return await axios.get(url, { headers });
         },
         accountNumber: async (token) => {
@@ -34,18 +34,18 @@ const ServerConnection = (() => {
             return await axios.get(url, { headers });
         },
         retailWithdrawal: async (token, amount) => {
-            let url = conf.API + "/retailWithdrawal";
+            let url = conf.API_KS + "/retailWithdrawal";
             let payload = { token, amount }
             return await axios.post(url, payload, { headers });
         },
         depositRetail: async (token, cod) => {
-            let url = conf.API + "/wallet/depositRetail";
+            let url = conf.API_KS + "/wallet/depositRetail";
             let payload = { token, cod }
             return axios.post(url, payload, { headers });
         },
         withdrawal_w: async (token, amount, bank, account, info, dni) => {
             let payload = { token, amount, bank, account, info, dni }
-            let url = conf.API + "/withdrawal";
+            let url = conf.API_KS+ "/withdrawal";
             return await axios.post(url, payload, { headers });
         },
         bankDeposit: async (token, bankDeposit,base64Image = "") => {
