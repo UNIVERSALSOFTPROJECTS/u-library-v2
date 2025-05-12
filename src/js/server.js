@@ -28,6 +28,7 @@ const ServerConnection = (() => {
             let url = conf.API_KS + `/accountNumber/${token}`;
             return await axios.get(url, { headers });
         },
+        
         consultUserWeb: async (token) => {
             let url = conf.API + `/numero_cuenta/${token}`;
             return await axios.get(url, { headers });
