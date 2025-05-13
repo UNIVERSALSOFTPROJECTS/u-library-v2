@@ -101,13 +101,16 @@
                 }
             }else{
                 let error;
-                if (data.msg == " Revisar Credencial Invalid receiver in  transaction. Recipient has to be registered with CPS in order to receive funds. For more information call Customer Services on {0}.") {
+                if (data.msg == " Revisar Credencial Invalid receiver in  transaction. Recipient has to be registered with CPS in order to receive funds. For more information call Customer Services on {0}."
+                    || data.message == " Revisar Credencial The length of the MSISDN is {0}, and has exceeded the valid range from {1} to {2}."
+                ) {
                     error = t("msg.phoneInvalid");
                 }
                 else{
                     error = t("msg.contactSupport");
                 }
                 onError(error);//falta detectar los errores
+                console.log("error: ", data);
             }
         } finally {
             loadWithdrawal = false
