@@ -84,13 +84,11 @@
         try {
             loadWithdrawal = true;
             let {data} = await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,prefixPayMobile+account,info, infoUser.documento);
-            console.log("error?: ", data);
             if(data.resp == "ok"){
                 await getUpdateBalance(user);
                 user = JSON.parse(sessionStorage.getItem("user"));
                 //esto sguro es de HTG CRASHGAMES, DIVIRI LOIGIC CON E PAYMOBILE
                 if (typeView === "payMobile") {
-                    
                     loadWithdrawalW = true;
                     setTimeout(() => {
                         loadWithdrawalW = false;
@@ -99,19 +97,17 @@
                 }else{
                     onOk(t("msg.withdrawalRequestSend"));
                 }
+            }            
+        } catch (error) { //  a futuro crear un listado con todo los error segun llegne del backend o indicar al baquend que mande codigo de error en lugar de la respuesta completa
+            const message = error.response.data.message;
+            let translatedError;
+            if (message == " Revisar Credencial Invalid receiver in  transaction. Recipient has to be registered with CPS in order to receive funds. For more information call Customer Services on {0}."
+                || message == " Revisar Credencial The length of the MSISDN is {0}, and has exceeded the valid range from {1} to {2}.") {
+                translatedError = t("msg.phoneInvalid");
             }else{
-                let error;
-                if (data.msg == " Revisar Credencial Invalid receiver in  transaction. Recipient has to be registered with CPS in order to receive funds. For more information call Customer Services on {0}."
-                    || data.msg == " Revisar Credencial The length of the MSISDN is {0}, and has exceeded the valid range from {1} to {2}."
-                ) {
-                    error = t("msg.phoneInvalid");
-                }
-                else{
-                    error = t("msg.contactSupport");
-                }
-                onError(error);//falta detectar los errores
+                translatedError = t("msg.contactSupport");
             }
-
+            onError(translatedError);
         } finally {
             loadWithdrawal = false
         }
