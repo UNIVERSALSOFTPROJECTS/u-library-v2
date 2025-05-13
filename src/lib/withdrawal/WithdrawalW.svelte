@@ -84,7 +84,7 @@
         try {
             loadWithdrawal = true;
             let {data} = await ServerConnection.wallet.withdrawal_w(user.token,amount,bank,prefixPayMobile+account,info, infoUser.documento);
-            
+            console.log("error?: ", data);
             if(data.resp == "ok"){
                 await getUpdateBalance(user);
                 user = JSON.parse(sessionStorage.getItem("user"));
@@ -111,7 +111,7 @@
                 }
                 onError(error);//falta detectar los errores
             }
-            console.log("error: ", data);
+
         } finally {
             loadWithdrawal = false
         }
