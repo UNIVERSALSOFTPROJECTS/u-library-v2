@@ -85,12 +85,6 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         login: (username, password, userType,turnstileToken = null) => {
-            if (conf) {
-                
-                console.log("conf",conf);
-            }
-            
-            // if (!conf.org) throw "ORG_MANDATORY";
             let payload = { username, password, org: conf.org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
             console.log("headers", headers);
