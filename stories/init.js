@@ -235,10 +235,8 @@ export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", p
             API_KS: "https://srv-prod-ks.apiusoft.com/lobby-bff",
             API_KS_AUTH: "https://srv-prod-ks.apiusoft.com/lobby-bff-auth",
             GAMEAPI_URL:"https://apiuniversalsoft.com/api",
-         //    CLIENT_AUTH:"DJTHDAJARTCHGAMES7DARAJATECHGAMES7123",
-         //    CLIENT_CODE:"DJTH",
-            CLIENT_AUTH:"URCOUNIVERSALRCOLUNIVERSALRACECOLOMBIA123",
-            CLIENT_CODE:"URCO",
+            CLIENT_AUTH:"CRSH77CRASHGAMES777CRASHGAMESCRSH",
+            CLIENT_CODE:"CRSH",
             CLIENT_ID: "159",
             LOBBY_GAMES_API:"https://lobby.apiusoft.com",
             API_GAMES_NODE: "https://prod-nd.apiusoft.com",
@@ -249,9 +247,8 @@ export default{ //recuerda el  API_GAMES_NODE: "https://prod-nd.apiusoft.com", p
             operatorId:"123",
             domain:"http://co.universalrace.net",
             assetsUrl:"https://assets.apiusoft.com",
-         //    org:"DJTH",
-            org:"URCO",
-            //currency:9,//PEN
+            org:"CRG",
+            currency:9,//PEN
        })
     },
     startSocket:()=>{

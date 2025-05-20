@@ -127,50 +127,16 @@
     };
 
     const configWithdrawal = {
-        id_banca: [], //disitribidor - almacena otros cajeros
-        id_ca: ["6970","6546"], //caja dentro de un distribuidor principal
-        dataType: "",
-        messageOptional: "",
-        formVerification: "",
-        typeView : "payMobile",
-        // formVerification: "https://forms.gle/5rRcbJVgE7n4F6Ro7",
-        platform,
-        banksNames: [
-            { id: "Banco Estado", name: "Banco Estado" },
-            { id: "Banco Falabella", name: "Banco Falabella" },
-            { id: "Banco Santander", name: "Banco Santander" },
-            {
-                id: "Banco de Chile(Edwards Citi)",
-                name: "Banco de Chile(Edwards Citi)",
-            },
-            { id: "Banco BCI", name: "Banco BCI" },
-            { id: "Scotiabank", name: "Scotiabank" },
-            { id: "Banco Itaú", name: "Banco Itaú" },
-            { id: "Coopeuch", name: "Coopeuch" },
-            { id: "Banco Ripley", name: "Banco Ripley" },
-            { id: "Banco BICE", name: "Banco BICE" },
-            { id: "Tenpo", name: "Tenpo" },
-            { id: "Banco Consorcio", name: "Banco Consorcio" },
-            { id: "Banco Internacional", name: "Banco Internacional" },
-            { id: "Mercado Pago", name: "Mercado Pago" },
-            { id: "Prepago Los Héroes", name: "Prepago Los Héroes" },
-            { id: "Superdigital", name: "Superdigital" },
-            { id: "Tapp Caja Los Andes", name: "Tapp Caja Los Andes" },
-        ],
-        typeAccount: [
-            { id: "Corriente", name: "Corriente" },
-            { id: "Vista/Cuenta RUT", name: "Vista/Cuenta RUT" },
-            { id: "Ahorros", name: "Ahorros" },
-        ],
-        linksChats: [
-            {
-                name: "Whatsapp",
-                url: "https://web.whatsapp.com/send?phone=56964783055",
-            },
-        ],
-        countries: [
-            { prefix: "+509", flag: "ht" },
-        ]
+        id_banca: ["4204", "4312", "4313"], //disitribidor - almacena otros cajeros
+    id_ca: ["15191"], //caja dentro de un distribuidor principal
+    dataType: "",
+    typeView: "payMobile",
+    messageOptional: "",
+    formVerification: "",
+    platform,
+    banksNames: [],
+    typeAccount: [],
+    linksChats: [],
     };
     const configFooter = {
         platform,

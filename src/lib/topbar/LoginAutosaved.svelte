@@ -24,6 +24,7 @@
 	let typeError = "";
 
 	async function loginClick(){
+		console.log("esto realmente funciona para el ts?xd");
 		
 		if(!username || !password ) return onError(t("msg.allObligatory"));
 		try {
