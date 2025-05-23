@@ -35,7 +35,7 @@
     let paymentLink;
     let id_banca  = configDeposit.id_banca;
     let id_ca  = configDeposit.id_ca;
-    let isTest  = configDeposit.isTest || "";
+    let isRequiredVoucher  = configDeposit.isRequiredVoucher || "";
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
@@ -128,7 +128,7 @@
     }
 
     async function validateDepositBank() {
-        if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '') return onError("Todos los campos son obligatorios"); 
+        if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) return onError("Todos los campos son obligatorios"); 
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
             let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
