@@ -233,7 +233,7 @@
                     <p>{t('deposit.transferDate')}</p>
                     <input type="text" class="ipt" bind:value={amountDeposit} disabled>
                     <input type="date" class="ipt" bind:value={bankDeposit.date}>
-                    {#if isTest}
+                    {#if isRequiredVoucher}
                         <p>subir voucher</p>
                         <p></p>
                         <input type="file" accept="image/*" on:change={handleFileChange} style="width: 100%;" />
