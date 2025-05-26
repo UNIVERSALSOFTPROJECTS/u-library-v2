@@ -157,6 +157,9 @@ $bgi-signup: "https://wallpapers.com/images/featured/horse-racing-ghym6kfaky4hep
             border-radius: 100%;
             position: relative;
         }
+        &--upload{
+            @include elementIconPosition(addColorIcon("upload","4f4f4f"),"right");
+        }
     }
     .modal{
         &.login{

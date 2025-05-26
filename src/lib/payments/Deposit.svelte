@@ -39,6 +39,7 @@
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
+    let fileInput;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -234,11 +235,15 @@
                     <input type="text" class="ipt" bind:value={amountDeposit} disabled>
                     <input type="date" class="ipt" bind:value={bankDeposit.date}>
                     {#if isRequiredVoucher}
-                        <p>subir voucher</p>
+                        <p>Subir voucher</p>
                         <p></p>
-                        <input type="file" accept="image/*" on:change={handleFileChange} style="width: 100%;" />
+                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>Seleccionar archivo</button>
+                        <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
                     {/if}
                 </div>
+                {#if isRequiredVoucher}
+                    <b>NOTA: ESPERAR DE 2 A 5 MINUTOS PARA VER REFLEJADO LA RECARGA DE SALDO EN TU CUENTA</b>
+                {/if}
                 <button class="btn deposit" on:click={validateDepositBank}>{t("profile.recharge")}</button>
             {/if}
         {:else}
