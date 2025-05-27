@@ -235,7 +235,7 @@
                     <input type="text" class="ipt" bind:value={amountDeposit} disabled>
                     <input type="date" class="ipt" bind:value={bankDeposit.date}>
                     {#if isRequiredVoucher}
-                        <p>Subir voucher</p>
+                        <p>Subir Imagen de pago</p>
                         <p></p>
                         <button class="slc icon--upload" on:click={()=> fileInput.click()}>Seleccionar archivo</button>
                         <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
