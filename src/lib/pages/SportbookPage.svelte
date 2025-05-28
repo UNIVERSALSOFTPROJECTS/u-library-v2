@@ -54,7 +54,7 @@
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const baseUrlWin365 = `https://prod20370-154306407.freethrow777.com`;
-  const baseUrlWin365Cl = `https://prod20370161018313.freethrow777.com`;
+  const baseUrlWin365Cl = `https://prod20370-161018313.freethrow777.com`;
 
 
   const games = {
