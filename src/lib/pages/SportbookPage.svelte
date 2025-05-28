@@ -54,6 +54,7 @@
   const baseUrlWintech ='https://betslip.sportsapi.la/mainbk/betslip';
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const baseUrlWin365 = `https://prod20370-154306407.freethrow777.com`;
+  const baseUrlWin365Cl = `https://prod20370161018313.freethrow777.com`;
 
 
   const games = {
@@ -154,9 +155,12 @@
         url = ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken)
         const data = await backend.game.getURL(url);
         url = data.url
-      }else{
+      }else if (CLIENT_CODE == 'URCO'){
         url = baseUrlWin365;
+      }else{
+        url =baseUrlWin365Cl;
       }
+
       sportbookGameUrl = url;
     } catch (error) {
       console.log("Sportbook Error",error);
