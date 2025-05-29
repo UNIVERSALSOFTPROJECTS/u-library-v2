@@ -38,6 +38,22 @@
 
 <footer class="footer">
     <div class="footer__top">
+                      
+           
+            {#if payments.length != 0}
+            <div class="footer__payments">
+                <b>{t("footer.paymethods")}</b>
+                <div class="footer__payments--imgs">
+                    {#each payments as payment}
+                    <img src="{assetsPayments}{payment}.png" alt="payments-{payment}" loading="lazy">
+                    {/each}
+                </div>
+            </div>
+            {:else}
+            <div></div>
+            {/if}
+    </div>
+    <div class="footer__top">
         <button class="footer--lang">
             <img src="{assetsFlags}{country.flag}.png" alt="{country.name}-flag" loading="lazy">
             <span>{country.name}</span>
@@ -111,20 +127,7 @@
                 </div>
             </div>
             
-                
-            {/if}
-            {#if payments.length != 0}
-            <div class="footer__payments">
-                <b>{t("footer.paymethods")}</b>
-                <div class="footer__payments--imgs">
-                    {#each payments as payment}
-                    <img src="{assetsPayments}{payment}.png" alt="payments-{payment}" loading="lazy">
-                    {/each}
-                </div>
-            </div>
-            {:else}
-            <div></div>
-            {/if}
+   {/if}
         </div>
 
         {#if socials.length != 0 || email}
