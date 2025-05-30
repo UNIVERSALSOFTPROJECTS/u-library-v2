@@ -61,7 +61,7 @@
     </button>
     <button class="u-menubar-button" on:click={ ()=>{ activeContent=false; onShowConfigs(); } }> Configuraciones </button>
   
- 
+
   </div>
   <div on:click={onActiveContent} class="u-backdrop"></div>
   {/if}

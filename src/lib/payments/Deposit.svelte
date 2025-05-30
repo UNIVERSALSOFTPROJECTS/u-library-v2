@@ -4,7 +4,7 @@
     import { assetsPayments } from "../../js/utils/assetsUtils";
     import inputUtils from "../../js/utils/inputUtils";
     import { currentDate } from "../../js/utils/formatUtils";
-    import { isMobile } from "mobile-device-detect";
+    import { isMobile, isMobileSafari } from "mobile-device-detect";
 
     export let user;
     export let onError;
@@ -40,6 +40,7 @@
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
     let fileInput;
+    let viewLinkSafari = false;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -63,7 +64,7 @@
 		}
     }
 
-   async function validateDeposit(pay){
+    async function validateDeposit(pay){
         if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
         else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
         else{
@@ -88,6 +89,8 @@
                         };
                         window.chrome.webview.postMessage(message2);
 
+                    }else if(isMobileSafari){
+                        viewLinkSafari = true;
                     }else{
                         window.open(iframeGateway,"_blank",isMobile?"": windowPayment());
                     }
@@ -114,7 +117,6 @@
 
     const openPayMethod = (typePayment) => {
         paySelected = typePayment;
-        if (paySelected.virtual === 0) paySelected.cta = JSON.parse(typePayment.cta);      
         typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
     }
     
@@ -126,6 +128,7 @@
         bankDeposit.targetBankId=undefined;
         bankDeposit.aditional='';
         bankDeposit.reference='';
+        viewLinkSafari = false;
     }
 
     async function validateDepositBank() {
@@ -188,6 +191,13 @@
                 <div class="deposit__arrow bottom"></div>
             </button>
             {#if detailsTranference}
+                {#if viewLinkSafari}
+                     <div class="deposit__link_blank">
+                        <h1>Redirección a pasarela</h1>
+                        <p>Haz clic en el botón para continuar con el proceso externo.</p>
+                        <button class="btn link_blank" on:click={()=>{window.open(iframeGateway,"_blank")}}>Ir a pasarela</button>
+                    </div>
+                {:else}
                 <b>{t('deposit.details')}:</b>
                 <div class="deposit__info">
                     <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
@@ -205,6 +215,7 @@
                         <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
                     </div>
                 </div>
+                {/if}
             {:else}
                 <p>{t('deposit.step1')}.</p>
                 <div class="deposit__details">
