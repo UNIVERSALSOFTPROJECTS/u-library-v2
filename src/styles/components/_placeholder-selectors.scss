@@ -1709,6 +1709,8 @@
             display: grid;
             justify-items: center;
             gap: 0.5rem;
+            overflow: auto;
+            width: 100%;
 
             &--imgs {
                 display: flex;
