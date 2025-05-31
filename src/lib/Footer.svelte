@@ -17,6 +17,7 @@
     let isGCB = configFooter.isGCB || "";
     let platform = configFooter.platform;
     let bonus = configFooter.bonus;
+    let aditionalTerms = configFooter.aditionalTerms || "";
     let linksChats = configFooter.linksChats;
     let activePanel = null;
     let route = detectIdiomPage(t("idiom"));
@@ -30,10 +31,7 @@
     const categorySlot = categoryGames.filter(a => slots.includes(a));
     const categorySport = categoryGames.filter(a => sports.includes(a));
 
-    const toggleAccordion = (panel) => { activePanel = activePanel === panel ? null : panel; };
-
-    console.log("configFooter: ", configFooter);
-    
+    const toggleAccordion = (panel) => { activePanel = activePanel === panel ? null : panel; };    
 </script>
 
 <footer class="footer">
@@ -98,6 +96,9 @@
                 <a href="{routePDF}/g&r.pdf" target="_blank">{t("footer.g_r")}</a>
                 <a href="{routePDF}/p&a.pdf" target="_blank">{t("footer.p_a")}</a>
                 <a href="{routePDF}/q&a.pdf" target="_blank">{t("footer.q_a")}</a>
+                {#each aditionalTerms as terms}
+                <a href="{routePDF}/{terms.name}.pdf" target="_blank">{t(`footer.${terms.name}`)}</a>
+                {/each}
             </div>
         </div>
         {#if bonus.length != 0}

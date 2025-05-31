@@ -161,6 +161,9 @@
         ],
         viewLogoUS: true,
         isGCB: "x",
+        // aditionalTerms: [
+        //     // {name: "new"}
+        // ]
     };
     const configPromotions = {
         platform,
