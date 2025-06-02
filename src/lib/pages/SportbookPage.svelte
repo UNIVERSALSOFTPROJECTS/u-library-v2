@@ -155,7 +155,7 @@
         url = ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken)
         const data = await backend.game.getURL(url);
         url = data.url
-      }else if (CLIENT_CODE == 'URCO'){
+      }else if (CLIENT_CODE == 'BPEN'){
         url = baseUrlWin365;
       }else{
         url =baseUrlWin365Cl;
