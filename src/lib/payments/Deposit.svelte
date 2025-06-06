@@ -248,7 +248,7 @@
                     {#if isRequiredVoucher}
                         <p>Subir Imagen de pago</p>
                         <p></p>
-                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>Seleccionar archivo</button>
+                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{base64Image?"Archivo subido":"Seleccionar archivo"}</button>
                         <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
                     {/if}
                 </div>

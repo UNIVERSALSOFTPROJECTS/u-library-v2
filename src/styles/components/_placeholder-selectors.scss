@@ -1724,7 +1724,8 @@
             &--imgs {
                 display: flex;
                 gap: 1rem;
-
+                width: 100%;
+                overflow: auto;
                 & img {
                     width: 120px;
                     border-radius: $borderR-btn;

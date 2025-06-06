@@ -147,6 +147,7 @@
         //"slot","slotlive","crash","scratch","sportbook","sportbooklive","horses","virtual"
         payments: [
             // "KHIPU","FLOW"
+            "NEQUI1","BANCOLOMBIA1","BANCOAVVILLAS","BANCODEBOGOTA","BANCOPOPULAR","BBVA","DAVIPLATA","PSE"
         ],
         social: [
             //ASEGURATO DE COLOCAR EL NOMBRE EN MINUSCULA Y EhenL ENLACE CORRECTO!!!
