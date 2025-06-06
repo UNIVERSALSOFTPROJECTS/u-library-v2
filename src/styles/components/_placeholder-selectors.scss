@@ -1914,6 +1914,23 @@
                 text-align: start;
             }
         }
+        .swiper-container{
+            &__payments{
+                display: grid;
+                width: 100%;
+                margin: 0 auto;
+                justify-content: center;
+                max-width: 600px;
+                @media #{$landscape_pc} {
+                    max-width: 100%;
+                }
+            }
+        }
+        .swiper-slide{
+            &__payments{
+                width: auto;
+            }
+        }
     }
 
     .btn {

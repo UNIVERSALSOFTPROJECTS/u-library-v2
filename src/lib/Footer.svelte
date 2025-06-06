@@ -1,5 +1,6 @@
 <script>
     import {register} from 'swiper/element/bundle';
+    import { isMobile } from 'mobile-device-detect';
     import { onMount } from 'svelte';
     import {assetsPayments, assetsFlags, assetsFooter,assetsPDF } from "../js/utils/assetsUtils";
     import { detectIdiomPage } from "../js/utils/formatUtils";
@@ -7,12 +8,7 @@
     export let onCategoryChange;
     export let openChatLive;
     export let configFooter;
-    export let locale;
     export let t;
-
-
-
-    console.log("locale",locale);
     
     let country = configFooter.country;
     let isChat = configFooter.isChat;
@@ -30,7 +26,6 @@
     let route = detectIdiomPage(t("idiom"));
     let routePDF = assetsPDF(platform,route);
    
-
     const currentYear = new Date().getFullYear();
     const slots = ["slot", "slotlive", "crash", "scratch"];
     const sports = ["sportbook", "sportbooklive", "horses", "virtual"];
@@ -40,8 +35,6 @@
 
     const toggleAccordion = (panel) => { activePanel = activePanel === panel ? null : panel; };    
 
-
-
     const initCarrousel = () => {
         const swiperEl = document.querySelector(".swiper-container__payments");
         const swiperParams = {
@@ -49,10 +42,9 @@
             slidesPerGroup: 2,
             slidesPerView: 'auto',
             speed: 1500,
-            loop: true,
+            loop: isMobile?true:false,
             autoplay: {
                 delay: 500,
-                disableOnInteraction: false,
             },
             watchSlidesProgress: true,
             slidesPerGroupAuto: true,
@@ -73,23 +65,15 @@
     <div class="footer__top">
         {#if payments.length != 0}
             <div class="footer__payments">
-                 <b>{t("footer.paymethods")}</b>
+                <b>{t("footer.paymethods")}</b>
                 <swiper-container class="swiper-container__payments" init="false">
                     {#each payments as payment}
-                        <swiper-slide>
+                        <swiper-slide class="swiper-slide__payments">
                             <img src="{assetsPayments}{payment}.png" alt="payments-{payment}" loading="lazy">
                         </swiper-slide>
                     {/each}
                 </swiper-container>
             </div>
-        <!-- <div class="footer__payments">
-           
-            <div class="footer__payments--imgs">
-                {#each payments as payment}
-                <img src="{assetsPayments}{payment}.png" alt="payments-{payment}" loading="lazy">
-                {/each}
-            </div>
-        </div> -->
         {:else}
         <div></div>
         {/if}
@@ -206,17 +190,3 @@
         </div>
     </div>
 </footer>
-
-<style>
-    swiper-container {
-        display: grid;
-        width: 100%;
-        margin: 0 auto;
-        justify-content: center;
-         max-width: 600px;
-    }
-    swiper-slide {
-        width: auto;
-    }
-
-</style>
