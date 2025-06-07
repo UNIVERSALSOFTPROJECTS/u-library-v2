@@ -157,6 +157,10 @@ const ServerConnection = (() => {
             let response = await axios.get(url, { headers });
             return response.data;
         },
+        getURLDemo: async (url) => {
+            const response = await axios.get(url, { headers });
+            return response.data;
+        },
         getURL: async (url) => {
             const response = await axios.get(url);
             return response.data;
