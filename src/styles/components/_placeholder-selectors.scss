@@ -684,6 +684,11 @@
             font-size: $g-font-size - 2;
         }
 
+        &__time {
+            color: #00d2e4;
+            font-size: $g-font-size - 2;
+        }
+
         &__link_blank{
             display: grid;
             gap: 0.5rem;

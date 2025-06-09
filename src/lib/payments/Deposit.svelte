@@ -36,11 +36,13 @@
     let id_banca  = configDeposit.id_banca;
     let id_ca  = configDeposit.id_ca;
     let isRequiredVoucher  = configDeposit.isRequiredVoucher || "";
+    let viewTimeDeposit = configDeposit.viewTimeDeposit || false;
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
     let fileInput;
     let viewLinkSafari = false;
+
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -266,6 +268,9 @@
                         <div>
                             <b>{paymethod.name_pay}</b>
                             <p class="deposit__limits">{paymethod.min} {paymethod.iso} - {paymethod.max} {paymethod.iso}</p>
+                            {#if viewTimeDeposit}
+                            <p class="deposit__time">Tiempo estimado: {paymethod.virtual == 0? "5 - 10 minutos": "Inmediato"}</p>
+                            {/if}
                         </div>
                         <div class="deposit__arrow right"></div>
                     </button>
