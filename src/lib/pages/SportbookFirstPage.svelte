@@ -6,11 +6,13 @@
 
   export let userState;
   export let user;
+  export let locale = "es";
   export let options;
   export let GAMEAPI_URL;
   export let CLIENT_CODE;
 
   let sportbookGameUrl = '';
+  let viewSportbook = true;
   let mode = ut.isMobile() ? "mb" : "wb";
 
   const first_id = "first_2024";
@@ -44,6 +46,14 @@
     openFirst();
   }
 
+  const resetSportbook = (locale) => {
+    console.log("variable recataiva", locale);
+    viewSportbook = false;
+    setTimeout(() => {
+      viewSportbook = true;
+    }, 100);
+  }
+
   const openFirst = async () => { 
     let url;
     try {
@@ -66,10 +76,14 @@
     document.body.style.overflow="scroll";
   });
 
+
+  $:resetSportbook(locale);
 </script>
 
 <div class="sportbook-content">
+  {#if viewSportbook}
   <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
+  {/if}
 </div>
 
 <style>
