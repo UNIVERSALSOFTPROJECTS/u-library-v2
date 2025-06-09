@@ -129,12 +129,13 @@
           url += `&lang=${lang}&r=url`;  
           if (CLIENT_CODE == 'PRLS') url += `&game_multiple=true`;
           //const data = await backend.game.getURL(url);
-        let data;
-        if (CLIENT_CODE === 'JU02') {
-          data = await backend.game.getURLDemo(url);
-        } else {
-          data = await backend.game.getURL(url);
-        }
+          if (CLIENT_CODE == 'JU02') console.log(JSON.stringify(CLIENT_CODE))
+          let data;
+          if (CLIENT_CODE === 'JU02') {
+            data = await backend.game.getURLDemo(url);
+          } else {
+            data = await backend.game.getURL(url);
+          }
           url = data.url;
         } else {
             url = resolveGuestURL(CLIENT_CODE, active_view, mode);
