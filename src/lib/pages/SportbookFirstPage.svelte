@@ -47,7 +47,6 @@
   }
 
   const resetSportbook = (locale) => {
-    console.log("variable recataiva", locale);
     viewSportbook = false;
     setTimeout(() => {
       viewSportbook = true;
