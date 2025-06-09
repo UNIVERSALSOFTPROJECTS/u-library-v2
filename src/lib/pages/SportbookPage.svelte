@@ -184,8 +184,6 @@ function RESELLER (params) {
 }
   const openBetsW3 = async () => { 
     let url;
-    console.log(mode,"mode");
-    console.log(clientCode,"CLI CO");
     if (userState == "loggedIn") {
       url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
