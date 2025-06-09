@@ -46,8 +46,9 @@
     openFirst();
   }
 
-  const resetSportbook = (locale) => {
+  const resetSportbook = async(locale) => {
     viewSportbook = false;
+    await openSport();
     setTimeout(() => {
       viewSportbook = true;
     }, 100);
@@ -57,7 +58,7 @@
     let url;
     try {
       if (userState == "loggedIn"){
-        url = ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken)
+        url = ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken, locale)
         const data = await backend.game.getURL(url);
         url = data.url
       }else{
