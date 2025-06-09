@@ -191,7 +191,7 @@ function RESELLER (params) {
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
       let data;
-      if (CLIENT_CODE === 'JU02') {
+      if (clientCode === 'JU02') {
             data = await backend.game.getURLDemo(url);
           } else {
             data = await backend.game.getURL(url);
