@@ -46,7 +46,7 @@
     openFirst();
   }
 
-  const resetSportbook = async() => {
+  const resetSportbook = async(locale) => {
     viewSportbook = false;
     await openSport();
     setTimeout(() => {
