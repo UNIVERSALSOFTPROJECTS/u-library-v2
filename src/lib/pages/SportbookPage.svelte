@@ -15,6 +15,7 @@
   export let GAME_JAVA_API_URL;
   export let lang = 'es';
   export let CLIENT_CODE;
+  export let clientCode;
   console.log(user,"sportbook");
   
 
@@ -184,7 +185,7 @@ function RESELLER (params) {
   const openBetsW3 = async () => { 
     let url;
     console.log(mode,"mode");
-    console.log(CLIENT_CODE,"CLI CO");
+    console.log(clientCode,"CLI CO");
     if (userState == "loggedIn") {
       url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
