@@ -129,7 +129,6 @@
           url += `&lang=${lang}&r=url`;  
           if (CLIENT_CODE == 'PRLS') url += `&game_multiple=true`;
           //const data = await backend.game.getURL(url);
-          console.log("client code: "+JSON.stringify(CLIENT_CODE))
           let data;
           if (CLIENT_CODE === 'JU02') {
             data = await backend.game.getURLDemo(url);
