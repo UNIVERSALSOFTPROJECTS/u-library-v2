@@ -57,7 +57,7 @@
   const baseUrlWin365 = `https://prod20370-154306407.freethrow777.com`;
   const baseUrlWin365Cl = `https://prod20370-161018313.freethrow777.com`;
   const baseUrlGanawin = `https://prod20370-169234874.freethrow777.com`;
-
+  const baseUrlGanabet365 = `https://prod20370-169327015.freethrow777.com`;
 
   const games = {
     'digtain':{
@@ -161,8 +161,10 @@
         url = baseUrlWin365;
       }else if (CLIENT_CODE == 'BTCL'){
         url =baseUrlWin365Cl;
-      }else if (CLIENT_CODE == 'GAWN' ) {
+      }else if (CLIENT_CODE == 'GAWN' ){
         url =baseUrlGanawin
+      }else if (CLIENT_CODE == 'GBPE'){
+        url =baseUrlGanabet365
       }
       else {
        url =baseUrlGanawin
