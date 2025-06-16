@@ -5,7 +5,7 @@
     export let onLogout;
     export let t;
 
-    let time = 60;
+    let time = 360;
 
     function countdownTimer() {
         time -= 1;
