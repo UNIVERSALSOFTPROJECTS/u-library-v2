@@ -161,9 +161,11 @@
         url = baseUrlWin365;
       }else if (CLIENT_CODE == 'BTCL'){
         url =baseUrlWin365Cl;
-      }else {
+      }else if (CLIENT_CODE == 'GAWN' ) {
         url =baseUrlGanawin
-        
+      }
+      else {
+       url =baseUrlGanawin
       }
 
       sportbookGameUrl = url;
