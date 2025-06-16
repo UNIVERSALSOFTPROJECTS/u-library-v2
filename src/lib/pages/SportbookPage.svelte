@@ -163,6 +163,7 @@
         url =baseUrlWin365Cl;
       }else {
         url =baseUrlGanawin
+        
       }
 
       sportbookGameUrl = url;
