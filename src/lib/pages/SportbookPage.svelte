@@ -56,6 +56,7 @@
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const baseUrlWin365 = `https://prod20370-154306407.freethrow777.com`;
   const baseUrlWin365Cl = `https://prod20370-161018313.freethrow777.com`;
+  const baseUrlGanawin = `https://prod20370-169234874.freethrow777.com`;
 
 
   const games = {
@@ -158,8 +159,10 @@
         url = data.url
       }else if (CLIENT_CODE == 'BPEN'){
         url = baseUrlWin365;
-      }else{
+      }else if (CLIENT_CODE == 'BTCL'){
         url =baseUrlWin365Cl;
+      }else {
+        url =baseUrlGanawin
       }
 
       sportbookGameUrl = url;
