@@ -57,7 +57,7 @@
   const baseUrlWin365 = `https://prod20370-154306407.freethrow777.com`;
   const baseUrlWin365Cl = `https://prod20370-161018313.freethrow777.com`;
   const baseUrlGanawin = `https://prod20370-169234874.freethrow777.com`;
-  const baseUrlGanabet365 = `https://prod20370-169327015.442hattrick.com`;
+  const baseUrlGanabet365 = `https://prod20370-169327015.freethrow777.com`;
 
   const games = {
     'digtain':{
