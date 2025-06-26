@@ -385,7 +385,7 @@ export default {
 
   },
   fr: {
-    "login.title": "Bienvenue à",
+  "login.title": "Bienvenue à",
   "login.user": "Utilisateur ou e-mail",
   "login.password": "Mot de passe",
   "login.access": "Se connecter",
