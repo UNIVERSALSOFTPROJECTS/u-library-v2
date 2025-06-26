@@ -536,7 +536,7 @@ export default {
   "common.accept": "Oui",
     //---
       "withdraw.selectToClaim": "Sélectionnez 'ENCAISSER' pour réclamer votre gain",
-  "withdraw.pending": "Vous avez un retrait en attente, veuillez réclamer votre gain"
+  "withdraw.pending": "Vous avez un retrait en attente, veuillez réclamer votre gain",
     //---
      "searcherGames.title": "Rechercher des jeux",
   "searcherGames.noData": "Aucune donnée trouvée",
@@ -659,7 +659,7 @@ export default {
 
     //---------------crashgame_text-----------------------------
     "header.reload": "Recharger",
-  "header.bonus": "Bonus"
+  "header.bonus": "Bonus",
     // ------------------------------
     "app.playNow": "Jouer maintenant !",
   "app.preview": "Précédent",
@@ -686,7 +686,7 @@ export default {
   "profile.changesAutosaved": "*Les modifications sont enregistrées automatiquement",
   "profile.fullscreen": "Plein écran",
   "profile.reduce": "Réduire",
-  "profile.enlarge": "Agrandir"
+  "profile.enlarge": "Agrandir",
     //---------------Betting History-----------------------------}
    "history.activities": "Historique des activités",
   "history.from": "De",
