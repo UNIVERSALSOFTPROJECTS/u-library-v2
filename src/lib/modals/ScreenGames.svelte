@@ -89,6 +89,20 @@
 
 
     $: statusModal(open);
+
+
+    window.addEventListener('message', (event) => {
+        if (event.source !== iframe.contentWindow) return;
+
+        if (event.data.event === 'exit') {
+            console.log('[iframe message] Evento recibido: exit');
+        } else if (event.data.event === 'reload') {
+            console.log('[iframe message] Evento recibido: reload');
+        } else {
+            console.log('[iframe message] Evento desconocido:', event.data.event);
+        }
+    });
+
 </script>
 
 {#if open}
