@@ -176,7 +176,7 @@
       else {
        url =baseUrlGanawin
       }
-
+      console.log("CLIENT_CODE",JSON.stringify(CLIENT_CODE))
       sportbookGameUrl = url;
     } catch (error) {
       console.log("Sportbook Error",error);
