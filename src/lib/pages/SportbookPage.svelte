@@ -56,6 +56,7 @@
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const baseUrlWin365 = `https://prod20370-154306407.freethrow777.com`;
   const baseUrlWin365Cl = `https://prod20370-161018313.freethrow777.com`;
+  const baseUrlWin365Mx = `https://prod20370-170517448.freethrow777.com`;
   const baseUrlGanawin = `https://prod20370-169234874.freethrow777.com`;
   const baseUrlGanabet365 = `https://prod20370-169327015.freethrow777.com`;
   const baseUrlParyajKebek = `https://prod20370-171305761.freethrow777.com`; 
@@ -166,6 +167,8 @@
         url =baseUrlGanawin
       }else if (CLIENT_CODE == 'GBPE'){
         url =baseUrlGanabet365
+      }else if (CLIENT_CODE == 'BTMX'){
+        url =baseUrlWin365Mx
       }
       else if (CLIENT_CODE == 'PJKB'){
         url =baseUrlParyajKebek
