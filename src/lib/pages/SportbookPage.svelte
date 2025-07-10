@@ -176,11 +176,11 @@
       else {
        url =baseUrlGanawin
       }
-
       sportbookGameUrl = url;
     } catch (error) {
       console.log("Sportbook Error",error);
     }
+    console.log("CLIENT_CODE",CLIENT_CODE)
   }
 
   const openPinnacle = async () => { 
