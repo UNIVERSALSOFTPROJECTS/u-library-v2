@@ -13,6 +13,7 @@
     let isFullscreen = false;
     let viewIframe = true;
     let heightModal;
+    let iframeScreenGame;
 
     const resizeHeightModal = () => { heightModal = visualViewport.height; }
     
@@ -79,6 +80,21 @@
     onMount(() => {
         //window.addEventListener('message', receiveMessage, false);
         window.addEventListener('resize', resizeHeightModal); 
+
+        function handleMessage(event) {
+            if (event.source !== iframeScreenGame.contentWindow) return;
+
+            if (event.data.event === 'exit') {
+            console.log('[iframe message] Evento recibido: exit');
+            } else if (event.data.event === 'reload') {
+            console.log('[iframe message] Evento recibido: reload');
+            } else {
+            console.log('[iframe message] Evento desconocido:', event.data.event);
+            }
+        }
+
+        window.addEventListener('message', handleMessage);
+        return () => window.removeEventListener('message', handleMessage);
     });
     
     onDestroy(() => {
@@ -89,20 +105,6 @@
 
 
     $: statusModal(open);
-
-
-    window.addEventListener('message', (event) => {
-        if (event.source !== iframe.contentWindow) return;
-
-        if (event.data.event === 'exit') {
-            console.log('[iframe message] Evento recibido: exit');
-        } else if (event.data.event === 'reload') {
-            console.log('[iframe message] Evento recibido: reload');
-        } else {
-            console.log('[iframe message] Evento desconocido:', event.data.event);
-        }
-    });
-
 </script>
 
 {#if open}
@@ -128,7 +130,7 @@
                         <b class="loading"><b><b></b></b></b>
                     {/if}
                     {#if viewIframe}
-                        <iframe  on:load={()=>{loadIframe = false;}} width="100%" height="100%" src={url_game} frameborder="0" title="modalGame"></iframe>
+                        <iframe  bind:this={iframeScreenGame}  on:load={()=>{loadIframe = false;}} width="100%" height="100%" src={url_game} frameborder="0" title="modalGame"></iframe>
                     {/if}
                 </div>
             </div>
