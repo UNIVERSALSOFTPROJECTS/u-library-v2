@@ -78,7 +78,7 @@
     }
 
     function handleMessage(event) {
-        if (!iframeScreenGame) {
+        if (!url_game) {
             return;
         }
         if (event.source !== iframeScreenGame.contentWindow) return;
