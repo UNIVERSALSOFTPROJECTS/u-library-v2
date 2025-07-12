@@ -76,7 +76,7 @@
             isFullscreen = false;
         }
     }
-    
+
     function handleMessage(event) {
         if (!iframeScreenGame) {
             return;
@@ -98,7 +98,6 @@
         //window.addEventListener('message', receiveMessage, false);
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', handleMessage);
-        return () => 
     });
     
     onDestroy(() => {
