@@ -48,6 +48,9 @@
   const guestURLbetw3Live = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
   const guestURLbetw3LAUS = "https://sports2.jcasino.live/?target=86224&name=latinsport21#/?target=latinsport21-86224-integration&token=123456789";
   const guestURLbetw3LAUSlive = "https://sports2.jcasino.live/?target=86224&name=latinsport21#/live_ecuabets/?target=latinsport21-86224-integration&token=123456789"
+  const guestURLbetw3GBPE = "https://sports2.jcasino.live/#/?target=ganabet365-86224-integration&token=123456789"
+  const guestURLbetw3GBPELive ="https://sports2.jcasino.live/#/live_ecuabets/?target=ganabet365-86224-integration&token=123456789"
+
 
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
@@ -165,8 +168,8 @@
         url =baseUrlWin365Cl;
       }else if (CLIENT_CODE == 'GAWN' ){
         url =baseUrlGanawin
-      }else if (CLIENT_CODE == 'GBPE'){
-        url =baseUrlGanabet365
+      // }else if (CLIENT_CODE == 'GBPE'){
+      //   url =baseUrlGanabet365
       }else if (CLIENT_CODE == 'BTMX'){
         url =baseUrlWin365Mx
       }
@@ -225,6 +228,9 @@ function RESELLER (params) {
         url = active_view == "sportbooklive" ? guestURLbetw3bt1Live : guestURLbetw3bt1;
         RESELLER();
       }
+      else if (CLIENT_CODE == "GBPE") {
+          url = active_view == "sportbooklive" ? guestURLbetw3GBPELive : guestURLbetw3GBPE;
+        }
 
       else{
         url = active_view == "sportbooklive" ? guestURLbetw3LJ : guestURLbetw3LJLive;
