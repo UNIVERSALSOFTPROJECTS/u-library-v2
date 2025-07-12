@@ -76,30 +76,35 @@
             isFullscreen = false;
         }
     }
+    
+    function handleMessage(event) {
+        if (!iframeScreenGame) {
+            return;
+        }
+        if (event.source !== iframeScreenGame.contentWindow) return;
+
+           const { event: messageEvent } = event.data;
+
+        if (messageEvent === 'exit') {
+        console.log('[iframe message] Evento recibido: exit');
+        } else if (messageEvent === 'reload') {
+        console.log('[iframe message] Evento recibido: reload');
+        } else {
+        console.log('[iframe message] Evento desconocido:', messageEvent);
+        }
+    }
 
     onMount(() => {
         //window.addEventListener('message', receiveMessage, false);
         window.addEventListener('resize', resizeHeightModal); 
-
-        function handleMessage(event) {
-            if (event.source !== iframeScreenGame.contentWindow) return;
-
-            if (event.data.event === 'exit') {
-            console.log('[iframe message] Evento recibido: exit');
-            } else if (event.data.event === 'reload') {
-            console.log('[iframe message] Evento recibido: reload');
-            } else {
-            console.log('[iframe message] Evento desconocido:', event.data.event);
-            }
-        }
-
         window.addEventListener('message', handleMessage);
-        return () => window.removeEventListener('message', handleMessage);
+        return () => 
     });
     
     onDestroy(() => {
         //window.removeEventListener('message', receiveMessage);
         window.removeEventListener('resize', resizeHeightModal);
+        window.removeEventListener('message', handleMessage);
         console.log("Cleaned up event listeners");
     });
 
