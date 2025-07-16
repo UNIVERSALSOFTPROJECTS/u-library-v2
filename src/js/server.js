@@ -85,10 +85,12 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         login: (username, password, userType,turnstileToken = null) => {
+            let url = conf.API_KS_LOGIN + "/login";
+
             let payload = { username, password, org: conf.org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
             console.log("headers", headers);
-            return axios.post("https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login", payload, { headers });
+            return axios.post(url, payload, { headers });
         },
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
             if (!currency) throw "CURRENCY_MANDATORY";
