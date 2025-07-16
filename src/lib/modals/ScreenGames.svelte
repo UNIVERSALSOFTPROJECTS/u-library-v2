@@ -13,6 +13,7 @@
     let isFullscreen = false;
     let viewIframe = true;
     let heightModal;
+    let iframeScreenGame;
 
     const resizeHeightModal = () => { heightModal = visualViewport.height; }
     
@@ -76,14 +77,33 @@
         }
     }
 
+    function handleMessage(event) {
+        if (!iframeScreenGame || !iframeScreenGame.contentWindow || !url_game) {
+            return;
+        }
+        if (event.source !== iframeScreenGame.contentWindow) return;
+
+           const { event: messageEvent } = event.data;
+
+        if (messageEvent === 'exit') {
+        console.log('[iframe message] Evento recibido: exit');
+        } else if (messageEvent === 'reload') {
+        console.log('[iframe message] Evento recibido: reload');
+        } else {
+        console.log('[iframe message] Evento desconocido:', messageEvent);
+        }
+    }
+
     onMount(() => {
         //window.addEventListener('message', receiveMessage, false);
         window.addEventListener('resize', resizeHeightModal); 
+        window.addEventListener('message', handleMessage);
     });
     
     onDestroy(() => {
         //window.removeEventListener('message', receiveMessage);
         window.removeEventListener('resize', resizeHeightModal);
+        window.removeEventListener('message', handleMessage);
         console.log("Cleaned up event listeners");
     });
 
@@ -114,7 +134,7 @@
                         <b class="loading"><b><b></b></b></b>
                     {/if}
                     {#if viewIframe}
-                        <iframe  on:load={()=>{loadIframe = false;}} width="100%" height="100%" src={url_game} frameborder="0" title="modalGame"></iframe>
+                        <iframe  bind:this={iframeScreenGame}  on:load={()=>{loadIframe = false;}} width="100%" height="100%" src={url_game} frameborder="0" title="modalGame"></iframe>
                     {/if}
                 </div>
             </div>

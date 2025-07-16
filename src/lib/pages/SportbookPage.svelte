@@ -43,11 +43,14 @@
   const guestURLbetw3LJ = "https://sports2.jcasino.live/?target=86224&name=betsamerica#/live_ecuabets/?target=betsamerica-86224-integration&token=123456789"
   const guestURLbetw3LJLive ="https://sports2.jcasino.live/?target=86224&name=betsamerica#/?target=betsamerica-86224-integration&token=123456789"
   const guestURLbetw3PRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/?target=parleysport-86224-integration&token=123456789";
-  const guestURLbetw3 = "https://sports.jbets.online/?target=86224&name=bets365#/?target=bets365-86224-integration&token=123456789";
+  const guestURLbetw3 = "https://sports2.jcasino.live/#/?target=ganabet365-86224-integration&token=123456789";
   const guestURLbetw3LivePRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/live_ecuabets/?target=parleysport-86224-integration&token=123456789";
   const guestURLbetw3Live = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
   const guestURLbetw3LAUS = "https://sports2.jcasino.live/?target=86224&name=latinsport21#/?target=latinsport21-86224-integration&token=123456789";
   const guestURLbetw3LAUSlive = "https://sports2.jcasino.live/?target=86224&name=latinsport21#/live_ecuabets/?target=latinsport21-86224-integration&token=123456789"
+  const guestURLbetw3GBPE = "https://sports2.jcasino.live/#/?target=ganabet365-86224-integration&token=123456789"
+  const guestURLbetw3GBPELive ="https://sports2.jcasino.live/#/live_ecuabets/?target=ganabet365-86224-integration&token=123456789"
+
 
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
@@ -56,8 +59,10 @@
   const baseUrlNovusbet = `https://www.3p.latinsport21.net/${page}?lang=es-ES`;
   const baseUrlWin365 = `https://prod20370-154306407.freethrow777.com`;
   const baseUrlWin365Cl = `https://prod20370-161018313.freethrow777.com`;
+  const baseUrlWin365Mx = `https://prod20370-170517448.freethrow777.com`;
   const baseUrlGanawin = `https://prod20370-169234874.freethrow777.com`;
-
+  // const baseUrlGanabet365 = `https://prod20370-169327015.freethrow777.com`;
+  const baseUrlParyajKebek = `https://prod20370-171305761.freethrow777.com`; 
 
   const games = {
     'digtain':{
@@ -161,17 +166,24 @@
         url = baseUrlWin365;
       }else if (CLIENT_CODE == 'BTCL'){
         url =baseUrlWin365Cl;
-      }else if (CLIENT_CODE == 'GAWN' ) {
+      }else if (CLIENT_CODE == 'GAWN' ){
         url =baseUrlGanawin
+      // }else if (CLIENT_CODE == 'GBPE'){
+      //   url =baseUrlGanabet365
+      }else if (CLIENT_CODE == 'BTMX'){
+        url =baseUrlWin365Mx
+      }
+      else if (CLIENT_CODE == 'PJKB'){
+        url =baseUrlParyajKebek
       }
       else {
        url =baseUrlGanawin
       }
-
       sportbookGameUrl = url;
     } catch (error) {
       console.log("Sportbook Error",error);
     }
+    console.log("CLIENT_CODE",CLIENT_CODE)
   }
 
   const openPinnacle = async () => { 
@@ -216,6 +228,9 @@ function RESELLER (params) {
         url = active_view == "sportbooklive" ? guestURLbetw3bt1Live : guestURLbetw3bt1;
         RESELLER();
       }
+      else if (CLIENT_CODE == "GBPE") {
+          url = active_view == "sportbooklive" ? guestURLbetw3GBPELive : guestURLbetw3GBPE;
+        }
 
       else{
         url = active_view == "sportbooklive" ? guestURLbetw3LJ : guestURLbetw3LJLive;
