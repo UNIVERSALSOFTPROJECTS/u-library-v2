@@ -85,7 +85,7 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         login: (username, password, userType,turnstileToken = null) => {
-            let url = conf.API_KS_LOGIN + "/login";
+            let url = conf.API_KS_AUTH + "/login";
 
             let payload = { username, password, org: conf.org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
