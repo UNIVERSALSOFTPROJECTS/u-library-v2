@@ -43,7 +43,6 @@
     let fileInput;
     let viewLinkSafari = false;
 
-
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
     const detectLockedDeposit = () => {
@@ -119,7 +118,12 @@
 
     const openPayMethod = (typePayment) => {
         paySelected = typePayment;
-        typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
+        //solo para peru
+        if (paySelected.banco === "YAPE" || paySelected.banco === "PLIN") {
+            typeTranference = 'wallet';
+        }else{
+            typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
+        }
     }
     
     const closePayMethod = () => {
@@ -134,6 +138,11 @@
     }
 
     async function validateDepositBank() {
+        if(typeTranference === 'wallet'){
+            bankDeposit.aditional = paySelected.banco;
+            bankDeposit.reference = paySelected.banco;
+            bankDeposit.targetBankId = paySelected.id;
+        }
         if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) return onError("Todos los campos son obligatorios"); 
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
@@ -225,11 +234,15 @@
                     <p>{paySelected.nombre}</p>
                     <b>{t('deposit.numBankAccount')}:</b>
                     <p>{paySelected.cta}</p>
+                    {#if typeTranference != 'wallet'}
                     <b>CCI:</b>
                     <p>{paySelected.cta['cci']}</p>
+                    {/if}
                 </div>
+                <img src="{assetsPayments}{paySelected.banco}__{paySelected.cta.replace(/\+|\s/g, "")}.png" alt="" width="100%">
                 <p>{t('deposit.step2')}.</p>
                 <div class="deposit__info">
+                    {#if typeTranference != 'wallet'}
                     <p>{t('deposit.destinationBank')}</p>
                     <p>{t('deposit.originBank')}</p>
                     <input type="text" class="ipt" value={paySelected.banco} disabled>
@@ -243,6 +256,7 @@
                     <p>{t('deposit.numReference')}</p>
                     <input type="number" class="ipt" bind:value={bankDeposit.aditional} on:input={inputJustNumbers}>
                     <input type="number" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
+                    {/if}
                     <p>{t('withdrawal.amount')}</p>
                     <p>{t('deposit.transferDate')}</p>
                     <input type="text" class="ipt" bind:value={amountDeposit} disabled>

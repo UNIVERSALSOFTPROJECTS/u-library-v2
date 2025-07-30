@@ -189,8 +189,8 @@
     
     //DEPOSIT
     const configDeposit = {
-        id_banca: ["2918","5628"], //disitribidor - almacena otros cajeros
-        id_ca: ["5558"], //caja dentro de un distribuidor principal
+        id_banca: ["2918","5628","5834"], //disitribidor - almacena otros cajeros
+        id_ca: ["5558","15818"], //caja dentro de un distribuidor principal
         isRequiredVoucher: true
     };
     //  const configWithdrawal = {
