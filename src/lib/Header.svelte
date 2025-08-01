@@ -127,17 +127,29 @@
     };
 
     const configWithdrawal = {
-        id_banca: ["4204", "4312", "4313"], //disitribidor - almacena otros cajeros
-    id_ca: ["15191"], //caja dentro de un distribuidor principal
-    dataType: "",
-    typeView: "payMobile",
-    messageOptional: "",
-    formVerification: "",
-    platform,
-    banksNames: [],
-    typeAccount: [],
-    linksChats: [],
+        id_banca: ["2918","5628","5834"], //disitribidor - almacena otros cajeros
+        id_ca: ["5558","15818"], //caja dentro de un distribuidor principal
+        dataType: "",
+        typeView: "",
+        messageOptional: "",
+        formVerification: "",
+        platform,
+    banksNames: [
+                { id:"BCP" , name:"BCP" },
+                { id:"INTRBK" , name:"INTERBANK" },
+                { id:"SCOTBNK" , name:"SCOTIABANK" },
+                { id:"BBVA" , name:"BBVA" },                
+                { id:"YAPE" , name:"YAPE" },                
+                { id:"PLIN" , name:"PLIN" },                
+                // { id:"Bancolombia" , name:"Bancolombia" },
+            ],
+            typeAccount: [
+                { id:"Corriente", name:"Corriente" },
+                { id:"Ahorros", name:"Ahorros" },
+            ], 
+        linksChats: [],
     };
+
     const configFooter = {
         platform,
         country: { name: "Chile", flag: "chl" },

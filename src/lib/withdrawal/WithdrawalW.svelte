@@ -205,8 +205,11 @@
                         <input type="text" class="ipt" bind:value={infoUser.nombre} disabled>
                         <input type="text" inputmode="numeric" class="ipt" bind:value={infoUser.documento} on:input={inputJustNumbers} disabled={infoUser.documento}>
                         <p>{t('deposit.bankName')}:</p>
-                        <p>{t('deposit.numBankAccount')}:</p>
-
+                        {#if infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}
+                            <p>Número de celular</p>
+                            {:else}
+                            <p>{t('deposit.numBankAccount')}:</p>
+                        {/if}
                         {#if banksNames.length == 0}
                             <input type="text" class="ipt" bind:value={infoAccount.banco} on:input={inputJustText}>
                         {:else}
@@ -217,19 +220,23 @@
                                 {/each}
                             </select>
                         {/if}
-
                         <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={inputAccountBank}>
-                        <p>{t('withdrawal.additionalInformation')}:</p>
+                        {#if infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}
+                            <!--  -->
+                            {:else}
+                            <p>{t('withdrawal.additionalInformation')}:</p>
+                        {/if}
                         {#if formVerification}
                         <p class="withdrawal__text--resalt">{t('withdrawal.mandatoryVerification')}</p>
                         {:else}
                         <p></p>
                         {/if}
-
                         {#if typeAccount.length == 0}      
                             <input type="text" class="ipt" bind:value={infoAccount.adicional}>
+                        {:else if  infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}   
+                            <!-- <div></div> -->
                         {:else}
-                            <select class="slc" bind:value={infoAccount.adicional}>
+                             <select class="slc" bind:value={infoAccount.adicional}>
                                 <option value="" disabled>{t('deposit.chooseTypeBankAccount')}</option>
                                 {#each typeAccount as account}
                                     <option value={account.id} >{account.name}</option>
