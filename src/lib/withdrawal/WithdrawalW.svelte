@@ -70,7 +70,7 @@
         //refactorizar esto ya quo searar logia de pasarelas machine de pasarelas web
         // esto es nmber directo infoUser.balance
         if(stringToNumber(amount) > infoUser.balance) return onError(t("withdrawal.lowBalance"));
-        let info = infoAccount.adicional || "";
+        let info = infoAccount.adicional || infoAccount.banco;
         let account = infoAccount.numero_cta;
         let bank = infoAccount.banco;
         let prefixPayMobile = typeView === "payMobile"?"509":"";
