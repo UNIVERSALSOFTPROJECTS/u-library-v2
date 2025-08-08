@@ -54,7 +54,7 @@ const ServerConnection = (() => {
             return await axios.post(url, payload, { headers });
         },
         getPayMethods: async (userToken) => {
-            let url = "https://srv-prod.newapiusoft.com/lobby-bff/paymethods/" + userToken;
+            let url = "https://srv-prod.newapiusoft.com/game-api-nd/paymethods/" + userToken;
             return await axios.get(url, { headers });
         },
         getPayLink: async (token, amount, type) => {
