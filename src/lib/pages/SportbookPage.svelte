@@ -238,7 +238,7 @@ function RESELLER (params) {
           url = active_view == "sportbooklive" ? guestURLbetw3GBPELive : guestURLbetw3GBPE;
         }
         else if (CLIENT_CODE == "BTCO") {
-          url = active_view == "sportbooklive" ? guestURLbetw3BTCO : guestURLbetw3BTCOLive;
+          url = active_view == "sportbooklive" ? guestURLbetw3BTCOLive : guestURLbetw3BTCO ;
         }
 
       else{
