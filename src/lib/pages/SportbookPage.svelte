@@ -52,6 +52,8 @@
   const guestURLbetw3GBPELive = "https://sports2.jcasino.live/#/?target=ganabet365-86224-integration&token=123456789&view=live"
   const guestURLbetwBPEN = "https://sports2.jcasino.live/#/?target=win365-86224-integration&token=123456789"
   const guestURLbetwBPENLive = "https://sports2.jcasino.live/#/?target=win365-86224-integration&token=123456789&view=live"
+  const guestURLbetw3BTCO = "https://sports2.jcasino.live/#/?target=win365-86224-integration&token=123456789"
+  const guestURLbetw3BTCOLive = "https://sports2.jcasino.live/#/?target=win365-86224-integration&token=123456789&view=live"
 
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
@@ -231,9 +233,12 @@ function RESELLER (params) {
         // url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
         url = active_view == "sportbooklive" ? guestURLbetw3bt1Live : guestURLbetw3bt1;
         RESELLER();
-      }
-      else if (CLIENT_CODE == "GBPE") {
+        }
+        else if (CLIENT_CODE == "GBPE") {
           url = active_view == "sportbooklive" ? guestURLbetw3GBPELive : guestURLbetw3GBPE;
+        }
+        else if (CLIENT_CODE == "BTCO") {
+          url = active_view == "sportbooklive" ? guestURLbetw3BTCO : guestURLbetw3BTCOLive;
         }
 
       else{
