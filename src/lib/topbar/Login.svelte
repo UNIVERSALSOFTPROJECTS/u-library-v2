@@ -99,13 +99,13 @@
       console.log("error: ", error);
       if (
         error.message == "Network Error" ||
-        error.response.data.message.includes("Connection refused")
+        error.response?.data?.message?.includes("Connection refused")
       )
         error = t("msg.pageMaintenance");
       else if (
-        error.response.data.message == "NECO_LOGIN_FAILED" ||
-        error.response.data.message == "LOGIN_ERROR" || 
-        error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
+        error.response?.data?.message === "NECO_LOGIN_FAILED" ||
+        error.response?.data?.message === "LOGIN_ERROR" || 
+        error.response?.data?.message === "WRONG_LOGIN_CREDENTIALS"
       ) {
         error = t("msg.incorrectUserPass") 
         turnstileError = true
