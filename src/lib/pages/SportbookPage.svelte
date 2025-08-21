@@ -165,21 +165,14 @@
         url = data.url
       // }else if (CLIENT_CODE == 'BPEN'){
       //   url = baseUrlWin365;
-      }else if (CLIENT_CODE == 'BTCL'){
-        url =baseUrlWin365Cl;
-      }else if (CLIENT_CODE == 'GAWN' ){
-        url =baseUrlGanawin
+      }
+      else if (CLIENT_CODE == 'BTCL') url =baseUrlWin365Cl;
+      else if (CLIENT_CODE == 'GAWN' ) url =baseUrlGanawin
       // }else if (CLIENT_CODE == 'GBPE'){
       //   url =baseUrlGanabet365
-      }else if (CLIENT_CODE == 'BTMX'){
-        url =baseUrlWin365Mx
-      }
-      else if (CLIENT_CODE == 'PJKB'){
-        url =baseUrlParyajKebek
-      }
-      else {
-       url =baseUrlGanawin
-      }
+      else if (CLIENT_CODE == 'BTMX') url =baseUrlWin365Mx
+      else if (CLIENT_CODE == 'PJKB') url =baseUrlParyajKebek
+      else url = baseUrlGanawin
       sportbookGameUrl = url;
     } catch (error) {
       console.log("Sportbook Error",error);

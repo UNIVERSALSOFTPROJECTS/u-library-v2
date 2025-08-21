@@ -7,7 +7,8 @@
     export let onCategoryChange;
     export let typeCarrusel;
 
-    const urlJSON = 'https://assetsapiusoft.s3.us-west-2.amazonaws.com/generic_imgs/configBanners.json';
+    // const urlJSON = 'https://assetsapiusoft.s3.us-west-2.amazonaws.com/generic_imgs/configBanners.json';
+    const urlJSON = 'https://d1dkqs4jlldj3s.cloudfront.net/generic_imgs/configBanners.json';
     let bannerDefault = [{"url_w":"https://assets.apiusoft.com/Latinsport21/bn_w_caballos2.png","url_m":"https://assets.apiusoft.com/Latinsport21/bn_m_caballos.png","dateFrom": "","dateUntil": "","category":"horses"}];
     let bannersJSON = [];
     let filteredBanners = [];
