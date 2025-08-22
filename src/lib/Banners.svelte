@@ -7,7 +7,7 @@
     export let onCategoryChange;
     export let typeCarrusel;
 
-    const urlJSON = 'https://assets.apiusoft.com/generic_imgs/configBanners.json';
+    const urlJSON = 'https://configs-v2.s3.ca-central-1.amazonaws.com/generic_imgs/configBanners.json';
     let bannerDefault = [{"url_w":"https://d1dkqs4jlldj3s.cloudfront.net/Latinsport21/bn_w_caballos2.png","url_m":"https://d1dkqs4jlldj3s.cloudfront.net/Latinsport21/bn_m_caballos.png","dateFrom": "","dateUntil": "","category":"horses"}];
     let bannersJSON = [];
     let filteredBanners = [];
