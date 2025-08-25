@@ -165,8 +165,9 @@
             
             // Limpiar después de 10 segundos
             setTimeout(() => {
+                applyIframeStyles()
                 loadTvbetFrame = false;
-            }, 10000);
+            }, 100);
         }
     }
 
