@@ -96,6 +96,7 @@
     }
 
     function initTvbetFrame() {
+        console.log("Initializing TvbetFrame with options:", options_launch.options);
         // @ts-ignore
         if (tvbetFrameContainer && window.TvbetFrame) {
             // Limpiar contenedor antes de inicializar
