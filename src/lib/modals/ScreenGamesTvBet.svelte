@@ -278,5 +278,21 @@
         z-index: 1 !important;
     }
     
+    /* Estilos para el contenedor del juego TvBet */
+    #tvbet-game-container {
+        border: 2px solid red !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-color: #f0f0f0;
+        box-sizing: border-box;
+    }
+
+    #tvbet-game {
+        border: 2px solid green !important;
+        width: 50% !important;
+        height: 50% !important;
+        background-color: orange;
+        box-sizing: border-box;
+    }
 
 </style>
