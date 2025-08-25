@@ -7,11 +7,7 @@
     export let open;
     export let platform;
     export let updateBalance;
-    export let language;
-    export let clientId;
-    export let token;
-    export let server;
-    export let gameId;
+   
     export let options_launch;
 
     let loadTvbetFrame = true;
@@ -20,6 +16,12 @@
     let heightModal;
     let tvbetFrameContainer;
     let tvbetFrameInstance;
+   
+    let tv_language;
+    let tv_clientId;
+    let tv_token;
+    let tv_server;
+    let tv_gameId;
 
     const resizeHeightModal = () => { heightModal = visualViewport.height; }
     
@@ -116,11 +118,11 @@
             loadTvbetFrame = true;
             // @ts-ignore
             tvbetFrameInstance = new window.TvbetFrame({
-                lng: language,
-                clientId: clientId,
-                tokenAuth: token,
-                server: server,
-                singleGame: gameId
+                lng: tv_language,
+                clientId: tv_clientId,
+                tokenAuth: tv_token,
+                server: tv_server,
+                singleGame: tv_gameId
             });
             loadTvbetFrame = false;
         }
@@ -143,11 +145,11 @@
     }
 
     onMount(async () => {
-        language = options_launch.language || 'en';
-        clientId = options_launch.clientId;
-        token = options_launch.token;
-        server = options_launch.server;
-        gameId = options_launch.gameId;
+        tv_language = options_launch.language || 'en';
+        tv_clientId = options_launch.clientId;
+        tv_token = options_launch.token;
+        tv_server = options_launch.server;
+        tv_gameId = options_launch.gameId;
 
         console.log("Mounting ScreenGamesTvBet modal",options_launch);
         window.addEventListener('resize', resizeHeightModal); 
