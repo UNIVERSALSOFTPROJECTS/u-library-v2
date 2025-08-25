@@ -171,10 +171,6 @@
     onDestroy(() => {
         window.removeEventListener('resize', resizeHeightModal);
         window.removeEventListener('message', handleMessage);
-        
-        if (tvbetFrameContainer) {
-            tvbetFrameContainer.innerHTML = '';
-        }
         console.log("Cleaned up event listeners and TvbetFrame instance");
     });
 
