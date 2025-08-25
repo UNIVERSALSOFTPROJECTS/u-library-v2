@@ -111,7 +111,7 @@
         <div class="loading"><p></p><p></p><p></p></div>
         {:else}
         {#if pendingWithdrawal && pendingWithdrawal.monto>0}
-            <img class="logo" src="https://assets.apiusoft.com/crashgames/logo.png" alt="">
+            <img class="logo" src="https://d1dkqs4jlldj3s.cloudfront.net/crashgames/logo.png" alt="">
             <b>Pago de retiro</b>
             <div class="withdrawal__info">
                 <b>Usuario:</b>
@@ -127,7 +127,7 @@
                 <b>{t("withdrawal.amount")}</b>
                 <p>{pendingWithdrawal.monto} {user.currency}</p>
             </div>
-            <img class="barcode" src="https://assets.apiusoft.com/generic_imgs/utils/barcode.webp" alt="">
+            <img class="barcode" src="https://d1dkqs4jlldj3s.cloudfront.net/generic_imgs/utils/barcode.webp" alt="">
         {:else}
             <p>Saldo total: {user.balance}</p>
             <p>{t("withdrawal.withdraw")}</p>

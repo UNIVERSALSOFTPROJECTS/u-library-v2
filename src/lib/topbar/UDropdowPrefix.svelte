@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    const url_global = "https://assets.apiusoft.com/generic_imgs";
+    const url_global = "https://d1dkqs4jlldj3s.cloudfront.net/generic_imgs";
     const fullCountryList= [{prefix: "+51", flag: "pe", code: "PE"},{prefix: "+54", flag: "ar", code: "ARS"}];
     export let countries;
     export let countryPrefix;

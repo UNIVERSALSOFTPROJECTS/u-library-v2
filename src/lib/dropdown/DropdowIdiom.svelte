@@ -5,7 +5,7 @@
   export let changeIdiom;
 
   let isDropdownOpen = false;
-  let url_global = "https://assets.apiusoft.com/generic_imgs";
+  let url_global = "https://d1dkqs4jlldj3s.cloudfront.net/generic_imgs";
   // let idiomDefault = idioms.find(idiom => idiom.id === localStorage.getItem('idiom'));
   let idiomDefault = (idioms ?? []).find(idiom => idiom.id === localStorage.getItem('idiom')) || {id: "es"};
 

@@ -5,7 +5,7 @@
 </script>
 <div class="modal-body">
     <b class="jut">“Bono del 20% Primer Depósito sin Rollover”</b>
-    <img src="https://assets.apiusoft.com/Coliseosport/banner_recharge_4.png" alt="">
+    <img src="https://d1dkqs4jlldj3s.cloudfront.net/Coliseosport/banner_recharge_4.png" alt="">
     <div class="uj2">
         <b>1. ¿Cómo puedo hacerme acreedor de este bono?</b>
         <br>

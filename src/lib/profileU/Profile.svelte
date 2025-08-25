@@ -34,7 +34,7 @@
   let icon = true;
   let active_section = "balance";
   let active_option = "MyProfile";
-  let url_global = "https://assets.apiusoft.com";
+  let url_global = "https://d1dkqs4jlldj3s.cloudfront.net";
 
   onMount(()=>{
     console.log("usuario", user);

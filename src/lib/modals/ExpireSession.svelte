@@ -22,7 +22,7 @@
 </script>
 
 <div class="modal-body">
-    <img class="expireSession__logo" src="https://assets.apiusoft.com/{platform}/logo.png" alt="logo-{platform}" loading="eager">
+    <img class="expireSession__logo" src="https://d1dkqs4jlldj3s.cloudfront.net/{platform}/logo.png" alt="logo-{platform}" loading="eager">
     <p class="expireSession__title">{t("expireSession.stillThere")}</p>
     <button class="btn continue" on:click={updateTimeSession}>{t( "expireSession.continuePlaying")}</button>
     <p class="expireSession__text">{t("expireSession.expireIn")} <b>{time}</b>s</p>
