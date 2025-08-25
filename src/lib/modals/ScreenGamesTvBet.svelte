@@ -256,10 +256,9 @@
     }
 
     #tvbet-game {
-        border: 2px solid green !important;
+        border: 1px solid purple !important;
         width: 100% !important;
         height: 100% !important;
-        background-color: orange;
         box-sizing: border-box;
     }
 
