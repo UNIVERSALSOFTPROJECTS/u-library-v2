@@ -145,11 +145,11 @@
     }
 
     onMount(async () => {
-        tv_language = options_launch.language || 'en';
-        tv_clientId = options_launch.clientId;
-        tv_token = options_launch.token;
-        tv_server = options_launch.server;
-        tv_gameId = options_launch.gameId;
+        tv_language = options_launch.options.language || 'en';
+        tv_clientId = options_launch.options.clientId;
+        tv_token = options_launch.options.token;
+        tv_server = options_launch.options.server;
+        tv_gameId = options_launch.options.gameId;
 
         console.log("Mounting ScreenGamesTvBet modal",options_launch);
         window.addEventListener('resize', resizeHeightModal); 
