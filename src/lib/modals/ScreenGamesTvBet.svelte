@@ -137,7 +137,8 @@
                 singleGame: tv_gameId
             });
             console.log(tvbetFrameInstance);
-            tvbetFrameInstance.init('#tvbet-game-container');
+            viewTvbetFrame = true;
+            tvbetFrameInstance.init('#tvbet-game');
            
           
             
@@ -226,7 +227,9 @@
                     {#if loadTvbetFrame}
                         <b class="loading"><b><b></b></b></b>
                     {/if}
-                    
+                    {#if viewTvbetFrame}
+                        <div bind:this={tvbetFrameContainer} class="tvbet-container" id="tvbet-game"></div>
+                    {/if}
                 </div>
             </div>
         </div>
