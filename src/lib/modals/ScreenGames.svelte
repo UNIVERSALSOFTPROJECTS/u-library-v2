@@ -98,6 +98,7 @@
     }
 
     onMount(() => {
+        console.log("---------------------- TvbetFrame options ---------------------------");
         //window.addEventListener('message', receiveMessage, false);
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', handleMessage);

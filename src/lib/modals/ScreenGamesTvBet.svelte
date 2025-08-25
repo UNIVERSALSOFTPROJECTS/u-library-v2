@@ -11,7 +11,6 @@
     export let options_launch;
 
     let loadTvbetFrame = true;
-    let loadIframe = true;
 
     let isFullscreen = false;
     let viewTvbetFrame = true;
@@ -49,7 +48,6 @@
         console.log("Closing modal");
         try {
             viewTvbetFrame = false;
-            loadIframe = false;
             loadTvbetFrame = false; 
             updateBalance();
             console.log("Balance updated");
@@ -154,7 +152,7 @@
         tv_token = options_launch.options.token;
         tv_server = options_launch.options.server;
         tv_gameId = options_launch.options.gameId;
-
+        console.log("---------------------- TvbetFrame options ---------------------------");
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', handleMessage);
         
