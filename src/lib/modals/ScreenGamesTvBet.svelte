@@ -48,7 +48,6 @@
         console.log("Closing modal");
         try {
             viewTvbetFrame = false;
-            loadTvbetFrame = false; 
             updateBalance();
             console.log("Balance updated");
             if (document.fullscreenElement != null) {
@@ -67,6 +66,7 @@
     const reloadTvbetFrame = () => { 
         console.log('Reloading TvbetFrame...');
         viewTvbetFrame = false;
+        loadTvbetFrame = true;
         setTimeout(() => { 
             viewTvbetFrame = true;
         }, 100);
@@ -125,7 +125,6 @@
                 server: tv_server,
                 singleGame: tv_gameId
             });
-            viewTvbetFrame = true;
             loadTvbetFrame = false;
             
         }
@@ -207,9 +206,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    {#if loadTvbetFrame}
-                        <b class="loading"><b><b></b></b></b>
-                    {/if}
+                    
                     {#if viewTvbetFrame}
                         <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="tvbet-game"></div>
                     {/if}
