@@ -2,7 +2,7 @@ import TopBar from '../src/lib/topbar/TopBar.svelte';
 import init from './init';
 init.start();
 
-let assetsUrl = 'https://assets.apiusoft.com';
+let assetsUrl = 'https://d1dkqs4jlldj3s.cloudfront.net';
 let userState = null;
 let active_view = null;
 let user = {};

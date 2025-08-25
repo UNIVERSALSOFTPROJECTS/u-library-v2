@@ -450,7 +450,7 @@
     const configLogin = {
         platform,
         typeView,
-        assetsUrl: "https://assets.apiusoft.com",
+        assetsUrl: "https://d1dkqs4jlldj3s.cloudfront.net",
         idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }],
         countries: [
             // {name: "Perú", domain:"pe"},

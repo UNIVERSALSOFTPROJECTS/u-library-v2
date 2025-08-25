@@ -3,7 +3,7 @@ import init from './init';
 init.start();
 
 let modalOpened;
-let assetsUrl ='https://assets.apiusoft.com/coliseosport';
+let assetsUrl ='https://d1dkqs4jlldj3s.cloudfront.net/coliseosport';
 export default {
   title: 'LOGIN',
   component: Login, 

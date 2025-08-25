@@ -1,7 +1,7 @@
 import Header from '../src/lib/Header.svelte';
 import init from "./init.js";
 let user=null;
-let assetsUrl="https://assets.apiusoft.com";
+let assetsUrl="https://d1dkqs4jlldj3s.cloudfront.net";
 
 init.start();
 

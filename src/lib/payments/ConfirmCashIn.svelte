@@ -63,7 +63,7 @@
             Al depositar dinero a su cuenta, usted acepta automáticamente la
             versión mas reciente de los
             <a
-              href="https://assets.apiusoft.com/365fortuna/t&c.pdf"
+              href="https://d1dkqs4jlldj3s.cloudfront.net/365fortuna/t&c.pdf"
               target="_blank"
               style="color:red;">términos y condiciones</a
             >

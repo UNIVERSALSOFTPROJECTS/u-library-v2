@@ -254,7 +254,7 @@
                         <p><b>{t('withdrawal.time')}:</b> {infoUser.horarios}</p>
                     {/if}
 
-                    <a href="https://assets.apiusoft.com/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
+                    <a href="https://d1dkqs4jlldj3s.cloudfront.net/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
                     {#if formVerification}
                     <div class="withdrawal__note">{@html t('withdrawal.reminderCompleteVerification')}</div>
                     {/if}
