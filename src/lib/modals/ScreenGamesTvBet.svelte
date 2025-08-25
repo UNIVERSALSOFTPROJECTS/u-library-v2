@@ -98,7 +98,6 @@
     function initTvbetFrame() {
         // @ts-ignore
             // Limpiar contenedor antes de inicializar
-            tvbetFrameContainer.innerHTML = '';
             
             // @ts-ignore
             tvbetFrameInstance = new window.TvbetFrame({
