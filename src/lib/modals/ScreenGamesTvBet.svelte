@@ -214,19 +214,3 @@
         </div>
     </div>
 {/if}
-
-<style>
-    /* Estilos para asegurar que TvbetFrame ocupe todo el espacio disponible */
-    :global(.modal.screenGames .modal-body > div) {
-        width: 100% !important;
-        height: 100% !important;
-        border: none;
-    }
-    
-    /* Estilos específicos para elementos internos de TvbetFrame */
-    :global(.modal.screenGames .modal-body iframe) {
-        width: 100%;
-        height: 100vh;
-        border: none;
-    }
-</style>
