@@ -46,6 +46,8 @@
     const closeModal = () => { 
         console.log("Closing modal");
         try {
+            viewTvbetFrame = true;
+            loadTvbetFrame = false; 
             updateBalance();
             console.log("Balance updated");
             if (document.fullscreenElement != null) {
@@ -138,11 +140,7 @@
             });
             console.log(tvbetFrameInstance);
             viewTvbetFrame = true;
-            loadTvbetFrame = false;
-            tvbetFrameInstance.init('#tvbet-game');
-           
-          
-            
+            loadTvbetFrame = false; 
             // Limpiar después de 10 segundos
             setTimeout(() => {
                 loadTvbetFrame = false;
