@@ -144,14 +144,7 @@
                 
                 iframes.forEach(iframe => {
                     // Si el iframe no está en nuestro contenedor, moverlo
-                    if (!tvbetFrameContainer.contains(iframe)) {
-                        const src = iframe.src || '';
-                        if (src.includes('tvbet') || src.includes('game') || iframe.getAttribute('title')?.includes('game')) {
-                            console.log('Moving iframe to container');
-                            tvbetFrameContainer.appendChild(iframe);
-                            moved = true;
-                        }
-                    }
+                   
                     
                     // Aplicar estilos básicos
                     if (tvbetFrameContainer.contains(iframe)) {
@@ -168,24 +161,10 @@
                 }
             };
             
-            // Observador simple para detectar cambios
-            const observer = new MutationObserver(() => {
-                applyIframeStyles();
-            });
-            
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
-            });
-            
-            // Aplicar estilos con algunos intentos
-            setTimeout(applyIframeStyles, 500);
-            setTimeout(applyIframeStyles, 1000);
-            setTimeout(applyIframeStyles, 2000);
+          
             
             // Limpiar después de 10 segundos
             setTimeout(() => {
-                observer.disconnect();
                 loadTvbetFrame = false;
             }, 10000);
         }
@@ -279,42 +258,7 @@
 {/if}
 
 <style>
-    /* Estilos básicos para el modal */
-    :global(.modal.screenGames) {
-        z-index: 9999 !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
     
-    :global(.modal.screenGames .modal-dialog) {
-        position: relative !important;
-        z-index: 10000 !important;
-        width: 100% !important;
-        height: 100% !important;
-        margin: 0 !important;
-        max-width: 100% !important;
-    }
-    
-    :global(.modal.screenGames .modal-content) {
-        position: relative !important;
-        z-index: 10001 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        width: 100% !important;
-        height: 100% !important;
-        border: none !important;
-        border-radius: 0 !important;
-    }
-    
-    :global(.modal.screenGames .modal-header) {
-        position: relative !important;
-        z-index: 10002 !important;
-        flex-shrink: 0 !important;
-        background: #fff !important;
-    }
     
     :global(.modal.screenGames .modal-body) {
         position: relative !important;
@@ -340,9 +284,5 @@
         z-index: 1 !important;
     }
     
-    /* Asegurar que los botones del header estén visibles */
-    :global(.modal.screenGames .modal-header .btn) {
-        position: relative !important;
-        z-index: 10003 !important;
-    }
+    
 </style>
