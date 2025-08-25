@@ -226,9 +226,7 @@
                     {#if loadTvbetFrame}
                         <b class="loading"><b><b></b></b></b>
                     {/if}
-                    {#if viewTvbetFrame}
-                        <div bind:this={tvbetFrameContainer} class="tvbet-container" id="tvbet-game-container"></div>
-                    {/if}
+                    
                 </div>
             </div>
         </div>
