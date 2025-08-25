@@ -267,14 +267,7 @@
         overflow: hidden !important;
         padding: 0 !important;
     }
-    
-    .tvbet-container {
-        width: 100% !important;
-        height: 100% !important;
-        position: relative !important;
-        overflow: hidden !important;
-    }
-    
+
     /* Estilos básicos para el iframe */
     :global(.modal.screenGames .modal-body iframe) {
         width: 100% !important;
@@ -284,5 +277,5 @@
         z-index: 1 !important;
     }
     
-    
+
 </style>
