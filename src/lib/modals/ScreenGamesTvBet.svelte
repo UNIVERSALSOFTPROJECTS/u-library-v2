@@ -46,7 +46,7 @@
     const closeModal = () => { 
         console.log("Closing modal");
         try {
-            viewTvbetFrame = true;
+            viewTvbetFrame = false;
             loadTvbetFrame = false; 
             updateBalance();
             console.log("Balance updated");
@@ -66,21 +66,8 @@
     const reloadTvbetFrame = () => { 
         console.log('Reloading TvbetFrame...');
         viewTvbetFrame = false;
-        loadTvbetFrame = true;
-        
-        if (tvbetFrameContainer) {
-            tvbetFrameContainer.innerHTML = '';
-        }
-        
-        if (tvbetFrameInstance) {
-            tvbetFrameInstance = null;
-        }
-        
         setTimeout(() => { 
             viewTvbetFrame = true;
-            setTimeout(() => {
-                initTvbetFrame();
-            }, 100);
         }, 100);
     }
    
@@ -114,7 +101,6 @@
 
         if (messageEvent === 'exit') {
             console.log('[TvbetFrame message] Evento recibido: exit');
-            closeModal();
         } else if (messageEvent === 'reload') {
             console.log('[TvbetFrame message] Evento recibido: reload');
         } else {
@@ -140,11 +126,6 @@
             });
             console.log(tvbetFrameInstance);
             viewTvbetFrame = true;
-            loadTvbetFrame = false; 
-            // Limpiar después de 10 segundos
-            setTimeout(() => {
-                loadTvbetFrame = false;
-            }, 100);
         }
     }
 
@@ -171,7 +152,6 @@
         tv_server = options_launch.options.server;
         tv_gameId = options_launch.options.gameId;
 
-        console.log("Mounting ScreenGamesTvBet modal",options_launch);
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', handleMessage);
         

@@ -64,8 +64,11 @@
         if (!isFullscreen) {
             const e = document.body;
             if (e.requestFullscreen) e.requestFullscreen();
+            // @ts-ignore
             else if (e.mozRequestFullScreen) e.mozRequestFullScreen();
+            // @ts-ignore
             else if (e.webkitRequestFullscreen) e.webkitRequestFullscreen();
+            // @ts-ignore
             else if (e.msRequestFullscreen) e.msRequestFullscreen();
             isFullscreen = true;
         } else {
