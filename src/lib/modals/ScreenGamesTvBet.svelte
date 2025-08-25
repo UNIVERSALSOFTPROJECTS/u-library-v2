@@ -136,36 +136,13 @@
                 server: tv_server,
                 singleGame: tv_gameId
             });
-            
-            // Función simple para aplicar estilos al iframe
-            const applyIframeStyles = () => {
-                const iframes = document.querySelectorAll('iframe');
-                let moved = false;
-                
-                iframes.forEach(iframe => {
-                    // Si el iframe no está en nuestro contenedor, moverlo
-                   
-                    
-                    // Aplicar estilos básicos
-                    console.log('--------------------- Applying styles to iframe');
-                    if (tvbetFrameContainer.contains(iframe)) {
-                        iframe.style.width = '100%';
-                        iframe.style.height = '100%';
-                        iframe.style.border = 'none';
-                        iframe.style.zIndex = '1';
-                    }
-                });
-                
-                if (moved || tvbetFrameContainer.querySelector('iframe')) {
-                    loadTvbetFrame = false;
-                }
-            };
-            
+            console.log(tvbetFrameInstance);
+            tvbetFrameInstance.init('#tvbet-game-container');
+           
           
             
             // Limpiar después de 10 segundos
             setTimeout(() => {
-                applyIframeStyles()
                 loadTvbetFrame = false;
             }, 100);
         }
