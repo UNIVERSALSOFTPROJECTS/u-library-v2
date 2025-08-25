@@ -97,7 +97,9 @@
 
     function initTvbetFrame() {
         // @ts-ignore
+        if (tvbetFrameContainer && window.TvbetFrame) {
             // Limpiar contenedor antes de inicializar
+            tvbetFrameContainer.innerHTML = '';
             
             // @ts-ignore
             tvbetFrameInstance = new window.TvbetFrame({
@@ -108,6 +110,19 @@
                 singleGame: options_launch.options.gameId
             });
             
+        }
+    }
+     function handleMessage(event) {
+        // Manejar mensajes de TvbetFrame si es necesario
+        const { event: messageEvent } = event.data;
+
+        if (messageEvent === 'exit') {
+            console.log('[TvbetFrame message] Evento recibido: exit');
+        } else if (messageEvent === 'reload') {
+            console.log('[TvbetFrame message] Evento recibido: reload');
+        } else {
+            console.log('[TvbetFrame message] Evento desconocido:', messageEvent);
+        }
     }
 
     function loadTvbetFrameScript() {
@@ -131,6 +146,7 @@
        
         console.log("---------------------- TvbetFrame options ---------------------------");
         window.addEventListener('resize', resizeHeightModal); 
+        window.addEventListener('message', handleMessage);
         console.log("---------------------- TvbetFrame options 2 ---------------------------");
         
         // Cargar el script de TvbetFrame
@@ -147,6 +163,7 @@
     
     onDestroy(() => {
         window.removeEventListener('resize', resizeHeightModal);
+        window.removeEventListener('message', handleMessage);
         
         if (tvbetFrameContainer) {
             tvbetFrameContainer.innerHTML = '';
@@ -157,7 +174,9 @@
 
     $: statusModal(open);
     // @ts-ignore
+    $: if (open && window.TvbetFrame && tvbetFrameContainer) {
         initTvbetFrame();
+    }
 </script>
 
 {#if open}
