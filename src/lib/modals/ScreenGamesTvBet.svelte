@@ -143,6 +143,7 @@
     }
 
     onMount( async() => {
+        console.log("---------------------- params ",options_launch.options);
         tv_language = options_launch.options.language || 'en';
         tv_clientId = options_launch.options.clientId;
         tv_token = options_launch.options.token;
