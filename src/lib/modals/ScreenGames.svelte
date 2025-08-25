@@ -98,7 +98,7 @@
     }
 
     onMount(() => {
-        console.log("---------------------- TvbetFrame options ---------------------------");
+        console.log("---------------------- Gameeeees options ---------------------------");
         //window.addEventListener('message', receiveMessage, false);
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', handleMessage);
