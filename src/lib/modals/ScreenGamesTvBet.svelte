@@ -47,7 +47,6 @@
     const closeModal = () => { 
         console.log("Closing modal");
         try {
-            viewTvbetFrame = false;
             updateBalance();
             console.log("Balance updated");
             if (document.fullscreenElement != null) {
@@ -112,8 +111,6 @@
     function initTvbetFrame() {
         // @ts-ignore
         if (tvbetFrameContainer && window.TvbetFrame) {
-            loadTvbetFrame = true;
-            
             // Limpiar contenedor antes de inicializar
             tvbetFrameContainer.innerHTML = '';
             
@@ -125,7 +122,6 @@
                 server: tv_server,
                 singleGame: tv_gameId
             });
-            loadTvbetFrame = false;
             
         }
     }
@@ -206,7 +202,9 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    
+                    {#if loadTvbetFrame}
+                        <b class="loading"><b><b></b></b></b>
+                    {/if}
                     {#if viewTvbetFrame}
                         <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="tvbet-game"></div>
                     {/if}
