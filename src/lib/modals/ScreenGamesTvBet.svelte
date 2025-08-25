@@ -12,6 +12,7 @@
     export let token;
     export let server;
     export let gameId;
+    export let options_launch;
 
     let loadTvbetFrame = true;
     let isFullscreen = false;
@@ -142,6 +143,7 @@
     }
 
     onMount(async () => {
+        console.log("Mounting ScreenGamesTvBet modal",options_launch);
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', handleMessage);
         
