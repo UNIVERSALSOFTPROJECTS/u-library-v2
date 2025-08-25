@@ -11,6 +11,8 @@
     export let options_launch;
 
     let loadTvbetFrame = true;
+    let loadIframe = true;
+
     let isFullscreen = false;
     let viewTvbetFrame = true;
     let heightModal;
@@ -47,6 +49,7 @@
         console.log("Closing modal");
         try {
             viewTvbetFrame = false;
+            loadIframe = false;
             loadTvbetFrame = false; 
             updateBalance();
             console.log("Balance updated");
