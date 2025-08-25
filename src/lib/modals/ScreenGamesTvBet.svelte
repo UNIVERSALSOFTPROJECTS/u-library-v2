@@ -95,35 +95,20 @@
         }
     }
 
-    function handleMessage(event) {
-        // Manejar mensajes de TvbetFrame si es necesario
-        const { event: messageEvent } = event.data;
-
-        if (messageEvent === 'exit') {
-            console.log('[TvbetFrame message] Evento recibido: exit');
-        } else if (messageEvent === 'reload') {
-            console.log('[TvbetFrame message] Evento recibido: reload');
-        } else {
-            console.log('[TvbetFrame message] Evento desconocido:', messageEvent);
-        }
-    }
-
     function initTvbetFrame() {
         // @ts-ignore
-        if (tvbetFrameContainer && window.TvbetFrame) {
             // Limpiar contenedor antes de inicializar
             tvbetFrameContainer.innerHTML = '';
             
             // @ts-ignore
             tvbetFrameInstance = new window.TvbetFrame({
-                lng: tv_language,
-                clientId: tv_clientId,
-                tokenAuth: tv_token,
-                server: tv_server,
-                singleGame: tv_gameId
+                lng: options_launch.options.language || 'en',
+                clientId: options_launch.options.clientId,
+                tokenAuth: options_launch.options.token,
+                server: options_launch.options.server,
+                singleGame: options_launch.options.gameId
             });
             
-        }
     }
 
     function loadTvbetFrameScript() {
@@ -144,11 +129,7 @@
 
     onMount( async() => {
         console.log("---------------------- params onmount ",options_launch.options);
-        tv_language = options_launch.options.language || 'en';
-        tv_clientId = options_launch.options.clientId;
-        tv_token = options_launch.options.token;
-        tv_server = options_launch.options.server;
-        tv_gameId = options_launch.options.gameId;
+       
         console.log("---------------------- TvbetFrame options ---------------------------");
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', handleMessage);
