@@ -132,7 +132,6 @@
        
         console.log("---------------------- TvbetFrame options ---------------------------");
         window.addEventListener('resize', resizeHeightModal); 
-        window.addEventListener('message', handleMessage);
         console.log("---------------------- TvbetFrame options 2 ---------------------------");
         
         // Cargar el script de TvbetFrame
@@ -149,7 +148,6 @@
     
     onDestroy(() => {
         window.removeEventListener('resize', resizeHeightModal);
-        window.removeEventListener('message', handleMessage);
         
         if (tvbetFrameContainer) {
             tvbetFrameContainer.innerHTML = '';
