@@ -158,9 +158,7 @@
 
     $: statusModal(open);
     // @ts-ignore
-    $: if (open && window.TvbetFrame && tvbetFrameContainer) {
         initTvbetFrame();
-    }
 </script>
 
 {#if open}
