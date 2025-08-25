@@ -47,6 +47,12 @@
     const closeModal = () => { 
         console.log("Closing modal");
         try {
+            window.removeEventListener('resize', resizeHeightModal);
+        window.removeEventListener('message', handleMessage);
+        
+        if (tvbetFrameContainer) {
+            tvbetFrameContainer.innerHTML = '';
+        }
             viewTvbetFrame = false;
             loadTvbetFrame = false; 
             updateBalance();
