@@ -136,39 +136,131 @@
             // Limpiar contenedor antes de inicializar
             tvbetFrameContainer.innerHTML = '';
             
-            // @ts-ignore
-            tvbetFrameInstance = new window.TvbetFrame({
-                lng: tv_language,
-                clientId: tv_clientId,
-                tokenAuth: tv_token,
-                server: tv_server,
-                singleGame: tv_gameId
-            });
+            // Interceptar la creación de iframes para forzar que se creen en nuestro contenedor
+            const originalCreateElement = document.createElement;
+            document.createElement = function(tagName) {
+                const element = originalCreateElement.call(document, tagName);
+                
+                if (tagName.toLowerCase() === 'iframe') {
+                    console.log('Iframe being created, will move to container');
+                    // Agregar el iframe al contenedor después de un breve delay
+                    setTimeout(() => {
+                        if (!tvbetFrameContainer.contains(element) && element.parentNode) {
+                            console.log('Moving iframe to tvbet container');
+                            tvbetFrameContainer.appendChild(element);
+                            applyIframeStyles(element);
+                        }
+                    }, 100);
+                }
+                
+                return element;
+            };
+            
+            // Función para aplicar estilos específicos al iframe
+            const applyIframeStyles = (iframe) => {
+                iframe.style.cssText = `
+                    width: 100% !important;
+                    height: 100% !important;
+                    border: none !important;
+                    position: relative !important;
+                    z-index: 1 !important;
+                    max-width: 100% !important;
+                    max-height: 100% !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    right: auto !important;
+                    bottom: auto !important;
+                    transform: none !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                `;
+            };
+            
+            // Verificar si TvbetFrame acepta un parámetro container
+            try {
+                // @ts-ignore
+                tvbetFrameInstance = new window.TvbetFrame({
+                    lng: tv_language,
+                    clientId: tv_clientId,
+                    tokenAuth: tv_token,
+                    server: tv_server,
+                    singleGame: tv_gameId,
+                    container: '#tvbet-game-container', // Intentar usar el ID
+                    containerId: 'tvbet-game-container',
+                    target: tvbetFrameContainer,
+                    element: tvbetFrameContainer,
+                    parent: tvbetFrameContainer
+                });
+            } catch (e) {
+                try {
+                    // @ts-ignore
+                    tvbetFrameInstance = new window.TvbetFrame({
+                        lng: tv_language,
+                        clientId: tv_clientId,
+                        tokenAuth: tv_token,
+                        server: tv_server,
+                        singleGame: tv_gameId,
+                        container: tvbetFrameContainer
+                    });
+                } catch (e2) {
+                    // Si falla, intentar sin contenedor específico
+                    // @ts-ignore
+                    tvbetFrameInstance = new window.TvbetFrame({
+                        lng: tv_language,
+                        clientId: tv_clientId,
+                        tokenAuth: tv_token,
+                        server: tv_server,
+                        singleGame: tv_gameId
+                    });
+                }
+            }
+            
+            // Restaurar createElement después de un tiempo
+            setTimeout(() => {
+                document.createElement = originalCreateElement;
+            }, 5000);
+            
+            // Función para mover cualquier iframe creado al contenedor correcto
+            const moveIframesToContainer = () => {
+                // Buscar iframes que puedan haber sido creados fuera del contenedor
+                const allIframes = document.querySelectorAll('iframe');
+                let moved = false;
+                
+                allIframes.forEach(iframe => {
+                    // Si el iframe no está dentro de nuestro contenedor, moverlo
+                    if (!tvbetFrameContainer.contains(iframe)) {
+                        // Verificar si parece ser de TvbetFrame
+                        const src = iframe.src || '';
+                        const parentElement = iframe.parentElement;
+                        
+                        if (src.includes('tvbet') || 
+                            src.includes('frame') ||
+                            iframe.getAttribute('title')?.includes('tvbet') || 
+                            parentElement?.id?.includes('tvbet') || 
+                            parentElement?.className?.includes('tvbet') ||
+                            iframe.className?.includes('tvbet')) {
+                            
+                            console.log('Moving iframe to correct container:', iframe);
+                            tvbetFrameContainer.appendChild(iframe);
+                            applyIframeStyles(iframe);
+                            moved = true;
+                        }
+                    }
+                });
+                
+                return moved;
+            };
             
             // Función para aplicar estilos restrictivos
             const applyContainmentStyles = () => {
+                // Primero intentar mover iframes mal ubicados
+                moveIframesToContainer();
+                
                 const iframes = tvbetFrameContainer.querySelectorAll('iframe');
                 const allElements = tvbetFrameContainer.querySelectorAll('*');
                 
                 // Aplicar estilos a todos los iframes
-                iframes.forEach(iframe => {
-                    iframe.style.cssText = `
-                        width: 100% !important;
-                        height: 100% !important;
-                        border: none !important;
-                        position: relative !important;
-                        z-index: 1 !important;
-                        max-width: 100% !important;
-                        max-height: 100% !important;
-                        top: 0 !important;
-                        left: 0 !important;
-                        right: auto !important;
-                        bottom: auto !important;
-                        transform: none !important;
-                        margin: 0 !important;
-                        padding: 0 !important;
-                    `;
-                });
+                iframes.forEach(applyIframeStyles);
                 
                 // Aplicar estilos a todos los elementos para prevenir escape
                 allElements.forEach(element => {
@@ -200,8 +292,34 @@
                 }
             };
             
+            // Observar cambios en TODO el documento para detectar iframes creados fuera
+            const documentObserver = new MutationObserver((mutations) => {
+                let foundNewIframes = false;
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList') {
+                        mutation.addedNodes.forEach(node => {
+                            if (node.nodeType === 1) { // Element node
+                                if (node.tagName === 'IFRAME' || node.querySelector('iframe')) {
+                                    foundNewIframes = true;
+                                }
+                            }
+                        });
+                    }
+                });
+                
+                if (foundNewIframes) {
+                    setTimeout(applyContainmentStyles, 100);
+                }
+            });
+            
+            // Observar el documento completo para detectar iframes creados dinámicamente
+            documentObserver.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+            
             // Observar cambios en el contenedor
-            const observer = new MutationObserver((mutations) => {
+            const containerObserver = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.type === 'childList' || mutation.type === 'attributes') {
                         applyContainmentStyles();
@@ -209,7 +327,7 @@
                 });
             });
             
-            observer.observe(tvbetFrameContainer, {
+            containerObserver.observe(tvbetFrameContainer, {
                 childList: true,
                 subtree: true,
                 attributes: true,
@@ -221,35 +339,25 @@
             setTimeout(applyContainmentStyles, 500);
             setTimeout(applyContainmentStyles, 1000);
             setTimeout(applyContainmentStyles, 2000);
+            setTimeout(applyContainmentStyles, 3000);
+            setTimeout(applyContainmentStyles, 5000);
             
             // Iniciar un intervalo para verificar continuamente los estilos
             styleEnforcementInterval = setInterval(() => {
-                if (tvbetFrameContainer && tvbetFrameContainer.querySelector('iframe')) {
-                    applyContainmentStyles();
-                }
-            }, 1000);
-            
-            // Observador de intersección para detectar si algo se sale del contenedor
-            const intersectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        applyContainmentStyles();
-                    }
-                });
-            }, {
-                root: tvbetFrameContainer,
-                threshold: 0.9
-            });
+                applyContainmentStyles();
+            }, 2000);
             
             // Timeout de seguridad para desconectar los observers
             setTimeout(() => {
-                observer.disconnect();
-                intersectionObserver.disconnect();
+                documentObserver.disconnect();
+                containerObserver.disconnect();
                 if (styleEnforcementInterval) {
                     clearInterval(styleEnforcementInterval);
                 }
+                // Restaurar createElement por seguridad
+                document.createElement = originalCreateElement;
                 loadTvbetFrame = false;
-            }, 30000); // Aumenté el tiempo a 30 segundos
+            }, 60000); // Aumenté a 60 segundos
         }
     }
 
@@ -338,7 +446,7 @@
                         <b class="loading"><b><b></b></b></b>
                     {/if}
                     {#if viewTvbetFrame}
-                        <div bind:this={tvbetFrameContainer} class="tvbet-container"></div>
+                        <div bind:this={tvbetFrameContainer} class="tvbet-container" id="tvbet-game-container"></div>
                     {/if}
                 </div>
             </div>
