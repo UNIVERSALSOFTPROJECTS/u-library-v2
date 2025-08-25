@@ -205,9 +205,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    {#if loadTvbetFrame}
-                        <b class="loading"><b><b></b></b></b>
-                    {/if}
+                    
                     {#if viewTvbetFrame}
                         <div bind:this={tvbetFrameContainer} class="tvbet-container" id="tvbet-game"></div>
                     {/if}
