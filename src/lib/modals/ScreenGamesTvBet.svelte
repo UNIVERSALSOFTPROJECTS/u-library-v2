@@ -143,30 +143,30 @@
                 mutations.forEach((mutation) => {
                     if (mutation.type === 'childList') {
                         const iframes = tvbetFrameContainer.querySelectorAll('iframe');
-                        const divs = tvbetFrameContainer.querySelectorAll('div');
+                        //const divs = tvbetFrameContainer.querySelectorAll('div');
                         
                         // Aplicar estilos a todos los iframes
                         iframes.forEach(iframe => {
-                            iframe.style.width = '100%';
+                            iframe.style.width = '50%';
                             iframe.style.height = '100%';
                             iframe.style.border = 'none';
-                            iframe.style.position = 'relative';
-                            iframe.style.zIndex = '1';
-                            iframe.style.maxWidth = '100%';
-                            iframe.style.maxHeight = '100%';
+                            // iframe.style.position = 'relative';
+                            // iframe.style.zIndex = '1';
+                            // iframe.style.maxWidth = '100%';
+                            // iframe.style.maxHeight = '100%';
                         });
                         
                         // Aplicar estilos a divs contenedores
-                        divs.forEach(div => {
-                            if (div !== tvbetFrameContainer) {
-                                div.style.width = '100%';
-                                div.style.height = '100%';
-                                div.style.position = 'relative';
-                                div.style.overflow = 'hidden';
-                                div.style.maxWidth = '100%';
-                                div.style.maxHeight = '100%';
-                            }
-                        });
+                        // divs.forEach(div => {
+                        //     if (div !== tvbetFrameContainer) {
+                        //         div.style.width = '100%';
+                        //         div.style.height = '100%';
+                        //         div.style.position = 'relative';
+                        //         div.style.overflow = 'hidden';
+                        //         div.style.maxWidth = '100%';
+                        //         div.style.maxHeight = '100%';
+                        //     }
+                        // });
                         
                         if (iframes.length > 0) {
                             loadTvbetFrame = false;
