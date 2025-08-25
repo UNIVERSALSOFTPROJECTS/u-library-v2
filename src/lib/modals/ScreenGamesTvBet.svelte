@@ -217,7 +217,23 @@
 
 <style>
     
+    
+    :global(.modal.screenGames .modal-body) {
+        position: relative !important;
+        z-index: 10001 !important;
+        flex: 1 !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+    }
 
+    /* Estilos básicos para el iframe */
+    :global(.modal.screenGames .modal-body iframe) {
+        width: 100% !important;
+        height: 100% !important;
+        border: none !important;
+        position: relative !important;
+        z-index: 1 !important;
+    }
 
     #tvbet-game {
         border: 1px solid purple !important;
