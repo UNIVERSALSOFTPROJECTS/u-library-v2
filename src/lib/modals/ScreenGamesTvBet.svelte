@@ -132,7 +132,6 @@
     }
 
     function loadTvbetFrameScript() {
-        console.log("Loading TvbetFrame script...--------------------");
         return new Promise((resolve, reject) => {
             // @ts-ignore
             if (window.TvbetFrame) {
@@ -148,43 +147,45 @@
         });
     }
 
-    onMount(async () => {
+    onMount( async() => {
+        tv_language = options_launch.options.language || 'en';
+        tv_clientId = options_launch.options.clientId;
+        tv_token = options_launch.options.token;
+        tv_server = options_launch.options.server;
+        tv_gameId = options_launch.options.gameId;
+        console.log("---------------------- TvbetFrame options ---------------------------");
+        window.addEventListener('resize', resizeHeightModal); 
+        window.addEventListener('message', handleMessage);
+        console.log("---------------------- TvbetFrame options 2 ---------------------------");
+        
+        // Cargar el script de TvbetFrame
         try {
-            tv_language = options_launch.options.language || 'en';
-            tv_clientId = options_launch.options.clientId;
-            tv_token = options_launch.options.token;
-            tv_server = options_launch.options.server;
-            tv_gameId = options_launch.options.gameId;
-            console.log("---------------------- TvbetFrame options ---------------------------");
-            window.addEventListener('resize', resizeHeightModal); 
-            window.addEventListener('message', handleMessage);
-            
-            // Cargar el script de TvbetFrame
-            try {
-                console.log("STARTTING LOAD TVBET IFRAME...--------------------");
-                await loadTvbetFrameScript();
-                if (open) {
-                    initTvbetFrame();
-                }
-            } catch (error) {
-                console.error('Error loading TvbetFrame script:', error);
+            await loadTvbetFrameScript();
+            if (open) {
+                initTvbetFrame();
             }
+            console.log("TvbetFrame script loaded successfully ",window);
         } catch (error) {
-            console.error("Error during onMount:", error);
+            console.error('Error loading TvbetFrame script:', error);
         }
     });
     
     onDestroy(() => {
         window.removeEventListener('resize', resizeHeightModal);
         window.removeEventListener('message', handleMessage);
+        
+        if (tvbetFrameContainer) {
+            tvbetFrameContainer.innerHTML = '';
+        }
         console.log("Cleaned up event listeners and TvbetFrame instance");
     });
 
 
     $: statusModal(open);
     // @ts-ignore
-    initTvbetFrame();
-
+    $: if (open && window.TvbetFrame && tvbetFrameContainer) {
+        initTvbetFrame();
+    }
 </script>
 
 {#if open}
@@ -206,7 +207,9 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    
+                    {#if loadTvbetFrame}
+                        <b class="loading"><b><b></b></b></b>
+                    {/if}
                     {#if viewTvbetFrame}
                         <div bind:this={tvbetFrameContainer} class="tvbet-container" id="tvbet-game"></div>
                     {/if}
