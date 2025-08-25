@@ -125,8 +125,9 @@
                 server: tv_server,
                 singleGame: tv_gameId
             });
-            console.log(tvbetFrameInstance);
             viewTvbetFrame = true;
+            loadTvbetFrame = false;
+            
         }
     }
 
