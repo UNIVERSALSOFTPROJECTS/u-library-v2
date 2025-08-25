@@ -7,17 +7,13 @@
     export let open;
     export let platform;
     export let updateBalance;
-    
-    // Props para TvBet - puedes usarlas directamente o a través de options_launch
-    export let language = 'en';
-    export let clientId = '';
-    export let token = '';
-    export let server = '';
-    export let gameId = '';
-    export let options_launch = null;
+   
+    export let options_launch;
 
-    let loadTvbetFrame = false;
+    let loadTvbetFrame = true;
+
     let isFullscreen = false;
+    let viewTvbetFrame = true;
     let heightModal;
     let tvbetFrameContainer;
     let tvbetFrameInstance;
@@ -51,24 +47,14 @@
     const closeModal = () => { 
         console.log("Closing modal");
         try {
-            loadTvbetFrame = false;
-            
-            // Limpiar instancia y contenedor
-            if (tvbetFrameContainer) {
-                tvbetFrameContainer.innerHTML = '';
-            }
-            if (tvbetFrameInstance) {
-                tvbetFrameInstance = null;
-            }
-            
+            viewTvbetFrame = false;
+            loadTvbetFrame = false; 
             updateBalance();
             console.log("Balance updated");
-            
             if (document.fullscreenElement != null) {
                 console.log("Exiting fullscreen");
                 toggleFullscreen();
             }
-            
             open = false;
             console.log("Modal closed");
         } catch (error) {
@@ -80,19 +66,10 @@
 
     const reloadTvbetFrame = () => { 
         console.log('Reloading TvbetFrame...');
-        loadTvbetFrame = true;
-        
-        if (tvbetFrameContainer) {
-            tvbetFrameContainer.innerHTML = '';
-        }
-        
-        if (tvbetFrameInstance) {
-            tvbetFrameInstance = null;
-        }
-        
-        setTimeout(() => {
-            initTvbetFrame();
-        }, 200);
+        viewTvbetFrame = false;
+        setTimeout(() => { 
+            viewTvbetFrame = true;
+        }, 100);
     }
    
     const toggleFullscreen = () => {
@@ -134,41 +111,23 @@
 
     function initTvbetFrame() {
         // @ts-ignore
-        if (tvbetFrameContainer && window.TvbetFrame && tv_clientId && tv_token) {
-            console.log("Initializing TvbetFrame...");
+        if (tvbetFrameContainer && window.TvbetFrame) {
             loadTvbetFrame = true;
             
             // Limpiar contenedor antes de inicializar
             tvbetFrameContainer.innerHTML = '';
             
-            try {
-                // @ts-ignore
-                tvbetFrameInstance = new window.TvbetFrame({
-                    lng: tv_language,
-                    clientId: tv_clientId,
-                    tokenAuth: tv_token,
-                    server: tv_server,
-                    singleGame: tv_gameId
-                });
-                
-                console.log("TvbetFrame instance created successfully");
-                
-                // Dar tiempo para que se cree el iframe y luego ocultar loading
-                setTimeout(() => {
-                    loadTvbetFrame = false;
-                }, 1000);
-                
-            } catch (error) {
-                console.error("Error creating TvbetFrame instance:", error);
-                loadTvbetFrame = false;
-            }
-        } else {
-            console.warn("TvbetFrame initialization failed - missing dependencies:", {
-                container: !!tvbetFrameContainer,
-                TvbetFrame: !!window.TvbetFrame,
-                clientId: !!tv_clientId,
-                token: !!tv_token
+            // @ts-ignore
+            tvbetFrameInstance = new window.TvbetFrame({
+                lng: tv_language,
+                clientId: tv_clientId,
+                tokenAuth: tv_token,
+                server: tv_server,
+                singleGame: tv_gameId
             });
+            viewTvbetFrame = true;
+            loadTvbetFrame = false;
+            
         }
     }
 
@@ -190,54 +149,41 @@
     }
 
     onMount(async () => {
-        // Configurar variables desde props directas o options_launch
-        if (options_launch) {
+        try {
             tv_language = options_launch.options.language || 'en';
             tv_clientId = options_launch.options.clientId;
             tv_token = options_launch.options.token;
             tv_server = options_launch.options.server;
             tv_gameId = options_launch.options.gameId;
-        } else {
-            tv_language = language || 'en';
-            tv_clientId = clientId;
-            tv_token = token;
-            tv_server = server;
-            tv_gameId = gameId;
-        }
-        
-        console.log("TvbetFrame config:", { tv_language, tv_clientId, tv_server, tv_gameId });
-        window.addEventListener('resize', resizeHeightModal); 
-        window.addEventListener('message', handleMessage);
-        
-        // Cargar el script de TvbetFrame
-        try {
-            console.log("Loading TvbetFrame script...");
-            await loadTvbetFrameScript();
+            console.log("---------------------- TvbetFrame options ---------------------------");
+            window.addEventListener('resize', resizeHeightModal); 
+            window.addEventListener('message', handleMessage);
+            
+            // Cargar el script de TvbetFrame
+            try {
+                console.log("STARTTING LOAD TVBET IFRAME...--------------------");
+                await loadTvbetFrameScript();
+                if (open) {
+                    initTvbetFrame();
+                }
+            } catch (error) {
+                console.error('Error loading TvbetFrame script:', error);
+            }
         } catch (error) {
-            console.error('Error loading TvbetFrame script:', error);
+            console.error("Error during onMount:", error);
         }
     });
     
     onDestroy(() => {
         window.removeEventListener('resize', resizeHeightModal);
         window.removeEventListener('message', handleMessage);
-        
-        // Limpiar completamente
-        if (tvbetFrameContainer) {
-            tvbetFrameContainer.innerHTML = '';
-        }
-        if (tvbetFrameInstance) {
-            tvbetFrameInstance = null;
-        }
-        
         console.log("Cleaned up event listeners and TvbetFrame instance");
     });
 
-    // Reactive statement para inicializar TvbetFrame cuando el modal se abre
+
     $: statusModal(open);
-    $: if (open && tvbetFrameContainer && window.TvbetFrame && !tvbetFrameInstance) {
-        initTvbetFrame();
-    }
+    // @ts-ignore
+    initTvbetFrame();
 
 </script>
 
@@ -260,13 +206,10 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    {#if loadTvbetFrame}
-                        <div class="loading-container">
-                            <b class="loading"><b><b></b></b></b>
-                            <p>Cargando juego...</p>
-                        </div>
+                    
+                    {#if viewTvbetFrame}
+                        <div bind:this={tvbetFrameContainer} class="tvbet-container" id="tvbet-game"></div>
                     {/if}
-                    <div bind:this={tvbetFrameContainer} class="tvbet-container" id="tvbet-game"></div>
                 </div>
             </div>
         </div>
@@ -297,15 +240,6 @@
         border: 1px solid purple !important;
         width: 100% !important;
         height: 100% !important;
-    }
-    
-    .loading-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        z-index: 10;
     }
 
 </style>
