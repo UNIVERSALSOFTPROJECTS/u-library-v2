@@ -16,6 +16,7 @@
     let heightModal;
     let tvbetFrameContainer;
     let tvbetFrameInstance;
+    let styleEnforcementInterval;
    
     let tv_language;
     let tv_clientId;
@@ -65,6 +66,12 @@
         console.log('Reloading TvbetFrame...');
         viewTvbetFrame = false;
         loadTvbetFrame = true;
+        
+        // Limpiar el intervalo si existe
+        if (styleEnforcementInterval) {
+            clearInterval(styleEnforcementInterval);
+            styleEnforcementInterval = null;
+        }
         
         if (tvbetFrameContainer) {
             // Destruir la instancia actual y limpiar completamente el contenedor
@@ -138,54 +145,111 @@
                 singleGame: tv_gameId
             });
             
-            // Observar cambios en el contenedor para aplicar estilos cuando se cree el iframe
+            // Función para aplicar estilos restrictivos
+            const applyContainmentStyles = () => {
+                const iframes = tvbetFrameContainer.querySelectorAll('iframe');
+                const allElements = tvbetFrameContainer.querySelectorAll('*');
+                
+                // Aplicar estilos a todos los iframes
+                iframes.forEach(iframe => {
+                    iframe.style.cssText = `
+                        width: 100% !important;
+                        height: 100% !important;
+                        border: none !important;
+                        position: relative !important;
+                        z-index: 1 !important;
+                        max-width: 100% !important;
+                        max-height: 100% !important;
+                        top: 0 !important;
+                        left: 0 !important;
+                        right: auto !important;
+                        bottom: auto !important;
+                        transform: none !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    `;
+                });
+                
+                // Aplicar estilos a todos los elementos para prevenir escape
+                allElements.forEach(element => {
+                    if (element !== tvbetFrameContainer) {
+                        const computedStyle = window.getComputedStyle(element);
+                        
+                        // Forzar que elementos con position fixed se conviertan en relative
+                        if (computedStyle.position === 'fixed' || computedStyle.position === 'absolute') {
+                            element.style.position = 'relative !important';
+                        }
+                        
+                        element.style.maxWidth = '100% !important';
+                        element.style.maxHeight = '100% !important';
+                        element.style.overflow = 'hidden !important';
+                        
+                        // Prevenir que elementos se escapen del contenedor
+                        if (element.tagName === 'DIV' || element.tagName === 'IFRAME') {
+                            element.style.cssText += `
+                                contain: layout style !important;
+                                width: 100% !important;
+                                height: 100% !important;
+                            `;
+                        }
+                    }
+                });
+                
+                if (iframes.length > 0) {
+                    loadTvbetFrame = false;
+                }
+            };
+            
+            // Observar cambios en el contenedor
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
-                    if (mutation.type === 'childList') {
-                        const iframes = tvbetFrameContainer.querySelectorAll('iframe');
-                        //const divs = tvbetFrameContainer.querySelectorAll('div');
-                        
-                        // Aplicar estilos a todos los iframes
-                        iframes.forEach(iframe => {
-                            iframe.style.width = '50%';
-                            iframe.style.height = '100%';
-                            iframe.style.border = 'none';
-                            // iframe.style.position = 'relative';
-                            // iframe.style.zIndex = '1';
-                            // iframe.style.maxWidth = '100%';
-                            // iframe.style.maxHeight = '100%';
-                        });
-                        
-                        // Aplicar estilos a divs contenedores
-                        // divs.forEach(div => {
-                        //     if (div !== tvbetFrameContainer) {
-                        //         div.style.width = '100%';
-                        //         div.style.height = '100%';
-                        //         div.style.position = 'relative';
-                        //         div.style.overflow = 'hidden';
-                        //         div.style.maxWidth = '100%';
-                        //         div.style.maxHeight = '100%';
-                        //     }
-                        // });
-                        
-                        if (iframes.length > 0) {
-                            loadTvbetFrame = false;
-                            observer.disconnect();
-                        }
+                    if (mutation.type === 'childList' || mutation.type === 'attributes') {
+                        applyContainmentStyles();
                     }
                 });
             });
             
             observer.observe(tvbetFrameContainer, {
                 childList: true,
-                subtree: true
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style', 'class']
             });
             
-            // Timeout de seguridad para desconectar el observer
+            // Aplicar estilos inmediatamente y repetidamente
+            setTimeout(applyContainmentStyles, 100);
+            setTimeout(applyContainmentStyles, 500);
+            setTimeout(applyContainmentStyles, 1000);
+            setTimeout(applyContainmentStyles, 2000);
+            
+            // Iniciar un intervalo para verificar continuamente los estilos
+            styleEnforcementInterval = setInterval(() => {
+                if (tvbetFrameContainer && tvbetFrameContainer.querySelector('iframe')) {
+                    applyContainmentStyles();
+                }
+            }, 1000);
+            
+            // Observador de intersección para detectar si algo se sale del contenedor
+            const intersectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        applyContainmentStyles();
+                    }
+                });
+            }, {
+                root: tvbetFrameContainer,
+                threshold: 0.9
+            });
+            
+            // Timeout de seguridad para desconectar los observers
             setTimeout(() => {
                 observer.disconnect();
+                intersectionObserver.disconnect();
+                if (styleEnforcementInterval) {
+                    clearInterval(styleEnforcementInterval);
+                }
                 loadTvbetFrame = false;
-            }, 5000);
+            }, 30000); // Aumenté el tiempo a 30 segundos
         }
     }
 
@@ -230,6 +294,12 @@
     onDestroy(() => {
         window.removeEventListener('resize', resizeHeightModal);
         window.removeEventListener('message', handleMessage);
+        
+        // Limpiar el intervalo si existe
+        if (styleEnforcementInterval) {
+            clearInterval(styleEnforcementInterval);
+        }
+        
         if (tvbetFrameInstance) {
             // Limpiar la instancia de TvbetFrame si tiene un método de limpieza
             tvbetFrameContainer.innerHTML = '';
@@ -280,11 +350,21 @@
     /* Estilos para asegurar que TvbetFrame ocupe solo el espacio del modal-body */
     :global(.modal.screenGames) {
         z-index: 9999 !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden !important;
     }
     
     :global(.modal.screenGames .modal-dialog) {
         position: relative !important;
         z-index: 10000 !important;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        max-width: 100% !important;
     }
     
     :global(.modal.screenGames .modal-content) {
@@ -292,12 +372,19 @@
         z-index: 10001 !important;
         display: flex !important;
         flex-direction: column !important;
+        width: 100% !important;
+        height: 100% !important;
+        border: none !important;
+        border-radius: 0 !important;
+        overflow: hidden !important;
     }
     
     :global(.modal.screenGames .modal-header) {
         position: relative !important;
         z-index: 10002 !important;
         flex-shrink: 0 !important;
+        border-bottom: 1px solid #dee2e6 !important;
+        background: #fff !important;
     }
     
     :global(.modal.screenGames .modal-body) {
@@ -306,6 +393,7 @@
         flex: 1 !important;
         overflow: hidden !important;
         padding: 0 !important;
+        contain: layout style size !important;
     }
     
     .tvbet-container {
@@ -313,25 +401,60 @@
         height: 100% !important;
         position: relative !important;
         overflow: hidden !important;
+        contain: layout style size !important;
     }
     
-    /* Estilos específicos para elementos internos de TvbetFrame */
+    /* Estilos MUY agresivos para elementos internos de TvbetFrame */
+    :global(.modal.screenGames .modal-body *) {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        contain: layout !important;
+    }
+    
     :global(.modal.screenGames .modal-body iframe) {
         width: 100% !important;
         height: 100% !important;
         border: none !important;
         position: relative !important;
         z-index: 1 !important;
-    }
-    
-    /* Asegurar que cualquier elemento creado por TvbetFrame no escape del contenedor */
-    :global(.tvbet-container *) {
+        top: 0 !important;
+        left: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
         max-width: 100% !important;
         max-height: 100% !important;
     }
+    
+    /* Forzar que CUALQUIER elemento dentro del contenedor no escape */
+    :global(.tvbet-container *) {
+        position: relative !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        overflow: hidden !important;
+    }
      
-    /* Prevenir que elementos con position fixed escapen del modal */
-    :global(.tvbet-container [style*="position: fixed"]) {
-        position: absolute !important;
+    /* Prevenir elementos con position fixed/absolute */
+    :global(.tvbet-container [style*="position: fixed"]),
+    :global(.tvbet-container [style*="position: absolute"]) {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+    }
+    
+    /* Asegurar que los botones del header siempre estén visibles */
+    :global(.modal.screenGames .modal-header .btn) {
+        position: relative !important;
+        z-index: 10003 !important;
+    }
+    
+    /* Prevenir que cualquier elemento tenga z-index mayor que el header */
+    :global(.modal.screenGames .modal-body *) {
+        z-index: 1 !important;
     }
 </style>
