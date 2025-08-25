@@ -147,11 +147,11 @@
                    
                     
                     // Aplicar estilos básicos
+                    console.log('--------------------- Applying styles to iframe');
                     if (tvbetFrameContainer.contains(iframe)) {
                         iframe.style.width = '100%';
                         iframe.style.height = '100%';
                         iframe.style.border = 'none';
-                        iframe.style.position = 'relative';
                         iframe.style.zIndex = '1';
                     }
                 });
