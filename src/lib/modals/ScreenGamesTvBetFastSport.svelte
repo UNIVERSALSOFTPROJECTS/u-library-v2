@@ -94,8 +94,10 @@
                 clientId: options_launch.options.clientId,
                 tokenAuth: options_launch.options.token,
             };
-            params_tvbet.singleGame= options_launch.options.gameId ;
-            params_tvbet.server= options_launch.options.server ;
+            params_tvbet.floatTop = '#fTop' ;
+            params_tvbet.containerId = 'sport-game' ;
+            params_tvbet.game_id = options_launch.options.gameId ;
+            params_tvbet.server= options_launch.options.fast_server ;
             // @ts-ignore
             tvbetFrameInstance = new window.TvbetFrame(params_tvbet);
             const removeMinHeight = () => {
@@ -183,7 +185,7 @@
                         <b class="loading"><b><b></b></b></b>
                     {/if}
                     {#if viewTvbetFrame}
-                        <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="tvbet-game"></div>
+                        <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="sport-game"></div>
                     {/if}
                 </div>
             </div>
@@ -211,7 +213,7 @@
         z-index: 1 !important;
     }
 
-    #tvbet-game {
+    #sport-game {
         border: 1px solid purple !important;
         width: 100% !important;
         height: 100% !important;
