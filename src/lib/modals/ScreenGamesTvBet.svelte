@@ -93,16 +93,15 @@
                 lng: options_launch.options.language || 'en',
                 clientId: options_launch.options.clientId,
                 tokenAuth: options_launch.options.token,
-                server: options_launch.options.server,
             };
-            if('fast_server' in options_launch){
-                params_tvbet.floatTop = '#fTop';
-                params_tvbet.containerId = 'sport-game',
-                params_tvbet.game_id = options_launch.options.gameId
-
+            if('fast_server' in options_launch.options){
+                params_tvbet.floatTop = '#fTop' ;
+                params_tvbet.containerId = 'sport-game' ;
+                params_tvbet.game_id = options_launch.options.gameId ;
+                params_tvbet.server= options_launch.options.fast_server ;
             }else{
-                params_tvbet.singleGame= options_launch.options.gameId
-
+                params_tvbet.singleGame= options_launch.options.gameId ;
+                params_tvbet.server= options_launch.options.server ;
             }
             // @ts-ignore
             tvbetFrameInstance = new window.TvbetFrame(params_tvbet);
