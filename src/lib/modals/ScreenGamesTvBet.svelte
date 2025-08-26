@@ -88,9 +88,7 @@
     function initTvbetFrame() {
         // @ts-ignore
         if (tvbetFrameContainer && window.TvbetFrame) {
-            // Limpiar contenedor antes de inicializar
-            tvbetFrameContainer.innerHTML = '';
-            
+            tvbetFrameContainer.innerHTML = '';            
             // @ts-ignore
             tvbetFrameInstance = new window.TvbetFrame({
                 lng: options_launch.options.language || 'en',
@@ -102,18 +100,12 @@
             const removeMinHeight = () => {
                 const iframe = document.getElementById('tvbet-iframe');
                 if (iframe) {
-                    iframe.style.minHeight = '';  // Eliminar el min-height
-                    console.log('✅ min-height eliminado del iframe');
-
-                    counterSetInterval++;  // Incrementar el contador
-
-                    if (counterSetInterval >= 10) {  // Si se han ejecutado 10 veces
-                        clearInterval(intervalId);  // Detener el setInterval
-                        console.log('✅ setInterval detenido después de 10 intentos');
-                    }
+                    iframe.style.minHeight = ''; 
+                    counterSetInterval++;  
+                    if (counterSetInterval >= 20) clearInterval(intervalId);  
                 }
             };
-            const intervalId = setInterval(removeMinHeight, 1000);  // Revisa cada 100ms
+            const intervalId = setInterval(removeMinHeight, 1000);
         }
     }
      function handleMessage(event) {
