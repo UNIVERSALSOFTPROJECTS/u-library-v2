@@ -97,7 +97,7 @@
                 const placeholder = document.createElement('div');
                 placeholder.id = 'gameClientPlaceholder';
                 tomHornContainer.appendChild(placeholder);
-                
+                console.log("TomHorn placeholder created--------------------- ",options_launch);
                 // Configurar parámetros desde options_launch
                 const params = {
                     'width': options_launch.options.params.width || '100%',
@@ -189,6 +189,8 @@
     }
 
     onMount( async() => {       
+                console.log("TomHorn placeholder created--------------------- ",options_launch);
+
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', receiveMessage);        
         // Cargar los scripts de TomHorn
