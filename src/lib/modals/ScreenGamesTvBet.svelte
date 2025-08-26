@@ -102,7 +102,7 @@
                 if (iframe) {
                     iframe.style.minHeight = ''; 
                     counterSetInterval++;  
-                    if (counterSetInterval >= 20) clearInterval(intervalId);  
+                    if (counterSetInterval >= 40) clearInterval(intervalId);  
                 }
             };
             const intervalId = setInterval(removeMinHeight, 1000);
