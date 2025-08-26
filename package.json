@@ -41,6 +41,7 @@
     "@stomp/stompjs": "^7.0.0",
     "axios": "^1.4.0",
     "camel-case": "^5.0.0",
+    "crypto-js": "^4.2.0",
     "firebase": "^10.7.1",
     "google-login-svelte": "^0.0.1",
     "mobile-device-detect": "^0.4.3",
