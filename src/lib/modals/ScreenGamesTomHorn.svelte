@@ -194,8 +194,9 @@
     }
     onMount( async() => {       
         console.log("TomHorn placeholder created--------------------- ",options_launch);
-        options_launch.options = JSON.parse(decrypt(options_launch.options.encryptedData));
-        console.log("TomHorn placeholder created--------------------- ",options_launch);
+        let data_decrypt = decrypt(options_launch.options.encryptedData);
+
+        console.log("TomHorn placeholder created--------------------- ",data_decrypt);
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', receiveMessage);        
         // Cargar los scripts de TomHorn
