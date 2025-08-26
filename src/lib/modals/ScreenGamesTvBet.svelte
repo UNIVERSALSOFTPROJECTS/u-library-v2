@@ -193,11 +193,14 @@
                         <b class="loading"><b><b></b></b></b>
                     {/if}
                     {#if viewTvbetFrame}
+                    <div class="iframe-wrapper">
                         {#if frameId === 'sport-game'}
                             <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="sport-game"></div>
                         {:else}
                             <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="tvbet-game"></div>
                         {/if}
+                    </div>
+                        
                     {/if}
                 </div>
             </div>
@@ -207,30 +210,43 @@
 
 <style>
     
-    
     :global(.modal.screenGames .modal-body) {
         position: relative !important;
-        z-index: 10001 !important;
-        flex: 1 !important;
-        overflow: hidden !important;
-        padding: 0 !important;
+        overflow: hidden !important; /* asegúrate de que esto esté */
     }
+    
 
     /* Estilos básicos para el iframe */
     :global(.modal.screenGames .modal-body iframe) {
+        position: absolute !important;
+        top: 0;
+        left: 0;
         width: 100% !important;
         height: 100% !important;
         border: none !important;
-        position: relative !important;
         z-index: 1 !important;
     }
 
+    .iframe-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .tvbet-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
     #tvbet-game,
-    #tvbet-iframe,
     #sport-game {
-        border: 1px solid purple !important;
+        position: relative !important;
+        overflow: hidden !important;
         width: 100% !important;
         height: 100% !important;
+        border: 1px solid purple !important;
     }
 
 
