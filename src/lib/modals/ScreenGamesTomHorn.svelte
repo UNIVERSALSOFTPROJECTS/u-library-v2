@@ -148,7 +148,7 @@
             }
             
             console.log("Loading TomHorn scripts...");
-            const baseUrl = options_launch.options.base_url || options_launch.options.base || '';
+            const baseUrl = options_launch.options.url || options_launch.options.base || '';
             
             // Cargar ClientUtils.js
             const clientUtilsScript = document.createElement('script');
