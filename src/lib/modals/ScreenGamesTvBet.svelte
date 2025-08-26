@@ -110,6 +110,7 @@
                 server: options_launch.options.server,
                 singleGame: options_launch.options.gameId
             });
+            console.log("TvbetFrame script appended to document ",document.getElementById('tvbet-iframe'));
             
         }
     }
@@ -139,7 +140,6 @@
             script.onload = resolve;
             script.onerror = reject;
             document.head.appendChild(script);
-            console.log("TvbetFrame script appended to document ",document.getElementById('tvbet-iframe'));
         });
     }
 
