@@ -17,6 +17,7 @@
     let heightModal;
     let tvbetFrameContainer;
     let tvbetFrameInstance;
+    let frameId = '';
 
     let counterSetInterval = 0;
 
@@ -99,9 +100,11 @@
                 params_tvbet.containerId = 'sport-game' ;
                 params_tvbet.game_id = options_launch.options.gameId ;
                 params_tvbet.server= options_launch.options.fast_server ;
+                frameId = 'sport-game';
             }else{
                 params_tvbet.singleGame= options_launch.options.gameId ;
                 params_tvbet.server= options_launch.options.server ;
+                frameId = 'tvbet-game';
             }
             // @ts-ignore
             tvbetFrameInstance = new window.TvbetFrame(params_tvbet);
@@ -190,8 +193,7 @@
                         <b class="loading"><b><b></b></b></b>
                     {/if}
                     {#if viewTvbetFrame}
-                        <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="tvbet-game"></div>
-                        <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="sport-game"></div>
+                        <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id={frameId}></div>
                     {/if}
                 </div>
             </div>
