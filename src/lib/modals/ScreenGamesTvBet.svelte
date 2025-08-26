@@ -241,6 +241,7 @@
     }
 
     #tvbet-game,
+    #tvbet-iframe,
     #sport-game {
         position: relative !important;
         overflow: hidden !important;
