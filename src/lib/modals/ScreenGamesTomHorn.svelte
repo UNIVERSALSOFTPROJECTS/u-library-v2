@@ -100,18 +100,18 @@
                 
                 // Configurar parámetros desde options_launch
                 const params = {
-                    'width': options_launch.options.width || '100%',
-                    'height': options_launch.options.height || '100%',
-                    'param:base': options_launch.options.base,
-                    'var:auth': options_launch.options.auth,
-                    'var:moneyType': options_launch.options.moneyType,
-                    'channel': options_launch.options.channel || options_launch.options.chanel,
-                    'var:gameKey': options_launch.options.gameKey,
-                    'var:gameAddress': options_launch.options.gameAddress,
-                    'var:gameVersion': options_launch.options.gameVersion,
-                    'var:gameName': options_launch.options.gameName,
-                    'var:lang': options_launch.options.lang,
-                    'var:fastUrl': options_launch.options.fastURL
+                    'width': options_launch.options.params.width || '100%',
+                    'height': options_launch.options.params.height || '100%',
+                    'param:base': options_launch.options.params.base,
+                    'var:auth': options_launch.options.params.auth,
+                    'var:moneyType': options_launch.options.params.moneyType,
+                    'channel': options_launch.options.params.channel || options_launch.options.params.chanel,
+                    'var:gameKey': options_launch.options.params.gameKey,
+                    'var:gameAddress': options_launch.options.params.gameAddress,
+                    'var:gameVersion': options_launch.options.params.gameVersion,
+                    'var:gameName': options_launch.options.params.gameName,
+                    'var:lang': options_launch.options.params.lang,
+                    'var:fastUrl': options_launch.options.params.fastURL
                 };
                 
                 console.log("TomHorn params:", params);
@@ -149,7 +149,7 @@
             
             console.log("Loading TomHorn scripts...");
             const baseUrl = options_launch.options.url || options_launch.options.base || '';
-            
+            console.log("TomHorn base URL:", baseUrl);
             // Cargar ClientUtils.js
             const clientUtilsScript = document.createElement('script');
             clientUtilsScript.src = `${baseUrl}ClientUtils.js`;
