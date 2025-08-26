@@ -3,7 +3,6 @@
     import { watchResize } from "svelte-watch-resize";
     import { assetsUrl } from "../../js/utils/assetsUtils";
     import { isMobileSafari } from 'mobile-device-detect';
-    import CryptoJS from 'crypto-js';
 
     export let open;
     export let platform;
@@ -98,6 +97,7 @@
                 const placeholder = document.createElement('div');
                 placeholder.id = 'gameClientPlaceholder';
                 tomHornContainer.appendChild(placeholder);
+                
                 // Configurar parámetros desde options_launch
                 const params = {
                     'width': options_launch.options.params.width || '100%',
@@ -149,7 +149,7 @@
             
             console.log("Loading TomHorn scripts...");
             const baseUrl = options_launch.options.url || options_launch.options.base || '';
-            console.log("TomHorn base URL:", baseUrl);
+            
             // Cargar ClientUtils.js
             const clientUtilsScript = document.createElement('script');
             clientUtilsScript.src = `${baseUrl}ClientUtils.js`;
@@ -188,15 +188,7 @@
         });
     }
 
-    function decrypt(options) {
-        const bytes = CryptoJS.AES.decrypt(JSON.stringify(options), "b4f7d9f6a3e2c1e0b8d5c4a1f6e7b2c8");
-        return bytes.toString(CryptoJS.enc.Utf8);
-    }
     onMount( async() => {       
-        console.log("TomHorn placeholder created--------------------- ",options_launch);
-        let data_decrypt = decrypt(options_launch.options.encryptedData);
-
-        console.log("TomHorn placeholder created--------------------- ",data_decrypt);
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', receiveMessage);        
         // Cargar los scripts de TomHorn
