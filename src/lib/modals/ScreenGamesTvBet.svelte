@@ -139,6 +139,7 @@
             script.onload = resolve;
             script.onerror = reject;
             document.head.appendChild(script);
+            console.log("TvbetFrame script appended to document ",document.getElementById('tvbet-iframe'));
         });
     }
 
@@ -236,5 +237,6 @@
         width: 100% !important;
         height: 100% !important;
     }
+    
 
 </style>
