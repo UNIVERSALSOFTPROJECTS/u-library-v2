@@ -31,7 +31,6 @@
         if (event.data === "luckyspins_exit_game" || event.data === "adm_exit_game") {
             closeModal();
         } else {
-            console.log("Unknown message received:", event.data);
         }
     }
 
@@ -86,7 +85,6 @@
     function initTomHornGame() {
         // @ts-ignore
         if (tomHornContainer && window.renderClient) {
-            console.log("Initializing TomHorn game...");
             loadTomHornGame = true;
             
             // Limpiar contenedor antes de inicializar
@@ -114,13 +112,8 @@
                     'var:fastUrl': options_launch.options.params.fastURL
                 };
                 
-                console.log("TomHorn params:", params);
-                
                 // @ts-ignore
-                window.renderClient(params, 'gameClientPlaceholder');
-                
-                console.log("TomHorn game initialized successfully");
-                
+                window.renderClient(params, 'gameClientPlaceholder');                
                 // Dar tiempo para que se cree el juego y luego ocultar loading
                 setTimeout(() => {
                     loadTomHornGame = false;
@@ -142,12 +135,10 @@
         return new Promise((resolve, reject) => {
             // @ts-ignore
             if (window.renderClient) {
-                console.log("TomHorn scripts already loaded");
                 resolve();
                 return;
             }
             
-            console.log("Loading TomHorn scripts...");
             const baseUrl = options_launch.options.url || options_launch.options.base || '';
             
             // Cargar ClientUtils.js
@@ -165,9 +156,7 @@
             
             const onScriptLoad = () => {
                 scriptsLoaded++;
-                console.log(`TomHorn script loaded: ${scriptsLoaded}/${totalScripts}`);
                 if (scriptsLoaded === totalScripts) {
-                    console.log("All TomHorn scripts loaded successfully");
                     resolve();
                 }
             };
