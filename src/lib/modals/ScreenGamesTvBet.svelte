@@ -225,18 +225,13 @@
         z-index: 1 !important;
     }
 
-    #tvbet-game {
-        border: 1px solid purple !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
+    #tvbet-game,
+    #tvbet-iframe,
     #sport-game {
         border: 1px solid purple !important;
         width: 100% !important;
         height: 100% !important;
     }
-    #tvbet-iframe {
-        min-height: unset !important;
-    }
+
 
 </style>
