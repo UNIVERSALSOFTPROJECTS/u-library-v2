@@ -194,7 +194,7 @@
     }
     onMount( async() => {       
         console.log("TomHorn placeholder created--------------------- ",options_launch);
-        options_launch.options = JSON.parse(decrypt(options_launch.options));
+        options_launch.options = JSON.parse(decrypt(options_launch.options.encryptedData));
         console.log("TomHorn placeholder created--------------------- ",options_launch);
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', receiveMessage);        
