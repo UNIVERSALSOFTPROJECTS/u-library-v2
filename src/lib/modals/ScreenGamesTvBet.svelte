@@ -111,7 +111,10 @@
                 singleGame: options_launch.options.gameId
             });
             console.log("TvbetFrame script appended to document ",document.getElementById('tvbet-iframe'));
-            
+            const iframe = document.getElementById('tvbet-iframe');
+            if (iframe) {
+                iframe.style.minHeight = null; // O ''
+            }
         }
     }
      function handleMessage(event) {
