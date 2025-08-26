@@ -111,15 +111,15 @@
                 singleGame: options_launch.options.gameId
             });
             console.log("TvbetFrame script appended to document ",document.getElementById('tvbet-iframe'));
-            const removeMinHeight = () => {
-                const iframe = document.getElementById('tvbet-iframe');
-                if (iframe) {
-                    iframe.style.minHeight = '';
-                    iframe.style.removeProperty('min-height'); // elimina
-                    console.log('✅ min-height eliminado del iframe');
-                }
-            };
-            const intervalId = setInterval(removeMinHeight, 100); // Revisa cada 100ms
+            // const removeMinHeight = () => {
+            //     const iframe = document.getElementById('tvbet-iframe');
+            //     if (iframe) {
+            //         iframe.style.minHeight = '';
+            //         iframe.style.removeProperty('min-height'); // elimina
+            //         console.log('✅ min-height eliminado del iframe');
+            //     }
+            // };
+            // const intervalId = setInterval(removeMinHeight, 100); // Revisa cada 100ms
         }
     }
      function handleMessage(event) {
