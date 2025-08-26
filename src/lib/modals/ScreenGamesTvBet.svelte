@@ -89,14 +89,23 @@
         // @ts-ignore
         if (tvbetFrameContainer && window.TvbetFrame) {
             tvbetFrameContainer.innerHTML = '';            
-            // @ts-ignore
-            tvbetFrameInstance = new window.TvbetFrame({
+            let params_tvbet = {
                 lng: options_launch.options.language || 'en',
                 clientId: options_launch.options.clientId,
                 tokenAuth: options_launch.options.token,
                 server: options_launch.options.server,
-                singleGame: options_launch.options.gameId
-            });
+            };
+            if('fast_server' in options_launch){
+                params_tvbet.floatTop = '#fTop';
+                params_tvbet.containerId = 'sport-game',
+                params_tvbet.game_id = options_launch.options.gameId
+
+            }else{
+                params_tvbet.singleGame= options_launch.options.gameId
+
+            }
+            // @ts-ignore
+            tvbetFrameInstance = new window.TvbetFrame(params_tvbet);
             const removeMinHeight = () => {
                 const iframe = document.getElementById('tvbet-iframe');
                 if (iframe) {
