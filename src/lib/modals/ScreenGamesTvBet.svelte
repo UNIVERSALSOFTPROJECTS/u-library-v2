@@ -17,12 +17,8 @@
     let heightModal;
     let tvbetFrameContainer;
     let tvbetFrameInstance;
-   
-    let tv_language;
-    let tv_clientId;
-    let tv_token;
-    let tv_server;
-    let tv_gameId;
+
+    let counterSetInterval = 0;
 
     const resizeHeightModal = () => { heightModal = visualViewport.height; }
     
@@ -35,7 +31,6 @@
     const lockTouchZoom = (e) => { if (e.touches.length > 1) e.preventDefault(); }
 
     function receiveMessage(event) {
-        console.log("Received message from origin:", event.origin);
         if (event.data === "luckyspins_exit_game" || event.data === "adm_exit_game") {
             closeModal();
         } else {
@@ -45,16 +40,12 @@
 
 
     const closeModal = () => { 
-        console.log("Closing modal");
         try {
             updateBalance();
-            console.log("Balance updated");
             if (document.fullscreenElement != null) {
-                console.log("Exiting fullscreen");
                 toggleFullscreen();
             }
             open = false;
-            console.log("Modal closed");
         } catch (error) {
             console.error("Error closing modal:", error);
         }
@@ -63,7 +54,6 @@
  
 
     const reloadTvbetFrame = () => { 
-        console.log('Reloading TvbetFrame...');
         viewTvbetFrame = false;
         loadTvbetFrame = true;
         setTimeout(() => { 
@@ -96,7 +86,6 @@
     }
 
     function initTvbetFrame() {
-        console.log("Initializing TvbetFrame with options:", options_launch.options);
         // @ts-ignore
         if (tvbetFrameContainer && window.TvbetFrame) {
             // Limpiar contenedor antes de inicializar
@@ -110,29 +99,25 @@
                 server: options_launch.options.server,
                 singleGame: options_launch.options.gameId
             });
-            console.log("TvbetFrame script appended to document ",document.getElementById('tvbet-iframe'));
-            // const removeMinHeight = () => {
-            //     const iframe = document.getElementById('tvbet-iframe');
-            //     if (iframe) {
-            //         iframe.style.minHeight = '';
-            //         iframe.style.removeProperty('min-height'); // elimina
-            //         console.log('✅ min-height eliminado del iframe');
-            //     }
-            // };
-            // const intervalId = setInterval(removeMinHeight, 100); // Revisa cada 100ms
+            const removeMinHeight = () => {
+                const iframe = document.getElementById('tvbet-iframe');
+                if (iframe) {
+                    iframe.style.minHeight = '';  // Eliminar el min-height
+                    console.log('✅ min-height eliminado del iframe');
+
+                    counterSetInterval++;  // Incrementar el contador
+
+                    if (counterSetInterval >= 10) {  // Si se han ejecutado 10 veces
+                        clearInterval(intervalId);  // Detener el setInterval
+                        console.log('✅ setInterval detenido después de 10 intentos');
+                    }
+                }
+            };
+            const intervalId = setInterval(removeMinHeight, 1000);  // Revisa cada 100ms
         }
     }
      function handleMessage(event) {
-        // Manejar mensajes de TvbetFrame si es necesario
-        const { event: messageEvent } = event.data;
-
-        if (messageEvent === 'exit') {
-            console.log('[TvbetFrame message] Evento recibido: exit');
-        } else if (messageEvent === 'reload') {
-            console.log('[TvbetFrame message] Evento recibido: reload');
-        } else {
-            console.log('[TvbetFrame message] Evento desconocido:', messageEvent);
-        }
+    
     }
 
     function loadTvbetFrameScript() {
@@ -151,23 +136,17 @@
         });
     }
 
-    onMount( async() => {
-        console.log("---------------------- params onmount ",options_launch.options);
-       
-        console.log("---------------------- TvbetFrame options ---------------------------");
+    onMount( async() => {       
         window.addEventListener('resize', resizeHeightModal); 
-        window.addEventListener('message', handleMessage);
-        console.log("---------------------- TvbetFrame options 2 ---------------------------");
-        
+        window.addEventListener('message', handleMessage);        
         // Cargar el script de TvbetFrame
         try {
             await loadTvbetFrameScript();
             if (open) {
                 initTvbetFrame();
             }
-            console.log("TvbetFrame script loaded successfully ",window);
         } catch (error) {
-            console.error('Error loading TvbetFrame script:', error);
+            console.error("Error loading TvbetFrame script:", error);
         }
     });
     
@@ -178,7 +157,6 @@
         if (tvbetFrameContainer) {
             tvbetFrameContainer.innerHTML = '';
         }
-        console.log("Cleaned up event listeners and TvbetFrame instance");
     });
 
 
