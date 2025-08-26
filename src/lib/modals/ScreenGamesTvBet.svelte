@@ -115,6 +115,7 @@
             const iframe = document.getElementById('tvbet-iframe');
             if (iframe) {
                 iframe.style.minHeight = ''; // o = null
+                iframe.style.removeProperty('min-height');
                 console.log('✅ min-height eliminado del iframe');
                 observer.disconnect(); // ya no necesitamos seguir observando
             }
