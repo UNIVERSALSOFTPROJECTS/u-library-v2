@@ -194,11 +194,11 @@
                     {/if}
                     {#if viewTvbetFrame}
                     <div class="iframe-wrapper">
-                        {#if frameId === 'sport-game'}
+                        <!-- {#if frameId === 'sport-game'} -->
                             <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="sport-game"></div>
-                        {:else}
+                        <!-- {:else} -->
                             <div bind:this={tvbetFrameContainer} on:load={()=>{loadTvbetFrame = false;}} class="tvbet-container" id="tvbet-game"></div>
-                        {/if}
+                        <!-- {/if} -->
                     </div>
                         
                     {/if}
