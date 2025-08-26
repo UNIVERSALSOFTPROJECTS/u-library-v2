@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test TomHorn Modal</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; margin: 10px; cursor: pointer; }
+        .test-info { background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Test TomHorn Svelte Modal</h1>
+    
+    <div class="test-info">
+        <h3>Estado de la conversión:</h3>
+        <ul>
+            <li>✅ Convertido código EJS a Svelte</li>
+            <li>✅ Lógica de carga dinámica de scripts (ClientUtils.js, swfobject.js)</li>
+            <li>✅ Función renderClient para inicializar el juego</li>
+            <li>✅ Manejo de parámetros desde options_launch</li>
+            <li>✅ Controles del modal (cerrar, recargar, pantalla completa)</li>
+            <li>✅ Estilos CSS para contenedor del juego</li>
+            <li>✅ Estados de carga y visualización</li>
+            <li>✅ Limpieza al cerrar/destruir el componente</li>
+        </ul>
+    </div>
+
+    <div class="test-info">
+        <h3>Principales cambios realizados:</h3>
+        <ul>
+            <li><strong>Variables:</strong> Cambió de TVBet a TomHorn (loadTomHornGame, viewTomHornGame, tomHornContainer, etc.)</li>
+            <li><strong>Scripts:</strong> Carga dinámica de ClientUtils.js y swfobject.js desde base_url</li>
+            <li><strong>Inicialización:</strong> Usa window.renderClient() en lugar de TVBetFrame</li>
+            <li><strong>Parámetros:</strong> Mapea options_launch.options a los parámetros requeridos por TomHorn</li>
+            <li><strong>Contenedor:</strong> ID "tomhorn-game" con estilo de borde naranja para debugging</li>
+            <li><strong>Limpieza:</strong> Limpia el contenedor al cerrar/recargar</li>
+        </ul>
+    </div>
+
+    <div class="test-info">
+        <h3>Estructura del modal TomHorn:</h3>
+        <pre>
+&lt;script&gt;
+  // Variables y funciones para TomHorn
+  let loadTomHornGame = true;
+  let tomHornContainer;
+  
+  // Carga scripts ClientUtils.js y swfobject.js
+  function loadTomHornScripts() { ... }
+  
+  // Inicializa el juego usando renderClient
+  function initTomHornGame() { ... }
+  
+  // Controles del modal
+  function reloadTomHornGame() { ... }
+  function closeModal() { ... }
+  function toggleFullscreen() { ... }
+&lt;/script&gt;
+
+&lt;div class="modal"&gt;
+  &lt;div class="modal-header"&gt;
+    &lt;!-- Botones de control --&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-body"&gt;
+    &lt;div bind:this={tomHornContainer} id="tomhorn-game"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </pre>
+    </div>
+
+    <div class="test-info">
+        <h3>Para usar el componente:</h3>
+        <pre>
+&lt;script&gt;
+  import ScreenGamesTomHorn from './path/to/ScreenGamesTomHorn.svelte';
+  
+  let openModal = false;
+  
+  const options_launch = {
+    options: {
+      base: 'https://tomhorn-game-url/',
+      auth: 'auth_token',
+      moneyType: 'USD',
+      channel: 'channel_name',
+      gameKey: 'game_key',
+      gameAddress: 'game_address',
+      gameVersion: '1.0',
+      gameName: 'Game Name',
+      lang: 'es',
+      fastURL: 'fast_url'
+    }
+  };
+&lt;/script&gt;
+
+&lt;button on:click={() => openModal = true}&gt;
+  Abrir TomHorn Game
+&lt;/button&gt;
+
+&lt;ScreenGamesTomHorn 
+  bind:open={openModal}
+  platform="tomhorn"
+  updateBalance={() => console.log('Update balance')}
+  {options_launch}
+/&gt;
+        </pre>
+    </div>
+
+    <button onclick="alert('El modal TomHorn está listo para usar!')">✅ Conversión Completada</button>
+
+</body>
+</html>
