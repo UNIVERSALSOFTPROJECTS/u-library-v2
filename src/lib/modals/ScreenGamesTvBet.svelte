@@ -17,7 +17,7 @@
     let heightModal;
     let tvbetFrameContainer;
     let tvbetFrameInstance;
-    let frameId = '';
+    $: frameId = '';
 
     let counterSetInterval = 0;
 
