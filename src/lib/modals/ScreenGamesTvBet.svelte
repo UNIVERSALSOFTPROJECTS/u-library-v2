@@ -100,11 +100,11 @@
                 params_tvbet.containerId = 'sport-game' ;
                 params_tvbet.game_id = options_launch.options.gameId ;
                 params_tvbet.server= options_launch.options.fast_server ;
-                frameId = 'sport-game';
+                $: frameId = 'sport-game';
             }else{
                 params_tvbet.singleGame= options_launch.options.gameId ;
                 params_tvbet.server= options_launch.options.server ;
-                frameId = 'tvbet-game';
+                $: frameId = 'tvbet-game';
             }
             // @ts-ignore
             tvbetFrameInstance = new window.TvbetFrame(params_tvbet);
