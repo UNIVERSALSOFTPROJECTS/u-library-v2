@@ -117,7 +117,6 @@
                     iframe.style.minHeight = '';
                     iframe.style.removeProperty('min-height'); // elimina
                     console.log('✅ min-height eliminado del iframe');
-                    clearInterval(intervalId);
                 }
             };
             const intervalId = setInterval(removeMinHeight, 100); // Revisa cada 100ms
