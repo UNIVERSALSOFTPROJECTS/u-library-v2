@@ -401,7 +401,7 @@
     }
 
     #gaming777-game {
-        border: 1px solid #3584e4 !important;
+        border: 1px solid #424346 !important;
         width: 100% !important;
         height: 100% !important;
     }
