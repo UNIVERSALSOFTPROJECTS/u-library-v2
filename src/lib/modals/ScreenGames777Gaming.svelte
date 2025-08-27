@@ -315,11 +315,12 @@
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', receiveMessage);        
         // Cargar los scripts de 777Gaming
+        console.log("onMount loading 777Gaming scripts... params -------------------- ",options_launch);
         try {
-            // await load777GamingScripts();
-            // if (open) {
-            //     init777GamingGame();
-            // }
+            await load777GamingScripts();
+            if (open) {
+                init777GamingGame();
+            }
         } catch (error) {
             console.error("Error loading 777Gaming scripts:", error);
         }
@@ -344,7 +345,6 @@
     $: statusModal(open);
     // @ts-ignore
     $: if (open && window.NGT && gaming777Container) {
-        console.log("Reactive init777GamingGame call ----------------------");
         init777GamingGame();
     }
 </script>
