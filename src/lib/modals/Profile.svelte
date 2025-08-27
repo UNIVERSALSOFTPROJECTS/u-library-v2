@@ -31,7 +31,7 @@
     let id_ca  = configProfile.id_ca;
     let chatLiveUrl = configProfile.chatLiveUrl || "";
     let isLockedWithdrawal = false;//falta ocualtar o mostrar le anuncion dependiendo si tien idbacan o idca
-
+    let viewActiveWithdrawal = false;
     const openSection = (section) => { profileView = section; }
 
     const getMyAccount = async()  =>{
@@ -44,6 +44,7 @@
             accountUser.dataComplete = (accountUser.document || accountUser.address || accountUser.city ?true:false);
             accountUser.isViewWeb = id_banca.includes(user.id_banca) || id_ca.includes(user.id_ca);
             isLockedWithdrawal =  accountUser.isViewWeb?!accountUser.dataComplete:false;
+            viewActiveWithdrawal = isLockedWithdrawal;
         } catch (error) {
             if(error.response.data.errorCode == "OLD_TOKEN") error = t("msg.duplicatedSession");
             else error = t("msg.contactSupport");
@@ -96,7 +97,9 @@
             <DropdownBonus bind:bonusView bind:activedBonus bind:currency={user.currency} {t}/>
 
             <div class="profile__transaction">
-                <button class="btn withdrawal {isLockedWithdrawal?'locked':''}"  on:click={onOpenWithdrawal} disabled={isLockedWithdrawal}>{t("profile.withdrawal")}</button>
+                {#if viewActiveWithdrawal}
+                    <button class="btn withdrawal {isLockedWithdrawal?'locked':''}"  on:click={onOpenWithdrawal} disabled={isLockedWithdrawal}>{t("profile.withdrawal")}</button>
+                {/if}
                 <button class="btn recharge" on:click={onOpenDeposit}>{t("profile.recharge")}</button>
             </div>
             {#if isLockedWithdrawal}
