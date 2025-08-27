@@ -15,7 +15,6 @@
     let viewTomHornGame = true;
     let heightModal;
     let tomHornContainer;
-    let tomHornInstance;
 
     const resizeHeightModal = () => { heightModal = visualViewport.height; }
     
