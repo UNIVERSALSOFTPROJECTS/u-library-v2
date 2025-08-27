@@ -315,9 +315,12 @@
         window.addEventListener('resize', resizeHeightModal); 
         window.addEventListener('message', receiveMessage);        
         // Cargar los scripts de 777Gaming
+        console.log("onMount loading 777Gaming scripts... params -------------------- ",options_launch);
         try {
             await load777GamingScripts();
-            
+            if (open) {
+                init777GamingGame();
+            }
         } catch (error) {
             console.error("Error loading 777Gaming scripts:", error);
         }
@@ -398,7 +401,7 @@
     }
 
     #gaming777-game {
-        border: 1px solid #3584e4 !important;
+        border: 1px solid #424346 !important;
         width: 100% !important;
         height: 100% !important;
     }

@@ -259,7 +259,7 @@
     }
 
     #tomhorn-game {
-        border: 1px solid #ff6b35 !important;
+        border: 1px solid #424346 !important;
         width: 100% !important;
         height: 100% !important;
     }
