@@ -26,6 +26,7 @@ export {default as ScreenGames} from "./lib/modals/ScreenGames.svelte";
 export {default as ScreenGamesTvBet} from "./lib/modals/ScreenGamesTvBet.svelte";
 export {default as ScreenGamesTvBetFastSport} from "./lib/modals/ScreenGamesTvBetFastSport.svelte";
 export {default as ScreenGamesTomHorn} from "./lib/modals/ScreenGamesTomHorn.svelte";
+export {default as ScreenGames777Gaming} from "./lib/modals/ScreenGames777Gaming.svelte";
 export {default as ProviderList} from "./lib/lists/ProviderList.svelte";
 export {default as ProvidersPage} from "./lib/pages/ProvidersPage.svelte";
 export {default as Footer} from "./lib/Footer.svelte";
