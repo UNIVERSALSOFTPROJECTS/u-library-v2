@@ -317,9 +317,7 @@
         // Cargar los scripts de 777Gaming
         try {
             await load777GamingScripts();
-            if (open) {
-                init777GamingGame();
-            }
+            
         } catch (error) {
             console.error("Error loading 777Gaming scripts:", error);
         }

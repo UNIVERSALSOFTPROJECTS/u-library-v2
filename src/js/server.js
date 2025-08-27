@@ -89,7 +89,6 @@ const ServerConnection = (() => {
 
             let payload = { username, password, org: conf.org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
-            console.log("headers", headers);
             return axios.post(url, payload, { headers });
         },
         register: (username, name, country, phone, email, password, date, operatorId, smscode, usertype, platform, currency, doctype = "", document = "") => {
