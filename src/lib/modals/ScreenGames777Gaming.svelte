@@ -316,8 +316,10 @@
         window.addEventListener('message', receiveMessage);        
         // Cargar los scripts de 777Gaming
         try {
-            await load777GamingScripts();
-            
+            // await load777GamingScripts();
+            // if (open) {
+            //     init777GamingGame();
+            // }
         } catch (error) {
             console.error("Error loading 777Gaming scripts:", error);
         }
@@ -342,6 +344,7 @@
     $: statusModal(open);
     // @ts-ignore
     $: if (open && window.NGT && gaming777Container) {
+        console.log("Reactive init777GamingGame call ----------------------");
         init777GamingGame();
     }
 </script>
