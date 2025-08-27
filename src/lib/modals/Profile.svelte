@@ -31,7 +31,7 @@
     let id_ca  = configProfile.id_ca;
     let chatLiveUrl = configProfile.chatLiveUrl || "";
     let isLockedWithdrawal = false;//falta ocualtar o mostrar le anuncion dependiendo si tien idbacan o idca
-    let viewActiveWithdrawal = false;
+    let viewActiveWithdrawal = true;
     const openSection = (section) => { profileView = section; }
 
     const getMyAccount = async()  =>{
@@ -97,9 +97,8 @@
             <DropdownBonus bind:bonusView bind:activedBonus bind:currency={user.currency} {t}/>
 
             <div class="profile__transaction">
-                {#if viewActiveWithdrawal}
-                    <button class="btn withdrawal {isLockedWithdrawal?'locked':''}"  on:click={onOpenWithdrawal} disabled={isLockedWithdrawal}>{t("profile.withdrawal")}</button>
-                {/if}
+                <button class="btn withdrawal {isLockedWithdrawal?'locked':''}"  on:click={onOpenWithdrawal} disabled={viewActiveWithdrawal}>{t("profile.withdrawal")}</button>
+
                 <button class="btn recharge" on:click={onOpenDeposit}>{t("profile.recharge")}</button>
             </div>
             {#if isLockedWithdrawal}
