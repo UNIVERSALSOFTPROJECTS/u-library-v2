@@ -130,7 +130,7 @@
         </div>
         {#if bonus.length != 0}
         <div class="accordion {activePanel === 'panel4' ? 'active' : ''}">
-            <button class="accordion__select" on:click={() => toggleAccordion('panel4')}>{t("footer.promotions")}</button>
+            <button class="accordion__select" on:click={() => toggleAccordion('panel4')}>{t("footer.bonus")}</button>
             <div class="accordion__body">
                 {#each bonus as bono}
                 <!-- <a href="{routePDF}/bonus_horses.pdf" target="_blank">{bono.name}</a> -->
