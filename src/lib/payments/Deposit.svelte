@@ -15,6 +15,7 @@
 
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
     let loadDeposit = false;
+    let loadRecharge = false;
     let iframeGateway;
     let paySelected;
     let payMethods; 
@@ -144,12 +145,19 @@
             bankDeposit.targetBankId = paySelected.id;
         }
         if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) return onError("Todos los campos son obligatorios"); 
-            bankDeposit.originBank = paySelected.id;
-            bankDeposit.amount = amountDeposit;
+        bankDeposit.originBank = paySelected.id;
+        bankDeposit.amount = amountDeposit;
+        try {
+            loadRecharge = true;
             let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
             if (data.msg === "DEPOSITO_OK") onOk(t("deposit.successDeposit"));
             else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
             else onError(t('msg.contactSupport'));
+        } catch (error) {
+            console.log(error);
+        } finally {
+            loadRecharge = false;
+        }
     }
 
     const openVirtualKeyboard = () => {
@@ -271,7 +279,13 @@
                 {#if isRequiredVoucher}
                     <b>NOTA: ESPERAR DE 2 A 5 MINUTOS PARA VER REFLEJADO LA RECARGA DE SALDO EN TU CUENTA</b>
                 {/if}
-                <button class="btn deposit" on:click={validateDepositBank}>{t("profile.recharge")}</button>
+                <button class="btn deposit" disabled={loadRecharge} on:click={validateDepositBank}>
+                    {#if loadRecharge}
+                        <div class="loading"><p /><p /><p /></div>
+                    {:else}
+                        {t("profile.recharge")}
+                    {/if}
+                </button>
             {/if}
         {:else}
             <b>{t('deposit.choosePayMethod')}:</b>

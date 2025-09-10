@@ -91,6 +91,7 @@ export default {
     "categoryGame.lottery": "LOTERIA",
     "categoryGame.all": "TODOS",
     //---------------FOOTER-----------------------------
+    "footer.bonus": "Bonos",
     "footer.s_p": "Seguridad y privacidad",
     "footer.t_c": "Términos y condiciones",
     "footer.p_p": "Políticas de privacidad",
@@ -475,6 +476,7 @@ export default {
   "categoryGame.lottery": "LOTERIE",
   "categoryGame.all": "TOUS",
     //---------------FOOTER-----------------------------
+    "footer.bonus": "Bonos",
      "footer.s_p": "Sécurité et confidentialité",
   "footer.t_c": "Conditions générales",
   "footer.p_p": "Politique de confidentialité",
@@ -805,6 +807,7 @@ export default {
     "currency.clp": "Peso chileno",
     "currency.cop": "Peso colombiano",
     //---------------FOOTER-----------------------------
+     "footer.bonus": "Bônus",
     "footer.s_p": "Segurança e privacidade",
     "footer.t_c": "Termos e Condições",
     "footer.p_p": "Políticas de privacidade",
@@ -1234,6 +1237,7 @@ export default {
     "categoryGame.lottery": "LOTTERY",
     "categoryGame.all": "ALL",
     //---------------FOOTER-----------------------------
+      "footer.bonus": "Bonus",
     "footer.s_p": "Security and privacy",
     "footer.t_c": "Terms and conditions",
     "footer.p_p": "Privacy policies",
