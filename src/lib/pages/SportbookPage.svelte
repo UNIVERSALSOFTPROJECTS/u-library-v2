@@ -163,7 +163,7 @@
     try {
       if (userState == "loggedIn"){
         url = ut.getGameURL(GAMEAPI_URL, games.first, options.gameToken)
-        const data = await backend.game.getURL(url);
+        const data = await backend.game.getURL(url+"&r=url");
         url = data.url
       // }else if (CLIENT_CODE == 'BPEN'){
       //   url = baseUrlWin365;
