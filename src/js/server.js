@@ -2,6 +2,8 @@ import axios from "axios"
 import utils from './util'
 
 let conf;
+console.log("LIBRARYYYY",conf);
+
 if (!conf) {
     conf = JSON.parse(localStorage.getItem("conf"));
 }
