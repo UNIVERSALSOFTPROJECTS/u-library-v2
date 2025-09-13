@@ -2,6 +2,9 @@ import axios from "axios"
 import utils from './util'
 
 let conf;
+if (!conf) {
+    conf = JSON.parse(localStorage.getItem("conf"));
+}
 let headers = {};
 
 
@@ -11,7 +14,7 @@ const ServerConnection = (() => {
         conf = config;
         headers = {
             "Content-Type": "application/json;charset=UTF-8", 
-            "clientAuth": conf.CLIENT_AUTH || localStorage.getItem("CLIENT_AUTH"), "client": conf.CLIENT_CODE || localStorage.getItem("CLIENT_CODE"), ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
+            "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "*",
             "Access-Control-Allow-Headers": "*",
@@ -86,8 +89,7 @@ const ServerConnection = (() => {
         },
         login: (username, password, userType,turnstileToken = null) => {
             let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login":"https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login";
-            let org = conf.org || localStorage.getItem("org");
-            let payload = { username, password, org , userType }
+            let payload = { username, password, org:conf.org , userType }
             headers['cf-turnstile-response'] = turnstileToken;
             return axios.post(url, payload, { headers });
         },
