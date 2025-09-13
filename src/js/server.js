@@ -17,7 +17,7 @@ if (mainDomain === "universalrace.net") {
 const ServerConnection = (() => {
 
     const setConfig = (config) => {
-        conf = config;
+        conf = config || JSON.parse(localStorage.getItem("conf"));
         headers = {
             "Content-Type": "application/json;charset=UTF-8", 
             "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
