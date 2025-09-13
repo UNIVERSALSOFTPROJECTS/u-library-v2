@@ -2,12 +2,16 @@ import axios from "axios"
 import utils from './util'
 
 let conf;
-
-
-if (!conf) {
-    conf = JSON.parse(localStorage.getItem("conf"));
-}
 let headers = {};
+
+
+const hostname = window.location.hostname; 
+const parts = hostname.split(".");
+const mainDomain = parts.slice(-2).join(".");
+
+if (mainDomain === "universalrace.net") {
+   conf = JSON.parse(localStorage.getItem("conf"));
+} 
 
 
 const ServerConnection = (() => {
