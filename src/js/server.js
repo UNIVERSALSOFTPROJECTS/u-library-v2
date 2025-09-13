@@ -2,7 +2,7 @@ import axios from "axios"
 import utils from './util'
 
 let conf;
-console.log("LIBRARYYYY",conf);
+
 
 if (!conf) {
     conf = JSON.parse(localStorage.getItem("conf"));
@@ -90,6 +90,7 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         login: (username, password, userType,turnstileToken = null) => {
+            console.log("LIBRARYYYY",conf);
             let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login":"https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login";
             let payload = { username, password, org:conf.org , userType }
             headers['cf-turnstile-response'] = turnstileToken;
