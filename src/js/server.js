@@ -5,19 +5,10 @@ let conf;
 let headers = {};
 
 
-const hostname = window.location.hostname; 
-const parts = hostname.split(".");
-const mainDomain = parts.slice(-2).join(".");
-
-if (mainDomain === "universalrace.net") {
-   conf = JSON.parse(localStorage.getItem("conf"));
-} 
-
-
 const ServerConnection = (() => {
 
     const setConfig = (config) => {
-        conf = config || JSON.parse(localStorage.getItem("conf"));
+        conf = config;
         headers = {
             "Content-Type": "application/json;charset=UTF-8", 
             "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
@@ -94,9 +85,8 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         login: (username, password, userType,turnstileToken = null) => {
-            console.log("LIBRARYYYY",conf);
             let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login":"https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login";
-            let payload = { username, password, org:conf.org , userType }
+            let payload = { username, password, org: conf.org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
             return axios.post(url, payload, { headers });
         },
