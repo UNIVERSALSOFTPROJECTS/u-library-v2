@@ -163,6 +163,7 @@ const ServerConnection = (() => {
             return response.data;
         },
         getURL: async (url) => {
+            console.log("sending to api ",url,headers);
             const response = await axios.get(url, { headers });
             return response.data;
         },
