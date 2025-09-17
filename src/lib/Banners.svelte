@@ -29,9 +29,21 @@
             const response = await axios.get(urlJSON);
             bannersJSON = response.data;
             let detectPage = bannersJSON.filter((e) => e.page == platform)[0];
-            allBanners = detectPage.banners.filter((d) => d.country == subdomain)[0].banners;
-                filteredBanners = allBanners.filter( o => {
-                const dateFrom = parseDate(o.dateFrom);   
+            
+            // Obtener el país desde localStorage si existe, sino usar subdomain
+            let targetCountry = subdomain;
+            const storedConf = localStorage.getItem("conf");
+            if (storedConf) {
+                const conf = JSON.parse(storedConf);
+                if (conf.country) {
+                    targetCountry = conf.country.toLowerCase();
+                }
+            }
+            
+            allBanners = detectPage.banners.filter((d) => d.country == targetCountry)[0].banners;
+                
+            filteredBanners = allBanners.filter( o => {
+                const dateFrom = parseDate(o.dateFrom);
                 const dateUntil = parseDate(o.dateUntil);
                 return (dateFrom <= today && dateUntil >= today || dateFrom == "" && dateUntil == "");
             });
@@ -44,7 +56,7 @@
             bannersLoading = false;
             register();
         }
-    }     
+    }
 
     getBanners();  
 </script>
