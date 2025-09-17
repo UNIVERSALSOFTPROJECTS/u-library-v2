@@ -86,7 +86,6 @@ const ServerConnection = (() => {
         },
         login: (username, password, userType,turnstileToken = null) => {
             let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login":"https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login";
-
             let payload = { username, password, org: conf.org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
             return axios.post(url, payload, { headers });
@@ -163,7 +162,8 @@ const ServerConnection = (() => {
             return response.data;
         },
         getURL: async (url) => {
-            const response = await axios.get(url);
+            console.log("sending to api ",url,headers);
+            const response = await axios.get(url, { headers });
             return response.data;
         },
         getGameList: (category, section, page=1, currency='USD', xpage=20)=>{
