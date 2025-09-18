@@ -155,7 +155,7 @@ const ServerConnection = (() => {
             let queryUrl = game.provider === "pg" ? "&r=url" : "";
             let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}${queryUrl}&b=${game.brand}&m=${mode}&sessionid=${usertoken}${isMultipleView}`;
             let response = await axios.get(url, { headers });
-            return response;
+            return response.data;
         },
         getURLDemo: async (url) => {
             const response = await axios.get(url, { headers });
