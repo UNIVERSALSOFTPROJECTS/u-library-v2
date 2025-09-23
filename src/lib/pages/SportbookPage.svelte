@@ -16,7 +16,7 @@
   export let lang = 'es';
   export let CLIENT_CODE;
   export let clientCode;
-  // console.log(user,"sportbook"); esto traer error por que espera el valor de balance
+  console.log(user,"sportbook");
   
 
   let sportbookGameUrl = '';
@@ -149,8 +149,6 @@
   };
 
   async function openSport() {
-    console.log("me ejcujte en open sport???");
-    
     if (options.gameid == edg_id)openDigtain();
     else if (options.gameid == wt_id) openWintech();
     else if (options.gameid == nvb_id) openNovusbet();
@@ -212,8 +210,6 @@ function RESELLER (params) {
           }
       url = data.url;      
     } else  {
- 
-      
       if ( CLIENT_CODE == 'BUSD') {
         url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3; 
         }
@@ -243,7 +239,7 @@ function RESELLER (params) {
 
 
       }
-      console.log("url derpotivas",url);
+      console.log("url",url);
       
     }
     console.log("Sportbook", url);
@@ -296,10 +292,8 @@ function RESELLER (params) {
   };
   
   onDestroy(async () => {
-    if (user) {
-      let {data} = await backend.users.getBalance(user.agregatorToken);
-      user.balance = data.balance;
-    }
+    let {data} = await backend.users.getBalance(user.agregatorToken);
+    user.balance = data.balance;
     document.body.style.overflow="scroll";
   });
 </script>
