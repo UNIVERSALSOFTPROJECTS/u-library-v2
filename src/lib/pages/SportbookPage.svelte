@@ -292,8 +292,10 @@ function RESELLER (params) {
   };
   
   onDestroy(async () => {
-    let {data} = await backend.users.getBalance(user.agregatorToken);
-    user.balance = data.balance;
+    if (user) {
+      let {data} = await backend.users.getBalance(user.agregatorToken);
+      user.balance = data.balance;
+    }
     document.body.style.overflow="scroll";
   });
 </script>
