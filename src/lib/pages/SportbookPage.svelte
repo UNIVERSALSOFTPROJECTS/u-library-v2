@@ -12,7 +12,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
-  export let GAME_JAVA_API_URL = "";
+  export let GAME_JAVA_API_URL;
   export let lang = 'es';
   export let CLIENT_CODE;
   export let clientCode;
@@ -149,6 +149,8 @@
   };
 
   async function openSport() {
+    console.log("me ejcujte en open sport???");
+    
     if (options.gameid == edg_id)openDigtain();
     else if (options.gameid == wt_id) openWintech();
     else if (options.gameid == nvb_id) openNovusbet();
@@ -210,6 +212,8 @@ function RESELLER (params) {
           }
       url = data.url;      
     } else  {
+ 
+      
       if ( CLIENT_CODE == 'BUSD') {
         url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3; 
         }
@@ -239,7 +243,7 @@ function RESELLER (params) {
 
 
       }
-      console.log("url",url);
+      console.log("url derpotivas",url);
       
     }
     console.log("Sportbook", url);
