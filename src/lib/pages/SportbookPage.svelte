@@ -16,7 +16,7 @@
   export let lang = 'es';
   export let CLIENT_CODE;
   export let clientCode;
-  console.log(user,"sportbook");
+  // console.log(user,"sportbook"); esto traer error por que espera el valor de balance
   
 
   let sportbookGameUrl = '';
