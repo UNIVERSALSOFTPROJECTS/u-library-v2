@@ -12,7 +12,7 @@
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
-  export let GAME_JAVA_API_URL;
+  export let GAME_JAVA_API_URL = "";
   export let lang = 'es';
   export let CLIENT_CODE;
   export let clientCode;
