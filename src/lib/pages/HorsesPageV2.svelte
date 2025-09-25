@@ -3,6 +3,8 @@
     export let theme;
     export let idiom;
 
+    console.log("user horses",user);
+    
     let loadIframe = true;
     let url = `https://universalrace.net/new/cliente_api/apisoft_home.php?tk=${user.token}&ba=${user.balance}&lang=${idiom}&theme=${theme}`;
 
