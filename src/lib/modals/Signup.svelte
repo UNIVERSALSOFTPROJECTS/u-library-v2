@@ -123,7 +123,7 @@
         }
         if(!term_conditions) return onError(t("msg.acceptTandC"));
         if (!codeAgent) { 
-            if (typeSignup === "mixed") {//just if not have codeagent       
+            if (typeSignup === "mixed" || typeSignup == "web") {//just if not have codeagent       
                 codeAgent = currencies[0].agent;
                 currency = currencies[0].id;
             }else{
