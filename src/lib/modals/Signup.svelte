@@ -223,6 +223,8 @@
                 {/if}
             {/if}
         </div>
+    {:else if typeSignup === "web"}
+        <div></div>
     {/if}
     <div class="signup__phone">
         <DropdowPrefix {countries} bind:country/>
