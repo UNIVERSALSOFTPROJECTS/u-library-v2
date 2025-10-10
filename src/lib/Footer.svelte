@@ -11,6 +11,7 @@
     export let t;
     
     let country = configFooter.country;
+    let isJustDomain = configFooter.isJustDomain || false;
     let isChat = configFooter.isChat;
     let categoryGames = configFooter.categoryGames;
     let createdIn = configFooter.createdIn;
@@ -24,7 +25,7 @@
     let linksChats = configFooter.linksChats;
     let activePanel = null;
     let route = detectIdiomPage(t("idiom"));
-    let routePDF = assetsPDF(platform,route);
+    let routePDF = assetsPDF(platform,isJustDomain?country:route);
    
     const currentYear = new Date().getFullYear();
     const slots = ["slot", "slotlive", "crash", "scratch"];
