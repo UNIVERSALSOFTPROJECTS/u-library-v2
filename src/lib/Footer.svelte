@@ -11,6 +11,8 @@
     export let t;
     
     let country = configFooter.country;
+    console.log("countrycountrycountry",country);
+    
     let isJustDomain = configFooter.isJustDomain || false;
     let isChat = configFooter.isChat;
     let categoryGames = configFooter.categoryGames;
