@@ -832,7 +832,7 @@ export default {
     "msg.incorrectUserPass": "Usuário ou senha incorretos",
     "msg.contactSupport": "Ocorreu um erro, entre em contato com o suporte",
     "msg.sendSms": "SMS enviado!, verifique su celular",
-    "msg.sendEmail": "Código enviado!, verifique su correo electrónico XD",
+    "msg.sendEmail": "Código enviado!, verifique su correo electrónico",
     "msg.incorrectSms": "O código SMS está incorreto",
     "msg.incorrectCodeAgent": "O código do agente está incorreto",
     "msg.phoneExist": "O telefone já está cadastrado",

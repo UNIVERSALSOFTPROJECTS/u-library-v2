@@ -48,7 +48,7 @@
     let document;
     let term_conditions;
     let currency;
-    let channel = "sms";
+    let channel = "email";
     let route = detectIdiomPage(t("idiom"));
     let routePDF = assetsPDF(platform,route);
 
