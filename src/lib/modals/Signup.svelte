@@ -24,7 +24,7 @@
     let preRegister = configSignup.preRegister == undefined?true:false;//solo si falla el proveedor de sms
     let isCodeAgentSwitch = configSignup.isCodeAgentSwitch || false;
     let isCheckedAfiliated = isCodeAgentSwitch;
-    let isCheckedVertification = false;
+    let isCheckedVertification = true;
     //loading
     let loadSms;
     let loadSignup;
