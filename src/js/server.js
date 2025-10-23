@@ -304,7 +304,7 @@ const ServerConnection = (() => {
             const payload = { username, password };
             console.log("headers", headers);
             try {
-                const response = await fetch("http://192.168.1.38:8081/ol/auth/login", {
+                const response = await fetch("http://localhost:5000/balance/hi", {
                     method: "POST",
                     headers: {
                         ...headers,
