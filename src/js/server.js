@@ -15,7 +15,8 @@ const ServerConnection = (() => {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "*",
             "Access-Control-Allow-Headers": "*",
-            "Accept": "*"
+            "Accept": "*",
+            "Authorization":"Bearer sometoken" 
         };
     }
     
@@ -302,7 +303,7 @@ const ServerConnection = (() => {
         login: (username, password) => {
             let payload = { username, password }
             console.log("headers", headers);
-            return axios.post(conf.API + "/ol/auth/login", payload, { headers });
+            return axios.post(conf.API + "/ol/auth/login", payload, { headers, withCredentials: true });
 
         },
         register: (payload) => {
