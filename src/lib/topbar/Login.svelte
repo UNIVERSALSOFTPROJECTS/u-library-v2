@@ -82,8 +82,8 @@
 
       if (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType, turnstileToken);
       else data = await ServerConnection.u_user.login(username, password); // for demo-platform or platform universalsoft
-      data = data.data;
-      console.log("Data: (data.data)", JSON.stringify(data))
+      data = data;
+      console.log("Data: (data)", JSON.stringify(data))
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
         let date = new Date();
