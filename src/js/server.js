@@ -16,7 +16,6 @@ const ServerConnection = (() => {
             "Access-Control-Allow-Methods": "*",
             "Access-Control-Allow-Headers": "*",
             "Accept": "*",
-            "Authorization":"Bearer sometoken" 
         };
     }
     
@@ -304,14 +303,13 @@ const ServerConnection = (() => {
             const payload = { username, password };
             console.log("headers", headers);
             try {
-                const response = await fetch("http://192.168.1.38:8081/ol/auth/login", {
+                const response = await fetch(conf.API + "/ol/auth/login", {
                     method: "POST",
                     headers: {
                         ...headers,
                         "Content-Type": "application/json;charset=UTF-8",
                     },
                     body: JSON.stringify(payload),
-                    credentials: "include", // equivale a withCredentials: true
                 });
 
                 if (!response.ok) {
