@@ -302,7 +302,7 @@ const ServerConnection = (() => {
         login: (username, password) => {
             let payload = { username, password }
             console.log("headers", headers);
-            return axios.post(conf.API + "/ol/auth/login", payload, { headers });
+            return axios.post(conf.API + "/ol/auth/login", payload/*, { headers }*/);
 
         },
         register: (payload) => {
