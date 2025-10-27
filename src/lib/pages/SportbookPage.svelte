@@ -56,6 +56,14 @@
   const guestURLbetw3BTCOLive = "https://sports2.jcasino.live/#/?target=win365-86224-integration&token=123456789&view=live"
   const guestURLbetw3XLIV = "https://sports2.jcasino.live/?target=86224&name=xlive365#/?target=xlive365-86224-integration"
   const guestURLbetw3XLIVLive = "https://sports2.jcasino.live/?target=86224&name=xlive365#/?target=xlive365-86224-integration&view=live"
+  const guestURLbetw3BTAR = "https://sports2.jcasino.live/?target=86224&name=win365ar#/?target=win365ar-86224-integration"
+  const guestURLbetw3BTARLive = "https://sports2.jcasino.live/?target=86224&name=win365ar#/?target=win365ar-86224-integration&view=live"
+  const guestURLbetw3BPEC = "https://sports2.jcasino.live/?target=86224&name=win365ec#/?target=win365ec-86224-integration"
+  const guestURLbetw3BPECLive = "https://sports2.jcasino.live/?target=86224&name=win365ec#/?target=win365ec-86224-integration&view=live"
+  const guestURLbetw3GBEC = "https://sports2.jcasino.live/?target=86224&name=ganabet365ec#/?target=ganabet365ec-86224-integration"
+  const guestURLbetw3GBECLive ="https://sports2.jcasino.live/?target=86224&name=ganabet365ec#/?target=ganabet365ec-86224-integration&view=live"
+
+
 
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
@@ -237,6 +245,15 @@ function RESELLER (params) {
         }
         else if (CLIENT_CODE == "XLIV") {
           url = active_view == "sportbooklive" ? guestURLbetw3XLIVLive : guestURLbetw3XLIV ;
+        }
+        else if (CLIENT_CODE == "BTAR") {
+          url = active_view == "sportbooklive" ? guestURLbetw3BTARLive : guestURLbetw3BTAR ;
+        }
+        else if (CLIENT_CODE == "BPEC") {
+          url = active_view == "sportbooklive" ? guestURLbetw3BPECLive : guestURLbetw3BPEC ;
+        }
+        else if (CLIENT_CODE == "GBEC") {
+          url = active_view == "sportbooklive" ? guestURLbetw3GBECLive : guestURLbetw3GBEC ;
         }
 
       else{
