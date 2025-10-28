@@ -299,35 +299,36 @@ const ServerConnection = (() => {
             }
             return axios.post(url, payload_, { headers });
         },
-        login: (username, password) => {
-            let payload = { username, password }
-            console.log("headers", headers);
-            return axios.post(conf.API + "/api/casino/login", payload, { headers });
-        },
-        // login: async (username, password) => {
-        //     const payload = { username, password };
-        //     try {
-        //         const response = await fetch(conf.API + "/ol/auth/login", {
-        //             method: "POST",
-        //             headers: {
-        //                 ...headers,
-        //                 "Content-Type": "application/json;charset=UTF-8",
-        //             },
-        //             body: JSON.stringify(payload),
-        //         });
-        //         if (!response.ok) {
-        //             const errorText = await response.text();
-        //             throw new Error(`HTTP ${response.status}: ${errorText}`);
-        //         }
+        // login: (username, password) => {
+        //     let payload = { username, password }
+        //     console.log("headers", headers);
+        //     return axios.post(conf.API + "/api/casino/login", payload, { headers });
 
-        //         const data = await response.json();
-        //         return data;
-
-        //     } catch (error) {
-        //         console.error("❌ Error en login:", error);
-        //         throw error;
-        //     }
         // },
+        login: async (username, password) => {
+            const payload = { username, password };
+            try {
+                const response = await fetch(conf.API + "/ol/auth/login", {
+                    method: "POST",
+                    headers: {
+                        ...headers,
+                        "Content-Type": "application/json;charset=UTF-8",
+                    },
+                    body: JSON.stringify(payload),
+                });
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+
+                const data = await response.json();
+                return data;
+
+            } catch (error) {
+                console.error("❌ Error en login:", error);
+                throw error;
+            }
+        },
         register: (payload) => {
             if (!payload.currency) throw "CURRENCY_MANDATORY";
             if (!conf.domain) throw "DOMAIN_MANDATORY";
