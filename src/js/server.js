@@ -150,8 +150,7 @@ const ServerConnection = (() => {
           return await axios.get(url, { headers });
         },
         getGameURL: async (gameapi_url, game, usertoken, modeGame, type_view = "") => {
-            let mode = game.provider === "gr" ? modeGame : game.mode;
-            console.log("mode",mode,"modeGame",modeGame);
+            let mode = game.provider === "gr" || game.provider === "ptp" ? modeGame : game.mode;
             let isMultipleView = type_view === "multiple" ? "&game_multiple=true" : "";
             let queryUrl = game.provider === "pg" ? "&r=url" : "";
             let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}${queryUrl}&b=${game.brand}&m=${mode}&sessionid=${usertoken}${isMultipleView}`;
