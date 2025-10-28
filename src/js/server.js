@@ -151,6 +151,7 @@ const ServerConnection = (() => {
         },
         getGameURL: async (gameapi_url, game, usertoken, modeGame, type_view = "") => {
             let mode = game.provider === "gr" ? modeGame : game.mode;
+            console.log("mode",mode,"modeGame",modeGame);
             let isMultipleView = type_view === "multiple" ? "&game_multiple=true" : "";
             let queryUrl = game.provider === "pg" ? "&r=url" : "";
             let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}${queryUrl}&b=${game.brand}&m=${mode}&sessionid=${usertoken}${isMultipleView}`;
@@ -299,14 +300,9 @@ const ServerConnection = (() => {
             }
             return axios.post(url, payload_, { headers });
         },
-        // login: (username, password) => {
-        //     let payload = { username, password }
-        //     console.log("headers", headers);
-        //     return axios.post(conf.API + "/api/casino/login", payload, { headers });
-
-        // },
         login: async (username, password) => {
             const payload = { username, password };
+            console.log("headers", headers);
             try {
                 const response = await fetch(conf.API + "/ol/auth/login", {
                     method: "POST",
@@ -316,6 +312,7 @@ const ServerConnection = (() => {
                     },
                     body: JSON.stringify(payload),
                 });
+
                 if (!response.ok) {
                     const errorText = await response.text();
                     throw new Error(`HTTP ${response.status}: ${errorText}`);
@@ -329,6 +326,12 @@ const ServerConnection = (() => {
                 throw error;
             }
         },
+        // login: (username, password) => {
+        //     let payload = { username, password }
+        //     console.log("headers", headers);
+        //     return axios.post(/*conf.API +*/ "http://192.168.1.38:8081/ol/auth/login", payload, { headers, withCredentials: true });
+
+        // },
         register: (payload) => {
             if (!payload.currency) throw "CURRENCY_MANDATORY";
             if (!conf.domain) throw "DOMAIN_MANDATORY";
