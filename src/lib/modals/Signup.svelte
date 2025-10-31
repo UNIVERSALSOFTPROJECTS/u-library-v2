@@ -82,7 +82,7 @@
         try {
             loadSms = true;
             let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,channel);
-            preRegister ? counterResendSms() : smscode = data.smscode;
+            preRegister ? counterResendSms() : smscode = data.code_verify;
         } catch (error) {
             if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
             else if(error.response.data.message == 'PHONE_FORMAT_FAILED') error = t("msg.phoneFormat");
