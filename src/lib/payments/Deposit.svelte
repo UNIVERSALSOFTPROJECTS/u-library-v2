@@ -120,7 +120,7 @@
     const openPayMethod = (typePayment) => {
         paySelected = typePayment;
         //solo para peru
-        if (paySelected.banco === "YAPE" || paySelected.banco === "PLIN") {
+        if (paySelected.banco === "YAPE" || paySelected.banco === "PLIN" || paySelected.banco === "DE UNA") {
             typeTranference = 'wallet';
         }else{
             typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
