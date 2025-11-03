@@ -205,7 +205,7 @@
     <button
       type="button"
       class="btn login"
-      disabled={true}
+      disabled={loadLogin}
       on:click={loginClick}
     >
       {#if loadLogin}
