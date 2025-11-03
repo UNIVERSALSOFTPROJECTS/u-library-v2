@@ -168,7 +168,7 @@
     loading="eager"
   />
   <div></div>
-  <form class="login__form" on:submit={avoidSubmit}>
+  <form class="login__form" on:submit|preventDefault>
     {#if isOauth}
       <div id="g_id_signin"></div>
     {/if}
