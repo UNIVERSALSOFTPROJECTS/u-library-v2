@@ -91,6 +91,7 @@
       }
       //Formatear la propiedad "bonus" con el updatebalance
       //if (userGateway == "neco") await getUpdateBalance(data);
+      localStorage.setItem("session", JSON.stringify(data));
       onOk(data);
     } catch (error) {
       console.log("error: ", error);
@@ -158,7 +159,7 @@
   };
 </script>
 
-<div class="modal-body" on:submit={avoidSubmit}>
+<div class="modal-body">
   <div class="login__title">{t("login.title")}</div>
   <img
     class="login__logo"
@@ -167,7 +168,7 @@
     loading="eager"
   />
   <div></div>
-  <form class="login__form">
+  <form class="login__form" on:submit={avoidSubmit}>
     {#if isOauth}
       <div id="g_id_signin"></div>
     {/if}
