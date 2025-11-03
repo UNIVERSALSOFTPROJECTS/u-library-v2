@@ -200,7 +200,7 @@
       ></button>
     </div>
     {#if !isLocalhost}
-    <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:callback={(e) => handleVerify(e.detail)} />
+    <!-- <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:callback={(e) => handleVerify(e.detail)} /> -->
     {/if}
     <button
       type="button"
