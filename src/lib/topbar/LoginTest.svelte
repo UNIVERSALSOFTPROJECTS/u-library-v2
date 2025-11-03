@@ -76,8 +76,9 @@
       if (location.href.includes("terminal")) {
         userType = 2;
       }
-      if (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType);
-      else data = await ServerConnection.u_user.login(username, password);
+      // (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType);
+      data = await ServerConnection.u_user.login(username, password);
+      console.log("dataaa", data)
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
