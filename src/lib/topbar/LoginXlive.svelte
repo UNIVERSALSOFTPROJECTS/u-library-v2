@@ -70,7 +70,7 @@
   async function loginClick() {
     if (!username || !password) return onError(t("msg.allObligatory"));
     try {
-      loadLogin = true;
+      loadLogin = false;
       let data;
       let userType = 1;
       if (location.href.includes("terminal")) {
@@ -199,9 +199,9 @@
         on:click={togglePasswordHide}
       ></button>
     </div>
-    {#if !isLocalhost}
+    <!--{#if !isLocalhost}-->
     <!-- <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:callback={(e) => handleVerify(e.detail)} /> -->
-    {/if}
+    <!-- {/if}-->
     <button
       type="button"
       class="btn login"
