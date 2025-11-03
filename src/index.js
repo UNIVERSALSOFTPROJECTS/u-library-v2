@@ -2,7 +2,7 @@
 export {default as Login} from "./lib/topbar/Login.svelte";
 export {default as HorsesPage} from "./lib/pages/HorsesPage.svelte";
 export {default as HorsesPageV2} from "./lib/pages/HorsesPageV2.svelte";
-export {default as LoginXLive} from "./lib/topbar/LoginXLive.svelte";
+export {default as LoginXlive} from "./lib/topbar/LoginXlive.svelte";
 export {default as Pagination} from "./lib/Pagination.svelte";
 export {default as LoginAutosaved} from "./lib/topbar/LoginAutosaved.svelte";
 export {default as Deposit} from "./lib/payments/Deposit.svelte";
