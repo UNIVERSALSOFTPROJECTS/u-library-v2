@@ -90,12 +90,9 @@
         data.playerId = data.id;
         delete data.claims;
       }
-      if(data.status == 1 || data.status == "OK"){
-        onOk(data);
-      }
       //Formatear la propiedad "bonus" con el updatebalance
       //if (userGateway == "neco") await getUpdateBalance(data);
-      
+      onOk(data);
     } catch (error) {
       console.log("error: ", error);
       if (
@@ -104,7 +101,6 @@
       )
         error = t("msg.pageMaintenance");
       else if (
-        error.message == "LOGIN_FAILED" ||
         error.response.data.message == "NECO_LOGIN_FAILED" ||
         error.response.data.message == "LOGIN_ERROR" || 
         error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
