@@ -90,13 +90,13 @@
         delete data.claims;
       }
       if(data.status == 0){
-        onError(data)
-      }else {
-        onOk(data);
+        onError(data.message ==  t("msg.contactSupport"));
+        loadLogin = false;
+        return;
       }
       //Formatear la propiedad "bonus" con el updatebalance
       //if (userGateway == "neco") await getUpdateBalance(data);
-      
+      onOk(data);
     } catch (error) {
       console.log("error: ", error);
       if (
