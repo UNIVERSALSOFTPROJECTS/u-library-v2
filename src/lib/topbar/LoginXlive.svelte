@@ -81,9 +81,6 @@
       data = await ServerConnection.u_user.login(username, password);
       console.log("dataaa", data)
       data = data.data;
-      if(data.status !== 1 || data.status !== "OK"){
-        throw Error("LOGIN_FAILED");
-      }
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
         let date = new Date();
@@ -93,9 +90,12 @@
         data.playerId = data.id;
         delete data.claims;
       }
+      if(data.status == 1 || data.status == "OK"){
+        onOk(data);
+      }
       //Formatear la propiedad "bonus" con el updatebalance
       //if (userGateway == "neco") await getUpdateBalance(data);
-      onOk(data);
+      
     } catch (error) {
       console.log("error: ", error);
       if (
