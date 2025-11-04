@@ -55,6 +55,7 @@
             client_id:
               "632683480398-i9lkrr218mhu4r3dbsq5eq5sai5g6tch.apps.googleusercontent.com",
             callback: handleSigninGoogleOAuth2,
+            auto_select: false,
           });
           window.google.accounts.id.renderButton(
             document.getElementById("g_id_signin"),
@@ -81,7 +82,7 @@
       console.log("dataaa", data)
       data = data.data;
       if(data.status !== 1 || data.status !== "OK"){
-        throw new Error("LOGIN_FAILED");
+        throw Error("LOGIN_FAILED");
       }
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
@@ -144,13 +145,15 @@
   };
 
   const handleSigninGoogleOAuth2 = async (event) => {
+    if(!event?.credential) return;
     try {
       notify.loading("identificando");
       userGmail = parseJwt(event.credential);
       console.log("USUARIO DE GMAIL: ", userGmail);
       username = userGmail.email;
       password = userGmail.sub;
-      loginClick();
+      
+      await loginClick();
     } catch (e) {
       let msg = "Error!";
       notify.error(msg);
