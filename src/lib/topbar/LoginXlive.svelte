@@ -82,9 +82,7 @@
       data = await ServerConnection.u_user.login(username, password);
       console.log("dataaa", data)
       data = data.data;
-      if (!data || String(data.status) !== "1" || data.code !== "OK") 
-      // Mostrar mensaje de error con tu traducción
-      return onError(t("msg.incorrectUserPass")+"Esto es un error");
+      if (!data || String(data.status) !== "1" || data.code !== "OK")return onError(t("msg.incorrectUserPass")+"Esto es un error");
     
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
