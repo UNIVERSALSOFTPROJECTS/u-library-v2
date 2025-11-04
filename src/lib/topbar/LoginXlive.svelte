@@ -82,11 +82,6 @@
       data = await ServerConnection.u_user.login(username, password);
       console.log("dataaa", data)
       data = data.data;
-      if (!data || data.status !== 1 || data.code !== "OK"){
-        sessionStorage.removeItem("user");
-        return onError(t("msg.incorrectUserPass")+"Esto es un error");
-      }
-    
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
         let date = new Date();
@@ -99,6 +94,7 @@
       //Formatear la propiedad "bonus" con el updatebalance
       //if (userGateway == "neco") await getUpdateBalance(data);
       onOk(data);
+      location.reload();
     } catch (error) {
       console.log("error: ", error);
       if (
@@ -147,7 +143,6 @@
   };
 
   const handleSigninGoogleOAuth2 = async (event) => {
-    if(!event?.credential) return;
     try {
       notify.loading("identificando");
       userGmail = parseJwt(event.credential);
@@ -155,7 +150,7 @@
       username = userGmail.email;
       password = userGmail.sub;
       
-      await loginClick();
+      loginClick();
     } catch (e) {
       let msg = "Error!";
       notify.error(msg);
