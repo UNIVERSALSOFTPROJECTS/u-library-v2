@@ -91,8 +91,6 @@
       }
       //Formatear la propiedad "bonus" con el updatebalance
       //if (userGateway == "neco") await getUpdateBalance(data);
-
-      localStorage.setItem("user", JSON.stringify(data));
       onOk(data);
     } catch (error) {
       console.log("error: ", error);
