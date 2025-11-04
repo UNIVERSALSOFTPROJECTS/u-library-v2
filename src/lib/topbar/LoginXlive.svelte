@@ -80,6 +80,9 @@
       data = await ServerConnection.u_user.login(username, password);
       console.log("dataaa", data)
       data = data.data;
+      if(data.status !== 1 || data.status !== "OK"){
+        throw new Error("LOGIN_FAILED");
+      }
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
         let date = new Date();
@@ -88,10 +91,6 @@
         data.initToken = data.claims.iat;
         data.playerId = data.id;
         delete data.claims;
-      }
-      if(data.data.status == 0){
-        loadLogin = false;
-        return;
       }
       //Formatear la propiedad "bonus" con el updatebalance
       //if (userGateway == "neco") await getUpdateBalance(data);
@@ -104,6 +103,7 @@
       )
         error = t("msg.pageMaintenance");
       else if (
+        error.message == "LOGIN_FAILED" ||
         error.response.data.message == "NECO_LOGIN_FAILED" ||
         error.response.data.message == "LOGIN_ERROR" || 
         error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
