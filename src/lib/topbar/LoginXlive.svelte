@@ -93,10 +93,8 @@
       }
       //Formatear la propiedad "bonus" con el updatebalance
       //if (userGateway == "neco") await getUpdateBalance(data);
-      if(data.status == 1 || data.status == "OK"){
-        onOk(data);
-        location.reload();
-      }
+      onOk(data);
+      
     } catch (error) {
       console.log("error: ", error);
       if (
