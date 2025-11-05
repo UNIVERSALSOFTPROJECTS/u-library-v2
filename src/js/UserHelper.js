@@ -22,7 +22,8 @@ const UserHelper = (() => {
     };
     const connectToLobbySocket = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
-        SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${user.serial}`, conf); //conecta al websocket.
+        const serial = user.serial || user.aggregator_token?.slice(0,13);
+        SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf); //conecta al websocket.
     };
     return {
         checkAndLoadUserLogged, connectToLobbySocket
