@@ -55,6 +55,7 @@
             client_id:
               "632683480398-i9lkrr218mhu4r3dbsq5eq5sai5g6tch.apps.googleusercontent.com",
             callback: handleSigninGoogleOAuth2,
+            auto_select: false,
           });
           window.google.accounts.id.renderButton(
             document.getElementById("g_id_signin"),
@@ -69,15 +70,17 @@
 
   async function loginClick() {
     if (!username || !password) return onError(t("msg.allObligatory"));
+
     try {
-      loadLogin = true;
+      loadLogin = false;
       let data;
       let userType = 1;
       if (location.href.includes("terminal")) {
         userType = 2;
       }
-      if (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType);
-      else data = await ServerConnection.u_user.login(username, password);
+      // (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType);
+      data = await ServerConnection.u_user.login(username, password);
+      console.log("dataaa", data)
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
@@ -89,8 +92,9 @@
         delete data.claims;
       }
       //Formatear la propiedad "bonus" con el updatebalance
-      if (userGateway == "neco") await getUpdateBalance(data);
+      //if (userGateway == "neco") await getUpdateBalance(data);
       onOk(data);
+      
     } catch (error) {
       console.log("error: ", error);
       if (
@@ -145,6 +149,7 @@
       console.log("USUARIO DE GMAIL: ", userGmail);
       username = userGmail.email;
       password = userGmail.sub;
+      
       loginClick();
     } catch (e) {
       let msg = "Error!";
@@ -157,7 +162,7 @@
   };
 </script>
 
-<div class="modal-body" on:submit={avoidSubmit}>
+<div class="modal-body">
   <div class="login__title">{t("login.title")}</div>
   <img
     class="login__logo"
@@ -166,7 +171,7 @@
     loading="eager"
   />
   <div></div>
-  <form class="login__form">
+  <form class="login__form" on:submit|preventDefault>
     {#if isOauth}
       <div id="g_id_signin"></div>
     {/if}
@@ -197,13 +202,13 @@
         on:click={togglePasswordHide}
       ></button>
     </div>
-    {#if !isLocalhost}
-    <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:callback={(e) => handleVerify(e.detail)} />
-    {/if}
+    <!--{#if !isLocalhost}-->
+    <!-- <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:callback={(e) => handleVerify(e.detail)} /> -->
+    <!-- {/if}-->
     <button
       type="button"
       class="btn login"
-      disabled={loadLogin || !isVerified}
+      disabled={loadLogin}
       on:click={loginClick}
     >
       {#if loadLogin}
