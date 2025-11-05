@@ -43,12 +43,17 @@
                 dateTo,
                 newFilter ? "TT" : type,
             );
-            return response.data;
+            if (!response.data) {
+                return [];
+            }else{
+                return response.data; 
+            }
         } catch (error) {
             if (error.response.errorCode == "OLD_TOKEN")
                 error = t("msg.duplicatedSession");
             else error = t("msg.contactSupport");
             onError(error);
+            return []; // aqui en caso de eror lo de asi
         } finally {
             loadMovements = false;
         }
