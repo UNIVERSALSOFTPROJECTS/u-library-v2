@@ -4,10 +4,9 @@ import ServerConnection from './server';
 const UserHelper = (() => {
     const checkAndLoadUserLogged = async (conf) => {
         let user = null;
-        const u = sessionStorage.getItem("user");
+        let u = sessionStorage.getItem("user");
         if (u) {
-            let user_ = JSON.parse(u);
-            user = user_;
+            user = JSON.parse(u);
             let data;
             if (conf.CLIENT_CODE == 'JU02') {
                 data = await ServerConnection.u_user.getBalance(user.agregatorToken);
@@ -15,9 +14,18 @@ const UserHelper = (() => {
             }
             else {
                 data = await ServerConnection.users.getBalance(user.agregatorToken);
-                
+   
             }
             user.balance = data.data.balance;
+            connectToLobbySocket(user, conf);
+        }
+        return user;
+    };
+    const checkAndLoadUserLoggedUniversalSoft = async (conf) => {
+        let user = null;
+        let u = sessionStorage.getItem("user");
+        if (u) {
+            user = JSON.parse(u);
             connectToLobbySocket(user, conf);
         }
         return user;
@@ -28,7 +36,7 @@ const UserHelper = (() => {
         SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf); //conecta al websocket.
     };
     return {
-        checkAndLoadUserLogged, connectToLobbySocket
+        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft
     }
 })()
 
