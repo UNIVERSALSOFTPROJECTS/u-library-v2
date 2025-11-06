@@ -13,13 +13,11 @@
 
     onMount( ()=>{
         console.log("user: ", user);
-        console.log("onChangeBalance: ", onChangeBalance);
-        
+        console.log("onChangeBalance: ", onChangeBalance);     
         // notify.setEM(EventManager);
         EventManager.subscribe("update_balance", (data)=>{
             // let msg = "SALDO ACTUALIZADO";
             // notify.success(msg);
-            console.log("DATA DE UPDATEBALANCELISTENER", data),
             onChangeBalance(data);
         });
     })
