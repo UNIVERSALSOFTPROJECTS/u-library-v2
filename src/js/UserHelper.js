@@ -11,12 +11,11 @@ const UserHelper = (() => {
             let data;
             if (conf.CLIENT_CODE == 'JU02') {
                 data = await ServerConnection.u_user.getBalance(user.agregatorToken);
+                user.balance = data.data.balance;
             }
-            else {
-                data = await ServerConnection.users.getBalance(user.agregatorToken);
-            }
-            user.balance = data.data.balance;
+                //data = await ServerConnection.users.getBalance(user.agregatorToken);
             connectToLobbySocket(user, conf);
+            
         }
         return user;
     };
