@@ -16,18 +16,12 @@ const SocketConnector = (() => {
         });
 
         stompClient.onConnect = (frame) => {
-            console.log("onConnect Socket",frame);
+            console.log("onConnect Socket success");
             stompClient.subscribe('/user/queue/messages', (data) => {
-                console.log("message", data.body._body);
-                console.log("message", data.body.command);
-                console.log("message", JSON.stringify(data.body));
-                console.log("message", JSON.stringify(data));
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
                 } else if (/UPDATE_BALANCE/.test(data.body)) {
-                    console.log("----- enviando update blance",data.body);
-                    
                     EventManager.publish("update_balance", {newbalance: data.body})
                 }
 
