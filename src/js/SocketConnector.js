@@ -23,7 +23,7 @@ const SocketConnector = (() => {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
                 } else if (/UPDATE_BALANCE/.test(data.body)) {
-                    EventManager.publish("update_balance", {})
+                    EventManager.publish("update_balance", {newbalance: data.body})
                 }
 
             });
