@@ -329,7 +329,7 @@ const ServerConnection = (() => {
             let payload = { username, password }
             console.log("headers", headers);
             
-            return axios.post(conf.API_KS_AUTH + "/ol/auth/login", payload, { headers });
+            return axios.post(conf.API_KS_AUTH + "/login", payload, { headers });
             // return axios.post(conf.API + "/api/casino/login", payload, { headers });
 
         },
