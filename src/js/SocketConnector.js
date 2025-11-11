@@ -6,6 +6,7 @@ const SocketConnector = (() => {
     let stompClient
     let conf = {};
 
+
     function connectToLobbySocket(username, conf) {
         console.log(`Opening WS connection to LOBBYBFF`);
         stompClient = new Client({
@@ -14,17 +15,27 @@ const SocketConnector = (() => {
             debug: function (str) { /*console.log(str);*/ },
             reconnectDelay: 2500,
         });
-
+        
         stompClient.onConnect = (frame) => {
             console.log("onConnect Socket success");
             stompClient.subscribe('/user/queue/messages', (data) => {
+                const msg = data.body;
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
-                } else if (/UPDATE_BALANCE/.test(data.body)) {
+                } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
+                } else if (msg.startsWith("CASHIER_CONNECT_")){
+                    const [, , cashier, status] = msg.split("_")
+                    const isActive = status == "true"
+                    if(isActive){
+                        console.log("El cajero esta conectado", cashier)
+                        EventManager.publish("cashier_logged_in", {cashier})
+                    }else{
+                        console.log("El cajero esta desconectado", cashier)
+                        EventManager.publish("cashier_logged_out", {cashier})
+                    }      
                 }
-
             });
         };
 
