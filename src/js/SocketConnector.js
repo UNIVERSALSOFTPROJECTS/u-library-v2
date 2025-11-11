@@ -27,8 +27,7 @@ const SocketConnector = (() => {
                     EventManager.publish("duplicated_session", {})
                 } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
-                }
-                if (msg.startsWith("CASHIER_CONNECT_")){
+                } else if (msg.startsWith("CASHIER_CONNECT_")){
                     const [, , cashierName, status] = msg.split("_")
                     const isActive = status === "true"
                     console.log("CAJEROOOOOOO", cashierName)
