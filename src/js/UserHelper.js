@@ -28,6 +28,7 @@ const UserHelper = (() => {
             user = JSON.parse(u);
             connectToLobbySocket(user, conf);
         }
+        return user;
     };
     const connectToLobbySocket = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
