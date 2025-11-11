@@ -21,17 +21,13 @@ const UserHelper = (() => {
         }
         return user;
     };
-    const checkAndLoadUserLoggedUniversalSoft = async (conf, onOpenNotification) => {
+    const checkAndLoadUserLoggedUniversalSoft = async (conf) => {
         let user = null;
         let u = sessionStorage.getItem("user");
         if (u) {
             user = JSON.parse(u);
             connectToLobbySocket(user, conf);
         }
-        if(user.type === "TERMINAL" && user.cashier){
-            initSocketEvents(onOpenNotification, user.cashier)
-        }
-        return user;
     };
     const connectToLobbySocket = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
@@ -41,8 +37,7 @@ const UserHelper = (() => {
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
         EventManager.subscribe("cashier_logged_out", ({cashier})=>{
             if(cashier === currentcashier){
-                console.log("El CAJERO CERRO SESION",cashier);
-                
+                console.log("El CAJERO CERRO SESION",cashier);     
                 onOpenNotification("accessCashier")
             }
         })
