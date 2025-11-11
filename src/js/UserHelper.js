@@ -21,13 +21,17 @@ const UserHelper = (() => {
         }
         return user;
     };
-    const checkAndLoadUserLoggedUniversalSoft = async (conf) => {
+    const checkAndLoadUserLoggedUniversalSoft = async (conf,onOpenNotification) => {
         let user = null;
         let u = sessionStorage.getItem("user");
         if (u) {
             user = JSON.parse(u);
             connectToLobbySocket(user, conf);
         }
+        if(user.type === "TERMINAL" && user.cashier){
+            initSocketEvents(onOpenNotification, user.cashier)
+        }
+
         return user;
     };
     const connectToLobbySocket = (user, conf) => {
