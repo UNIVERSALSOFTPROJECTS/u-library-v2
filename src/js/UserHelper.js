@@ -28,7 +28,7 @@ const UserHelper = (() => {
             user = JSON.parse(u);
             connectToLobbySocket(user, conf);
         }
-        if(user.type == "TERMINAL" && user.cashier){
+        if(user.type === "TERMINAL" && user.cashier){
             initSocketEvents(onOpenNotification, user.cashier)
         }
         return user;
@@ -40,14 +40,14 @@ const UserHelper = (() => {
     };
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
         EventManager.subscribe("cashier_logged_out", ({cashier})=>{
-            if(cashier == currentcashier){
+            if(cashier === currentcashier){
                 console.log("El CAJERO CERRO SESION",cashier);
                 
                 onOpenNotification("accessCashier")
             }
         })
          EventManager.subscribe("cashier_logged_in", ({cashier})=>{
-            if(cashier == currentcashier){
+            if(cashier === currentcashier){
                 console.log("El CAJERO INICIA SESION",cashier);
                 onOpenNotification(null)
             }
