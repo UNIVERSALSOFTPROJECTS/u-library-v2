@@ -19,18 +19,20 @@ const SocketConnector = (() => {
         stompClient.onConnect = (frame) => {
             console.log("onConnect Socket success");
             stompClient.subscribe('/user/queue/messages', (data) => {
-                console.log("data.body", data.body);
-                
                 const msg = data.body;
+                console.log("data.body", data.body);
+                console.log("MSGCASHIER", msg.startsWith("CASHIER_CONNECT_"));
+                
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
                 } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
                 } else if (msg.startsWith("CASHIER_CONNECT_")){
+                    console.log("CAJEROOOOOOO")
+
                     const [, , cashierName, status] = msg.split("_")
                     const isActive = status === "true"
-                    console.log("CAJEROOOOOOO", cashierName)
                     if(isActive){
                         console.log("El cajero esta conectado", cashierName)
                         EventManager.publish("cashier_logged_in", {cashier: cashierName})
