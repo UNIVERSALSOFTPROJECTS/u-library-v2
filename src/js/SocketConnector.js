@@ -28,6 +28,7 @@ const SocketConnector = (() => {
                 } else if (msg.startsWith("CASHIER_CONNECT_")){
                     const [, , cashierName, status] = msg.split("_")
                     const isActive = status == "true"
+                    console.log("CAJEROOOOOOO", cashierName)
                     if(isActive){
                         console.log("El cajero esta conectado", cashierName)
                         EventManager.publish("cashier_logged_in", {cashier: cashierName})
