@@ -19,6 +19,8 @@ const SocketConnector = (() => {
         stompClient.onConnect = (frame) => {
             console.log("onConnect Socket success");
             stompClient.subscribe('/user/queue/messages', (data) => {
+                console.log("data.body", data.body);
+                
                 const msg = data.body;
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
@@ -27,7 +29,7 @@ const SocketConnector = (() => {
                     EventManager.publish("update_balance", {newBalance: data.body})
                 } else if (msg.startsWith("CASHIER_CONNECT_")){
                     const [, , cashierName, status] = msg.split("_")
-                    const isActive = status == "true"
+                    const isActive = status === "true"
                     console.log("CAJEROOOOOOO", cashierName)
                     if(isActive){
                         console.log("El cajero esta conectado", cashierName)
