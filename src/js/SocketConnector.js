@@ -26,14 +26,14 @@ const SocketConnector = (() => {
                 } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
                 } else if (msg.startsWith("CASHIER_CONNECT_")){
-                    const [, , cashier, status] = msg.split("_")
+                    const [, , cashierName, status] = msg.split("_")
                     const isActive = status == "true"
                     if(isActive){
-                        console.log("El cajero esta conectado", cashier)
-                        EventManager.publish("cashier_logged_in", {cashier})
+                        console.log("El cajero esta conectado", cashierName)
+                        EventManager.publish("cashier_logged_in", {cashier: cashierName})
                     }else{
-                        console.log("El cajero esta desconectado", cashier)
-                        EventManager.publish("cashier_logged_out", {cashier})
+                        console.log("El cajero esta desconectado", cashierName)
+                        EventManager.publish("cashier_logged_out", {cashier: cashierName})
                     }      
                 }
             });

@@ -1,6 +1,6 @@
 import SocketConnector from './SocketConnector';
 import ServerConnection from './server';
-
+import EventManager from "./EventManager";
 const UserHelper = (() => {
     const checkAndLoadUserLogged = async (conf) => {
         let user = null;
@@ -21,12 +21,15 @@ const UserHelper = (() => {
         }
         return user;
     };
-    const checkAndLoadUserLoggedUniversalSoft = async (conf) => {
+    const checkAndLoadUserLoggedUniversalSoft = async (conf, onOpenNotification) => {
         let user = null;
         let u = sessionStorage.getItem("user");
         if (u) {
             user = JSON.parse(u);
             connectToLobbySocket(user, conf);
+        }
+        if(user.type == "TERMINAL" && user.cashier){
+            initSocketEvents(onOpenNotification, user.cashier)
         }
         return user;
     };
@@ -35,6 +38,18 @@ const UserHelper = (() => {
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf); //conecta al websocket.
     };
+    const initSocketEvents = (onOpenNotification, currentcashier)=>{
+        EventManager.subscribe("cashier_logged_out", ({cashier})=>{
+            if(cashier == currentcashier){
+                onOpenNotification("accessCashier")
+            }
+        })
+         EventManager.subscribe("cashier_logged_in", ({cashier})=>{
+            if(cashier == currentcashier){
+                onOpenNotification(null)
+            }
+        })
+    }
     return {
         checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft
     }
