@@ -54,7 +54,7 @@ const UserHelper = (() => {
         })
     }
     return {
-        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft
+        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft,initSocketEvents
     }
 })()
 
