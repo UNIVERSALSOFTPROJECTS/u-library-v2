@@ -41,14 +41,12 @@ const UserHelper = (() => {
     };
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
         EventManager.subscribe("cashier_logged_out", ({cashier})=>{
-            if(cashier === currentcashier){
-                console.log("El CAJERO CERRO SESION",cashier);     
+            if(cashier === currentcashier){ 
                 onOpenNotification("accessCashier")
             }
         })
          EventManager.subscribe("cashier_logged_in", ({cashier})=>{
             if(cashier === currentcashier){
-                console.log("El CAJERO INICIA SESION",cashier);
                 onOpenNotification(null)
             }
         })
