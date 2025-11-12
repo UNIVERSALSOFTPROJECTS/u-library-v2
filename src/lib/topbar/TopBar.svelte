@@ -164,9 +164,10 @@
     user = user_;
     if (!user_ || String(user_.status) !== "1" || user_.code !== "OK") {
       sessionStorage.removeItem("user");
-      notify.error("error","Usuario o Contraseña Incorrecta");
+      notify.error("Usuario o Contraseña Incorrecta");
       return ;
     }
+    
     notify.success("Bienvenido a " + platform);
     loginModalOpen = false;
     userState = "loggedIn";
