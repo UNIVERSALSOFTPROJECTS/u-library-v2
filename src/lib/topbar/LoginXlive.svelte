@@ -78,7 +78,6 @@
       if (location.href.includes("terminal")) {
         userType = 2;
       }
-      // (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType);
       data = await ServerConnection.u_user.login(username, password);
       console.log("dataaa", data)
       data = data.data;
@@ -92,7 +91,6 @@
         delete data.claims;
       }
       //Formatear la propiedad "bonus" con el updatebalance
-      //if (userGateway == "neco") await getUpdateBalance(data);
       onOk(data);
       
     } catch (error) {
