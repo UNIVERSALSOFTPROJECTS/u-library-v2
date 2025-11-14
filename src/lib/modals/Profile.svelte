@@ -95,12 +95,13 @@
             </div>
             <div class="profile__balance"><b>{t("header.balance")}</b> : {user.balance} {user.currency}</div>
             <DropdownBonus bind:bonusView bind:activedBonus bind:currency={user.currency} {t}/>
-
+            {#if isLockedWithdrawal}
             <div class="profile__transaction">
                 <button class="btn withdrawal {isLockedWithdrawal?'locked':''}"  on:click={onOpenWithdrawal} disabled={viewActiveWithdrawal}>{t("profile.withdrawal")}</button>
 
                 <button class="btn recharge" on:click={onOpenDeposit}>{t("profile.recharge")}</button>
             </div>
+            {/if}
             {#if isLockedWithdrawal}
             <div class="profile__warning">
                 <div class="icon--info"></div><span>{t("profile.warning")}</span>
