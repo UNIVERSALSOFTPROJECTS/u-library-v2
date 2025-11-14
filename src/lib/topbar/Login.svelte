@@ -58,6 +58,7 @@
             client_id:
               "632683480398-i9lkrr218mhu4r3dbsq5eq5sai5g6tch.apps.googleusercontent.com",
             callback: handleSigninGoogleOAuth2,
+            auto_select: false,
           });
           window.google.accounts.id.renderButton(
             document.getElementById("g_id_signin"),
@@ -73,7 +74,7 @@
   async function loginClick() {
     if (!username || !password) return onError(t("msg.allObligatory"));
     try {
-      loadLogin = true;
+      loadLogin = false;
       let data;
       let userType = 1;
       if (location.href.includes("terminal")) {
