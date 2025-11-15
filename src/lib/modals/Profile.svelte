@@ -26,6 +26,8 @@
     let activedBonus = [];
     let bonusView = {type: "total", value : user.bonus_sumTotal};
     let profileView = visualViewport.width > 1023 ? "movements":"";
+    let depositView = configProfile.depositView || true;
+    let withdrawalView = configProfile.withdrawalView || true;
     let timezone = configProfile.timezone;
     let id_banca  = configProfile.id_banca;
     let id_ca  = configProfile.id_ca;
@@ -97,9 +99,12 @@
             <DropdownBonus bind:bonusView bind:activedBonus bind:currency={user.currency} {t}/>
 
             <div class="profile__transaction">
+                {#if withdrawalView}
                 <button class="btn withdrawal {isLockedWithdrawal?'locked':''}"  on:click={onOpenWithdrawal} disabled={viewActiveWithdrawal}>{t("profile.withdrawal")}</button>
-
+                {/if}
+                {#if depositView}
                 <button class="btn recharge" on:click={onOpenDeposit}>{t("profile.recharge")}</button>
+                {/if}
             </div>
             {#if isLockedWithdrawal}
             <div class="profile__warning">
