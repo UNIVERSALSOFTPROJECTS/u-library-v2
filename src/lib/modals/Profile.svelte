@@ -26,8 +26,8 @@
     let activedBonus = [];
     let bonusView = {type: "total", value : user.bonus_sumTotal};
     let profileView = visualViewport.width > 1023 ? "movements":"";
-    let depositView = configProfile.depositView || true;
-    let withdrawalView = configProfile.withdrawalView || true;
+    let depositView = configProfile.depositView ?? true;
+    let withdrawalView = configProfile.withdrawalView ?? true;
     let timezone = configProfile.timezone;
     let id_banca  = configProfile.id_banca;
     let id_ca  = configProfile.id_ca;
