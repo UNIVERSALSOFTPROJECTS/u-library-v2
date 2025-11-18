@@ -23,7 +23,7 @@
       <img class="usericon1 s-pLY60ePxNKjT" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png" alt=""/>
       <table class="user">
         <div class="user-content">
-          <tr> <th class="codigo" style="color: white;" >{user.username}  <br>#{user?.serial ?? user.agregatorToken.slice(0,13)}</th></tr>
+          <tr> <th class="codigo" style="color: white;" >{user.username}  <br>#{user.serial}</th></tr>
           <tr>
             <td>
               <button class="title-user" style="padding-left: 1rem;" on:click={onOpenMyAccount} > Mi cuenta
