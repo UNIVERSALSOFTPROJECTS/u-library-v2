@@ -39,14 +39,15 @@ const UserHelper = (() => {
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf); //conecta al websocket.
     };
+    //body	"CASHIER_CONNECT_cajero.default_true"
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
-        EventManager.subscribe("cashier_logged_out", ({cashier})=>{
-            if(cashier === currentcashier){ 
+        EventManager.subscribe("CASHIER_DISCONNECT", ({cashier})=>{
+            if(cashier == currentcashier){ 
                 onOpenNotification("accessCashier")
             }
         })
-         EventManager.subscribe("cashier_logged_in", ({cashier})=>{
-            if(cashier === currentcashier){
+         EventManager.subscribe("CASHIER_CONNECT", ({cashier})=>{
+            if(cashier == currentcashier){
                 onOpenNotification(null)
             }
         })
