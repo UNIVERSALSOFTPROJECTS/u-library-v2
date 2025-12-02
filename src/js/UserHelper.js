@@ -21,23 +21,37 @@ const UserHelper = (() => {
         }
         return user;
     };
-    const checkAndLoadUserLoggedUniversalSoft = async (conf,onOpenNotification) => {
+    const checkAndLoadUserLoggedUniversalSoft = async (conf) => {
         let user = null;
         let u = sessionStorage.getItem("user");
         if (u) {
             user = JSON.parse(u);
             connectToLobbySocket(user, conf);
         }
+        return user;
+    };
+    const checkAndLoadUserLoggedCashier = async (conf,onOpenNotification) => {
+        let user = null;
+        let u = sessionStorage.getItem("user");
+        if (u) {
+            user = JSON.parse(u);
+            connectToLobbySocketCashier(user, conf)
+        }
         if(user.type === "TERMINAL" && user.cashier){
             initSocketEvents(onOpenNotification, user.cashier)
+            
         }
-
         return user;
     };
     const connectToLobbySocket = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf); //conecta al websocket.
+    };
+    const connectToLobbySocketCashier = (user, conf) => {
+        if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
+        const serial = user.serial || user.aggregator_token?.slice(0,13);
+        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf); //conecta al websocket.
     };
     //body	"CASHIER_CONNECT_cajero.default_true"
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
@@ -53,7 +67,7 @@ const UserHelper = (() => {
         })
     }
     return {
-        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft,initSocketEvents
+        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft,checkAndLoadUserLoggedCashier, connectToLobbySocketCashier
     }
 })()
 

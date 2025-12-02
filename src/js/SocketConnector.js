@@ -27,7 +27,40 @@ const SocketConnector = (() => {
                 } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
                     //body	"CASHIER_CONNECT_cajero.default_true"
-                } else if (msg.startsWith("CASHIER_CONNECT_")){
+                }
+            });
+        };
+
+        stompClient.onWebSocketError = (error) => {
+            console.error('Error with websocket', error);
+            EventManager.publish("logout", {});
+            EventManager.publish("error", { errorCode: "OIV9FABT2A", errorMessage: "Connection closed" });
+        };
+
+        stompClient.onStompError = (frame) => {
+            console.error('Broker reported error: ' + frame.headers['message']);
+            console.error('Additional details: ' + frame.body);
+        };
+
+        stompClient.activate();
+
+    }
+
+     function connectToLobbySocketCashier(username, conf) {
+        console.log(`Opening WS connection to LOBBYBFF`);
+        stompClient = new Client({
+            brokerURL: conf.WS_URL,
+            connectHeaders: { username},
+            debug: function (str) { /*console.log(str);*/ },
+            reconnectDelay: 2500,
+        });
+        
+        stompClient.onConnect = (frame) => {
+            console.log("onConnect Socket Cashier success");
+            stompClient.subscribe('/cashier/queue/messages', (data) => {
+                const msg = data.body;
+               
+                if (msg.startsWith("CASHIER_CONNECT_")){
                     const [, , cashierName, status] = msg.split("_")
                     const isActive = status == "true"
                     if(isActive){
@@ -53,6 +86,8 @@ const SocketConnector = (() => {
         stompClient.activate();
 
     }
+
+
 
     function setConfig(conf_) {
         conf = conf_;
@@ -94,7 +129,7 @@ const SocketConnector = (() => {
     }
 
     return {
-        connect, setConfig, connectToLobbySocket
+        connect, setConfig, connectToLobbySocket, connectToLobbySocketCashier
     }
 
 })()
