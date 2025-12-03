@@ -38,6 +38,13 @@ const SocketConnector = (() => {
                     }
                 }      
             });
+            stompClient.subscribe('/cashier/queue/messages', (data) => {
+                const msg = data.body;
+                if (/UPDATE_BALANCE/.test(msg)) {
+                    EventManager.publish("update_balance", {newBalance: data.body})
+                    //body	"CASHIER_CONNECT_cajero.default_true"
+                }
+            });
         };
 
         stompClient.onWebSocketError = (error) => {
@@ -78,6 +85,13 @@ const SocketConnector = (() => {
                     }else{
                         EventManager.publish("CASHIER_DISCONNECT", {cashier: cashierName})
                     }      
+                }
+            });
+            stompClientCashier.subscribe('/user/queue/messagess', (data) => {
+                const msg = data.body;
+                if (/UPDATE_BALANCE/.test(msg)) {
+                    EventManager.publish("update_balance", {newBalance: data.body})
+                    //body	"CASHIER_CONNECT_cajero.default_true"
                 }
             });
         };
