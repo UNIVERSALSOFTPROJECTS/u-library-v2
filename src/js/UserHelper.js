@@ -21,23 +21,15 @@ const UserHelper = (() => {
         }
         return user;
     };
-    const checkAndLoadUserLoggedUniversalSoft = async (conf) => {
+    const checkAndLoadUserLoggedUniversalSoft = async (conf, onOpenNotification) => {
         let user = null;
         let u = sessionStorage.getItem("user");
         if (u) {
             user = JSON.parse(u);
             connectToLobbySocket(user, conf);
         }
-        return user;
-    };
-    const checkAndLoadUserLoggedCashier = async (conf,onOpenNotification) => {
-        let user = null;
-        let u = sessionStorage.getItem("user");
-        if (u) {
-            user = JSON.parse(u);
-            connectToLobbySocketCashier(user, conf)
-        }
         if(user.type === "TERMINAL" && user.cashier){
+            connectToLobbySocketCashier(user, conf);
             initSocketEvents(onOpenNotification, user.cashier)
             
         }
@@ -67,7 +59,7 @@ const UserHelper = (() => {
         })
     }
     return {
-        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft,checkAndLoadUserLoggedCashier, connectToLobbySocketCashier
+        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft, connectToLobbySocketCashier
     }
 })()
 
