@@ -31,7 +31,6 @@ const UserHelper = (() => {
         if(user.type === "TERMINAL" && user.cashier && user.type === "CASHIER"){
             connectToLobbySocketCashier(user, conf);
             initSocketEvents(onOpenNotification, user.cashier)
-            
         }
         return user;
     };
