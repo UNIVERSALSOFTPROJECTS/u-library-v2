@@ -27,7 +27,15 @@ const SocketConnector = (() => {
                 } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
                     //body	"CASHIER_CONNECT_cajero.default_true"
-                }
+                }else if (msg.startsWith("CASHIER_CONNECT_")){
+                    const [, , cashierName, status] = msg.split("_")
+                    const isActive = status == "true"
+                    if(isActive){
+                        EventManager.publish("CASHIER_CONNECT", {cashier: cashierName})
+                    }else{
+                        EventManager.publish("CASHIER_DISCONNECT", {cashier: cashierName})
+                    }
+                }      
             });
         };
 
@@ -59,8 +67,10 @@ const SocketConnector = (() => {
             console.log("onConnect Socket Cashier success");
             stompClient.subscribe('/cashier/queue/messages', (data) => {
                 const msg = data.body;
-               
-                if (msg.startsWith("CASHIER_CONNECT_")){
+                if (/UPDATE_BALANCE/.test(msg)) {
+                    EventManager.publish("update_balance", {newBalance: data.body})
+                    //body	"CASHIER_CONNECT_cajero.default_true"
+                } else if (msg.startsWith("CASHIER_CONNECT_")){
                     const [, , cashierName, status] = msg.split("_")
                     const isActive = status == "true"
                     if(isActive){
