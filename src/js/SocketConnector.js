@@ -71,6 +71,12 @@ const SocketConnector = (() => {
             reconnectDelay: 2500,
         });
         
+        stompClientCashier.subscribe('/user/queue/messages', (data) => {
+            const msg = data.body;
+            if (/UPDATE_BALANCE/.test(msg)) {
+                EventManager.publish("update_balance", {newBalance: data.body})
+            }
+        });     
         stompClientCashier.onConnect = (frame) => {
             console.log("onConnect Socket Cashier success");
             stompClientCashier.subscribe('/cashier/queue/messages', (data) => {
