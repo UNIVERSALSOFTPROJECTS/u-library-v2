@@ -53,7 +53,7 @@ const UserHelper = (() => {
         // } else if (user.type === "TERMINAL") {
         //     cashierId = user.cashier; // la terminal se conecta al canal de su cajero
         // } 
-        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}-cashier`, conf); //conecta al websocket.
+        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.cashier}-${serial}-cashier`, conf); //conecta al websocket.
     };
     //body	"CASHIER_CONNECT_cajero.default_true"
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
