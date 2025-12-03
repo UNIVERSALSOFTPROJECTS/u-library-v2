@@ -43,7 +43,7 @@ const UserHelper = (() => {
     const connectToLobbySocketCashier = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
-        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf); //conecta al websocket.
+        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}-cashier`, conf); //conecta al websocket.
     };
     //body	"CASHIER_CONNECT_cajero.default_true"
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
