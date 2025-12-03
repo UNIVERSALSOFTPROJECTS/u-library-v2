@@ -70,6 +70,13 @@ const SocketConnector = (() => {
             debug: function (str) { /*console.log(str);*/ },
             reconnectDelay: 2500,
         });
+        stompClientCashier.subscribe('/user/queue/messagess', (data) => {
+            const msg = data.body;
+            if (/UPDATE_BALANCE/.test(msg)) {
+                EventManager.publish("update_balance", {newBalance: data.body})
+                //body	"CASHIER_CONNECT_cajero.default_true"
+            }
+        });
         stompClientCashier.onConnect = (frame) => {
             console.log("onConnect Socket Cashier success");
             stompClientCashier.subscribe('/cashier/queue/messages', (data) => {
@@ -85,13 +92,6 @@ const SocketConnector = (() => {
                     }else{
                         EventManager.publish("CASHIER_DISCONNECT", {cashier: cashierName})
                     }      
-                }
-            });
-            stompClientCashier.subscribe('/user/queue/messagess', (data) => {
-                const msg = data.body;
-                if (/UPDATE_BALANCE/.test(msg)) {
-                    EventManager.publish("update_balance", {newBalance: data.body})
-                    //body	"CASHIER_CONNECT_cajero.default_true"
                 }
             });
         };

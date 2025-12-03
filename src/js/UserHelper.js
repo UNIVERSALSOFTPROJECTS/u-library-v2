@@ -46,14 +46,17 @@ const UserHelper = (() => {
     };
     const connectToLobbySocketCashier = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
-        const serial = user.serial || user.aggregator_token?.slice(0,13);
+        let serial = user.serial || user.aggregator_token?.slice(0,13);
         let cashierId
+        let serialCashier;
         if (user.type === "CASHIER") {
             cashierId = user.username; // el cajero es dueño del canal
+            serialCashier = serial
         } else if (user.type === "TERMINAL") {
             cashierId = user.cashier; // la terminal se conecta al canal de su cajero
+            serialCashier = user.serialCashier
         } 
-        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${cashierId}-cashier`, conf); //conecta al websocket.
+        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${cashierId}-${serialCashier}`, conf); //conecta al websocket.
     };
     //body	"CASHIER_CONNECT_cajero.default_true"
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
