@@ -4,6 +4,7 @@ import { Client } from '@stomp/stompjs';
 const SocketConnector = (() => {
 
     let stompClient
+    let stompClientCashier 
     let conf = {};
 
 
@@ -56,16 +57,16 @@ const SocketConnector = (() => {
 
      function connectToLobbySocketCashier(username, conf) {
         console.log(`Opening WS connection to LOBBYBFF`);
-        stompClient = new Client({
+        stompClientCashier = new Client({
             brokerURL: conf.WS_URL,
             connectHeaders: { username},
             debug: function (str) { /*console.log(str);*/ },
             reconnectDelay: 2500,
         });
         
-        stompClient.onConnect = (frame) => {
+        stompClientCashier.onConnect = (frame) => {
             console.log("onConnect Socket Cashier success");
-            stompClient.subscribe('/cashier/queue/messages', (data) => {
+            stompClientCashier.subscribe('/cashier/queue/messages', (data) => {
                 const msg = data.body;
                 if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
@@ -82,18 +83,18 @@ const SocketConnector = (() => {
             });
         };
 
-        stompClient.onWebSocketError = (error) => {
+        stompClientCashier.onWebSocketError = (error) => {
             console.error('Error with websocket', error);
             EventManager.publish("logout", {});
             EventManager.publish("error", { errorCode: "OIV9FABT2A", errorMessage: "Connection closed" });
         };
 
-        stompClient.onStompError = (frame) => {
+        stompClientCashier.onStompError = (frame) => {
             console.error('Broker reported error: ' + frame.headers['message']);
             console.error('Additional details: ' + frame.body);
         };
 
-        stompClient.activate();
+        stompClientCashier.activate();
 
     }
 
