@@ -54,7 +54,7 @@ const UserHelper = (() => {
             serialCashier = serial
         } else if (user.type === "TERMINAL") {
             cashierId = user.cashier; // la terminal se conecta al canal de su cajero
-            serialCashier = user.serialCashier
+            serialCashier = user.serial
         } 
         SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${cashierId}-${serialCashier}`, conf); //conecta al websocket.
     };
