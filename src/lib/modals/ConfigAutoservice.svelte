@@ -25,6 +25,16 @@
     let isVirtualKeyboard = localStorage.getItem("btnVirtualKeyboard")?true:false;
     const domain = detectDomain();
     let subdomain = detectSubdomain();
+    
+    // Función reactiva que se ejecuta cuando countries está disponible
+    $: if (countries && countries.length > 0) {
+        // Solo procesar si subdomain está vacío (sin subdominio en la URL)
+        if (subdomain === "" || subdomain === "www") {
+            // Intentar obtener el dominio guardado en localStorage
+            const savedDomain = localStorage.getItem("domain");
+            subdomain = savedDomain;
+        }
+    }
 
     const viewDataConfig = () => {
         if (localStorage.getItem('autoSaved')) {
