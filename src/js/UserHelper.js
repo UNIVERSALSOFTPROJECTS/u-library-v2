@@ -29,7 +29,7 @@ const UserHelper = (() => {
             connectToLobbySocket(user, conf);
         }
         if(user.type === "TERMINAL" && user.cashier){
-            connectToLobbySocketCashier(user, conf);
+            // connectToLobbySocketCashier(user, conf);
             initSocketEvents(onOpenNotification, user.cashier)
         }
 
@@ -72,7 +72,7 @@ const UserHelper = (() => {
         })
     }
     return {
-        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft, connectToLobbySocketCashier
+        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft
     }
 })()
 
