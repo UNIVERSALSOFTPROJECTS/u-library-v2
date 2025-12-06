@@ -86,7 +86,7 @@
         <div class="profile__container">
             <div class="profile__top">
                 <div class="profile__header">
-                    <img class="profile__img" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png" alt="icon-user">
+                    <img class="profile__img" src="https://d1dkqs4jlldj3s.cloudfront.net/Win365/icon1.png" alt="icon-user">
                     <div>
                         <b>{user.username}</b>
                         <p>#{user.id}</p>

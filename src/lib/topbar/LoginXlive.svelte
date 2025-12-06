@@ -79,7 +79,6 @@
         userType = 2;
       }
       data = await ServerConnection.u_user.login(username, password);
-      console.log("dataaa", data)
       data = data.data;
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
