@@ -1,8 +1,9 @@
 <script>
     import Modal from "../Modal.svelte";
     import DropdowIdiom from "../dropdown/DropdowIdiom.svelte";
-    import { detectDomain, detectSubdomain } from "../../js/utils/formatUtils";
+    import { detectDomain, detectSubdomain, getSharedCookie, setSharedCookie } from "../../js/utils/formatUtils";
     import { isMobile } from "mobile-device-detect";
+    import { onMount } from "svelte";
 
     export let configLogin;
     export let onError;
@@ -25,6 +26,21 @@
     let isVirtualKeyboard = localStorage.getItem("btnVirtualKeyboard")?true:false;
     const domain = detectDomain();
     let subdomain = detectSubdomain();
+    
+    // Redirección automática al iniciar: detecta cookie y redirige si existe
+    onMount(() => {
+        // Solo redirigir si está en la ruta principal (sin subdominio)
+        if ((subdomain === "" || subdomain === "www") && countries && countries.length > 0) {
+            const savedDomain = getSharedCookie("domain");
+            // Si existe cookie, redirigir al subdominio guardado
+            if (savedDomain && savedDomain !== "") {
+                const domainExists = countries.some(country => country.domain === savedDomain);
+                if (domainExists) {
+                    window.location.href = `https://${savedDomain}.${domain}`;
+                }
+            }
+        }
+    });
 
     const viewDataConfig = () => {
         if (localStorage.getItem('autoSaved')) {
@@ -52,16 +68,23 @@
         onOk(t("autoservice.configSaved"));
 
         setTimeout(() => {
-                sessionStorage.removeItem("user");
-                localStorage.setItem("domain",subdomain);
-            if (subdomain == "") {
+            sessionStorage.removeItem("user");
+            
+            // Crear cookie con el subdominio seleccionado y redirigir
+            if (subdomain && subdomain !== "") {
+                setSharedCookie("domain", subdomain);
+                // Solo redirigir si no estás ya en ese subdominio
+                const currentSubdomain = detectSubdomain();
+                if (currentSubdomain !== subdomain) {
+                    window.location.href = `https://${subdomain}.${domain}`;
+                } else {
+                    // Si ya estás en ese subdominio, solo recargar
+                    location.reload();
+                }
+            } else {
                 location.reload();
-            }else{
-                window.location.href = `https://${subdomain}.${domain}`;
             }
         }, 1000);
-        
-
     }
     const toggleBtnWithdrawal = () => {
         isWithdrawal != isWithdrawal;
