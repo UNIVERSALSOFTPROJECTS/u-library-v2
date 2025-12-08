@@ -3,7 +3,6 @@
   import ut from '../../js/util';
   import backend from '../../js/server'
 
-
   export let userState;
   export let active_view
   export let user;
@@ -34,6 +33,7 @@
 
   const openNovusbet = async () => {
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games, options.gameToken) : baseUrlNovusbet;
+    console.log("ESTA ES LA URL: ", url);
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     if (userState == "loggedIn"){
       const data = await backend.game.getURL(url);
