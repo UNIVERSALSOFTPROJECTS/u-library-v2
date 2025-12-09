@@ -28,8 +28,11 @@ const UserHelper = (() => {
             user = JSON.parse(u);
             connectToLobbySocket(user, conf)
         }
+        const serial = user.serial || user.aggregator_token?.slice(0,13);
+
         if(user.type === "TERMINAL" && user.cashier){
             initSocketEvents(onOpenNotification, user.cashier)
+            SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf)
         }
         return user;
     };
