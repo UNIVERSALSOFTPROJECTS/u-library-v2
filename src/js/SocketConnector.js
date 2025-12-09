@@ -19,7 +19,7 @@ const SocketConnector = (() => {
         
         stompClient.onConnect = (frame) => {
             console.log("onConnect Socket success");
-            if(typeof onConnected == "function"){
+            if(typeof onConnected === "function"){
                 onConnected(stompClient)
             }
             stompClient.subscribe('/user/queue/messages', (data) => {
