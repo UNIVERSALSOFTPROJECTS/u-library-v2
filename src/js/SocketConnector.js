@@ -27,12 +27,6 @@ const SocketConnector = (() => {
                 } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
                     //body	"CASHIER_CONNECT_cajero.default_true"
-                }     
-            });
-            stompClient.subscribe(`/topic/messages/cashier-${username.cashier || username.username}`,(data)=>{
-                const msg = data.body;
-                if (/UPDATE_BALANCE/.test(msg)) {
-                    EventManager.publish("update_balance", {newBalance: data.body})
                 }else if (msg.startsWith("CASHIER_CONNECT_")){
                     const [, , cashierName, status] = msg.split("_")
                     const isActive = status == "true"
@@ -42,6 +36,12 @@ const SocketConnector = (() => {
                     const [, , cashierName, status] = msg.split("_")
                     const isDisconnect = status == "true"
                     EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, disconnect: isDisconnect})
+                }    
+            });
+            stompClient.subscribe(`/topic/messages/cashier-${username.cashier || username.username}`,(data)=>{
+                const msg = data.body;
+                if (/UPDATE_BALANCE/.test(msg)) {
+                    EventManager.publish("update_balance", {newBalance: data.body})
                 }
             });
         };
