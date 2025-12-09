@@ -4,11 +4,10 @@ import { Client } from '@stomp/stompjs';
 const SocketConnector = (() => {
 
     let stompClient
-    let stompClientCashier 
     let conf = {};
 
 
-    function connectToLobbySocket(username, conf, onConnected) {
+    function connectToLobbySocket(username, conf) {
         console.log(`Opening WS connection to LOBBYBFF`);
         stompClient = new Client({
             brokerURL: conf.WS_URL,
@@ -19,9 +18,6 @@ const SocketConnector = (() => {
         
         stompClient.onConnect = (frame) => {
             console.log("onConnect Socket success");
-            if(typeof onConnected === "function"){
-                onConnected(stompClient)
-            }
             stompClient.subscribe('/user/queue/messages', (data) => {
                 const msg = data.body;
                
@@ -33,7 +29,7 @@ const SocketConnector = (() => {
                     //body	"CASHIER_CONNECT_cajero.default_true"
                 }     
             });
-            stompClient.subscribe('/topic/messages/cashier',(data)=>{
+            stompClient.subscribe(`/topic/messages/cashier-${username.cashier || username.username}`,(data)=>{
                 const msg = data.body;
                 if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
