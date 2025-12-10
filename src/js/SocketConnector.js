@@ -57,7 +57,7 @@ const SocketConnector = (() => {
         
         stompClientCashier.onConnect = (frame) => {
             console.log("onConnect Socket success");
-            stompClientCashier.subscribe('/user/queue/device-sync', (data) => {
+            stompClientCashier.subscribe('/user/queue/messages/device-sync', (data) => {
                 const msg = data.body;
                 if (msg.startsWith("CASHIER_CONNECT_")){
                     const [, , cashierName, status] = msg.split("_")
