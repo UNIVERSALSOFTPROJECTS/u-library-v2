@@ -1,7 +1,7 @@
 import SocketConnector from './SocketConnector';
 import ServerConnection from './server';
 import EventManager from "./EventManager";
-import { userEvent } from '@storybook/testing-library';
+
 const UserHelper = (() => {
     const checkAndLoadUserLogged = async (conf) => {
         let user = null;
