@@ -34,7 +34,7 @@
   const openNovusbet = async () => {
     console.log("OPTIONS CONTAINS....: ", JSON.stringify(options));
     console.log("USER DATA....: ",JSON.stringify(user));
-    let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games, options.gameToken) : baseUrlNovusbet;
+    let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games, user.agregatorToken) : baseUrlNovusbet;
     console.log("ESTA ES LA URL...: ", JSON.stringify(url));
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     if (userState == "loggedIn"){
