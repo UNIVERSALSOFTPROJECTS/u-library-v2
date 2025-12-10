@@ -75,7 +75,8 @@
   const baseUrlWin365Mx = `https://prod20370-170517448.freethrow777.com`;
   const baseUrlGanawin = `https://prod20370-169234874.freethrow777.com`;
   // const baseUrlGanabet365 = `https://prod20370-169327015.freethrow777.com`;
-  const baseUrlParyajKebek = `https://prod20370-171305761.freethrow777.com`; 
+  const baseUrlParyajKebek = `https://prod20370-171305761.freethrow777.com`;
+  const baseUrlBets286 = `https://prod20370-184927999.freethrow777.com`;
 
   const games = {
     'digtain':{
@@ -184,6 +185,7 @@
       //   url =baseUrlGanabet365
       else if (CLIENT_CODE == 'BTMX') url =baseUrlWin365Mx
       else if (CLIENT_CODE == 'PJKB') url =baseUrlParyajKebek
+      else if (CLIENT_CODE == 'BDOS') url =baseUrlBets286
       else url = baseUrlGanawin
       sportbookGameUrl = url;
     } catch (error) {
