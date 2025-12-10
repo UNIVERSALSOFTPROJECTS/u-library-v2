@@ -1,6 +1,7 @@
 import SocketConnector from './SocketConnector';
 import ServerConnection from './server';
 import EventManager from "./EventManager";
+import { userEvent } from '@storybook/testing-library';
 const UserHelper = (() => {
     const checkAndLoadUserLogged = async (conf) => {
         let user = null;
@@ -30,6 +31,7 @@ const UserHelper = (() => {
         }
 
         if(user.type === "TERMINAL" && user.cashier){
+            connectToLobbySocketCashier(user, conf)
             initSocketEvents(onOpenNotification, user.cashier)
         }
         return user;
@@ -38,10 +40,15 @@ const UserHelper = (() => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf);
-
          //conecta al websocket.
     };
    
+    const connectToLobbySocketCashier = (user, conf) => {
+        if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
+        const serial = user.serial || user.aggregator_token?.slice(0,13);
+              
+        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf);
+    };
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
         EventManager.subscribe("CASHIER_DISCONNECT", ({cashier})=>{
             if(cashier == currentcashier){ 
