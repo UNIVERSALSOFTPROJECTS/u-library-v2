@@ -29,11 +29,11 @@ const SocketConnector = (() => {
                     EventManager.publish("update_balance", {newBalance: data.body})
                     //body	"CASHIER_CONNECT_cajero.default_true"
                 }else if (data.body == "CASHIER_CONNECTED"){
-                    EventManager.publish("CASHIER_CONNECT", {cashierName})
+                    EventManager.publish("CASHIER_CONNECT", {cashierName: cashierName})
                     console.log("cashierName11",cashierName);
                     
                 }else if (data.body == "CASHIER_DISCONNECTED"){
-                    EventManager.publish("CASHIER_DISCONNECTED", {cashierName})
+                    EventManager.publish("CASHIER_DISCONNECTED", {cashierName: cashierName})
                     console.log("cashierName22",cashierName);
                 } 
             });
@@ -53,7 +53,7 @@ const SocketConnector = (() => {
         stompClient.activate();
 
     }
-    function connectToLobbySocketCashier(username, cashier, conf, cashierName) {
+    function connectToLobbySocketCashier(username, cashier, conf) {
         console.log(`Opening WS connection to LOBBYBFF`);
         let headersSocket = {};
         if(cashier!=null){
@@ -71,8 +71,6 @@ const SocketConnector = (() => {
         stompClientCashier.onConnect = (frame) => {
             console.log("onConnect Socket success");
             stompClientCashier.subscribe('/user/queue/messages', (data) => {
-                console.log("DATA WEBSOCKET", data);
-                console.log("CASHIER WEBSOCKET", cashier);
                 const msg = data.body;
                 // if (msg.startsWith("CASHIER_CONNECT_")){
                 //     const [, , cashierName, status] = msg.split("_")
@@ -84,14 +82,7 @@ const SocketConnector = (() => {
                 //     const isDisconnect = status == "true"
                 //     EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, disconnect: isDisconnect})
                 // }
-                if (data.body == "CASHIER_CONNECTED"){
-                    EventManager.publish("CASHIER_CONNECT", {cashierName})
-                    console.log("cashierName",cashierName);
-                    
-                }else if (data.body == "CASHIER_DISCONNECTED"){
-                    EventManager.publish("CASHIER_DISCONNECTED", {cashierName})
-                    console.log("cashierName2",cashierName);
-                }  
+                  
             });
         };
 

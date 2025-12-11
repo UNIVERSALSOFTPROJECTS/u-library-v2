@@ -27,11 +27,12 @@ const UserHelper = (() => {
         let u = sessionStorage.getItem("user");
         if (u) {
             user = JSON.parse(u);
-            connectToLobbySocket(user, conf, onOpenNotification)
+            connectToLobbySocket(user, conf)
+            initSocketEvents(onOpenNotification, user.cashier) 
         }
 
         if(user.type === "TERMINAL" && user.cashier){
-            connectToLobbySocketTerminal(user, conf, onOpenNotification)
+            connectToLobbySocketTerminal(user, conf)
             // initSocketEvents(onOpenNotification, user.cashier)
         }
 
@@ -41,11 +42,10 @@ const UserHelper = (() => {
 
         return user;
     };
-    const connectToLobbySocket = (user, conf, onOpenNotification) => {
+    const connectToLobbySocket = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf, user.cashier);
-        initSocketEvents(onOpenNotification, user.cashier) 
         //conecta al websocket.
     };
    
@@ -54,11 +54,10 @@ const UserHelper = (() => {
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`,null, conf);
     };
-    const connectToLobbySocketTerminal = (user, conf, onOpenNotification) => {
+    const connectToLobbySocketTerminal = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
-        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`, conf, user.cashier);
-        initSocketEvents(onOpenNotification, user.cashier)
+        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`, conf);
     };
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
         EventManager.subscribe("CASHIER_DISCONNECTED", ({cashier})=>{
