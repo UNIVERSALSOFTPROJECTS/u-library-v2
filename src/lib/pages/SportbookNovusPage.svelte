@@ -34,7 +34,7 @@
   const openNovusbet = async () => {
     console.log("OPTIONS CONTAINS....: ", JSON.stringify(options));
     console.log("USER DATA....: ",JSON.stringify(user));
-    const data = await backend.authInGame(user.agregatorToken);
+    const data = await backend.users.authInGame(user.agregatorToken);
     console.log("DATA.....: ",JSON.stringify(data));
     let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games, data.gameToken) : baseUrlNovusbet;
     console.log("ESTA ES LA URL...: ", JSON.stringify(url));
