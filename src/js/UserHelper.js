@@ -27,13 +27,16 @@ const UserHelper = (() => {
         let u = sessionStorage.getItem("user");
         if (u) {
             user = JSON.parse(u);
-            connectToLobbySocket(user, conf, onOpenNotification)
-            // initSocketEvents(onOpenNotification, user.cashier)
+            
+            if(user.type === "TERMINAL" && user.cashier){
+                connectToLobbySocketTerminal(user, conf, onOpenNotification)
+            }else {
+                connectToLobbySocket(user, conf)
+            }
         }
 
         if(user.type === "TERMINAL" && user.cashier){
-            connectToLobbySocketTerminal(user, conf)
-            // initSocketEvents(onOpenNotification, user.cashier)
+            connectToLobbySocketTerminal2(user, conf)
         }
 
         if(user.type === "CASHIER"){
@@ -42,7 +45,13 @@ const UserHelper = (() => {
 
         return user;
     };
-    const connectToLobbySocket = (user, conf, onOpenNotification) => {
+    const connectToLobbySocket = (user, conf) => {
+        if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
+        const serial = user.serial || user.aggregator_token?.slice(0,13);
+        SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf, user.cashier);
+        //conecta al websocket.
+    };
+    const connectToLobbySocketTerminal = (user, conf, onOpenNotification) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf, user.cashier, onOpenNotification);
@@ -54,27 +63,11 @@ const UserHelper = (() => {
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`,null, conf);
     };
-    const connectToLobbySocketTerminal = (user, conf) => {
+    const connectToLobbySocketTerminal2 = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`, conf);
     };
-    // const initSocketEvents = (onOpenNotification, currentcashier)=>{
-    //     console.log("entrando a initsockets--------currentcashier", currentcashier);
-    //     EventManager.subscribe("CASHIER_DISCONNECTED", ({cashier})=>{
-    //         if(cashier == currentcashier){ 
-    //             onOpenNotification("accessCashier")
-    //             console.log("CASHIER DESCONECTADO", cashier);
-                
-    //         }
-    //     })
-    //      EventManager.subscribe("CASHIER_CONNECTED", ({cashier})=>{
-    //         if(cashier == currentcashier){
-    //             onOpenNotification(null)
-    //             console.log("CASHIER CONECTADO", cashier);
-    //         }
-    //     })
-    // }
     
     return {
         checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft
