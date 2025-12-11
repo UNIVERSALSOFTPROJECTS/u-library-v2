@@ -27,7 +27,7 @@ const UserHelper = (() => {
         let u = sessionStorage.getItem("user");
         if (u) {
             user = JSON.parse(u);
-            connectToLobbySocket(user, conf)
+            connectToLobbySocket(user, conf, onOpenNotification)
         }
 
         if(user.type === "TERMINAL" && user.cashier){
@@ -41,11 +41,12 @@ const UserHelper = (() => {
 
         return user;
     };
-    const connectToLobbySocket = (user, conf) => {
+    const connectToLobbySocket = (user, conf, onOpenNotification) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
-        SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf);
-         //conecta al websocket.
+        SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf, user.cashier);
+        initSocketEvents(onOpenNotification, user.cashier) 
+        //conecta al websocket.
     };
    
     const connectToLobbySocketCashier = (user, conf) => {

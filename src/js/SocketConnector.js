@@ -8,7 +8,7 @@ const SocketConnector = (() => {
     let conf = {};
 
 
-    function connectToLobbySocket(username, conf) {
+    function connectToLobbySocket(username, conf, cashierName) {
         console.log(`Opening WS connection to LOBBYBFF`);
         stompClient = new Client({
             brokerURL: conf.WS_URL,
@@ -28,7 +28,14 @@ const SocketConnector = (() => {
                 } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
                     //body	"CASHIER_CONNECT_cajero.default_true"
-                }
+                }else if (data.body == "CASHIER_CONNECTED"){
+                    EventManager.publish("CASHIER_CONNECT", {cashierName})
+                    console.log("cashierName11",cashierName);
+                    
+                }else if (data.body == "CASHIER_DISCONNECTED"){
+                    EventManager.publish("CASHIER_DISCONNECTED", {cashierName})
+                    console.log("cashierName22",cashierName);
+                } 
             });
         };
 
