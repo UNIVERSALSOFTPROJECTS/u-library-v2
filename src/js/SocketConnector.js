@@ -28,11 +28,7 @@ const SocketConnector = (() => {
                 } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
                     //body	"CASHIER_CONNECT_cajero.default_true"
-                } else if (data.body == "CASHIER_CONNECTED"){
-                    EventManager.publish("CASHIER_CONNECT", {})
-                }else if (data.body == "CASHIER_DISCONNECTED"){
-                    EventManager.publish("CASHIER_DISCONNECTED", {})
-                } 
+                }
             });
         };
 
@@ -50,7 +46,7 @@ const SocketConnector = (() => {
         stompClient.activate();
 
     }
-    function connectToLobbySocketCashier(username, cashier, conf) {
+    function connectToLobbySocketCashier(username, cashier, conf, cashierName) {
         console.log(`Opening WS connection to LOBBYBFF`);
         let headersSocket = {};
         if(cashier!=null){
@@ -82,9 +78,12 @@ const SocketConnector = (() => {
                 //     EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, disconnect: isDisconnect})
                 // }
                 if (data.body == "CASHIER_CONNECTED"){
-                    EventManager.publish("CASHIER_CONNECT", {cashier})
+                    EventManager.publish("CASHIER_CONNECT", {cashierName})
+                    console.log("cashierName",cashierName);
+                    
                 }else if (data.body == "CASHIER_DISCONNECTED"){
-                    EventManager.publish("CASHIER_DISCONNECTED", {cashier})
+                    EventManager.publish("CASHIER_DISCONNECTED", {cashierName})
+                    console.log("cashierName2",cashierName);
                 }  
             });
         };

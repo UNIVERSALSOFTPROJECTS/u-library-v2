@@ -56,7 +56,7 @@ const UserHelper = (() => {
     const connectToLobbySocketTerminal = (user, conf, onOpenNotification) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
-        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`, conf);
+        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`, conf, user.cashier);
         initSocketEvents(onOpenNotification, user.cashier)
     };
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
