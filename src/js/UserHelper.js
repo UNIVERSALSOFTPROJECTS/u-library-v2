@@ -60,7 +60,7 @@ const UserHelper = (() => {
         initSocketEvents(onOpenNotification, user.cashier)
     };
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
-        EventManager.subscribe("CASHIER_NOT_CONNECTED", ({cashier})=>{
+        EventManager.subscribe("CASHIER_DISCONNECTED", ({cashier})=>{
             if(cashier == currentcashier){ 
                 onOpenNotification("accessCashier")
             }
