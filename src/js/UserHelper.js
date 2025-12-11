@@ -28,12 +28,14 @@ const UserHelper = (() => {
         if (u) {
             user = JSON.parse(u);
             connectToLobbySocket(user, conf)
-            initSocketEvents(onOpenNotification, user.cashier) 
+            initSocketEvents(onOpenNotification, user.cashier)
+            console.log("onOpenNotification", onOpenNotification);
+            
         }
 
         if(user.type === "TERMINAL" && user.cashier){
             connectToLobbySocketTerminal(user, conf)
-            // initSocketEvents(onOpenNotification, user.cashier)
+            initSocketEvents(onOpenNotification, user.cashier)
         }
 
         if(user.type === "CASHIER"){
@@ -60,14 +62,18 @@ const UserHelper = (() => {
         SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`, conf);
     };
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
+        console.log("entrando a initsockets--------currentcashier", currentcashier);
         EventManager.subscribe("CASHIER_DISCONNECTED", ({cashier})=>{
             if(cashier == currentcashier){ 
                 onOpenNotification("accessCashier")
+                console.log("CASHIER DESCONECTADO", cashier);
+                
             }
         })
          EventManager.subscribe("CASHIER_CONNECTED", ({cashier})=>{
             if(cashier == currentcashier){
                 onOpenNotification(null)
+                console.log("CASHIER CONECTADO", cashier);
             }
         })
     }
