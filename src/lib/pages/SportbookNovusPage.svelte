@@ -36,7 +36,7 @@
     console.log("USER DATA....: ",JSON.stringify(user));
     const data = await backend.users.authInGame(user.agregatorToken);
     console.log("DATA AUTH IN GAME.....: ",JSON.stringify(data));
-    let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games, data.gameToken) : baseUrlNovusbet;
+    let url = userState == "loggedIn"? ut.getGameURL(GAMEAPI_URL, games, data.val.token) : baseUrlNovusbet;
     console.log("ESTA ES LA URL...: ", JSON.stringify(url));
     url += active_view == "sportbooklive" ? "&page=live" : "&page=sport";
     if (userState == "loggedIn"){
