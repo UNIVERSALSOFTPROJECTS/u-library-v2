@@ -31,13 +31,12 @@ const UserHelper = (() => {
         }
 
         if(user.type === "TERMINAL" && user.cashier){
-            connectToLobbySocketTerminal(user, conf)
-            initSocketEvents(onOpenNotification, user.cashier)
+            connectToLobbySocketTerminal(user, conf, onOpenNotification)
+            // initSocketEvents(onOpenNotification, user.cashier)
         }
 
         if(user.type === "CASHIER"){
             connectToLobbySocketCashier(user, conf)
-            initSocketEvents(onOpenNotification, user.cashier)
         }
 
         return user;
@@ -52,21 +51,21 @@ const UserHelper = (() => {
     const connectToLobbySocketCashier = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
-        
         SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`,null, conf);
     };
-    const connectToLobbySocketTerminal = (user, conf) => {
+    const connectToLobbySocketTerminal = (user, conf, onOpenNotification) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`, conf);
+        initSocketEvents(onOpenNotification, user.cashier)
     };
     const initSocketEvents = (onOpenNotification, currentcashier)=>{
-        EventManager.subscribe("CASHIER_DISCONNECT", ({cashier})=>{
+        EventManager.subscribe("CASHIER_NOT_CONNECTED", ({cashier})=>{
             if(cashier == currentcashier){ 
                 onOpenNotification("accessCashier")
             }
         })
-         EventManager.subscribe("CASHIER_CONNECT", ({cashier})=>{
+         EventManager.subscribe("CASHIER_CONNECTED", ({cashier})=>{
             if(cashier == currentcashier){
                 onOpenNotification(null)
             }

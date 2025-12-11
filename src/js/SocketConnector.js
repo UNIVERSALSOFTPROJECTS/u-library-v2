@@ -46,7 +46,7 @@ const SocketConnector = (() => {
         stompClient.activate();
 
     }
-    function connectToLobbySocketCashier(username, cashier,conf) {
+    function connectToLobbySocketCashier(username, cashier, conf) {
         console.log(`Opening WS connection to LOBBYBFF`);
         let headersSocket = {};
         if(cashier!=null){
@@ -64,16 +64,23 @@ const SocketConnector = (() => {
         stompClientCashier.onConnect = (frame) => {
             console.log("onConnect Socket success");
             stompClientCashier.subscribe('/user/queue/messages', (data) => {
+                console.log("DATA WEBSOCKET", data);
+                
                 const msg = data.body;
-                if (msg.startsWith("CASHIER_CONNECT_")){
-                    const [, , cashierName, status] = msg.split("_")
-                    const isActive = status == "true"
-                    EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, active: isActive})
+                // if (msg.startsWith("CASHIER_CONNECT_")){
+                //     const [, , cashierName, status] = msg.split("_")
+                //     const isActive = status == "true"
+                //     EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, active: isActive})
                     
-                }else if (msg.startsWith("CASHIER_DISCONNECT_")){
-                    const [, , cashierName, status] = msg.split("_")
-                    const isDisconnect = status == "true"
-                    EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, disconnect: isDisconnect})
+                // }else if (msg.startsWith("CASHIER_DISCONNECT_")){
+                //     const [, , cashierName, status] = msg.split("_")
+                //     const isDisconnect = status == "true"
+                //     EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, disconnect: isDisconnect})
+                // }
+                if (data.body == "CASHIER_CONNECTED"){
+                    EventManager.publish("CASHIER_CONNECT", {cashier: cashier})
+                }else if (data.body == "CASHIER_NOT_CONNECTED"){
+                    EventManager.publish("CASHIER_NOT_CONNECTED", {cashier: cashier})
                 }  
             });
         };
