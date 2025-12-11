@@ -45,7 +45,7 @@ const UserHelper = (() => {
     const connectToLobbySocket = (user, conf, onOpenNotification) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
-        SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf, onOpenNotification);
+        SocketConnector.connectToLobbySocket(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf, user.cashier, onOpenNotification);
         //conecta al websocket.
     };
    
