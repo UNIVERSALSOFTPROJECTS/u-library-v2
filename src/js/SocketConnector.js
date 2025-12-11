@@ -20,15 +20,19 @@ const SocketConnector = (() => {
         stompClient.onConnect = (frame) => {
             console.log("onConnect Socket success");
             stompClient.subscribe('/user/queue/messages', (data) => {
+               console.log("DATA WEBSOCKET11", data);
                 const msg = data.body;
-               
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
                 } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
                     //body	"CASHIER_CONNECT_cajero.default_true"
-                }
+                } else if (data.body == "CASHIER_CONNECTED"){
+                    EventManager.publish("CASHIER_CONNECT", {})
+                }else if (data.body == "CASHIER_DISCONNECTED"){
+                    EventManager.publish("CASHIER_DISCONNECTED", {})
+                } 
             });
         };
 
