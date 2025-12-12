@@ -28,20 +28,19 @@ const UserHelper = (() => {
         if (u) {
             user = JSON.parse(u);
             
-            if(user.type === "TERMINAL" && user.cashier){
+            if(user.type == "TERMINAL" && user.cashier){
                 connectToLobbySocketTerminal(user, conf, onOpenNotification)
             }else {
                 connectToLobbySocket(user, conf)
             }
 
-            if(user.type === "TERMINAL" && user.cashier){
+            if(user.type == "TERMINAL" && user.cashier){
                 connectToLobbySocketTerminal2(user, conf)
             }
 
-            if(user.type === "CASHIER"){
+            if(user.type == "CASHIER"){
                 connectToLobbySocketCashier(user, conf)
             }
-
         }
         
         return user;
