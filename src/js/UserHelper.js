@@ -33,16 +33,17 @@ const UserHelper = (() => {
             }else {
                 connectToLobbySocket(user, conf)
             }
-        }
 
-        if(user.type === "TERMINAL" && user.cashier){
-            connectToLobbySocketTerminal2(user, conf)
-        }
+            if(user.type === "TERMINAL" && user.cashier){
+                connectToLobbySocketTerminal2(user, conf)
+            }
 
-        if(user.type === "CASHIER"){
-            connectToLobbySocketCashier(user, conf)
-        }
+            if(user.type === "CASHIER"){
+                connectToLobbySocketCashier(user, conf)
+            }
 
+        }
+        
         return user;
     };
     const connectToLobbySocket = (user, conf) => {
