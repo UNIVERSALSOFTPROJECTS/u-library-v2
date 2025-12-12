@@ -136,9 +136,30 @@ const SocketConnector = (() => {
 
         stompClient.activate();
     }
+    function disconnectAll() {
+        try {
+            if (stompClient) {
+                console.log("Disconnecting main socket...");
+                stompClient.deactivate();
+                stompClient = null;
+            }
+        } catch (e) {
+            console.warn("Error disconnecting stompClient", e);
+        }
+        try {
+            if (stompClientCashier) {
+                console.log("Disconnecting cashier socket...");
+                stompClientCashier.deactivate();
+                stompClientCashier = null;
+            }
+        } catch (e) {
+            console.warn("Error disconnecting stompClientCashier", e);
+        }
+    }
+
 
     return {
-        connect, setConfig, connectToLobbySocket, connectToLobbySocketCashier
+        connect, disconnectAll, setConfig, connectToLobbySocket, connectToLobbySocketCashier
     }
 
 })()

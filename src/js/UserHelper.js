@@ -68,9 +68,11 @@ const UserHelper = (() => {
         const serial = user.serial || user.aggregator_token?.slice(0,13);
         SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`, conf);
     };
-    
+    const checkDisconnectAll = ()=>{
+        SocketConnector.disconnectAll();
+    }
     return {
-        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft
+        checkAndLoadUserLogged, connectToLobbySocket, checkAndLoadUserLoggedUniversalSoft, checkDisconnectAll
     }
 })()
 
