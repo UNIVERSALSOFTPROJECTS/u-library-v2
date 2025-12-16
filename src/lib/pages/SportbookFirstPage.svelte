@@ -22,6 +22,7 @@
     URCO:"https://prod20370-161019095.freethrow777.com",
     URCL: "https://prod20370-161018822.freethrow777.com",
     MPCO: "https://prod20370-161019095.freethrow777.com",
+    URVE:"https://prod20370-161019095.freethrow777.com",
     default: "https://prod20370-150256248.freethrow777.com",
   };
   
