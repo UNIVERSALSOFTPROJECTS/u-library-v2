@@ -1,12 +1,6 @@
 <script>
   import { onMount } from "svelte";
   import ServerConnection from "../../js/server";
-  import { Turnstile } from "svelte-turnstile";
-  import {
-    getUpdateBalance,
-    getUpdateBalanceUniversal,
-  } from "../../js/utils/serverUtils";
-  import notify from "../../js/notify";
 
   export let onOk;
   export let onError;
@@ -21,11 +15,9 @@
   let username = "";
   let loadLogin = false;
   let showPassword = false;
-  const isLocalhost = window.location.hostname === "localhost";
-  let isVerified = isLocalhost?true:false;
-  let turnstileToken = "";
   let autoLogin = localStorage.getItem('autoSaved') ? true : false;
   let timerLogin;
+  let isAutoLoginInProgress = false;
 
   const dataPassword = (e) => {
     password = e.target.value;
@@ -37,17 +29,11 @@
     if (e.charCode === 13) loginClick();
   };
 
-  function handleVerify(token) {
-    console.log("tokentokentokentoken",token);
-    
-    turnstileToken = token;
-    isVerified = true;
-  }
-
   function cancelAutologin(status) {
     if (!status) {
       clearTimeout(timerLogin);
       localStorage.removeItem('autoSaved');
+      isAutoLoginInProgress = false;
     }
   }
 
@@ -77,34 +63,50 @@
         localStorage.setItem('autoSaved', `[{"user":"${username}", "pass":"${password}"}]`);
       }
       if (timerLogin) clearTimeout(timerLogin);
+      isAutoLoginInProgress = false;
       //Formatear la propiedad "bonus" con el updatebalance
+      loadLogin = false;
       onOk(data);
       
     } catch (error) {
       console.log("error: ", error);
-      if (
-        error.message == "Network Error" ||
-        error.response.data.message.includes("Connection refused")
-      )
-        error = t("msg.pageMaintenance");
-      else if (
-        error.response.data.message == "NECO_LOGIN_FAILED" ||
-        error.response.data.message == "LOGIN_ERROR" || 
-        error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
-      )
-        error = t("msg.incorrectUserPass");
-      else error = t("msg.contactSupport"); //si aparece esto, es un tipo de error nuevo y se tieneque debbugear
-      onError(error);
       loadLogin = false;
+      isAutoLoginInProgress = false;
+      let errorMessage = t("msg.contactSupport");
+      
+      if (error.message == "Network Error") {
+        errorMessage = t("msg.pageMaintenance");
+      } else if (error.response && error.response.data && error.response.data.message) {
+        if (error.response.data.message.includes("Connection refused")) {
+          errorMessage = t("msg.pageMaintenance");
+        } else if (
+          error.response.data.message == "NECO_LOGIN_FAILED" ||
+          error.response.data.message == "LOGIN_ERROR" || 
+          error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
+        ) {
+          errorMessage = t("msg.incorrectUserPass");
+        }
+      }
+      onError(errorMessage);
     }
   }
 
   onMount(() => {
     if (autoLogin) {
-      let userSaved = JSON.parse(localStorage.getItem('autoSaved'));
-      username = userSaved[0].user;
-      password = userSaved[0].pass;
-      timerLogin = setTimeout(function() { loginClick(); }, 10000);
+      try {
+        let userSaved = JSON.parse(localStorage.getItem('autoSaved'));
+        if (userSaved && userSaved[0]) {
+          username = userSaved[0].user;
+          password = userSaved[0].pass;
+          isAutoLoginInProgress = true;
+          timerLogin = setTimeout(function() { loginClick(); }, 10000);
+        }
+      } catch (e) {
+        console.error("Error loading saved credentials:", e);
+        localStorage.removeItem('autoSaved');
+        autoLogin = false;
+        isAutoLoginInProgress = false;
+      }
     }
   });
 
@@ -130,7 +132,7 @@
       autocomplete="username"
       on:keypress={loginEnter}
       bind:value={username}
-      disabled={autoLogin}
+      disabled={isAutoLoginInProgress}
     />
     <div class="login__ipt--pass">
       <input
@@ -140,7 +142,7 @@
         placeholder={t("login.password")}
         on:keypress={loginEnter}
         on:input={dataPassword}
-        disabled={autoLogin}
+        disabled={isAutoLoginInProgress}
       />
       <button
         type="button"
@@ -153,9 +155,6 @@
       <input type="checkbox" id="autosaved" bind:checked={autoLogin}>
       <label for="autosaved">{t("login.remember")}</label>
     </div>
-    <!--{#if !isLocalhost}-->
-    <!-- <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:callback={(e) => handleVerify(e.detail)} /> -->
-    <!-- {/if}-->
     <button
       type="button"
       class="btn login"
