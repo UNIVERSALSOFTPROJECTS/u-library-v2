@@ -3,7 +3,7 @@
     import DropdowIdiom from "../dropdown/DropdowIdiom.svelte";
     import { detectDomain, detectSubdomain, getSharedCookie, setSharedCookie } from "../../js/utils/formatUtils";
     import { isMobile } from "mobile-device-detect";
-    import { onMount } from "svelte";
+    import { onMount, onDestroy } from "svelte";
 
     export let configLogin;
     export let configTypeView;
@@ -28,6 +28,18 @@
     const domain = detectDomain();
     let subdomain = detectSubdomain();
     
+    // Función para manejar teclas especiales
+    const handleKeydown = (e) => {
+        if (e.key === 'F2') f2Pressed = true;
+        
+        if (f2Pressed && (e.key === 'r' || e.key === 'R')){
+            modalOpen = true;
+            f2Pressed = false;
+            viewDataConfig();
+        }
+        if (e.key !== 'F2' && e.key !== 'r' && e.key !== 'R') f2Pressed = false;
+    };
+
     // Redirección automática al iniciar: detecta cookie y redirige si existe
     onMount(() => {
         // Solo redirigir si está en la ruta principal (sin subdominio)
@@ -41,6 +53,14 @@
                 }
             }
         }
+
+        // Abrir modal con teclas especiales (F2 + r) - funciona en web y mobile
+        document.addEventListener('keydown', handleKeydown);
+    });
+
+    onDestroy(() => {
+        // Limpiar el listener cuando el componente se desmonte
+        document.removeEventListener('keydown', handleKeydown);
     });
 
     const viewDataConfig = () => {
@@ -105,31 +125,6 @@
         isVirtualKeyboard != isVirtualKeyboard; 
         isVirtualKeyboard?localStorage.removeItem("btnVirtualKeyboard"):localStorage.setItem("btnVirtualKeyboard", "active");
     }
-
-    //open Modal with specials keys
-    document.addEventListener('keydown', (e) => {
-        //just venezuela tv with android Mobile , specuak key "*"" 
-        // if (isMobile) {
-                        document.querySelectorAll('input').forEach((input) => {
-                input.addEventListener('input', (e) => {
-                    if (e.target.value.includes('*')) {
-                        modalOpen = true;
-                        viewDataConfig();
-                        e.target.value = e.target.value.replace('*', ''); // Opcional: elimina el asterisco
-                    }
-                });
-});
-        // }else{
-            if (e.key === 'F2') f2Pressed = true;
-            
-            if (f2Pressed && e.key === 'r' || f2Pressed &&  e.key === 'R'){
-                modalOpen = true;
-                f2Pressed = false;
-                viewDataConfig();
-            }
-            if (e.key !== 'F2' && e.key !== 'r')  f2Pressed = false;
-        // }
-    });
 </script>
 
 <Modal bind:open={modalOpen} bind:subModalOpened title={t("profile.configuration")}>
