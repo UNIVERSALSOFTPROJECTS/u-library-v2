@@ -10,10 +10,10 @@
     export let onOk;
     export let t;
 
-    const openBillCollector = configLogin.openBillCollector;
-    const changeIdiom = configLogin.changeIdiom;
-	let  idioms = configLogin.idioms;
-    let countries = configLogin.countries;
+    const openBillCollector = configLogin?.openBillCollector;
+    const changeIdiom = configLogin?.changeIdiom;
+	let  idioms = configLogin?.idioms;
+    let countries = configLogin?.countries;
     let typeView = localStorage.getItem("typeView") || "";
     let modalOpen = false;
     let subModalOpened = "configAutoservice";
@@ -138,21 +138,25 @@
             <input type="text" class="ipt icon--user" placeholder={t("login.user")} autocapitalize="off" bind:value={username}>
 		    <input type="text" class="ipt icon--password" placeholder={t("login.password")} autocomplete="off"  bind:value={password}>
         </div>
+        {#if changeIdiom && idioms}
         <div class="configAutoservice__country">
             <b>{t("autoservice.language")}</b>
+            {#if countries && countries.length > 0}
             <b>{t("autoservice.country")}</b>
+            {/if}
             <DropdowIdiom bind:idioms {changeIdiom}/>
-            {#if countries.length != 0}
+            {#if countries && countries.length > 0}
             <select class="slc" bind:value={subdomain}>
                 <option value="" disabled>{t("autoservice.selectCountry")}</option>
                 {#each countries as country}
                     <option value={country.domain}>{country.name}</option>
                 {/each}
             </select>
-            {:else}
+            {:else if countries}
             <input type="text" class="ipt" value={t("autoservice.notAviable")} disabled>
             {/if}
         </div>
+        {/if}
         <b>{t("autoservice.typeView")}</b>
         <div class="configAutoservice__type">
             <button class="btn {typeView == ""?'active':''}" on:click={()=>changeTypeView("")}>Web</button>
@@ -168,11 +172,13 @@
             <input type="checkbox" class="switch" id="version" bind:checked={isLiteVersion} on:click={toggleBtnLiteVersion}>
             <label for="keyboard">{t("autoservice.virtualKeyboard")}</label> 
             <input type="checkbox" class="switch" id="keyboard" bind:checked={isVirtualKeyboard} on:click={toggleBtnsVirtualKeyboard}>
+            {#if openBillCollector}
             <div>{t("autoservice.wallet")}</div>
             <button class="btn wallet" on:click={() => {
                 openBillCollector();
                 modalOpen = false;
               }}>{t("autoservice.open")}</button>
+            {/if}
         </div>
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>
