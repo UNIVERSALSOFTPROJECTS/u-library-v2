@@ -6,6 +6,7 @@
     import { onMount } from "svelte";
 
     export let configLogin;
+    export let configTypeView;
     export let onError;
     export let onOk;
     export let t;
@@ -13,7 +14,7 @@
     const openBillCollector = configLogin?.openBillCollector;
     const changeIdiom = configLogin?.changeIdiom;
 	let  idioms = configLogin?.idioms;
-    let countries = configLogin?.countries;
+    let countries = configLogin?.countries || [];
     let typeView = localStorage.getItem("typeView") || "";
     let modalOpen = false;
     let subModalOpened = "configAutoservice";
@@ -138,21 +139,21 @@
             <input type="text" class="ipt icon--user" placeholder={t("login.user")} autocapitalize="off" bind:value={username}>
 		    <input type="text" class="ipt icon--password" placeholder={t("login.password")} autocomplete="off"  bind:value={password}>
         </div>
-        {#if changeIdiom && idioms}
+        {#if configTypeView != "cashier"}
         <div class="configAutoservice__country">
+            {#if changeIdiom && idioms}
             <b>{t("autoservice.language")}</b>
+            <DropdowIdiom bind:idioms {changeIdiom}/>
+            {/if}
             {#if countries && countries.length > 0}
             <b>{t("autoservice.country")}</b>
-            {/if}
-            <DropdowIdiom bind:idioms {changeIdiom}/>
-            {#if countries && countries.length > 0}
             <select class="slc" bind:value={subdomain}>
                 <option value="" disabled>{t("autoservice.selectCountry")}</option>
                 {#each countries as country}
                     <option value={country.domain}>{country.name}</option>
                 {/each}
             </select>
-            {:else if countries}
+            {:else}
             <input type="text" class="ipt" value={t("autoservice.notAviable")} disabled>
             {/if}
         </div>
@@ -162,6 +163,7 @@
             <button class="btn {typeView == ""?'active':''}" on:click={()=>changeTypeView("")}>Web</button>
             <button class="btn {typeView == "autoservice"?'active':''}" on:click={()=>changeTypeView("autoservice")}>Autoservice</button>
         </div>
+        {#if configTypeView != "cashier"}
         <b>{t("autoservice.buttons")}</b>
         <div class="configAutoservice__buttons">
             <label for="deposit">{t("autoservice.deposit")}</label> 
@@ -180,6 +182,7 @@
               }}>{t("autoservice.open")}</button>
             {/if}
         </div>
+        {/if}
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>
 </Modal>
