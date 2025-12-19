@@ -15,9 +15,13 @@
   let username = "";
   let loadLogin = false;
   let showPassword = false;
+  let typeView = localStorage.getItem('typeView') || "";
   let autoLogin = localStorage.getItem('autoSaved') ? true : false;
+  let isAutoservice = autoLogin && typeView == "autoservice";
+  let isAutoserviceError = false;
   let timerLogin;
   let isAutoLoginInProgress = false;
+  let typeError = "";
 
   const dataPassword = (e) => {
     password = e.target.value;
@@ -85,9 +89,11 @@
           error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
         ) {
           errorMessage = t("msg.incorrectUserPass");
+          typeError = "incorrectUserPass";
         }
       }
       onError(errorMessage);
+      if (isAutoservice) isAutoserviceError = true;
     }
   }
 
@@ -99,7 +105,7 @@
           username = userSaved[0].user;
           password = userSaved[0].pass;
           isAutoLoginInProgress = true;
-          timerLogin = setTimeout(function() { loginClick(); }, 10000);
+          timerLogin = setTimeout(function() { loginClick(); }, typeView == "autoservice" ? 2000 : 10000);
         }
       } catch (e) {
         console.error("Error loading saved credentials:", e);
@@ -111,10 +117,33 @@
   });
 
   $: cancelAutologin(autoLogin);
+  $: isAutoservice = autoLogin && typeView == "autoservice";
 
 </script>
 
+{#if isAutoservice}
 <div class="modal-body">
+  {#if isAutoserviceError}
+    <div class="login__autoservice error">
+      <p>
+        {typeError == 'incorrectUserPass' ? t("msg.incorrectUserPass") : t("login.autoserviceError")}
+      </p>
+      <button class="btn" on:click={()=>location.reload()}>{t("msg.refresh")}</button>
+    </div>
+  {:else}
+    <div class="login__autoservice">
+      <!-- esto de momento es solo para machines -->
+      <div class="loading">
+        <div>
+          <b><b><b><b><b><b><b><b><b><b><b></b></b></b></b></b></b></b></b></b></b></b>
+        </div>
+      </div>
+      <p>{t("lobby.loading")}</p>
+    </div>
+  {/if}
+</div>
+{/if}
+<div class="modal-body {isAutoservice?'autoservice':''}">
   <div class="login__title">{t("login.title")}</div>
   <img
     class="login__logo"
@@ -132,7 +161,7 @@
       autocomplete="username"
       on:keypress={loginEnter}
       bind:value={username}
-      disabled={isAutoLoginInProgress}
+      disabled={autoLogin}
     />
     <div class="login__ipt--pass">
       <input
@@ -142,7 +171,7 @@
         placeholder={t("login.password")}
         on:keypress={loginEnter}
         on:input={dataPassword}
-        disabled={isAutoLoginInProgress}
+        disabled={autoLogin}
       />
       <button
         type="button"
