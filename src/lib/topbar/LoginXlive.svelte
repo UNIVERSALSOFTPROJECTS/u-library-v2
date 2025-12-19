@@ -14,7 +14,6 @@
   let password = "";
   let username = "";
   let loadLogin = false;
-  let showPassword = false;
   let typeView = localStorage.getItem('typeView') || "";
   let autoLogin = localStorage.getItem('autoSaved') ? true : false;
   let isAutoservice = autoLogin && typeView == "autoservice";
@@ -23,12 +22,6 @@
   let isAutoLoginInProgress = false;
   let typeError = "";
 
-  const dataPassword = (e) => {
-    password = e.target.value;
-  };
-  const togglePasswordHide = () => {
-    showPassword = !showPassword;
-  };
   const loginEnter = (e) => {
     if (e.charCode === 13) loginClick();
   };
@@ -187,23 +180,15 @@
       bind:value={username}
       disabled={autoLogin}
     />
-    <div class="login__ipt--pass">
-      <input
-        class="ipt icon--password"
-        type={showPassword ? "text" : "password"}
-        autocomplete="current-password"
-        placeholder={t("login.password")}
-        on:keypress={loginEnter}
-        on:input={dataPassword}
-        disabled={autoLogin}
-      />
-      <button
-        type="button"
-        class="btn {showPassword ? 'no-eye' : 'eye'}"
-        name="password"
-        on:click={togglePasswordHide}
-      ></button>
-    </div>
+    <input
+      class="ipt icon--password"
+      type="password"
+      autocomplete="current-password"
+      placeholder={t("login.password")}
+      on:keypress={loginEnter}
+      bind:value={password}
+      disabled={autoLogin}
+    />
     <div class="login__autosaved">
       <input type="checkbox" id="autosaved" bind:checked={autoLogin}>
       <label for="autosaved">{t("login.remember")}</label>
