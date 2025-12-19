@@ -51,9 +51,15 @@
       if (location.href.includes("terminal")) {
         userType = 2;
       }
-      data = await ServerConnection.u_user.login(username, password);
-      data = data.data;
-      if (data.username == "") throw "USER_NOT_FOUND";
+      const response = await ServerConnection.u_user.login(username, password);
+      
+      // Verificar si la respuesta contiene un error
+      if (response.data && response.data.status === 1 && response.data.errorCode) {
+        throw { response: { data: response.data } };
+      }
+      
+      data = response.data;
+      if (!data || data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
         let date = new Date();
         date.setDate(date.getDate() + 1);
@@ -80,16 +86,34 @@
       
       if (error.message == "Network Error") {
         errorMessage = t("msg.pageMaintenance");
-      } else if (error.response && error.response.data && error.response.data.message) {
-        if (error.response.data.message.includes("Connection refused")) {
-          errorMessage = t("msg.pageMaintenance");
-        } else if (
-          error.response.data.message == "NECO_LOGIN_FAILED" ||
-          error.response.data.message == "LOGIN_ERROR" || 
-          error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
-        ) {
-          errorMessage = t("msg.incorrectUserPass");
-          typeError = "incorrectUserPass";
+      } else if (error.response && error.response.data) {
+        const errorData = error.response.data;
+        
+        // Manejar estructura de error con errorCode
+        if (errorData.errorCode) {
+          if (
+            errorData.errorCode == "NECO_LOGIN_FAILED" ||
+            errorData.errorCode == "LOGIN_ERROR" || 
+            errorData.errorCode == "WRONG_LOGIN_CREDENTIALS" 
+          ) {
+            errorMessage = t("msg.incorrectUserPass");
+            typeError = "incorrectUserPass";
+          } else if (errorData.message && errorData.message.includes("Connection refused")) {
+            errorMessage = t("msg.pageMaintenance");
+          }
+        } 
+        // Manejar estructura de error con message directo
+        else if (errorData.message) {
+          if (errorData.message.includes("Connection refused")) {
+            errorMessage = t("msg.pageMaintenance");
+          } else if (
+            errorData.message == "NECO_LOGIN_FAILED" ||
+            errorData.message == "LOGIN_ERROR" || 
+            errorData.message == "WRONG_LOGIN_CREDENTIALS" 
+          ) {
+            errorMessage = t("msg.incorrectUserPass");
+            typeError = "incorrectUserPass";
+          }
         }
       }
       onError(errorMessage);
