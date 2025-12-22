@@ -27,7 +27,7 @@
   let isVerified = isLocalhost?true:false;
   let turnstileToken = "";
   let turnstileError = false;
-
+  let isTurnstileReady = false;
 
   let userGmail;
 
@@ -58,6 +58,7 @@
             client_id:
               "632683480398-i9lkrr218mhu4r3dbsq5eq5sai5g6tch.apps.googleusercontent.com",
             callback: handleSigninGoogleOAuth2,
+            auto_select: false,
           });
           window.google.accounts.id.renderButton(
             document.getElementById("g_id_signin"),
@@ -73,7 +74,7 @@
   async function loginClick() {
     if (!username || !password) return onError(t("msg.allObligatory"));
     try {
-      loadLogin = true;
+      loadLogin = false;
       let data;
       let userType = 1;
       if (location.href.includes("terminal")) {
@@ -83,6 +84,7 @@
       if (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType, turnstileToken);
       else data = await ServerConnection.u_user.login(username, password); // for demo-platform or platform universalsoft
       data = data.data;
+      //console.log("USERSSSSS ULIBRARYY",data)
       if (data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
         let date = new Date();
@@ -208,8 +210,8 @@
       ></button>
     </div>
     {#if !isLocalhost && siteKey && !turnstileError}
-      <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)} />
-      <button type="button" class="btn login" disabled={loadLogin || !isVerified} on:click={loginClick}>
+      <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)}/>
+      <button type="button" class="btn login" disabled={loadLogin || !isVerified} on:click|once={loginClick}>
         {#if loadLogin}
           <div class="loading"><p /><p /><p /></div>
         {:else}

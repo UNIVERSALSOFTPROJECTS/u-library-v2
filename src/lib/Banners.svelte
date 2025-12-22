@@ -57,7 +57,6 @@
             register();
         }
     }
-
     getBanners();  
 </script>
 

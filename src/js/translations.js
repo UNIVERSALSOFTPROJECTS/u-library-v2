@@ -143,6 +143,7 @@ export default {
     "msg.successfulProcess": "¡Saldo acreditado con éxito! Verifique su balance y, si no está actualizado, recargue el juego.",
     "msg.fewPinDigits": "EL CÓDIGO PIN DEBE SER DE 10 DIGITOS",
     "msg.wrongPin": "TU CÓDIGO DE PIN ES INVÁLIDO",
+    "msg.accessCashier":"TERMINAL NO HABILITADO",
     //------------------------- JUST FOR VLT  ----------------------------//
     "common.userName": "Nombre",
     "common.enterPin": "Ingrese Pin",

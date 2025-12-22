@@ -41,7 +41,7 @@
 {#if open}
     <div class="{subModalOpened?'sub':''} modal {modalOpened || subModalOpened}" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom} use:watchResize={resizeHeightModal}>
         <div class="modal-dialog {isMobile?'':'centered'}" transition:fly={{ y: -50, duration: 500 }}>
-        <div class="modal-content" style="max-height:{heightModal}">
+        <div class="modal-content" style="max-height:{heightModal}" on:click|stopPropagation>
             <div class="modal-header">
                 <div />
                 <div>{title}</div>
