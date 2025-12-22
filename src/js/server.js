@@ -11,6 +11,7 @@ const ServerConnection = (() => {
         conf = config;
         headers = {
             "Content-Type": "application/json;charset=UTF-8", 
+            "site-id": conf.SITE_ID, 
             "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "*",
