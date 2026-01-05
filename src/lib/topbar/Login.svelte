@@ -74,7 +74,7 @@
   async function loginClick() {
     if (!username || !password) return onError(t("msg.allObligatory"));
     try {
-      loadLogin = false;
+      loadLogin = siteKey  ? false : true;
       let data;
       let userType = 1;
       if (location.href.includes("terminal")) {
