@@ -3,17 +3,18 @@
     import DropdowIdiom from "../dropdown/DropdowIdiom.svelte";
     import { detectDomain, detectSubdomain, getSharedCookie, setSharedCookie } from "../../js/utils/formatUtils";
     import { isMobile } from "mobile-device-detect";
-    import { onMount } from "svelte";
+    import { onMount, onDestroy } from "svelte";
 
     export let configLogin;
+    export let configTypeView;
     export let onError;
     export let onOk;
     export let t;
 
-    const openBillCollector = configLogin.openBillCollector;
-    const changeIdiom = configLogin.changeIdiom;
-	let  idioms = configLogin.idioms;
-    let countries = configLogin.countries;
+    const openBillCollector = configLogin?.openBillCollector;
+    const changeIdiom = configLogin?.changeIdiom;
+	let  idioms = configLogin?.idioms;
+    let countries = configLogin?.countries || [];
     let typeView = localStorage.getItem("typeView") || "";
     let modalOpen = false;
     let subModalOpened = "configAutoservice";
@@ -27,6 +28,18 @@
     const domain = detectDomain();
     let subdomain = detectSubdomain();
     
+    // Función para manejar teclas especiales
+    const handleKeydown = (e) => {
+        if (e.key === 'F2') f2Pressed = true;
+        
+        if (f2Pressed && (e.key === 'r' || e.key === 'R')){
+            modalOpen = true;
+            f2Pressed = false;
+            viewDataConfig();
+        }
+        if (e.key !== 'F2' && e.key !== 'r' && e.key !== 'R') f2Pressed = false;
+    };
+
     // Redirección automática al iniciar: detecta cookie y redirige si existe
     onMount(() => {
         // Solo redirigir si está en la ruta principal (sin subdominio)
@@ -40,6 +53,14 @@
                 }
             }
         }
+
+        // Abrir modal con teclas especiales (F2 + r) - funciona en web y mobile
+        document.addEventListener('keydown', handleKeydown);
+    });
+
+    onDestroy(() => {
+        // Limpiar el listener cuando el componente se desmonte
+        document.removeEventListener('keydown', handleKeydown);
     });
 
     const viewDataConfig = () => {
@@ -104,31 +125,6 @@
         isVirtualKeyboard != isVirtualKeyboard; 
         isVirtualKeyboard?localStorage.removeItem("btnVirtualKeyboard"):localStorage.setItem("btnVirtualKeyboard", "active");
     }
-
-    //open Modal with specials keys
-    document.addEventListener('keydown', (e) => {
-        //just venezuela tv with android Mobile , specuak key "*"" 
-        // if (isMobile) {
-                        document.querySelectorAll('input').forEach((input) => {
-                input.addEventListener('input', (e) => {
-                    if (e.target.value.includes('*')) {
-                        modalOpen = true;
-                        viewDataConfig();
-                        e.target.value = e.target.value.replace('*', ''); // Opcional: elimina el asterisco
-                    }
-                });
-});
-        // }else{
-            if (e.key === 'F2') f2Pressed = true;
-            
-            if (f2Pressed && e.key === 'r' || f2Pressed &&  e.key === 'R'){
-                modalOpen = true;
-                f2Pressed = false;
-                viewDataConfig();
-            }
-            if (e.key !== 'F2' && e.key !== 'r')  f2Pressed = false;
-        // }
-    });
 </script>
 
 <Modal bind:open={modalOpen} bind:subModalOpened title={t("profile.configuration")}>
@@ -138,11 +134,14 @@
             <input type="text" class="ipt icon--user" placeholder={t("login.user")} autocapitalize="off" bind:value={username}>
 		    <input type="text" class="ipt icon--password" placeholder={t("login.password")} autocomplete="off"  bind:value={password}>
         </div>
+        {#if configTypeView != "cashier"}
         <div class="configAutoservice__country">
+            {#if changeIdiom && idioms}
             <b>{t("autoservice.language")}</b>
-            <b>{t("autoservice.country")}</b>
             <DropdowIdiom bind:idioms {changeIdiom}/>
-            {#if countries.length != 0}
+            {/if}
+            {#if countries && countries.length > 0}
+            <b>{t("autoservice.country")}</b>
             <select class="slc" bind:value={subdomain}>
                 <option value="" disabled>{t("autoservice.selectCountry")}</option>
                 {#each countries as country}
@@ -153,11 +152,13 @@
             <input type="text" class="ipt" value={t("autoservice.notAviable")} disabled>
             {/if}
         </div>
+        {/if}
         <b>{t("autoservice.typeView")}</b>
         <div class="configAutoservice__type">
             <button class="btn {typeView == ""?'active':''}" on:click={()=>changeTypeView("")}>Web</button>
             <button class="btn {typeView == "autoservice"?'active':''}" on:click={()=>changeTypeView("autoservice")}>Autoservice</button>
         </div>
+        {#if configTypeView != "cashier"}
         <b>{t("autoservice.buttons")}</b>
         <div class="configAutoservice__buttons">
             <label for="deposit">{t("autoservice.deposit")}</label> 
@@ -168,12 +169,15 @@
             <input type="checkbox" class="switch" id="version" bind:checked={isLiteVersion} on:click={toggleBtnLiteVersion}>
             <label for="keyboard">{t("autoservice.virtualKeyboard")}</label> 
             <input type="checkbox" class="switch" id="keyboard" bind:checked={isVirtualKeyboard} on:click={toggleBtnsVirtualKeyboard}>
+            {#if openBillCollector}
             <div>{t("autoservice.wallet")}</div>
             <button class="btn wallet" on:click={() => {
                 openBillCollector();
                 modalOpen = false;
               }}>{t("autoservice.open")}</button>
+            {/if}
         </div>
+        {/if}
         <button class="btn save" on:click={saveUser}>{t("profile.save")}</button>
     </div>
 </Modal>

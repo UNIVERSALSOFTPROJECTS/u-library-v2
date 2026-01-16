@@ -1,12 +1,6 @@
 <script>
   import { onMount } from "svelte";
   import ServerConnection from "../../js/server";
-  import { Turnstile } from "svelte-turnstile";
-  import {
-    getUpdateBalance,
-    getUpdateBalanceUniversal,
-  } from "../../js/utils/serverUtils";
-  import notify from "../../js/notify";
 
   export let onOk;
   export let onError;
@@ -16,71 +10,49 @@
   export let onOpenRecoverPassword;
   export let onOpenSignup;
   export let t; //traduccion
-  export let isOauth = false;
 
   let password = "";
   let username = "";
   let loadLogin = false;
-  let showPassword = false;
-  const isLocalhost = window.location.hostname === "localhost";
-  let isVerified = isLocalhost?true:false;
-  let turnstileToken = "";
+  let typeView = localStorage.getItem('typeView') || "";
+  let autoLogin = localStorage.getItem('autoSaved') ? true : false;
+  let isAutoservice = autoLogin && typeView == "autoservice";
+  let isAutoserviceError = false;
+  let timerLogin;
+  let isAutoLoginInProgress = false;
+  let typeError = "";
 
-  let userGmail;
-
-  const dataPassword = (e) => {
-    password = e.target.value;
-  };
-  const togglePasswordHide = () => {
-    showPassword = !showPassword;
-  };
   const loginEnter = (e) => {
     if (e.charCode === 13) loginClick();
   };
 
-  function handleVerify(token) {
-    console.log("tokentokentokentoken",token);
-    
-    turnstileToken = token;
-    isVerified = true;
+  function cancelAutologin(status) {
+    if (!status) {
+      clearTimeout(timerLogin);
+      localStorage.removeItem('autoSaved');
+      isAutoLoginInProgress = false;
+    }
   }
-
-  onMount(() => {
-    loadScript("https://accounts.google.com/gsi/client")
-      .then((data) => {
-        console.log("Script loaded successfully", data);
-        setTimeout(() => {
-          console.log("Goolgle Loaded: ", window.google);
-          window.google.accounts.id.initialize({
-            client_id:
-              "632683480398-i9lkrr218mhu4r3dbsq5eq5sai5g6tch.apps.googleusercontent.com",
-            callback: handleSigninGoogleOAuth2,
-            auto_select: false,
-          });
-          window.google.accounts.id.renderButton(
-            document.getElementById("g_id_signin"),
-            {}
-          );
-        }, 1000);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  });
 
   async function loginClick() {
     if (!username || !password) return onError(t("msg.allObligatory"));
 
     try {
-      loadLogin = false;
+      loadLogin = true;
       let data;
       let userType = 1;
       if (location.href.includes("terminal")) {
         userType = 2;
       }
-      data = await ServerConnection.u_user.login(username, password);
-      data = data.data;
-      if (data.username == "") throw "USER_NOT_FOUND";
+      const response = await ServerConnection.u_user.login(username, password);
+      
+      // Verificar si la respuesta contiene un error
+      if (response.data && response.data.status === 1 && response.data.errorCode) {
+        throw { response: { data: response.data } };
+      }
+      
+      data = response.data;
+      if (!data || data.username == "") throw "USER_NOT_FOUND";
       if (data.claims) {
         let date = new Date();
         date.setDate(date.getDate() + 1);
@@ -89,77 +61,106 @@
         data.playerId = data.id;
         delete data.claims;
       }
+      // Guardar credenciales si está marcado recordar contraseña
+      if (autoLogin && !localStorage.getItem('autoSaved')) {
+        localStorage.setItem('autoSaved', `[{"user":"${username}", "pass":"${password}"}]`);
+      }
+      if (timerLogin) clearTimeout(timerLogin);
+      isAutoLoginInProgress = false;
       //Formatear la propiedad "bonus" con el updatebalance
+      loadLogin = false;
       onOk(data);
       
     } catch (error) {
       console.log("error: ", error);
-      if (
-        error.message == "Network Error" ||
-        error.response.data.message.includes("Connection refused")
-      )
-        error = t("msg.pageMaintenance");
-      else if (
-        error.response.data.message == "NECO_LOGIN_FAILED" ||
-        error.response.data.message == "LOGIN_ERROR" || 
-        error.response.data.message == "WRONG_LOGIN_CREDENTIALS" 
-      )
-        error = t("msg.incorrectUserPass");
-      else error = t("msg.contactSupport"); //si aparece esto, es un tipo de error nuevo y se tieneque debbugear
-      onError(error);
       loadLogin = false;
+      isAutoLoginInProgress = false;
+      let errorMessage = t("msg.contactSupport");
+      
+      if (error.message == "Network Error") {
+        errorMessage = t("msg.pageMaintenance");
+      } else if (error.response && error.response.data) {
+        const errorData = error.response.data;
+        
+        // Manejar estructura de error con errorCode
+        if (errorData.errorCode) {
+          if (
+            errorData.errorCode == "NECO_LOGIN_FAILED" ||
+            errorData.errorCode == "LOGIN_ERROR" || 
+            errorData.errorCode == "WRONG_LOGIN_CREDENTIALS" 
+          ) {
+            errorMessage = t("msg.incorrectUserPass");
+            typeError = "incorrectUserPass";
+          } else if (errorData.message && errorData.message.includes("Connection refused")) {
+            errorMessage = t("msg.pageMaintenance");
+          }
+        } 
+        // Manejar estructura de error con message directo
+        else if (errorData.message) {
+          if (errorData.message.includes("Connection refused")) {
+            errorMessage = t("msg.pageMaintenance");
+          } else if (
+            errorData.message == "NECO_LOGIN_FAILED" ||
+            errorData.message == "LOGIN_ERROR" || 
+            errorData.message == "WRONG_LOGIN_CREDENTIALS" 
+          ) {
+            errorMessage = t("msg.incorrectUserPass");
+            typeError = "incorrectUserPass";
+          }
+        }
+      }
+      onError(errorMessage);
+      if (isAutoservice) isAutoserviceError = true;
     }
   }
 
-  const loadScript = (FILE_URL, async = true, type = "text/javascript") => {
-    return new Promise((resolve, reject) => {
+  onMount(() => {
+    if (autoLogin) {
       try {
-        const scriptEle = document.createElement("script");
-        scriptEle.type = type;
-        scriptEle.async = async;
-        scriptEle.defer = true;
-        scriptEle.src = FILE_URL;
-        scriptEle.addEventListener("load", (ev) => {
-          resolve({ status: true });
-        });
-        scriptEle.addEventListener("error", (ev) => {
-          reject({
-            status: false,
-            message: `Failed to load the script ${FILE_URL}`,
-          });
-        });
-        document.body.appendChild(scriptEle);
-      } catch (error) {
-        reject(error);
+        let userSaved = JSON.parse(localStorage.getItem('autoSaved'));
+        if (userSaved && userSaved[0]) {
+          username = userSaved[0].user;
+          password = userSaved[0].pass;
+          isAutoLoginInProgress = true;
+          timerLogin = setTimeout(function() { loginClick(); }, typeView == "autoservice" ? 2000 : 10000);
+        }
+      } catch (e) {
+        console.error("Error loading saved credentials:", e);
+        localStorage.removeItem('autoSaved');
+        autoLogin = false;
+        isAutoLoginInProgress = false;
       }
-    });
-  };
-
-  const parseJwt = (token) => {
-    return JSON.parse(atob(token.split(".")[1]));
-  };
-
-  const handleSigninGoogleOAuth2 = async (event) => {
-    try {
-      notify.loading("identificando");
-      userGmail = parseJwt(event.credential);
-      console.log("USUARIO DE GMAIL: ", userGmail);
-      username = userGmail.email;
-      password = userGmail.sub;
-      
-      loginClick();
-    } catch (e) {
-      let msg = "Error!";
-      notify.error(msg);
     }
-    notify.loading(false);
-  };
-  const avoidSubmit = (e) => {
-    e.preventDefault();
-  };
+  });
+
+  $: cancelAutologin(autoLogin);
+  $: isAutoservice = autoLogin && typeView == "autoservice";
+
 </script>
 
+{#if isAutoservice}
 <div class="modal-body">
+  {#if isAutoserviceError}
+    <div class="login__autoservice error">
+      <p>
+        {typeError == 'incorrectUserPass' ? t("msg.incorrectUserPass") : t("login.autoserviceError")}
+      </p>
+      <button class="btn" on:click={()=>location.reload()}>{t("msg.refresh")}</button>
+    </div>
+  {:else}
+    <div class="login__autoservice">
+      <!-- esto de momento es solo para machines -->
+      <div class="loading">
+        <div>
+          <b><b><b><b><b><b><b><b><b><b><b></b></b></b></b></b></b></b></b></b></b></b>
+        </div>
+      </div>
+      <p>{t("lobby.loading")}</p>
+    </div>
+  {/if}
+</div>
+{/if}
+<div class="modal-body {isAutoservice?'autoservice':''}">
   <div class="login__title">{t("login.title")}</div>
   <img
     class="login__logo"
@@ -169,9 +170,6 @@
   />
   <div></div>
   <form class="login__form" on:submit|preventDefault>
-    {#if isOauth}
-      <div id="g_id_signin"></div>
-    {/if}
     <input
       type="text"
       class="ipt icon--user"
@@ -180,28 +178,21 @@
       autocomplete="username"
       on:keypress={loginEnter}
       bind:value={username}
-      disabled={userGmail}
+      disabled={autoLogin}
     />
-    <div class="login__ipt--pass">
-      <input
-        class="ipt icon--password"
-        type={showPassword ? "text" : "password"}
-        autocomplete="current-password"
-        placeholder={t("login.password")}
-        on:keypress={loginEnter}
-        on:input={dataPassword}
-        disabled={userGmail}
-      />
-      <button
-        type="button"
-        class="btn {showPassword ? 'no-eye' : 'eye'}"
-        name="password"
-        on:click={togglePasswordHide}
-      ></button>
+    <input
+      class="ipt icon--password"
+      type="password"
+      autocomplete="current-password"
+      placeholder={t("login.password")}
+      on:keypress={loginEnter}
+      bind:value={password}
+      disabled={autoLogin}
+    />
+    <div class="login__autosaved">
+      <input type="checkbox" id="autosaved" bind:checked={autoLogin}>
+      <label for="autosaved">{t("login.remember")}</label>
     </div>
-    <!--{#if !isLocalhost}-->
-    <!-- <Turnstile siteKey="0x4AAAAAABDhqfAGuyXzfu4q"  on:callback={(e) => handleVerify(e.detail)} /> -->
-    <!-- {/if}-->
     <button
       type="button"
       class="btn login"
