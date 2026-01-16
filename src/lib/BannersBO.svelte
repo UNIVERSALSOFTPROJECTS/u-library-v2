@@ -1,8 +1,7 @@
 <script>
   import {register} from 'swiper/element/bundle';
   //import { detectSubdomain } from "../js/utils/formatUtils";
-  import {shouldShowBanner,calculateIntervals,startAutoplay} from "../../../js/constants";
-  import backend from "../../../server";
+  import {shouldShowBanner,calculateIntervals,startAutoplay} from "../js/constants";
   import ServerConnection from '../js/server';
   import { onMount,tick } from "svelte";
 
