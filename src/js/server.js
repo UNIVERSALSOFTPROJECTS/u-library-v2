@@ -409,8 +409,15 @@ const ServerConnection = (() => {
         }
 
     }
+
+    const banners = {
+        getBanners : async(conf)=>{
+            const response = await axios.get(`${conf.API_KS}/banners`, { headers });
+            return response.data;
+        }
+    }
     /* */
-    return { setConfig, wallet, users, game, u_user, u_wallet, u_game }
+    return { setConfig, wallet, users, game, u_user, u_wallet, u_game, banners }
 
 })()
 
