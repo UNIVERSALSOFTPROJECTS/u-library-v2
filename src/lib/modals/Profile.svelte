@@ -32,6 +32,7 @@
     let id_banca  = configProfile.id_banca;
     let id_ca  = configProfile.id_ca;
     let chatLiveUrl = configProfile.chatLiveUrl || "";
+    let verificationIdentity = configProfile.verificationIdentity || "";
     let isLockedWithdrawal = false;//falta ocualtar o mostrar le anuncion dependiendo si tien idbacan o idca
     let viewActiveWithdrawal = true;
     const openSection = (section) => { profileView = section; }
@@ -117,6 +118,9 @@
         <button class="btn profile" on:click={() => openSection("movements")}><i class="icon--movements"></i>{t("profile.recordMovement")}</button>
         {#if activePromotions}
         <button class="btn profile"><i class="icon--bonus"></i>Bonos y promociones</button>
+        {/if}
+        {#if verificationIdentity != ""}
+         <button class="btn profile" on:click={() => window.open(verificationIdentity)}><i class="icon--bonus"></i>Verificación de Identidad</button>
         {/if}
         <button class="btn logout icon--logout" on:click={onLogout}>{t("header.logout")}</button>
         <div class="btn bottom">
