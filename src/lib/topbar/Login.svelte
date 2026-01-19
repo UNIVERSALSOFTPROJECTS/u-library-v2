@@ -110,13 +110,16 @@
         error.response?.data?.message === "LOGIN_ERROR" || 
         error.response?.data?.message === "WRONG_LOGIN_CREDENTIALS"
       ) {
-        error = t("msg.incorrectUserPass") 
-        turnstileError = true
-        isVerified = false  // Resetear el estado de verificación
-        isTurnstileReady = false  // Resetear el estado de carga del Turnstile
-        setTimeout(() => {
-          turnstileError = false
-        }, 1000);
+        error = t("msg.incorrectUserPass")
+        // Si hay siteKey, resetear estados del Turnstile ANTES de quitar el loading
+        if (siteKey && !isLocalhost) {
+          isVerified = false  // Resetear el estado de verificación
+          isTurnstileReady = false  // Resetear el estado de carga del Turnstile
+          turnstileError = true
+          setTimeout(() => {
+            turnstileError = false
+          }, 1000);
+        }
       }
       else error = t("msg.contactSupport"); //si aparece esto, es un tipo de error nuevo y se tieneque debbugear
     
@@ -214,7 +217,7 @@
     </div>
     {#if !isLocalhost && siteKey && !turnstileError}
       <Turnstile siteKey={siteKey} on:callback={(e) => handleVerify(e.detail)}/>
-      <button type="button" class="btn login" disabled={loadLogin || !isTurnstileReady || !isVerified} on:click={loginClick}>
+      <button type="button" class="btn login" disabled={loadLogin || !isTurnstileReady || !isVerified || turnstileError} on:click={loginClick}>
         {#if loadLogin}
           <div class="loading"><p /><p /><p /></div>
         {:else}
