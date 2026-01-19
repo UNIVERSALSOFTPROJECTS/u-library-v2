@@ -74,7 +74,7 @@
   async function loginClick() {
     if (!username || !password) return onError(t("msg.allObligatory"));
     try {
-      loadLogin =  true;
+      loadLogin = siteKey !="" ? false : true;
       let data;
       let userType = 1;
       if (location.href.includes("terminal")) {
@@ -111,6 +111,7 @@
       ) {
         error = t("msg.incorrectUserPass") 
         turnstileError = true
+        isVerified = false  // Resetear el estado de verificación
         setTimeout(() => {
           turnstileError = false
         }, 1000);
@@ -211,7 +212,7 @@
     </div>
     {#if !isLocalhost && siteKey && !turnstileError}
       <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)}/>
-      <button type="button" class="btn login" disabled={loadLogin || !isVerified || turnstileError} on:click={loginClick}>
+      <button type="button" class="btn login" disabled={loadLogin || !isVerified} on:click={loginClick}>
         {#if loadLogin}
           <div class="loading"><p /><p /><p /></div>
         {:else}
