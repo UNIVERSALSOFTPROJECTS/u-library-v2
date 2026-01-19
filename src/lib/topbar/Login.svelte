@@ -211,7 +211,7 @@
     </div>
     {#if !isLocalhost && siteKey && !turnstileError}
       <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)}/>
-      <button type="button" class="btn login" disabled={loadLogin || !isVerified || !turnstileError} on:click={loginClick}>
+      <button type="button" class="btn login" disabled={loadLogin || !isVerified || turnstileError} on:click={loginClick}>
         {#if loadLogin}
           <div class="loading"><p /><p /><p /></div>
         {:else}
