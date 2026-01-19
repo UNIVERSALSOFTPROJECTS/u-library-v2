@@ -27,7 +27,7 @@
   let isVerified = isLocalhost?true:false;
   let turnstileToken = "";
   let turnstileError = false;
-  let isTurnstileReady = false;
+  let isTurnstileReady = isLocalhost || !siteKey; // Si es localhost o no hay siteKey, está "listo"
 
   let userGmail;
 
@@ -46,6 +46,10 @@
   const handleVerify = (details) => {
     turnstileToken = details.token;
     isVerified = true;
+  }
+
+  const handleTurnstileLoad = () => {
+    isTurnstileReady = true;
   }
 
   onMount(() => {
@@ -74,7 +78,7 @@
   async function loginClick() {
     if (!username || !password) return onError(t("msg.allObligatory"));
     try {
-      loadLogin = siteKey !="" ? false : true;
+      loadLogin = true;
       let data;
       let userType = 1;
       if (location.href.includes("terminal")) {
@@ -112,6 +116,7 @@
         error = t("msg.incorrectUserPass") 
         turnstileError = true
         isVerified = false  // Resetear el estado de verificación
+        isTurnstileReady = false  // Resetear el estado de carga del Turnstile
         setTimeout(() => {
           turnstileError = false
         }, 1000);
@@ -211,8 +216,8 @@
       ></button>
     </div>
     {#if !isLocalhost && siteKey && !turnstileError}
-      <Turnstile siteKey={siteKey}  on:callback={(e) => handleVerify(e.detail)}/>
-      <button type="button" class="btn login" disabled={loadLogin || !isVerified} on:click={loginClick}>
+      <Turnstile siteKey={siteKey} on:load={handleTurnstileLoad} on:callback={(e) => handleVerify(e.detail)}/>
+      <button type="button" class="btn login" disabled={loadLogin || !isTurnstileReady || !isVerified} on:click={loginClick}>
         {#if loadLogin}
           <div class="loading"><p /><p /><p /></div>
         {:else}
