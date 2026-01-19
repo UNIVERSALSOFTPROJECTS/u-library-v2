@@ -19,6 +19,7 @@
     let messageOptional = configWithdrawal.messageOptional;
     let formVerification = configWithdrawal.formVerification;
     let linksChats = configWithdrawal.linksChats;
+    let dataType = configWithdrawal.dataType;
     let pendingWithdrawal;
     let typeView = configWithdrawal.typeView || "";
     let amount;
@@ -223,6 +224,8 @@
                         <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={inputAccountBank}>
                         {#if infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}
                             <!--  -->
+                            {:else if dataType == "phoneNumber"}
+                            <p>{t('withdrawal.phoneNumber')}:</p>
                             {:else}
                             <p>{t('withdrawal.additionalInformation')}:</p>
                         {/if}
