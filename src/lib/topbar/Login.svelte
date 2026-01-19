@@ -46,10 +46,7 @@
   const handleVerify = (details) => {
     turnstileToken = details.token;
     isVerified = true;
-  }
-
-  const handleTurnstileLoad = () => {
-    isTurnstileReady = true;
+    isTurnstileReady = true;  // Cuando se verifica, ya terminó de cargar
   }
 
   onMount(() => {
@@ -216,7 +213,7 @@
       ></button>
     </div>
     {#if !isLocalhost && siteKey && !turnstileError}
-      <Turnstile siteKey={siteKey} on:load={handleTurnstileLoad} on:callback={(e) => handleVerify(e.detail)}/>
+      <Turnstile siteKey={siteKey} on:callback={(e) => handleVerify(e.detail)}/>
       <button type="button" class="btn login" disabled={loadLogin || !isTurnstileReady || !isVerified} on:click={loginClick}>
         {#if loadLogin}
           <div class="loading"><p /><p /><p /></div>
