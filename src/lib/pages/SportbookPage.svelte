@@ -43,9 +43,9 @@
   const guestURLbetw3LJ = "https://sports2.sw3data.com/?target=86224&name=betsamerica#/live_ecuabets/?target=betsamerica-86224-integration&token=123456789"
   const guestURLbetw3LJLive ="https://sports2.sw3data.com/?target=86224&name=betsamerica#/?target=betsamerica-86224-integration&token=123456789"
   const guestURLbetw3PRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/?target=parleysport-86224-integration&token=123456789";
-  const guestURLbetw3 = "https://sports2.sw3data.com/#/?target=ganabet365-86224-integration&token=123456789";
+  const guestURLbetw3 = "https://sports2.sw3data.com/?target=86224&name=win365us#/?target=win365us-86224-integration&token=123456789";
   const guestURLbetw3LivePRLS = "https://sports.jcasino.live/?target=86224&name=parleysport#/live_ecuabets/?target=parleysport-86224-integration&token=123456789";
-  const guestURLbetw3Live = "https://sports.jbets.online/?target=86224&name=bets365#/live_ecuabets/?target=bets365-86224-integration&token=123456789";
+  const guestURLbetw3Live = "https://sports2.sw3data.com/?target=86224&name=win365us#/?target=win365us-86224-integration&token=123456789&view=live";
   const guestURLbetw3LAUS = "https://sports2.sw3data.com/?target=86224&name=latinsport21#/?target=latinsport21-86224-integration&token=123456789";
   const guestURLbetw3LAUSlive = "https://sports2.sw3data.com/?target=86224&name=latinsport21#/live_ecuabets/?target=latinsport21-86224-integration&token=123456789"
   const guestURLbetw3GBPE = "https://sports2.sw3data.com/?target=86224&name=ganabet365#/?target=ganabet365-86224-integration&token=123456789"
