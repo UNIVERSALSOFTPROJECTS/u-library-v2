@@ -79,7 +79,7 @@
   const baseUrlBets286 = `https://prod20370-184927999.freethrow777.com`;
   const baseUrlUniversalRaceURVE = `https://prod20370-186229048.freethrow777.com/`;
   const baseUrlWinproxWINP = `https://prod20370-189834269.442hattrick.com/`;
-  const baseUrlWinproxWINPLIVE = `https://prod20370-189834269.freethrow777.com/`;
+  const baseUrlEcuFlexBetFBET ='https://prod20370-189834999.442hattrick.com/';
 
   const games = {
     'digtain':{
@@ -191,6 +191,7 @@
       else if (CLIENT_CODE == 'BDOS') url =baseUrlBets286
       else if (CLIENT_CODE == 'URVE') url =baseUrlUniversalRaceURVE
       else if (CLIENT_CODE == 'WINP') url =baseUrlWinproxWINP
+      else if (CLIENT_CODE == 'FBET') url =baseUrlEcuFlexBetFBET
       else url = baseUrlGanawin
       sportbookGameUrl = url;
     } catch (error) {
