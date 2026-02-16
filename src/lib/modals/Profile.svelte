@@ -9,6 +9,7 @@
     import ChangePassword from "../profile/ChangePassword.svelte";
     import Movements from "../profile/Movements.svelte"
 
+    export let platform;
     export let user;
     export let onError;
     export let onOk;
@@ -87,7 +88,7 @@
         <div class="profile__container">
             <div class="profile__top">
                 <div class="profile__header">
-                    <img class="profile__img" src="https://d1dkqs4jlldj3s.cloudfront.net/Win365/icon1.png" alt="icon-user">
+                    <img class="profile__img" src="https://d1dkqs4jlldj3s.cloudfront.net/{platform}/icon1.png" alt="icon-user">
                     <div>
                         <b>{user.username}</b>
                         <p>#{user.id}</p>

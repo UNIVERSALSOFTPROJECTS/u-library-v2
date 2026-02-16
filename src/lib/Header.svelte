@@ -668,7 +668,7 @@
         <Modal bind:open={profileModalOpen} bind:modalOpened title="Mi cuenta">
             
             <Profile
-                
+                bind:platform
                 {configProfile}
                 activePromotions
                 {onOpenWithdrawal}
