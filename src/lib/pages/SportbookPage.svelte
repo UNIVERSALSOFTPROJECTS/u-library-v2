@@ -80,6 +80,7 @@
   const baseUrlUniversalRaceURVE = `https://prod20370-186229048.freethrow777.com/`;
   const baseUrlWinproxWINP = `https://prod20370-189834269.442hattrick.com/`;
   const baseUrlEcuFlexBetFBET ='https://prod20370-189834999.442hattrick.com/';
+  const baseUrlEcuFlexBetMBET ='https://prod20370-191367006.freethrow777.com';
 
   const games = {
     'digtain':{
@@ -192,6 +193,7 @@
       else if (CLIENT_CODE == 'URVE') url =baseUrlUniversalRaceURVE
       else if (CLIENT_CODE == 'WINP') url =baseUrlWinproxWINP
       else if (CLIENT_CODE == 'FBET') url =baseUrlEcuFlexBetFBET
+      else if (CLIENT_CODE == 'MBET') url =baseUrlEcuFlexBetMBET
       else url = baseUrlGanawin
       sportbookGameUrl = url;
     } catch (error) {
