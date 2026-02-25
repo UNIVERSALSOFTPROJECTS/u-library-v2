@@ -60,7 +60,7 @@
     function counterResendSms() {
         onOk(channel=="sms"?t("msg.sendSms"):t("msg.sendEmail"));
         activeSMS = true;
-        minutes = 2;
+        minutes = 5;
         seconds = 0;
         const timer = setInterval(() => {
             if (seconds === 0 && minutes !== 0) {
