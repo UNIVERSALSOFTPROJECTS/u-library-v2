@@ -24,6 +24,11 @@ const utils = (() => {
       let url = gameapi_url +`/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}${lang}`;
       return url;
     }
+    const getGameURLAltenar=(gameapi_url,gameid, usertoken, idiom = "es")=>{
+      let lang = `&lang=${idiom}`;
+      let url = gameapi_url +`/launch?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=${"mb"}&sessionid=${usertoken}${lang}`;
+      return url;
+    }
   const getGameURLTest = (gameapi_url, game, usertoken) => {
     let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
     return url;
@@ -115,6 +120,6 @@ const utils = (() => {
     });
   };
 
-  return { loadScript, isJson, initDropdown, showNotify, sleep, checkSetIsFav, getImgUrl, getProviderImgUrl, getGameURL, isMobile, dateDiffInDays, getAge, setUrlPage, categoryAllowedChange, getGameURLTest } ;
+  return { loadScript, isJson, initDropdown, showNotify, sleep, checkSetIsFav, getImgUrl, getProviderImgUrl, getGameURL,getGameURLAltenar, isMobile, dateDiffInDays, getAge, setUrlPage, categoryAllowedChange, getGameURLTest } ;
 })()
 export default utils
