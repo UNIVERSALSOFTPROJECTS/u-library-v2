@@ -203,7 +203,27 @@
     const configDeposit = {
         id_banca: ["2918","5628","5834"], //disitribidor - almacena otros cajeros
         id_ca: ["5558","15818"], //caja dentro de un distribuidor principal
-        isRequiredVoucher: true
+        isRequiredVoucher: true,
+        banksOrigin:[
+            "Banco de Venezuela (BDV)",
+            "Banesco Banco Universal",
+            "BBVA Provincial",
+            "Mercantil Banco Universal",
+            "Banco Nacional de Crédito (BNC)",
+            "Bancaribe",
+            "Banco Exterior",
+            "Banco Venezolano de, Crédito",
+            "Banco Plaza",
+            "Banco Activo",
+            "100% Banco",
+            "Bancamiga",
+            "Banco De los trabajadores (público)",
+            "Banco de la Fuerza Armada Nacional Bolivariana – Banfanb",
+            "Banco Agrícola de Venezuela",
+            "BANPLUS BANCO COMERCIAL",
+            "BANCO CARONÍ",
+            "R4 BANCO MICROFINANCIERO"
+        ]
     };
     //  const configWithdrawal = {
     //     dataType : "",

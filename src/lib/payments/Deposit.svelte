@@ -38,6 +38,7 @@
     let id_ca  = configDeposit.id_ca;
     let isRequiredVoucher  = configDeposit.isRequiredVoucher || "";
     let viewTimeDeposit = configDeposit.viewTimeDeposit || false;
+    let banksOrigin = configDeposit.banksOrigin || [];
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
@@ -256,10 +257,17 @@
                     <input type="text" class="ipt" value={paySelected.banco} disabled>
                     <select class="slc" bind:value={bankDeposit.targetBankId}>
                         <option value="0" selected disabled>{t('deposit.chooseBank')}</option>
-                        {#each bankPayments as bank}
-                            <option value={bank.id}>{bank.banco}</option>
-                        {/each}  
-                    </select>
+                            {#if banksOrigin.length > 0}
+                                {#each banksOrigin as bank}
+                                    <option value={bank}>{bank}</option>
+                                {/each}
+                            {:else}
+                                {#each bankPayments as bank}
+                                    <option value={bank.id}>{bank.banco}</option>
+                                {/each}
+                            {/if}
+                        </select>
+
                     <p>{t('deposit.numAccount')}</p>
                     <p>{t('deposit.numReference')}</p>
                     <input type="number" class="ipt" bind:value={bankDeposit.aditional} on:input={inputJustNumbers}>
