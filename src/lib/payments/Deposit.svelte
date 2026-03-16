@@ -269,7 +269,7 @@
                         </select>
 
                     <p>{t('deposit.numAccount')}</p>
-                    <p>{t('deposit.numReference')}</p>
+                    <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
                     <input type="number" class="ipt" bind:value={bankDeposit.aditional} on:input={inputJustNumbers}>
                     <input type="number" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
                     {/if}
