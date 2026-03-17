@@ -259,7 +259,7 @@
                         <option value="0" selected disabled>{t('deposit.chooseBank')}</option>
                             {#if banksOrigin.length > 0}
                                 {#each banksOrigin as bank}
-                                    <option value={bank}>{bank}</option>
+                                    <option value={bank.id}>{bank.name}</option>
                                 {/each}
                             {:else}
                                 {#each bankPayments as bank}
