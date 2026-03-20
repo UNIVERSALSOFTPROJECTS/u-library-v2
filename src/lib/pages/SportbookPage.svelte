@@ -225,7 +225,7 @@ function RESELLER (params) {
       url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
-      sportbookskin?url += `&version=${sportbookskin}`: ""; // just for xlive365
+      sportbookskin?url += `&skin=${sportbookskin}`: ""; // just for xlive365
       let data;
       if (clientCode === 'JU02') {
             data = await backend.game.getURLDemo(url);
