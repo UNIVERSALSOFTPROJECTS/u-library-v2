@@ -17,7 +17,7 @@
   export let CLIENT_CODE;
   export let clientCode;
 
-  let sportbookversion = localStorage.getItem("sportbookversion") || "";
+  let sportbookskin = localStorage.getItem("sportbookversion") || "";
   console.log(user,"sportbook");
   
 
@@ -58,6 +58,7 @@
   const guestURLbetw3BTCOLive = "https://sports2.sw3data.com/#/?target=win365-86224-integration&token=123456789&view=live"
   const guestURLbetw3XLIV = "https://sports2.sw3data.com/?target=86224&name=xlive365#/?target=xlive365-86224-integration&token=123456789"
   const guestURLbetw3XLIVLive = "https://sports2.sw3data.com/?target=86224&name=xlive365#/?target=xlive365-86224-integration&view=live&token=123456789"
+  const guestURLbetw3XLIVLiveSKIN2 = "https://sports2.sw3data.com/?target=86224&name=xlivev2#/?target=xlivev2-86224-integration&token=123456789"
   const guestURLbetw3BTAR = "https://sports2.sw3data.com/?target=86224&name=win365ar#/?target=win365ar-86224-integration"
   const guestURLbetw3BTARLive = "https://sports2.sw3data.com/?target=86224&name=win365ar#/?target=win365ar-86224-integration&view=live"
   const guestURLbetw3BPEC = "https://sports2.sw3data.com/?target=86224&name=win365ec#/?target=win365ec-86224-integration"
@@ -224,7 +225,7 @@ function RESELLER (params) {
       url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
-      sportbookversion?url += `&version=${sportbookversion}`: ""; // just for xlive365
+      sportbookskin?url += `&version=${sportbookskin}`: ""; // just for xlive365
       let data;
       if (clientCode === 'JU02') {
             data = await backend.game.getURLDemo(url);
@@ -257,7 +258,11 @@ function RESELLER (params) {
           url = active_view == "sportbooklive" ? guestURLbetw3BTCOLive : guestURLbetw3BTCO ;
         }
         else if (CLIENT_CODE == "XLIV") {
-          url = active_view == "sportbooklive" ? guestURLbetw3XLIVLive : guestURLbetw3XLIV ;
+          if (sportbookskin == "2") {
+            url =  guestURLbetw3XLIVLiveSKIN2;
+          }else{
+            url = active_view == "sportbooklive" ? guestURLbetw3XLIVLive : guestURLbetw3XLIV ;
+          }
         }
         else if (CLIENT_CODE == "BTAR") {
           url = active_view == "sportbooklive" ? guestURLbetw3BTARLive : guestURLbetw3BTAR ;
