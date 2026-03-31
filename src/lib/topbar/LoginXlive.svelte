@@ -4,8 +4,8 @@
 
   export let onOk;
   export let onError;
-  export let assetsUrl;
-  export let platform;
+  // export let assetsUrl;
+  // export let platform;
   export let userGateway = "neco"; //neco/universal
   export let onOpenRecoverPassword;
   export let onOpenSignup;
@@ -161,13 +161,13 @@
 </div>
 {/if}
 <div class="modal-body {isAutoservice?'autoservice':''}">
-  <div class="login__title">{t("login.title")}</div>
-  <img
+  <div class="login__title">{t("loginXlive.title")}</div>
+  <!-- <img
     class="login__logo"
     src="{assetsUrl}/{platform}/logo.png"
     alt="logo-{platform}"
     loading="eager"
-  />
+  /> -->
   <div></div>
   <form class="login__form" on:submit|preventDefault>
     <input

@@ -2,6 +2,7 @@ export default {
   es: {
     "idiom": "es",
     "login.title": "Bienvenido a",
+    "loginXlive.title": "Bienvenido",
     "login.user": "Usuario o correo electrónico",
     "login.password": "Contraseña",
     "login.access": "Ingresar",
@@ -390,6 +391,7 @@ export default {
   fr: {
   "idiom": "fr",
   "login.title": "Bienvenue à",
+  "loginXlive.title": "Bienvenue",
   "login.user": "Utilisateur ou e-mail",
   "login.password": "Mot de passe",
   "login.access": "Se connecter",
@@ -775,6 +777,7 @@ export default {
   br: {
     "idiom": "br",
     "login.title": "Bem-vindo a",
+    "loginXlive.title": "Bem-vindo",
     "login.user": "Utilizador",
     "login.password": "Senha",
     "login.access": "Entrar",
@@ -1156,6 +1159,7 @@ export default {
   en: {
     "idiom": "en",
     "login.title": "Welcome to",
+    "loginXlive.title": "Welcome",
     "login.user": "User or email",
     "login.password": "Password",
     "login.access": "Login",
