@@ -39,6 +39,7 @@
     let isRequiredVoucher  = configDeposit.isRequiredVoucher || "";
     let viewTimeDeposit = configDeposit.viewTimeDeposit || false;
     let banksOrigin = configDeposit.banksOrigin || [];
+    let imgR4 = configDeposit.imgR4 || "";
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
@@ -123,7 +124,10 @@
         //solo para peru
         if (paySelected.banco === "YAPE" || paySelected.banco === "PLIN" || paySelected.banco === "DE UNA") {
             typeTranference = 'wallet';
-        }else{
+        }else if(paySelected.banco === "Banco R4"){
+            typeTranference = 'r4';
+        }
+        else{
             typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
         }
     }
@@ -202,6 +206,9 @@
         <div class="loading"><p></p><p></p><p></p></div>
     {:else}
         {#if paySelected}
+            {#if typeTranference == 'r4'}
+                <img src={imgR4} width="100%" alt="gateway-r4">
+            {/if}
             <button class="btn deposit__type" on:click={closePayMethod}>
                 <img src="{assetsPayments}{paySelected.img}.png" alt="paymethod-{paySelected.img}">
                 <div>
@@ -218,23 +225,34 @@
                         <button class="btn link_blank" on:click={()=>{window.open(iframeGateway,"_blank")}}>Ir a pasarela</button>
                     </div>
                 {:else}
-                <b>{t('deposit.details')}:</b>
-                <div class="deposit__info">
-                    <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
-                    <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
-                </div>
-                <div class="deposit__gateway">
-                    <div class="deposit__mounts">
-                        {#each amountsFav as amount}
-                            <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
-                        {/each}  
+                    <b>{t('deposit.details')}:</b>
+                    {#if typeTranference == 'r4'}
+                        <div class="deposit__info">
+                            <p>Banco: R4</p>
+                            <p>CI: Tu número de cédula.</p>
+                            <p>Teléfono: 04143144524</p>
+                            <p>Monto: El que desees recargar en tu cuenta.</p>
+                        </div>
+                    {:else}
+                    <div class="deposit__info">
+                        <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
+                        <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
                     </div>
-                    <div class="deposit__ipt">
-                        <b>{paySelected.iso}</b>
-                        <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
-                        <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
+                    {/if}
+                    {#if typeTranference != 'r4'}
+                    <div class="deposit__gateway">
+                        <div class="deposit__mounts">
+                            {#each amountsFav as amount}
+                                <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
+                            {/each}  
+                        </div>
+                        <div class="deposit__ipt">
+                            <b>{paySelected.iso}</b>
+                            <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
+                            <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
+                        </div>
                     </div>
-                </div>
+                    {/if}
                 {/if}
             {:else}
                 <p>{t('deposit.step1')}.</p>
