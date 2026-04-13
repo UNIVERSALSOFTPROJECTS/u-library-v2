@@ -79,6 +79,10 @@
             if(!infoUser.document){infoUser.document = ""}
             if(!infoUser.bank){infoUser.bank = ""}
             if(!account || !info) return onError(t("msg.allObligatory"));
+        }else if(typeView === "R4"){
+            info = "";
+            account = "";
+             if(!infoUser.bank || !infoUser.document) return onError(t("msg.allObligatory"));
         }else{
             if(!infoUser.documento || !info || !account || !bank) return onError(t("msg.allObligatory"));
         }
@@ -208,6 +212,8 @@
                         <p>{t('deposit.bankName')}:</p>
                         {#if infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}
                             <p>Número de celular</p>
+                            {:else if typeView === "R4"}
+                                <!-- -->
                             {:else}
                             <p>{t('deposit.numBankAccount')}:</p>
                         {/if}
@@ -221,8 +227,10 @@
                                 {/each}
                             </select>
                         {/if}
+                        {#if typeView != "R4"}
                         <input type="text" inputmode="numeric" class="ipt" bind:value={infoAccount.numero_cta} on:input={inputAccountBank}>
-                        {#if infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}
+                        {/if}
+                        {#if infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN" || typeView === "R4"}
                             <!--  -->
                             {:else if dataType == "phoneNumber"}
                             <p>{t('withdrawal.phoneNumber')}:</p>
@@ -236,7 +244,7 @@
                         {/if}
                         {#if typeAccount.length == 0}      
                             <input type="text" class="ipt" bind:value={infoAccount.adicional}>
-                        {:else if  infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}   
+                        {:else if  infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN" || typeView === "R4"}   
                             <!-- <div></div> -->
                         {:else}
                              <select class="slc" bind:value={infoAccount.adicional}>
