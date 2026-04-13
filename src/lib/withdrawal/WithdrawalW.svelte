@@ -82,7 +82,7 @@
         }else if(typeView === "R4"){
             info = "";
             account = "";
-             if(!infoUser.bank || !infoUser.document) return onError(t("msg.allObligatory"));
+             if(!bank || !infoUser.document) return onError(t("msg.allObligatory"));
         }else{
             if(!infoUser.documento || !info || !account || !bank) return onError(t("msg.allObligatory"));
         }
@@ -213,7 +213,7 @@
                         {#if infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}
                             <p>Número de celular</p>
                             {:else if typeView === "R4"}
-                                <!-- -->
+                                <p></p>
                             {:else}
                             <p>{t('deposit.numBankAccount')}:</p>
                         {/if}
