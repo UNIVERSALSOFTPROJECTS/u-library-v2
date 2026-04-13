@@ -76,13 +76,13 @@
         let bank = infoAccount.banco;
         let prefixPayMobile = typeView === "payMobile"?"509":"";
         if(typeView === "payMobile"){
-            if(!infoUser.document){infoUser.document = ""}
+            if(!infoUser.documento){infoUser.documento = ""}
             if(!infoUser.bank){infoUser.bank = ""}
             if(!account || !info) return onError(t("msg.allObligatory"));
         }else if(typeView === "R4"){
             info = "";
             account = "";
-             if(!bank || !infoUser.document) return onError(t("msg.allObligatory"));
+             if(!bank || !infoUser.documento) return onError(t("msg.allObligatory"));
         }else{
             if(!infoUser.documento || !info || !account || !bank) return onError(t("msg.allObligatory"));
         }
