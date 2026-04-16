@@ -77,11 +77,20 @@
         }, 1000);
     }
 
+    function getCurrencyPrefixById(currencyId) {
+        const currencyPrefixMap = {
+            1: "VES",
+            3: "USD"
+        };
+        const prefix = currencyPrefixMap[Number(currencyId)];
+        if (!prefix) return onError("La moneda no esta registrada");
+        return prefix;
+    }
+
     async function preRegisterClick(){
         if(isMultipleCurrencies){
             if(!document || !currency) return onError(t("msg.allObligatory"));
-            username = currency+document;
-            console.log(username);
+            username = `${getCurrencyPrefixById(currency)}${document}`;
         }
         if(!name || !date || !email || !username || !password || !phone || 
         typeSignup === "codeAgent" && !codeAgent || typeSignup === "selectCurrency" && !codeAgent) return onError(t("msg.allObligatory"));
