@@ -45,8 +45,8 @@
     //este se detecta al enviar codigo de agente por sendSMS
     let phone;
     let smscode;
-    let doctype;
-    let document = isMultipleCurrencies ? "CI" : "";
+    let doctype = isMultipleCurrencies ? "CI" : "";
+    let document;
     let term_conditions;
     let currency;
     let channel = "email";
@@ -78,6 +78,11 @@
     }
 
     async function preRegisterClick(){
+        if(isMultipleCurrencies){
+            if(!document || !currency) return onError(t("msg.allObligatory"));
+            username = currency+document;
+            console.log(username);
+        }
         if(!name || !date || !email || !username || !password || !phone || 
         typeSignup === "codeAgent" && !codeAgent || typeSignup === "selectCurrency" && !codeAgent) return onError(t("msg.allObligatory"));
         try {
@@ -131,10 +136,7 @@
                 return onError(t("msg.incorrectCodeAgent"));
             }
         }
-        if(isMultipleCurrencies){
-            if(!document || !currency) return onError(t("msg.allObligatory"));
-            username = currency+document;
-        }
+        if(isMultipleCurrencies && (!document || !currency)) return onError(t("msg.allObligatory"));
         try {
             loadSignup = true;
             if(typeSignup === "codeAgent"){
