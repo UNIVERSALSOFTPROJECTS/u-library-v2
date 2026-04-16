@@ -23,6 +23,7 @@
     let agentCodeType = configSignup.agentCodeType || 'codeAgent';
     let preRegister = configSignup.preRegister == undefined?true:false;//solo si falla el proveedor de sms
     let isCodeAgentSwitch = configSignup.isCodeAgentSwitch || false;
+    let isMultipleCurrencies = configSignup.isMultipleCurrencies || false;
     let isCheckedAfiliated = isCodeAgentSwitch;
     let isCheckedVertification = true;
     //loading
@@ -45,7 +46,7 @@
     let phone;
     let smscode;
     let doctype;
-    let document;
+    let document = isMultipleCurrencies ? "CI" : "";
     let term_conditions;
     let currency;
     let channel = "email";
@@ -129,7 +130,11 @@
             }else{
                 return onError(t("msg.incorrectCodeAgent"));
             }
-         }
+        }
+        if(isMultipleCurrencies){
+            if(!document || !currency) return onError(t("msg.allObligatory"));
+            username = currency+document;
+        }
         try {
             loadSignup = true;
             if(typeSignup === "codeAgent"){
@@ -183,7 +188,11 @@
     <b>{t("signup.dataAccess")}</b>
     <p class="signup__text--resalt">{t("signup.loguedEmailUser")}</p>
     <form><input type="email" class="ipt icon--email" placeholder={t("signup.email")} autocomplete="off" bind:value={email}></form>
-    <form><input type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}></form>
+    {#if isMultipleCurrencies}
+        <p>{t("signup.identityCard")}</p>
+        <input type="text" class="ipt" placeholder={t("signup.identityCard")} autocomplete="off" bind:value={document}>
+    {/if}
+    <form><input hidden={isMultipleCurrencies} type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}></form>
     <div class="signup__container--pass">
         <InputPassword bind:password {t}/>
     </div>

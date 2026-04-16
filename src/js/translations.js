@@ -33,6 +33,7 @@ export default {
     "signup.register": "Registrarse",
     "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
     "signup.verification": "Generar codigo de verificación para activar cuenta",
+    "signup.identityCard": "Cédula de identidad",
     //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
     "currency.usd": "Dólar estadounidense",
     "currency.clp": "Peso chileno",
@@ -423,6 +424,7 @@ export default {
   "signup.register": "S'inscrire",
   "signup.loginHere": "Vous avez déjà un compte ? <b>Connectez-vous ici</b>",
   "signup.verification": "Générer un code de vérification pour activer le compte",
+  "signup.identityCard": "Carte d'identité",
     //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
   "currency.usd": "Dollar américain",
   "currency.clp": "Peso chilien",
@@ -810,6 +812,7 @@ export default {
     "signup.register": "Cadastre-se",
     "signup.loginHere": "Já tem uma conta? <b>Entre aqui</b>",
     "signup.verification": "Gerar código de verificação para ativar a conta",
+    "signup.identityCard": "Carteira de identidade",
     //----------SINGUP/NAME CURRENCIES-------DISCARD-------------------
     "currency.usd": "Dólar americano",
     "currency.clp": "Peso chileno",
@@ -1193,6 +1196,7 @@ export default {
     "signup.register": "Register",
     "signup.loginHere": "Already have an account? <b>Log in here</b>",
     "signup.verification": "Verification",
+    "signup.identityCard": "Identity card",
     //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
     "currency.usd": "US Dollar",
     "currency.clp": "Chilean Peso",
