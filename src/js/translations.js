@@ -37,6 +37,7 @@ export default {
     "currency.usd": "Dólar estadounidense",
     "currency.clp": "Peso chileno",
     "currency.cop": "Peso colombiano",
+    "currency.ves": "Bolívar venezolano",
     //---------------RECOVERPASSWORD-----------------------------
     "recoverPassword.title": "¿Olvidaste tu contraseña?",
     "recoverPassword.email": "Ingrese su corrreo electrónico",
@@ -423,9 +424,10 @@ export default {
   "signup.loginHere": "Vous avez déjà un compte ? <b>Connectez-vous ici</b>",
   "signup.verification": "Générer un code de vérification pour activer le compte",
     //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
-   "currency.usd": "Dollar américain",
+  "currency.usd": "Dollar américain",
   "currency.clp": "Peso chilien",
   "currency.cop": "Peso colombien",
+  "currency.ves": "Bolivar vénézuélien",
     //---------------RECOVERPASSWORD-----------------------------
  "recoverPassword.title": "Mot de passe oublié ?",
   "recoverPassword.email": "Entrez votre adresse e-mail",
@@ -812,6 +814,7 @@ export default {
     "currency.usd": "Dólar americano",
     "currency.clp": "Peso chileno",
     "currency.cop": "Peso colombiano",
+    "currency.ves": "Bolívar venezuelano",
     //---------------FOOTER-----------------------------
      "footer.bonus": "Bônus",
     "footer.s_p": "Segurança e privacidade",
@@ -1194,6 +1197,7 @@ export default {
     "currency.usd": "US Dollar",
     "currency.clp": "Chilean Peso",
     "currency.cop": "Colombian Peso",
+    "currency.ves": "Venezuelan Bolívar",
     //---------------RECOVERPASSWORD-----------------------------
     "recoverPassword.title": "Forgot your password?",
     "recoverPassword.email": "Enter your email",
