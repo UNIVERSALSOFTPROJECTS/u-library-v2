@@ -18,6 +18,7 @@
   export let t; //traduccion
   export let isOauth = false;
   export let siteKey;
+  export let orgByCurrency;
 
   let password = "";
   let username = "";
@@ -31,7 +32,7 @@
 
   let userGmail;
 
-  let orgMultiCurrency = (platform == "betswing" ? localStorage.getItem("org") || "" : "");
+  let orgMultiCurrency = (orgByCurrency ? localStorage.getItem("org") || "" : "");
 
   const dataPassword = (e) => {
     password = e.target.value;
@@ -74,6 +75,22 @@
       });
   });
 
+  function detectCurrencyByUsername(username) {
+    const prefixToCurrency = {
+      VES: "VES",
+      BSB: "VES",
+      USD: "USD",
+      BSD: "USD",
+    };
+
+  const prefix = (username || "").trim().slice(0, 3).toUpperCase();
+  const currency = prefixToCurrency[prefix];
+  if (!currency) return onError("Prefijo no soportado");
+  const org = orgByCurrency[currency];
+  if (!org) return onError("Org no configurada");
+  localStorage.setItem("org", org);
+  return org;
+}
   async function loginClick() {
     if (!username || !password) return onError(t("msg.allObligatory"));
     try {
@@ -83,7 +100,7 @@
       if (location.href.includes("terminal")) {
         userType = 2;
       }
-
+      if (orgByCurrency) detectCurrencyByUsername(username);
       if (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType, turnstileToken, orgMultiCurrency);
       else data = await ServerConnection.u_user.login(username, password); // for demo-platform or platform universalsoft
       data = data.data;
