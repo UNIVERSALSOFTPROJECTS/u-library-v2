@@ -257,10 +257,10 @@
     <div class="signup__phone">
         <DropdowPrefix {countries} bind:country/>
         <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone} on:input={inputJustNumbers}>
-        {#if isMultipleCurrencies}
-            <p class="signup__text--hint">{t("signup.phoneHint")}</p>
-        {/if}
     </div>
+    {#if isMultipleCurrencies}
+        <p class="signup__text--hint">{t("signup.phoneHint")}</p>
+    {/if}
     {#if preRegister} 
     <b>{t("signup.verification")}</b>
     <div>
