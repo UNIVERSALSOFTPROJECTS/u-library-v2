@@ -89,9 +89,7 @@
     }
 
     async function preRegisterClick(){
-        if(isMultipleCurrencies && platform == "betswing"){
-            console.log("document: ", document);
-            console.log("currency: ", currency);
+        if(isMultipleCurrencies){
             if(!document || !currency) return onError(t("msg.allObligatory"));
             username = `${getCurrencyPrefixById(currency)}${document}`;
             if (currency) {
