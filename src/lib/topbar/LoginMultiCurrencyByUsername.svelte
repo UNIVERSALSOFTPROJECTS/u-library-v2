@@ -89,6 +89,7 @@
   const org = orgByCurrency[currency];
   if (!org) return onError("Org no configurada");
   localStorage.setItem("org", org);
+  orgMultiCurrency = org;
   return org;
 }
   async function loginClick() {
