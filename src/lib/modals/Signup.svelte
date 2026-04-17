@@ -23,6 +23,7 @@
     let agentCodeType = configSignup.agentCodeType || 'codeAgent';
     let preRegister = configSignup.preRegister == undefined?true:false;//solo si falla el proveedor de sms
     let isCodeAgentSwitch = configSignup.isCodeAgentSwitch || false;
+    let isMultipleCurrencies = configSignup.isMultipleCurrencies || false;
     let isCheckedAfiliated = isCodeAgentSwitch;
     let isCheckedVertification = true;
     //loading
@@ -44,13 +45,14 @@
     //este se detecta al enviar codigo de agente por sendSMS
     let phone;
     let smscode;
-    let doctype;
+    let doctype = isMultipleCurrencies ? "CI" : "";
     let document;
     let term_conditions;
     let currency;
     let channel = "email";
     let route = detectIdiomPage(t("idiom"));
     let routePDF = assetsPDF(platform,route);
+    let orgMultiCurrency;
 
     //validations imput -utils JS
     const inputJustText = inputUtils.justTextValidator;
@@ -76,12 +78,32 @@
         }, 1000);
     }
 
+    function getCurrencyPrefixById(currencyId) {
+        const currencyPrefixMap = {
+            1: "VES",
+            3: "USD"
+        };
+        const prefix = currencyPrefixMap[Number(currencyId)];
+        if (!prefix) return onError("La moneda no esta registrada");
+        return prefix;
+    }
+
     async function preRegisterClick(){
+        if(isMultipleCurrencies){
+            if(!document || !currency) return onError(t("msg.allObligatory"));
+            username = `${getCurrencyPrefixById(currency)}${document}`;
+            if (currency) {
+                orgMultiCurrency = currency === "1" ? "BTSW" : "";
+                orgMultiCurrency = currency === "3" ? "BWDA" : "";
+                if (!orgMultiCurrency) return onError(t("msg.contactSupport"));
+                localStorage.setItem("org", orgMultiCurrency);
+            }
+        }
         if(!name || !date || !email || !username || !password || !phone || 
         typeSignup === "codeAgent" && !codeAgent || typeSignup === "selectCurrency" && !codeAgent) return onError(t("msg.allObligatory"));
         try {
             loadSms = true;
-            let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,channel);
+            let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,channel, orgMultiCurrency);
             preRegister ? counterResendSms() : smscode = data.code_verify;
         } catch (error) {
             if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
@@ -129,7 +151,8 @@
             }else{
                 return onError(t("msg.incorrectCodeAgent"));
             }
-         }
+        }
+        if(isMultipleCurrencies && (!document || !currency)) return onError(t("msg.allObligatory"));
         try {
             loadSignup = true;
             if(typeSignup === "codeAgent"){
@@ -183,7 +206,12 @@
     <b>{t("signup.dataAccess")}</b>
     <p class="signup__text--resalt">{t("signup.loguedEmailUser")}</p>
     <form><input type="email" class="ipt icon--email" placeholder={t("signup.email")} autocomplete="off" bind:value={email}></form>
-    <form><input type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}></form>
+    {#if isMultipleCurrencies}
+        <p>{t("signup.identityCard")}</p>
+        <form><input type="text" class="ipt" placeholder={t("signup.identityCard")} autocomplete="off" bind:value={document} on:input={inputJustNumbers}></form>
+        <p class="signup__text--hint">{t("signup.identityCardHint")}</p>
+    {/if}
+    <form><input hidden={isMultipleCurrencies} type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}></form>
     <div class="signup__container--pass">
         <InputPassword bind:password {t}/>
     </div>
@@ -228,8 +256,11 @@
     {/if}
     <div class="signup__phone">
         <DropdowPrefix {countries} bind:country/>
-        <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone}>
+        <input type="number" class="ipt" min="0" placeholder={t("signup.phone")} autocomplete="off" bind:value={phone} on:input={inputJustNumbers}>
     </div>
+    {#if isMultipleCurrencies}
+        <p class="signup__text--hint">{t("signup.phoneHint")}</p>
+    {/if}
     {#if preRegister} 
     <b>{t("signup.verification")}</b>
     <div>

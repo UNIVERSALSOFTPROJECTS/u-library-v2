@@ -7,6 +7,7 @@
 
     //add name transalate by idCurrency
     const namesCurrenciesById = {
+        1: t("currency.ves"),
         3: t("currency.usd"),
         7: t("currency.clp"),
         8: t("currency.cop"),

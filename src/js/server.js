@@ -77,17 +77,18 @@ const ServerConnection = (() => {
             let url = conf.API_KS + `/retailAgents/${id}/currencies`;
             return axios.get(url, { headers });
         },
-        preRegister: (username, email, phone, platform, channel) => {
-            let url = conf.API_KS + "/user/preRegister";
-            console.log('URL', url);
+        preRegister: (username, email, phone, platform, channel, orgMultiCurrency = "") => {
+            let url = conf.API_KS + "/user/preRegister";    
             if (!conf.org) throw "ORG_MANDATORY";
-            let payload = { username, email, phone, org: conf.org, platform, channel }
+            let org = orgMultiCurrency == "" ? conf.org : orgMultiCurrency;
+            let payload = { username, email, phone, org, platform, channel }
             console.log("RETURN",payload);
             return axios.post(url, payload, { headers });
         },
-        login: (username, password, userType,turnstileToken = null) => {
+        login: (username, password, userType,turnstileToken = null, orgMultiCurrency = "") => {
+            let org = orgMultiCurrency == "" ? conf.org : orgMultiCurrency;
             let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login":"https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login";
-            let payload = { username, password, org: conf.org, userType }
+            let payload = { username, password, org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
             return axios.post(url, payload, { headers });
         },
