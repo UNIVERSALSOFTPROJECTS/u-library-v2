@@ -85,9 +85,10 @@ const ServerConnection = (() => {
             console.log("RETURN",payload);
             return axios.post(url, payload, { headers });
         },
-        login: (username, password, userType,turnstileToken = null) => {
+        login: (username, password, userType,turnstileToken = null, orgMultiCurrency = "") => {
+            let org = orgMultiCurrency == "" ? conf.org : orgMultiCurrency;
             let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login":"https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login";
-            let payload = { username, password, org: conf.org, userType }
+            let payload = { username, password, org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
             return axios.post(url, payload, { headers });
         },

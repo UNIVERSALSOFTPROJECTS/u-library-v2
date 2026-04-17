@@ -201,7 +201,7 @@
     <form><input type="email" class="ipt icon--email" placeholder={t("signup.email")} autocomplete="off" bind:value={email}></form>
     {#if isMultipleCurrencies}
         <p>{t("signup.identityCard")}</p>
-        <input type="text" class="ipt" placeholder={t("signup.identityCard")} autocomplete="off" bind:value={document}>
+        <form><input type="text" class="ipt" placeholder={t("signup.identityCard")} autocomplete="off" bind:value={document}></form>
     {/if}
     <form><input hidden={isMultipleCurrencies} type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}></form>
     <div class="signup__container--pass">
