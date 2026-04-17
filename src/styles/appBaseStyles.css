@@ -628,6 +628,9 @@ p, b, span, a, li *, button {
   border-radius: 0 0.25rem 0.25rem 0;
   padding-left: 0.25rem;
 }
+.Coliseosport .modal.signup .signup__phone > .signup__text--hint {
+  grid-column: 1 / -1;
+}
 .Coliseosport .modal.signup .signup__conditions {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -721,6 +724,11 @@ p, b, span, a, li *, button {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
+}
+.Coliseosport .modal.signup .signup__text--hint {
+  color: #888;
+  font-size: 11px;
+  margin-top: 0.25rem;
 }
 .Coliseosport .modal.signup .btn.validsms {
   background: #2783ff;

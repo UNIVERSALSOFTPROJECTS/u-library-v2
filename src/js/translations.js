@@ -26,6 +26,7 @@ export default {
     "signup.afiliated": "Afiliado",
     "signup.nameAfiliated": "Nombre de afiliado",
     "signup.phone": "Teléfono",
+    "signup.phoneHint": "Número local solo dígitos, sin 0 al inicio ni caracteres especiales (ej. 414325652).",
     "signup.generateCode": "Generar código",
     "signup.newCodeIn": "Nuevo código en",
     "signup.code": "Código",
@@ -34,6 +35,7 @@ export default {
     "signup.loginHere": "¿Ya tienes una cuenta? <b>Ingresa aquí</b>",
     "signup.verification": "Generar codigo de verificación para activar cuenta",
     "signup.identityCard": "Cédula de identidad",
+    "signup.identityCardHint": "Formato CI: solo números, 7 u 8 dígitos (ej. 12345678).",
     //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
     "currency.usd": "Dólar estadounidense",
     "currency.clp": "Peso chileno",
@@ -417,6 +419,7 @@ export default {
   "signup.afiliated": "Affilié",
   "signup.nameAfiliated": "Nom de l'affilié",
   "signup.phone": "Téléphone",
+  "signup.phoneHint": "Numéro local : chiffres uniquement, sans 0 initial ni caractères spéciaux (ex. 414325652).",
   "signup.generateCode": "Générer un code",
   "signup.newCodeIn": "Nouveau code dans",
   "signup.code": "Code",
@@ -425,6 +428,7 @@ export default {
   "signup.loginHere": "Vous avez déjà un compte ? <b>Connectez-vous ici</b>",
   "signup.verification": "Générer un code de vérification pour activer le compte",
   "signup.identityCard": "Carte d'identité",
+  "signup.identityCardHint": "Format carte d'identité : chiffres uniquement, 7 à 8 chiffres (ex. 12345678).",
     //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
   "currency.usd": "Dollar américain",
   "currency.clp": "Peso chilien",
@@ -805,6 +809,7 @@ export default {
     "signup.afiliated": "Afiliado",
     "signup.nameAfiliated": "Nome do afiliado",
     "signup.phone": "Telefone",
+    "signup.phoneHint": "Número local apenas dígitos, sem zero à esquerda e sem caracteres especiais (ex. 414325652).",
     "signup.generateCode": "Gerar código",
     "signup.newCodeIn": "Novo código em",
     "signup.code": "Código",
@@ -813,6 +818,7 @@ export default {
     "signup.loginHere": "Já tem uma conta? <b>Entre aqui</b>",
     "signup.verification": "Gerar código de verificação para ativar a conta",
     "signup.identityCard": "Carteira de identidade",
+    "signup.identityCardHint": "Formato do documento: apenas números, 7 ou 8 dígitos (ex. 12345678).",
     //----------SINGUP/NAME CURRENCIES-------DISCARD-------------------
     "currency.usd": "Dólar americano",
     "currency.clp": "Peso chileno",
@@ -1189,6 +1195,7 @@ export default {
     "signup.afiliated": "Affiliate",
     "signup.nameAfiliated": "Affiliate name",
     "signup.phone": "Phone",
+    "signup.phoneHint": "Local number: digits only, no leading 0 and no special characters (e.g. 414325652).",
     "signup.generateCode": "Generate code",
     "signup.newCodeIn": "New code in",
     "signup.code": "Code",
@@ -1197,6 +1204,7 @@ export default {
     "signup.loginHere": "Already have an account? <b>Log in here</b>",
     "signup.verification": "Verification",
     "signup.identityCard": "Identity card",
+    "signup.identityCardHint": "ID format: digits only, 7–8 digits (e.g. 12345678).",
     //---------------SINGUP/NAME CURRENCIES-------DISCARD----------------------
     "currency.usd": "US Dollar",
     "currency.clp": "Chilean Peso",
