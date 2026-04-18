@@ -95,8 +95,8 @@
             if(!document || !currency) return onError(t("msg.allObligatory"));
             username = `${getCurrencyPrefixById(currency)}${document}`;
             if (currency) {
-                orgMultiCurrency = currency == "1" ? "BTSW" : "";
-                orgMultiCurrency = currency == "3" ? "BWDA" : "";
+                orgMultiCurrency = currency == 1 ? "BTSW" : "";
+                orgMultiCurrency = currency == 3 ? "BWDA" : "";
                 console.log("orgMultiCurrency   ", orgMultiCurrency);
                 
                 if (!orgMultiCurrency) return onError(t("msg.contactSupport"));
