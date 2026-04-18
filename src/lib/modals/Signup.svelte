@@ -95,13 +95,9 @@
             if(!document || !currency) return onError(t("msg.allObligatory"));
             username = `${getCurrencyPrefixById(currency)}${document}`;
             if (currency) {
-                console.log("currency",currency);
-                console.log("currency1",currency == "1");
-                console.log("currency2",currency == "3");
-                
-                orgMultiCurrency = currency == "1" ? "BTSW" : "";
-                orgMultiCurrency = currency == "3" ? "BWDA" : "";
-                console.log("orgMultiCurrency   ", orgMultiCurrency);
+               if (currency == "1") orgMultiCurrency = "BTSW";
+                else if (currency == "3") orgMultiCurrency = "BWDA";
+                else orgMultiCurrency = "";
                 
                 if (!orgMultiCurrency) return onError(t("msg.contactSupport"));
                 localStorage.setItem("org", orgMultiCurrency);
