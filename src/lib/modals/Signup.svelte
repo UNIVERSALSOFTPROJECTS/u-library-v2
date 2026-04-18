@@ -15,6 +15,8 @@
     export let onError;
     export let t;
 
+    export let refreshConf;
+
     let platform = configSignup.platform;
     let typeSignup = configSignup.typeSignup;
     let userType = configSignup.userType;
@@ -90,6 +92,7 @@
 
     async function preRegisterClick(){
         if(isMultipleCurrencies){
+            console.log("currency", currency);
             if(!document || !currency) return onError(t("msg.allObligatory"));
             username = `${getCurrencyPrefixById(currency)}${document}`;
             if (currency) {
@@ -97,6 +100,7 @@
                 orgMultiCurrency = currency === "3" ? "BWDA" : "";
                 if (!orgMultiCurrency) return onError(t("msg.contactSupport"));
                 localStorage.setItem("org", orgMultiCurrency);
+                await refreshConf();
             }
         }
         if(!name || !date || !email || !username || !password || !phone || 
