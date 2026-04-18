@@ -97,6 +97,8 @@
             if (currency) {
                 orgMultiCurrency = currency == "1" ? "BTSW" : "";
                 orgMultiCurrency = currency == "3" ? "BWDA" : "";
+                console.log("orgMultiCurrency   ", orgMultiCurrency);
+                
                 if (!orgMultiCurrency) return onError(t("msg.contactSupport"));
                 localStorage.setItem("org", orgMultiCurrency);
                 await refreshConf();
