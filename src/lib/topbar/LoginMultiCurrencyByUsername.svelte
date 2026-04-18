@@ -77,7 +77,7 @@
       });
   });
 
-  function detectCurrencyByUsername(username) {
+  async function detectCurrencyByUsername (username) {
     const prefixToCurrency = {
       VES: "VES",
       BSB: "VES",
@@ -91,8 +91,8 @@
   const org = orgByCurrency[currency];
   if (!org) return onError("Org no configurada");
   localStorage.setItem("org", org);
-  refreshConf();
   orgMultiCurrency = org;
+  await refreshConf();
   return org;
 }
   async function loginClick() {
@@ -104,7 +104,7 @@
       if (location.href.includes("terminal")) {
         userType = 2;
       }
-      if (orgByCurrency) detectCurrencyByUsername(username);
+      if (orgByCurrency) await detectCurrencyByUsername(username);
       if (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType, turnstileToken, orgMultiCurrency);
       else data = await ServerConnection.u_user.login(username, password); // for demo-platform or platform universalsoft
       data = data.data;
