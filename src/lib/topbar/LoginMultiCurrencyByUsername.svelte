@@ -20,6 +20,8 @@
   export let siteKey;
   export let orgByCurrency;
 
+  export let refreshConf;
+
   let password = "";
   let username = "";
   let loadLogin = false;
@@ -89,6 +91,7 @@
   const org = orgByCurrency[currency];
   if (!org) return onError("Org no configurada");
   localStorage.setItem("org", org);
+  refreshConf();
   orgMultiCurrency = org;
   return org;
 }
