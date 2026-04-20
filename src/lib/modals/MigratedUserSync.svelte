@@ -5,11 +5,9 @@
 
     export let user;
     export let accountUser = {};
-    export let getMyAccount = () => {};
-    export let t = (_key) => "";
-    export let onError = (_message) => {};
-    export let onOk = () => {};
-    export let configProfile = {};
+    export let t;
+    export let onError;
+    export let onOk;
 
     let step = 1;
 
@@ -52,7 +50,6 @@
             />
         {:else}
             <UserDataMigrated
-                {getMyAccount}
                 bind:accountUser
                 {ServerConnection}
                 {onError}

@@ -3,9 +3,8 @@
 
     export let ServerConnection;
     export let accountUser = {};
-    export let onError = (_message) => {};
-    export let onOk = (_message) => {};
-    export let getMyAccount = () => {};
+    export let onError;
+    export let onOk;
 
     let loadUserData = false;
     let doctypes = ["CI", "RUT", "DNI"];
@@ -30,7 +29,6 @@
             accountUser.doctype = selectDoctype || accountUser.doctype || "CI";
             await ServerConnection.users.saveMyAccount(accountUser);
             onOk("Datos guardados correctamente.");
-            await getMyAccount();
         } catch (error) {
             onError("Ocurrio un error. Contacte soporte.");
         } finally {
