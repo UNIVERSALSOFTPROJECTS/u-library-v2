@@ -10,6 +10,7 @@
     let doctypes = ["CI", "RUT", "DNI"];
     let selectDoctype = "";
     let exampleDoctype = "";
+    accountUser.birthday = "";
 
     const avoidSubmit = (e) => { e.preventDefault(); };
 
@@ -51,11 +52,11 @@
         <input class="ipt" type="text" bind:value={accountUser.name} disabled>
 
         <p>Correo</p>
-        <p>Fecha de nacimiento *</p>
+        <p>Fecha de nacimiento <span class="required">*</span></p>
         <input class="ipt" type="text" bind:value={accountUser.email} disabled>
         <input class="ipt" type="date" bind:value={accountUser.birthday}>
 
-        <p>Telefono *</p>
+        <p>Telefono <span class="required">*</span></p>
         <p>Tipo de documento</p>
         <input class="ipt" type="text" bind:value={accountUser.phone}>
         <select class="slc" bind:value={selectDoctype} on:change={changeDoctype}>
@@ -67,7 +68,7 @@
             {/if}
         </select>
 
-        <p>Numero de documento *</p>
+        <p>Numero de documento <span class="required">*</span></p>
         <p>Direccion</p>
         <input class="ipt" type="text" placeholder={exampleDoctype} bind:value={accountUser.document}>
         <input class="ipt" type="text" bind:value={accountUser.address}>

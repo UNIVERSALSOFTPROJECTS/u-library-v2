@@ -60,7 +60,7 @@
 
     <div class="migratedSync__actions">
         {#if step > 1}
-            <button class="btn profile" type="button" on:click={previousStep}>
+            <button class="btn back" type="button" on:click={previousStep}>
                 Volver
             </button>
         {/if}
