@@ -1,6 +1,7 @@
 //export {default as Header} from "./lib/Header.svelte";
 export {default as Login} from "./lib/topbar/Login.svelte";
 export {default as LoginMultiCurrencyByUsername} from "./lib/topbar/LoginMultiCurrencyByUsername.svelte";
+export {default as MigratedUserSync} from "./lib/modals/MigratedUserSync.svelte";
 export {default as HorsesPage} from "./lib/pages/HorsesPage.svelte";
 export {default as HorsesPageV2} from "./lib/pages/HorsesPageV2.svelte";
 export {default as LoginXlive} from "./lib/topbar/LoginXlive.svelte";
