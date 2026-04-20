@@ -11,12 +11,10 @@
 
     let step = 1;
 
-    const nextStep = () => {
-        if (step < 2) step += 1;
-    };
-
-    const previousStep = () => {
-        if (step > 1) step -= 1;
+    /** Tras cambio de contrasena exitoso ChangePassword llama onOk; avanzamos al perfil sin boton Continuar/Volver. */
+    const onOkAfterPasswordChange = (msg) => {
+        if (typeof onOk === "function") onOk(msg);
+        if (step < 2) step = 2;
     };
 
     const finishFlow = () => {
@@ -45,7 +43,7 @@
                 bind:user
                 {ServerConnection}
                 {onError}
-                {onOk}
+                onOk={onOkAfterPasswordChange}
                 {t}
             />
         {:else}
@@ -59,17 +57,7 @@
     </div>
 
     <div class="migratedSync__actions">
-        {#if step > 1}
-            <button class="btn back" type="button" on:click={previousStep}>
-                Volver
-            </button>
-        {/if}
-
-        {#if step < 2}
-            <button class="btn save" type="button" on:click={nextStep}>
-                Continuar
-            </button>
-        {:else}
+        {#if step === 2}
             <button class="btn save" type="button" on:click={finishFlow}>
                 Finalizar
             </button>
