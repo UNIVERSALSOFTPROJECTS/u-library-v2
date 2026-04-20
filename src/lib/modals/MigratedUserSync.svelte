@@ -52,7 +52,6 @@
             />
         {:else}
             <UserDataMigrated
-                {configProfile}
                 {getMyAccount}
                 bind:accountUser
                 {ServerConnection}

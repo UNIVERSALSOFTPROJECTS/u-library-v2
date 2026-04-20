@@ -5,11 +5,10 @@
     export let accountUser = {};
     export let onError = (_message) => {};
     export let onOk = (_message) => {};
-    export let configProfile = {};
     export let getMyAccount = () => {};
 
     let loadUserData = false;
-    let doctypes = configProfile.doctype || [];
+    let doctypes = ["CI", "RUT", "DNI"];
     let selectDoctype = "";
     let exampleDoctype = "";
 
