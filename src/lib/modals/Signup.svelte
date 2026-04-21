@@ -15,6 +15,8 @@
     export let onError;
     export let t;
 
+    export let refreshConf;
+
     let platform = configSignup.platform;
     let typeSignup = configSignup.typeSignup;
     let userType = configSignup.userType;
@@ -93,10 +95,13 @@
             if(!document || !currency) return onError(t("msg.allObligatory"));
             username = `${getCurrencyPrefixById(currency)}${document}`;
             if (currency) {
-                orgMultiCurrency = currency === "1" ? "BTSW" : "";
-                orgMultiCurrency = currency === "3" ? "BWDA" : "";
+               if (currency == "1") orgMultiCurrency = "BTSW";
+                else if (currency == "3") orgMultiCurrency = "BWDA";
+                else orgMultiCurrency = "";
+                
                 if (!orgMultiCurrency) return onError(t("msg.contactSupport"));
                 localStorage.setItem("org", orgMultiCurrency);
+                await refreshConf();
             }
         }
         if(!name || !date || !email || !username || !password || !phone || 
