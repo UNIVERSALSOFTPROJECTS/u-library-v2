@@ -84,14 +84,18 @@
                 onUpdateWallet(walletStatus) { console.log(`[GoldenRace ${mode}] onUpdateWallet`, walletStatus); },
                 onGameSelected(playlist) { console.log(`[GoldenRace ${mode}] onGameSelected`, playlist); },
             };
-
             if (mode === "terminal") {
                 loader = window.GR.terminalLoader(cfg, callbacks);
             } else {
                 loader = window.GR.cashierLoader(cfg, callbacks);
             }
-
-            loader.start?.();
+            if (loader && loader.start) {
+                loader.start().catch((err) => {
+                    console.error("🔴 Error interno de GR:", err);
+                    loading = false;
+                });
+            }
+            loading = false;
         } catch (e) {
             console.error(`[GoldenRace ${mode}] Error:`, e);
             error = e.message || "Error al cargar GoldenRace";
