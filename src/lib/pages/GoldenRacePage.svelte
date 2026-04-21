@@ -54,7 +54,6 @@
     async function fetchGoldenRaceToken() {
         console.log("🟡 [GoldenRace Lib] Iniciando fetch... userState es:", userState);
         if (userState !== "loggedIn") {
-            console.warn("🟠 [GoldenRace Lib] Abortando fetch: El usuario no está loggedIn");
             return null;
         }
         try {
@@ -65,14 +64,13 @@
             });
             const data = await response.json();
             console.log("🟢 [GoldenRace Lib] Respuesta de API Java:", data);
-            if (data.status === "READY") return data.extToken;
+            if (data.status === "READY") return data.onlineHash;
             throw new Error("No se pudo obtener el token de juego");
         } catch (err) {
             console.error("🔴 [GoldenRace Lib] Error en fetch:", err);
             throw err;
         }
     }
-
     // ── Init ────────────────────────────────────────────────────────────────────
     function initLoader() {
         try {
