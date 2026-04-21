@@ -130,22 +130,18 @@
 </script>
 
 <div class="gr-wrapper">
-
     {#if loading}
         <div class="gr-loading">
             <span class="gr-spinner"></span>
             <p>Cargando GoldenRace...</p>
         </div>
     {/if}
-
     {#if error}
         <div class="gr-error">
             <p>⚠️ {error}</p>
         </div>
     {/if}
-
-    <div id={containerId} class="gr-container" class:gr-hidden={loading || !!error}></div>
-
+    <div id={containerId} class="gr-container" class:gr-hidden={loading}></div>
 </div>
 
 <style>
