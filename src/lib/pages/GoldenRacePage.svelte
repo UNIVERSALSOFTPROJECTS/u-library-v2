@@ -90,10 +90,7 @@
                 loader = window.GR.cashierLoader(cfg, callbacks);
             }
             if (loader && loader.start) {
-                loader.start().catch((err) => {
-                    console.error("🔴 Error interno de GR:", err);
-                    loading = false;
-                });
+                loader.start();
             }
             loading = false;
         } catch (e) {
