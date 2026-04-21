@@ -58,7 +58,11 @@
             return null;
         }
         try {
-            const response = await fetch(`${GAME_JAVA_API_URL}/api/goldenrace/opengame`, {...});
+            const response = await fetch(`${GAME_JAVA_API_URL}/api/goldenrace/opengame`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ t: gameToken })
+            });
             const data = await response.json();
             console.log("🟢 [GoldenRace Lib] Respuesta de API Java:", data);
             if (data.status === "READY") return data.extToken;
