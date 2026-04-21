@@ -153,7 +153,6 @@
         width: 100%;
         height: 100%;
     }
-
     :global(#golden-race-terminal-app iframe),
     :global(#golden-race-cashier-app iframe) {
         width: 100% !important;
@@ -162,29 +161,15 @@
     }
 
     .gr-hidden { display: none; }
-
     .gr-loading {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
         height: 100%;
-        gap: 1rem;
-        color: #ccc;
-        font-size: 1.1rem;
+        background-color: #1a1a1a;
+        z-index: 10;
     }
-
-    .gr-spinner {
-        width: 48px;
-        height: 48px;
-        border: 5px solid rgba(255,255,255,0.2);
-        border-top-color: #fff;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
     .gr-error {
         display: flex;
         align-items: center;
@@ -193,7 +178,6 @@
         color: #f87171;
         font-size: 1.1rem;
     }
-
     @media only screen and (max-width: 1199px) {
         .gr-wrapper { height: 100vh; }
     }
