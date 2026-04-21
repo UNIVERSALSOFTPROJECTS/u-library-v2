@@ -132,10 +132,7 @@
 
 <div class="gr-wrapper">
     {#if loading}
-        <div class="gr-loading">
-            <span class="gr-spinner"></span>
-            <p>Cargando GoldenRace...</p>
-        </div>
+        <div class="gr-loading"></div>
     {/if}
     {#if error}
         <div class="gr-error">
