@@ -10,6 +10,7 @@
     export let GAME_JAVA_API_URL = "https://api-oci-test.newapiusoft.com/game-api-jv-v2";
     export let gameToken;
 
+    $: console.log("🔵 [GoldenRace Lib] Props actuales -> userState:", userState, "| gameToken:", gameToken);
     // ── URLs ────────────────────────────────────────────────────────────────────
     const URLS = {
         terminal: "https://latam-games.virtustec.com/terminal/loader.js",
@@ -46,23 +47,24 @@
         } else if (hwId) {
             cfg.hwId = hwId;
         }
+        console.log("🔥 [GoldenRace Lib] CONFIG FINAL ENVIADA AL SDK:", cfg);
         return cfg;
     }
 
     async function fetchGoldenRaceToken() {
-        if (userState !== "loggedIn") return null;
+        console.log("🟡 [GoldenRace Lib] Iniciando fetch... userState es:", userState);
+        if (userState !== "loggedIn") {
+            console.warn("🟠 [GoldenRace Lib] Abortando fetch: El usuario no está loggedIn");
+            return null;
+        }
         try {
-            const response = await fetch(`${GAME_JAVA_API_URL}/api/goldenrace/opengame`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ t: gameToken })
-            });
-            if (!response.ok) throw new Error("Sesión inválida en Golden Race");
+            const response = await fetch(`${GAME_JAVA_API_URL}/api/goldenrace/opengame`, {...});
             const data = await response.json();
+            console.log("🟢 [GoldenRace Lib] Respuesta de API Java:", data);
             if (data.status === "READY") return data.extToken;
             throw new Error("No se pudo obtener el token de juego");
         } catch (err) {
-            console.error("Error obteniendo token:", err);
+            console.error("🔴 [GoldenRace Lib] Error en fetch:", err);
             throw err;
         }
     }
