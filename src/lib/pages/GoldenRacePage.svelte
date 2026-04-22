@@ -54,20 +54,35 @@
     async function fetchGoldenRaceToken() {
         console.log("🟡 [GoldenRace Lib] Iniciando fetch... userState es:", userState);
         if (userState !== "loggedIn") {
+            console.log("🟠 [GoldenRace Lib] Usuario no logueado. Abortando fetch.");
             return null;
         }
+        if (!gameToken) {
+            console.error("🔴 [GoldenRace Lib] Error: gameToken (Pase VIP) está vacío o indefinido.");
+            throw new Error("Falta el token de autorización (gameToken)");
+        }
         try {
-            const response = await fetch(`${GAME_JAVA_API_URL}/api/goldenrace/opengame`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ t: gameToken })
-            });
-            const data = await response.json();
-            console.log("🟢 [GoldenRace Lib] Respuesta de API Java:", data);
-            if (data.status === "READY") return data.onlineHash;
-            throw new Error("No se pudo obtener el token de juego");
+            console.log("🟡 [GoldenRace Lib] Paso 1: Solicitando /launch a Node.js para guardar la sesión...");
+            const launchUrl = `${GAMEAPI_URL}/launch?gameid=grv_2026&p=grv&b=GoldenRace&m=wb&sessionid=${gameToken}`;
+            console.log("   -> URL generada para Node:", launchUrl);
+            const launchResponse = await fetch(launchUrl);
+            const launchData = await launchResponse.json();
+            console.log("🟢 [GoldenRace Lib] Paso 1 Completado. Respuesta de Node.js:", launchData);
+            if (!launchData || !launchData.url) {
+                throw new Error("Node.js no devolvió la URL de Java en el atributo 'url'");
+            }
+            console.log("🟡 [GoldenRace Lib] Paso 2: Consumiendo URL de Java devuelta por Node...");
+            console.log("   -> URL de Java a consumir:", launchData.url);
+            const javaResponse = await fetch(launchData.url);
+            const javaData = await javaResponse.json();
+            console.log("🟢 [GoldenRace Lib] Paso 2 Completado. Respuesta de API Java:", javaData);
+            if (javaData.status === "READY" && javaData.onlineHash) {
+                console.log("🚀 [GoldenRace Lib] Hash obtenido con éxito. Listo para inicializar SDK.");
+                return javaData.onlineHash;
+            }
+            throw new Error("Java devolvió un estado inesperado o no devolvió el onlineHash");
         } catch (err) {
-            console.error("🔴 [GoldenRace Lib] Error en fetch:", err);
+            console.error("🔴 [GoldenRace Lib] Error crítico en la cadena de peticiones:", err);
             throw err;
         }
     }
