@@ -55,21 +55,15 @@
         console.log("🟡 [GoldenRace Lib] Iniciando fetch... userState es:", userState);
         if (userState !== "loggedIn" || !gameToken) return null;
         try {
-            console.log("🟡 [GoldenRace Lib] Paso 1: Solicitando /launch a Node.js...");
+            console.log("🟡 [GoldenRace Lib] Solicitando /launch a Node.js...");
             const launchUrl = `${GAMEAPI_URL}/launch?gameid=grv_2026&p=grv&b=GoldenRace&m=wb&sessionid=${gameToken}&r=url`;
             const launchData = await backend.game.getURL(launchUrl);
-            console.log("🟢 [GoldenRace Lib] Paso 1 Completado. Respuesta Node.js:", launchData);
-            if (!launchData || !launchData.url) {
-                throw new Error("Node.js no devolvió la URL en el atributo 'url'");
+            console.log("🟢 [GoldenRace Lib] Respuesta de Node/Java unificada:", launchData);
+            if (launchData.status === "READY" && launchData.onlineHash) {
+                console.log("🚀 [GoldenRace Lib] ¡ÉXITO! Hash obtenido:", launchData.onlineHash);
+                return launchData.onlineHash;
             }
-            console.log("🟡 [GoldenRace Lib] Paso 2: Consumiendo URL de Java...");
-            const javaResponse = await fetch(launchData.url);
-            const javaData = await javaResponse.json();
-            console.log("🟢 [GoldenRace Lib] Paso 2 Completado. Respuesta Java:", javaData);
-            if (javaData.status === "READY" && javaData.onlineHash) {
-                return javaData.onlineHash;
-            }
-            throw new Error("Java no devolvió el onlineHash");
+            throw new Error("No se recibió el onlineHash válido en la respuesta.");
         } catch (err) {
             console.error("🔴 [GoldenRace Lib] Error crítico:", err);
             throw err;
