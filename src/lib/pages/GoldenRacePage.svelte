@@ -8,6 +8,7 @@
     export let mode = "cashier";      // "terminal" | "cashier"
     export let hwId = "144147";              // para modo read-only sin login
     export let GAME_JAVA_API_URL = "https://api-oci-test.newapiusoft.com/game-api-jv-v2";
+    export let GAMEAPI_URL;
     export let gameToken;
 
     $: console.log("🔵 [GoldenRace Lib] Props actuales -> userState:", userState, "| gameToken:", gameToken);
