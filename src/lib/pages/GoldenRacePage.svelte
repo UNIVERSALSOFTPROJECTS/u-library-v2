@@ -40,8 +40,7 @@
     function buildConfig() {
         const cfg = {
             script:    `#${SCRIPT_IDS[mode]}`,
-            container: `#${CONTAINER_IDS[mode]}`,
-            lang: "es",
+            container: `#${CONTAINER_IDS[mode]}`
         };
         if (userState === "loggedIn" && fetchedExtToken) {
             cfg.onlineHash = fetchedExtToken;
