@@ -15,7 +15,7 @@
     // ── URLs ────────────────────────────────────────────────────────────────────
     const URLS = {
         terminal: "https://latam-games.virtustec.com/terminal/loader.js",
-        cashier:  "https://latam-games.virtustec.com/cashier/loader.js",
+        cashier:  "https://latam-games.virtustec.com/cashier-v1/loader.js",
     };
 
     const CONTAINER_IDS = {
