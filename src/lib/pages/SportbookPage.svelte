@@ -85,6 +85,11 @@
   const baseUrlEcuFlexBetFBET ='https://prod20370-189834999.442hattrick.com/';
   const baseUrlEcuFlexBetMBET ='https://prod20370-191367006.freethrow777.com';
 
+  const baseUrlHipicasBabiecaHBCO = 'https://prod20370-201498456.freethrow777.com';
+  const baseUrlHipicasBabiecaHBVE = 'https://prod20370-201498755.freethrow777.com';
+  const baseUrlBetSwingBWDA = 'https://prod20370-201479896.freethrow777.com';
+  const baseUrlBetSwingBTSW = 'https://prod20370-201497598.freethrow777.com';
+
   const games = {
     'digtain':{
       provider: "edg",
@@ -197,6 +202,10 @@
       else if (CLIENT_CODE == 'WINP') url =baseUrlWinproxWINP
       else if (CLIENT_CODE == 'FBET') url =baseUrlEcuFlexBetFBET
       else if (CLIENT_CODE == 'MBET') url =baseUrlEcuFlexBetMBET
+      else if (CLIENT_CODE == 'BWDA') url =baseUrlBetSwingBWDA
+      else if (CLIENT_CODE == 'HBVE') url =baseUrlHipicasBabiecaHBVE
+      else if (CLIENT_CODE == 'HBCO') url =baseUrlHipicasBabiecaHBCO
+      else if (CLIENT_CODE == 'BTSW') url =baseUrlBetSwingBTSW
       else url = baseUrlGanawin
       sportbookGameUrl = url;
     } catch (error) {
