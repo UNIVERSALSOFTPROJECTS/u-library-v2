@@ -208,7 +208,8 @@
                         <p>{t('profile.fullname')}</p>
                         <p>{t('profile.dni')}</p>
                         <input type="text" class="ipt" bind:value={infoUser.nombre} disabled>
-                        <input type="text" inputmode="numeric" class="ipt" bind:value={infoUser.documento} on:input={inputJustNumbers} disabled={infoUser.documento}>
+                        <!-- disabled={infoUser.documento} -->
+                        <input type="text" inputmode="numeric" class="ipt" bind:value={infoUser.documento} on:input={inputJustNumbers} >
                         <p>{t('deposit.bankName')}:</p>
                         {#if infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}
                             <p>Número de celular</p>
