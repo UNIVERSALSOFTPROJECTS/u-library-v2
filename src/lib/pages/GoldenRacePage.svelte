@@ -42,11 +42,7 @@
             script:    `#${SCRIPT_IDS[mode]}`,
             container: `#${CONTAINER_IDS[mode]}`
         };
-        if (userState === "loggedIn" && fetchedExtToken) {
-            cfg.onlineHash = fetchedExtToken;
-        } else if (hwId) {
-            cfg.hwId = hwId;
-        }
+        if (userState === "loggedIn" && fetchedExtToken) cfg.onlineHash = fetchedExtToken;
         console.log("🔥 [GoldenRace Lib] CONFIG FINAL ENVIADA AL SDK:", cfg);
         return cfg;
     }
@@ -70,42 +66,29 @@
     }
     // ── Init ────────────────────────────────────────────────────────────────────
     function initLoader() {
+        if (mode === "online") return;
         try {
             const cfg = buildConfig();
-            const callbacks = {
-                onLogin(account, balances, content, user, sessionContext) {
-                    console.log(`[GoldenRace ${mode}] onLogin`, account, balances);
-                    loading = false;
-                },
-                onLogout() { console.log(`[GoldenRace ${mode}] onLogout`); },
-                onUpdateWallet(walletStatus) { console.log(`[GoldenRace ${mode}] onUpdateWallet`, walletStatus); },
-                onGameSelected(playlist) { console.log(`[GoldenRace ${mode}] onGameSelected`, playlist); },
-            };
-            if (mode === "terminal") {
-                loader = window.GR.terminalLoader(cfg, callbacks);
-            } else {
-                loader = window.GR.cashierLoader(cfg, callbacks);
-            }
-            if (loader && loader.start) {
-                loader.start();
-            }
+            if (mode === "terminal") loader = window.GR.terminalLoader(cfg);
+            else loader = window.GR.cashierLoader(cfg);
+            if (loader && loader.start) loader.start();
             loading = false;
         } catch (e) {
-            console.error(`[GoldenRace ${mode}] Error:`, e);
-            error = e.message || "Error al cargar GoldenRace";
+            error = e.message || "Error al inicializar el loader de GoldenRace";
             loading = false;
         }
     }
 
     // ── Script loader ───────────────────────────────────────────────────────────
     function loadScript() {
+        if (mode === "online") return Promise.resolve();
         return new Promise((resolve, reject) => {
             if (document.getElementById(SCRIPT_IDS[mode])) return resolve();
             const script = document.createElement("script");
             script.src = URLS[mode];
             script.id  = SCRIPT_IDS[mode];
             script.onload  = () => resolve();
-            script.onerror = () => reject(new Error(`No se pudo cargar el script (${mode})`));
+            script.onerror = () => reject(new Error(`Fallo al cargar ${URLS[mode]}`));
             document.head.appendChild(script);
         });
     }
