@@ -34,13 +34,9 @@
             script:    `#${SCRIPT_IDS[mode]}`,
             container: `#${CONTAINER_IDS[mode]}`
         };
-        if (mode === "terminal") {
-            cfg.hwId = "941eccb3-fd89-470c-87be-128504ac484a";
-            if (userState === "loggedIn" && fetchedExtToken) {
-                cfg.onlineHash = fetchedExtToken;
-            }
-        }
-        else if (mode === "cashier" && userState === "loggedIn" && fetchedExtToken) {
+
+        // Apertura estándar: Se envía siempre el onlineHash del usuario logueado
+        if (userState === "loggedIn" && fetchedExtToken) {
             cfg.onlineHash = fetchedExtToken;
         }
 
