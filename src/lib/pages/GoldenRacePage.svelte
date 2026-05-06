@@ -1,18 +1,14 @@
 <script>
-    // @ts-nocheck
     import { onMount, onDestroy } from "svelte";
     import backend from '../../js/server.js';
 
     export let userState = "logout";
     export let user = {};
-    export let mode = "cashier";      // "terminal" | "cashier"
-    export let hwId = "144147";              // para modo read-only sin login
-    export let GAME_JAVA_API_URL = "https://api-oci-test.newapiusoft.com/game-api-jv-v2";
+    export let mode = "online"; // Recibe 'terminal' o 'cashier' desde App.svelte
+    export let GAME_JAVA_API_URL;
     export let GAMEAPI_URL;
     export let gameToken;
 
-    $: console.log("🔵 [GoldenRace Lib] Props actuales -> userState:", userState, "| gameToken:", gameToken);
-    // ── URLs ────────────────────────────────────────────────────────────────────
     const URLS = {
         terminal: "https://latam-games.virtustec.com/terminal/loader.js",
         cashier:  "https://latam-games.virtustec.com/cashier/loader.js",
@@ -24,11 +20,10 @@
     };
 
     const SCRIPT_IDS = {
-        terminal: "golden-race-terminal-script",
-        cashier:  "golden-race-cashier-script",
+        terminal: "golden-race-terminal-loader",
+        cashier:  "golden-race-cashier-loader",
     };
 
-    // ── Estado ──────────────────────────────────────────────────────────────────
     let loader = null;
     let loading = true;
     let error = null;
@@ -36,41 +31,49 @@
 
     $: containerId = CONTAINER_IDS[mode];
 
-    // ── Config ──────────────────────────────────────────────────────────────────
     function buildConfig() {
         const cfg = {
             script:    `#${SCRIPT_IDS[mode]}`,
             container: `#${CONTAINER_IDS[mode]}`
         };
-        if (userState === "loggedIn" && fetchedExtToken) cfg.onlineHash = fetchedExtToken;
+
+        // Apertura estándar al pie de la letra: Se envía siempre el onlineHash del usuario logueado
+        if (userState === "loggedIn" && fetchedExtToken) {
+            cfg.onlineHash = fetchedExtToken;
+        }
+
         console.log("🔥 [GoldenRace Lib] CONFIG FINAL ENVIADA AL SDK:", cfg);
         return cfg;
     }
+
     async function fetchGoldenRaceToken() {
-        console.log("🟡 [GoldenRace Lib] Iniciando fetch... userState es:", userState);
         if (userState !== "loggedIn" || !gameToken) return null;
         try {
-            console.log("🟡 [GoldenRace Lib] Solicitando /launch a Node.js...");
             const launchUrl = `${GAMEAPI_URL}/launch?gameid=grv_2026&p=grv&b=GoldenRace&m=wb&sessionid=${gameToken}&r=url`;
             const launchData = await backend.game.getURL(launchUrl);
-            console.log("🟢 [GoldenRace Lib] Respuesta de Node/Java unificada:", launchData);
+
             if (launchData.status === "READY" && launchData.onlineHash) {
-                console.log("🚀 [GoldenRace Lib] ¡ÉXITO! Hash obtenido:", launchData.onlineHash);
                 return launchData.onlineHash;
             }
-            throw new Error("No se recibió el onlineHash válido en la respuesta.");
+            throw new Error("No se recibió un onlineHash válido.");
         } catch (err) {
-            console.error("🔴 [GoldenRace Lib] Error crítico:", err);
             throw err;
         }
     }
-    // ── Init ────────────────────────────────────────────────────────────────────
+
     function initLoader() {
-        if (mode === "online") return;
+        // Filtro de seguridad: Si por algún motivo entra un type distinto a 3 o 4, abortamos la carga del SDK
+        if (mode !== "terminal" && mode !== "cashier") return;
+
         try {
             const cfg = buildConfig();
-            if (mode === "terminal") loader = window.GR.terminalLoader(cfg);
-            else loader = window.GR.cashierLoader(cfg);
+
+            if (mode === "terminal") {
+                loader = window.GR.terminalLoader(cfg);
+            } else {
+                loader = window.GR.cashierLoader(cfg);
+            }
+
             if (loader && loader.start) loader.start();
             loading = false;
         } catch (e) {
@@ -79,21 +82,20 @@
         }
     }
 
-    // ── Script loader ───────────────────────────────────────────────────────────
     function loadScript() {
-        if (mode === "online") return Promise.resolve();
+        if (mode !== "terminal" && mode !== "cashier") return Promise.resolve();
+
         return new Promise((resolve, reject) => {
             if (document.getElementById(SCRIPT_IDS[mode])) return resolve();
             const script = document.createElement("script");
             script.src = URLS[mode];
             script.id  = SCRIPT_IDS[mode];
             script.onload  = () => resolve();
-            script.onerror = () => reject(new Error(`Fallo al cargar ${URLS[mode]}`));
+            script.onerror = () => reject(new Error(`Fallo al cargar script para: ${mode}`));
             document.head.appendChild(script);
         });
     }
 
-    // ── Ciclo de vida ───────────────────────────────────────────────────────────
     onMount(async () => {
         try {
             fetchedExtToken = await fetchGoldenRaceToken();
@@ -119,7 +121,10 @@
             <p>⚠️ {error}</p>
         </div>
     {/if}
-    <div id={containerId} class="gr-container" class:gr-hidden={loading}></div>
+
+    {#if mode === "terminal" || mode === "cashier"}
+        <div id={containerId} class="gr-container" class:gr-hidden={loading}></div>
+    {/if}
 </div>
 
 <style>
@@ -128,7 +133,6 @@
         width: 100%;
         height: calc(100dvh - 3.75rem);
     }
-
     .gr-container {
         width: 100%;
         height: 100%;
@@ -139,14 +143,11 @@
         height: 100% !important;
         border: none;
     }
-
     .gr-hidden { display: none; }
     .gr-loading {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
         background-color: #1a1a1a;
         z-index: 10;
     }
@@ -157,8 +158,5 @@
         height: 100%;
         color: #f87171;
         font-size: 1.1rem;
-    }
-    @media only screen and (max-width: 1199px) {
-        .gr-wrapper { height: 100vh; }
     }
 </style>
