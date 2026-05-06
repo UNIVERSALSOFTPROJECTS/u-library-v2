@@ -25,8 +25,6 @@
     };
 
     let loader = null;
-    let loading = true;
-    let error = null;
     let fetchedExtToken = null;
 
     $: containerId = CONTAINER_IDS[mode];
@@ -37,7 +35,7 @@
             container: `#${CONTAINER_IDS[mode]}`
         };
 
-        // Apertura estándar al pie de la letra: Se envía siempre el onlineHash del usuario logueado
+        // Apertura estándar: Se envía siempre el onlineHash del usuario logueado
         if (userState === "loggedIn" && fetchedExtToken) {
             cfg.onlineHash = fetchedExtToken;
         }
@@ -57,12 +55,12 @@
             }
             throw new Error("No se recibió un onlineHash válido.");
         } catch (err) {
+            console.error("🔴 [GoldenRace Lib] Error obteniendo el hash:", err);
             throw err;
         }
     }
 
     function initLoader() {
-        // Filtro de seguridad: Si por algún motivo entra un type distinto a 3 o 4, abortamos la carga del SDK
         if (mode !== "terminal" && mode !== "cashier") return;
 
         try {
@@ -75,10 +73,8 @@
             }
 
             if (loader && loader.start) loader.start();
-            loading = false;
         } catch (e) {
-            error = e.message || "Error al inicializar el loader de GoldenRace";
-            loading = false;
+            console.error("🔴 [GoldenRace Lib] Error al inicializar el loader:", e);
         }
     }
 
@@ -102,8 +98,7 @@
             await loadScript();
             initLoader();
         } catch (e) {
-            error = e.message;
-            loading = false;
+            console.error("🔴 [GoldenRace Lib] Error general en onMount:", e);
         }
     });
 
@@ -113,17 +108,8 @@
 </script>
 
 <div class="gr-wrapper">
-    {#if loading}
-        <div class="gr-loading"></div>
-    {/if}
-    {#if error}
-        <div class="gr-error">
-            <p>⚠️ {error}</p>
-        </div>
-    {/if}
-
     {#if mode === "terminal" || mode === "cashier"}
-        <div id={containerId} class="gr-container" class:gr-hidden={loading}></div>
+        <div id={containerId} class="gr-container"></div>
     {/if}
 </div>
 
@@ -136,27 +122,13 @@
     .gr-container {
         width: 100%;
         height: 100%;
+        /* Aseguramos que tenga un fondo oscuro por si el iframe tarda en cargar */
+        background-color: #1a1a1a;
     }
     :global(#golden-race-terminal-app iframe),
     :global(#golden-race-cashier-app iframe) {
         width: 100% !important;
         height: 100% !important;
         border: none;
-    }
-    .gr-hidden { display: none; }
-    .gr-loading {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background-color: #1a1a1a;
-        z-index: 10;
-    }
-    .gr-error {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        color: #f87171;
-        font-size: 1.1rem;
     }
 </style>
