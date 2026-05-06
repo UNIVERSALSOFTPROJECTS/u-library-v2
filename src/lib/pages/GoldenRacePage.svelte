@@ -6,10 +6,11 @@
     export let userState = "logout";
     export let user = {};
     export let mode = "cashier";      // "terminal" | "cashier"
-    export let hwId = "144147";              // para modo read-only sin login
+    export let hwId = "941eccb3-fd89-470c-87be-128504ac484a";
     export let GAME_JAVA_API_URL = "https://api-oci-test.newapiusoft.com/game-api-jv-v2";
     export let GAMEAPI_URL;
     export let gameToken;
+
 
     $: console.log("🔵 [GoldenRace Lib] Props actuales -> userState:", userState, "| gameToken:", gameToken);
     // ── URLs ────────────────────────────────────────────────────────────────────
@@ -42,8 +43,12 @@
             script:    `#${SCRIPT_IDS[mode]}`,
             container: `#${CONTAINER_IDS[mode]}`
         };
-        if (userState === "loggedIn" && fetchedExtToken) cfg.onlineHash = fetchedExtToken;
-        console.log("🔥 [GoldenRace Lib] CONFIG FINAL ENVIADA AL SDK:", cfg);
+        if (mode === "terminal") {
+            cfg.hwId = hwId;
+        } else if (userState === "loggedIn" && fetchedExtToken) {
+            cfg.onlineHash = fetchedExtToken;
+        }
+        console.log("🔥 [GoldenRace Lib] CONFIG FINAL ENVIADA:", cfg);
         return cfg;
     }
     async function fetchGoldenRaceToken() {
