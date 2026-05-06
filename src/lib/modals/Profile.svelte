@@ -39,10 +39,15 @@
   let rolloverData = null;
 
   const getRollover = async () => {
+    console.log("DEBUG: Iniciando consulta de rollover. Token:", user.token);
     try {
       const serialFromToken = user.token.substring(0, 13);
+      console.log("DEBUG: Serial extraído del token:", serialFromToken);
+
       const { data } =
         await ServerConnection.users.verifyRollover(serialFromToken);
+      console.log("DEBUG: Respuesta recibida de verifyRollover:", data);
+
       if (data && data.rolloverAmount > 0) {
         rolloverData = data;
         // Calculamos el porcentaje: (spend / rolloverAmount) * 100
@@ -50,9 +55,15 @@
           100,
           Math.floor((data.spend / data.rolloverAmount) * 100),
         );
+        console.log("DEBUG: Rollover activo. Datos procesados:", rolloverData);
+      } else {
+        console.warn(
+          "DEBUG: No se mostró la barra porque rolloverAmount es:",
+          data?.rolloverAmount,
+        );
       }
     } catch (error) {
-      console.error("Error al obtener rollover", error);
+      console.error("DEBUG: Error en la petición de rollover:", error);
     }
   };
 

@@ -10,8 +10,8 @@ const ServerConnection = (() => {
     const setConfig = (config) => {
         conf = config;
         headers = {
-            "Content-Type": "application/json;charset=UTF-8", 
-            "site-id": conf.SITE_ID, 
+            "Content-Type": "application/json;charset=UTF-8",
+            "site-id": conf.SITE_ID,
             "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "*",
@@ -19,7 +19,7 @@ const ServerConnection = (() => {
             "Accept": "*",
         };
     }
-    
+
     const wallet = {
         checkPreviewWithdrawal: async (token) => {
             let url = conf.API_KS + `/checkRetailWithdrawal/${token}`;
@@ -46,10 +46,10 @@ const ServerConnection = (() => {
         },
         withdrawal_w: async (token, amount, bank, account, info, dni) => {
             let payload = { token, amount, bank, account, info, dni }
-            let url = conf.API_KS+ "/withdrawal";
+            let url = conf.API_KS + "/withdrawal";
             return await axios.post(url, payload, { headers });
         },
-        bankDeposit: async (token, bankDeposit,base64Image = "") => {
+        bankDeposit: async (token, bankDeposit, base64Image = "") => {
             let payload = { ...bankDeposit, token, base64Image }
             let url = conf.API_KS + "/wallet/bankDeposit";
             return await axios.post(url, payload, { headers });
@@ -69,6 +69,7 @@ const ServerConnection = (() => {
             return axios.get(url, { headers });
         },
         verifyRollover: (serial) => {
+            console.log("Serial", serial);
             let url = conf.API_KS + `/verifyRollover?serial=${serial}`;
             return axios.get(url, { headers });
         },
@@ -82,16 +83,16 @@ const ServerConnection = (() => {
             return axios.get(url, { headers });
         },
         preRegister: (username, email, phone, platform, channel, orgMultiCurrency = "") => {
-            let url = conf.API_KS + "/user/preRegister";    
+            let url = conf.API_KS + "/user/preRegister";
             if (!conf.org) throw "ORG_MANDATORY";
             let org = orgMultiCurrency == "" ? conf.org : orgMultiCurrency;
             let payload = { username, email, phone, org, platform, channel }
-            console.log("RETURN",payload);
+            console.log("RETURN", payload);
             return axios.post(url, payload, { headers });
         },
-        login: (username, password, userType,turnstileToken = null, orgMultiCurrency = "") => {
+        login: (username, password, userType, turnstileToken = null, orgMultiCurrency = "") => {
             let org = orgMultiCurrency == "" ? conf.org : orgMultiCurrency;
-            let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login":"https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login";
+            let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login" : "https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login";
             let payload = { username, password, org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
             return axios.post(url, payload, { headers });
@@ -103,31 +104,31 @@ const ServerConnection = (() => {
             let payload = { username, name, phone, email, currency, password, date, smscode, country, operatorId, doctype: doctype, document: document, birthday: date, domain: conf.domain, usertype, platform, org: conf.org }
             return axios.post(url, payload, { headers });
         },
-        resetPassword:(data)=>{
+        resetPassword: (data) => {
             if (!conf.org) throw "ORG_MANDATORY";
-            const url = window.origin+"/resetPassword";
-            let payload = { email:data.email, url, org: conf.org };
+            const url = window.origin + "/resetPassword";
+            let payload = { email: data.email, url, org: conf.org };
             return axios.post(`${conf.API_KS}/resetPassword`, payload, { headers });
         },
-        confirmResetPassword:(temporalToken)=>{
+        confirmResetPassword: (temporalToken) => {
             if (!conf.org) throw "ORG_MANDATORY";
-            let payload = { token:temporalToken, org: conf.org };
+            let payload = { token: temporalToken, org: conf.org };
             return axios.post(`${conf.API_KS}/confirmResetPassword`, payload, { headers });
         },
-        getMyAccount: (userToken)=>{
-            let url = conf.API_KS +`/myaccount/`+ userToken;
+        getMyAccount: (userToken) => {
+            let url = conf.API_KS + `/myaccount/` + userToken;
             return axios.get(url, { headers });
         },
-        saveMyAccount: (user) =>{   
-            let payload =  user;
+        saveMyAccount: (user) => {
+            let payload = user;
             return axios.post(`${conf.API_KS}/user/myAccount`, payload, { headers });
         },
-        changePassword: (userToken, newPassword, oldpass)=>{
+        changePassword: (userToken, newPassword, oldpass) => {
             let payload = { userToken, newPassword, oldpass }
             return axios.post(`${conf.API_KS}/changepassword`, payload, { headers });
         },
-        getMovements: (token, dateStringFrom, dateStringTo, filter)=>{
-            let url = conf.API_KS+`/wallet/${token}/${dateStringFrom}/${dateStringTo}/${filter}/movements`;
+        getMovements: (token, dateStringFrom, dateStringTo, filter) => {
+            let url = conf.API_KS + `/wallet/${token}/${dateStringFrom}/${dateStringTo}/${filter}/movements`;
             return axios.get(url, { headers });
         }
     }
@@ -151,9 +152,9 @@ const ServerConnection = (() => {
             return response.data;
         },
         authInGame: async (agregatorToken) => {
-          let url = conf.API_KS+`/authInGame/${agregatorToken}`;
-          console.log(url,"desde server");
-          return await axios.get(url, { headers });
+            let url = conf.API_KS + `/authInGame/${agregatorToken}`;
+            console.log(url, "desde server");
+            return await axios.get(url, { headers });
         },
         getGameURL: async (gameapi_url, game, usertoken, modeGame, type_view = "") => {
             let mode = game.provider === "gr" || game.provider === "ptp" ? modeGame : game.mode;
@@ -168,18 +169,18 @@ const ServerConnection = (() => {
             return response.data;
         },
         getURL: async (url) => {
-            console.log("sending to api ",url,headers);
+            console.log("sending to api ", url, headers);
             const response = await axios.get(url, { headers });
             return response.data;
         },
-        getGameList: (category, section, page=1, currency='USD', xpage=20)=>{
-            let url=conf.API_KS+`/games?c=${category}&m=wb&page=${page}&xpage=${xpage}&curr=${currency}`;
-            if( typeof section =='object' && section.brand ) url += `&b=${section.brand}`;
-            else if( typeof section =='object' && section.search ) url += `&g=${section.search}`;
-            else if(section=="TOP") url += `&o=200000`;
-            else if(section=="POP") url += `&o=100000`;
-            else if(section=="NEW") url += `&n=true`;
-            else if( /BACC|RLIV|BJLIV|MWLIV|LOTTO|SICBO|TVLIV|DROP|CLASS|RULE|TABL|MEGA|FAST/.test(section)) url += `&t=${section}`; 
+        getGameList: (category, section, page = 1, currency = 'USD', xpage = 20) => {
+            let url = conf.API_KS + `/games?c=${category}&m=wb&page=${page}&xpage=${xpage}&curr=${currency}`;
+            if (typeof section == 'object' && section.brand) url += `&b=${section.brand}`;
+            else if (typeof section == 'object' && section.search) url += `&g=${section.search}`;
+            else if (section == "TOP") url += `&o=200000`;
+            else if (section == "POP") url += `&o=100000`;
+            else if (section == "NEW") url += `&n=true`;
+            else if (/BACC|RLIV|BJLIV|MWLIV|LOTTO|SICBO|TVLIV|DROP|CLASS|RULE|TABL|MEGA|FAST/.test(section)) url += `&t=${section}`;
             return axios.get(url, { headers });
         },
         getGameListV2: async (category, section, page = 1, currency = 'USD', xpage = 20) => {
@@ -209,7 +210,7 @@ const ServerConnection = (() => {
             const response = await axios.get(url, { headers });
             return response.data;
         },
-        getGamesTypeSlot: ()=>{
+        getGamesTypeSlot: () => {
             let url = `${conf.API_GAMES_NODE}/lobby/gameTypesByClient?cat=slot&type=wb&client=${conf.CLIENT_ID}`;
             return axios.get(url, { headers });
         }
@@ -243,7 +244,7 @@ const ServerConnection = (() => {
             payload.platformId = conf.platformId;
             return await axios.post(url, payload, { headers });
         },
-        confirmCashin: async (token, data) => {  
+        confirmCashin: async (token, data) => {
             headers['Authorization'] = token;
             let payload = { ...data }
             let url = conf.API + "/api/casino/wallet/confirmCashin";
@@ -257,7 +258,8 @@ const ServerConnection = (() => {
         },
         withdrawalBank: async (token, params) => {
             headers['Authorization'] = token;
-            let payload = { ...params,
+            let payload = {
+                ...params,
                 platformId: conf.platformId
             }
             let url = conf.API + "/api/casino/wallet/bankWithdrawal";
@@ -270,9 +272,9 @@ const ServerConnection = (() => {
             return await axios.post(url, payload, { headers });
         },
         transactions: async (params,) => {
-            console.log("Params",params);
+            console.log("Params", params);
             headers['token'] = params.token;
-            let url = conf.API + "/api/casino/wallet/transactions?playerId="+ params.playerId+"&page=" + params.page+"&xpage="+ params.xpage + "&from=" + params.from + "&to=" + params.to + "&filter=" + params.type;
+            let url = conf.API + "/api/casino/wallet/transactions?playerId=" + params.playerId + "&page=" + params.page + "&xpage=" + params.xpage + "&from=" + params.from + "&to=" + params.to + "&filter=" + params.type;
             return await axios.get(url, { headers });
         }
 
@@ -280,12 +282,12 @@ const ServerConnection = (() => {
 
     const u_user = {
         getBalance: (userToken) => {
-            return axios.get(conf.API +`/api/casino/balance/${userToken}`, { headers });
+            return axios.get(conf.API + `/api/casino/balance/${userToken}`, { headers });
         },
-        refreshToken:(userToken)=> {
-            return axios.get(conf.API +`/api/casino/refreshToken/${userToken}`, { headers });
+        refreshToken: (userToken) => {
+            return axios.get(conf.API + `/api/casino/refreshToken/${userToken}`, { headers });
         },
-        myAccount: (userToken) =>{
+        myAccount: (userToken) => {
             let url = conf.API + `/api/casino/myAccount/${userToken}`;
             return axios.get(url, { headers });
         },
@@ -294,11 +296,11 @@ const ServerConnection = (() => {
             var url = conf.API + "/api/casino/user/preRegister";
             //console.log("conf here: ",conf)
             if (!conf.org) throw "ORG_MANDATORY";
-            var payload_ = { 
-                username: payload.username, 
-                email: payload.email, 
-                phone: payload.countryPrefix +payload.phone, 
-                org: conf.org, 
+            var payload_ = {
+                username: payload.username,
+                email: payload.email,
+                phone: payload.countryPrefix + payload.phone,
+                org: conf.org,
                 platform: conf.org,
                 platformId: conf.platformId,
 
@@ -334,7 +336,7 @@ const ServerConnection = (() => {
         login: (username, password) => {
             let payload = { username, password }
             console.log("headers", headers);
-            
+
             return axios.post(conf.API_KS_AUTH + "/login", payload, { headers });
             // return axios.post(conf.API + "/api/casino/login", payload, { headers });
 
@@ -344,27 +346,27 @@ const ServerConnection = (() => {
             if (!conf.domain) throw "DOMAIN_MANDATORY";
             if (!conf.platformId) throw "PLATFORMID_EMPTY";
             var url = conf.API + "/api/casino/user";
-            var payload_ = { 
-                username: payload.username, 
-                name: payload.name, 
+            var payload_ = {
+                username: payload.username,
+                name: payload.name,
                 phone: payload.countryPrefix + payload.phone,
-                email: payload.email, 
-                currency: payload.currency, 
-                password: payload.password, 
-                birthday: payload.birthday, 
-                smscode: payload.smscode, 
-                country: payload.countryCode, 
-                operatorId: '', 
-                doctype: payload.doctype, 
-                document: payload.document,  
-                domain: conf.domain, 
-                usertype: 'W', 
-                platformId: conf.platformId, 
-                org: conf.org 
+                email: payload.email,
+                currency: payload.currency,
+                password: payload.password,
+                birthday: payload.birthday,
+                smscode: payload.smscode,
+                country: payload.countryCode,
+                operatorId: '',
+                doctype: payload.doctype,
+                document: payload.document,
+                domain: conf.domain,
+                usertype: 'W',
+                platformId: conf.platformId,
+                org: conf.org
             }
             return axios.post(url, payload_, { headers });
         },
-        saveMyAccount:(user) => {
+        saveMyAccount: (user) => {
             var payload = user;
             var user_storage = JSON.parse(sessionStorage.getItem("user"))
             payload.token = user_storage.token;
@@ -372,18 +374,18 @@ const ServerConnection = (() => {
             var url = conf.API + "/api/casino/myAccount";
             headers.agregatorToken = payload.agregatorToken;
             headers.Authorization = payload.token;
-            return axios.post(url, payload, {headers})
+            return axios.post(url, payload, { headers })
         },
 
         changePassword: (userToken, payload) => {
-            var payload_ = { 
-                newPassword: payload.new_Password, 
-                oldPassword: payload.old_Password 
+            var payload_ = {
+                newPassword: payload.new_Password,
+                oldPassword: payload.old_Password
             }
             headers.Authorization = userToken;
             console.log(payload_);
             var url = conf.API + "/api/casino/changepassword";
-            return axios.post(url, payload_,{headers})
+            return axios.post(url, payload_, { headers })
         },
 
         recoverPassword: (payload) => {
@@ -416,7 +418,7 @@ const ServerConnection = (() => {
     }
 
     const banners = {
-        getBanners : async(conf)=>{
+        getBanners: async (conf) => {
             const response = await axios.get(`${conf.API_KS}/banners`, { headers });
             return response.data;
         }
