@@ -15,17 +15,17 @@
     // ── URLs ────────────────────────────────────────────────────────────────────
     const URLS = {
         terminal: "https://latam-games.virtustec.com/terminal/loader.js",
-        cashier:  "https://latam-games.virtustec.com/terminal/loader.js",
+        cashier:  "https://latam-games.virtustec.com/cashier/loader.js",
     };
 
     const CONTAINER_IDS = {
         terminal: "golden-race-terminal-app",
-        cashier:  "golden-race-terminal-app",
+        cashier:  "golden-race-cashier-app",
     };
 
     const SCRIPT_IDS = {
         terminal: "golden-race-terminal-script",
-        cashier:  "golden-race-terminal-script",
+        cashier:  "golden-race-cashier-script",
     };
 
     // ── Estado ──────────────────────────────────────────────────────────────────
