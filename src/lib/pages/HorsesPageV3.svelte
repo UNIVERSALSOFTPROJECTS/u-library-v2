@@ -5,13 +5,15 @@
     export let userState;
     export let user;
     export let gameToken;
-    export let GAME_JAVA_API_URL;
+    export let GAMEAPI_URL; // Usamos la variable del gateway
 
     let iframeUrl = '';
     let loading = true;
     let errorMsg = '';
     let isRequestSent = false;
-    $: if (GAME_JAVA_API_URL && gameToken && !isRequestSent) {
+
+    // Ahora evaluamos GAMEAPI_URL en lugar del de Java
+    $: if (GAMEAPI_URL && gameToken && !isRequestSent) {
         initHorsesLaunch();
     }
 
@@ -20,11 +22,17 @@
         try {
             loading = true;
 
-            const launchUrl = `${GAME_JAVA_API_URL}/api/horses/opengame?t=${gameToken}&gameid=horses_2026`;
+            const launchUrl = `${GAMEAPI_URL}/launch?gameid=horses_2026&p=horses&b=UniversalRace&m=wb&sessionid=${gameToken}&r=url`;
+
             console.log("🚀 [HorsesPage] Launching via:", launchUrl);
+
             const response = await backend.game.getURL(launchUrl);
-            if (response && response.status === "READY" && response.url) iframeUrl = response.url;
-            else errorMsg = "URL not received or status not READY";
+
+            if (response && response.status === "READY" && response.url) {
+                iframeUrl = response.url;
+            } else {
+                errorMsg = "URL not received or status not READY";
+            }
         } catch (error) {
             console.error("❌ [HorsesPage] Error:", error);
             errorMsg = "Failed to initialize Horses session.";
@@ -32,6 +40,7 @@
             loading = false;
         }
     }
+
     onDestroy(() => {
         document.body.style.overflow = "scroll";
     });
