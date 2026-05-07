@@ -263,7 +263,7 @@
                         
                     </div>
                     {#if infoUser.horarios}
-                        <p><b>{t('withdrawal.time')}:</b> {infoUser.horarios}</p>
+                        <p class="schedulesWihtdrawals"><b>{t('withdrawal.time')}:</b> {infoUser.horarios}</p>
                     {/if}
 
                     <a href="https://d1dkqs4jlldj3s.cloudfront.net/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
