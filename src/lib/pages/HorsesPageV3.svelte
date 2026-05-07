@@ -68,14 +68,14 @@
 </div>
 
 <style>
-    /* Estilos alineados con SportbookPage para asegurar consistencia visual */
     .horses-content {
         position: relative;
         background-color: #1a1a1a;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: calc(100dvh - 3.75rem);
+        height: calc(100dvh - 3.75rem); /* Altura perfecta descontando el TopBar */
+        width: 100%;
     }
 
     .status-container {
@@ -87,13 +87,28 @@
         color: #ff4444;
     }
 
+    .horses-iframe {
+        border: none;
+        display: block; /* Elimina márgenes fantasma en la parte inferior */
+    }
+
     @media only screen and (max-width: 1199px) {
-        .horses-content { width: 100%; }
-        .horses-iframe { height: 100vh; width: 100%; }
+        .horses-content {
+            width: 100%;
+        }
+        .horses-iframe {
+            height: 100%; /* Cambiado de 100vh a 100% */
+            width: 100%;
+        }
     }
 
     @media only screen and (min-width: 1200px) {
-        .horses-content { width: 98.9vw; }
-        .horses-iframe { width: 100%; height: 100vh; }
+        .horses-content {
+            width: 98.9vw;
+        }
+        .horses-iframe {
+            width: 100%;
+            height: 100%; /* Cambiado de 100vh a 100% */
+        }
     }
 </style>
