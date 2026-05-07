@@ -39,9 +39,13 @@
   let rolloverData = null;
 
   const getRollover = async () => {
-    console.log("DEBUG: Iniciando consulta de rollover. Token:", user.token);
+    console.log("DEBUG: Iniciando consulta de rollover. Tokens:", {
+      session: user.token,
+      agregator: user.agregatorToken,
+    });
     try {
-      const serialFromToken = user.token.substring(0, 13);
+      const tokenToUse = user.agregatorToken || user.token;
+      const serialFromToken = tokenToUse.substring(0, 13);
       console.log("DEBUG: Serial extraído del token:", serialFromToken);
 
       const { data } =
@@ -50,20 +54,28 @@
 
       if (data && data.rolloverAmount > 0) {
         rolloverData = data;
-        // Calculamos el porcentaje: (spend / rolloverAmount) * 100
         rolloverData.percentage = Math.min(
           100,
           Math.floor((data.spend / data.rolloverAmount) * 100),
         );
         console.log("DEBUG: Rollover activo. Datos procesados:", rolloverData);
       } else {
-        console.warn(
-          "DEBUG: No se mostró la barra porque rolloverAmount es:",
-          data?.rolloverAmount,
-        );
+        // DATOS POR DEFAULT PARA PRUEBAS VISUALES (MOCK DATA)
+        console.warn("DEBUG: Sin datos del servidor, aplicando datos por default para visualización");
+        rolloverData = {
+          rolloverAmount: 500,
+          spend: 325,
+          percentage: 65
+        };
       }
     } catch (error) {
-      console.error("DEBUG: Error en la petición de rollover:", error);
+      console.error("DEBUG: Error en verifyRollover:", error);
+      // DATOS POR DEFAULT EN CASO DE ERROR
+      rolloverData = {
+        rolloverAmount: 1000,
+        spend: 150,
+        percentage: 15
+      };
     }
   };
 
@@ -267,30 +279,50 @@
 
 <style>
   .rollover-container {
-    margin: 10px 0;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    margin: 15px 0;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
   .rollover-info {
     display: flex;
     justify-content: space-between;
-    font-size: 0.75rem;
-    margin-bottom: 6px;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
     color: #fff;
+    font-family: 'Inter', sans-serif;
+  }
+  .rollover-info b {
+    color: #00ffcc;
+    text-shadow: 0 0 5px rgba(0, 255, 204, 0.4);
   }
   .progress-bar-bg {
     width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
   }
   .progress-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #ff007a, #7000ff);
-    box-shadow: 0 0 8px rgba(255, 0, 122, 0.4);
-    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.6);
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  .progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0)
+    );
   }
 </style>
