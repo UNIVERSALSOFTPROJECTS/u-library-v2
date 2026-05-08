@@ -48,16 +48,12 @@
       const serialFromToken = tokenToUse.substring(0, 13);
       console.log("DEBUG: Serial extraído del token:", serialFromToken);
 
-      const { data } =
-        await ServerConnection.users.verifyRollover(serialFromToken);
+      const { data } = await ServerConnection.users.verifyRollover(serialFromToken);
       console.log("DEBUG: Respuesta recibida de verifyRollover:", data);
 
       if (data && data.rolloverAmount > 0) {
         rolloverData = data;
-        rolloverData.percentage = Math.min(
-          100,
-          Math.floor((data.spend / data.rolloverAmount) * 100),
-        );
+        rolloverData.percentage = Math.min(100, Math.floor((data.spend / data.rolloverAmount) * 100));
         console.log("DEBUG: Rollover activo. Datos procesados:", rolloverData);
       } else {
         // DATOS POR DEFAULT PARA PRUEBAS VISUALES (MOCK DATA)
@@ -65,7 +61,7 @@
         rolloverData = {
           rolloverAmount: 500,
           spend: 325,
-          percentage: 65
+          percentage: 65,
         };
       }
     } catch (error) {
@@ -74,7 +70,7 @@
       rolloverData = {
         rolloverAmount: 1000,
         spend: 150,
-        percentage: 15
+        percentage: 15,
       };
     }
   };
@@ -90,19 +86,12 @@
       accountUser.serial_api_casino = user.serial;
       accountUser.token = user.token;
       accountUser.agregatorToken = user.agregatorToken;
-      accountUser.dataComplete =
-        accountUser.document || accountUser.address || accountUser.city
-          ? true
-          : false;
-      accountUser.isViewWeb =
-        id_banca.includes(user.id_banca) || id_ca.includes(user.id_ca);
-      isLockedWithdrawal = accountUser.isViewWeb
-        ? !accountUser.dataComplete
-        : false;
+      accountUser.dataComplete = accountUser.document || accountUser.address || accountUser.city ? true : false;
+      accountUser.isViewWeb = id_banca.includes(user.id_banca) || id_ca.includes(user.id_ca);
+      isLockedWithdrawal = accountUser.isViewWeb ? !accountUser.dataComplete : false;
       viewActiveWithdrawal = isLockedWithdrawal;
     } catch (error) {
-      if (error.response.data.errorCode == "OLD_TOKEN")
-        error = t("msg.duplicatedSession");
+      if (error.response.data.errorCode == "OLD_TOKEN") error = t("msg.duplicatedSession");
       else error = t("msg.contactSupport");
       onError(error);
       console.log(error);
@@ -144,11 +133,7 @@
     <div class="profile__container">
       <div class="profile__top">
         <div class="profile__header">
-          <img
-            class="profile__img"
-            src="https://d1dkqs4jlldj3s.cloudfront.net/{platform}/icon1.png"
-            alt="icon-user"
-          />
+          <img class="profile__img" src="https://d1dkqs4jlldj3s.cloudfront.net/{platform}/icon1.png" alt="icon-user" />
           <div>
             <b>{user.username}</b>
             <p>#{user.id}</p>
@@ -161,14 +146,9 @@
         <b>{t("header.balance")}</b> : {user.balance}
         {user.currency}
       </div>
-      <DropdownBonus
-        bind:bonusView
-        bind:activedBonus
-        bind:currency={user.currency}
-        {t}
-      />
+      <DropdownBonus bind:bonusView bind:activedBonus bind:currency={user.currency} {t} />
 
-      {#if rolloverData}
+      <!-- {#if rolloverData}
         <div class="rollover-container">
           <div class="rollover-info">
             <span>Rollover: <b>{rolloverData.percentage}%</b></span>
@@ -181,20 +161,16 @@
             ></div>
           </div>
         </div>
-      {/if}
+      {/if} -->
 
       <div class="profile__transaction">
         {#if withdrawalView}
-          <button
-            class="btn withdrawal {isLockedWithdrawal ? 'locked' : ''}"
-            on:click={onOpenWithdrawal}
-            disabled={viewActiveWithdrawal}>{t("profile.withdrawal")}</button
+          <button class="btn withdrawal {isLockedWithdrawal ? 'locked' : ''}" on:click={onOpenWithdrawal} disabled={viewActiveWithdrawal}
+            >{t("profile.withdrawal")}</button
           >
         {/if}
         {#if depositView}
-          <button class="btn recharge" on:click={onOpenDeposit}
-            >{t("profile.recharge")}</button
-          >
+          <button class="btn recharge" on:click={onOpenDeposit}>{t("profile.recharge")}</button>
         {/if}
       </div>
       {#if isLockedWithdrawal}
@@ -204,35 +180,23 @@
         </div>
       {/if}
     </div>
-    <button class="btn profile" on:click={() => openSection("profile")}
-      ><i class="icon--user"></i>{t("profile.myProfile")}</button
-    >
-    <button class="btn profile" on:click={() => openSection("changePass")}
-      ><i class="icon--password"></i>{t("profile.changePass")}</button
-    >
+    <button class="btn profile" on:click={() => openSection("profile")}><i class="icon--user"></i>{t("profile.myProfile")}</button>
+    <button class="btn profile" on:click={() => openSection("changePass")}><i class="icon--password"></i>{t("profile.changePass")}</button>
     <button class="btn profile" on:click={() => openSection("movements")}
       ><i class="icon--movements"></i>{t("profile.recordMovement")}</button
     >
     {#if activePromotions}
-      <button class="btn profile"
-        ><i class="icon--bonus"></i>Bonos y promociones</button
-      >
+      <button class="btn profile"><i class="icon--bonus"></i>Bonos y promociones</button>
     {/if}
     {#if verificationIdentity != ""}
-      <button
-        class="btn profile"
-        on:click={() => window.open(verificationIdentity)}
+      <button class="btn profile" on:click={() => window.open(verificationIdentity)}
         ><i class="icon--bonus"></i>Verificación de Identidad</button
       >
     {/if}
-    <button class="btn logout icon--logout" on:click={onLogout}
-      >{t("header.logout")}</button
-    >
+    <button class="btn logout icon--logout" on:click={onLogout}>{t("header.logout")}</button>
     <div class="btn bottom">
       {#if chatLiveUrl}
-        <button class="btn support" on:click={openChatLive}
-          ><i class="icon--chat"></i>{t("profile.support")}</button
-        >
+        <button class="btn support" on:click={openChatLive}><i class="icon--chat"></i>{t("profile.support")}</button>
       {/if}
       {#if idioms.length !== 0}
         <DropdowIdiom bind:idioms {changeIdiom} />
@@ -242,36 +206,14 @@
   {#if profileView !== ""}
     <div class="profile__view">
       {#if profileView == "profile"}
-        <button class="btn profile active" on:click={() => openSection("")}
-          >{t("profile.myProfile")}</button
-        >
-        <UserData
-          {configProfile}
-          {getMyAccount}
-          bind:accountUser
-          {ServerConnection}
-          {onError}
-          {onOk}
-          {t}
-        />
+        <button class="btn profile active" on:click={() => openSection("")}>{t("profile.myProfile")}</button>
+        <UserData {configProfile} {getMyAccount} bind:accountUser {ServerConnection} {onError} {onOk} {t} />
       {:else if profileView == "changePass"}
-        <button class="btn profile active" on:click={() => openSection("")}
-          >{t("profile.changePass")}</button
-        >
+        <button class="btn profile active" on:click={() => openSection("")}>{t("profile.changePass")}</button>
         <ChangePassword bind:user {ServerConnection} {onError} {onOk} {t} />
       {:else if profileView == "movements"}
-        <button class="btn profile active" on:click={() => openSection("")}
-          >{t("profile.recordMovement")}</button
-        >
-        <Movements
-          bind:user
-          bind:timezone
-          typeView=""
-          {ServerConnection}
-          {onError}
-          {onOk}
-          {t}
-        />
+        <button class="btn profile active" on:click={() => openSection("")}>{t("profile.recordMovement")}</button>
+        <Movements bind:user bind:timezone typeView="" {ServerConnection} {onError} {onOk} {t} />
       {/if}
     </div>
   {/if}
@@ -293,7 +235,7 @@
     font-size: 0.8rem;
     margin-bottom: 8px;
     color: #fff;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
   .rollover-info b {
     color: #00ffcc;
@@ -317,12 +259,12 @@
     position: relative;
   }
   .progress-bar-fill::after {
-    content: '';
+    content: "";
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0)
-    );
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
   }
 </style>
