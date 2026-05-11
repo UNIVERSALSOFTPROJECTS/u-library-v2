@@ -3,66 +3,51 @@
     import backend from '../../js/server.js';
 
     export let userState = "logout";
-    export let user = {};
-    export let mode = "online"; // Recibe 'terminal' o 'cashier' desde App.svelte
-    export let GAME_JAVA_API_URL;
+    export let mode = "online";
     export let GAMEAPI_URL;
     export let gameToken;
-
     const URLS = {
         terminal: "https://latam-games.virtustec.com/terminal/loader.js",
         cashier:  "https://latam-games.virtustec.com/cashier/loader.js",
     };
-
     const CONTAINER_IDS = {
         terminal: "golden-race-terminal-app",
         cashier:  "golden-race-cashier-app",
     };
-
     const SCRIPT_IDS = {
         terminal: "golden-race-terminal-loader",
         cashier:  "golden-race-cashier-loader",
     };
-
     let loader = null;
     let fetchedExtToken = null;
-
     $: containerId = CONTAINER_IDS[mode];
-
     function buildConfig() {
         const cfg = {
             script:    `#${SCRIPT_IDS[mode]}`,
             container: `#${CONTAINER_IDS[mode]}`
         };
-
-        // Apertura estándar: Se envía siempre el onlineHash del usuario logueado
         if (userState === "loggedIn" && fetchedExtToken) {
             cfg.onlineHash = fetchedExtToken;
         }
-
-        console.log("🔥 [GoldenRace Lib] CONFIG FINAL ENVIADA AL SDK:", cfg);
+        console.log("CONFIG:", cfg);
         return cfg;
     }
-
     async function fetchGoldenRaceToken() {
         if (userState !== "loggedIn" || !gameToken) return null;
         try {
             const launchUrl = `${GAMEAPI_URL}/launch?gameid=grv_2026&p=grv&b=GoldenRace&m=wb&sessionid=${gameToken}&r=url`;
             const launchData = await backend.game.getURL(launchUrl);
-
             if (launchData.status === "READY" && launchData.onlineHash) {
                 return launchData.onlineHash;
             }
             throw new Error("No se recibió un onlineHash válido.");
         } catch (err) {
-            console.error("🔴 [GoldenRace Lib] Error obteniendo el hash:", err);
+            console.error("Error token:", err);
             throw err;
         }
     }
-
     function initLoader() {
         if (mode !== "terminal" && mode !== "cashier") return;
-
         try {
             const cfg = buildConfig();
 
@@ -74,10 +59,9 @@
 
             if (loader && loader.start) loader.start();
         } catch (e) {
-            console.error("🔴 [GoldenRace Lib] Error al inicializar el loader:", e);
+            console.error("Error loader:", e);
         }
     }
-
     function loadScript() {
         if (mode !== "terminal" && mode !== "cashier") return Promise.resolve();
 
@@ -91,17 +75,15 @@
             document.head.appendChild(script);
         });
     }
-
     onMount(async () => {
         try {
             fetchedExtToken = await fetchGoldenRaceToken();
             await loadScript();
             initLoader();
         } catch (e) {
-            console.error("🔴 [GoldenRace Lib] Error general en onMount:", e);
+            console.error("Error onMount:", e);
         }
     });
-
     onDestroy(() => {
         loader?.stop?.();
     });
@@ -112,7 +94,6 @@
         <div id={containerId} class="gr-container"></div>
     {/if}
 </div>
-
 <style>
     .gr-wrapper {
         position: relative;
@@ -122,7 +103,6 @@
     .gr-container {
         width: 100%;
         height: 100%;
-        /* Aseguramos que tenga un fondo oscuro por si el iframe tarda en cargar */
         background-color: #1a1a1a;
     }
     :global(#golden-race-terminal-app iframe),
