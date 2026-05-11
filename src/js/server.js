@@ -68,10 +68,10 @@ const ServerConnection = (() => {
             let url = conf.API_KS + `/balance/${userToken}`;
             return axios.get(url, { headers });
         },
-        verifyRollover: (serial) => {
-            console.log("Serial", serial);
-            let url = conf.API_KS + `/verifyRollover?serial=${serial}`;
-            return axios.get(url, { headers });
+        verifyRollover: async (token) => {
+            let url = conf.API_KS + `/verifyRollover?token=${token}`;
+            const response = await axios.get(url, { headers })
+            return response.data;
         },
         authInGame: async (agregatorToken) => {
             let url = conf.API_KS;
