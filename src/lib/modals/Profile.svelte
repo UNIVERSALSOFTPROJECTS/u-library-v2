@@ -308,13 +308,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-<<<<<<< Updated upstream
-    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-=======
     background: linear-gradient(
       rgba(255, 255, 255, 0.2),
       rgba(255, 255, 255, 0)
     );
->>>>>>> Stashed changes
   }
 </style>
