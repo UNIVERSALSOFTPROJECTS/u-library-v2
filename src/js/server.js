@@ -174,15 +174,10 @@ const ServerConnection = (() => {
             return response.data;
         },
         openCmsWagerGame: async (sessionToken, gameId, mode) => {
-            const response = await axios.get(`${conf.API}/api/cmsw/opengame`, {
-                headers,
-                params: {
-                    t: sessionToken,
-                    gameid: gameId,
-                    mode,
-                    r: "json",
-                },
-            });
+            const response = await axios.get(
+                `${conf.GAMEAPI_URL}/launch?gameid=${gameId}&p=cmsw&b=CMSWager&m=${mode}&sessionid=${sessionToken}&r=url&sport_view=sport&lang=es`,
+                { headers }
+            );
             return response.data;
         },
         getGameList: (category, section, page = 1, currency = 'USD', xpage = 20) => {

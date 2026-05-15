@@ -30,7 +30,7 @@
     let requestVersion = 0;
     let launchKey = "";
     let appContent;
-    let cmswScriptElement = null;
+    let activeLaunchKey = "";
 
     const resizeHeightModal = () => {
         heightModal = visualViewport?.height || window.innerHeight;
@@ -51,25 +51,28 @@
         }
     }
 
-    function cleanupScript() {
-        if (cmswScriptElement?.parentNode) {
-            cmswScriptElement.parentNode.removeChild(cmswScriptElement);
-        }
-        cmswScriptElement = null;
-        if (window.cmsSportbook) {
-            delete window.cmsSportbook;
-        }
-    }
-
     function clearState() {
         loadCmsWager = false;
         errorMessage = "";
+        activeLaunchKey = "";
         clearContainer();
-        cleanupScript();
     }
 
     function loadProviderScript(scriptUrl) {
-        return new Promise((resolve, reject) => {
+        window.__cmsWagerScriptPromises = window.__cmsWagerScriptPromises || {};
+        if (window.__cmsWagerScriptPromises[scriptUrl]) {
+            return window.__cmsWagerScriptPromises[scriptUrl];
+        }
+
+        const existingScript = document.querySelector(
+            `script[data-cmswager-script="true"][src="${scriptUrl}"]`
+        );
+        if (existingScript) {
+            window.__cmsWagerScriptPromises[scriptUrl] = Promise.resolve(existingScript);
+            return window.__cmsWagerScriptPromises[scriptUrl];
+        }
+
+        window.__cmsWagerScriptPromises[scriptUrl] = new Promise((resolve, reject) => {
             const script = document.createElement("script");
             script.src = scriptUrl;
             script.async = true;
@@ -79,6 +82,8 @@
                 reject(new Error(`Failed to load CMSWager script: ${scriptUrl}`));
             document.head.appendChild(script);
         });
+
+        return window.__cmsWagerScriptPromises[scriptUrl];
     }
 
     async function loadCmsWagerSportbook() {
@@ -93,11 +98,16 @@
             return;
         }
 
+        const currentLaunchKey = `${sessionToken}|${gameId}|${mode}`;
+        if (loadCmsWager || activeLaunchKey === currentLaunchKey) {
+            return;
+        }
+        activeLaunchKey = currentLaunchKey;
+
         const currentRequest = ++requestVersion;
         loadCmsWager = true;
         errorMessage = "";
         clearContainer();
-        cleanupScript();
 
         try {
             /** @type {CmsWagerLaunchResponse} */
@@ -123,13 +133,15 @@
                 return;
             }
 
-            cmswScriptElement = await loadProviderScript(params.scriptUrl);
+            await loadProviderScript(params.scriptUrl);
             if (currentRequest !== requestVersion) return;
             await tick();
 
+            const sportsbook =
+                typeof cmsSportbook !== "undefined" ? cmsSportbook : window.cmsSportbook;
             if (
-                !window.cmsSportbook ||
-                typeof window.cmsSportbook.startSportbook !== "function"
+                !sportsbook ||
+                typeof sportsbook.startSportbook !== "function"
             ) {
                 console.error("CMSWager script loaded without cmsSportbook.startSportbook");
                 errorMessage =
@@ -138,7 +150,7 @@
             }
 
             clearContainer();
-            window.cmsSportbook.startSportbook(
+            sportsbook.startSportbook(
                 params.platform,
                 params.token,
                 params.culture,
@@ -158,6 +170,7 @@
             console.error("CMSWager launch failed:", error);
             errorMessage =
                 "Error al cargar CMSWager. Revisa la conexión o intenta nuevamente.";
+            activeLaunchKey = "";
         } finally {
             if (currentRequest === requestVersion) {
                 loadCmsWager = false;
@@ -181,6 +194,7 @@
     }
 
     function reloadCmsWager() {
+        activeLaunchKey = "";
         loadCmsWagerSportbook();
     }
 
