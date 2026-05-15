@@ -173,6 +173,18 @@ const ServerConnection = (() => {
             const response = await axios.get(url, { headers });
             return response.data;
         },
+        openCmsWagerGame: async (sessionToken, gameId, mode) => {
+            const response = await axios.get(`${conf.API}/api/cmsw/opengame`, {
+                headers,
+                params: {
+                    t: sessionToken,
+                    gameid: gameId,
+                    mode,
+                    r: "json",
+                },
+            });
+            return response.data;
+        },
         getGameList: (category, section, page = 1, currency = 'USD', xpage = 20) => {
             let url = conf.API_KS + `/games?c=${category}&m=wb&page=${page}&xpage=${xpage}&curr=${currency}`;
             if (typeof section == 'object' && section.brand) url += `&b=${section.brand}`;
