@@ -53,8 +53,10 @@
         url = ut.getGameURLAltenar(GAMEAPI_URL,gameId, options.gameToken)
         const data = await backend.game.getURL(url+"&r=url");
         url = data.url
-      // }else if (CLIENT_CODE == 'BPEN'){
-      //   url = baseUrlWin365;
+      } else {
+        url = ut.getGameURLAltenar(GAMEAPI_URL,gameId, "")
+        const data = await backend.game.getURL(url+"&r=url");
+        url = data.url
       }
       console.log("url => ",url);
       

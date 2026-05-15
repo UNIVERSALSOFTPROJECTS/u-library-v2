@@ -80,7 +80,7 @@ const utils = (() => {
       history.pushState({name: page}, null, page);
     }
     const categoryAllowedChange=(category, userState)=>{
-      return ( /horses|sportbook|esports/.test(category) && userState == "logout")
+      return ( /horses|esports/.test(category) && userState == "logout")
     }
     const initDropdown=()=>{
       let isDropdownOpen = false;
