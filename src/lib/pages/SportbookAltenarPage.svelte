@@ -54,7 +54,7 @@
         const data = await backend.game.getURL(url+"&r=url");
         url = data.url
       } else {
-        url = ut.getGameURLAltenar(GAMEAPI_URL,gameId, "")
+        url = ut.getGameURLAltenar(GAMEAPI_URL,gameId, "3")
         const data = await backend.game.getURL(url+"&r=url");
         url = data.url
       }
