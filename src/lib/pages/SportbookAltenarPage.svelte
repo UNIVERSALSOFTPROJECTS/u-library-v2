@@ -20,7 +20,7 @@
 
   const gameId = "67000_ank";
   const GUEST_URL =
-    "https://srv-prod.newapiusoft.com/game-api-jv-prod/api/anakatech/opengame";
+    "https://srv-prod.newapiusoft.com/game-api-jv/api/anakatech/opengame";
 
   onMount(() => {
     console.log("lang", lang);
