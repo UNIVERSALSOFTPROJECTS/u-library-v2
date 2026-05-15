@@ -26,9 +26,14 @@ const utils = (() => {
   }
   const getGameURLAltenar = (gameapi_url, gameid, usertoken, idiom = "es") => {
     let lang = `&lang=${idiom}`;
-    if(usertoken != "123456789") gameapi_url = gameapi_url + "/launch";
-    let url = gameapi_url + `?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&sessionid=${usertoken}${lang}`;
-    return url;
+    if(usertoken != "123456789"){
+      let url = gameapi_url + `/launch?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&sessionid=${usertoken}${lang}`;
+      return url;
+    }else{
+      let url = gameapi_url + `?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&t=${usertoken}&r=r`;
+      return url;
+    }
+    
   }
   const getGameURLTest = (gameapi_url, game, usertoken) => {
     let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
