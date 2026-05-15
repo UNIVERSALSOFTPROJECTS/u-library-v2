@@ -19,7 +19,8 @@
   let sportbookGameUrl = "";
 
   const gameId = "67000_ank";
-  const GUEST_URL = "https://srv-prod.newapiusoft.com/game-api-jv/api/anakatech/opengame";
+  const GUEST_URL =
+    "https://srv-prod.newapiusoft.com/game-api-jv-prod/api/anakatech/opengame";
 
   onMount(() => {
     console.log("lang", lang);
@@ -55,12 +56,7 @@
         const data = await backend.game.getURL(url + "&r=url");
         url = data.url;
       } else {
-        url = ut.getGameURLAltenar(
-          GUEST_URL,
-          gameId,
-          "123456789",
-          lang,
-        );
+        url = ut.getGameURLAltenar(GUEST_URL, gameId, "123456789", lang);
         const data = await backend.game.getURL(url + "&r=url");
         url = data.url;
       }
