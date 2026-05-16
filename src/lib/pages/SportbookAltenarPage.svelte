@@ -52,11 +52,12 @@
           gameId,
           options.gameToken,
           lang,
+          options?.page
         );
         const data = await backend.game.getURL(url + "&r=url");
         url = data.url;
       } else {
-        url = ut.getGameURLAltenar(GUEST_URL, gameId, "123456789", lang);
+        url = ut.getGameURLAltenar(GUEST_URL, gameId, "123456789", lang, options?.page);
         const data = await backend.game.getURL(url + "&r=url");
         url = data.url;
       }
@@ -68,10 +69,6 @@
     }
     console.log("CLIENT_CODE", CLIENT_CODE);
   };
-
-  function RESELLER(params) {
-    console.log("RESELLER enviando");
-  }
 
   onDestroy(async () => {
     let { data } = await backend.users.getBalance(user.agregatorToken);

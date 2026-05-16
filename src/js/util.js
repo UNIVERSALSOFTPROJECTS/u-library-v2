@@ -24,16 +24,17 @@ const utils = (() => {
     let url = gameapi_url + `/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}${lang}`;
     return url;
   }
-  const getGameURLAltenar = (gameapi_url, gameid, usertoken, idiom = "es") => {
+  const getGameURLAltenar = (gameapi_url, gameid, usertoken, idiom = "es", page = "") => {
     let lang = `&lang=${idiom}`;
-    if(usertoken != "123456789"){
-      let url = gameapi_url + `/launch?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&sessionid=${usertoken}${lang}`;
+    let section = page === "live" ? "&section=live" : "";
+    if (usertoken != "123456789") {
+      let url = gameapi_url + `/launch?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&sessionid=${usertoken}${lang}${section}`;
       return url;
-    }else{
-      let url = gameapi_url + `?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&t=${usertoken}&r=r`;
+    } else {
+      let url = gameapi_url + `?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&t=${usertoken}&r=r${section}`;
       return url;
     }
-    
+
   }
   const getGameURLTest = (gameapi_url, game, usertoken) => {
     let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
