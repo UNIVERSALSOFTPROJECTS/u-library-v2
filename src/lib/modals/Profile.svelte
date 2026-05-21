@@ -41,7 +41,9 @@
   const getRollover = async () => {
     try {
       const tokenToUse = user.agregatorToken || user.token;
-      const { data } = await ServerConnection.users.verifyRollover(tokenToUse);
+      // const data = await ServerConnection.users.verifyRollover(tokenToUse);
+      let data = {};
+      console.log("DEBUG: Respuesta de rollover:", data);
       if (data && data.rolloverAmount > 0) {
         rolloverData = data;
         rolloverData.percentage = Math.min(

@@ -92,7 +92,7 @@ const ServerConnection = (() => {
         },
         login: (username, password, userType, turnstileToken = null, orgMultiCurrency = "") => {
             let org = orgMultiCurrency == "" ? conf.org : orgMultiCurrency;
-            let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login" : "https://srv-prod-ks.apiusoft.com/lobby-bff-auth/login";
+            let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login" : "https://srv-prod.newapiusoft.com/lobby-bff-auth";
             let payload = { username, password, org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
             return axios.post(url, payload, { headers });

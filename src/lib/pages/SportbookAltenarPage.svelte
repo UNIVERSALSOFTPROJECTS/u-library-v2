@@ -1,31 +1,29 @@
 <script>
   import { onDestroy, onMount } from "svelte";
-  import ut from '../../js/util';
-  import backend from '../../js/server'
-  import { Client } from '@stomp/stompjs';
-
+  import ut from "../../js/util";
+  import backend from "../../js/server";
+  import { Client } from "@stomp/stompjs";
 
   export let userState;
-  export let active_view
+  export let active_view;
   export let user;
   export let options;
   export let loginModalOpen;
   export let GAMEAPI_URL;
   export let GAME_JAVA_API_URL;
-  export let lang = 'es';
+  export let lang = "es";
   export let CLIENT_CODE;
   export let clientCode;
-  console.log(user,"sportbook");
-  
+  console.log(user, "sportbook");
 
-  let sportbookGameUrl = '';
+  let sportbookGameUrl = "";
 
   const gameId = "67000_ank";
+  const GUEST_URL =
+    "https://srv-prod.newapiusoft.com/game-api-jv/api/anakatech/opengame";
 
-
-  
-  onMount(()=>{
-    console.log("lang", lang)
+  onMount(() => {
+    console.log("lang", lang);
     window.addEventListener("message", receiveMessage, false);
     console.log("receiveMessage:", receiveMessage);
   });
@@ -37,7 +35,6 @@
   const receiveMessage = (event) => {
     if (event.data == "onNologinBet") {
       loginModalOpen = true;
-      
     }
     console.log("estado:", loginModalOpen);
   };
@@ -46,61 +43,66 @@
     open();
   }
 
-  const open = async () => { 
+  const open = async () => {
     let url;
     try {
-      if (userState == "loggedIn"){
-        url = ut.getGameURLAltenar(GAMEAPI_URL,gameId, options.gameToken)
-        const data = await backend.game.getURL(url+"&r=url");
-        url = data.url
-      // }else if (CLIENT_CODE == 'BPEN'){
-      //   url = baseUrlWin365;
+      if (userState == "loggedIn") {
+        url = ut.getGameURLAltenar(
+          GAMEAPI_URL,
+          gameId,
+          options.gameToken,
+          lang,
+          options?.page
+        );
+        const data = await backend.game.getURL(url + "&r=url");
+        url = data.url;
+      } else {
+        url = ut.getGameURLAltenar(GUEST_URL, gameId, "123456789", lang, options?.page);
+        const data = await backend.game.getURL(url + "&r=url");
+        url = data.url;
       }
-      console.log("url => ",url);
-      
+      console.log("url => ", url);
+
       sportbookGameUrl = url;
     } catch (error) {
-      console.log("Sportbook Error",error);
+      console.log("Sportbook Error", error);
     }
-    console.log("CLIENT_CODE",CLIENT_CODE)
-  }
+    console.log("CLIENT_CODE", CLIENT_CODE);
+  };
 
- 
-function RESELLER (params) {
-  console.log("RESELLER enviando");
-  
-}
-
-
-
-  
   onDestroy(async () => {
-    let {data} = await backend.users.getBalance(user.agregatorToken);
+    let { data } = await backend.users.getBalance(user.agregatorToken);
     user.balance = data.balance;
-    document.body.style.overflow="scroll";
+    document.body.style.overflow = "scroll";
   });
 </script>
 
 <div class="sportbook-content">
-  <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
+  <iframe
+    class="sportbook-iframe"
+    id="sportbook-iframe"
+    title=""
+    src={sportbookGameUrl}
+    frameborder="0"
+  />
 </div>
 
 <style>
   @media only screen and (max-width: 1199px) {
-    .sportbook-content{
+    .sportbook-content {
       width: 100%;
     }
     .sportbook-iframe {
       height: 100vh;
       width: 100%;
-    } 
+    }
   }
   @media only screen and (min-width: 1200px) {
-    .sportbook-content{
+    .sportbook-content {
       width: 98.9vw;
     }
     .sportbook-iframe {
-      width: 100%;    
+      width: 100%;
       height: 100vh;
     }
   }
