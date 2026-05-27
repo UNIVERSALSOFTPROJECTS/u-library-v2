@@ -16,6 +16,8 @@
   let active_section = "record";
   let promise;
 
+  const getPlayerId = () => user?.playerId ?? user?.id ?? user?.data?.playerId ?? user?.data?.id;
+
   const onPageClick = (page) => {
     filters.page = page;
     filters.type = "TT"
@@ -57,9 +59,14 @@
 
   const getMovements = async () => {
     if(filters.type == "") delete filters.type;
+    const playerId = getPlayerId();
+    if (!playerId) {
+      notify.error("No se encontró el identificador del jugador")
+      return;
+    }
     try { let params = {
         ...filters,
-        playerId: user.playerId,
+        playerId,
         token:user.token
       }
       console.log("params1", params);

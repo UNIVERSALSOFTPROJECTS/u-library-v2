@@ -92,9 +92,9 @@
         date.setDate(date.getDate() + 1);
         data.expireToken = data.claims.exp;
         data.initToken = data.claims.iat;
-        data.playerId = data.id;
         delete data.claims;
       }
+      data.playerId = data.playerId ?? data.id;
       //Formatear la propiedad "bonus" con el updatebalance
       if (userGateway == "neco") await getUpdateBalance(data);
       onOk(data);

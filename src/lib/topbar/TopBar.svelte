@@ -136,11 +136,13 @@
     let serial_api_casino = user.serial_api_casino;
     let token = user.token;
     let agregatorToken = user.agregatorToken;
+    let playerId = user.playerId ?? user.id ?? data?.data?.playerId ?? data?.data?.id;
     user = { ...user, ...data };
      
     user.serial_api_casino = serial_api_casino;
     user.token = token;
     user.agregatorToken = agregatorToken;
+    user.playerId = playerId;
   };
 
   const onPasswordChangeModal = () => {
