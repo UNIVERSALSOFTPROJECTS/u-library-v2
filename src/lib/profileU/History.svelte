@@ -16,7 +16,24 @@
   let active_section = "record";
   let promise;
 
-  const getPlayerId = () => user?.playerId ?? user?.id ?? user?.data?.playerId ?? user?.data?.id;
+  const getJwtSubject = (token) => {
+    try {
+      const payload = token?.split(".")?.[1];
+      if (!payload) return null;
+      const base64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+      const paddedBase64 = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), "=");
+      return JSON.parse(atob(paddedBase64)).sub ?? null;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const getPlayerId = () =>
+    user?.playerId ??
+    user?.id ??
+    user?.data?.playerId ??
+    user?.data?.id ??
+    getJwtSubject(user?.user_token ?? user?.token);
 
   const onPageClick = (page) => {
     filters.page = page;
