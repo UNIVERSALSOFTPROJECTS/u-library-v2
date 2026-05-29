@@ -41,28 +41,22 @@
   const getRollover = async () => {
     try {
       const tokenToUse = user.agregatorToken || user.token;
-      // const data = await ServerConnection.users.verifyRollover(tokenToUse);
-      let data = {};
+      const data = await ServerConnection.users.verifyRollover(tokenToUse);
       console.log("DEBUG: Respuesta de rollover:", data);
-      if (data && data.rolloverAmount > 0) {
-        rolloverData = data;
-        rolloverData.percentage = Math.min(
-          100,
-          Math.floor((data.spend / data.rolloverAmount) * 100),
-        );
-      } else {
+      if (data && data.id && data.rolloverAmount > 0) {
         rolloverData = {
-          rolloverAmount: 500,
-          spend: 325,
-          percentage: 65,
+          ...data,
+          percentage: Math.min(
+            100,
+            Math.floor((data.spend / data.rolloverAmount) * 100),
+          ),
         };
+      } else {
+        rolloverData = null;
       }
     } catch (error) {
-      rolloverData = {
-        rolloverAmount: 1000,
-        spend: 150,
-        percentage: 15,
-      };
+      console.error("Error al obtener rollover:", error);
+      rolloverData = null;
     }
   };
 
@@ -155,7 +149,7 @@
         {t}
       />
 
-      <!-- {#if rolloverData}
+      {#if rolloverData}
         <div class="rollover-container">
           <div class="rollover-info">
             <span>Rollover: <b>{rolloverData.percentage}%</b></span>
@@ -168,7 +162,7 @@
             ></div>
           </div>
         </div>
-      {/if} -->
+      {/if}
 
       <div class="profile__transaction">
         {#if withdrawalView}
