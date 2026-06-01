@@ -111,6 +111,7 @@ export default {
     "footer.declaration": "está sujeto a los términos y condiciones de este sitio web. Todos los derechos reservados.",
     "footer.disclaimer": "universalrace.net es operado por Games & More B.V., registrado bajo el número 149948 en Hanchi Snoa 19, Edificio Trias, Curazao. Este sitio web tiene licencia y está regulado por GCB (Junta de Control de Juegos de Curazao) bajo la licencia No. OGL/2023/121/0086.",
     "footer.chatOnLive": "Chat en vivo",
+    "footer.conditions_pay_horses": "Condiciones de pago hipicas",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Bienvenido a {{platform}}",
     "msg.sucessRegister": "Registro exitoso",
@@ -503,6 +504,7 @@ export default {
   "footer.declaration": "est soumis aux conditions générales de ce site web. Tous droits réservés.",
   "footer.disclaimer": "universalrace.net est exploité par Games & More B.V., enregistré sous le numéro 149948 à Hanchi Snoa 19, Bâtiment Trias, Curaçao. Ce site est licencié et réglementé par la GCB (Commission de contrôle des jeux de Curaçao) sous la licence No. OGL/2023/121/0086.",
   "footer.chatOnLive": "Chat en direct",
+  "footer.conditions_pay_horses": "Conditions de paiement des courses de chevaux",
     //---------------MENSAJES-----------------------------
  "msg.sucessLogin": "Bienvenue sur {{platform}}",
   "msg.sucessRegister": "Inscription réussie",
@@ -840,6 +842,7 @@ export default {
     "footer.declaration": "está sujeito aos termos e condições deste site. Todos os direitos reservados.",
     "footer.disclaimer": "universalrace.net  é operado pela Games & More B.V., Registrado sob o número 149948 em Hanchi Snoa 19, Edificio Trias, Curazao. Este site é licenciado e regulamentado pela GCB (Conselho de Controle de Jogos de Curazao) sob licença No. OGL/2023/121/0086.",
     "footer.chatOnLive": "Chat ao vivo",
+    "footer.conditions_pay_horses": "Condições de pagamento de corridas de cavalos",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Bem-vindo a {{platform}}",
     "msg.duplicateSession": "Sessão duplicada, saindo...",
@@ -1276,6 +1279,7 @@ export default {
     "footer.declaration": "is subject to the terms and conditions of this website. All rights reserved.",
     "footer.disclaimer": "universalrace.net is operated by Games & More B.V., registered under number 149948 at Hanchi Snoa 19, Trias Building, Curaçao. This website is licensed and regulated by the GCB (Curaçao Gaming Control Board) under license no. OGL/2023/121/0086.",
     "footer.chatOnLive": "Live chat",
+    "footer.conditions_pay_horses": "Conditions of payment for horse racing",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Welcome to {{platform}}",
     "msg.sucessRegister": "Successful registration",
