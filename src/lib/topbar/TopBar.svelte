@@ -106,6 +106,18 @@
     }, 100);
   };
 
+  const getJwtSubject = (token) => {
+    try {
+      const payload = token?.split(".")?.[1];
+      if (!payload) return null;
+      const base64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+      const paddedBase64 = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), "=");
+      return JSON.parse(atob(paddedBase64)).sub ?? null;
+    } catch (error) {
+      return null;
+    }
+  };
+
   const onOpenRecoverPass = () => {
     loginModalOpen = false;
     showRecoverPass = true;
@@ -136,11 +148,18 @@
     let serial_api_casino = user.serial_api_casino;
     let token = user.token;
     let agregatorToken = user.agregatorToken;
+    let playerId =
+      user.playerId ??
+      user.id ??
+      data?.data?.playerId ??
+      data?.data?.id ??
+      getJwtSubject(user.user_token ?? user.token);
     user = { ...user, ...data };
      
     user.serial_api_casino = serial_api_casino;
     user.token = token;
     user.agregatorToken = agregatorToken;
+    user.playerId = playerId;
   };
 
   const onPasswordChangeModal = () => {

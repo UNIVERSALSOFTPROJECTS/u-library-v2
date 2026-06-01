@@ -43,6 +43,18 @@
     } ;
   };
 
+  const getJwtSubject = (token) => {
+    try {
+      const payload = token?.split(".")?.[1];
+      if (!payload) return null;
+      const base64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+      const paddedBase64 = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), "=");
+      return JSON.parse(atob(paddedBase64)).sub ?? null;
+    } catch (error) {
+      return null;
+    }
+  };
+
   const handleVerify = (details) => {
     turnstileToken = details.token;
     isVerified = true;
@@ -92,9 +104,9 @@
         date.setDate(date.getDate() + 1);
         data.expireToken = data.claims.exp;
         data.initToken = data.claims.iat;
-        data.playerId = data.id;
         delete data.claims;
       }
+      data.playerId = data.playerId ?? data.id ?? getJwtSubject(data.user_token ?? data.token);
       //Formatear la propiedad "bonus" con el updatebalance
       if (userGateway == "neco") await getUpdateBalance(data);
       onOk(data);

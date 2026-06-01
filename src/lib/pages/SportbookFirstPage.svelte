@@ -27,6 +27,11 @@
     HBVE: "https://prod20370-201498755.freethrow777.com",
     BTSW: "https://prod20370-201497598.freethrow777.com",
     BWDA: "https://prod20370-201479896.freethrow777.com",
+    HBEC: "https://prod20370-205035163.freethrow777.com",
+    HBCL: "https://prod20370-204441557.freethrow777.com",
+    PNBO: "https://prod20370-205035220.freethrow777.com",
+    MSVE: "https://prod20370-206588353.freethrow777.com",
+    ALAR: "https://prod20370-206586095.freethrow777.com/",
     default: "https://prod20370-150256248.freethrow777.com",
   };
   
