@@ -229,8 +229,8 @@
                     {#if typeTranference == 'r4'}
                         <div class="deposit__info">
                             <p>Banco: R4</p>
-                            <p>CI: Tu número de cédula.</p>
-                            <p>Teléfono: 04143144524</p>
+                            <p>Rif: j405427230</p>
+                            <p>Teléfono: 04241670598</p>
                             <p>Monto: El que desees recargar en tu cuenta.</p>
                         </div>
                     {:else}
