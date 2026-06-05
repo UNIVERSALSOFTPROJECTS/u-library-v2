@@ -103,7 +103,7 @@
 
         <p>Correo</p>
         <p>Fecha de nacimiento <span class="required">*</span></p>
-        <input class="ipt" type="text" bind:value={accountUser.email} disabled>
+        <input class="ipt" type="text" bind:value={accountUser.email}>
         <input class="ipt" type="date" bind:value={accountUser.birthday}>
 
         <p>Telefono <span class="required">*</span></p>
