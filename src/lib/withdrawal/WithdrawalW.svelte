@@ -15,10 +15,10 @@
 
     let platform = configWithdrawal.platform;
     let banksNames = configWithdrawal.banksNames || [];
-    let typeAccount = configWithdrawal.typeAccount;
+    let typeAccount = configWithdrawal.typeAccount || [];
     let messageOptional = configWithdrawal.messageOptional;
     let formVerification = configWithdrawal.formVerification;
-    let linksChats = configWithdrawal.linksChats;
+    let linksChats = configWithdrawal.linksChats || [];
     let dataType = configWithdrawal.dataType;
     let pendingWithdrawal;
     let typeView = configWithdrawal.typeView || "";
