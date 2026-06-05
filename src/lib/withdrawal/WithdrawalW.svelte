@@ -14,7 +14,7 @@
     export let t;
 
     let platform = configWithdrawal.platform;
-    let banksNames = configWithdrawal.banksNames;
+    let banksNames = configWithdrawal.banksNames || [];
     let typeAccount = configWithdrawal.typeAccount;
     let messageOptional = configWithdrawal.messageOptional;
     let formVerification = configWithdrawal.formVerification;
