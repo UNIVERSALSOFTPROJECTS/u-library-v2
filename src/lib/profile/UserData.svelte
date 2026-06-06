@@ -48,6 +48,8 @@
         }
     });
 
+    $: fullName = [accountUser?.name, accountUser?.lastname].filter(Boolean).join(" ");
+
 </script>
 <div class="userdata">
     <b>{t("profile.personalData")}</b>
@@ -55,7 +57,7 @@
         <p>{t("profile.username")}</p>
         <p>{t("profile.nameLastname")}</p>
         <input class="ipt" type="text" bind:value={accountUser.username} disabled>
-        <input class="ipt" type="text" bind:value={accountUser.name} disabled>
+        <input class="ipt" type="text" value={fullName} disabled>
         <p>{t("profile.email")}</p>
         <p>{t("profile.birthday")}</p>
         <input class="ipt" type="text" bind:value={accountUser.email} disabled>

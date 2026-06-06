@@ -97,21 +97,25 @@
     <b>Datos personales</b>
     <form class="userdata__form" on:submit={avoidSubmit}>
         <p>Usuario</p>
-        <p>Nombre y apellido</p>
+        <p>Nombre</p>
         <input class="ipt" type="text" bind:value={accountUser.username} disabled>
         <input class="ipt" type="text" bind:value={accountUser.name} disabled>
 
+        <p>Apellido</p>
         <p>Correo</p>
-        <p>Fecha de nacimiento <span class="required">*</span></p>
+        <input class="ipt" type="text" bind:value={accountUser.lastname}>
         <input class="ipt" type="text" bind:value={accountUser.email}>
-        <input class="ipt" type="date" bind:value={accountUser.birthday}>
 
+        <p>Fecha de nacimiento <span class="required">*</span></p>
         <p>Telefono <span class="required">*</span></p>
-        <p>Tipo de documento</p>
+        <input class="ipt" type="date" bind:value={accountUser.birthday}>
         <div class="userdata__phone">
             <DropdowPrefix {countries} bind:country={countryPrefix} />
             <input class="ipt" type="text" bind:value={phoneNumber}>
         </div>
+
+        <p>Tipo de documento</p>
+        <p>Numero de documento <span class="required">*</span></p>
         <select class="slc" bind:value={selectDoctype} on:change={changeDoctype}>
             {#each doctypes as doctype}
                 <option value={doctype}>{doctype}</option>
@@ -120,16 +124,12 @@
                 <option value="CI">CI</option>
             {/if}
         </select>
-
-        <p>Numero de documento <span class="required">*</span></p>
-        <p>Direccion</p>
         <input class="ipt" type="text" placeholder={exampleDoctype} bind:value={accountUser.document}>
-        <input class="ipt" type="text" bind:value={accountUser.address}>
 
+        <p>Direccion</p>
         <p>Ciudad</p>
-        <div></div>
+        <input class="ipt" type="text" bind:value={accountUser.address}>
         <input class="ipt" type="text" bind:value={accountUser.city}>
-        <div></div>
     </form>
 
     <button class="btn save" type="button" on:click={saveMyAccount} disabled={loadUserData}>
