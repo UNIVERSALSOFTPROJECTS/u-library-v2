@@ -85,7 +85,7 @@
         <p class="recoverPassword__text">{@html t("recoverPassword.info")}</p>
           <input type="email" class="ipt icon--email" placeholder={t("recoverPassword.email")} autocomplete="off" bind:value={forgotPass.email}/>
           {#if multipleCurrencies?.length}
-            <select class="ipt" bind:value={forgotPass.currency}>
+            <select class="slc recoverPassword__currencies" bind:value={forgotPass.currency}>
               {#each multipleCurrencies as currency}
                 <option value={currency.currency}>{currency.currency}</option>
               {/each}
