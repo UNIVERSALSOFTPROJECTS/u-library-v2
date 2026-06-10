@@ -7,6 +7,8 @@
   export let t;
   export let onOk;
   export let onError;
+  export let multipleCurrencies;
+
 
   let forgotPass = {}
   let loadRecoverPassword = false;
@@ -14,6 +16,12 @@
   let redirectURL;
   let codeSms;
   let view = "recover";
+
+  $: if (multipleCurrencies?.length) {
+    const selected = multipleCurrencies.find((c) => c.currency === forgotPass.currency) || multipleCurrencies[0];
+    forgotPass.currency = selected.currency;
+    forgotPass.org = selected.org;
+  }
 
   const avoidSubmit = (e) =>{ e.preventDefault(); }
   const justNumbersValidate = (e) =>{ e.target.value = e.target.value.replace(/[^\d]/g, "") }
@@ -76,7 +84,14 @@
         {:else}
         <p class="recoverPassword__text">{@html t("recoverPassword.info")}</p>
           <input type="email" class="ipt icon--email" placeholder={t("recoverPassword.email")} autocomplete="off" bind:value={forgotPass.email}/>
-          <button type="button" class="btn send" on:click={sendRecoverPassword} disabled={!forgotPass.email||loadRecoverPassword }>
+          {#if multipleCurrencies?.length}
+            <select class="ipt" bind:value={forgotPass.currency}>
+              {#each multipleCurrencies as currency}
+                <option value={currency.currency}>{currency.currency}</option>
+              {/each}
+            </select>
+          {/if}
+          <button type="button" class="btn send" on:click={sendRecoverPassword} disabled={!forgotPass.email || loadRecoverPassword || (multipleCurrencies?.length && !forgotPass.currency)}>
             {#if loadRecoverPassword}
               <div class="loading"><p/><p/><p/></div>
             {:else}

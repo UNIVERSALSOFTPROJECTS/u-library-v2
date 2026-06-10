@@ -105,9 +105,10 @@ const ServerConnection = (() => {
             return axios.post(url, payload, { headers });
         },
         resetPassword: (data) => {
-            if (!conf.org) throw "ORG_MANDATORY";
+            const org = data.org || conf.org;
+            if (!org) throw "ORG_MANDATORY";
             const url = window.origin + "/resetPassword";
-            let payload = { email: data.email, url, org: conf.org };
+            let payload = { email: data.email, url, org };
             return axios.post(`${conf.API_KS}/resetPassword`, payload, { headers });
         },
         confirmResetPassword: (temporalToken) => {
