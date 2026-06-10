@@ -85,11 +85,14 @@
         <p class="recoverPassword__text">{@html t("recoverPassword.info")}</p>
           <input type="email" class="ipt icon--email" placeholder={t("recoverPassword.email")} autocomplete="off" bind:value={forgotPass.email}/>
           {#if multipleCurrencies?.length}
-            <select class="slc recoverPassword__currencies" bind:value={forgotPass.currency}>
-              {#each multipleCurrencies as currency}
-                <option value={currency.currency}>{currency.currency}</option>
-              {/each}
-            </select>
+            <div class="recoverPassword__currencies--container">
+              <p>Tipo de moneda:</p>              
+              <select class="slc recoverPassword__currencies" bind:value={forgotPass.currency}>
+                {#each multipleCurrencies as currency}
+                  <option value={currency.currency}>{currency.currency}</option>
+                {/each}
+              </select>
+            </div>
           {/if}
           <button type="button" class="btn send" on:click={sendRecoverPassword} disabled={!forgotPass.email || loadRecoverPassword || (multipleCurrencies?.length && !forgotPass.currency)}>
             {#if loadRecoverPassword}
