@@ -10,13 +10,13 @@
     function getImagePath(item) {
         switch(item.ref) {
             case 'provider':
-                return `https://d1dkqs4jlldj3s.cloudfront.net/generic_imgs/providers/top/${item.name}.webp`;
+                return `https://assets-usoft.universalsoft.net/generic_imgs/providers/top/${item.name}.webp`;
             case 'category':
                 // Ajusta la ruta según tu estructura de assets
-                return `https://d1dkqs4jlldj3s.cloudfront.net/generic_imgs/category/top/${item.name}.webp`;
+                return `https://assets-usoft.universalsoft.net/generic_imgs/category/top/${item.name}.webp`;
             case 'game':
                 // Ajusta la ruta según tu estructura de assets
-                return `https://d1dkqs4jlldj3s.cloudfront.net/generic_imgs/games/top/${item.name}.webp`;
+                return `https://assets-usoft.universalsoft.net/generic_imgs/games/top/${item.name}.webp`;
             default:
                 return '';
         }

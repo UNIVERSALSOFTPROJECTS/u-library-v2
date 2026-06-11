@@ -477,7 +477,7 @@
     const configLogin = {
         platform,
         typeView,
-        assetsUrl: "https://d1dkqs4jlldj3s.cloudfront.net",
+        assetsUrl: "https://assets-usoft.universalsoft.net",
         idioms: [{ id: "es" }, { id: "br" }, { id: "fr" },{ id: "en" }],
         countries: [
             // {name: "Perú", domain:"pe"},

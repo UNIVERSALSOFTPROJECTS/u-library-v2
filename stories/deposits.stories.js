@@ -12,7 +12,7 @@ let user = {
   balance: 12.21
 };
 
-let assetsUrl = "https://d1dkqs4jlldj3s.cloudfront.net";
+let assetsUrl = "https://assets-usoft.universalsoft.net";
 let maxAmount = 6000;
 let minAmount = 50;
 

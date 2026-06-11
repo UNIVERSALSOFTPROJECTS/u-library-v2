@@ -1,7 +1,7 @@
 import LoginTest from '../src/lib/LoginFullScreenTest.svelte';
 import init from "./init.js";
 let user=null;
-let assetsUrl="https://d1dkqs4jlldj3s.cloudfront.net";
+let assetsUrl="https://assets-usoft.universalsoft.net";
 
 init.start();
 

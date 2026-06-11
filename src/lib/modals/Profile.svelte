@@ -127,7 +127,7 @@
         <div class="profile__header">
           <img
             class="profile__img"
-            src="https://d1dkqs4jlldj3s.cloudfront.net/{platform}/icon1.png"
+            src="https://assets-usoft.universalsoft.net/{platform}/icon1.png"
             alt="icon-user"
           />
           <div>
