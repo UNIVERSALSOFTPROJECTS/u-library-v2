@@ -443,7 +443,9 @@ export default {
   "recoverPassword.email": "Entrez votre adresse e-mail",
   "recoverPassword.send": "Envoyer",
   "recoverPassword.info": "Pas de souci ! Il vous suffit de <b>renseigner votre adresse e-mail</b> et un <b>code SMS vous sera envoyé sur votre téléphone</b> pour réinitialiser votre mot de passe.",
+  "recoverPassword.info2": "Pas de souci ! Il vous suffit de <b>renseigner votre adresse e-mail</b> et un <b>code vous sera envoyé</b> pour réinitialiser votre mot de passe.",
   "recoverPassword.infoSms": "Veuillez <b>entrer le code à 8 chiffres qui a été envoyé à votre téléphone</b>. Rappelez-vous que <b>ce code sera votre nouveau mot de passe</b>.",
+  "recoverPassword.infoEmail": "Veuillez <b>entrer le code à 8 chiffres qui a été envoyé à votre adresse e-mail</b>. Rappelez-vous que <b>ce code sera votre nouveau mot de passe</b>.",
   "recoverPassword.confirmingChangePass": "Confirmation du changement de mot de passe, veuillez patienter un moment.",
     //---------------Withdrawal-----------------------------
   "withdrawal.title": "Retrait",
@@ -1111,6 +1113,8 @@ export default {
     "recoverPassword.email": "Digite seu e-mail",
     "recoverPassword.send": "Enviar",
     "recoverPassword.info": "Não há problema! Basta <b>inserir seu e-mail</b> e um código SMS será enviado para o seu celular</b>, com o qual você redefinirá sua senha.",
+    "recoverPassword.info2": "Não há problema! Basta <b>inserir seu e-mail</b> e um código será enviado para o seu e-mail, com o qual você redefinirá sua senha.",
+    "recoverPassword.infoEmail": "Por favor <b>insira o código de 8 dígitos que foi enviado para o seu e-mail</b>, lembre-se que <b>este código será sua nova senha</b>.",
     "recoverPassword.infoSms": "Por favor <b>insira o código de 8 dígitos que foi enviado para o seu celular</b>, lembre-se que <b>este código será sua nova senha</b>.",
     "recoverPassword.confirmingChangePass": "Confirmando a alteração da senha, aguarde um momento.",
     //---------------Autoservice-----------------------------}
@@ -1223,6 +1227,8 @@ export default {
     "recoverPassword.email": "Enter your email",
     "recoverPassword.send": "Send",
     "recoverPassword.info": "No problem! Just <b>enter your email</b>, and an <b>SMS code will be sent to your phone</b>, with which you can reset your password.",
+    "recoverPassword.info2": "No problem! Just <b>enter your email</b>, and a code will be sent to your email, with which you can reset your password.",
+    "recoverPassword.infoEmail": "Please <b>enter the 8-digit code sent to your email</b>. Remember, <b>this code will be your new password</b>.",
     "recoverPassword.infoSms": "Please <b>enter the 8-digit code sent to your phone</b>. Remember, <b>this code will be your new password</b>.",
     "recoverPassword.confirmingChangePass": "Confirming password change, please wait a moment.",
     //---------------Withdrawal-----------------------------
