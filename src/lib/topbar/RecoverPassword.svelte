@@ -8,7 +8,7 @@
   export let onOk;
   export let onError;
   export let multipleCurrencies;
-
+  export let channel;
 
   let forgotPass = {}
   let loadRecoverPassword = false;
@@ -78,11 +78,19 @@
     {#if view == "recover"}
       <form class="recoverPassword__form" on:submit={avoidSubmit}>
         {#if newPassword}
-          <p class="recoverPassword__text">{@html t("recoverPassword.infoSms")}</p>
+            {#if channel == 'email'}
+            <p class="recoverPassword__text">{@html t("recoverPassword.infoEmail")}</p>
+            {:else}
+            <p class="recoverPassword__text">{@html t("recoverPassword.infoSms")}</p>
+            {/if}
           <input type="number" min="0" class="ipt icon--password" placeholder="00000000" autocomplete="off" bind:value={codeSms} on:input={justNumbersValidate}>
           <button type="button" class="btn send" on:click={validateCodeSMS}>{t("recoverPassword.send")}</button>
         {:else}
+        {#if channel == 'email'}
+        <p class="recoverPassword__text">{@html t("recoverPassword.info2")}</p>
+        {:else}
         <p class="recoverPassword__text">{@html t("recoverPassword.info")}</p>
+        {/if}
           <input type="email" class="ipt icon--email" placeholder={t("recoverPassword.email")} autocomplete="off" bind:value={forgotPass.email}/>
           {#if multipleCurrencies?.length}
             <div class="recoverPassword__currencies--container">

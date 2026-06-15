@@ -46,7 +46,9 @@ export default {
     "recoverPassword.email": "Ingrese su corrreo electrónico",
     "recoverPassword.send": "Enviar",
     "recoverPassword.info": "¡No hay problema! Sólo tienes que <b>ingresar tu correo electrónico</b> y se <b>te enviará un código SMS a tu celular</b>, con el cual reestableceras tu contraseña.",
+    "recoverPassword.info2": "¡No hay problema! Sólo tienes que <b>ingresar tu correo electrónico</b> y se <b>te enviará un código</b>, con el cual reestableceras tu contraseña.",
     "recoverPassword.infoSms": "Por favor <b>ingrese el código de 8 digitos que fue enviado a su celular</b>, recuerde que <b>este código sera su nueva contraseña</b>.",
+    "recoverPassword.infoEmail": "Por favor <b>ingrese el código de 8 digitos que fue enviado a su correo electrónico</b>, recuerde que <b>este código sera su nueva contraseña</b>.",
     "recoverPassword.confirmingChangePass": "Confirmando el cambio de contraseña, espere un momento.",
     //---------------Withdrawal-----------------------------
     "withdrawal.title": "Retiro",
