@@ -4,6 +4,7 @@
     export let currencies;
     export let currency;
     export let codeAgent;
+    export let disabled = false;
 
     //add name transalate by idCurrency
     const namesCurrenciesById = {
@@ -25,7 +26,7 @@
     //todo es el el DROPSOW y puede estar el utils o algo asi, preguntar a apndo, este tipo de dropdow te borra el texto inicial al cambiar
     let selectedOption = '';
     let isDropdownOpen = false;
-    const toggleDropdown = () => { isDropdownOpen = !isDropdownOpen }
+    const toggleDropdown = () => { if (!disabled) isDropdownOpen = !isDropdownOpen }
     
     onMount(() => {
         const handleClickOutside = (e) => {if (!e.target.closest('.dropdown.currencies')) isDropdownOpen = false; }
@@ -37,7 +38,7 @@
 
   
 <div class="dropdown currencies">
-    <button type="button" class="slc" on:click={toggleDropdown}>{selectedOption || 'Seleccionar moneda'}</button>
+    <button type="button" class="slc" disabled={disabled} on:click={toggleDropdown}>{selectedOption || 'Seleccionar moneda'}</button>
     {#if isDropdownOpen}
         <div class="dropdown-menu">
             {#each currencies as currency}

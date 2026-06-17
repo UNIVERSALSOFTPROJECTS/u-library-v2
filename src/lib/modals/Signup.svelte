@@ -55,6 +55,7 @@
     let route = detectIdiomPage(t("idiom"));
     let routePDF = assetsPDF(platform,route);
     let orgMultiCurrency;
+    let currencyLocked = false;
 
     //validations imput -utils JS
     const inputJustText = inputUtils.justTextValidator;
@@ -109,6 +110,7 @@
         try {
             loadSms = true;
             let {data} = await ServerConnection.users.preRegister(username.trim(), email, country+phone, platform,channel, orgMultiCurrency);
+            if (typeSignup === "selectCurrency") currencyLocked = true;
             preRegister ? counterResendSms() : smscode = data.code_verify;
         } catch (error) {
             if(error.response.data.message == 'El telefono ya existe') error = t("msg.phoneExist");
@@ -230,7 +232,7 @@
             </div>
         </div>
     {:else if typeSignup === "selectCurrency"}
-        <DropdownCurrencies {currencies} bind:currency bind:codeAgent t={t}/>
+        <DropdownCurrencies {currencies} bind:currency bind:codeAgent t={t} disabled={currencyLocked}/>
     {:else if typeSignup === "codeAgent"}
         {#if agentCodeType !='url' && isCodeAgentSwitch}
             <div>
