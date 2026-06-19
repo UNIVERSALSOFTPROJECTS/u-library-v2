@@ -1,9 +1,8 @@
 <script>
-	import DigtainSportBook from './../sportbooks/DigtainSportBook.svelte';
   import { onDestroy, onMount } from "svelte";
+  import ScreenGamesCmsWager from "../modals/ScreenGamesCmsWager.svelte";
   import ut from '../../js/util';
   import backend from '../../js/server'
-  import { Client } from '@stomp/stompjs';
 
 
   export let userState;
@@ -22,9 +21,15 @@
   
 
   let sportbookGameUrl = '';
+  let guestLaunchResponse = null;
+  let guestLaunchError = "";
   let mode = ut.isMobile() ? "mb" : "wb";
   let page = active_view == "sportbooklive" ? "live" : "sport";
   let internalPage = active_view == "sportbooklive" ? "live" : "preMatch"
+
+  const GUEST_LAUNCH_IFRAME_URL = "iframe_url";
+  const GUEST_LAUNCH_CMSWAGER = "cmswager_bootstrap";
+  const GUEST_LAUNCH_HOSTED_VIEW_URL = "hosted_view_url";
 
   const edg_id = "8042022_digitain";
   const wt_id = "wintech_gaming";
@@ -172,6 +177,16 @@
   };
 
   async function openSport() {
+    guestLaunchError = "";
+    guestLaunchResponse = null;
+
+    if (userState != "loggedIn") {
+      const isGuestLaunchHandled = await openGuestSportbook();
+      if (isGuestLaunchHandled) {
+        return;
+      }
+    }
+
     if (options.gameid == edg_id)openDigtain();
     else if (options.gameid == wt_id) openWintech();
     else if (options.gameid == nvb_id) openNovusbet();
@@ -179,6 +194,44 @@
     else if (options.gameid == pnc_id) openPinnacle();
     else if (options.gameid == bw3_id) openBetsW3();
     else if (options.gameid == frst_id) openFirst();
+  }
+
+  async function openGuestSportbook() {
+    try {
+      const response = await backend.game.openGuestSportbook({
+        clientCode: clientCode || CLIENT_CODE,
+        sportView: active_view == "sportbooklive" ? "live" : "sport",
+        lang,
+        mode,
+        device: ut.isMobile() ? "mobile" : "desktop",
+      });
+
+      if (!response?.success || !response?.launchType) {
+        throw new Error(response?.message || "Invalid guest sportbook response");
+      }
+
+      guestLaunchResponse = response;
+
+      if (
+        response.launchType == GUEST_LAUNCH_IFRAME_URL ||
+        response.launchType == GUEST_LAUNCH_HOSTED_VIEW_URL
+      ) {
+        sportbookGameUrl = response?.payload?.url || "";
+        return !!sportbookGameUrl;
+      }
+
+      if (response.launchType == GUEST_LAUNCH_CMSWAGER) {
+        sportbookGameUrl = "";
+        return true;
+      }
+
+      throw new Error(`Unsupported guest launch type: ${response.launchType}`);
+    } catch (error) {
+      guestLaunchResponse = null;
+      guestLaunchError = error?.message || "Guest sportbook launch failed";
+      console.log("Guest sportbook fallback", error);
+      return false;
+    }
   }
 
   const openFirst = async () => { 
@@ -341,15 +394,27 @@ function RESELLER (params) {
   };
   
   onDestroy(async () => {
-    let {data} = await backend.users.getBalance(user.agregatorToken);
-    user.balance = data.balance;
+    if (user?.agregatorToken) {
+      let {data} = await backend.users.getBalance(user.agregatorToken);
+      user.balance = data.balance;
+    }
     document.body.style.overflow="scroll";
   });
 </script>
 
-<div class="sportbook-content">
-  <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
-</div>
+{#if userState != "loggedIn" && guestLaunchResponse?.launchType == GUEST_LAUNCH_CMSWAGER}
+  <ScreenGamesCmsWager
+    open={true}
+    platform={guestLaunchResponse?.provider || "cmswager"}
+    options_launch={{}}
+    launchDescriptor={guestLaunchResponse}
+    updateBalance={() => {}}
+  />
+{:else}
+  <div class="sportbook-content">
+    <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
+  </div>
+{/if}
 
 <style>
   @media only screen and (max-width: 1199px) {

@@ -174,6 +174,18 @@ const ServerConnection = (() => {
             const response = await axios.get(url, { headers });
             return response.data;
         },
+        openGuestSportbook: async (payload = {}) => {
+            const request = {
+                org: payload.org || conf.org,
+                clientCode: payload.clientCode || conf.CLIENT_CODE,
+                sportView: payload.sportView || "sport",
+                lang: payload.lang || "es",
+                mode: payload.mode,
+                device: payload.device,
+            };
+            const response = await axios.post(`${conf.API_KS}/sportbook/guest-launch`, request, { headers });
+            return response.data;
+        },
         openCmsWagerGame: async (sessionToken, gameId, mode) => {
             const response = await axios.get(
                 `${conf.GAMEAPI_URL}/launch?gameid=${gameId}&p=cmsw&b=CMSWager&m=${mode}&sessionid=${sessionToken}&r=url&sport_view=sport&lang=es`,

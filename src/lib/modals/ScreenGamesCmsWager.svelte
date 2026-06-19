@@ -22,6 +22,7 @@
     export let platform;
     export let updateBalance = () => {};
     export let options_launch = {};
+    export let launchDescriptor = null;
 
     let loadCmsWager = false;
     let isFullscreen = false;
@@ -87,18 +88,30 @@
     }
 
     async function loadCmsWagerSportbook() {
+        const descriptorParams = launchDescriptor?.payload?.params;
+        const descriptorBaseUrl =
+            launchDescriptor?.payload?.baseUrl || launchDescriptor?.payload?.url || "";
         const sessionToken =
             options_launch?.sessionToken || options_launch?.token || options_launch?.gameToken;
         const gameId = options_launch?.gameId || options_launch?.gameid;
         const mode = options_launch?.mode || options_launch?.deviceMode || options_launch?.viewMode;
 
-        if (!sessionToken || !gameId || !mode) {
+        if (!descriptorParams && (!sessionToken || !gameId || !mode)) {
             errorMessage =
                 "No se pudo iniciar CMSWager: faltan sessionToken, gameId o mode.";
             return;
         }
 
-        const currentLaunchKey = `${sessionToken}|${gameId}|${mode}`;
+        const currentLaunchKey = descriptorParams
+            ? JSON.stringify({
+                  scriptUrl: descriptorParams.scriptUrl,
+                  platform: descriptorParams.platform,
+                  token: descriptorParams.token,
+                  culture: descriptorParams.culture,
+                  clientKey: descriptorParams.clientKey,
+                  defaultPage: descriptorParams.defaultPage,
+              })
+            : `${sessionToken}|${gameId}|${mode}`;
         if (loadCmsWager || activeLaunchKey === currentLaunchKey) {
             return;
         }
@@ -111,11 +124,16 @@
 
         try {
             /** @type {CmsWagerLaunchResponse} */
-            const response = await ServerConnection.game.openCmsWagerGame(
-                sessionToken,
-                gameId,
-                mode
-            );
+            const response = descriptorParams
+                ? {
+                      url: descriptorBaseUrl,
+                      params: descriptorParams,
+                  }
+                : await ServerConnection.game.openCmsWagerGame(
+                      sessionToken,
+                      gameId,
+                      mode
+                  );
 
             if (currentRequest !== requestVersion) return;
 
@@ -244,13 +262,22 @@
     $: statusModal(open);
 
     $: {
+        const descriptorKey = launchDescriptor?.payload?.params
+            ? JSON.stringify(launchDescriptor.payload.params)
+            : "";
         const sessionToken =
             options_launch?.sessionToken || options_launch?.token || options_launch?.gameToken || "";
         const gameId = options_launch?.gameId || options_launch?.gameid || "";
         const mode = options_launch?.mode || options_launch?.deviceMode || options_launch?.viewMode || "";
-        const nextLaunchKey = `${open}|${sessionToken}|${gameId}|${mode}`;
+        const nextLaunchKey = descriptorKey
+            ? `${open}|descriptor|${descriptorKey}`
+            : `${open}|${sessionToken}|${gameId}|${mode}`;
 
-        if (open && sessionToken && gameId && mode && nextLaunchKey !== launchKey) {
+        if (
+            open &&
+            ((descriptorKey && launchDescriptor?.payload?.params) || (sessionToken && gameId && mode)) &&
+            nextLaunchKey !== launchKey
+        ) {
             launchKey = nextLaunchKey;
             loadCmsWagerSportbook();
         } else if (!open) {
