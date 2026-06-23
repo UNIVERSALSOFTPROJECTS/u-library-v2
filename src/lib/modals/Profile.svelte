@@ -200,10 +200,12 @@
       >
     {/if}
     {#if verificationIdentity != ""}
-      <button
+      <a
         class="btn profile"
-        on:click={() => window.open(verificationIdentity)}
-        ><i class="icon--bonus"></i>Verificación de Identidad</button
+        href={verificationIdentity}
+        target="_blank"
+        rel="noopener noreferrer"
+        ><i class="icon--bonus"></i>Verificación de Identidad</a
       >
     {/if}
     <button class="btn logout icon--logout" on:click={onLogout}
