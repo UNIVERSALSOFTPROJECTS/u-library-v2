@@ -22,6 +22,7 @@
 
   let sportbookGameUrl = '';
   let guestLaunchResponse = null;
+  let cmsWagerLaunchOptions = null;
   let guestLaunchError = "";
   let mode = ut.isMobile() ? "mb" : "wb";
   let page = active_view == "sportbooklive" ? "live" : "sport";
@@ -40,6 +41,7 @@
   const panda_id = "1_SBO_1053_ThirdPartySportsBook";
   const AFB_id = "0_SBO_1015_ThirdPartySportsBook";
   const frst_id = "first_2024";
+  const cmsw_id = "sportbook_cmsw";
   //const guestURLbetw3 = "https://sports.jbets.online/#/?target=hipicasbabieca-86224-integration&token=123456789";
   //const guestURLbetw3Live = "https://sports.jbets.online/#/live_ecuabets?target=hipicasbabieca-86224-integration&token=123456789";
   
@@ -179,6 +181,7 @@
   async function openSport() {
     guestLaunchError = "";
     guestLaunchResponse = null;
+    cmsWagerLaunchOptions = null;
 
     if (userState != "loggedIn") {
       const isGuestLaunchHandled = await openGuestSportbook();
@@ -194,6 +197,16 @@
     else if (options.gameid == pnc_id) openPinnacle();
     else if (options.gameid == bw3_id) openBetsW3();
     else if (options.gameid == frst_id) openFirst();
+    else if (options.gameid == cmsw_id) openCmsWager();
+  }
+
+  async function openCmsWager() {
+    sportbookGameUrl = "";
+    cmsWagerLaunchOptions = {
+      sessionToken: user?.aggregator_token || user?.agregatorToken,
+      gameId: options?.gameid || cmsw_id,
+      mode,
+    };
   }
 
   async function openGuestSportbook() {
@@ -408,6 +421,13 @@ function RESELLER (params) {
     platform={guestLaunchResponse?.provider || "cmswager"}
     options_launch={{}}
     launchDescriptor={guestLaunchResponse}
+    updateBalance={() => {}}
+  />
+{:else if cmsWagerLaunchOptions}
+  <ScreenGamesCmsWager
+    open={true}
+    platform={"cmswager"}
+    options_launch={cmsWagerLaunchOptions}
     updateBalance={() => {}}
   />
 {:else}
