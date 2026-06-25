@@ -23,6 +23,7 @@
     export let updateBalance = () => {};
     export let options_launch = {};
     export let launchDescriptor = null;
+    export let embedded = true;
 
     let loadCmsWager = false;
     let isFullscreen = false;
@@ -39,7 +40,8 @@
 
     function statusModal(isActive) {
         const body = document.body.classList;
-        isActive ? body.add("modal-open") : body.remove("modal-open");
+        if (embedded || !isActive) body.remove("modal-open");
+        else body.add("modal-open");
     }
 
     const lockTouchZoom = (e) => {
@@ -240,7 +242,7 @@
     function handleMessage(event) {
         const { event: messageEvent } = event.data || {};
         if (messageEvent === "exit") {
-            closeModal();
+            if (!embedded) closeModal();
         } else if (messageEvent === "reload") {
             reloadCmsWager();
         }
@@ -292,40 +294,59 @@
 </script>
 
 {#if open}
-    <div class="modal screenGames" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom} on:scroll={resizeHeightModal}>
-        <div class="modal-dialog">
-            <div class="modal-content" use:watchResize={resizeHeightModal} style="height:{heightModal}px">
-                <div class="modal-header {isMobileSafari ? 'safari' : ''}">
-                    <div class="screenGames__options">
-                        <button class="btn close" on:click={closeModal} />
-                        <div />
+    {#if embedded}
+        <div class="cmswager-inline" use:watchResize={resizeHeightModal}>
+            <div class="cmswager-inline__body" style="height:{heightModal}px">
+                <div bind:this={appContent} id="appcontent" class="cmswager-container"></div>
+                {#if loadCmsWager}
+                    <div class="screenGames__overlay">
+                        <b class="loading"><b><b></b></b></b>
                     </div>
-                    <picture>
-                        <source media="(max-width: 1023px)" srcset="{assetsUrl}{platform}/logo_mb.png" />
-                        <img src="{assetsUrl}{platform}/logo.png" alt="{platform}-logo" loading="eager" />
-                    </picture>
-                    <div class="screenGames__options">
-                        <button class="btn reload" on:click={reloadCmsWager} disabled={loadCmsWager}></button>
-                        <button class="btn screen {isFullscreen ? 'full' : ''}" on:click={toggleFullscreen} hidden={isMobileSafari}></button>
+                {:else if errorMessage}
+                    <div class="screenGames__error">
+                        <b>No se pudo cargar CMSWager.</b>
+                        <p>{errorMessage}</p>
+                        <button class="btn screenGames__retry" on:click={reloadCmsWager}>Reintentar</button>
                     </div>
-                </div>
-                <div class="modal-body">
-                    <div bind:this={appContent} id="appcontent" class="cmswager-container"></div>
-                    {#if loadCmsWager}
-                        <div class="screenGames__overlay">
-                            <b class="loading"><b><b></b></b></b>
+                {/if}
+            </div>
+        </div>
+    {:else}
+        <div class="modal screenGames" on:touchstart={lockTouchZoom} on:touchmove={lockTouchZoom} on:scroll={resizeHeightModal}>
+            <div class="modal-dialog">
+                <div class="modal-content" use:watchResize={resizeHeightModal} style="height:{heightModal}px">
+                    <div class="modal-header {isMobileSafari ? 'safari' : ''}">
+                        <div class="screenGames__options">
+                            <button class="btn close" on:click={closeModal} />
+                            <div />
                         </div>
-                    {:else if errorMessage}
-                        <div class="screenGames__error">
-                            <b>No se pudo cargar CMSWager.</b>
-                            <p>{errorMessage}</p>
-                            <button class="btn screenGames__retry" on:click={reloadCmsWager}>Reintentar</button>
+                        <picture>
+                            <source media="(max-width: 1023px)" srcset="{assetsUrl}{platform}/logo_mb.png" />
+                            <img src="{assetsUrl}{platform}/logo.png" alt="{platform}-logo" loading="eager" />
+                        </picture>
+                        <div class="screenGames__options">
+                            <button class="btn reload" on:click={reloadCmsWager} disabled={loadCmsWager}></button>
+                            <button class="btn screen {isFullscreen ? 'full' : ''}" on:click={toggleFullscreen} hidden={isMobileSafari}></button>
                         </div>
-                    {/if}
+                    </div>
+                    <div class="modal-body">
+                        <div bind:this={appContent} id="appcontent" class="cmswager-container"></div>
+                        {#if loadCmsWager}
+                            <div class="screenGames__overlay">
+                                <b class="loading"><b><b></b></b></b>
+                            </div>
+                        {:else if errorMessage}
+                            <div class="screenGames__error">
+                                <b>No se pudo cargar CMSWager.</b>
+                                <p>{errorMessage}</p>
+                                <button class="btn screenGames__retry" on:click={reloadCmsWager}>Reintentar</button>
+                            </div>
+                        {/if}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {/if}
 {/if}
 
 <style>
@@ -343,6 +364,16 @@
         border: none !important;
         position: relative !important;
         z-index: 1 !important;
+    }
+
+    .cmswager-inline {
+        width: 100%;
+    }
+
+    .cmswager-inline__body {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
     }
 
     .cmswager-container {
