@@ -69,16 +69,16 @@ const SocketConnector = (() => {
             console.log("onConnect Socket success");
             stompClientCashier.subscribe('/user/queue/messages', (data) => {
                 const msg = data.body;
-                // if (msg.startsWith("CASHIER_CONNECT_")){
-                //     const [, , cashierName, status] = msg.split("_")
-                //     const isActive = status == "true"
-                //     EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, active: isActive})
+                if (msg.startsWith("CASHIER_CONNECT_")){
+                    const [, , cashierName, status] = msg.split("_")
+                    const isActive = status == "true"
+                    EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, active: isActive})
                     
-                // }else if (msg.startsWith("CASHIER_DISCONNECT_")){
-                //     const [, , cashierName, status] = msg.split("_")
-                //     const isDisconnect = status == "true"
-                //     EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, disconnect: isDisconnect})
-                // }
+                }else if (msg.startsWith("CASHIER_DISCONNECT_")){
+                    const [, , cashierName, status] = msg.split("_")
+                    const isDisconnect = status == "true"
+                    EventManager.publish("CASHIER_CONNECT", {cashier: cashierName, disconnect: isDisconnect})
+                }
                   
             });
         };
