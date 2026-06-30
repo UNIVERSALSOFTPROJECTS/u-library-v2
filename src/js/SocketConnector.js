@@ -87,6 +87,12 @@ const SocketConnector = (() => {
                         console.log("-> message event cashier",message.body);
                     }
                 );
+                stompClientCashier.publish({
+                    destination: "/app/terminal/ready",
+                    body: JSON.stringify({
+                        cashierId:`${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`
+                    })
+                });
             }
             
         };
