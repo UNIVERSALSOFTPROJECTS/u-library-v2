@@ -66,7 +66,6 @@ const SocketConnector = (() => {
                 stompClientCashier.subscribe(
                     "/topic/cashier/" + `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`,
                     message => {
-                        // message.body = {"event":"ONLINE","cashierId":"XLIV-cajero.jordi-5870722006786"}
                         let event_data = JSON.parse(message.body);
                         console.log("-> event listener cashier ",event_data);
                         if(event_data.event == "ONLINE") EventManager.publish("CASHIER_CONNECT", {cashierName: event_data.cashierId.split('-')[1] })
@@ -76,7 +75,6 @@ const SocketConnector = (() => {
                 stompClientCashier.subscribe(
                     "/user/queue/status",
                     message => {
-                        console.log("-> message event cashier",message.body);
                         let event_data = JSON.parse(message.body);
                         console.log("-> event listener cashier on ready terminal ",event_data.event);
                         if(event_data.event == "ONLINE") EventManager.publish("CASHIER_CONNECT", {cashierName: event_data.cashierId.split('-')[1] })
@@ -89,6 +87,17 @@ const SocketConnector = (() => {
                         cashierId:`${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`
                     })
                 });
+            }
+            else if(user.type == "CASHIER"){
+                stompClientCashier.subscribe(
+                    "/topic/shop/" + `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`,
+                    message => {
+                        let event_data = JSON.parse(message.body);
+                        console.log("-> event listener cashier ",event_data);
+                        if(event_data.event == "ONLINE") EventManager.publish("CASHIER_CONNECT", {cashierName: event_data.cashierId.split('-')[1] })
+                        else if(event_data.event == "OFFLINE") EventManager.publish("CASHIER_DISCONNECTED", {cashierName: event_data.cashierId.split('-')[1] })
+                    }
+                );
             }
             
         };
