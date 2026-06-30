@@ -24,15 +24,7 @@ const SocketConnector = (() => {
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
-                } else if (/UPDATE_BALANCE/.test(msg)) {
-                    EventManager.publish("update_balance", {newBalance: data.body})
-                }else if (data.body == "CASHIER_CONNECTED"){
-                    EventManager.publish("CASHIER_CONNECT", {cashierName: cashierName})
-                    onOpenNotification(null)
-                }else if (data.body == "CASHIER_DISCONNECTED"){
-                    EventManager.publish("CASHIER_DISCONNECTED", {cashierName: cashierName})
-                    onOpenNotification("accessCashier")
-                } 
+                }
             });
         };
 
