@@ -93,7 +93,10 @@ const SocketConnector = (() => {
                     "/topic/shop/" + `${conf.CLIENT_CODE}-${user.shopName}`,
                     message => {
                         let event_data = JSON.parse(message.body);
-                        console.log("-> event listener cashier ",event_data);
+                        if('new_balance' in event_data){
+                            console.log("-> UPDATE_BALANCE_SHOP ",event_data);
+                            EventManager.publish("update_balance",{new_balance:event_data.new_balance})
+                        }
                         
                     }
                 );
