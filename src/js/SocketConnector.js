@@ -67,7 +67,6 @@ const SocketConnector = (() => {
                     "/topic/cashier/" + `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`,
                     message => {
                         let event_data = JSON.parse(message.body);
-                        console.log("-> event listener cashier ",event_data);
                         if(event_data.event == "ONLINE") EventManager.publish("cashier_online", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
                         else if(event_data.event == "OFFLINE") EventManager.publish("cashier_offline", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
                     }
@@ -76,7 +75,6 @@ const SocketConnector = (() => {
                     "/user/queue/status",
                     message => {
                         let event_data = JSON.parse(message.body);
-                        console.log("-> event listener cashier on ready terminal ",event_data.event);
                         if(event_data.event == "ONLINE") EventManager.publish("cashier_online", {cashierName: event_data.cashierId.split('-')[1] ,state: event_data.event})
                         else if(event_data.event == "OFFLINE") EventManager.publish("cashier_offline", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
                     }
@@ -94,7 +92,6 @@ const SocketConnector = (() => {
                     message => {
                         let event_data = JSON.parse(message.body);
                         if('new_balance' in event_data){
-                            console.log("-> UPDATE_BALANCE_SHOP ",event_data);
                             EventManager.publish("update_balance",{new_balance:event_data.new_balance})
                         }
                         
