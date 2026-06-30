@@ -1,5 +1,5 @@
 <script>
-    import { onDestroy, onMount, tick } from "svelte";
+    import { createEventDispatcher, onDestroy, onMount, tick } from "svelte";
     import { watchResize } from "svelte-watch-resize";
     import { isMobileSafari } from "mobile-device-detect";
     import ServerConnection from "../../js/server";
@@ -15,6 +15,9 @@
      *   culture: string,
      *   clientKey: string,
      *   defaultPage?: string,
+     *   exttoken?: string,
+     *   clientApi?: string,
+     *   logo?: string,
      * }} params
      */
 
@@ -24,6 +27,9 @@
     export let options_launch = {};
     export let launchDescriptor = null;
     export let embedded = true;
+    export let onTerminalEvent = () => {};
+
+    const dispatch = createEventDispatcher();
 
     let loadCmsWager = false;
     let isFullscreen = false;
@@ -33,6 +39,11 @@
     let launchKey = "";
     let appContent;
     let activeLaunchKey = "";
+    let terminalConfig = {
+        exttoken: "",
+        clientApi: "",
+        logo: "",
+    };
 
     const resizeHeightModal = () => {
         heightModal = visualViewport?.height || window.innerHeight;
@@ -54,11 +65,43 @@
         }
     }
 
+    function resetTerminalConfig() {
+        terminalConfig = {
+            exttoken: "",
+            clientApi: "",
+            logo: "",
+        };
+    }
+
     function clearState() {
         loadCmsWager = false;
         errorMessage = "";
         activeLaunchKey = "";
         clearContainer();
+        resetTerminalConfig();
+    }
+
+    function applyTerminalDescriptor(params) {
+        terminalConfig = {
+            exttoken: params?.exttoken || "",
+            clientApi: params?.clientApi || "",
+            logo: params?.logo || "",
+        };
+    }
+
+    function emitTerminalEvent(type, payload) {
+        const detail = {
+            type,
+            payload,
+            config: terminalConfig,
+        };
+        console.info("CMSWager terminal event", detail);
+        dispatch("terminalEvent", detail);
+        try {
+            onTerminalEvent(detail);
+        } catch (error) {
+            console.error("CMSWager terminal event callback failed", error);
+        }
     }
 
     function loadProviderScript(scriptUrl) {
@@ -112,6 +155,9 @@
                   culture: descriptorParams.culture,
                   clientKey: descriptorParams.clientKey,
                   defaultPage: descriptorParams.defaultPage,
+                  exttoken: descriptorParams.exttoken,
+                  clientApi: descriptorParams.clientApi,
+                  logo: descriptorParams.logo,
               })
             : `${sessionToken}|${gameId}|${mode}`;
         if (loadCmsWager || activeLaunchKey === currentLaunchKey) {
@@ -153,6 +199,8 @@
                 return;
             }
 
+            applyTerminalDescriptor(params);
+
             await loadProviderScript(params.scriptUrl);
             if (currentRequest !== requestVersion) return;
             await tick();
@@ -165,7 +213,7 @@
             ) {
                 console.error("CMSWager script loaded without cmsSportbook.startSportbook");
                 errorMessage =
-                    "CMSWager cargó el script, pero el bootstrap del proveedor no está disponible.";
+                    "CMSWager cargo el script, pero el bootstrap del proveedor no esta disponible.";
                 return;
             }
 
@@ -184,12 +232,13 @@
                 baseUrl: response.url,
                 platform: params.platform,
                 defaultPage: params.defaultPage,
+                hasTerminalConfig: !!(params.exttoken || params.clientApi || params.logo),
             });
         } catch (error) {
             if (currentRequest !== requestVersion) return;
             console.error("CMSWager launch failed:", error);
             errorMessage =
-                "Error al cargar CMSWager. Revisa la conexión o intenta nuevamente.";
+                "Error al cargar CMSWager. Revisa la conexion o intenta nuevamente.";
             activeLaunchKey = "";
         } finally {
             if (currentRequest === requestVersion) {
@@ -240,7 +289,15 @@
     }
 
     function handleMessage(event) {
-        const { event: messageEvent } = event.data || {};
+        const payload = event?.data || {};
+        const messageType = payload?.type;
+        const messageEvent = payload?.event;
+
+        if (messageType === "ticket:placed" || messageType === "action:openCheckTicket") {
+            emitTerminalEvent(messageType, payload);
+            return;
+        }
+
         if (messageEvent === "exit") {
             if (!embedded) closeModal();
         } else if (messageEvent === "reload") {
@@ -320,10 +377,14 @@
                             <button class="btn close" on:click={closeModal} />
                             <div />
                         </div>
-                        <picture>
-                            <source media="(max-width: 1023px)" srcset="{assetsUrl}{platform}/logo_mb.png" />
-                            <img src="{assetsUrl}{platform}/logo.png" alt="{platform}-logo" loading="eager" />
-                        </picture>
+                        {#if terminalConfig.logo}
+                            <img src={terminalConfig.logo} alt="cmswager-terminal-logo" class="screenGames__custom-logo" loading="eager" />
+                        {:else}
+                            <picture>
+                                <source media="(max-width: 1023px)" srcset="{assetsUrl}{platform}/logo_mb.png" />
+                                <img src="{assetsUrl}{platform}/logo.png" alt="{platform}-logo" loading="eager" />
+                            </picture>
+                        {/if}
                         <div class="screenGames__options">
                             <button class="btn reload" on:click={reloadCmsWager} disabled={loadCmsWager}></button>
                             <button class="btn screen {isFullscreen ? 'full' : ''}" on:click={toggleFullscreen} hidden={isMobileSafari}></button>
@@ -379,6 +440,12 @@
     .cmswager-container {
         width: 100%;
         height: 100%;
+    }
+
+    .screenGames__custom-logo {
+        max-height: 42px;
+        max-width: min(280px, 42vw);
+        object-fit: contain;
     }
 
     .screenGames__overlay,
