@@ -90,12 +90,11 @@ const SocketConnector = (() => {
             }
             else if(user.type == "CASHIER"){
                 stompClientCashier.subscribe(
-                    "/topic/shop/" + `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`,
+                    "/topic/shop/" + `${conf.CLIENT_CODE}-${user.shopName}`,
                     message => {
                         let event_data = JSON.parse(message.body);
                         console.log("-> event listener cashier ",event_data);
-                        if(event_data.event == "ONLINE") EventManager.publish("CASHIER_CONNECT", {cashierName: event_data.cashierId.split('-')[1] })
-                        else if(event_data.event == "OFFLINE") EventManager.publish("CASHIER_DISCONNECTED", {cashierName: event_data.cashierId.split('-')[1] })
+                        
                     }
                 );
             }
