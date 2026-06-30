@@ -68,8 +68,8 @@ const SocketConnector = (() => {
                     message => {
                         let event_data = JSON.parse(message.body);
                         console.log("-> event listener cashier ",event_data);
-                        if(event_data.event == "ONLINE") EventManager.publish("CASHIER_CONNECT", {cashierName: event_data.cashierId.split('-')[1] })
-                        else if(event_data.event == "OFFLINE") EventManager.publish("CASHIER_DISCONNECTED", {cashierName: event_data.cashierId.split('-')[1] })
+                        if(event_data.event == "ONLINE") EventManager.publish("cashier_online", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
+                        else if(event_data.event == "OFFLINE") EventManager.publish("cashier_offline", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
                     }
                 );
                 stompClientCashier.subscribe(
@@ -77,8 +77,8 @@ const SocketConnector = (() => {
                     message => {
                         let event_data = JSON.parse(message.body);
                         console.log("-> event listener cashier on ready terminal ",event_data.event);
-                        if(event_data.event == "ONLINE") EventManager.publish("CASHIER_CONNECT", {cashierName: event_data.cashierId.split('-')[1] })
-                        else if(event_data.event == "OFFLINE") EventManager.publish("CASHIER_DISCONNECTED", {cashierName: event_data.cashierId.split('-')[1] })
+                        if(event_data.event == "ONLINE") EventManager.publish("cashier_online", {cashierName: event_data.cashierId.split('-')[1] ,state: event_data.event})
+                        else if(event_data.event == "OFFLINE") EventManager.publish("cashier_offline", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
                     }
                 );
                 stompClientCashier.publish({

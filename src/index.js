@@ -56,6 +56,7 @@ export { default as SportbookNovusPage } from './lib/pages/SportbookNovusPage.sv
 export { default as ESportPage } from './lib/pages/ESportPage.svelte';
 export { default as BalanceSocketListener } from './lib/BalanceSocketListener.svelte';
 export { default as UpdateBalanceListener } from './lib/UpdateBalanceListener.svelte';
+export { default as ModalCashierListener } from './lib/ModalCashierListener.svelte';
 export {default as RecoverPassword } from './lib/topbar/RecoverPassword.svelte';
 export {default as BillCollector} from './lib/BillCollector.svelte';
 export { default as AlertTokenExpired } from './lib/topbar/AlertRefreshToken.svelte';
