@@ -10,7 +10,7 @@
 
     EventManager.subscribe("CASHIER_DISCONNECTED", () => {
         showDisconnectedModal = true;
-        EventManager.publish("notify", { mode: "error", msg: t("msg.accessCashier")  });
+        EventManager.publish("notify", { mode: "warning", msg: t("msg.duplicatedSession")  });
     
     });
     EventManager.subscribe("CASHIER_CONNECT", () => {
