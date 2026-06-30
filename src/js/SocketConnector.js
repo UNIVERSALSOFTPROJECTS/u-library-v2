@@ -69,6 +69,7 @@ const SocketConnector = (() => {
                         console.log("-> message event cashier",message.body);
                         // message.body = {"event":"ONLINE","cashierId":"XLIV-cajero.jordi-5870722006786"}
                         let event_data = JSON.parse(message.body);
+                        console.log("-> event ",event_data.event);
                         if(event_data.event == "ONLINE") EventManager.publish("CASHIER_CONNECT", {cashierName: event_data.cashierId.split('-')[1] })
                         else if(event_data.event == "OFFLINE") EventManager.publish("CASHIER_DISCONNECTED", {cashierName: event_data.cashierId.split('-')[1] })
                     }

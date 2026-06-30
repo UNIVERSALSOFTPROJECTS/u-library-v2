@@ -12,10 +12,12 @@
         showDisconnectedModal = true;
         message = t("msg.duplicatedSession");
 
-        // Recarga después de 3 segundos
-        setTimeout(() => {
-            // location.reload();
-        }, 3000);
+    
+    });
+    EventManager.subscribe("CASHIER_CONNECT", () => {
+        showDisconnectedModal = false;
+        message = t("msg.duplicatedSession");
+
     });
 </script>
 

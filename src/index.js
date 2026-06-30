@@ -60,6 +60,7 @@ export {default as RecoverPassword } from './lib/topbar/RecoverPassword.svelte';
 export {default as BillCollector} from './lib/BillCollector.svelte';
 export { default as AlertTokenExpired } from './lib/topbar/AlertRefreshToken.svelte';
 export { default as DuplicatedSessionListener } from './lib/DuplicatedSessionListener.svelte';
+export { default as SessionCloseCashier } from './lib/SessionCloseCashier.svelte';
 export { default as DigtainWidget } from './lib/widgets/DigtainWidget.svelte';  
 export { default as DigtainSportBook } from './lib/sportbooks/DigtainSportBook.svelte';
 export {default as DropdownSearch} from './lib/dropdown/DropdownSearch.svelte';
