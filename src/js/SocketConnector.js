@@ -66,7 +66,7 @@ const SocketConnector = (() => {
                 stompClientCashier.subscribe(
                     "/topic/cashier/" + `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`,
                     message => {
-                        console.log("-> message event cashier",typeof message.body);
+                        console.log("-> message event cashier 1 ",typeof message.body);
                         // message.body = {"event":"ONLINE","cashierId":"XLIV-cajero.jordi-5870722006786"}
                         let event_data = JSON.parse(message.body);
                         console.log("-> event ",event_data.event);
