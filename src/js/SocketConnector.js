@@ -59,7 +59,7 @@ const SocketConnector = (() => {
             headersSocket = { username,type:user.type ,brokerURL: conf.WS_URL}
         }
         stompClientCashier = new Client({
-            brokerURL: conf.WS_URL2,
+            brokerURL: conf.WS_URL,
             connectHeaders: {...headersSocket} ,
             debug: function (str) { /*console.log(str);*/ },
             reconnectDelay: 2500,
