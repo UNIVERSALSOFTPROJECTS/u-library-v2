@@ -12,7 +12,7 @@ const SocketConnector = (() => {
         console.log(`Opening WS connection to LOBBYBFF`);
         stompClient = new Client({
             brokerURL: conf.WS_URL,
-            connectHeaders: { username,type:"TERMINAL",cashierId:conf.CLIENT_CODE+"-"+cashierName, brokerURL: conf.WS_URL},
+            connectHeaders: { username, brokerURL: conf.WS_URL},
             debug: function (str) { /*console.log(str);*/ },
             reconnectDelay: 2500,
         });
@@ -24,8 +24,7 @@ const SocketConnector = (() => {
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
-                } 
-                else if (/UPDATE_BALANCE/.test(msg)) {
+                } else if (/UPDATE_BALANCE/.test(msg)) {
                     EventManager.publish("update_balance", {newBalance: data.body})
                 }else if (data.body == "CASHIER_CONNECTED"){
                     EventManager.publish("CASHIER_CONNECT", {cashierName: cashierName})
@@ -51,13 +50,13 @@ const SocketConnector = (() => {
         stompClient.activate();
 
     }
-    function connectToLobbySocketCashier(username, cashier, conf) {
+    function connectToLobbySocketXlive(username, conf,user) {
         console.log(`Opening WS connection to LOBBYBFF`);
         let headersSocket = {};
-        if(cashier!=null){
-            headersSocket = { username, cashier ,type:"CASHIER",brokerURL: conf.WS_URL2}
+        if(user.type == 'TERMINAL'){
+            headersSocket = { username,type:user.type, cashierId:`${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}` ,brokerURL: conf.WS_URL}
         }else{
-            headersSocket = { username ,brokerURL: conf.WS_URL2}
+            headersSocket = { username,type:user.type ,brokerURL: conf.WS_URL}
         }
         stompClientCashier = new Client({
             brokerURL: conf.WS_URL2,
@@ -160,7 +159,7 @@ const SocketConnector = (() => {
 
 
     return {
-        connect, disconnectAll, setConfig, connectToLobbySocket, connectToLobbySocketCashier
+        connect, disconnectAll, setConfig, connectToLobbySocket, connectToLobbySocketXlive
     }
 
 })()

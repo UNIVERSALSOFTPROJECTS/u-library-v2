@@ -28,19 +28,7 @@ const UserHelper = (() => {
         if (u) {
             user = JSON.parse(u);
             
-            if(user.type == "TERMINAL" && user.cashier){
-                connectToLobbySocketTerminal(user, conf, onOpenNotification)
-            }else {
-                connectToLobbySocket(user, conf)
-            }
-
-            if(user.type == "TERMINAL" && user.cashier){
-                connectToLobbySocketTerminal2(user, conf)
-            }
-
-            if(user.type == "CASHIER"){
-                connectToLobbySocketCashier(user, conf)
-            }
+            connectToLobbySocketXlive(user, conf);
         }
         
         return user;
@@ -58,16 +46,12 @@ const UserHelper = (() => {
         //conecta al websocket.
     };
    
-    const connectToLobbySocketCashier = (user, conf) => {
+    const connectToLobbySocketXlive = (user, conf) => {
         if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
         const serial = user.serial || user.aggregator_token?.slice(0,13);
-        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`,null, conf);
+        SocketConnector.connectToLobbySocketXlive(`${conf.CLIENT_CODE}-${user.username}-${serial}`, conf,user);
     };
-    const connectToLobbySocketTerminal2 = (user, conf) => {
-        if (!conf.CLIENT_CODE) throw "CONF_CLIENT_CODE_NOT_FOUND";
-        const serial = user.serial || user.aggregator_token?.slice(0,13);
-        SocketConnector.connectToLobbySocketCashier(`${conf.CLIENT_CODE}-${user.username}-${serial}`, `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`, conf);
-    };
+    
     const checkDisconnectAll = ()=>{
         SocketConnector.disconnectAll();
     }
