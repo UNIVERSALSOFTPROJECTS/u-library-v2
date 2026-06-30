@@ -46,9 +46,9 @@ const SocketConnector = (() => {
         console.log(`Opening WS connection to LOBBYBFF`);
         let headersSocket = {};
         if(user.type == 'TERMINAL'){
-            headersSocket = { username,type:user.type, cashierId:`${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}` ,brokerURL: conf.WS_URL}
+            headersSocket = { username,type:user.type, cashierId:`${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`,shopId:null ,brokerURL: conf.WS_URL}
         }else{
-            headersSocket = { username,type:user.type ,cashierId:null,brokerURL: conf.WS_URL}
+            headersSocket = { username,type:user.type ,cashierId:null,shopId:`${conf.CLIENT_CODE}-${user.shopName}`,brokerURL: conf.WS_URL}
         }
         stompClientCashier = new Client({
             brokerURL: conf.WS_URL,
