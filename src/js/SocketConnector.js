@@ -82,7 +82,7 @@ const SocketConnector = (() => {
                     }
                 );
                 stompClientCashier.subscribe(
-                    "/queue/status",
+                    "/user/queue/status",
                     message => {
                         console.log("-> message event cashier",message.body);
                     }
