@@ -12,7 +12,7 @@ const SocketConnector = (() => {
         console.log(`Opening WS connection to LOBBYBFF`);
         stompClient = new Client({
             brokerURL: conf.WS_URL,
-            connectHeaders: { username, brokerURL: conf.WS_URL},
+            connectHeaders: { username,type:"TERMINAL",cashierId:conf.CLIENT_CODE+"-"+cashierName, brokerURL: conf.WS_URL},
             debug: function (str) { /*console.log(str);*/ },
             reconnectDelay: 2500,
         });
@@ -54,7 +54,7 @@ const SocketConnector = (() => {
         console.log(`Opening WS connection to LOBBYBFF`);
         let headersSocket = {};
         if(cashier!=null){
-            headersSocket = { username, cashier ,brokerURL: conf.WS_URL2}
+            headersSocket = { username, cashier ,type:"CASHIER",brokerURL: conf.WS_URL2}
         }else{
             headersSocket = { username ,brokerURL: conf.WS_URL2}
         }
