@@ -26,6 +26,7 @@
     let loadWithdrawal = false;
     let infoUser = {};
     let infoAccount = { adicional:"", numero_cta:"", banco:"" };
+    let infoExtra = "";
     let id_banca  = configWithdrawal.id_banca;
     let id_ca  = configWithdrawal.id_ca;
     let isLocked = true;
@@ -34,6 +35,9 @@
     const inputJustText = inputUtils.justTextValidator;
     const inputJustNumbers = inputUtils.justNumbersValidator;
     const inputAccountBank = inputUtils.validateAccountBank;
+
+    $: accountOptions = typeAccount.filter((a) => a.id);
+    $: showAdditionalInfo = typeAccount.some((a) => a.additionalInfo);
 
     const detectLockedDeposit = () => {
         if (id_banca.length === 0 && id_ca.length === 0) {
@@ -72,6 +76,9 @@
         // esto es nmber directo infoUser.balance
         if(stringToNumber(amount) > infoUser.balance) return onError(t("withdrawal.lowBalance"));
         let info = infoAccount.adicional || infoAccount.banco;
+        if (showAdditionalInfo && accountOptions.length > 0 && infoExtra?.trim()) {
+            info = `${infoAccount.adicional} - ${infoExtra.trim()}`;
+        }
         let account = infoAccount.numero_cta;
         let bank = infoAccount.banco;
         let prefixPayMobile = typeView === "payMobile"?"509":"";
@@ -235,28 +242,34 @@
                             <!--  -->
                             {:else if dataType == "phoneNumber"}
                             <p>{t('withdrawal.phoneNumber')}:</p>
+                            {:else if accountOptions.length > 0}
+                            <p>{t('deposit.chooseTypeBankAccount')}</p>
                             {:else}
                             <p>{t('withdrawal.additionalInformation')}:</p>
                         {/if}
                         {#if formVerification}
                         <p class="withdrawal__text--resalt">{t('withdrawal.mandatoryVerification')}</p>
+                        {:else if showAdditionalInfo && accountOptions.length > 0 && infoAccount.banco != "YAPE" && infoAccount.banco != "PLIN" && typeView !== "R4"}
+                        <p>{t('withdrawal.additionalInformation')}:</p>
                         {:else}
                         <p></p>
                         {/if}
-                        {#if typeAccount.length == 0}      
+                        {#if accountOptions.length == 0}      
                             <input type="text" class="ipt" bind:value={infoAccount.adicional}>
                         {:else if  infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN" || typeView === "R4"}   
                             <!-- <div></div> -->
                         {:else}
                              <select class="slc" bind:value={infoAccount.adicional}>
                                 <option value="" disabled>{t('deposit.chooseTypeBankAccount')}</option>
-                                {#each typeAccount as account}
+                                {#each accountOptions as account}
                                     <option value={account.id} >{account.name}</option>
                                 {/each}
                             </select>
                         {/if}
                         {#if formVerification}
                             <a class="btn verification" href={formVerification} target="_blank">{t('deposit.identityVerification')}</a>
+                        {:else if showAdditionalInfo && accountOptions.length > 0 && infoAccount.banco != "YAPE" && infoAccount.banco != "PLIN" && typeView !== "R4"}
+                            <input type="text" class="ipt" bind:value={infoExtra} placeholder={t('withdrawal.additionalInformation')}>
                         {/if}
                         {/if}
 

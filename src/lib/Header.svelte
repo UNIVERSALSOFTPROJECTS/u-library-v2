@@ -146,7 +146,8 @@
             typeAccount: [
                 { id:"Corriente", name:"Corriente" },
                 { id:"Ahorros", name:"Ahorros" },
-            ], 
+                { additionalInfo: true },
+            ],
         linksChats: [],
     };
 
