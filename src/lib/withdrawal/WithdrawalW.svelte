@@ -269,7 +269,7 @@
                         {#if formVerification}
                             <a class="btn verification" href={formVerification} target="_blank">{t('deposit.identityVerification')}</a>
                         {:else if showAdditionalInfo && accountOptions.length > 0 && infoAccount.banco != "YAPE" && infoAccount.banco != "PLIN" && typeView !== "R4"}
-                            <input type="text" class="ipt" bind:value={infoExtra} placeholder={t('withdrawal.additionalInformation')}>
+                            <input type="text" class="ipt" bind:value={infoExtra}>
                         {/if}
                         {/if}
 
