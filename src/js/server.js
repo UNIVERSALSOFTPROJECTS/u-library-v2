@@ -186,6 +186,16 @@ const ServerConnection = (() => {
             const response = await axios.post(`${conf.API_KS}/sportbook/guest-launch`, request, { headers });
             return response.data;
         },
+        openAuthenticatedSportbook: async (gameapi_url, payload = {}) => {
+            const params = new URLSearchParams({
+                sessionid: payload.sessionToken || payload.token || "",
+                m: payload.mode || "wb",
+                sport_view: payload.sportView || "sport",
+                lang: payload.lang || "es",
+            });
+            const response = await axios.get(`${gameapi_url}/sportbook/launch?${params.toString()}`, { headers });
+            return response.data;
+        },
         openCmsWagerGame: async (sessionToken, gameId, mode) => {
             const response = await axios.get(
                 `${conf.GAMEAPI_URL}/launch?gameid=${gameId}&p=cmsw&b=CMSWager&m=${mode}&sessionid=${sessionToken}&r=url&sport_view=sport&lang=es`,
