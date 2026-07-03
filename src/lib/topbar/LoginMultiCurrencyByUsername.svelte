@@ -22,6 +22,9 @@
 
   export let refreshConf;
 
+  const isBetwsingDomain = window.location.hostname.includes("betwsing");
+  const currencyOptions = orgByCurrency ? Object.keys(orgByCurrency) : [];
+
   let password = "";
   let username = "";
   let loadLogin = false;
@@ -35,6 +38,24 @@
   let userGmail;
 
   let orgMultiCurrency = (orgByCurrency ? localStorage.getItem("org") || "" : "");
+  let selectedCurrency = "";
+
+  const getCurrencyByOrg = (org) => {
+    return currencyOptions.find((currency) => orgByCurrency[currency] === org) || "";
+  };
+
+  const syncCurrencySelection = async (shouldRefresh = false) => {
+    if (!orgByCurrency || isBetwsingDomain) return;
+    const org = orgByCurrency[selectedCurrency];
+    if (!org) return;
+    localStorage.setItem("org", org);
+    orgMultiCurrency = org;
+    if (shouldRefresh && refreshConf) await refreshConf();
+  };
+
+  $: if (orgByCurrency && !isBetwsingDomain && !selectedCurrency) {
+    selectedCurrency = getCurrencyByOrg(orgMultiCurrency) || currencyOptions[0] || "";
+  }
 
   const dataPassword = (e) => {
     password = e.target.value;
@@ -55,6 +76,7 @@
   }
 
   onMount(() => {
+    syncCurrencySelection();
     loadScript("https://accounts.google.com/gsi/client")
       .then((data) => {
         console.log("Script loaded successfully", data);
@@ -104,7 +126,7 @@
       if (location.href.includes("terminal")) {
         userType = 2;
       }
-      if (orgByCurrency) await detectCurrencyByUsername(username);
+      if (orgByCurrency && isBetwsingDomain) await detectCurrencyByUsername(username);
       if (userGateway == "neco") data = await ServerConnection.users.login(username, password, userType, turnstileToken, orgMultiCurrency);
       else data = await ServerConnection.u_user.login(username, password); // for demo-platform or platform universalsoft
       data = data.data;
@@ -238,6 +260,13 @@
         on:click={togglePasswordHide}
       ></button>
     </div>
+    {#if orgByCurrency && !isBetwsingDomain}
+      <select class="ipt" bind:value={selectedCurrency} on:change={() => syncCurrencySelection(true)}>
+        {#each currencyOptions as currency}
+          <option value={currency}>{currency}</option>
+        {/each}
+      </select>
+    {/if}
     {#if !isLocalhost && siteKey && !turnstileError}
       <Turnstile siteKey={siteKey} on:callback={(e) => handleVerify(e.detail)}/>
       <button type="button" class="btn login" disabled={loadLogin || !isTurnstileReady || !isVerified || turnstileError} on:click={loginClick}>
