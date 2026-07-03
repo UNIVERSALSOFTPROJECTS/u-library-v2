@@ -163,7 +163,7 @@
                 return onError(t("msg.incorrectCodeAgent"));
             }
         }
-        if(isMultipleCurrencies & && (!document || !currency)) return onError(t("msg.allObligatory"));
+        if(isMultipleCurrencies && isBetwsingDomain && (!document || !currency)) return onError(t("msg.allObligatory"));
         try {
             loadSignup = true;
             if(typeSignup === "codeAgent"){
