@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy, onMount } from "svelte";
+  import { createEventDispatcher, onDestroy, onMount } from "svelte";
   import ScreenGamesCmsWager from "../modals/ScreenGamesCmsWager.svelte";
   import ut from '../../js/util';
   import backend from '../../js/server'
@@ -15,6 +15,8 @@
   export let lang = 'es';
   export let CLIENT_CODE;
   export let clientCode;
+
+  const dispatch = createEventDispatcher();
 
   let sportbookskin = localStorage.getItem("sportbookversion") || "";
   console.log(user,"sportbook");
@@ -216,6 +218,11 @@
       gameId: options?.gameid || cmsw_id,
       mode,
     };
+  }
+
+  function handleCmsWagerTerminalEvent(event) {
+    if (!event?.detail?.type) return;
+    dispatch("terminalEvent", event.detail);
   }
 
   async function openGuestSportbook() {
@@ -472,6 +479,7 @@ function RESELLER (params) {
     options_launch={{}}
     launchDescriptor={authenticatedLaunchResponse}
     updateBalance={() => {}}
+    on:terminalEvent={handleCmsWagerTerminalEvent}
   />
 {:else if userState != "loggedIn" && guestLaunchResponse?.launchType == GUEST_LAUNCH_CMSWAGER}
   <ScreenGamesCmsWager
@@ -480,6 +488,7 @@ function RESELLER (params) {
     options_launch={{}}
     launchDescriptor={guestLaunchResponse}
     updateBalance={() => {}}
+    on:terminalEvent={handleCmsWagerTerminalEvent}
   />
 {:else if cmsWagerLaunchOptions}
   <ScreenGamesCmsWager
@@ -487,6 +496,7 @@ function RESELLER (params) {
     platform={"cmswager"}
     options_launch={cmsWagerLaunchOptions}
     updateBalance={() => {}}
+    on:terminalEvent={handleCmsWagerTerminalEvent}
   />
 {:else}
   <div class="sportbook-content">
