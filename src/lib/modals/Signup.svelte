@@ -28,6 +28,7 @@
     let isMultipleCurrencies = configSignup.isMultipleCurrencies || false;
     let isCheckedAfiliated = isCodeAgentSwitch;
     let isCheckedVertification = true;
+    const isBetwsingDomain = window.location.hostname.includes("betwsing");
     //loading
     let loadSms;
     let loadSignup;
@@ -47,7 +48,7 @@
     //este se detecta al enviar codigo de agente por sendSMS
     let phone;
     let smscode;
-    let doctype = isMultipleCurrencies ? "CI" : "";
+    let doctype = (isMultipleCurrencies && isBetwsingDomain) ? "CI" : "";
     let document;
     let term_conditions;
     let currency;
@@ -56,6 +57,7 @@
     let routePDF = assetsPDF(platform,route);
     let orgMultiCurrency;
     let currencyLocked = false;
+
 
     //validations imput -utils JS
     const inputJustText = inputUtils.justTextValidator;
@@ -92,17 +94,19 @@
     }
 
     async function preRegisterClick(){
-        if(isMultipleCurrencies){
-            if(!document || !currency) return onError(t("msg.allObligatory"));
-            username = `${getCurrencyPrefixById(currency)}${document}`;
+        if(isMultipleCurrencies ){
+            if(isBetwsingDomain){
+                if(!document || !currency) return onError(t("msg.allObligatory"));
+                username = `${getCurrencyPrefixById(currency)}${document}`;
+            }
             if (currency) {
-               if (currency == "1") orgMultiCurrency = "BTSW";
-                else if (currency == "3") orgMultiCurrency = "BWDA";
-                else orgMultiCurrency = "";
-                
-                if (!orgMultiCurrency) return onError(t("msg.contactSupport"));
-                localStorage.setItem("org", orgMultiCurrency);
-                await refreshConf();
+                const selectedCurrency = currencies.find(c => c.id == currency);
+                orgMultiCurrency = selectedCurrency?.org || "";
+
+                if (orgMultiCurrency) {
+                    localStorage.setItem("org", orgMultiCurrency);
+                    await refreshConf();
+                }
             }
         }
         if(!name || !date || !email || !username || !password || !phone || 
@@ -159,7 +163,7 @@
                 return onError(t("msg.incorrectCodeAgent"));
             }
         }
-        if(isMultipleCurrencies && (!document || !currency)) return onError(t("msg.allObligatory"));
+        if(isMultipleCurrencies & && (!document || !currency)) return onError(t("msg.allObligatory"));
         try {
             loadSignup = true;
             if(typeSignup === "codeAgent"){
@@ -213,12 +217,12 @@
     <b>{t("signup.dataAccess")}</b>
     <p class="signup__text--resalt">{t("signup.loguedEmailUser")}</p>
     <form><input type="email" class="ipt icon--email" placeholder={t("signup.email")} autocomplete="off" bind:value={email}></form>
-    {#if isMultipleCurrencies}
+    {#if isMultipleCurrencies && isBetwsingDomain}
         <p>{t("signup.identityCard")}</p>
         <form><input type="text" class="ipt" placeholder={t("signup.identityCard")} autocomplete="off" bind:value={document} on:input={inputJustNumbers}></form>
         <p class="signup__text--hint">{t("signup.identityCardHint")}</p>
     {/if}
-    <form><input hidden={isMultipleCurrencies} type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}></form>
+    <form><input hidden={isMultipleCurrencies && isBetwsingDomain} type="text" class="ipt icon--user" autocapitalize="off" placeholder={t("signup.username")} autocomplete="off" bind:value={username} on:input={notWhiteSpace}></form>
     <div class="signup__container--pass">
         <InputPassword bind:password {t}/>
     </div>
