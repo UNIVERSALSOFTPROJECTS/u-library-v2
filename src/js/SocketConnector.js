@@ -21,9 +21,18 @@ const SocketConnector = (() => {
             console.log("onConnect Socket success");
             stompClient.subscribe('/user/queue/messages', (data) => {
                 const msg = data.body;
+                console.log("RAW_MSG:", msg);
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
+                } else if (/UPDATE_BALANCE/.test(msg)) {
+                    console.log("STEP1: UPDATE_BALANCE received:", msg);
+                    const balance = msg.replace("UPDATE_BALANCE_", "");
+                    console.log("STEP2: balance extracted:", balance);
+                    EventManager.publish("update_balance", {newBalance: balance})
+                    console.log("STEP3: Event published");
+                } else {
+                    console.log("NO_MATCH:", msg);
                 }
             });
         };
@@ -61,6 +70,19 @@ const SocketConnector = (() => {
             console.log("onConnect Socket success");
             stompClientCashier.subscribe('/user/queue/messages', (data) => {
                 const msg = data.body;
+                console.log("RAW_MSG_XLIVE:", msg);
+                if (data.body == "NEW_SESSION_OPENED") {
+                    console.log("NEW_SESSION_OPENED");
+                    EventManager.publish("duplicated_session", {})
+                } else if (/UPDATE_BALANCE/.test(msg)) {
+                    console.log("STEP1_XLIVE: UPDATE_BALANCE received:", msg);
+                    const balance = msg.replace("UPDATE_BALANCE_", "");
+                    console.log("STEP2_XLIVE: balance extracted:", balance);
+                    EventManager.publish("update_balance", {newBalance: balance})
+                    console.log("STEP3_XLIVE: Event published");
+                } else {
+                    console.log("NO_MATCH_XLIVE:", msg);
+                }
             });
             if(user.type == 'TERMINAL'){
                 stompClientCashier.subscribe(
@@ -92,7 +114,7 @@ const SocketConnector = (() => {
                     message => {
                         let event_data = JSON.parse(message.body);
                         if('new_balance' in event_data){
-                            EventManager.publish("update_balance",{new_balance:event_data.new_balance})
+                            EventManager.publish("update_balance",{newBalance:event_data.new_balance})
                         }
                         
                     }

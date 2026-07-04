@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy, onMount } from "svelte";
+  import { createEventDispatcher, onDestroy, onMount } from "svelte";
   import ScreenGamesCmsWager from "../modals/ScreenGamesCmsWager.svelte";
   import ut from '../../js/util';
   import backend from '../../js/server'
@@ -16,12 +16,15 @@
   export let CLIENT_CODE;
   export let clientCode;
 
+  const dispatch = createEventDispatcher();
+
   let sportbookskin = localStorage.getItem("sportbookversion") || "";
   console.log(user,"sportbook");
   
 
   let sportbookGameUrl = '';
   let guestLaunchResponse = null;
+  let authenticatedLaunchResponse = null;
   let cmsWagerLaunchOptions = null;
   let guestLaunchError = "";
   let mode = ut.isMobile() ? "mb" : "wb";
@@ -181,12 +184,24 @@
   async function openSport() {
     guestLaunchError = "";
     guestLaunchResponse = null;
+    authenticatedLaunchResponse = null;
     cmsWagerLaunchOptions = null;
 
-    if (userState != "loggedIn") {
-      const isGuestLaunchHandled = await openGuestSportbook();
-      if (isGuestLaunchHandled) {
-        return;
+    const isCmsWagerSportbook = options?.gameid == cmsw_id;
+
+    if (isCmsWagerSportbook) {
+      if (userState == "loggedIn") {
+        const isAuthenticatedLaunchHandled = await openAuthenticatedSportbook();
+        if (isAuthenticatedLaunchHandled) {
+          return;
+        }
+      }
+
+      if (userState != "loggedIn") {
+        const isGuestLaunchHandled = await openGuestSportbook();
+        if (isGuestLaunchHandled) {
+          return;
+        }
       }
     }
 
@@ -207,6 +222,11 @@
       gameId: options?.gameid || cmsw_id,
       mode,
     };
+  }
+
+  function handleCmsWagerTerminalEvent(event) {
+    if (!event?.detail?.type) return;
+    dispatch("terminalEvent", event.detail);
   }
 
   async function openGuestSportbook() {
@@ -243,6 +263,47 @@
       guestLaunchResponse = null;
       guestLaunchError = error?.message || "Guest sportbook launch failed";
       console.log("Guest sportbook fallback", error);
+      return false;
+    }
+  }
+
+  async function openAuthenticatedSportbook() {
+    try {
+      const sessionToken = options?.gameToken;
+      if (!sessionToken) {
+        return false;
+      }
+
+      const response = await backend.game.openAuthenticatedSportbook(GAMEAPI_URL, {
+        sessionToken,
+        sportView: active_view == "sportbooklive" ? "live" : "sport",
+        lang,
+        mode,
+      });
+
+      if (!response?.success || !response?.launchType) {
+        throw new Error(response?.message || "Invalid authenticated sportbook response");
+      }
+
+      authenticatedLaunchResponse = response;
+
+      if (
+        response.launchType == GUEST_LAUNCH_IFRAME_URL ||
+        response.launchType == GUEST_LAUNCH_HOSTED_VIEW_URL
+      ) {
+        sportbookGameUrl = response?.payload?.url || "";
+        return !!sportbookGameUrl;
+      }
+
+      if (response.launchType == GUEST_LAUNCH_CMSWAGER) {
+        sportbookGameUrl = "";
+        return true;
+      }
+
+      throw new Error(`Unsupported authenticated launch type: ${response.launchType}`);
+    } catch (error) {
+      authenticatedLaunchResponse = null;
+      console.log("Authenticated sportbook fallback", error);
       return false;
     }
   }
@@ -415,13 +476,23 @@ function RESELLER (params) {
   });
 </script>
 
-{#if userState != "loggedIn" && guestLaunchResponse?.launchType == GUEST_LAUNCH_CMSWAGER}
+{#if authenticatedLaunchResponse?.launchType == GUEST_LAUNCH_CMSWAGER}
+  <ScreenGamesCmsWager
+    open={true}
+    platform={authenticatedLaunchResponse?.provider || "cmswager"}
+    options_launch={{}}
+    launchDescriptor={authenticatedLaunchResponse}
+    updateBalance={() => {}}
+    on:terminalEvent={handleCmsWagerTerminalEvent}
+  />
+{:else if userState != "loggedIn" && guestLaunchResponse?.launchType == GUEST_LAUNCH_CMSWAGER}
   <ScreenGamesCmsWager
     open={true}
     platform={guestLaunchResponse?.provider || "cmswager"}
     options_launch={{}}
     launchDescriptor={guestLaunchResponse}
     updateBalance={() => {}}
+    on:terminalEvent={handleCmsWagerTerminalEvent}
   />
 {:else if cmsWagerLaunchOptions}
   <ScreenGamesCmsWager
@@ -429,6 +500,7 @@ function RESELLER (params) {
     platform={"cmswager"}
     options_launch={cmsWagerLaunchOptions}
     updateBalance={() => {}}
+    on:terminalEvent={handleCmsWagerTerminalEvent}
   />
 {:else}
   <div class="sportbook-content">
