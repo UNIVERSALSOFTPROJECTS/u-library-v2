@@ -25,8 +25,11 @@ const SocketConnector = (() => {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
                 } else if (/UPDATE_BALANCE/.test(msg)) {
+                    console.log("STEP1: UPDATE_BALANCE received:", msg);
                     const balance = msg.replace("UPDATE_BALANCE_", "");
+                    console.log("STEP2: balance extracted:", balance);
                     EventManager.publish("update_balance", {newBalance: balance})
+                    console.log("STEP3: Event published");
                 }
             });
         };

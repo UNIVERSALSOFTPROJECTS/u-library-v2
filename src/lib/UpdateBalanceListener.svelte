@@ -16,6 +16,7 @@
         console.log("onChangeBalance: ", onChangeBalance);     
         // notify.setEM(EventManager);
         EventManager.subscribe("update_balance", (data)=>{
+            console.log("STEP4: UpdateBalanceListener received:", data);
             // let msg = "SALDO ACTUALIZADO";
             // notify.success(msg);
             onChangeBalance(data);
