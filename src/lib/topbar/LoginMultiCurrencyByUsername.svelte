@@ -261,7 +261,7 @@
       ></button>
     </div>
     {#if orgByCurrency && !isBetwsingDomain}
-      <select class="ipt" bind:value={selectedCurrency} on:change={() => syncCurrencySelection(true)}>
+      <select class="slc" bind:value={selectedCurrency} on:change={() => syncCurrencySelection(true)}>
         {#each currencyOptions as currency}
           <option value={currency}>{currency}</option>
         {/each}
