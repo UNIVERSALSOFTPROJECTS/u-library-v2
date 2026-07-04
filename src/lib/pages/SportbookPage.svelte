@@ -187,17 +187,21 @@
     authenticatedLaunchResponse = null;
     cmsWagerLaunchOptions = null;
 
-    if (userState == "loggedIn") {
-      const isAuthenticatedLaunchHandled = await openAuthenticatedSportbook();
-      if (isAuthenticatedLaunchHandled) {
-        return;
-      }
-    }
+    const isCmsWagerSportbook = options?.gameid == cmsw_id;
 
-    if (userState != "loggedIn") {
-      const isGuestLaunchHandled = await openGuestSportbook();
-      if (isGuestLaunchHandled) {
-        return;
+    if (isCmsWagerSportbook) {
+      if (userState == "loggedIn") {
+        const isAuthenticatedLaunchHandled = await openAuthenticatedSportbook();
+        if (isAuthenticatedLaunchHandled) {
+          return;
+        }
+      }
+
+      if (userState != "loggedIn") {
+        const isGuestLaunchHandled = await openGuestSportbook();
+        if (isGuestLaunchHandled) {
+          return;
+        }
       }
     }
 
