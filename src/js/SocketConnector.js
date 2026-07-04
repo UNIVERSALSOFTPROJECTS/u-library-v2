@@ -24,6 +24,9 @@ const SocketConnector = (() => {
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
+                } else if (/UPDATE_BALANCE/.test(msg)) {
+                    const balance = msg.replace("UPDATE_BALANCE_", "");
+                    EventManager.publish("update_balance", {newBalance: balance})
                 }
             });
         };
@@ -92,7 +95,7 @@ const SocketConnector = (() => {
                     message => {
                         let event_data = JSON.parse(message.body);
                         if('new_balance' in event_data){
-                            EventManager.publish("update_balance",{new_balance:event_data.new_balance})
+                            EventManager.publish("update_balance",{newBalance:event_data.new_balance})
                         }
                         
                     }
