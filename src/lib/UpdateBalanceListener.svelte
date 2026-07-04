@@ -12,8 +12,9 @@
     
 
     onMount( ()=>{
-        console.log("user: ", user);
-        console.log("onChangeBalance: ", onChangeBalance);     
+        console.log("ONMOUNT_UBL: mounted", user?.username);
+        console.log("ONMOUNT_UBL: onChangeBalance", !!onChangeBalance);
+        console.log("ONMOUNT_UBL: EventManager", !!EventManager);
         // notify.setEM(EventManager);
         EventManager.subscribe("update_balance", (data)=>{
             console.log("STEP4: UpdateBalanceListener received:", data);
