@@ -27,7 +27,6 @@
     let isCodeAgentSwitch = configSignup.isCodeAgentSwitch || false;
     let isMultipleCurrencies = configSignup.isMultipleCurrencies || false;
     let isCheckedAfiliated = isCodeAgentSwitch;
-    let isCheckedVertification = true;
     const isBetwsingDomain = window.location.hostname.includes("betwsing");
     //loading
     let loadSms;
@@ -189,10 +188,6 @@
         agentCodeType = agentCodeType == "codeAgent"?"nameAfiliated":"codeAgent";
         codeAgent = "";
      }
-     const toggleCodeVerificationType = () =>{ 
-        isCheckedVertification = !isCheckedVertification;
-        channel = isCheckedVertification ? "email":"sms";
-     }
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
     onMount(()=>{
@@ -274,11 +269,6 @@
     {/if}
     {#if preRegister} 
     <b>{t("signup.verification")}</b>
-    <div>
-        <label for="vericitation">SMS</label>
-        <input type="checkbox" id="vericitation" class="switch" bind:checked={isCheckedVertification} on:click={toggleCodeVerificationType}>
-        <label for="vericitation">E-mail</label>
-    </div>
     <div class="signup__sms">
         <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
             {#if activeSMS}
