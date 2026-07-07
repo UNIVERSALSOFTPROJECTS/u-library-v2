@@ -27,8 +27,7 @@
     let isCodeAgentSwitch = configSignup.isCodeAgentSwitch || false;
     let isMultipleCurrencies = configSignup.isMultipleCurrencies || false;
     let isCheckedAfiliated = isCodeAgentSwitch;
-    let onlySms = configSignup.onlySms || false;
-    let isCheckedVertification = !onlySms;
+    let isCheckedVertification = true;
     const isBetwsingDomain = window.location.hostname.includes("betwsing");
     //loading
     let loadSms;
@@ -53,7 +52,7 @@
     let document;
     let term_conditions;
     let currency;
-    let channel = onlySms ? "sms" : "email";
+    let channel = "email";
     let route = detectIdiomPage(t("idiom"));
     let routePDF = assetsPDF(platform,route);
     let orgMultiCurrency;
@@ -275,13 +274,11 @@
     {/if}
     {#if preRegister} 
     <b>{t("signup.verification")}</b>
-    {#if !onlySms}
     <div>
         <label for="vericitation">SMS</label>
         <input type="checkbox" id="vericitation" class="switch" bind:checked={isCheckedVertification} on:click={toggleCodeVerificationType}>
         <label for="vericitation">E-mail</label>
     </div>
-    {/if}
     <div class="signup__sms">
         <button type="button" class="btn validsms" on:click={preRegisterClick} disabled={loadSms}>
             {#if activeSMS}
