@@ -14,12 +14,26 @@
     let exampleDoctype;
     let selectDoctype;
     let isDataComplete =  accountUser.dataComplete;
-    
+
+    // Ajusta estos patrones segun las reglas exactas de cada tipo de documento
+    const documentValidators = {
+        "Cédula": /^\d{6,10}$/,
+        "Cedula de Extrajeria": /^\d{6,10}$/,
+        "Pasaporte": /^[A-Za-z0-9]{5,15}$/,
+        "DNI": /^\d{8}$/,
+        "CI": /^\d{6,10}$/,
+    };
+
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
     const saveMyAccount = async()  =>{
         if(!accountUser.document || !accountUser.address || !accountUser.city){
             return onError(t("msg.allObligatory"));
+        }
+        const doctype = selectDoctype || accountUser.doctype;
+        const validator = documentValidators[doctype];
+        if (validator && !validator.test(accountUser.document)) {
+            return onError(t("msg.documentInvalid"));
         }
         try {
             loadUserData = true;

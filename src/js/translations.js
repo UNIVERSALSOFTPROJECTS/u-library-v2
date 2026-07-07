@@ -143,6 +143,7 @@ export default {
     "msg.lostConnection": "Se perdió la conexión a internet",
     "msg.refresh": "Actualizar",
     "msg.phoneInvalid": "Número de teléfono invalido!",
+    "msg.documentInvalid": "Número de documento inválido!",
     "msg.withdrawalRequestSend": "Solicitud de retiro enviada!",
 
 
@@ -539,6 +540,7 @@ export default {
   "msg.lostConnection": "Connexion internet perdue",
   "msg.refresh": "Actualiser",
   "msg.phoneInvalid": "Numéro de téléphone invalide !",
+  "msg.documentInvalid": "Numéro de document invalide !",
   "msg.withdrawalRequestSend": "Demande de retrait envoyée !",
 
     //========== VLT NOTIFICATION MESSAGES ==========
@@ -879,6 +881,7 @@ export default {
     "msg.lostConnection": "A conexão com a Internet foi perdida",
     "msg.refresh": "Atualizar",
     "msg.phoneInvalid": "Número de telefone inválido!",
+    "msg.documentInvalid": "Número de documento inválido!",
     "msg.withdrawalRequestSend": "Pedido de saque enviado!",
     //========== VLT NOTIFICATION MESSAGES ==========
     "msg.lowBalance": "EQUILÍBRIO INSUFICIENTE",
@@ -1320,6 +1323,7 @@ export default {
     "msg.lostConnection": "Internet connection lost",
     "msg.refresh": "Refresh",
     "msg.phoneInvalid": "Invalid phone number!",
+    "msg.documentInvalid": "Invalid document number!",
     "msg.withdrawalRequestSend": "Withdrawal request sent!",
     "msg.lowBalance": "INSUFFICIENT BALANCE",
     "msg.successfulProcess": "¡Saldo acreditado con exito! Check your balance and if it is not updated, reload the game.",
