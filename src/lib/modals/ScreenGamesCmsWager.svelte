@@ -312,20 +312,43 @@
 
         console.info("CMSWager message received", {
             origin: event?.origin,
+            sourceExists: !!event?.source,
             dataType: typeof rawData,
             parsedFromString,
+            rawData,
             payload,
         });
 
         if (messageType === "ticket:placed" || messageType === "action:openCheckTicket") {
+            console.info("CMSWager message accepted", {
+                messageType,
+                messageEvent,
+                payload,
+            });
             emitTerminalEvent(messageType, payload);
             return;
         }
 
         if (messageEvent === "exit") {
+            console.info("CMSWager message accepted", {
+                messageType,
+                messageEvent,
+                payload,
+            });
             if (!embedded) closeModal();
         } else if (messageEvent === "reload") {
+            console.info("CMSWager message accepted", {
+                messageType,
+                messageEvent,
+                payload,
+            });
             reloadCmsWager();
+        } else {
+            console.info("CMSWager message ignored", {
+                messageType,
+                messageEvent,
+                payload,
+            });
         }
     }
 
