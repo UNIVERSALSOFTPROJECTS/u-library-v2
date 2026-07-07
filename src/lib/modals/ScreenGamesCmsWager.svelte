@@ -87,6 +87,11 @@
             clientApi: params?.clientApi || "",
             logo: params?.logo || "",
         };
+        console.info("CMSWager terminal config applied", {
+            hasExtToken: !!terminalConfig.exttoken,
+            clientApi: terminalConfig.clientApi,
+            hasLogo: !!terminalConfig.logo,
+        });
     }
 
     function emitTerminalEvent(type, payload) {
