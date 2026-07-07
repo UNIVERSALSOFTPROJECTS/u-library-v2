@@ -289,9 +289,33 @@
     }
 
     function handleMessage(event) {
-        const payload = event?.data || {};
+        const rawData = event?.data;
+        let payload = rawData || {};
+        let parsedFromString = false;
+
+        if (typeof rawData === "string") {
+            try {
+                payload = JSON.parse(rawData);
+                parsedFromString = true;
+            } catch (error) {
+                payload = rawData;
+                console.warn("CMSWager message parse failed", {
+                    origin: event?.origin,
+                    rawData,
+                    error: error?.message || error,
+                });
+            }
+        }
+
         const messageType = payload?.type;
         const messageEvent = payload?.event;
+
+        console.info("CMSWager message received", {
+            origin: event?.origin,
+            dataType: typeof rawData,
+            parsedFromString,
+            payload,
+        });
 
         if (messageType === "ticket:placed" || messageType === "action:openCheckTicket") {
             emitTerminalEvent(messageType, payload);
