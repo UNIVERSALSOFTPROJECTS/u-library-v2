@@ -12,6 +12,8 @@
   let selectedOption = '';
   let isDropdownOpen = false;
   let isDropdownOpen2 = false;
+  let sportbookBtnIsDisabled = false;
+  let sportbookBtnTimeout;
   
   function toggleDropdown() {
     isDropdownOpen = !isDropdownOpen;
@@ -19,13 +21,25 @@
   function toggleDropdown2() {
     isDropdownOpen2 = !isDropdownOpen2;
   }
+
+  function lockSportbookButtons() {
+    sportbookBtnIsDisabled = true;
+    clearTimeout(sportbookBtnTimeout);
+    sportbookBtnTimeout = setTimeout(() => {
+      sportbookBtnIsDisabled = false;
+    }, 2500);
+  }
   
   function selectOption(option) {
+    if (sportbookBtnIsDisabled) return;
+    lockSportbookButtons();
     onCategoryChange("sportbook",option);
     isDropdownOpen = false;
   }
   function selectOption2(option) {
+    if (sportbookBtnIsDisabled) return;
     console.log("select option:",option);
+    lockSportbookButtons();
     onCategoryChange("sportbooklive",option);
     isDropdownOpen2 = false;
   }
@@ -68,15 +82,15 @@
 
     {#if isDropdownOpen}
         <div class="dropdown-menu">
-          <button class="btn cahs" on:click={() => selectOption({gameid:"wintech_gaming"})}>
+          <button disabled={sportbookBtnIsDisabled} class="btn cahs" on:click={() => selectOption({gameid:"wintech_gaming"})}>
             <div class="cashout">Nuevo cashout</div>
            <p class="depor1"> Deporte 1</p>
           </button>
-          <button class="btn" on:click={() => selectOption({gameid:"8042022_digitain"})}> <p class="depor2"> Deporte 2</p></button>
+          <button disabled={sportbookBtnIsDisabled} class="btn" on:click={() => selectOption({gameid:"8042022_digitain"})}> <p class="depor2"> Deporte 2</p></button>
         </div>
       {:else}
         <div class="dropdown">
-          <button  on:click={toggleDropdown} class="li-game {active_view=='sportbook'?'u-category-select':''}">
+          <button disabled={sportbookBtnIsDisabled || active_view=='sportbook'} on:click={toggleDropdown} class="li-game {active_view=='sportbook'?'u-category-select':''}">
             <linearGradient x1="585.97" x2="585.97" y1="-696.746" y2="-667.894" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1 0 0 -1 -566.97 -667.906)">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 72.371 72.372" style="enable-background:new 0 0 72.371 72.372;" xml:space="preserve">
                 <g>
@@ -91,15 +105,15 @@
       
       {#if isDropdownOpen2}
         <div class="dropdown-menu">
-          <button class="btn cahs" on:click={() => selectOption2({gameid:"wintech_gaming"})}>
+          <button disabled={sportbookBtnIsDisabled} class="btn cahs" on:click={() => selectOption2({gameid:"wintech_gaming"})}>
             <div class="cashout">Streaming</div>
             <p class="depor1"> Deporte 1</p>
           </button>
-          <button class="btn" on:click={() => selectOption2({gameid:"8042022_digitain"})}><p class="depor2"> Deporte 2</p></button>
+          <button disabled={sportbookBtnIsDisabled} class="btn" on:click={() => selectOption2({gameid:"8042022_digitain"})}><p class="depor2"> Deporte 2</p></button>
         </div>
         {:else}
         <div class="dropdown2">
-          <button on:click={toggleDropdown2} class="li-game in-d {active_view=='sportbooklive'?'u-category-select':''}">
+          <button disabled={sportbookBtnIsDisabled || active_view=='sportbooklive'} on:click={toggleDropdown2} class="li-game in-d {active_view=='sportbooklive'?'u-category-select':''}">
             <img class="u-menubar-icon re" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/sportbooktlive.png" alt="" style="margin: 0 auto;">
             <span class="u-span-li-games">En vivo</span>  
           </button>

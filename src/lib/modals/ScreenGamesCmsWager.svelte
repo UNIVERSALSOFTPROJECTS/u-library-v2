@@ -289,19 +289,66 @@
     }
 
     function handleMessage(event) {
-        const payload = event?.data || {};
+        const rawData = event?.data;
+        let payload = rawData || {};
+        let parsedFromString = false;
+
+        if (typeof rawData === "string") {
+            try {
+                payload = JSON.parse(rawData);
+                parsedFromString = true;
+            } catch (error) {
+                payload = rawData;
+                console.warn("CMSWager message parse failed", {
+                    origin: event?.origin,
+                    rawData,
+                    error: error?.message || error,
+                });
+            }
+        }
+
         const messageType = payload?.type;
         const messageEvent = payload?.event;
 
+        console.info("CMSWager message received", {
+            origin: event?.origin,
+            sourceExists: !!event?.source,
+            dataType: typeof rawData,
+            parsedFromString,
+            rawData,
+            payload,
+        });
+
         if (messageType === "ticket:placed" || messageType === "action:openCheckTicket") {
+            console.info("CMSWager message accepted", {
+                messageType,
+                messageEvent,
+                payload,
+            });
             emitTerminalEvent(messageType, payload);
             return;
         }
 
         if (messageEvent === "exit") {
+            console.info("CMSWager message accepted", {
+                messageType,
+                messageEvent,
+                payload,
+            });
             if (!embedded) closeModal();
         } else if (messageEvent === "reload") {
+            console.info("CMSWager message accepted", {
+                messageType,
+                messageEvent,
+                payload,
+            });
             reloadCmsWager();
+        } else {
+            console.info("CMSWager message ignored", {
+                messageType,
+                messageEvent,
+                payload,
+            });
         }
     }
 

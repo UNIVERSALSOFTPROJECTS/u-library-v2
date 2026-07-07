@@ -108,7 +108,7 @@ const SocketConnector = (() => {
                     })
                 });
             }
-            else if(user.type == "CASHIER"){
+            else if(user.type === "CASHIER" || user.type === "SHOP"){
                 stompClientCashier.subscribe(
                     "/topic/shop/" + `${conf.CLIENT_CODE}-${user.shopName}`,
                     message => {
@@ -116,7 +116,6 @@ const SocketConnector = (() => {
                         if('new_balance' in event_data){
                             EventManager.publish("update_balance",{newBalance:event_data.new_balance})
                         }
-                        
                     }
                 );
             }
