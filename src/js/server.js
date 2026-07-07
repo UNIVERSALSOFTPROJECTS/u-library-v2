@@ -183,7 +183,7 @@ const ServerConnection = (() => {
                 mode: payload.mode,
                 device: payload.device,
             };
-            const response = await axios.post(`${conf.API_KS}/sportbook/guest-launch`, request, { headers });
+            const response = await axios.post(`${conf.API_KS}/api/sportbook/guest-launch`, request, { headers });
             return response.data;
         },
         openAuthenticatedSportbook: async (gameapi_url, payload = {}) => {
