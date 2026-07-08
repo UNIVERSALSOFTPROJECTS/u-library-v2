@@ -11,7 +11,7 @@
 
     let loadUserData;
     let doctypes = configProfile.doctype;
-    let exampleDoctype;
+    // let exampleDoctype;
     let selectDoctype;
     let isDataComplete =  accountUser.dataComplete;
 
@@ -24,14 +24,14 @@
         "CI": /^\d{6,10}$/,
     };
 
-    const documentExamples = {
-        "Cédula": "Ejemplo: 12345678",
-        "Cedula de Extrajeria": "Ejemplo: 987654321",
-        "Pasaporte": "Ejemplo: AB1234567",
-        "DNI": "Ejemplo: 47087611",
-        "CI": "Ejemplo: 1234567",
-        "RUT": "Ejemplo: 15.363.225-1",
-    };
+    // const documentExamples = {
+    //     "Cédula": "Ejemplo: 12345678",
+    //     "Cedula de Extrajeria": "Ejemplo: 987654321",
+    //     "Pasaporte": "Ejemplo: AB1234567",
+    //     "DNI": "Ejemplo: 47087611",
+    //     "CI": "Ejemplo: 1234567",
+    //     "RUT": "Ejemplo: 15.363.225-1",
+    // };
 
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
@@ -58,14 +58,13 @@
             loadUserData = false;
         }                                                                                        
     }
-    const changeDoctype = () =>{
-        exampleDoctype = documentExamples[selectDoctype] || "";
-    }
+    // const changeDoctype = () =>{
+    //     exampleDoctype = documentExamples[selectDoctype] || "";
+    // }
 
     onMount(async() => {
         if (accountUser.isViewWeb && !isDataComplete) {
             selectDoctype = doctypes[0];
-            changeDoctype();
         }
     });
 
@@ -90,7 +89,7 @@
             {#if accountUser.doctype}
             <input class="ipt" type="text" bind:value={accountUser.doctype} disabled>
             {:else}
-            <select class="slc" bind:value={selectDoctype} on:change={changeDoctype}>
+            <select class="slc" bind:value={selectDoctype}>
                 {#each doctypes as doctype}
                     <option value={doctype}>{doctype}</option>
                 {/each}
@@ -98,7 +97,7 @@
             {/if}
             <p>{t("profile.numberDoc")}</p>
             <p>{t("profile.address")}</p>
-            <input class="ipt" type="text" placeholder={exampleDoctype} bind:value={accountUser.document} disabled={isDataComplete}>
+            <input class="ipt" type="text" placeholder={t("profile.enterOfficialDocument")} bind:value={accountUser.document} disabled={isDataComplete}>
             <input class="ipt" type="text" bind:value={accountUser.address} disabled={isDataComplete}>
             <p>{t("profile.city")}</p>
             <div></div>
