@@ -39,6 +39,7 @@
     let isRequiredVoucher  = configDeposit.isRequiredVoucher || "";
     let viewTimeDeposit = configDeposit.viewTimeDeposit || false;
     let banksOrigin = configDeposit.banksOrigin || [];
+    let originBankJustText = configDeposit.originBankJustText || false;
     let imgR4 = configDeposit.imgR4 || "";
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
@@ -273,18 +274,22 @@
                     <p>{t('deposit.destinationBank')}</p>
                     <p>{t('deposit.originBank')}</p>
                     <input type="text" class="ipt" value={paySelected.banco} disabled>
-                    <select class="slc" bind:value={bankDeposit.targetBankId}>
-                        <option value="0" selected disabled>{t('deposit.chooseBank')}</option>
-                            {#if banksOrigin.length > 0}
-                                {#each banksOrigin as bank}
-                                    <option value={bank.id}>{bank.name}</option>
-                                {/each}
-                            {:else}
-                                {#each bankPayments as bank}
-                                    <option value={bank.id}>{bank.banco}</option>
-                                {/each}
-                            {/if}
-                        </select>
+                    {#if originBankJustText}
+                        <input type="text" class="ipt" placeholder={t('deposit.chooseBank')} bind:value={bankDeposit.targetBankId}>
+                    {:else}
+                        <select class="slc" bind:value={bankDeposit.targetBankId}>
+                            <option value="0" selected disabled>{t('deposit.chooseBank')}</option>
+                                {#if banksOrigin.length > 0}
+                                    {#each banksOrigin as bank}
+                                        <option value={bank.id}>{bank.name}</option>
+                                    {/each}
+                                {:else}
+                                    {#each bankPayments as bank}
+                                        <option value={bank.id}>{bank.banco}</option>
+                                    {/each}
+                                {/if}
+                            </select>
+                    {/if}
 
                     <p>{t('deposit.numAccount')}</p>
                     <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
