@@ -24,6 +24,15 @@
         "CI": /^\d{6,10}$/,
     };
 
+    const documentExamples = {
+        "Cédula": "Ejemplo: 12345678",
+        "Cedula de Extrajeria": "Ejemplo: 987654321",
+        "Pasaporte": "Ejemplo: AB1234567",
+        "DNI": "Ejemplo: 47087611",
+        "CI": "Ejemplo: 1234567",
+        "RUT": "Ejemplo: 15.363.225-1",
+    };
+
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
     const saveMyAccount = async()  =>{
@@ -50,9 +59,7 @@
         }                                                                                        
     }
     const changeDoctype = () =>{
-        if (selectDoctype == "RUT") exampleDoctype = "Ejemplo: 15.363.225-1";
-        else if(selectDoctype == "DNI") exampleDoctype = "Ejemplo: 47087611";
-        else exampleDoctype = "";
+        exampleDoctype = documentExamples[selectDoctype] || "";
     }
 
     onMount(async() => {
