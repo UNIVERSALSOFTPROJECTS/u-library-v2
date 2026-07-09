@@ -109,6 +109,20 @@
         }
     }
 
+    function mountIframeLaunch(url) {
+        if (!appContent) return;
+        clearContainer();
+        const iframe = document.createElement("iframe");
+        iframe.src = url;
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("allowfullscreen", "true");
+        iframe.setAttribute("title", "cmswager-terminal");
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "0";
+        appContent.appendChild(iframe);
+    }
+
     function loadProviderScript(scriptUrl) {
         window.__cmsWagerScriptPromises = window.__cmsWagerScriptPromises || {};
         if (window.__cmsWagerScriptPromises[scriptUrl]) {
@@ -191,13 +205,15 @@
             if (currentRequest !== requestVersion) return;
 
             const params = response?.params;
+            const isIframeLaunch = params?.launchMode === "iframe_url";
             if (
                 !response?.url ||
-                !params?.scriptUrl ||
-                !params?.platform ||
-                !params?.token ||
-                !params?.culture ||
-                !params?.clientKey
+                (!isIframeLaunch &&
+                    (!params?.scriptUrl ||
+                        !params?.platform ||
+                        !params?.token ||
+                        !params?.culture ||
+                        !params?.clientKey))
             ) {
                 console.error("Invalid CMSWager opengame response:", response);
                 errorMessage = "No fue posible obtener el descriptor de CMSWager.";
@@ -205,6 +221,15 @@
             }
 
             applyTerminalDescriptor(params);
+
+            if (isIframeLaunch) {
+                mountIframeLaunch(response.url);
+                console.log("CMSWager iframe terminal started", {
+                    baseUrl: response.url,
+                    hasTerminalConfig: !!(params.exttoken || params.clientApi || params.logo),
+                });
+                return;
+            }
 
             await loadProviderScript(params.scriptUrl);
             if (currentRequest !== requestVersion) return;
