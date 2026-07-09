@@ -110,7 +110,10 @@
     }
 
     function mountIframeLaunch(url) {
-        if (!appContent) return;
+        if (!appContent) {
+            console.warn("CMSWager iframe mount skipped: container not ready", { url });
+            return;
+        }
         clearContainer();
         const iframe = document.createElement("iframe");
         iframe.src = url;
@@ -223,6 +226,8 @@
             applyTerminalDescriptor(params);
 
             if (isIframeLaunch) {
+                await tick();
+                if (currentRequest !== requestVersion) return;
                 mountIframeLaunch(response.url);
                 console.log("CMSWager iframe terminal started", {
                     baseUrl: response.url,
