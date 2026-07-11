@@ -38,6 +38,14 @@
 
     const toggleAccordion = (panel) => { activePanel = activePanel === panel ? null : panel; };    
 
+    const handleCategoryChange = (category) => {
+        if (category === "sportbook" || category === "sportbooklive") {
+            onCategoryChange(category, { sportbook: true, type: category });
+            return;
+        }
+        onCategoryChange(category);
+    };
+
     const initCarrousel = () => {
         const swiperEl = document.querySelector(".swiper-container__payments");
         const swiperParams = {
@@ -102,7 +110,7 @@
             <button class="accordion__select" on:click={() => toggleAccordion('panel1')}>{t("categoryGame.slot")}</button>
             <div class="accordion__body">
                 {#each categorySlot as category }
-                    <button class="btn" on:click={onCategoryChange(`${category}`)}>{t(`categoryGame.${category}`)}</button>
+                    <button class="btn" on:click={() => handleCategoryChange(category)}>{t(`categoryGame.${category}`)}</button>
                 {/each}
             </div>
         </div>
@@ -112,7 +120,7 @@
             <button class="accordion__select" on:click={() => toggleAccordion('panel2')}>{t("categoryGame.sportbook")}</button>
             <div class="accordion__body">
                 {#each categorySport as category }
-                    <button class="btn" on:click={onCategoryChange(`${category}`)}>{t(`categoryGame.${category}`)}</button>
+                    <button class="btn" on:click={() => handleCategoryChange(category)}>{t(`categoryGame.${category}`)}</button>
                 {/each}
             </div>
         </div>
