@@ -126,6 +126,66 @@
         appContent.appendChild(iframe);
     }
 
+    function appendExtTokenToUrl(urlValue, exttoken) {
+        if (!urlValue || !exttoken) return urlValue;
+
+        try {
+            const parsedUrl = new URL(urlValue, window.location.href);
+            if (!parsedUrl.searchParams.get("exttoken")) {
+                parsedUrl.searchParams.set("exttoken", exttoken);
+            }
+            return parsedUrl.toString();
+        } catch (error) {
+            console.warn("CMSWager exttoken URL patch failed", {
+                urlValue,
+                hasExtToken: !!exttoken,
+                error: error?.message || error,
+            });
+            return urlValue;
+        }
+    }
+
+    function patchIframeExtToken(iframe, exttoken) {
+        if (!iframe || !exttoken) return false;
+
+        const currentSrc = iframe.getAttribute("src") || iframe.src;
+        if (!currentSrc) return false;
+
+        const patchedSrc = appendExtTokenToUrl(currentSrc, exttoken);
+        if (!patchedSrc || patchedSrc === currentSrc) return false;
+
+        iframe.src = patchedSrc;
+        console.info("CMSWager iframe exttoken appended", {
+            iframeSrc: patchedSrc,
+        });
+        return true;
+    }
+
+    function ensureBootstrapIframeExtToken(exttoken) {
+        if (!appContent || !exttoken) return;
+
+        let attempts = 0;
+        const maxAttempts = 30;
+
+        const tryPatch = () => {
+            const iframe = appContent?.querySelector("iframe");
+            if (iframe && patchIframeExtToken(iframe, exttoken)) {
+                return;
+            }
+
+            attempts += 1;
+            if (attempts < maxAttempts) {
+                setTimeout(tryPatch, 200);
+            } else {
+                console.info("CMSWager iframe exttoken not applied: iframe not ready or already patched", {
+                    hasExtToken: !!exttoken,
+                });
+            }
+        };
+
+        tryPatch();
+    }
+
     function loadProviderScript(scriptUrl) {
         window.__cmsWagerScriptPromises = window.__cmsWagerScriptPromises || {};
         if (window.__cmsWagerScriptPromises[scriptUrl]) {
@@ -260,6 +320,7 @@
                 params.clientKey,
                 params.defaultPage || "sport"
             );
+            ensureBootstrapIframeExtToken(params.exttoken);
 
             console.log("CMSWager sportbook started", {
                 gameId,
