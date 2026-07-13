@@ -41,6 +41,7 @@ export default {
     "currency.clp": "Peso chileno",
     "currency.cop": "Peso colombiano",
     "currency.ves": "Bolívar venezolano",
+    "currency.brl": "Real brasileño",
     //---------------RECOVERPASSWORD-----------------------------
     "recoverPassword.title": "¿Olvidaste tu contraseña?",
     "recoverPassword.email": "Ingrese su corrreo electrónico",
@@ -438,6 +439,7 @@ export default {
   "currency.clp": "Peso chilien",
   "currency.cop": "Peso colombien",
   "currency.ves": "Bolivar vénézuélien",
+  "currency.brl": "Réal brésilien",
     //---------------RECOVERPASSWORD-----------------------------
  "recoverPassword.title": "Mot de passe oublié ?",
   "recoverPassword.email": "Entrez votre adresse e-mail",
@@ -832,6 +834,7 @@ export default {
     "currency.clp": "Peso chileno",
     "currency.cop": "Peso colombiano",
     "currency.ves": "Bolívar venezuelano",
+    "currency.brl": "Real brasileiro",
     //---------------FOOTER-----------------------------
      "footer.bonus": "Bônus",
     "footer.s_p": "Segurança e privacidade",
@@ -1222,6 +1225,7 @@ export default {
     "currency.clp": "Chilean Peso",
     "currency.cop": "Colombian Peso",
     "currency.ves": "Venezuelan Bolívar",
+    "currency.brl": "Brazilian Real",
     //---------------RECOVERPASSWORD-----------------------------
     "recoverPassword.title": "Forgot your password?",
     "recoverPassword.email": "Enter your email",

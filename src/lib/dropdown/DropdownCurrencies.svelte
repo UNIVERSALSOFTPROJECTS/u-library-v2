@@ -12,6 +12,7 @@
         3: t("currency.usd"),
         7: t("currency.clp"),
         8: t("currency.cop"),
+        6: t("currency.brl"),
     };
 
     currencies.forEach(obj => { obj.name = namesCurrenciesById[obj.id] || 'add this new currency'; });
