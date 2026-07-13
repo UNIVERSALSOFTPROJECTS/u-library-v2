@@ -167,7 +167,9 @@
             </div>
             {/if}
             {#if poweredByUS}
-               <img style="margin: 0 auto;" src="https://assets-usoft.universalsoft.net/generic_imgs/Power_bi/power_bi.png" alt="poweredbyus-img" loading="lazy">
+               <a href="https://universalsoft.net/" target="_blank" rel="noopener noreferrer">
+                   <img style="margin: 0 auto;" src="https://assets-usoft.universalsoft.net/generic_imgs/Power_bi/power_bi.png" alt="poweredbyus-img" loading="lazy">
+               </a>
             {/if}
         </div>
 
