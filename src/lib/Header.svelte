@@ -173,8 +173,8 @@
         linksChats: [
             //{name: "Whatsapp", url:"https://web.whatsapp.com/send?phone=56964783055"}
         ],
-        viewLogoUS: true,
-        isGCB: "x",
+        viewLogoUS: false,
+        isGCB: "",
         // aditionalTerms: [
         //     // {name: "new"}
         // ]

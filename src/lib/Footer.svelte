@@ -21,6 +21,7 @@
     let socials = configFooter.social;
     let email = configFooter.email;
     let isGCB = configFooter.isGCB || "";
+    let poweredByUS = configFooter.poweredByUS || false;
     let platform = configFooter.platform;
     let bonus = configFooter.bonus;
     let aditionalTerms = configFooter.aditionalTerms || "";
@@ -164,8 +165,10 @@
                     </a>
                 </div>
             </div>
-            
-   {/if}
+            {/if}
+            {#if poweredByUS}
+               <img style="margin: 0 auto;" src="https://assets-usoft.universalsoft.net/generic_imgs/Power_bi/power_bi.png" alt="poweredbyus-img" loading="lazy">
+            {/if}
         </div>
 
         {#if socials.length != 0 || email}
