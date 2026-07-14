@@ -22,7 +22,7 @@
 
   export let refreshConf;
 
-  const isBetwsingDomain = window.location.hostname.includes("betswing");
+  const isBetwsingDomain = window.location.hostname.includes("betswing") || window.location.hostname.includes("xuperparley");
   const currencyOptions = orgByCurrency ? Object.keys(orgByCurrency) : [];
 
   let password = "";

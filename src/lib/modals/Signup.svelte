@@ -27,7 +27,7 @@
     let isCodeAgentSwitch = configSignup.isCodeAgentSwitch || false;
     let isMultipleCurrencies = configSignup.isMultipleCurrencies || false;
     let isCheckedAfiliated = isCodeAgentSwitch;
-    const isBetwsingDomain = window.location.hostname.includes("betswing");
+    const isBetwsingDomain = window.location.hostname.includes("betswing") || window.location.hostname.includes("xuperparley");
     //loading
     let loadSms;
     let loadSignup;
