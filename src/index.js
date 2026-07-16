@@ -22,6 +22,7 @@ export {default as Banners} from "./lib/Banners.svelte";
 export {default as SingupW} from "./lib/modals/SingupW.svelte";//temporales miestras se unifica - una vez ser termine de pasa todos al registro global eliminar
 export {default as SingupM} from "./lib/modals/SingupM.svelte";//temporales miestras se unifica - una vez ser termine de pasa todos al registro global eliminar
 export {default as Signup} from "./lib/modals/Signup.svelte";//temporales miestras se unifica
+export {default as SignupGanabet365} from "./lib/modals/SignupGanabet365.svelte";
 export {default as Profile} from "./lib/modals/Profile.svelte";
 export {default as Movements} from "./lib/profile/Movements.svelte";
 export {default as ChangePassword} from "./lib/profile/ChangePassword.svelte";
