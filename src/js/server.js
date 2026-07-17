@@ -186,6 +186,15 @@ const ServerConnection = (() => {
             const response = await axios.post(`${conf.API_KS}/sportbook/guest-launch`, request, { headers });
             return response.data;
         },
+        getSportbookConfig: async (payload = {}) => {
+            const response = await axios.get(`${conf.API_KS}/sportbook/config`, {
+                headers,
+                params: {
+                    clientCode: payload.clientCode || conf.CLIENT_CODE,
+                }
+            });
+            return response.data;
+        },
         openAuthenticatedSportbook: async (gameapi_url, payload = {}) => {
             const params = new URLSearchParams({
                 sessionid: payload.sessionToken || payload.token || "",
