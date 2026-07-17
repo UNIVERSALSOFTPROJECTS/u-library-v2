@@ -48,6 +48,7 @@ export {default as WithdrawalBillX } from './lib/withdrawal/WithdrawalBillX.svel
 export {default as WithdrawalW } from './lib/withdrawal/WithdrawalW.svelte';
 export {default as TopBar } from './lib/topbar/TopBar.svelte';
 export { default as SportbookPage } from './lib/pages/SportbookPage.svelte';
+export { default as SportbookUniversalPage } from './lib/pages/SportbookUniversalPage.svelte';
 export { default as GoldenRacePage } from './lib/pages/GoldenRacePage.svelte';
 export { default as HorsesPageV3 } from './lib/pages/HorsesPageV3.svelte';
 export { default as SportbookAltenarPage } from './lib/pages/SportbookAltenarPage.svelte';
