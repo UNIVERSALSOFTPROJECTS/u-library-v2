@@ -26,7 +26,7 @@
   }
 
   function getMode() {
-    return util.isMoble() ? "mb" : "wb";
+    return util.isMobile() ? "mb" : "wb";
   }
 
   function shouldUseLegacyAltenar() {
@@ -62,7 +62,7 @@
           sportView: getSportView(),
           lang: locale || "es",
           mode: getMode(),
-          device: util.isMoble() ? "mobile" : "desktop",
+          device: util.isMobile() ? "mobile" : "desktop",
         });
       }
 
