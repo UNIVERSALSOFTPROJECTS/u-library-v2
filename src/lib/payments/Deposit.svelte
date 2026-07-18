@@ -179,7 +179,7 @@
 
     async function validateDepositBank() {
         if(typeTranference == "GATEWAY_PAY"){
-            OPEN_MODAL_GATEWAY_PAY = false;
+            OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
                 currency: user.currency,
@@ -242,17 +242,18 @@
     });
 </script>
 
+
+<div class="modal-body">
 {#if OPEN_MODAL_GATEWAY_PAY == true}
     <!-- <Modal
     bind:open={}
     >
     </Modal> -->
     <GatewayModal
-    bind:data_payin={data_pay}
-    bind:open={OPEN_MODAL_GATEWAY_PAY}
+        bind:data_payin={data_pay}
+        bind:open={OPEN_MODAL_GATEWAY_PAY}
     />
 {/if}
-<div class="modal-body">
 {#if isLocked}
     <div class="deposit__message">
         <div class="deposit__message--icon"></div>
@@ -306,7 +307,7 @@
                             <div class="deposit__gateway">
                                 <div class="deposit__mounts">
                                     {#each amountsFav as amount}
-                                        <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
+                                        <button class="btn amount" on:click={()=> amountDeposit = amount}>Hola hola</button>
                                     {/each}  
                                 </div>
                                 <div class="deposit__ipt">
