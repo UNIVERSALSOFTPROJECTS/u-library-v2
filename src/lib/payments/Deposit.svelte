@@ -248,7 +248,7 @@
 {#if OPEN_MODAL_GATEWAY_PAY == true}
     <Modal
     bind:open={OPEN_MODAL_GATEWAY_PAY}
-    bind:modalOpened={"gateway_pay"}
+    modalOpened={"gateway_pay"}
     >
         <GatewayModal
             bind:data_payin={data_pay}
