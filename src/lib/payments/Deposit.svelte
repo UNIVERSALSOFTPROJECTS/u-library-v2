@@ -136,7 +136,7 @@
 
         paySelected = typePayment;
         if(paySelected.banco == 'GATEWAY_PAY'){
-            typeTranference = ""
+            typeTranference = "GATEWAY_PAY"
         }
         //solo para peru
         if (paySelected.banco === "YAPE" || paySelected.banco === "PLIN" || paySelected.banco === "DE UNA") {
@@ -256,7 +256,21 @@
                         <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
                     </div>
                     {/if}
-                    {#if typeTranference != 'r4'}
+                    {#if typeTranference != 'r4' && typeTranference != 'GATEWAY_PAY'}
+                    <div class="deposit__gateway">
+                        <div class="deposit__mounts">
+                            {#each amountsFav as amount}
+                                <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
+                            {/each}  
+                        </div>
+                        <div class="deposit__ipt">
+                            <b>{paySelected.iso}</b>
+                            <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
+                            <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
+                        </div>
+                    </div>
+                    {/if}
+                    {#if typeTranference == 'GATEWAY_PAY'}
                     <div class="deposit__gateway">
                         <div class="deposit__mounts">
                             {#each amountsFav as amount}
