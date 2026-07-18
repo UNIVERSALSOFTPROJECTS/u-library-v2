@@ -66,7 +66,7 @@
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
             payMethods = data;
             if(user.serial == '4880946481945'){
-                payMethods.push({
+                payMethods.unshift({
                     "img": "visa",
                     "name_pay": "PAGAR CON PASARELA",
                     "min": 1,
