@@ -4,7 +4,9 @@
     import { assetsPayments } from "../../js/utils/assetsUtils";
     import inputUtils from "../../js/utils/inputUtils";
     import { currentDate } from "../../js/utils/formatUtils";
+    import GatewayModal from './GatewayModal.svelte'
     import { isMobile, isMobileSafari } from "mobile-device-detect";
+    import Modal from "../Modal.svelte";
 
     export let user;
     export let onError;
@@ -46,6 +48,8 @@
     let base64Image;
     let fileInput;
     let viewLinkSafari = false;
+    let OPEN_MODAL_GATEWAY_PAY=false;
+    let data_pay ;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -82,42 +86,55 @@
     }
 
     async function validateDeposit(pay){
-        if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
-        else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
-        else{
-            detailsTranference = false;
-            if (typeTranference === 'gateway') {
-                try {
-                    loadDeposit = true;
-                    paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
-                    iframeGateway = paymentLink.data.link;
-                   
-                    if(detecMachine){
-                        openVirtualKeyboard();
+        if(typeTranference == "GATEWAY_PAY"){
+            OPEN_MODAL_GATEWAY_PAY = false;
+            data_pay = {
+                amount: amountDeposit,
+                currency: user.currency,
+                reference: user.serial "-"+Date.now(),
+                payinMethods: "QR,TRANSFER,CASH",
+                customerName:user.username,
+                customerDocType:"DNI",
+                customerDocNumber: "12312312"
+            };
+        }else{
+            if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
+            else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
+            else{
+                detailsTranference = false;
+                if (typeTranference === 'gateway') {
+                    try {
+                        loadDeposit = true;
+                        paymentLink = await ServerConnection.wallet.getPayLink(user.token,amountDeposit,pay.cta);
+                        iframeGateway = paymentLink.data.link;
                     
-                        const message2 = {
-                            action: "pop_up_window",
-                            configuration: {
-                                isPop_up: true ,
-                                height:600,
-                                width:600,
-                                url:iframeGateway
-                            }
-                        };
-                        window.chrome.webview.postMessage(message2);
+                        if(detecMachine){
+                            openVirtualKeyboard();
+                        
+                            const message2 = {
+                                action: "pop_up_window",
+                                configuration: {
+                                    isPop_up: true ,
+                                    height:600,
+                                    width:600,
+                                    url:iframeGateway
+                                }
+                            };
+                            window.chrome.webview.postMessage(message2);
 
-                    }else if(isMobileSafari){
-                        viewLinkSafari = true;
-                    }else{
-                        window.open(iframeGateway,"_blank",isMobile?"": windowPayment());
+                        }else if(isMobileSafari){
+                            viewLinkSafari = true;
+                        }else{
+                            window.open(iframeGateway,"_blank",isMobile?"": windowPayment());
+                        }
+                    } catch (error) {
+                        onError(t("msg.contactSupport"));
                     }
-                } catch (error) {
-                    onError(t("msg.contactSupport"));
-                }
-                finally{
-                    detailsTranference = true;
-                    amountDeposit = "";
-                    loadDeposit = false;
+                    finally{
+                        detailsTranference = true;
+                        amountDeposit = "";
+                        loadDeposit = false;
+                    }
                 }
             }
         }
@@ -212,6 +229,16 @@
     });
 </script>
 
+{#if OPEN_MODAL_GATEWAY_PAY == true}
+    <!-- <Modal
+    bind:open={}
+    >
+    </Modal> -->
+    <GatewayModal
+    bind:data_payin={data_pay}
+    bind:open={OPEN_MODAL_GATEWAY_PAY}
+    />
+{/if}
 <div class="modal-body">
 {#if isLocked}
     <div class="deposit__message">
@@ -252,23 +279,47 @@
                         </div>
                     {:else}
                     <div class="deposit__info">
-                        <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
-                        <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
+                        {#if typeTranference == 'GATEWAY_PAY' }
+                            <p>{t('deposit.typeTransfer')}:</p><p>Automatico</p>
+                            <p>{t('deposit.processingTime')}:</p><p>1-3 minutos</p>
+                        {:else}
+                            <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
+                            <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
+                        {/if}
+                        
+                        
                     </div>
                     {/if}
                     {#if typeTranference != 'r4' }
-                    <div class="deposit__gateway">
-                        <div class="deposit__mounts">
-                            {#each amountsFav as amount}
-                                <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
-                            {/each}  
-                        </div>
-                        <div class="deposit__ipt">
-                            <b>{paySelected.iso}</b>
-                            <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
-                            <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
-                        </div>
-                    </div>
+                        {#if typeTranference == 'GATEWAY_PAY' }
+                            <div class="deposit__gateway">
+                                <div class="deposit__mounts">
+                                    {#each amountsFav as amount}
+                                        <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
+                                    {/each}  
+                                </div>
+                                <div class="deposit__ipt">
+                                    <b>{paySelected.iso}</b>
+                                    <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
+                                    <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
+                                </div>
+                            </div>
+                        {:else}
+                            <div class="deposit__gateway">
+                                <div class="deposit__mounts">
+                                    {#each amountsFav as amount}
+                                        <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
+                                    {/each}  
+                                </div>
+                                <div class="deposit__ipt">
+                                    <b>{paySelected.iso}</b>
+                                    <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
+                                    <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
+                                </div>
+                            </div>
+                        {/if}
+                        
+                        
                     {/if}
                 {/if}
             {:else}

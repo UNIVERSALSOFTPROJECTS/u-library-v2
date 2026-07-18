@@ -2,32 +2,21 @@
     import { onMount } from 'svelte';
 
     export let open;
+    export let data_payin;
 
     let loading = true;
     let error = "";
 
     async function loadGateway() {
-
         try {
-
             // 1. Solicitar firma al backend
-
-            const body = {
-                amount: 100,
-                currency: "PEN",
-                reference: "ORD-"+Date.now()+"-",
-                "payinMethods": "QR,TRANSFER,CASH",
-                "customerName":"Juan Perez",
-                "customerDocType":"DNI",
-                customerDocNumber: "43766099"
-            };
-
+            console.log("data to send ",data_payin)
             const response = await fetch("https://api-test.usoft-api88.net/wallet-service/webhooks/payment/nxpay/signature", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(data_payin)
             });
 
             const data = await response.json();
@@ -38,30 +27,17 @@
             await loadSdk();
 
             window.PayOrchestrator.render({
-
                 elementId: "pay-orchestrator-widget",
-
                 apiKey: "mch_key_SYrD0iFLCwQQRLSc8W6QVALnvcA0yqjG",
-
-                amount: body.amount,
-
-                currency: body.currency,
-
-                reference: body.reference, 
-
+                amount: data_payin.amount,
+                currency: data_payin.currency,
+                reference: data_payin.reference, 
                 payinMethods: "QR,TRANSFER,CASH",
-
-                customerName: "Juan Perez",
-
-                customerDocType: "DNI",
-
-                customerDocNumber: "43766099",
-
+                customerName: data_payin.customerName,
+                customerDocType: data_payin.customerDocType,
+                customerDocNumber: data_payin.customerDocNumber,
                 signature: data.signature,
-
                 timestamp: data.timestamp,
-
-
                 // customerPhoneCode: "+51",
 
                 // customerPhoneNumber: "999999999",
