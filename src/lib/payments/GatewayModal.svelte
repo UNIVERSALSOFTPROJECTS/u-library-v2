@@ -9,12 +9,15 @@
 
     async function loadGateway() {
         try {
+            let user = sessionStorage.getItem("user");
+            if(!user) return ;
             // 1. Solicitar firma al backend
             console.log("data to send ",data_payin)
             const response = await fetch("https://api-test.usoft-api88.net/wallet-service/webhooks/payment/nxpay/signature", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "x-token":(JSON.parse(user)).token
                 },
                 body: JSON.stringify(data_payin)
             });
