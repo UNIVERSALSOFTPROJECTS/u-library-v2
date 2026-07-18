@@ -87,7 +87,7 @@
 
     async function validateDeposit(pay){
         if(typeTranference == "GATEWAY_PAY"){
-            OPEN_MODAL_GATEWAY_PAY = false;
+            OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
                 currency: user.currency,
