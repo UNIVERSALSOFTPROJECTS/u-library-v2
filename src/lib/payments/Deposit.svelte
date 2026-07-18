@@ -246,14 +246,16 @@
 
 <div class="modal-body">
 {#if OPEN_MODAL_GATEWAY_PAY == true}
-    <!-- <Modal
-    bind:open={}
+    <Modal
+    bind:open={OPEN_MODAL_GATEWAY_PAY}
+    bind:modalOpened={"gateway_pay"}
     >
-    </Modal> -->
-    <GatewayModal
-        bind:data_payin={data_pay}
-        bind:open={OPEN_MODAL_GATEWAY_PAY}
-    />
+        <GatewayModal
+            bind:data_payin={data_pay}
+            bind:open={OPEN_MODAL_GATEWAY_PAY}
+        />
+    </Modal>
+    
 {/if}
 {#if isLocked}
     <div class="deposit__message">
