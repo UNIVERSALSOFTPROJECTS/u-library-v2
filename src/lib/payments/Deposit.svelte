@@ -260,7 +260,7 @@
                     <div class="deposit__gateway">
                         <div class="deposit__mounts">
                             {#each amountsFav as amount}
-                                <button class="btn amount" on:click={()=> amountDeposit = amount}>holaaaaa</button>
+                                <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
                             {/each}  
                         </div>
                         <div class="deposit__ipt">
