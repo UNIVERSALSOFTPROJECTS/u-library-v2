@@ -178,24 +178,37 @@
     }
 
     async function validateDepositBank() {
-        if(typeTranference === 'wallet'){
-            bankDeposit.aditional = paySelected.banco;
-            bankDeposit.reference = paySelected.banco;
-            bankDeposit.targetBankId = paySelected.id;
-        }
-        if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) return onError("Todos los campos son obligatorios"); 
-        bankDeposit.originBank = paySelected.id;
-        bankDeposit.amount = amountDeposit;
-        try {
-            loadRecharge = true;
-            let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
-            if (data.msg === "DEPOSITO_OK") onOk(t("deposit.successDeposit"));
-            else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
-            else onError(t('msg.contactSupport'));
-        } catch (error) {
-            console.log(error);
-        } finally {
-            loadRecharge = false;
+        if(typeTranference == "GATEWAY_PAY"){
+            OPEN_MODAL_GATEWAY_PAY = false;
+            data_pay = {
+                amount: amountDeposit,
+                currency: user.currency,
+                reference: user.serial + "-"+Date.now(),
+                payinMethods: "QR,TRANSFER,CASH",
+                customerName:user.username,
+                customerDocType:"DNI",
+                customerDocNumber: "12312312"
+            };
+        }else{
+            if(typeTranference === 'wallet'){
+                bankDeposit.aditional = paySelected.banco;
+                bankDeposit.reference = paySelected.banco;
+                bankDeposit.targetBankId = paySelected.id;
+            }
+            if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) return onError("Todos los campos son obligatorios"); 
+            bankDeposit.originBank = paySelected.id;
+            bankDeposit.amount = amountDeposit;
+            try {
+                loadRecharge = true;
+                let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
+                if (data.msg === "DEPOSITO_OK") onOk(t("deposit.successDeposit"));
+                else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
+                else onError(t('msg.contactSupport'));
+            } catch (error) {
+                console.log(error);
+            } finally {
+                loadRecharge = false;
+            }
         }
     }
 
@@ -286,8 +299,6 @@
                             <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
                             <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
                         {/if}
-                        
-                        
                     </div>
                     {/if}
                     {#if typeTranference != 'r4' }
