@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
 
     export let open;
-    export let data_payin;
+    export let data_payin ;
 
     let loading = true;
     let error = "";
@@ -13,6 +13,7 @@
             if(!user) return ;
             // 1. Solicitar firma al backend
             console.log("data to send ",data_payin)
+            data_payin.amount= data_payin.amount*100;
             const response = await fetch("https://api-test.usoft-api88.net/wallet-service/webhooks/payment/nxpay/signature", {
                 method: "POST",
                 headers: {
