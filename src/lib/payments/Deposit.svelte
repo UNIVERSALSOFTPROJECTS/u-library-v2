@@ -153,7 +153,8 @@
 
         paySelected = typePayment;
         if(paySelected.banco == 'GATEWAY_PAY'){
-            typeTranference = "GATEWAY_PAY"
+            typeTranference = "GATEWAY_PAY";
+            return;
         }
         //solo para peru
         if (paySelected.banco === "YAPE" || paySelected.banco === "PLIN" || paySelected.banco === "DE UNA") {
