@@ -61,6 +61,18 @@
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
             payMethods = data;
+            if(user.serial == '4880946481945'){
+                payMethods.push({
+                    "img": "visa",
+                    "name_pay": "PAGAR CON PASARELA",
+                    "min": 1,
+                    "max": 100,
+                    "iso": "PEN",
+                    "virtual": 0,
+                    "banco":"GATEWAY_PAY"
+                    }
+                );
+            }
             loadDeposit = false;
 		} catch (error) {
             console.log(error);
@@ -121,7 +133,11 @@
     }
 
     const openPayMethod = (typePayment) => {
+
         paySelected = typePayment;
+        if(paySelected.banco == 'GATEWAY_PAY'){
+            typeTranference = 
+        }
         //solo para peru
         if (paySelected.banco === "YAPE" || paySelected.banco === "PLIN" || paySelected.banco === "DE UNA") {
             typeTranference = 'wallet';
