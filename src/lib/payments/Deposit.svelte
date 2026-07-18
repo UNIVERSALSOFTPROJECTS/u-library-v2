@@ -93,7 +93,7 @@
                 currency: user.currency,
                 reference: user.serial + "-"+Date.now(),
                 payinMethods: "QR,TRANSFER,CASH",
-                customerName:user.username,
+                customerName:user.username+ " test",
                 customerDocType:"DNI",
                 customerDocNumber: "12312312"
             };
