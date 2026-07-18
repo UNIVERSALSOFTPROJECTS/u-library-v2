@@ -91,7 +91,7 @@
             data_pay = {
                 amount: amountDeposit,
                 currency: user.currency,
-                reference: user.serial "-"+Date.now(),
+                reference: user.serial + "-"+Date.now(),
                 payinMethods: "QR,TRANSFER,CASH",
                 customerName:user.username,
                 customerDocType:"DNI",
