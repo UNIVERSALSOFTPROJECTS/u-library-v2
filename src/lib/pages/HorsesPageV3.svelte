@@ -17,7 +17,7 @@
         isRequestSent = true;
         try {
             loading = true;
-            const launchUrl = `${GAMEAPI_URL}/launch?gameid=horses_2026&p=horses&b=UniversalRace&m=wb&sessionid=${gameToken}&r=url`;
+            const launchUrl = `${GAMEAPI_URL}/launch?gameid=horses_2026&p=horses&b=UniversalRace&m=wb&sessionid=${gameToken}&r=url&theme=shopretail`;
             const response = await backend.game.getURL(launchUrl);
             if (response && response.status === "READY" && response.url) {
                 iframeUrl = response.url;
