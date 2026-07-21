@@ -13,9 +13,6 @@ const ServerConnection = (() => {
             "Content-Type": "application/json;charset=UTF-8",
             "site-id": conf.SITE_ID,
             "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
-//            "Access-Control-Allow-Origin": "*",
-//            "Access-Control-Allow-Methods": "*",
-//            "Access-Control-Allow-Headers": "*",
             "Accept": "*",
         };
     }
@@ -434,6 +431,17 @@ const ServerConnection = (() => {
                 platform: conf.org,
             }
             return axios.post(conf.API + "/api/casino/forgotPassword", payload_)
+        },
+        generateSignatureToOrderPayIn:async (payload,usertoken_nc) => {
+            return await axios.post(conf.API_WALLET + "/webhooks/payment/nxpay/signature", payload,{
+                                                headers: {
+                                                "Content-Type": "application/json",
+                                                "x-token": usertoken_nc,
+                                                }
+                                    })
+        },
+        getSecretGateway: () => {
+            return conf.SECRET_WALLET;
         }
     }
 
