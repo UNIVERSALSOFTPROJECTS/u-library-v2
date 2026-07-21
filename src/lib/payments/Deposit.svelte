@@ -344,10 +344,6 @@
                     <p>{paySelected.nombre}</p>
                     <b>{t('deposit.numBankAccount')}:</b>
                     <p>{paySelected.cta}</p>
-                    {#if typeTranference != 'wallet'}
-                    <b>CCI:</b>
-                    <p>{paySelected.cta['cci']}</p>
-                    {/if}
                 </div>
                 <img
                     src="{assetsPayments}{paySelected.banco}__{paySelected.cta.replace(/\+|\s/g, "")}.png"
