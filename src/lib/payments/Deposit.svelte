@@ -91,7 +91,7 @@
             data_pay = {
                 amount: amountDeposit,
                 currency: user.currency,
-                reference: user.serial + "-"+crypto.randomUUID(),
+                reference: crypto.randomUUID().replaceAll("-","").substring(0,30),
                 payinMethods: "QR,TRANSFER",
                 customerName:user.username,
                 customerLastname: "Test",
