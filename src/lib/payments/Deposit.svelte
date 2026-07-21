@@ -67,7 +67,7 @@
             payMethods = data;
             if(user.serial == '4880946481945'){
                 payMethods.unshift({
-                    "img": "visa",
+                    "img": "nexopyment",
                     "name_pay": "PAGAR CON PASARELA",
                     "min": 1,
                     "max": 100,
