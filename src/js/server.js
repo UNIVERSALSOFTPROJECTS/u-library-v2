@@ -435,8 +435,9 @@ const ServerConnection = (() => {
         generateSignatureToOrderPayIn:async (payload,usertoken_nc) => {
             return await axios.post(conf.API_WALLET + "/webhooks/payment/nxpay/signature", payload,{
                                                 headers: {
-                                                "Content-Type": "application/json",
+                                                "Content-Type": "application/json;charset=UTF-8",
                                                 "x-token": usertoken_nc,
+                                                "Accept": "*",
                                                 }
                                     })
         },
