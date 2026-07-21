@@ -91,9 +91,10 @@
             data_pay = {
                 amount: amountDeposit,
                 currency: user.currency,
-                reference: user.serial + "-"+Date.now(),
-                payinMethods: "QR,TRANSFER,CASH",
-                customerName:user.username+ " test",
+                reference: user.serial + "-"+crypto.randomUUID(),
+                payinMethods: "QR,TRANSFER",
+                customerName:user.username,
+                customerLastname: "Test",
                 customerDocType:"DNI",
                 customerDocNumber: "12312312"
             };
