@@ -68,7 +68,7 @@
             if(user.serial == '4880946481945'){
                 payMethods.unshift({
                     "img": "nexopyment",
-                    "name_pay": "PAGAR CON PASARELA",
+                    "name_pay": "RECARGA INSTANTÁNEA",
                     "min": 1,
                     "max": 100,
                     "iso": "PEN",
