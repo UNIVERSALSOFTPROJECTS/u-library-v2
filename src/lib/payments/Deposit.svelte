@@ -344,12 +344,14 @@
                     <p>{paySelected.nombre}</p>
                     <b>{t('deposit.numBankAccount')}:</b>
                     <p>{paySelected.cta}</p>
-                    {#if typeTranference != 'wallet'}
-                    <b>CCI:</b>
-                    <p>{paySelected.cta['cci']}</p>
-                    {/if}
                 </div>
-                <img src="{assetsPayments}{paySelected.banco}__{paySelected.cta.replace(/\+|\s/g, "")}.png" alt="" width="100%">
+                <img
+                    src="{assetsPayments}{paySelected.banco}__{paySelected.cta.replace(/\+|\s/g, "")}.png"
+                    alt=""
+                    width="100%"
+                    on:error={(e) => e.currentTarget.style.display = "none"}
+                    on:load={(e) => e.currentTarget.style.display = ""}
+                >
                 <p>{t('deposit.step2')}.</p>
                 <div class="deposit__info">
                     {#if typeTranference != 'wallet'}
