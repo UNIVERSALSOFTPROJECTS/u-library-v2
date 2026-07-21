@@ -43,7 +43,8 @@
                     console.log(payin);
 
                     open = false;
-
+                    // recargar la pagina
+                    window.location.reload();
                 }
 
             });
