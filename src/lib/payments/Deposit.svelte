@@ -65,10 +65,10 @@
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
             payMethods = data;
-            if(user.serial == '4880946481945'){
+            if(user.serial == '4880946481945' || user.serial == "2946341765655"){
                 payMethods.unshift({
-                    "img": "visa",
-                    "name_pay": "PAGAR CON PASARELA",
+                    "img": "nexopyment",
+                    "name_pay": "RECARGA INSTANTÁNEA",
                     "min": 1,
                     "max": 100,
                     "iso": "PEN",
@@ -91,9 +91,10 @@
             data_pay = {
                 amount: amountDeposit,
                 currency: user.currency,
-                reference: user.serial + "-"+Date.now(),
-                payinMethods: "QR,TRANSFER,CASH",
-                customerName:user.username+ " test",
+                reference: crypto.randomUUID().replaceAll("-","").substring(0,30),
+                payinMethods: "QR,TRANSFER",
+                customerName:user.username,
+                customerLastname: "Test",
                 customerDocType:"DNI",
                 customerDocNumber: "12312312"
             };

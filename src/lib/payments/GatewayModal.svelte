@@ -1,5 +1,6 @@
 <script>
     import { onMount } from 'svelte';
+    import ServerConnection from '../../js/server'
 
     export let open;
     export let data_payin ;
@@ -11,33 +12,22 @@
         try {
             let user = sessionStorage.getItem("user");
             if(!user) return ;
-            // 1. Solicitar firma al backend
-            console.log("data to send ",data_payin)
-            data_payin.amount= data_payin.amount*100;
-            const response = await fetch("https://api-test.usoft-api88.net/wallet-service/webhooks/payment/nxpay/signature", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-token":(JSON.parse(user)).token
-                },
-                body: JSON.stringify(data_payin)
-            });
-
-            const data = await response.json();
-
-            // data.signature
-            // data.timestamp
-
+            data_payin.amount = data_payin.amount*100;
+            let secret_wallet_gateway = ServerConnection.u_user.getSecretGateway();
+            console.log("secret "+secret_wallet_gateway)
+            let response = await ServerConnection.u_user.generateSignatureToOrderPayIn(data_payin,(JSON.parse(user)).token)
+            const data = response.data;
             await loadSdk();
 
             window.PayOrchestrator.render({
                 elementId: "pay-orchestrator-widget",
-                apiKey: "mch_key_SYrD0iFLCwQQRLSc8W6QVALnvcA0yqjG",
+                apiKey: secret_wallet_gateway,
                 amount: data_payin.amount,
                 currency: data_payin.currency,
                 reference: data_payin.reference, 
-                payinMethods: "QR,TRANSFER,CASH",
+                payinMethods: data_payin.payinMethods,
                 customerName: data_payin.customerName,
+                customerLastname: data_payin.customerLastname,
                 customerDocType: data_payin.customerDocType,
                 customerDocNumber: data_payin.customerDocNumber,
                 signature: data.signature,
@@ -53,7 +43,8 @@
                     console.log(payin);
 
                     open = false;
-
+                    // recargar la pagina
+                    window.location.reload();
                 }
 
             });
