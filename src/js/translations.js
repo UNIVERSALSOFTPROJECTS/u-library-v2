@@ -113,6 +113,7 @@ export default {
     "footer.disclaimer": "universalrace.net es operado por Games & More B.V., registrado bajo el número 149948 en Hanchi Snoa 19, Edificio Trias, Curazao. Este sitio web tiene licencia y está regulado por GCB (Junta de Control de Juegos de Curazao) bajo la licencia No. OGL/2023/121/0086.",
     "footer.chatOnLive": "Chat en vivo",
     "footer.conditions_pay_horses": "Condiciones de pago hipicas",
+    "footer.t_c_cashier": "TyC Cajero - Dep/Ret",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Bienvenido a {{platform}}",
     "msg.sucessRegister": "Registro exitoso",
@@ -510,6 +511,7 @@ export default {
   "footer.disclaimer": "universalrace.net est exploité par Games & More B.V., enregistré sous le numéro 149948 à Hanchi Snoa 19, Bâtiment Trias, Curaçao. Ce site est licencié et réglementé par la GCB (Commission de contrôle des jeux de Curaçao) sous la licence No. OGL/2023/121/0086.",
   "footer.chatOnLive": "Chat en direct",
   "footer.conditions_pay_horses": "Conditions de paiement des courses de chevaux",
+  "footer.t_c_cashier": "TyC Cajero - Dep/Ret",
     //---------------MENSAJES-----------------------------
  "msg.sucessLogin": "Bienvenue sur {{platform}}",
   "msg.sucessRegister": "Inscription réussie",
@@ -852,6 +854,7 @@ export default {
     "footer.disclaimer": "universalrace.net  é operado pela Games & More B.V., Registrado sob o número 149948 em Hanchi Snoa 19, Edificio Trias, Curazao. Este site é licenciado e regulamentado pela GCB (Conselho de Controle de Jogos de Curazao) sob licença No. OGL/2023/121/0086.",
     "footer.chatOnLive": "Chat ao vivo",
     "footer.conditions_pay_horses": "Condições de pagamento de corridas de cavalos",
+    "footer.t_c_cashier": "TyC Cajero - Dep/Ret",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Bem-vindo a {{platform}}",
     "msg.duplicateSession": "Sessão duplicada, saindo...",
@@ -1293,6 +1296,7 @@ export default {
     "footer.disclaimer": "universalrace.net is operated by Games & More B.V., registered under number 149948 at Hanchi Snoa 19, Trias Building, Curaçao. This website is licensed and regulated by the GCB (Curaçao Gaming Control Board) under license no. OGL/2023/121/0086.",
     "footer.chatOnLive": "Live chat",
     "footer.conditions_pay_horses": "Conditions of payment for horse racing",
+    "footer.t_c_cashier": "TyC Cajero - Dep/Ret",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Welcome to {{platform}}",
     "msg.sucessRegister": "Successful registration",
