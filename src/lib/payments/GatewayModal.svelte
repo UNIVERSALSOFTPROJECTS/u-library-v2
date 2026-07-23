@@ -19,7 +19,7 @@
             const data = response.data;
             await loadSdk();
 
-            window.PayOrchestrator.render({
+            window.NexoPay.render({
                 elementId: "pay-orchestrator-widget",
                 apiKey: secret_wallet_gateway,
                 amount: data_payin.amount,
