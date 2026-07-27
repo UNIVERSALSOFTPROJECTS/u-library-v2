@@ -34,6 +34,13 @@
   }
 
   async function launchSportbook() {
+    const hasPersistedUserSession =
+      typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("user");
+
+    if (userState != "loggedIn" && hasPersistedUserSession && !options?.gameToken) {
+      return;
+    }
+
     const nextKey = `${userState}|${active_view}|${options?.gameToken || ""}|${CLIENT_CODE}|${GAMEAPI_URL}`;
     if (!GAMEAPI_URL || requestKey == nextKey) return;
     requestKey = nextKey;
