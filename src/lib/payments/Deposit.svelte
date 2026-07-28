@@ -160,7 +160,7 @@
         //solo para peru
         if (paySelected.banco === "YAPE" || paySelected.banco === "PLIN" || paySelected.banco === "DE UNA") {
             typeTranference = 'wallet';
-        }else if(paySelected.banco === "Banco R4"){
+        }else if((paySelected.banco || "").toLowerCase().includes("r4")){
             typeTranference = 'r4';
         }
         else{
