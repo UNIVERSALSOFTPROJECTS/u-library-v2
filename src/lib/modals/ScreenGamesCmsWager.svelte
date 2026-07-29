@@ -39,6 +39,9 @@
     let launchKey = "";
     let appContent;
     let activeLaunchKey = "";
+    let ifrContentTreeObserver = null;
+    let ifrContentStyleObserver = null;
+    let guardedIfrContent = null;
     let terminalConfig = {
         exttoken: "",
         clientApi: "",
@@ -65,20 +68,89 @@
         }
     }
 
-    function resetTerminalConfig() {
-        terminalConfig = {
-            exttoken: "",
-            clientApi: "",
-            logo: "",
-        };
+    function stripIfrContentInlineStyles(el) {
+        if (!el) return;
+        if (el.getAttribute("style") || el.style.cssText) {
+            el.removeAttribute("style");
+            el.style.cssText = "";
+            console.info("CMSWager #ifrContent inline styles removed");
+        }
+    }
+
+    function stopIfrContentStyleWatcher() {
+        if (ifrContentTreeObserver) {
+            ifrContentTreeObserver.disconnect();
+            ifrContentTreeObserver = null;
+        }
+        if (ifrContentStyleObserver) {
+            ifrContentStyleObserver.disconnect();
+            ifrContentStyleObserver = null;
+        }
+        guardedIfrContent = null;
+    }
+
+    function bindIfrContentStyleGuard(el) {
+        stripIfrContentInlineStyles(el);
+        if (guardedIfrContent === el && ifrContentStyleObserver) return;
+
+        if (ifrContentStyleObserver) {
+            ifrContentStyleObserver.disconnect();
+            ifrContentStyleObserver = null;
+        }
+        guardedIfrContent = el;
+        ifrContentStyleObserver = new MutationObserver(() => {
+            stripIfrContentInlineStyles(el);
+        });
+        ifrContentStyleObserver.observe(el, {
+            attributes: true,
+            attributeFilter: ["style"],
+        });
+    }
+
+    function findIfrContent() {
+        return (
+            document.getElementById("ifrContent") ||
+            appContent?.querySelector("#ifrContent") ||
+            null
+        );
+    }
+
+    function startIfrContentStyleWatcher() {
+        stopIfrContentStyleWatcher();
+
+        const existing = findIfrContent();
+        if (existing) {
+            bindIfrContentStyleGuard(existing);
+        }
+
+        const root = appContent || document.body;
+        if (!root) return;
+
+        ifrContentTreeObserver = new MutationObserver(() => {
+            const el = findIfrContent();
+            if (el) bindIfrContentStyleGuard(el);
+        });
+        ifrContentTreeObserver.observe(root, {
+            childList: true,
+            subtree: true,
+        });
     }
 
     function clearState() {
         loadCmsWager = false;
         errorMessage = "";
         activeLaunchKey = "";
+        stopIfrContentStyleWatcher();
         clearContainer();
         resetTerminalConfig();
+    }
+
+    function resetTerminalConfig() {
+        terminalConfig = {
+            exttoken: "",
+            clientApi: "",
+            logo: "",
+        };
     }
 
     function applyTerminalDescriptor(params) {
@@ -124,6 +196,7 @@
         iframe.style.height = "100%";
         iframe.style.border = "0";
         appContent.appendChild(iframe);
+        startIfrContentStyleWatcher();
     }
 
     function appendExtTokenToUrl(urlValue, exttoken) {
@@ -158,7 +231,6 @@
         console.info("CMSWager iframe exttoken appended", {
             iframeSrc: patchedSrc,
         });
-        iframe.removeAttribute("style");
         return true;
     }
 
@@ -322,6 +394,7 @@
                 params.defaultPage || "sport"
             );
             ensureBootstrapIframeExtToken(params.exttoken);
+            startIfrContentStyleWatcher();
 
             console.log("CMSWager sportbook started", {
                 gameId,
@@ -458,6 +531,7 @@
     onDestroy(() => {
         requestVersion += 1;
         clearState();
+        stopIfrContentStyleWatcher();
         window.removeEventListener("resize", resizeHeightModal);
         window.removeEventListener("message", handleMessage);
     });
