@@ -120,8 +120,10 @@
         iframe.setAttribute("frameborder", "0");
         iframe.setAttribute("allowfullscreen", "true");
         iframe.setAttribute("title", "cmswager-terminal");
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "0";
         appContent.appendChild(iframe);
-        iframe.removeAttribute("style");
     }
 
     function appendExtTokenToUrl(urlValue, exttoken) {
@@ -156,6 +158,7 @@
         console.info("CMSWager iframe exttoken appended", {
             iframeSrc: patchedSrc,
         });
+        iframe.removeAttribute("style");
         return true;
     }
 
@@ -494,7 +497,7 @@
 {#if open}
     {#if embedded}
         <div class="cmswager-inline" use:watchResize={resizeHeightModal}>
-            <div class="cmswager-inline__body" style="height:{heightModal - 56}px">
+            <div class="cmswager-inline__body" style="height:{heightModal}px">
                 <div bind:this={appContent} id="appcontent" class="cmswager-container"></div>
                 {#if loadCmsWager}
                     <div class="screenGames__overlay">
