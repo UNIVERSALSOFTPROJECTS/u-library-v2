@@ -571,7 +571,7 @@
 {#if open}
     {#if embedded}
         <div class="cmswager-inline" use:watchResize={resizeHeightModal}>
-            <div class="cmswager-inline__body" style="height:{heightModal}px">
+            <div class="cmswager-inline__body" style="height:{heightModal - 70}px">
                 <div bind:this={appContent} id="appcontent" class="cmswager-container"></div>
                 {#if loadCmsWager}
                     <div class="screenGames__overlay">
