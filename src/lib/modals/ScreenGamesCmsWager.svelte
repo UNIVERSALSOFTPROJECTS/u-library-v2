@@ -120,10 +120,8 @@
         iframe.setAttribute("frameborder", "0");
         iframe.setAttribute("allowfullscreen", "true");
         iframe.setAttribute("title", "cmswager-terminal");
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.border = "0";
         appContent.appendChild(iframe);
+        iframe.removeAttribute("style");
     }
 
     function appendExtTokenToUrl(urlValue, exttoken) {
