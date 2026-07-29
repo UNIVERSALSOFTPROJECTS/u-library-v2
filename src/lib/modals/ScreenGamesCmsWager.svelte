@@ -28,6 +28,7 @@
     export let launchDescriptor = null;
     export let embedded = true;
     export let onTerminalEvent = () => {};
+    export let headerHeight = 70;
 
     const dispatch = createEventDispatcher();
 
@@ -39,9 +40,7 @@
     let launchKey = "";
     let appContent;
     let activeLaunchKey = "";
-    let ifrContentTreeObserver = null;
-    let ifrContentStyleObserver = null;
-    let guardedIfrContent = null;
+    let ifrContentTimer = null;
     let terminalConfig = {
         exttoken: "",
         clientApi: "",
@@ -68,72 +67,27 @@
         }
     }
 
-    function stripIfrContentInlineStyles(el) {
-        if (!el) return;
-        if (el.getAttribute("style") || el.style.cssText) {
-            el.removeAttribute("style");
-            el.style.cssText = "";
-            console.info("CMSWager #ifrContent inline styles removed");
-        }
-    }
-
     function stopIfrContentStyleWatcher() {
-        if (ifrContentTreeObserver) {
-            ifrContentTreeObserver.disconnect();
-            ifrContentTreeObserver = null;
+        if (ifrContentTimer) {
+            clearInterval(ifrContentTimer);
+            ifrContentTimer = null;
         }
-        if (ifrContentStyleObserver) {
-            ifrContentStyleObserver.disconnect();
-            ifrContentStyleObserver = null;
-        }
-        guardedIfrContent = null;
-    }
-
-    function bindIfrContentStyleGuard(el) {
-        stripIfrContentInlineStyles(el);
-        if (guardedIfrContent === el && ifrContentStyleObserver) return;
-
-        if (ifrContentStyleObserver) {
-            ifrContentStyleObserver.disconnect();
-            ifrContentStyleObserver = null;
-        }
-        guardedIfrContent = el;
-        ifrContentStyleObserver = new MutationObserver(() => {
-            stripIfrContentInlineStyles(el);
-        });
-        ifrContentStyleObserver.observe(el, {
-            attributes: true,
-            attributeFilter: ["style"],
-        });
-    }
-
-    function findIfrContent() {
-        return (
-            document.getElementById("ifrContent") ||
-            appContent?.querySelector("#ifrContent") ||
-            null
-        );
     }
 
     function startIfrContentStyleWatcher() {
         stopIfrContentStyleWatcher();
-
-        const existing = findIfrContent();
-        if (existing) {
-            bindIfrContentStyleGuard(existing);
-        }
-
-        const root = appContent || document.body;
-        if (!root) return;
-
-        ifrContentTreeObserver = new MutationObserver(() => {
-            const el = findIfrContent();
-            if (el) bindIfrContentStyleGuard(el);
-        });
-        ifrContentTreeObserver.observe(root, {
-            childList: true,
-            subtree: true,
-        });
+        let attempts = 0;
+        ifrContentTimer = setInterval(() => {
+            const el = document.getElementById("ifrContent");
+            attempts += 1;
+            if (el) {
+                el.removeAttribute("style");
+                el.style.cssText = "";
+                stopIfrContentStyleWatcher();
+                return;
+            }
+            if (attempts >= 30) stopIfrContentStyleWatcher();
+        }, 1000);
     }
 
     function clearState() {
@@ -571,7 +525,7 @@
 {#if open}
     {#if embedded}
         <div class="cmswager-inline" use:watchResize={resizeHeightModal}>
-            <div class="cmswager-inline__body" style="height:{heightModal - 70}px">
+            <div class="cmswager-inline__body" style="height:{heightModal - headerHeight}px">
                 <div bind:this={appContent} id="appcontent" class="cmswager-container"></div>
                 {#if loadCmsWager}
                     <div class="screenGames__overlay">
