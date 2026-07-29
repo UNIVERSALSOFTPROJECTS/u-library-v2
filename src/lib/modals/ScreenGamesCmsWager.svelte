@@ -46,7 +46,7 @@
     };
 
     const resizeHeightModal = () => {
-        heightModal = visualViewport?.height || window.innerHeight;
+        heightModal = visualViewport?.height || window.innerHeight - 56;
     };
 
     function statusModal(isActive) {
