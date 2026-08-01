@@ -378,8 +378,8 @@
 
                     <p>{t('deposit.numAccount')}</p>
                     <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
-                    <input type="number" class="ipt" bind:value={bankDeposit.aditional} on:input={inputJustNumbers}>
-                    <input type="number" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
+                    <input type="text" class="ipt" bind:value={bankDeposit.aditional} on:input={inputJustNumbers}>
+                    <input type="text" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
                     {/if}
                     <p>{t('withdrawal.amount')}</p>
                     <p>{t('deposit.transferDate')}</p>
