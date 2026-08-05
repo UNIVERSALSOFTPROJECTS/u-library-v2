@@ -76,6 +76,7 @@
         });
     }
     onMount(async () => {
+        document.body.style.overflow = "";
         try {
             fetchedExtToken = await fetchGoldenRaceToken();
             await loadScript();

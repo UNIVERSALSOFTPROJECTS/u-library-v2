@@ -28,7 +28,7 @@
     export let launchDescriptor = null;
     export let embedded = true;
     export let onTerminalEvent = () => {};
-    export let headerHeight = 70;
+    export let headerHeight = 60;
 
     const dispatch = createEventDispatcher();
 
@@ -480,6 +480,7 @@
         resizeHeightModal();
         window.addEventListener("resize", resizeHeightModal);
         window.addEventListener("message", handleMessage);
+        document.body.style.overflow = "";
     });
 
     onDestroy(() => {
