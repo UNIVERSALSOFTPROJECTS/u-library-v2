@@ -66,7 +66,8 @@
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
             payMethods = data;
-            if(user.serial == '4880946481945' || user.serial == "2946341765655"){
+            let client_code = ServerConnection.users.getClientCode();
+            if(client_code == 'GBPE' ){
                 payMethods.unshift({
                     "img": "nexopyment",
                     "name_pay": "RECARGA INSTANTÁNEA",
