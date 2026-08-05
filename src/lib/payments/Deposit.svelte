@@ -50,6 +50,7 @@
     let viewLinkSafari = false;
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
+    let amountsFavGateway = [50,80,100,200]
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -69,8 +70,8 @@
                 payMethods.unshift({
                     "img": "nexopyment",
                     "name_pay": "RECARGA INSTANTÁNEA",
-                    "min": 1,
-                    "max": 100,
+                    "min": 50,
+                    "max": 500,
                     "iso": "PEN",
                     "virtual": 0,
                     "banco":"GATEWAY_PAY"
@@ -87,6 +88,8 @@
 
     async function validateDeposit(pay){
         if(typeTranference == "GATEWAY_PAY"){
+            if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
+
             OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
@@ -310,7 +313,7 @@
                         {#if typeTranference == 'GATEWAY_PAY' }
                             <div class="deposit__gateway">
                                 <div class="deposit__mounts">
-                                    {#each amountsFav as amount}
+                                    {#each amountsFavGateway as amount}
                                         <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
                                     {/each}  
                                 </div>
