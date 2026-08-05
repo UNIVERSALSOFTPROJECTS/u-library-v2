@@ -1,5 +1,5 @@
 <script>
-    import { onDestroy } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import backend from '../../js/server.js';
 
     export let user;
@@ -33,6 +33,9 @@
     }
     onDestroy(() => {
         document.body.style.overflow = "scroll";
+    });
+    onMount(() => {
+        document.body.style.overflow = "";
     });
 </script>
 
@@ -75,23 +78,5 @@
     .horses-iframe {
         border: none;
         display: block;
-    }
-    @media only screen and (max-width: 1199px) {
-        .horses-content {
-            width: 100%;
-        }
-        .horses-iframe {
-            height: 100%;
-            width: 100%;
-        }
-    }
-    @media only screen and (min-width: 1200px) {
-        .horses-content {
-            width: 98.9vw;
-        }
-        .horses-iframe {
-            width: 100%;
-            height: 100%;
-        }
     }
 </style>
