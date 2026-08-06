@@ -50,6 +50,7 @@
     let viewLinkSafari = false;
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
+    let amountsFavGateway = [50,80,100,200]
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -65,12 +66,13 @@
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
             payMethods = data;
-            if(user.serial == '4880946481945' || user.serial == "2946341765655"){
+            let client_code = ServerConnection.users.getClientCode();
+            if(client_code == 'GBPE' ){
                 payMethods.unshift({
                     "img": "nexopyment",
                     "name_pay": "RECARGA INSTANTÁNEA",
-                    "min": 1,
-                    "max": 100,
+                    "min": 50,
+                    "max": 500,
                     "iso": "PEN",
                     "virtual": 0,
                     "banco":"GATEWAY_PAY"
@@ -87,6 +89,8 @@
 
     async function validateDeposit(pay){
         if(typeTranference == "GATEWAY_PAY"){
+            if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
+            else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
             OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
@@ -310,7 +314,7 @@
                         {#if typeTranference == 'GATEWAY_PAY' }
                             <div class="deposit__gateway">
                                 <div class="deposit__mounts">
-                                    {#each amountsFav as amount}
+                                    {#each amountsFavGateway as amount}
                                         <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
                                     {/each}  
                                 </div>
