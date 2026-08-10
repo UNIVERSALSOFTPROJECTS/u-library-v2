@@ -14,6 +14,8 @@
   let sportbookGameUrl = '';
   let viewSportbook = true;
   let mode = ut.isMobile() ? "mb" : "wb";
+  let mounted = false;
+  let previousLocale = locale;
 
   const first_id = "first_2024";
 
@@ -52,6 +54,7 @@
 
   onMount(()=>{
     console.log("UserState", userState);
+    mounted = true;
   });
   
   $: {
@@ -93,7 +96,10 @@
   });
 
 
-  $:resetSportbook(locale);
+  $: if (mounted && locale !== previousLocale) {
+    previousLocale = locale;
+    resetSportbook(locale);
+  }
 </script>
 
 <div class="sportbook-content">
