@@ -9,10 +9,11 @@ const ServerConnection = (() => {
 
     const setConfig = (config) => {
         conf = config;
+        const shouldSendTenantHeader = conf["x-tenant"] && conf.platform !== "DemoPlatform";
         headers = {
             "Content-Type": "application/json;charset=UTF-8",
             "site-id": conf.SITE_ID,
-            "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, ...(conf["x-tenant"] ? { "X-Tenant": conf["x-tenant"] } : {}),
+            "clientAuth": conf.CLIENT_AUTH, "client": conf.CLIENT_CODE, ...(shouldSendTenantHeader ? { "X-Tenant": conf["x-tenant"] } : {}),
             "Accept": "*",
         };
     }
@@ -61,6 +62,9 @@ const ServerConnection = (() => {
         },
     }
     const users = {
+        getClientCode: () => {
+            return conf.CLIENT_CODE;
+        },
         getBalance: (userToken) => {
             let url = conf.API_KS + `/balance/${userToken}`;
             return axios.get(url, { headers });

@@ -28,6 +28,7 @@
     export let launchDescriptor = null;
     export let embedded = true;
     export let onTerminalEvent = () => {};
+    export let headerHeight = 60;
 
     const dispatch = createEventDispatcher();
 
@@ -39,6 +40,7 @@
     let launchKey = "";
     let appContent;
     let activeLaunchKey = "";
+    let ifrContentTimer = null;
     let terminalConfig = {
         exttoken: "",
         clientApi: "",
@@ -65,20 +67,44 @@
         }
     }
 
-    function resetTerminalConfig() {
-        terminalConfig = {
-            exttoken: "",
-            clientApi: "",
-            logo: "",
-        };
+    function stopIfrContentStyleWatcher() {
+        if (ifrContentTimer) {
+            clearInterval(ifrContentTimer);
+            ifrContentTimer = null;
+        }
+    }
+
+    function startIfrContentStyleWatcher() {
+        stopIfrContentStyleWatcher();
+        let attempts = 0;
+        ifrContentTimer = setInterval(() => {
+            const el = document.getElementById("ifrContent");
+            attempts += 1;
+            if (el) {
+                el.removeAttribute("style");
+                el.style.cssText = "";
+                stopIfrContentStyleWatcher();
+                return;
+            }
+            if (attempts >= 30) stopIfrContentStyleWatcher();
+        }, 1000);
     }
 
     function clearState() {
         loadCmsWager = false;
         errorMessage = "";
         activeLaunchKey = "";
+        stopIfrContentStyleWatcher();
         clearContainer();
         resetTerminalConfig();
+    }
+
+    function resetTerminalConfig() {
+        terminalConfig = {
+            exttoken: "",
+            clientApi: "",
+            logo: "",
+        };
     }
 
     function applyTerminalDescriptor(params) {
@@ -124,6 +150,7 @@
         iframe.style.height = "100%";
         iframe.style.border = "0";
         appContent.appendChild(iframe);
+        startIfrContentStyleWatcher();
     }
 
     function appendExtTokenToUrl(urlValue, exttoken) {
@@ -321,6 +348,7 @@
                 params.defaultPage || "sport"
             );
             ensureBootstrapIframeExtToken(params.exttoken);
+            startIfrContentStyleWatcher();
 
             console.log("CMSWager sportbook started", {
                 gameId,
@@ -452,11 +480,13 @@
         resizeHeightModal();
         window.addEventListener("resize", resizeHeightModal);
         window.addEventListener("message", handleMessage);
+        document.body.style.overflow = "";
     });
 
     onDestroy(() => {
         requestVersion += 1;
         clearState();
+        stopIfrContentStyleWatcher();
         window.removeEventListener("resize", resizeHeightModal);
         window.removeEventListener("message", handleMessage);
     });
@@ -496,7 +526,7 @@
 {#if open}
     {#if embedded}
         <div class="cmswager-inline" use:watchResize={resizeHeightModal}>
-            <div class="cmswager-inline__body" style="height:{heightModal}px">
+            <div class="cmswager-inline__body" style="height:{heightModal - headerHeight}px">
                 <div bind:this={appContent} id="appcontent" class="cmswager-container"></div>
                 {#if loadCmsWager}
                     <div class="screenGames__overlay">

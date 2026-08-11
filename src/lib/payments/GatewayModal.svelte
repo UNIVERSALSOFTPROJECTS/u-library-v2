@@ -18,6 +18,13 @@
             let response = await ServerConnection.u_user.generateSignatureToOrderPayIn(data_payin,(JSON.parse(user)).token)
             const data = response.data;
             await loadSdk();
+            // si customerDocType es vacio enviar DNI , cuando es cedula enviar DNI
+            // si customerDocNumber vacio o 0 enviar 12312312
+            data_payin.customerName = data.customerName || data_payin.customerName ; 
+            data_payin.customerLastname = data.customerLastname || "Test"; 
+            data_payin.customerDocType = data.customerDocType || "DNI" ; 
+            data_payin.customerDocNumber = data.customerDocNumber || data_payin.customerDocNumber; 
+
 
             window.NexoPay.render({
                 elementId: "pay-orchestrator-widget",
