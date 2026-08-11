@@ -10,7 +10,7 @@
   export let options;
   export let GAMEAPI_URL;
   export let CLIENT_CODE;
-  export let mode;
+  export let mode_bussines;
 
   let sportbookGameUrl = '';
   let viewSportbook = true;
@@ -92,7 +92,7 @@
         const data = await backend.game.getURL(url);
         url = data.url
       }else{
-        if(mode === 'retail') url = guestURLSRetail[CLIENT_CODE] || guestURLSRetail.default; 
+        if(mode_bussines === 'retail') url = guestURLSRetail[CLIENT_CODE] || guestURLSRetail.default; 
         else url = guestURLs[CLIENT_CODE] || guestURLs.default;
       }
       sportbookGameUrl = url;
