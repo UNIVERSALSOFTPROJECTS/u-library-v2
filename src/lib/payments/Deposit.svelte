@@ -50,7 +50,7 @@
     let viewLinkSafari = false;
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
-    let amountsFavGateway = [50,80,100,200]
+    let amountsFavGateway = [1,20,50,100,200]
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
