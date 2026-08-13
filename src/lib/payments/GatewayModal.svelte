@@ -14,7 +14,8 @@
             if(!user) return ;
             data_payin.amount = data_payin.amount*100;
             let secret_wallet_gateway = ServerConnection.u_user.getSecretGateway();
-            let response = await ServerConnection.u_user.generateSignatureToOrderPayIn(data_payin,(JSON.parse(user)).token)
+            let user_recharge = JSON.parse(user);
+            let response = await ServerConnection.u_user.generateSignatureToOrderPayIn(data_payin,user_recharge.token+"_"+user_recharge.id+"_"+user_recharge.username);
             let data = response.data;
             await loadSdk();
             // si customerDocType es vacio enviar DNI , cuando es cedula enviar DNI
