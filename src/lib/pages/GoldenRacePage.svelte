@@ -20,6 +20,7 @@
     };
     let loader = null;
     let fetchedExtToken = null;
+    let fetchedCashierUrl = null;
     $: containerId = CONTAINER_IDS[mode];
     function buildConfig() {
         const cfg = {
@@ -38,6 +39,7 @@
             const launchUrl = `${GAMEAPI_URL}/launch?gameid=grv_2026&p=grv&b=GoldenRace&m=wb&sessionid=${gameToken}&r=url`;
             const launchData = await backend.game.getURL(launchUrl);
             if (launchData.status === "READY" && launchData.onlineHash) {
+                fetchedCashierUrl = launchData.cashierUrl;
                 return launchData.onlineHash;
             }
             throw new Error("No se recibió un onlineHash válido.");
@@ -64,11 +66,12 @@
     }
     function loadScript() {
         if (mode !== "terminal" && mode !== "cashier") return Promise.resolve();
-
+        const scriptSrc = mode === "cashier" ? fetchedCashierUrl : URLS[mode];
+        if (!scriptSrc) return Promise.reject(new Error(`Fallo al cargar script para: ${mode} (cashierUrl ausente en la respuesta del backend)`));
         return new Promise((resolve, reject) => {
             if (document.getElementById(SCRIPT_IDS[mode])) return resolve();
             const script = document.createElement("script");
-            script.src = URLS[mode];
+            script.src = scriptSrc;
             script.id  = SCRIPT_IDS[mode];
             script.onload  = () => resolve();
             script.onerror = () => reject(new Error(`Fallo al cargar script para: ${mode}`));
