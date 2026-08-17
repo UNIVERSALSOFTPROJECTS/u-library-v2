@@ -50,6 +50,7 @@
     BSVD: "https://prod20370-225938690.freethrow777.com",
     FBET: "https://prod20370-225939107.freethrow777.com", 
     WINP: "https://prod20370-225938029.freethrow777.com", 
+    PNCO: "https://prod20370-225938029.freethrow777.com", 
     default: "https://prod20370-150256248.freethrow777.com",
   };
   
