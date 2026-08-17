@@ -75,6 +75,10 @@
   const guestURLbetw3BPECLive = "https://sports2.sw3data.com/?target=86224&name=win365ec#/?target=win365ec-86224-integration&view=live"
   const guestURLbetw3GBEC = "https://sports2.sw3data.com/?target=86224&name=ganabet365ec#/?target=ganabet365ec-86224-integration"
   const guestURLbetw3GBECLive ="https://sports2.sw3data.com/?target=86224&name=ganabet365ec#/?target=ganabet365ec-86224-integration&view=live"
+  const guestURLacpe ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
+  const guestURLacpeLive ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
+  const guestURLacec ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
+  const guestURLacecLive ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
 
 
 
@@ -408,6 +412,13 @@ function RESELLER (params) {
         }
         else if (CLIENT_CODE == "GBEC") {
           url = active_view == "sportbooklive" ? guestURLbetw3GBECLive : guestURLbetw3GBEC ;
+        }
+
+        else if (CLIENT_CODE == "ACPE") {
+          url = active_view == "sportbooklive" ? guestURLacpeLive : guestURLacpe;
+        }
+        else if (CLIENT_CODE == "ACEC") {
+          url = active_view == "sportbooklive" ? guestURLacecLive : guestURLacec;
         }
 
       else{
