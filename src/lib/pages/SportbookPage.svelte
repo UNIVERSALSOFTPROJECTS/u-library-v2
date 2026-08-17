@@ -77,8 +77,8 @@
   const guestURLbetw3GBECLive ="https://sports2.sw3data.com/?target=86224&name=ganabet365ec#/?target=ganabet365ec-86224-integration&view=live"
   const guestURLacpe ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
   const guestURLacpeLive ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
-  const guestURLacec ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
-  const guestURLacecLive ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
+  const guestURLacec ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail2_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37b48bda1906f6e6a995&userMode=retail"
+  const guestURLacecLive ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail2_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37b48bda1906f6e6a995&userMode=retail&view=live"
 
 
 
