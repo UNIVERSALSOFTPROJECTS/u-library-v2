@@ -64,6 +64,7 @@ const ServerConnection = (() => {
     const users = {
         getClientCode: () => {
             return conf.CLIENT_CODE;
+
         },
         getBalance: (userToken) => {
             let url = conf.API_KS + `/balance/${userToken}`;

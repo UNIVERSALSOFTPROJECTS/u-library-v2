@@ -67,6 +67,7 @@
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
             payMethods = data;
             let client_code = ServerConnection.users.getClientCode();
+            //traert los datos del frontend de ganabet
             if(client_code == 'GBPE' ){
                 payMethods.unshift({
                     "img": "nexopyment",
@@ -77,7 +78,7 @@
                     "virtual": 0,
                     "banco":"GATEWAY_PAY"
                     }
-                );
+                ); // quitar
             }
             loadDeposit = false;
 		} catch (error) {
