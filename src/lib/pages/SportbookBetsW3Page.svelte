@@ -44,6 +44,11 @@
     const guestURLurco ="https://sports2.jcasino.live/?target=86224&name=couniversalrace#/?target=couniversalrace-86224-integration&token=123456789"
     const guestURLurcoLive ="https://sports2.jcasino.live/?target=86224&name=couniversalrace#/live_ecuabets/?target=couniversalrace-86224-integration&token=123456789"
 
+    const guestURLacpe ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
+    const guestURLacpeLive ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
+    const guestURLacec ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
+    const guestURLacecLive ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
+
     const guestURLs = {
       BPEN: {
         live: guestURLLive,
@@ -76,6 +81,14 @@
       URCO:{
         live: guestURLurcoLive,
         default: guestURLurco,
+      },
+      ACPE:{
+        live: guestURLacpeLive,
+        default: guestURLacpe,
+      },
+      ACEC:{
+        live: guestURLacecLive,
+        default: guestURLacec,
       },
       default: {
         live: guestURLLJLive,
