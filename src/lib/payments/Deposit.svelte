@@ -43,6 +43,7 @@
     let banksOrigin = configDeposit.banksOrigin || [];
     let originBankJustText = configDeposit.originBankJustText || false;
     let imgR4 = configDeposit.imgR4 || "";
+    let gateways = configDeposit.gateways || [];
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
@@ -50,7 +51,6 @@
     let viewLinkSafari = false;
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
-    let amountsFavGateway = [1,20,50,100,200]
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -65,21 +65,11 @@
             bankPayments = data.filter((e) => e.virtual == 0);
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
-            payMethods = data;
-            let client_code = ServerConnection.users.getClientCode();
-            //traert los datos del frontend de ganabet
-            if(client_code == 'GBPE' ){
-                payMethods.unshift({
-                    "img": "nexopyment",
-                    "name_pay": "RECARGA INSTANTÁNEA",
-                    "min": 1,
-                    "max": 500,
-                    "iso": "PEN",
-                    "virtual": 0,
-                    "banco":"GATEWAY_PAY"
-                    }
-                ); // quitar
-            }
+            //las pasarelas las declara cada frontend en configDeposit.gateways
+            payMethods = [
+                ...gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" })),
+                ...data
+            ];
             loadDeposit = false;
 		} catch (error) {
             console.log(error);
@@ -95,9 +85,9 @@
             OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
-                currency: user.currency,
+                currency: pay.currency || user.currency,
                 reference: crypto.randomUUID().replaceAll("-","").substring(0,30),
-                payinMethods: "QR,TRANSFER",
+                payinMethods: pay.payinMethods || "QR,TRANSFER",
                 customerName:user.username,
                 customerLastname: "Test",
                 customerDocType:"DNI",
@@ -304,7 +294,7 @@
                     <div class="deposit__info">
                         {#if typeTranference == 'GATEWAY_PAY' }
                             <p>{t('deposit.typeTransfer')}:</p><p>Automatico</p>
-                            <p>{t('deposit.processingTime')}:</p><p>1-3 minutos</p>
+                            <p>{t('deposit.processingTime')}:</p><p>{paySelected.processingTime || ""}</p>
                         {:else}
                             <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
                             <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
@@ -315,7 +305,7 @@
                         {#if typeTranference == 'GATEWAY_PAY' }
                             <div class="deposit__gateway">
                                 <div class="deposit__mounts">
-                                    {#each amountsFavGateway as amount}
+                                    {#each (paySelected.amountsFav || amountsFav) as amount}
                                         <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
                                     {/each}  
                                 </div>
