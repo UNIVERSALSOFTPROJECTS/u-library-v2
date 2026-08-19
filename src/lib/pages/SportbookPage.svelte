@@ -86,7 +86,6 @@
   const guestURLacecLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail2_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37b48bda1906f6e6a995&userMode=retail&view=live"
 
 
-
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${mode}`;

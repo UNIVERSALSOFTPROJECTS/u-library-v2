@@ -111,7 +111,6 @@
         return clientURLs.default[mode] || clientURLs.default;
     };
 
-
     const games = {
       'BetW3':{
         gameid: bw3_id,
