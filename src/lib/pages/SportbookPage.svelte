@@ -41,6 +41,7 @@
   const bbq_id = "sport-betbuq";
   const pnc_id = "902-pinnacle";
   const bw3_id = "betsw3_2024";
+  const bw3_v2_id = "betsw3_v2";
   const panda_id = "1_SBO_1053_ThirdPartySportsBook";
   const AFB_id = "0_SBO_1015_ThirdPartySportsBook";
   const frst_id = "first_2024";
@@ -166,6 +167,12 @@
       id:93326
     }
   }
+
+  const isBetsw3GameId = (gameid) => [bw3_id, bw3_v2_id].includes(gameid);
+  const getBetsw3Game = () => ({
+    ...games.BetW3,
+    gameid: isBetsw3GameId(options?.gameid) ? options.gameid : games.BetW3.gameid,
+  });
   
   onMount(()=>{
     console.log("lang", lang)
@@ -214,7 +221,7 @@
     else if (options.gameid == nvb_id) openNovusbet();
     else if (options.gameid == bbq_id) openBBQ();
     else if (options.gameid == pnc_id) openPinnacle();
-    else if (options.gameid == bw3_id) openBetsW3();
+    else if (isBetsw3GameId(options.gameid)) openBetsW3();
     else if (options.gameid == frst_id) openFirst();
     else if (options.gameid == cmsw_id) openCmsWager();
   }
@@ -362,7 +369,7 @@ function RESELLER (params) {
   const openBetsW3 = async () => { 
     let url;
     if (userState == "loggedIn") {
-      url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
+      url = ut.getGameURL(GAMEAPI_URL, getBetsw3Game(), options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
       sportbookskin?url += `&skin=${sportbookskin}`: ""; // just for xlive365

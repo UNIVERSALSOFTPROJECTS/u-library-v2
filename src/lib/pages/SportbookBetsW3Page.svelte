@@ -20,6 +20,7 @@
 
  
     const bw3_id = "betsw3_2024";
+    const bw3_v2_id = "betsw3_v2";
     
     const guestURLbt1Live="https://sports2.jcasino.live/?target=86224&name=betsson3#/?target=betsson3-86224-integration&view=live&token=123456789";
     // const guestURLbt1Live="https://sports.jcasino.live/#/live_ecuabets/?target=betsson1-86224-integration&token=123456789";
@@ -106,15 +107,21 @@
     };
 
 
-  const games = {
-    'BetW3':{
-      gameid: bw3_id,
-      provider: "betsw3",
-      brand: "BETSW3",
-      mode,
-      id: 125072
-    }
-  }
+    const games = {
+      'BetW3':{
+        gameid: bw3_id,
+        provider: "betsw3",
+        brand: "BETSW3",
+        mode,
+        id: 125072
+      }
+    };
+
+    const isBetsw3GameId = (gameid) => [bw3_id, bw3_v2_id].includes(gameid);
+    const getBetsw3Game = () => ({
+        ...games.BetW3,
+        gameid: isBetsw3GameId(options?.gameid) ? options.gameid : games.BetW3.gameid,
+    });
   
   onMount(()=>{
     console.log("CLIENT_CODE", CLIENT_CODE);
@@ -137,7 +144,7 @@
       console.log(mode, "mode");
       try {
         if (userState === "loggedIn") {
-          url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken);
+          url = ut.getGameURL(GAMEAPI_URL, getBetsw3Game(), options.gameToken);
           url += active_view === "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
           url += `&lang=${lang}&r=url`;  
           if (CLIENT_CODE == 'PRLS') url += `&game_multiple=true`;
