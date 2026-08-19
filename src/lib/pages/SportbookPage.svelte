@@ -85,6 +85,8 @@
   const guestURLacec2 ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail2_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37b48bda1906f6e6a995&userMode=retail"
   const guestURLacecLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail2_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37b48bda1906f6e6a995&userMode=retail&view=live"
 
+
+
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${mode}`;
@@ -188,28 +190,18 @@
     GBEC: { live: guestURLbetw3GBECLive, default: guestURLbetw3GBEC },
   };
   const betsw3V2GuestUrlsByClient = {
-    ACPE: {
-      "1": { live: guestURLacpeLive1, default: guestURLacpe1 },
-      "2": { live: guestURLacpeLive2, default: guestURLacpe2 },
-    },
-    ACEC: {
-      "1": { live: guestURLacecLive1, default: guestURLacec1 },
-      "2": { live: guestURLacecLive2, default: guestURLacec2 },
-    },
+    ACPE: { live: guestURLacpeLive1, default: guestURLacpe1 },
+    ACEC: { live: guestURLacecLive1, default: guestURLacec1 },
   };
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
     const normalizedClientCode = String(clientCode ?? "").trim().toUpperCase();
     const isLiveView = view == "sportbooklive";
-    const normalizedSkin = String(skin ?? "").trim() == "2" ? "2" : "1";
 
     if (normalizedClientCode == "XLIV" && skin == "2") {
       return guestURLbetw3XLIVLiveSKIN2;
     }
 
-    const v2Entry =
-      gameid == bw3_v2_id
-        ? betsw3V2GuestUrlsByClient[normalizedClientCode]?.[normalizedSkin]
-        : null;
+    const v2Entry = gameid == bw3_v2_id ? betsw3V2GuestUrlsByClient[normalizedClientCode] : null;
     if (v2Entry) {
       return isLiveView ? v2Entry.live : v2Entry.default;
     }
