@@ -59,21 +59,21 @@
     }
 
     async function getPayMethods() {
+        //las pasarelas las declara cada frontend en configDeposit.gateways, no dependen del feed
+        const gatewayMethods = gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" }));
         try {
             loadDeposit = true;
             const {data} = await ServerConnection.wallet.getPayMethods(user.token);
             bankPayments = data.filter((e) => e.virtual == 0);
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
-            //las pasarelas las declara cada frontend en configDeposit.gateways
-            payMethods = [
-                ...gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" })),
-                ...data
-            ];
+            payMethods = [...gatewayMethods, ...data];
             loadDeposit = false;
 		} catch (error) {
             console.log(error);
-			onError(t("msg.contactSupport"));
+            //si el feed de bancos falla igual se muestran las pasarelas configuradas
+            payMethods = gatewayMethods;
+            if (gatewayMethods.length === 0) onError(t("msg.contactSupport"));
             loadDeposit = false;
 		}
     }
