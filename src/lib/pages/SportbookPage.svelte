@@ -190,18 +190,28 @@
     GBEC: { live: guestURLbetw3GBECLive, default: guestURLbetw3GBEC },
   };
   const betsw3V2GuestUrlsByClient = {
-    ACPE: { live: guestURLacpeLive1, default: guestURLacpe1 },
-    ACEC: { live: guestURLacecLive1, default: guestURLacec1 },
+    ACPE: {
+      "1": { live: guestURLacpeLive1, default: guestURLacpe1 },
+      "2": { live: guestURLacpeLive2, default: guestURLacpe2 },
+    },
+    ACEC: {
+      "1": { live: guestURLacecLive1, default: guestURLacec1 },
+      "2": { live: guestURLacecLive2, default: guestURLacec2 },
+    },
   };
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
     const normalizedClientCode = String(clientCode ?? "").trim().toUpperCase();
     const isLiveView = view == "sportbooklive";
+    const normalizedSkin = String(skin ?? "").trim() == "2" ? "2" : "1";
 
     if (normalizedClientCode == "XLIV" && skin == "2") {
       return guestURLbetw3XLIVLiveSKIN2;
     }
 
-    const v2Entry = gameid == bw3_v2_id ? betsw3V2GuestUrlsByClient[normalizedClientCode] : null;
+    const v2Entry =
+      gameid == bw3_v2_id
+        ? betsw3V2GuestUrlsByClient[normalizedClientCode]?.[normalizedSkin]
+        : null;
     if (v2Entry) {
       return isLiveView ? v2Entry.live : v2Entry.default;
     }
