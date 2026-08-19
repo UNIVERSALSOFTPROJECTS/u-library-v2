@@ -233,7 +233,14 @@
     console.log("receiveMessage:", receiveMessage);
   });
 
-  $: {
+  $: if (options?.gameid) {
+    options?.gameid;
+    active_view;
+    userState;
+    CLIENT_CODE;
+    clientCode;
+    sportbookskin;
+    options?.gameToken;
     openSport();
   }
 
