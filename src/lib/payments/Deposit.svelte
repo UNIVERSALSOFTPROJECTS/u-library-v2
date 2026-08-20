@@ -67,14 +67,10 @@
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
             payMethods = [
-                ...gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" })),
                 ...data
             ];
         } catch (error) {
             console.log(error);
-            payMethods = [
-                ...gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" }))
-            ];
         }finally {
             loadDeposit = false;
         }
@@ -239,8 +235,7 @@
         detectLockedDeposit();
 
         if (gateways.length > 0) {
-            getPayMethods();
-            return;
+            payMethods = [...gateways]
         }
         if (!isLocked) getPayMethods();
     });
