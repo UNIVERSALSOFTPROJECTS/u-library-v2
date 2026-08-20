@@ -67,7 +67,8 @@
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
             payMethods = [
-                ...data
+                ...data,
+                ...gateways.map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }))
             ];
         } catch (error) {
             console.log(error);
@@ -234,11 +235,12 @@
         
     onMount(async() => {
         detectLockedDeposit();
+        if (!isLocked) getPayMethods();
 
         if (gateways.length > 0) {
-            payMethods = gateways.map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
+            payMethods = gateways.unshift(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
         }
-        if (!isLocked) getPayMethods();
+
     });
 </script>
 
