@@ -43,7 +43,7 @@
     let banksOrigin = configDeposit.banksOrigin || [];
     let originBankJustText = configDeposit.originBankJustText || false;
     let imgR4 = configDeposit.imgR4 || "";
-    let gateways = configDeposit.gateways || [];
+    let gateways = (configDeposit.gateways || []).map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
@@ -55,8 +55,7 @@
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
     const detectLockedDeposit = () => {
-        isLocked = !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
-        console.log(isLocked);
+        isLocked = gateways.length === 0 && !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
     }
 
     async function getPayMethods() {
@@ -66,12 +65,10 @@
             bankPayments = data.filter((e) => e.virtual == 0);
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
-            payMethods = [
-                ...gateways.map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" })),
-                ...data
-            ];
+            payMethods = [...gateways, ...data];
         } catch (error) {
             console.log(error);
+            payMethods = [...gateways];
         }finally {
             loadDeposit = false;
         }
@@ -235,17 +232,7 @@
         
     onMount(async() => {
         detectLockedDeposit();
-        if (!isLocked){
-            await getPayMethods();
-            return
-        }
-
-        if (gateways.length > 0) {
-            payMethods = [
-                ...gateways.map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" })),
-            ];
-        }
-
+        if (!isLocked) getPayMethods();
     });
 </script>
 
