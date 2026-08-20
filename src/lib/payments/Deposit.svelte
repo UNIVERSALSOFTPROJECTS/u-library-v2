@@ -236,7 +236,7 @@
         detectLockedDeposit();
 
         if (gateways.length > 0) {
-            payMethods = gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" }));
+            payMethods = gateways.map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
         }
         if (!isLocked) getPayMethods();
     });
