@@ -76,7 +76,7 @@
 
             const script = document.createElement("script");
 
-            script.src = "https://payments02.nexopayment.net/widget.js";
+            script.src = "https://payments02-dev.nexopayment.net/widget.js";
 
             script.onload = resolve;
 
