@@ -101,6 +101,7 @@
   const baseUrlUniversalRaceURVE = `https://prod20370-186229048.freethrow777.com/`;
   const baseUrlWinproxWINP = `https://prod20370-189834269.442hattrick.com/`;
   const baseUrlEcuFlexBetFBET ='https://prod20370-189834999.442hattrick.com/';
+  const baseUrlEcuFlexBetFBMM ='https://prod20370-189834999.442hattrick.com/';
   const baseUrlEcuFlexBetMBET ='https://prod20370-191367006.freethrow777.com';
 
   const baseUrlHipicasBabiecaHBCO = 'https://prod20370-201498456.freethrow777.com';
@@ -399,6 +400,7 @@
       else if (CLIENT_CODE == 'URVE') url =baseUrlUniversalRaceURVE
       else if (CLIENT_CODE == 'WINP') url =baseUrlWinproxWINP
       else if (CLIENT_CODE == 'FBET') url =baseUrlEcuFlexBetFBET
+      else if (CLIENT_CODE == 'FBMM') url =baseUrlEcuFlexBetFBMM
       else if (CLIENT_CODE == 'MBET') url =baseUrlEcuFlexBetMBET
       else if (CLIENT_CODE == 'BWDA') url =baseUrlBetSwingBWDA
       else if (CLIENT_CODE == 'HBVE') url =baseUrlHipicasBabiecaHBVE
