@@ -76,6 +76,7 @@
         }
     }
 
+
     async function validateDeposit(pay){
         if(typeTranference == "GATEWAY_PAY"){
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
@@ -235,7 +236,7 @@
         detectLockedDeposit();
 
         if (gateways.length > 0) {
-            payMethods = [...gateways]
+            payMethods = gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" }));
         }
         if (!isLocked) getPayMethods();
     });

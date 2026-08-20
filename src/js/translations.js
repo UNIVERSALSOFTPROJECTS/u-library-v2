@@ -395,7 +395,7 @@ export default {
     "deposit.direct": "Directa",
     "deposit.paymentGateway": "Pasarela de pago",
     "deposit.semiAutomatic": "Semi-automático",
-    "deposit.automatic": "Automatic"
+    "deposit.automatic": "Automatico"
 
   },
   fr: {
