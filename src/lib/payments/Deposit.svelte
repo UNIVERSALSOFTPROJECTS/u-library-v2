@@ -236,7 +236,11 @@
     onMount(async() => {
         detectLockedDeposit();
 
-        if (!isLocked) getPayMethods(); 
+        if (gateways.length > 0) {
+            getPayMethods();
+            return;
+        }
+        if (!isLocked) getPayMethods();
     });
 </script>
 
