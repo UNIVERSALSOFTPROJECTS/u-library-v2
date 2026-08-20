@@ -70,7 +70,6 @@
                 ...gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" })),
                 ...data
             ];
-            loadDeposit = false;
         } catch (error) {
             console.log(error);
             payMethods = [
