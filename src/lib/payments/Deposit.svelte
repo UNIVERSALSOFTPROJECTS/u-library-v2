@@ -235,9 +235,9 @@
         
     onMount(async() => {
         detectLockedDeposit();
-        if (!isLocked) getPayMethods();
+        if (!isLocked) getPayMethods() ;
 
-        if (gateways.length > 0) {
+        if (gateways.length > 0 && isLocked) {
             payMethods = gateways.unshift(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
         }
 
