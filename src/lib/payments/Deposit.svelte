@@ -241,7 +241,9 @@
         }
 
         if (gateways.length > 0) {
-            payMethods = gateways.unshift(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
+            payMethods = [
+                ...gateways.map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" })),
+            ];
         }
 
     });
