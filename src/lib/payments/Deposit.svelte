@@ -73,7 +73,10 @@
             loadDeposit = false;
         } catch (error) {
             console.log(error);
-            onError(t("msg.contactSupport"));
+            payMethods = [
+                ...gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" }))
+            ];
+        }finally {
             loadDeposit = false;
         }
     }
