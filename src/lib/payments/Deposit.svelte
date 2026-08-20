@@ -56,26 +56,26 @@
 
     const detectLockedDeposit = () => {
         isLocked = !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
+        console.log(isLocked);
     }
 
     async function getPayMethods() {
-        //las pasarelas las declara cada frontend en configDeposit.gateways, no dependen del feed
-        const gatewayMethods = gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" }));
         try {
             loadDeposit = true;
             const {data} = await ServerConnection.wallet.getPayMethods(user.token);
             bankPayments = data.filter((e) => e.virtual == 0);
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
-            payMethods = [...gatewayMethods, ...data];
+            payMethods = [
+                ...gateways.map(gateway => ({ ...gateway, virtual: 0, banco: "GATEWAY_PAY" })),
+                ...data
+            ];
             loadDeposit = false;
-		} catch (error) {
+        } catch (error) {
             console.log(error);
-            //si el feed de bancos falla igual se muestran las pasarelas configuradas
-            payMethods = gatewayMethods;
-            if (gatewayMethods.length === 0) onError(t("msg.contactSupport"));
+            onError(t("msg.contactSupport"));
             loadDeposit = false;
-		}
+        }
     }
 
     async function validateDeposit(pay){
@@ -235,6 +235,7 @@
         
     onMount(async() => {
         detectLockedDeposit();
+
         if (!isLocked) getPayMethods(); 
     });
 </script>
