@@ -438,7 +438,7 @@ const ServerConnection = (() => {
             return axios.post(conf.API + "/api/casino/forgotPassword", payload_)
         },
         generateSignatureToOrderPayIn:async (payload,usertoken_nc) => {
-            return await axios.post(conf.API_WALLET + "/webhooks/payment/nxpay/signature2", payload,{
+            return await axios.post(conf.API_WALLET + "/webhooks/payment/nxpay/signature", payload,{
                                                 headers: {
                                                 "Content-Type": "application/json;charset=UTF-8",
                                                 "x-token": usertoken_nc,
