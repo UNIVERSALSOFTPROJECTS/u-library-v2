@@ -44,15 +44,15 @@
   };
 
   const guestURLSRetail = {
-    PNBO: "https://prod20370-225939404.freethrow777.com", 
-    PNEC: "https://prod20370-225939404.freethrow777.com", 
-    BSVV: "https://prod20370-225938335.freethrow777.com", 
-    BSVD: "https://prod20370-225938690.freethrow777.com",
-    FBET: "https://prod20370-225939107.freethrow777.com", 
-    FBMM: "https://prod20370-225939107.freethrow777.com",
-    WINP: "https://prod20370-225938029.freethrow777.com", 
-    PNCO: "https://prod20370-225939404.freethrow777.com", 
-    default: "https://prod20370-150256248.freethrow777.com",
+    PNBO: "https://prod20370-225939404.freethrow777.com/es/retail", 
+    PNEC: "https://prod20370-225939404.freethrow777.com/es/retail", 
+    BSVV: "https://prod20370-225938335.freethrow777.com/es/retail", 
+    BSVD: "https://prod20370-225938690.freethrow777.com/es/retail",
+    FBET: "https://prod20370-225939107.freethrow777.com/es/retail", 
+    FBMM: "https://prod20370-225939107.freethrow777.com/es/retail",
+    WINP: "https://prod20370-225938029.freethrow777.com/es/retail", 
+    PNCO: "https://prod20370-225939404.freethrow777.com/es/retail", 
+    default: "https://prod20370-150256248.freethrow777.com/es/retail",
   };
   
   const games = {
