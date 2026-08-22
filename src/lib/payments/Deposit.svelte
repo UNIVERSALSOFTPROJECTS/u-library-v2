@@ -56,7 +56,6 @@
 
     const detectLockedDeposit = () => {
         isLocked = !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
-        console.log("isLocked",isLocked);
     }
 
     async function getPayMethods() {
