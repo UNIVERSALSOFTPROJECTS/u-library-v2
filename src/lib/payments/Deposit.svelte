@@ -20,7 +20,8 @@
     let loadRecharge = false;
     let iframeGateway;
     let paySelected;
-    let payMethods; 
+    let gateways = (configDeposit.gateways || []).map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
+    let payMethods = [...gateways];
     let bankPayments = [];
     let amountDeposit;
     let typeTranference;
@@ -43,7 +44,6 @@
     let banksOrigin = configDeposit.banksOrigin || [];
     let originBankJustText = configDeposit.originBankJustText || false;
     let imgR4 = configDeposit.imgR4 || "";
-    let gateways = (configDeposit.gateways || []).map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
@@ -233,11 +233,7 @@
         
     onMount(async() => {
         detectLockedDeposit();
-        if (!isLocked) getPayMethods();
-        if (gateways.length>0){
-            payMethods = [...gateways];
-            loadDeposit = true;
-        }
+        if (!isLocked) await getPayMethods();
     });
 </script>
 
@@ -255,7 +251,7 @@
     </Modal>
     
 {/if}
-{#if isLocked}
+{#if isLocked && gateways.length === 0}
     <div class="deposit__message">
         <div class="deposit__message--icon"></div>
         <div class="deposit__message--text">{t('deposit.cachierSupport')}.</div>
