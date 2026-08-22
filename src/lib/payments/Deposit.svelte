@@ -55,7 +55,7 @@
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
     const detectLockedDeposit = () => {
-        isLocked = gateways.length === 0 && !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
+        isLocked = !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
     }
 
     async function getPayMethods() {
@@ -233,6 +233,9 @@
     onMount(async() => {
         detectLockedDeposit();
         if (!isLocked) getPayMethods();
+        if (gateways.length>0){
+            payMethods = [...gateways];
+        }
     });
 </script>
 
