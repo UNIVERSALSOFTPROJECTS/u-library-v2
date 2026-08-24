@@ -15,8 +15,8 @@
         BAPE: { region: "america", hwId: "c2d03fd6-84b2-4fb9-a755-d77257c01558" },
     };
     const DESKTOP_URLS = {
-        america: "https://america-games.virtustec.com/desktop-v4/stable/default/golden-race-desktop-loader.js",
-        latam:   "https://latam-games.virtustec.com/desktop-v4/stable/default/golden-race-desktop-loader.js",
+        america: "https://america-games.virtustec.com/desktop-v4/default/golden-race-desktop-loader.js",
+        latam:   "https://latam-games.virtustec.com/desktop-v4/default/golden-race-desktop-loader.js",
     };
     const URLS = {
         terminal: "https://latam-games.virtustec.com/terminal/loader.js",
@@ -42,12 +42,20 @@
     let fetchedExtToken = null;
     let fetchedCashierUrl = null;
     $: containerId = CONTAINER_IDS[mode];
+    function buildDesktopConfig() {
+        const cfg = {
+            containerId: CONTAINER_IDS.desktop,
+            language: "es-ES",
+        };
+        if (desktopHwId) cfg.hwId = desktopHwId;
+        console.log("CONFIG:", cfg);
+        return cfg;
+    }
     function buildConfig() {
         const cfg = {
             script:    `#${SCRIPT_IDS[mode]}`,
             container: `#${CONTAINER_IDS[mode]}`
         };
-        if (mode === "desktop" && desktopHwId) cfg.hwId = desktopHwId;
         if (userState === "loggedIn" && fetchedExtToken) cfg.onlineHash = fetchedExtToken;
         console.log("CONFIG:", cfg);
         return cfg;
@@ -71,7 +79,7 @@
         if (mode !== "terminal" && mode !== "cashier" && mode !== "desktop") return;
         if (mode === "desktop" && !desktopEnabled) return;
         try {
-            const cfg = buildConfig();
+            const cfg = mode === "desktop" ? buildDesktopConfig() : buildConfig();
             if (mode === "terminal") loader = window.GR.terminalLoader(cfg);
             else if (mode === "cashier") loader = window.GR.cashierLoader(cfg);
             else if (mode === "desktop") loader = window.grDesktopLoader(cfg);
