@@ -221,14 +221,29 @@
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                base64Image = reader.result;
-            };
-            reader.readAsDataURL(file);
+        
+        if (!file) return;
+        
+        const maxSize = 1 * 1024 * 1024; // 1 MB
+        
+        if (!file.type.startsWith("image/")) {
+            event.target.value = "";
+            return onError("El archivo seleccionado debe ser una imagen");
         }
-    }
+    
+        if (file.size > maxSize) {
+            event.target.value = "";
+            return onError("La imagen no puede superar 1 MB");
+        }
+    
+        const reader = new FileReader();
+    
+        reader.onload = () => {
+            base64Image = reader.result;
+        };
+    
+        reader.readAsDataURL(file);
+    };
         
     onMount(async() => {
         detectLockedDeposit();
