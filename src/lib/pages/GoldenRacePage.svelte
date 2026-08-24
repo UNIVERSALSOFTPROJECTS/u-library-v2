@@ -7,8 +7,13 @@
     export let GAMEAPI_URL;
     export let gameToken;
     export let hwId = null;
-    export let region = "america";
+    export let region = null;
+    export let CLIENT_CODE;
+    export let clientCode;
 
+    const DESKTOP_GUEST_BY_CLIENT = {
+        BAPE: { region: "america", hwId: "c2d03fd6-84b2-4fb9-a755-d77257c01558" },
+    };
     const DESKTOP_URLS = {
         america: "https://america-games.virtustec.com/desktop-v4/stable/default/golden-race-desktop-loader.js",
         latam:   "https://latam-games.virtustec.com/desktop-v4/stable/default/golden-race-desktop-loader.js",
@@ -27,7 +32,12 @@
         cashier:  "golden-race-cashier-loader",
         desktop:  "golden-race-desktop-loader",
     };
-    $: desktopScriptSrc = DESKTOP_URLS[region] || DESKTOP_URLS.america;
+    $: code = CLIENT_CODE || clientCode;
+    $: guestCfg = DESKTOP_GUEST_BY_CLIENT[code] || null;
+    $: desktopHwId = hwId || guestCfg?.hwId || "";
+    $: desktopRegion = region || guestCfg?.region || "america";
+    $: desktopScriptSrc = DESKTOP_URLS[desktopRegion] || DESKTOP_URLS.america;
+    $: desktopEnabled = mode === "desktop" && !!desktopHwId;
     let loader = null;
     let fetchedExtToken = null;
     let fetchedCashierUrl = null;
@@ -37,7 +47,7 @@
             script:    `#${SCRIPT_IDS[mode]}`,
             container: `#${CONTAINER_IDS[mode]}`
         };
-        if (mode === "desktop" && hwId) cfg.hwId = hwId;
+        if (mode === "desktop" && desktopHwId) cfg.hwId = desktopHwId;
         if (userState === "loggedIn" && fetchedExtToken) cfg.onlineHash = fetchedExtToken;
         console.log("CONFIG:", cfg);
         return cfg;
@@ -59,6 +69,7 @@
     }
     function initLoader() {
         if (mode !== "terminal" && mode !== "cashier" && mode !== "desktop") return;
+        if (mode === "desktop" && !desktopEnabled) return;
         try {
             const cfg = buildConfig();
             if (mode === "terminal") loader = window.GR.terminalLoader(cfg);
@@ -71,6 +82,7 @@
     }
     function loadScript() {
         if (mode !== "terminal" && mode !== "cashier" && mode !== "desktop") return Promise.resolve();
+        if (mode === "desktop" && !desktopEnabled) return Promise.resolve();
         let scriptSrc;
         if (mode === "cashier") scriptSrc = fetchedCashierUrl;
         else if (mode === "desktop") scriptSrc = desktopScriptSrc;
@@ -88,6 +100,7 @@
     }
     onMount(async () => {
         document.body.style.overflow = "";
+        if (mode === "desktop" && !desktopEnabled) return;
         try {
             fetchedExtToken = await fetchGoldenRaceToken();
             await loadScript();
@@ -102,7 +115,7 @@
 </script>
 
 <div class="gr-wrapper">
-    {#if mode === "terminal" || mode === "cashier" || mode === "desktop"}
+    {#if mode === "terminal" || mode === "cashier" || desktopEnabled}
         <div id={containerId} class="gr-container"></div>
     {/if}
 </div>
@@ -118,7 +131,8 @@
         background-color: #1a1a1a;
     }
     :global(#golden-race-terminal-app iframe),
-    :global(#golden-race-cashier-app iframe) {
+    :global(#golden-race-cashier-app iframe),
+    :global(#golden-race-desktop-app iframe) {
         width: 100% !important;
         height: 100% !important;
         border: none;
