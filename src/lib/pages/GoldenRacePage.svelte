@@ -6,6 +6,13 @@
     export let mode = "online";
     export let GAMEAPI_URL;
     export let gameToken;
+    export let hwId = null;
+    export let region = "america";
+
+    const DESKTOP_URLS = {
+        america: "https://america-games.virtustec.com/desktop-v4/stable/default/golden-race-desktop-loader.js",
+        latam:   "https://latam-games.virtustec.com/desktop-v4/stable/default/golden-race-desktop-loader.js",
+    };
     const URLS = {
         terminal: "https://latam-games.virtustec.com/terminal/loader.js",
         cashier:  "https://latam-games.virtustec.com/cashier/loader.js",
@@ -13,11 +20,14 @@
     const CONTAINER_IDS = {
         terminal: "golden-race-terminal-app",
         cashier:  "golden-race-cashier-app",
+        desktop:  "golden-race-desktop-app",
     };
     const SCRIPT_IDS = {
         terminal: "golden-race-terminal-loader",
         cashier:  "golden-race-cashier-loader",
+        desktop:  "golden-race-desktop-loader",
     };
+    $: desktopScriptSrc = DESKTOP_URLS[region] || DESKTOP_URLS.america;
     let loader = null;
     let fetchedExtToken = null;
     let fetchedCashierUrl = null;
@@ -27,9 +37,8 @@
             script:    `#${SCRIPT_IDS[mode]}`,
             container: `#${CONTAINER_IDS[mode]}`
         };
-        if (userState === "loggedIn" && fetchedExtToken) {
-            cfg.onlineHash = fetchedExtToken;
-        }
+        if (mode === "desktop" && hwId) cfg.hwId = hwId;
+        if (userState === "loggedIn" && fetchedExtToken) cfg.onlineHash = fetchedExtToken;
         console.log("CONFIG:", cfg);
         return cfg;
     }
@@ -49,24 +58,23 @@
         }
     }
     function initLoader() {
-        if (mode !== "terminal" && mode !== "cashier") return;
+        if (mode !== "terminal" && mode !== "cashier" && mode !== "desktop") return;
         try {
             const cfg = buildConfig();
-
-            if (mode === "terminal") {
-                loader = window.GR.terminalLoader(cfg);
-            } else {
-                loader = window.GR.cashierLoader(cfg);
-            }
-
+            if (mode === "terminal") loader = window.GR.terminalLoader(cfg);
+            else if (mode === "cashier") loader = window.GR.cashierLoader(cfg);
+            else if (mode === "desktop") loader = window.grDesktopLoader(cfg);
             if (loader && loader.start) loader.start();
         } catch (e) {
             console.error("Error loader:", e);
         }
     }
     function loadScript() {
-        if (mode !== "terminal" && mode !== "cashier") return Promise.resolve();
-        const scriptSrc = mode === "cashier" ? fetchedCashierUrl : URLS[mode];
+        if (mode !== "terminal" && mode !== "cashier" && mode !== "desktop") return Promise.resolve();
+        let scriptSrc;
+        if (mode === "cashier") scriptSrc = fetchedCashierUrl;
+        else if (mode === "desktop") scriptSrc = desktopScriptSrc;
+        else scriptSrc = URLS[mode];
         if (!scriptSrc) return Promise.reject(new Error(`Fallo al cargar script para: ${mode} (cashierUrl ausente en la respuesta del backend)`));
         return new Promise((resolve, reject) => {
             if (document.getElementById(SCRIPT_IDS[mode])) return resolve();
@@ -94,7 +102,7 @@
 </script>
 
 <div class="gr-wrapper">
-    {#if mode === "terminal" || mode === "cashier"}
+    {#if mode === "terminal" || mode === "cashier" || mode === "desktop"}
         <div id={containerId} class="gr-container"></div>
     {/if}
 </div>
