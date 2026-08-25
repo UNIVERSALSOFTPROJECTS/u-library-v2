@@ -62,6 +62,10 @@ const ServerConnection = (() => {
         },
     }
     const users = {
+        getClientCode: () => {
+            return conf.CLIENT_CODE;
+
+        },
         getBalance: (userToken) => {
             let url = conf.API_KS + `/balance/${userToken}`;
             return axios.get(url, { headers });
@@ -438,12 +442,10 @@ const ServerConnection = (() => {
                                                 headers: {
                                                 "Content-Type": "application/json;charset=UTF-8",
                                                 "x-token": usertoken_nc,
+                                                "X-Client-Code": conf.CLIENT_CODE,
                                                 "Accept": "*",
                                                 }
                                     })
-        },
-        getSecretGateway: () => {
-            return conf.SECRET_WALLET;
         }
     }
 

@@ -13,15 +13,21 @@
             let user = sessionStorage.getItem("user");
             if(!user) return ;
             data_payin.amount = data_payin.amount*100;
-            let secret_wallet_gateway = ServerConnection.u_user.getSecretGateway();
-            console.log("secret "+secret_wallet_gateway)
-            let response = await ServerConnection.u_user.generateSignatureToOrderPayIn(data_payin,(JSON.parse(user)).token)
-            const data = response.data;
+            let user_recharge = JSON.parse(user);
+            let response = await ServerConnection.u_user.generateSignatureToOrderPayIn(data_payin,user_recharge.token+"_"+user_recharge.id+"_"+user_recharge.username);
+            let data = response.data;
             await loadSdk();
+            // si customerDocType es vacio enviar DNI , cuando es cedula enviar DNI
+            // si customerDocNumber vacio o 0 enviar 12312312
+            data_payin.customerName = data.customerName ; 
+            data_payin.customerLastname = data.customerLastname ; 
+            data_payin.customerDocType = data.customerDocType ; 
+            data_payin.customerDocNumber = data.customerDocNumber ; 
+            console.log("data_payin",data_payin); 
 
-            window.PayOrchestrator.render({
+            window.NexoPay.render({
                 elementId: "pay-orchestrator-widget",
-                apiKey: secret_wallet_gateway,
+                apiKey: data.merchantKey,
                 amount: data_payin.amount,
                 currency: data_payin.currency,
                 reference: data_payin.reference, 
@@ -70,7 +76,7 @@
 
             const script = document.createElement("script");
 
-            script.src = "https://payments01.doncaerp.com/widget.js";
+            script.src = "https://payments02.nexopayment.net/widget.js";
 
             script.onload = resolve;
 

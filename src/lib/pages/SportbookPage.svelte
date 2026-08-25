@@ -41,6 +41,7 @@
   const bbq_id = "sport-betbuq";
   const pnc_id = "902-pinnacle";
   const bw3_id = "betsw3_2024";
+  const bw3_v2_id = "betsw3_v2";
   const panda_id = "1_SBO_1053_ThirdPartySportsBook";
   const AFB_id = "0_SBO_1015_ThirdPartySportsBook";
   const frst_id = "first_2024";
@@ -75,7 +76,14 @@
   const guestURLbetw3BPECLive = "https://sports2.sw3data.com/?target=86224&name=win365ec#/?target=win365ec-86224-integration&view=live"
   const guestURLbetw3GBEC = "https://sports2.sw3data.com/?target=86224&name=ganabet365ec#/?target=ganabet365ec-86224-integration"
   const guestURLbetw3GBECLive ="https://sports2.sw3data.com/?target=86224&name=ganabet365ec#/?target=ganabet365ec-86224-integration&view=live"
-
+  const guestURLacpe1 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail1_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e5a8bda1906f6e6a996&userMode=retail"
+  const guestURLacpeLive1 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail1_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e5a8bda1906f6e6a996&userMode=retail&view=live"
+  const guestURLacec1 ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail1_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37a58bda1906f6e6a994&userMode=retail"
+  const guestURLacecLive1 ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail1_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37a58bda1906f6e6a994&userMode=retail&view=live"
+  const guestURLacpe2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
+  const guestURLacpeLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
+  const guestURLacec2 ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail2_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37b48bda1906f6e6a995&userMode=retail"
+  const guestURLacecLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail2_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37b48bda1906f6e6a995&userMode=retail&view=live"
 
 
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
@@ -93,6 +101,7 @@
   const baseUrlUniversalRaceURVE = `https://prod20370-186229048.freethrow777.com/`;
   const baseUrlWinproxWINP = `https://prod20370-189834269.442hattrick.com/`;
   const baseUrlEcuFlexBetFBET ='https://prod20370-189834999.442hattrick.com/';
+  const baseUrlEcuFlexBetFBMM ='https://prod20370-189834999.442hattrick.com/';
   const baseUrlEcuFlexBetMBET ='https://prod20370-191367006.freethrow777.com';
 
   const baseUrlHipicasBabiecaHBCO = 'https://prod20370-201498456.freethrow777.com';
@@ -162,6 +171,62 @@
       id:93326
     }
   }
+
+  const isBetsw3GameId = (gameid) => [bw3_id, bw3_v2_id].includes(gameid);
+  const getBetsw3Game = () => ({
+    ...games.BetW3,
+    gameid: isBetsw3GameId(options?.gameid) ? options.gameid : games.BetW3.gameid,
+  });
+  const betsw3GuestUrlsByClient = {
+    BUSD: { live: guestURLbetw3Live, default: guestURLbetw3 },
+    BPEN: { live: guestURLbetwBPENLive, default: guestURLbetwBPEN },
+    GAWN: { live: guestURLbetw3GWLive, default: guestURLbetw3GW },
+    LAUS: { live: guestURLbetw3LAUSlive, default: guestURLbetw3LAUS },
+    PRLS: { live: guestURLbetw3bt1Live, default: guestURLbetw3bt1 },
+    GBPE: { live: guestURLbetw3GBPELive, default: guestURLbetw3GBPE },
+    BTCO: { live: guestURLbetw3BTCOLive, default: guestURLbetw3BTCO },
+    BTAR: { live: guestURLbetw3BTARLive, default: guestURLbetw3BTAR },
+    BPEC: { live: guestURLbetw3BPECLive, default: guestURLbetw3BPEC },
+    GBEC: { live: guestURLbetw3GBECLive, default: guestURLbetw3GBEC },
+  };
+  const betsw3V2GuestUrlsByClient = {
+    ACPE: {
+      "1": { live: guestURLacpeLive1, default: guestURLacpe1 },
+      "2": { live: guestURLacpeLive2, default: guestURLacpe2 },
+    },
+    ACEC: {
+      "1": { live: guestURLacecLive1, default: guestURLacec1 },
+      "2": { live: guestURLacecLive2, default: guestURLacec2 },
+    },
+  };
+  const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
+    const normalizedClientCode = String(clientCode ?? "").trim().toUpperCase();
+    const isLiveView = view == "sportbooklive";
+    const normalizedSkin = String(skin ?? "").trim() == "2" ? "2" : "1";
+
+    if (normalizedClientCode == "XLIV" && skin == "2") {
+      return guestURLbetw3XLIVLiveSKIN2;
+    }
+
+    const v2Entry =
+      gameid == bw3_v2_id
+        ? betsw3V2GuestUrlsByClient[normalizedClientCode]?.[normalizedSkin]
+        : null;
+    if (v2Entry) {
+      return isLiveView ? v2Entry.live : v2Entry.default;
+    }
+
+    const legacyEntry = betsw3GuestUrlsByClient[normalizedClientCode];
+    if (legacyEntry) {
+      return isLiveView ? legacyEntry.live : legacyEntry.default;
+    }
+
+    if (normalizedClientCode == "XLIV") {
+      return isLiveView ? guestURLbetw3XLIVLive : guestURLbetw3XLIV;
+    }
+
+    return isLiveView ? guestURLbetw3LJ : guestURLbetw3LJLive;
+  };
   
   onMount(()=>{
     console.log("lang", lang)
@@ -169,7 +234,14 @@
     console.log("receiveMessage:", receiveMessage);
   });
 
-  $: {
+  $: if (options?.gameid) {
+    options?.gameid;
+    active_view;
+    userState;
+    CLIENT_CODE;
+    clientCode;
+    sportbookskin;
+    options?.gameToken;
     openSport();
   }
 
@@ -210,7 +282,7 @@
     else if (options.gameid == nvb_id) openNovusbet();
     else if (options.gameid == bbq_id) openBBQ();
     else if (options.gameid == pnc_id) openPinnacle();
-    else if (options.gameid == bw3_id) openBetsW3();
+    else if (isBetsw3GameId(options.gameid)) openBetsW3();
     else if (options.gameid == frst_id) openFirst();
     else if (options.gameid == cmsw_id) openCmsWager();
   }
@@ -328,6 +400,7 @@
       else if (CLIENT_CODE == 'URVE') url =baseUrlUniversalRaceURVE
       else if (CLIENT_CODE == 'WINP') url =baseUrlWinproxWINP
       else if (CLIENT_CODE == 'FBET') url =baseUrlEcuFlexBetFBET
+      else if (CLIENT_CODE == 'FBMM') url =baseUrlEcuFlexBetFBMM
       else if (CLIENT_CODE == 'MBET') url =baseUrlEcuFlexBetMBET
       else if (CLIENT_CODE == 'BWDA') url =baseUrlBetSwingBWDA
       else if (CLIENT_CODE == 'HBVE') url =baseUrlHipicasBabiecaHBVE
@@ -358,7 +431,7 @@ function RESELLER (params) {
   const openBetsW3 = async () => { 
     let url;
     if (userState == "loggedIn") {
-      url = ut.getGameURL(GAMEAPI_URL, games.BetW3, options.gameToken); 
+      url = ut.getGameURL(GAMEAPI_URL, getBetsw3Game(), options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
       sportbookskin?url += `&skin=${sportbookskin}`: ""; // just for xlive365
@@ -367,54 +440,11 @@ function RESELLER (params) {
             data = await backend.game.getURLDemo(url);
           } else {
             data = await backend.game.getURL(url);
-          }
+      }
       url = data.url;      
     } else  {
-      if ( CLIENT_CODE == 'BUSD') {
-        url = active_view == "sportbooklive" ? guestURLbetw3Live : guestURLbetw3; 
-        }
-        else if ( CLIENT_CODE == 'BPEN')
-        url = active_view == "sportbooklive" ? guestURLbetwBPENLive : guestURLbetwBPEN; 
-
-        else if (CLIENT_CODE == "GAWN") {
-          url = active_view == "sportbooklive" ? guestURLbetw3GWLive : guestURLbetw3GW;
-        }
-        else if (CLIENT_CODE == "LAUS") {
-          url = active_view == "sportbooklive" ? guestURLbetw3LAUSlive : guestURLbetw3LAUS;
-        }
-        else if (CLIENT_CODE == "PRLS") {
-        // url = active_view == "sportbooklive" ? guestURLbetw3LivePRLS : guestURLbetw3PRLS;
-        url = active_view == "sportbooklive" ? guestURLbetw3bt1Live : guestURLbetw3bt1;
-        RESELLER();
-        }
-        else if (CLIENT_CODE == "GBPE") {
-          url = active_view == "sportbooklive" ? guestURLbetw3GBPELive : guestURLbetw3GBPE;
-        }
-        else if (CLIENT_CODE == "BTCO") {
-          url = active_view == "sportbooklive" ? guestURLbetw3BTCOLive : guestURLbetw3BTCO ;
-        }
-        else if (CLIENT_CODE == "XLIV") {
-          if (sportbookskin == "2") {
-            url =  guestURLbetw3XLIVLiveSKIN2;
-          }else{
-            url = active_view == "sportbooklive" ? guestURLbetw3XLIVLive : guestURLbetw3XLIV ;
-          }
-        }
-        else if (CLIENT_CODE == "BTAR") {
-          url = active_view == "sportbooklive" ? guestURLbetw3BTARLive : guestURLbetw3BTAR ;
-        }
-        else if (CLIENT_CODE == "BPEC") {
-          url = active_view == "sportbooklive" ? guestURLbetw3BPECLive : guestURLbetw3BPEC ;
-        }
-        else if (CLIENT_CODE == "GBEC") {
-          url = active_view == "sportbooklive" ? guestURLbetw3GBECLive : guestURLbetw3GBEC ;
-        }
-
-      else{
-        url = active_view == "sportbooklive" ? guestURLbetw3LJ : guestURLbetw3LJLive;
-
-
-      }
+      url = resolveBetsw3GuestUrl(options?.gameid, CLIENT_CODE, active_view, sportbookskin);
+      if (CLIENT_CODE == "PRLS") RESELLER();
       console.log("url",url);
       
     }

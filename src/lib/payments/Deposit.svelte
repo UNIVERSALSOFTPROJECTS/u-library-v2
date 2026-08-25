@@ -20,7 +20,8 @@
     let loadRecharge = false;
     let iframeGateway;
     let paySelected;
-    let payMethods; 
+    let gateways = (configDeposit.gateways || []).map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
+    let payMethods = [...gateways];
     let bankPayments = [];
     let amountDeposit;
     let typeTranference;
@@ -50,7 +51,6 @@
     let viewLinkSafari = false;
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
-    let amountsFavGateway = [50,80,100,200]
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -65,26 +65,15 @@
             bankPayments = data.filter((e) => e.virtual == 0);
             data.forEach(item => { item.img = item.virtual === 0?item.banco:item.cta; });
             data.forEach(item => { item.name_pay = item.virtual === 0?item.banco:item.nombre+(item.nota != null?" - "+item.nota:''); });
-            payMethods = data;
-            if(user.serial == '4880946481945' || user.serial == "2946341765655"){
-                payMethods.unshift({
-                    "img": "nexopyment",
-                    "name_pay": "RECARGA INSTANTÁNEA",
-                    "min": 50,
-                    "max": 500,
-                    "iso": "PEN",
-                    "virtual": 0,
-                    "banco":"GATEWAY_PAY"
-                    }
-                );
-            }
-            loadDeposit = false;
-		} catch (error) {
+            payMethods = [...gateways, ...data];
+        } catch (error) {
             console.log(error);
-			onError(t("msg.contactSupport"));
+            payMethods = [...gateways];
+        }finally {
             loadDeposit = false;
-		}
+        }
     }
+
 
     async function validateDeposit(pay){
         if(typeTranference == "GATEWAY_PAY"){
@@ -93,9 +82,9 @@
             OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
-                currency: user.currency,
+                currency: pay.currency || user.currency,
                 reference: crypto.randomUUID().replaceAll("-","").substring(0,30),
-                payinMethods: "QR,TRANSFER",
+                payinMethods: pay.payinMethods || "QR,TRANSFER",
                 customerName:user.username,
                 customerLastname: "Test",
                 customerDocType:"DNI",
@@ -243,18 +232,33 @@
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                base64Image = reader.result;
-            };
-            reader.readAsDataURL(file);
+        
+        if (!file) return;
+        
+        const maxSize = 1 * 1024 * 1024; // 1 MB
+        
+        if (!file.type.startsWith("image/")) {
+            event.target.value = "";
+            return onError("El archivo seleccionado debe ser una imagen");
         }
-    }
+    
+        if (file.size > maxSize) {
+            event.target.value = "";
+            return onError("La imagen no puede superar 1 MB");
+        }
+    
+        const reader = new FileReader();
+    
+        reader.onload = () => {
+            base64Image = reader.result;
+        };
+    
+        reader.readAsDataURL(file);
+    };
         
     onMount(async() => {
         detectLockedDeposit();
-        if (!isLocked) getPayMethods(); 
+        if (!isLocked) await getPayMethods();
     });
 </script>
 
@@ -272,7 +276,7 @@
     </Modal>
     
 {/if}
-{#if isLocked}
+{#if isLocked && gateways.length === 0}
     <div class="deposit__message">
         <div class="deposit__message--icon"></div>
         <div class="deposit__message--text">{t('deposit.cachierSupport')}.</div>
@@ -313,7 +317,7 @@
                     <div class="deposit__info">
                         {#if typeTranference == 'GATEWAY_PAY' }
                             <p>{t('deposit.typeTransfer')}:</p><p>Automatico</p>
-                            <p>{t('deposit.processingTime')}:</p><p>1-3 minutos</p>
+                            <p>{t('deposit.processingTime')}:</p><p>{paySelected.processingTime || ""}</p>
                         {:else}
                             <p>{t('deposit.typeTransfer')}:</p><p>{typeTranference == 'bank'? t ('deposit.direct'): t('deposit.paymentGateway') }</p>
                             <p>{t('deposit.processingTime')}:</p><p>{typeTranference == 'bank'? t('deposit.semiAutomatic'): t('deposit.automatic')}</p>
@@ -324,7 +328,7 @@
                         {#if typeTranference == 'GATEWAY_PAY' }
                             <div class="deposit__gateway">
                                 <div class="deposit__mounts">
-                                    {#each amountsFavGateway as amount}
+                                    {#each (paySelected.amountsFav || amountsFav) as amount}
                                         <button class="btn amount" on:click={()=> amountDeposit = amount}>{amount}</button>
                                     {/each}  
                                 </div>

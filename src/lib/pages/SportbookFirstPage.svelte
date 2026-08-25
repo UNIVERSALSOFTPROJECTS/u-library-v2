@@ -10,10 +10,13 @@
   export let options;
   export let GAMEAPI_URL;
   export let CLIENT_CODE;
+  export let mode_bussines;
 
   let sportbookGameUrl = '';
   let viewSportbook = true;
   let mode = ut.isMobile() ? "mb" : "wb";
+  let mounted = false;
+  let previousLocale = locale;
 
   const first_id = "first_2024";
 
@@ -39,6 +42,18 @@
     ALAR: "https://prod20370-206586095.freethrow777.com/",
     default: "https://prod20370-150256248.freethrow777.com",
   };
+
+  const guestURLSRetail = {
+    PNBO: "https://prod20370-225939404.freethrow777.com/es/retail", 
+    PNEC: "https://prod20370-225939404.freethrow777.com/es/retail", 
+    BSVV: "https://prod20370-225938335.freethrow777.com/es/retail", 
+    BSVD: "https://prod20370-225938690.freethrow777.com/es/retail",
+    FBET: "https://prod20370-225939107.freethrow777.com/es/retail", 
+    FBMM: "https://prod20370-225939107.freethrow777.com/es/retail",
+    WINP: "https://prod20370-225938029.freethrow777.com/es/retail", 
+    PNCO: "https://prod20370-225939404.freethrow777.com/es/retail", 
+    default: "https://prod20370-150256248.freethrow777.com/es/retail",
+  };
   
   const games = {
     'first':{
@@ -52,6 +67,7 @@
 
   onMount(()=>{
     console.log("UserState", userState);
+    mounted = true;
   });
   
   $: {
@@ -78,7 +94,8 @@
         const data = await backend.game.getURL(url);
         url = data.url
       }else{
-        url = guestURLs[CLIENT_CODE] || guestURLs.default;
+        if(mode_bussines === 'retail') url = guestURLSRetail[CLIENT_CODE] || guestURLSRetail.default; 
+        else url = guestURLs[CLIENT_CODE] || guestURLs.default;
       }
       sportbookGameUrl = url;
     } catch (error) {
@@ -93,7 +110,10 @@
   });
 
 
-  $:resetSportbook(locale);
+  $: if (mounted && locale !== previousLocale) {
+    previousLocale = locale;
+    resetSportbook(locale);
+  }
 </script>
 
 <div class="sportbook-content">
