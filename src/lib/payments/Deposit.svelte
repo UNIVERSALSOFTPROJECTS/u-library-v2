@@ -387,11 +387,12 @@
                         >
                             {#if copiedAccount}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                    <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             {:else}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                                    <path d="M13.3332 0.833374H1.6665V14.1667H3.33317V2.50004H13.3332V0.833374ZM17.4998 4.16671H4.99984V19.1667H17.4998V4.16671ZM15.8332 17.5H6.6665V5.83337H15.8332V17.5Z" fill="currentColor"/>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
                             {/if}
                         </button>
@@ -500,12 +501,12 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 1.75rem;
-        height: 1.75rem;
+        width: 2rem;
+        height: 2rem;
         padding: 0;
         border: 0;
-        border-radius: 50%;
-        background: #5b5b5b;
+        border-radius: 0.5rem;
+        background: #1a1a1a;
         color: #fff;
         cursor: pointer;
         flex-shrink: 0;
