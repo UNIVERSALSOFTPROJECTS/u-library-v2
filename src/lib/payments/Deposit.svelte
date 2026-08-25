@@ -49,6 +49,7 @@
     let base64Image;
     let fileInput;
     let viewLinkSafari = false;
+    let copiedAccount = false;
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
 
@@ -169,6 +170,7 @@
         bankDeposit.aditional='';
         bankDeposit.reference='';
         viewLinkSafari = false;
+        copiedAccount = false;
     }
 
     const copyAccountNumber = async () => {
@@ -176,7 +178,8 @@
         if (!value) return;
         try {
             await navigator.clipboard.writeText(value);
-            onOk("Número de cuenta copiado");
+            copiedAccount = true;
+            setTimeout(() => (copiedAccount = false), 1500);
         } catch (error) {
             onError(t("msg.contactSupport"));
         }
@@ -369,12 +372,21 @@
                             class="btn deposit__copy"
                             on:click={copyAccountNumber}
                             aria-label="Copiar número de cuenta"
-                            title="Copiar"
+                            title={copiedAccount ? "Copiado" : "Copiar"}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                                <path d="M13.3332 0.833374H1.6665V14.1667H3.33317V2.50004H13.3332V0.833374ZM17.4998 4.16671H4.99984V19.1667H17.4998V4.16671ZM15.8332 17.5H6.6665V5.83337H15.8332V17.5Z" fill="currentColor"/>
-                            </svg>
+                            {#if copiedAccount}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            {:else}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                    <path d="M13.3332 0.833374H1.6665V14.1667H3.33317V2.50004H13.3332V0.833374ZM17.4998 4.16671H4.99984V19.1667H17.4998V4.16671ZM15.8332 17.5H6.6665V5.83337H15.8332V17.5Z" fill="currentColor"/>
+                                </svg>
+                            {/if}
                         </button>
+                        {#if copiedAccount}
+                            <small class="deposit__copied">Copiado</small>
+                        {/if}
                     </p>
                 </div>
                 <img
@@ -457,12 +469,6 @@
 </div>
 
 <style>
-    .deposit__cta-copy {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin: 0;
-    }
 
     .deposit__copy {
         display: inline-flex;
@@ -481,5 +487,10 @@
 
     .deposit__copy:hover {
         opacity: 0.9;
+    }
+
+    .deposit__copied {
+        color: #34b93d;
+        font-size: 0.75rem;
     }
 </style>
