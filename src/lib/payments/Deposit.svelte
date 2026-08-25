@@ -49,6 +49,7 @@
     let base64Image;
     let fileInput;
     let viewLinkSafari = false;
+    let copiedAccount = false;
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
 
@@ -154,6 +155,8 @@
             typeTranference = 'wallet';
         }else if((paySelected.banco || "").toLowerCase().includes("r4")){
             typeTranference = 'r4';
+        }else if((paySelected.banco || "").toLowerCase().includes("binance")){
+            typeTranference = 'cripto';
         }
         else{
             typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
@@ -169,6 +172,19 @@
         bankDeposit.aditional='';
         bankDeposit.reference='';
         viewLinkSafari = false;
+        copiedAccount = false;
+    }
+
+    const copyAccountNumber = async () => {
+        const value = String(paySelected?.cta ?? "");
+        if (!value) return;
+        try {
+            await navigator.clipboard.writeText(value);
+            copiedAccount = true;
+            setTimeout(() => (copiedAccount = false), 1500);
+        } catch (error) {
+            onError(t("msg.contactSupport"));
+        }
     }
 
     async function validateDepositBank() {
@@ -188,8 +204,15 @@
                 bankDeposit.aditional = paySelected.banco;
                 bankDeposit.reference = paySelected.banco;
                 bankDeposit.targetBankId = paySelected.id;
+            }else if(typeTranference === 'cripto'){
+                bankDeposit.aditional = paySelected.banco;
+                bankDeposit.targetBankId = paySelected.id;
+                if (!bankDeposit.reference || (isRequiredVoucher && !base64Image)) {
+                    return onError("Todos los campos son obligatorios");
+                }
+            }else if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) {
+                return onError("Todos los campos son obligatorios");
             }
-            if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) return onError("Todos los campos son obligatorios"); 
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
             try {
@@ -221,14 +244,29 @@
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                base64Image = reader.result;
-            };
-            reader.readAsDataURL(file);
+        
+        if (!file) return;
+        
+        const maxSize = 1 * 1024 * 1024; // 1 MB
+        
+        if (!file.type.startsWith("image/")) {
+            event.target.value = "";
+            return onError("El archivo seleccionado debe ser una imagen");
         }
-    }
+    
+        if (file.size > maxSize) {
+            event.target.value = "";
+            return onError("La imagen no puede superar 1 MB");
+        }
+    
+        const reader = new FileReader();
+    
+        reader.onload = () => {
+            base64Image = reader.result;
+        };
+    
+        reader.readAsDataURL(file);
+    };
         
     onMount(async() => {
         detectLockedDeposit();
@@ -338,7 +376,29 @@
                     <b>{t('deposit.holder')}:</b>
                     <p>{paySelected.nombre}</p>
                     <b>{t('deposit.numBankAccount')}:</b>
-                    <p>{paySelected.cta}</p>
+                    <p class="deposit__cta-copy">
+                        <span>{paySelected.cta}</span>
+                        <button
+                            type="button"
+                            class="btn deposit__copy"
+                            on:click={copyAccountNumber}
+                            aria-label="Copiar número de cuenta"
+                            title={copiedAccount ? "Copiado" : "Copiar"}
+                        >
+                            {#if copiedAccount}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            {:else}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                    <path d="M13.3332 0.833374H1.6665V14.1667H3.33317V2.50004H13.3332V0.833374ZM17.4998 4.16671H4.99984V19.1667H17.4998V4.16671ZM15.8332 17.5H6.6665V5.83337H15.8332V17.5Z" fill="currentColor"/>
+                                </svg>
+                            {/if}
+                        </button>
+                        {#if copiedAccount}
+                            <small class="deposit__copied">Copiado</small>
+                        {/if}
+                    </p>
                 </div>
                 <img
                     src="{assetsPayments}{paySelected.banco}__{paySelected.cta.replace(/\+|\s/g, "")}.png"
@@ -349,6 +409,21 @@
                 >
                 <p>{t('deposit.step2')}.</p>
                 <div class="deposit__info">
+                    {#if typeTranference === 'cripto'}
+                    <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
+                    <p>{t('withdrawal.amount')}</p>
+                    <input type="text" class="ipt" bind:value={bankDeposit.reference}>
+                    <input type="text" class="ipt" bind:value={amountDeposit} disabled>
+                    <p>{t('deposit.transferDate')}</p>
+                    <p>{isRequiredVoucher ? "Subir Imagen de pago" : ""}</p>
+                    <input type="date" class="ipt" bind:value={bankDeposit.date}>
+                    {#if isRequiredVoucher}
+                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{base64Image?"Archivo subido":"Seleccionar archivo"}</button>
+                        <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
+                    {:else}
+                        <p></p>
+                    {/if}
+                    {:else}
                     {#if typeTranference != 'wallet'}
                     <p>{t('deposit.destinationBank')}</p>
                     <p>{t('deposit.originBank')}</p>
@@ -385,6 +460,7 @@
                         <button class="slc icon--upload" on:click={()=> fileInput.click()}>{base64Image?"Archivo subido":"Seleccionar archivo"}</button>
                         <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
                     {/if}
+                    {/if}
                 </div>
                 {#if isRequiredVoucher}
                     <b>NOTA: ESPERAR DE 2 A 5 MINUTOS PARA VER REFLEJADO LA RECARGA DE SALDO EN TU CUENTA</b>
@@ -418,3 +494,29 @@
     {/if}
 {/if}
 </div>
+
+<style>
+    .deposit__copy {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: #5b5b5b;
+        color: #fff;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .deposit__copy:hover {
+        opacity: 0.9;
+    }
+
+    .deposit__copied {
+        color: #34b93d;
+        font-size: 0.75rem;
+    }
+</style>
