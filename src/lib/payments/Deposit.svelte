@@ -182,6 +182,17 @@
         viewLinkSafari = false;
     }
 
+    const copyAccountNumber = async () => {
+        const value = String(paySelected?.cta ?? "");
+        if (!value) return;
+        try {
+            await navigator.clipboard.writeText(value);
+            onOk("Número de cuenta copiado");
+        } catch (error) {
+            onError(t("msg.contactSupport"));
+        }
+    }
+
     async function validateDepositBank() {
         if(typeTranference == "GATEWAY_PAY"){
             OPEN_MODAL_GATEWAY_PAY = true;
@@ -347,7 +358,20 @@
                     <b>{t('deposit.holder')}:</b>
                     <p>{paySelected.nombre}</p>
                     <b>{t('deposit.numBankAccount')}:</b>
-                    <p>{paySelected.cta}</p>
+                    <p class="deposit__cta-copy">
+                        <span>{paySelected.cta}</span>
+                        <button
+                            type="button"
+                            class="btn deposit__copy"
+                            on:click={copyAccountNumber}
+                            aria-label="Copiar número de cuenta"
+                            title="Copiar"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <path d="M13.3332 0.833374H1.6665V14.1667H3.33317V2.50004H13.3332V0.833374ZM17.4998 4.16671H4.99984V19.1667H17.4998V4.16671ZM15.8332 17.5H6.6665V5.83337H15.8332V17.5Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </p>
                 </div>
                 <img
                     src="{assetsPayments}{paySelected.banco}__{paySelected.cta.replace(/\+|\s/g, "")}.png"
@@ -427,3 +451,31 @@
     {/if}
 {/if}
 </div>
+
+<style>
+    .deposit__cta-copy {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+    }
+
+    .deposit__copy {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: #5b5b5b;
+        color: #fff;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .deposit__copy:hover {
+        opacity: 0.9;
+    }
+</style>
