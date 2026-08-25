@@ -504,12 +504,17 @@
 </div>
 
 <style>
+    .deposit__cta-copy {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
     .deposit__copy {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 2rem;
-        height: 2rem;
+        width: 15px;
+        height: 10px;
         padding: 0;
         border: 0;
         border-radius: 0.5rem;
