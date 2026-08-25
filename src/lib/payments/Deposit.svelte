@@ -155,6 +155,8 @@
             typeTranference = 'wallet';
         }else if((paySelected.banco || "").toLowerCase().includes("r4")){
             typeTranference = 'r4';
+        }else if((paySelected.banco || "").toLowerCase().includes("binance")){
+            typeTranference = 'cripto';
         }
         else{
             typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
@@ -202,8 +204,15 @@
                 bankDeposit.aditional = paySelected.banco;
                 bankDeposit.reference = paySelected.banco;
                 bankDeposit.targetBankId = paySelected.id;
+            }else if(typeTranference === 'cripto'){
+                bankDeposit.aditional = paySelected.banco;
+                bankDeposit.targetBankId = paySelected.id;
+                if (!bankDeposit.reference || (isRequiredVoucher && !base64Image)) {
+                    return onError("Todos los campos son obligatorios");
+                }
+            }else if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) {
+                return onError("Todos los campos son obligatorios");
             }
-            if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) return onError("Todos los campos son obligatorios"); 
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
             try {
@@ -398,7 +407,12 @@
                 >
                 <p>{t('deposit.step2')}.</p>
                 <div class="deposit__info">
-                    {#if typeTranference != 'wallet'}
+                    {#if typeTranference === 'cripto'}
+                    <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
+                    <p></p>
+                    <input type="text" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
+                    <p></p>
+                    {:else if typeTranference != 'wallet'}
                     <p>{t('deposit.destinationBank')}</p>
                     <p>{t('deposit.originBank')}</p>
                     <input type="text" class="ipt" value={paySelected.banco} disabled>
