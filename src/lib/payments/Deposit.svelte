@@ -406,11 +406,23 @@
                     on:load={(e) => e.currentTarget.style.display = ""}
                 >
                 <p>{t('deposit.step2')}.</p>
-                <div class="deposit__info" class:deposit__info--cripto={typeTranference === 'cripto'}>
+                <div class="deposit__info">
                     {#if typeTranference === 'cripto'}
-                    <p class="deposit__full">{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
-                    <input type="text" class="ipt deposit__full" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
-                    {:else if typeTranference != 'wallet'}
+                    <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
+                    <p>{t('withdrawal.amount')}</p>
+                    <input type="text" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
+                    <input type="text" class="ipt" bind:value={amountDeposit} disabled>
+                    <p>{t('deposit.transferDate')}</p>
+                    <p>{isRequiredVoucher ? "Subir Imagen de pago" : ""}</p>
+                    <input type="date" class="ipt" bind:value={bankDeposit.date}>
+                    {#if isRequiredVoucher}
+                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{base64Image?"Archivo subido":"Seleccionar archivo"}</button>
+                        <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
+                    {:else}
+                        <p></p>
+                    {/if}
+                    {:else}
+                    {#if typeTranference != 'wallet'}
                     <p>{t('deposit.destinationBank')}</p>
                     <p>{t('deposit.originBank')}</p>
                     <input type="text" class="ipt" value={paySelected.banco} disabled>
@@ -441,16 +453,11 @@
                     <input type="text" class="ipt" bind:value={amountDeposit} disabled>
                     <input type="date" class="ipt" bind:value={bankDeposit.date}>
                     {#if isRequiredVoucher}
-                        <p class:deposit__full={typeTranference === 'cripto'}>Subir Imagen de pago</p>
-                        {#if typeTranference !== 'cripto'}
+                        <p>Subir Imagen de pago</p>
                         <p></p>
-                        {/if}
-                        <button
-                            class="slc icon--upload"
-                            class:deposit__full={typeTranference === 'cripto'}
-                            on:click={()=> fileInput.click()}
-                        >{base64Image?"Archivo subido":"Seleccionar archivo"}</button>
+                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{base64Image?"Archivo subido":"Seleccionar archivo"}</button>
                         <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
+                    {/if}
                     {/if}
                 </div>
                 {#if isRequiredVoucher}
@@ -487,10 +494,6 @@
 </div>
 
 <style>
-    .deposit__full {
-        grid-column: 1 / -1;
-    }
-
     .deposit__copy {
         display: inline-flex;
         align-items: center;
