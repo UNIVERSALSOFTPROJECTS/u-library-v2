@@ -410,7 +410,7 @@
                     {#if typeTranference === 'cripto'}
                     <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
                     <p>{t('withdrawal.amount')}</p>
-                    <input type="text" class="ipt" bind:value={bankDeposit.reference} on:input={inputJustNumbers}>
+                    <input type="text" class="ipt" bind:value={bankDeposit.reference}>
                     <input type="text" class="ipt" bind:value={amountDeposit} disabled>
                     <p>{t('deposit.transferDate')}</p>
                     <p>{isRequiredVoucher ? "Subir Imagen de pago" : ""}</p>
