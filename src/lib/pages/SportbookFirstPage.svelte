@@ -38,6 +38,7 @@
     PNBO: "https://prod20370-205035220.freethrow777.com",
     PNEC: "https://prod20370-205035220.freethrow777.com",
     PNCO: "https://prod20370-205035220.freethrow777.com",
+    PNMM: "https://prod20370-205035220.freethrow777.com",
     MSVE: "https://prod20370-206588353.freethrow777.com",
     ALAR: "https://prod20370-206586095.freethrow777.com/",
     default: "https://prod20370-150256248.freethrow777.com",
