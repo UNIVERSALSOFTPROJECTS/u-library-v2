@@ -88,8 +88,8 @@
                 payinMethods: pay.payinMethods || "QR,TRANSFER",
                 customerName:user.username,
                 customerLastname: "Test",
-                customerDocType:"DNI",
-                customerDocNumber: "12312312"
+                customerDocType: user.doctype || "DNI",
+                customerDocNumber: user.document || "12312312"
             };
         }else{
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
@@ -196,8 +196,8 @@
                 reference: user.serial + "-"+Date.now(),
                 payinMethods: "QR,TRANSFER,CASH",
                 customerName:user.username,
-                customerDocType:"DNI",
-                customerDocNumber: "12312312"
+                customerDocType:user.doctype || "DNI",
+                customerDocNumber: user.document || "12312312"
             };
         }else{
             if(typeTranference === 'wallet'){
