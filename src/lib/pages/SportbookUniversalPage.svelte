@@ -15,6 +15,7 @@
   export let locale = "es";
 
   let sportbookGameUrl = "";
+  let sportbookProvider = "";
   let useLegacyFallback = false;
   let loading = false;
   let requestKey = "";
@@ -34,6 +35,24 @@
     return options?.legacyGameid?.includes("ank");
   }
 
+  function isAltenarProvider(provider) {
+    const normalizedProvider = `${provider || ""}`.trim().toLowerCase();
+    return (
+      normalizedProvider == "ank" ||
+      normalizedProvider == "anakatech" ||
+      normalizedProvider == "altenar"
+    );
+  }
+
+  function isAltenarLaunchUrl() {
+    const normalizedUrl = `${sportbookGameUrl || ""}`.toLowerCase();
+    return normalizedUrl.includes("anakatech") || normalizedUrl.includes("altenar");
+  }
+
+  function isAltenarSportbook() {
+    return shouldUseLegacyAltenar() || isAltenarProvider(sportbookProvider) || isAltenarLaunchUrl();
+  }
+
   async function launchSportbook() {
     const hasPersistedUserSession =
       typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("user");
@@ -47,6 +66,7 @@
     requestKey = nextKey;
 
     sportbookGameUrl = "";
+    sportbookProvider = "";
     useLegacyFallback = false;
     loading = true;
 
@@ -80,6 +100,8 @@
           response?.launchType == LAUNCH_HOSTED_VIEW_URL) &&
         response?.payload?.url
       ) {
+        sportbookProvider =
+          response.provider || response?.payload?.provider || response?.meta?.provider || "";
         sportbookGameUrl = response.payload.url;
         return;
       }
@@ -98,7 +120,7 @@
 
 {#if sportbookGameUrl}
   <div class="sportbook-content">
-    {#if shouldUseLegacyAltenar()}
+    {#if isAltenarSportbook()}
       <AltenarLanguageSelector />
     {/if}
     <iframe
