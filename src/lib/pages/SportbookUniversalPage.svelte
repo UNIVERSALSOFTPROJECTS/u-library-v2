@@ -49,8 +49,15 @@
     return normalizedUrl.includes("anakatech") || normalizedUrl.includes("altenar");
   }
 
+  function shouldShowAltenarLanguageSelector() {
+    return `${CLIENT_CODE || ""}`.trim().toUpperCase() == "BDBR";
+  }
+
   function isAltenarSportbook() {
-    return shouldUseLegacyAltenar() || isAltenarProvider(sportbookProvider) || isAltenarLaunchUrl();
+    return (
+      shouldShowAltenarLanguageSelector() &&
+      (shouldUseLegacyAltenar() || isAltenarProvider(sportbookProvider) || isAltenarLaunchUrl())
+    );
   }
 
   async function launchSportbook() {

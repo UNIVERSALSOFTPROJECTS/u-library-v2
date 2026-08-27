@@ -40,6 +40,10 @@
     console.log("estado:", loginModalOpen);
   };
 
+  function shouldShowAltenarLanguageSelector() {
+    return `${CLIENT_CODE || clientCode || ""}`.trim().toUpperCase() == "BDBR";
+  }
+
   async function openSport() {
     open();
   }
@@ -79,7 +83,9 @@
 </script>
 
 <div class="sportbook-content">
-  <AltenarLanguageSelector />
+  {#if shouldShowAltenarLanguageSelector()}
+    <AltenarLanguageSelector />
+  {/if}
   <iframe
     class="sportbook-iframe"
     id="sportbook-iframe"
