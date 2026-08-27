@@ -11,20 +11,13 @@
   function changeCulture(event) {
     selectedCulture = event.target.value;
     const iframe = document.getElementById(iframeId);
-    let targetOrigin = "*";
-
-    try {
-      targetOrigin = new URL(iframe?.src).origin;
-    } catch (error) {
-      targetOrigin = "*";
-    }
 
     iframe?.contentWindow?.postMessage(
       {
         type: "ALTENAR_SET_CULTURE",
         culture: selectedCulture,
       },
-      targetOrigin
+      "*"
     );
   }
 </script>
