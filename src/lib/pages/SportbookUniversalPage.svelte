@@ -1,6 +1,7 @@
 <script>
   import backend from "../../js/server";
   import util from "../../js/util";
+  import AltenarLanguageSelector from "../components/AltenarLanguageSelector.svelte";
   import SportbookAltenarPage from "./SportbookAltenarPage.svelte";
   import SportbookPage from "./SportbookPage.svelte";
 
@@ -97,6 +98,9 @@
 
 {#if sportbookGameUrl}
   <div class="sportbook-content">
+    {#if shouldUseLegacyAltenar()}
+      <AltenarLanguageSelector />
+    {/if}
     <iframe
       class="sportbook-iframe"
       id="sportbook-iframe"
@@ -137,6 +141,7 @@
 
 <style>
   .sportbook-content {
+    position: relative;
     width: 100%;
   }
 
