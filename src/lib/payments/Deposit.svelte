@@ -13,6 +13,7 @@
     export let onOk;
     export let amountsFav;
     export let configDeposit;
+    export let typeTranference = "";
     export let t;
 
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
@@ -24,7 +25,6 @@
     let payMethods = [...gateways];
     let bankPayments = [];
     let amountDeposit;
-    let typeTranference;
     let date = currentDate();
     let detailsTranference = true;
     let bankDeposit = {
@@ -156,7 +156,7 @@
         }else if((paySelected.banco || "").toLowerCase().includes("r4")){
             typeTranference = 'r4';
         }else if((paySelected.banco || "").toLowerCase().includes("binance")){
-            typeTranference = 'cripto';
+            typeTranference = 'minimal';
         }
         else{
             typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
@@ -204,9 +204,9 @@
                 bankDeposit.aditional = paySelected.banco;
                 bankDeposit.reference = paySelected.banco;
                 bankDeposit.targetBankId = paySelected.id;
-            }else if(typeTranference === 'cripto'){
-                bankDeposit.aditional = paySelected.banco;
-                bankDeposit.targetBankId = paySelected.id;
+            }else if(typeTranference === 'minimal'){
+                bankDeposit.aditional = "";
+                bankDeposit.targetBankId = "";
                 if (!bankDeposit.reference || (isRequiredVoucher && !base64Image)) {
                     return onError("Todos los campos son obligatorios");
                 }
@@ -417,7 +417,7 @@
                 >
                 <p>{t('deposit.step2')}.</p>
                 <div class="deposit__info">
-                    {#if typeTranference === 'cripto'}
+                    {#if typeTranference === 'minimal'}
                     <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
                     <p>{t('withdrawal.amount')}</p>
                     <input type="text" class="ipt" bind:value={bankDeposit.reference}>
