@@ -13,7 +13,6 @@
     export let onOk;
     export let amountsFav;
     export let configDeposit;
-    export let typeTranference = "";
     export let t;
 
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
@@ -43,6 +42,7 @@
     let viewTimeDeposit = configDeposit.viewTimeDeposit || false;
     let banksOrigin = configDeposit.banksOrigin || [];
     let originBankJustText = configDeposit.originBankJustText || false;
+    let typeTranference = configDeposit.typeTranference || "";
     let imgR4 = configDeposit.imgR4 || "";
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
@@ -531,11 +531,10 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 15px;
-        height: 10px;
-        padding: 0;
+        width: 16px;
+        height: 16px;
+        padding: 2px;
         border: 0;
-        border-radius: 0.5rem;
         background: #1a1a1a;
         color: #fff;
         cursor: pointer;
