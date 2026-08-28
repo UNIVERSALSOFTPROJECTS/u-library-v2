@@ -42,9 +42,8 @@
     let viewTimeDeposit = configDeposit.viewTimeDeposit || false;
     let banksOrigin = configDeposit.banksOrigin || [];
     let originBankJustText = configDeposit.originBankJustText || false;
-    let typeTranference = configDeposit.typeTranference || "";
-    console.log("typeTranference", typeTranference);
-    
+    let typeView = configDeposit.typeView || "";
+    let typeTranference = "";
     let imgR4 = configDeposit.imgR4 || "";
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
@@ -175,7 +174,7 @@
         }else if((paySelected.banco || "").toLowerCase().includes("r4")){
             typeTranference = 'r4';
         }else if((paySelected.banco || "").toLowerCase().includes("binance")){
-            typeTranference = 'minimal';
+            typeView = 'minimal';
         }
         else{
             typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
@@ -224,7 +223,7 @@
                 bankDeposit.aditional = paySelected.banco;
                 bankDeposit.reference = paySelected.banco;
                 bankDeposit.targetBankId = paySelected.id;
-            }else if(typeTranference === 'minimal'){
+            }else if(typeView === 'minimal'){
                 bankDeposit.aditional = "";
                 bankDeposit.targetBankId = "";
                 if (!bankDeposit.reference || (isRequiredVoucher && !base64Image)) {
@@ -437,7 +436,7 @@
                 >
                 <p>{t('deposit.step2')}.</p>
                 <div class="deposit__info">
-                    {#if typeTranference === 'minimal'}
+                    {#if typeView === 'minimal'}
                     <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
                     <p>{t('withdrawal.amount')}</p>
                     <input type="text" class="ipt" bind:value={bankDeposit.reference}>
