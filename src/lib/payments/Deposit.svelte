@@ -43,6 +43,8 @@
     let banksOrigin = configDeposit.banksOrigin || [];
     let originBankJustText = configDeposit.originBankJustText || false;
     let typeTranference = configDeposit.typeTranference || "";
+    console.log("typeTranference", typeTranference);
+    
     let imgR4 = configDeposit.imgR4 || "";
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
