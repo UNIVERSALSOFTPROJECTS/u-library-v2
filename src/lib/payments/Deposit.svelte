@@ -76,10 +76,27 @@
     }
 
 
+    async function getAccountDoc() {
+        try {
+            const { data } = await ServerConnection.users.getMyAccount(user.token);
+            return {
+                doctype: data.doctype || user.doctype || "DNI",
+                document: data.document || user.document || "12312312"
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                doctype: user.doctype || "DNI",
+                document: user.document || "12312312"
+            };
+        }
+    }
+
     async function validateDeposit(pay){
         if(typeTranference == "GATEWAY_PAY"){
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
             else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
+            const { doctype, document } = await getAccountDoc();
             OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
@@ -88,8 +105,8 @@
                 payinMethods: pay.payinMethods || "QR,TRANSFER",
                 customerName:user.username,
                 customerLastname: "Test",
-                customerDocType:"DNI",
-                customerDocNumber: "12312312"
+                customerDocType: doctype,
+                customerDocNumber: document
             };
         }else{
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
@@ -189,6 +206,7 @@
 
     async function validateDepositBank() {
         if(typeTranference == "GATEWAY_PAY"){
+            const { doctype, document } = await getAccountDoc();
             OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
@@ -196,8 +214,8 @@
                 reference: user.serial + "-"+Date.now(),
                 payinMethods: "QR,TRANSFER,CASH",
                 customerName:user.username,
-                customerDocType:"DNI",
-                customerDocNumber: "12312312"
+                customerDocType: doctype,
+                customerDocNumber: document
             };
         }else{
             if(typeTranference === 'wallet'){

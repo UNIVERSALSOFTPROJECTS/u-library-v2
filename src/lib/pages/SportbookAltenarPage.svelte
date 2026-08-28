@@ -2,6 +2,7 @@
   import { onDestroy, onMount } from "svelte";
   import ut from "../../js/util";
   import backend from "../../js/server";
+  import AltenarLanguageSelector from "../components/AltenarLanguageSelector.svelte";
   import { Client } from "@stomp/stompjs";
 
   export let userState;
@@ -38,6 +39,10 @@
     }
     console.log("estado:", loginModalOpen);
   };
+
+  function shouldShowAltenarLanguageSelector() {
+    return `${CLIENT_CODE || clientCode || ""}`.trim().toUpperCase() == "BDBR";
+  }
 
   async function openSport() {
     open();
@@ -78,6 +83,9 @@
 </script>
 
 <div class="sportbook-content">
+  {#if shouldShowAltenarLanguageSelector()}
+    <AltenarLanguageSelector />
+  {/if}
   <iframe
     class="sportbook-iframe"
     id="sportbook-iframe"
@@ -90,6 +98,7 @@
 <style>
   @media only screen and (max-width: 1199px) {
     .sportbook-content {
+      position: relative;
       width: 100%;
     }
     .sportbook-iframe {
@@ -99,6 +108,7 @@
   }
   @media only screen and (min-width: 1200px) {
     .sportbook-content {
+      position: relative;
       width: 98.9vw;
     }
     .sportbook-iframe {
