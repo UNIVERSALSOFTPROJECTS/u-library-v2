@@ -207,6 +207,10 @@
       "1": { live: guestURLacpbLive1, default: guestURLacpb1 },
       "2": { live: guestURLacpbLive2, default: guestURLacpb2 },
     },
+    ACBB: {
+      "1": { live: guestURLacpbLive1, default: guestURLacpb1 },
+      "2": { live: guestURLacpbLive2, default: guestURLacpb2 },
+    },
   };
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
     const normalizedClientCode = String(clientCode ?? "").trim().toUpperCase();
