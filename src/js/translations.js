@@ -114,6 +114,7 @@ export default {
     "footer.chatOnLive": "Chat en vivo",
     "footer.conditions_pay_horses": "Condiciones de pago hipicas",
     "footer.t_c_cashier": "TyC Cajero - Dep/Ret",
+    "footer.t_c_payment": "TyC Pasarela de pago",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Bienvenido a {{platform}}",
     "msg.sucessRegister": "Registro exitoso",
@@ -512,6 +513,7 @@ export default {
   "footer.chatOnLive": "Chat en direct",
   "footer.conditions_pay_horses": "Conditions de paiement des courses de chevaux",
   "footer.t_c_cashier": "TyC Cajero - Dep/Ret",
+  "footer.t_c_payment": "TyC Pasarela de pago",
     //---------------MENSAJES-----------------------------
  "msg.sucessLogin": "Bienvenue sur {{platform}}",
   "msg.sucessRegister": "Inscription réussie",
@@ -855,6 +857,7 @@ export default {
     "footer.chatOnLive": "Chat ao vivo",
     "footer.conditions_pay_horses": "Condições de pagamento de corridas de cavalos",
     "footer.t_c_cashier": "TyC Cajero - Dep/Ret",
+    "footer.t_c_payment": "TyC Pasarela de pago",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Bem-vindo a {{platform}}",
     "msg.duplicateSession": "Sessão duplicada, saindo...",
@@ -1297,6 +1300,7 @@ export default {
     "footer.chatOnLive": "Live chat",
     "footer.conditions_pay_horses": "Conditions of payment for horse racing",
     "footer.t_c_cashier": "TyC Cajero - Dep/Ret",
+    "footer.t_c_payment": "TyC Pasarela de pago",
     //---------------MENSAJES-----------------------------
     "msg.sucessLogin": "Welcome to {{platform}}",
     "msg.sucessRegister": "Successful registration",
