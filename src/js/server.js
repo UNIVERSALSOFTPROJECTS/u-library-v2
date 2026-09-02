@@ -53,7 +53,9 @@ const ServerConnection = (() => {
             return await axios.post(url, payload, { headers });
         },
         obtainPresignedURL: async (params) => {
-            headers.Authorization = "Bearer " + sessionStorage.getItem("token");
+            const user = sessionStorage.getItem("user");
+            const token = user.token && user.token !== ""?user.token:"";
+            headers.Authorization = "Bearer " + token;
             return axios.post(`${conf.API_BO}/banners/presigned-url`,params,{ headers });
         },
         getPayMethods: async (userToken) => {
