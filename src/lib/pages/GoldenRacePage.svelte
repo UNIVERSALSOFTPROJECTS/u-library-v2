@@ -13,6 +13,7 @@
 
     const DESKTOP_GUEST_BY_CLIENT = {
         BAPE: { region: "america", hwId: "c2d03fd6-84b2-4fb9-a755-d77257c01558" },
+        BABB: { region: "america", hwId: "c2d03fd6-84b2-4fb9-a755-d77257c01558" },
     };
     const DESKTOP_URLS = {
         america: "https://america-games.virtustec.com/desktop-v4/default/golden-race-desktop-loader.js",
