@@ -53,6 +53,7 @@
     let copiedAccount = false;
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
+    let fileInfo;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
@@ -191,6 +192,9 @@
         bankDeposit.reference='';
         viewLinkSafari = false;
         copiedAccount = false;
+        base64Image = undefined;
+        fileInfo = undefined;
+        if (fileInput) fileInput.value = "";
     }
 
     const copyAccountNumber = async () => {
@@ -226,22 +230,43 @@
             }else if(typeView === 'minimal'){
                 bankDeposit.aditional = "";
                 bankDeposit.targetBankId = "";
-                if (!bankDeposit.reference || (isRequiredVoucher && !base64Image)) {
+                if (!bankDeposit.reference || (isRequiredVoucher && !fileInfo?.file)) {
                     return onError("Todos los campos son obligatorios");
                 }
-            }else if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) {
+            }else if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !fileInfo?.file) {
                 return onError("Todos los campos son obligatorios");
             }
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
+
             try {
                 loadRecharge = true;
-                let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
-                if (data.msg === "DEPOSITO_OK") onOk(t("deposit.successDeposit"));
+                let response;
+                if (ServerConnection.wallet.isDirectDepositUploadFileMode()) {
+                    bankDeposit.imageUrl = fileInfo?.file ? await uploadFileRepo() : "";
+                    if(bankDeposit.imageUrl == null || bankDeposit.imageUrl === "") {
+                        return onError("Error al cargar el archivo");
+                    }
+                    response = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit);
+                } else {
+                    if (fileInfo?.file && !base64Image) {
+                        base64Image = await readFileAsDataURL(fileInfo.file);
+                    }
+                    response = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit, base64Image);
+                }
+                const { data } = response;
+                //let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
+                if (data.msg === "DEPOSITO_OK") {
+                    base64Image = undefined;
+                    fileInfo = undefined;
+                    if (fileInput) fileInput.value = "";
+                    onOk(t("deposit.successDeposit"));
+                }
                 else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
                 else onError(t('msg.contactSupport'));
             } catch (error) {
-                console.log(error);
+                console.error("Error registrando el depósito", error);
+                onError(t('msg.contactSupport'));
             } finally {
                 loadRecharge = false;
             }
@@ -263,12 +288,15 @@
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        
+
+        base64Image = undefined;
+        fileInfo = undefined;
         if (!file) return;
         
         const maxSize = 1 * 1024 * 1024; // 1 MB
         
-        if (!file.type.startsWith("image/")) {
+        const allowedTypes = ["image/jpeg", "image/png"];
+        if (!allowedTypes.includes(file.type)) {
             event.target.value = "";
             return onError("El archivo seleccionado debe ser una imagen");
         }
@@ -278,13 +306,51 @@
             return onError("La imagen no puede superar 1 MB");
         }
     
-        const reader = new FileReader();
-    
-        reader.onload = () => {
-            base64Image = reader.result;
+        const extension = file.type === "image/png" ? "png" : "jpg";
+        fileInfo = {
+            file,
+            contentType: file.type,
+            fileName: file.name,
+            fileKey: `deposits/${crypto.randomUUID()}.${extension}`,
         };
-    
+
+        if (!ServerConnection.wallet.isDirectDepositUploadFileMode()) {
+            readFileAsDataURL(file).then((result) => {
+                if (fileInfo?.file === file) base64Image = result;
+            }).catch((error) => {
+                console.error("Error leyendo el comprobante", error);
+                fileInfo = undefined;
+                event.target.value = "";
+                onError(t('msg.contactSupport'));
+            });
+        }
+    };
+
+    const readFileAsDataURL = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
         reader.readAsDataURL(file);
+    });
+
+    const uploadFileRepo = async () => {
+        const uploadUrl = await getCredentialsURL(fileInfo.file, fileInfo.fileKey);
+        const response = await fetch(uploadUrl, {
+            method: "PUT",
+            body: fileInfo.file,
+        });
+
+        if (!response.ok) throw new Error(`Error subiendo imagen ${fileInfo.fileName}`);
+
+        return ServerConnection.wallet.getPublicAssetUrl(fileInfo.fileKey);
+    }
+
+    const getCredentialsURL = async (file, key) => {
+        const url = await ServerConnection.wallet.obtainPresignedURL({
+            fileName: key,
+            contentType: file.type,
+        });
+        return url.data;
     };
         
     onMount(async() => {
@@ -445,8 +511,8 @@
                     <p>{isRequiredVoucher ? "Subir Imagen de pago" : ""}</p>
                     <input type="date" class="ipt" bind:value={bankDeposit.date}>
                     {#if isRequiredVoucher}
-                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{base64Image?"Archivo subido":"Seleccionar archivo"}</button>
-                        <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
+                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{fileInfo?.file?"Archivo seleccionado":"Seleccionar archivo"}</button>
+                        <input type="file" bind:this={fileInput} accept="image/jpeg,image/png" on:change={handleFileChange} hidden />
                     {:else}
                         <p></p>
                     {/if}
@@ -484,8 +550,8 @@
                     {#if isRequiredVoucher}
                         <p>Subir Imagen de pago</p>
                         <p></p>
-                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{base64Image?"Archivo subido":"Seleccionar archivo"}</button>
-                        <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
+                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{fileInfo?.file?"Archivo seleccionado":"Seleccionar archivo"}</button>
+                        <input type="file" bind:this={fileInput} accept="image/jpeg,image/png" on:change={handleFileChange} hidden />
                     {/if}
                     {/if}
                 </div>
