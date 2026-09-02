@@ -1,5 +1,4 @@
 import axios from "axios"
-import utils from './util'
 
 let conf;
 let headers = {};
@@ -53,10 +52,8 @@ const ServerConnection = (() => {
             return await axios.post(url, payload, { headers });
         },
         obtainPresignedURL: async (params) => {
-            const user = sessionStorage.getItem("user");
-            const token = user.token && user.token !== ""?user.token:"";
-            headers.Authorization = "Bearer " + token;
-            return axios.post(`${conf.API_BO}/banners/presigned-url`,params,{ headers });
+            headers.secret = conf.API_GUEST_SECRET;
+            return axios.post(`${conf.API_BO}/guest/presigned-url`,params,{ headers });
         },
         getPayMethods: async (userToken) => {
             let url = "https://srv-prod.newapiusoft.com/game-api-nd/paymethods/" + userToken;
