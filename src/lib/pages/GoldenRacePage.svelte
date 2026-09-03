@@ -19,7 +19,7 @@
     };
     const DESKTOP_URLS = {
         america: "https://america-games.virtustec.com/desktop-v4/default/golden-race-desktop-loader.js",
-        latam:   "https://latam-games.virtustec.com/desktop-v4/default/golden-race-desktop-loader.js",
+        latam:   "https://latam-games.virtustec.com/desktop-v4/stable/default/golden-race-desktop-loader.js",
     };
     const URLS = {
         terminal: "https://latam-games.virtustec.com/terminal/loader.js",
