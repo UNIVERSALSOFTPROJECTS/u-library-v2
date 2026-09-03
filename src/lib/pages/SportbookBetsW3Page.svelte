@@ -60,6 +60,11 @@
     const guestURLacpb2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
     const guestURLacpbLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
 
+    const guestURLacbb1 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail1_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e5a8bda1906f6e6a996&userMode=retail"
+    const guestURLacbbLive1 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail1_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e5a8bda1906f6e6a996&userMode=retail&view=live"
+    const guestURLacbb2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
+    const guestURLacbbLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
+
     const guestURLs = {
       BPEN: {
         live: guestURLLive,
@@ -102,8 +107,8 @@
         default: guestURLacec1,
       },
       ACBB:{
-        live: guestURLacpbLive1,
-        default: guestURLacpb1,
+        live: guestURLacbbLive1,
+        default: guestURLacbb1,
       },
       default: {
         live: guestURLLJLive,
@@ -159,8 +164,8 @@
           "2": { live: guestURLacpbLive2, default: guestURLacpb2 },
         },
         ACBB: {
-          "1": { live: guestURLacpbLive1, default: guestURLacpb1 },
-          "2": { live: guestURLacpbLive2, default: guestURLacpb2 },
+          "1": { live: guestURLacbbLive1, default: guestURLacbb1 },
+          "2": { live: guestURLacbbLive2, default: guestURLacbb2 },
         },
     };
     const resolveBetsw3GuestUrl = (gameid, clientCode, view) => {
