@@ -226,10 +226,10 @@
       return guestURLbetw3XLIVLiveSKIN2;
     }
 
+    // Prioriza el mapping V2 del cliente (por skin) si existe, sin depender del gameid,
+    // para que clientes tipo ACBB/ACPE/ACEC/ACPB usen siempre su URL correcta.
     const v2Entry =
-      gameid == bw3_v2_id
-        ? betsw3V2GuestUrlsByClient[normalizedClientCode]?.[normalizedSkin]
-        : null;
+      betsw3V2GuestUrlsByClient[normalizedClientCode]?.[normalizedSkin];
     if (v2Entry) {
       return isLiveView ? v2Entry.live : v2Entry.default;
     }
