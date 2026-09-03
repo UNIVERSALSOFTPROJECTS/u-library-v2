@@ -1,6 +1,8 @@
 <script>
-    import { onMount, onDestroy } from "svelte";
+    import { createEventDispatcher, onMount, onDestroy } from "svelte";
     import backend from '../../js/server.js';
+
+    const dispatch = createEventDispatcher();
 
     export let userState = "logout";
     export let mode = "online";
@@ -109,7 +111,10 @@
     }
     onMount(async () => {
         document.body.style.overflow = "";
-        if (mode === "desktop" && !desktopEnabled) return;
+        if (mode === "desktop" && !desktopEnabled) {
+            dispatch('ready');
+            return;
+        }
         try {
             fetchedExtToken = await fetchGoldenRaceToken();
             await loadScript();
@@ -117,6 +122,8 @@
         } catch (e) {
             console.error("Error onMount:", e);
         }
+        // Avisa al padre que terminó el launch (éxito o error).
+        dispatch('ready');
     });
     onDestroy(() => {
         loader?.stop?.();

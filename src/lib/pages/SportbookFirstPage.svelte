@@ -1,8 +1,10 @@
 <script>
 
-  import { onDestroy, onMount } from "svelte";
+  import { createEventDispatcher, onDestroy, onMount } from "svelte";
   import ut from '../../js/util';
   import backend from '../../js/server'
+
+  const dispatch = createEventDispatcher();
 
   export let userState;
   export let user;
@@ -13,6 +15,7 @@
   export let mode_bussines;
 
   let sportbookGameUrl = '';
+  let readyDispatched = false;
   let viewSportbook = true;
   let mode = ut.isMobile() ? "mb" : "wb";
   let mounted = false;
@@ -76,6 +79,8 @@
   }
 
   async function openSport() {
+    readyDispatched = false;
+    sportbookGameUrl = '';
     openFirst();
   }
 
@@ -102,6 +107,12 @@
     } catch (error) {
       console.log("Sportbook Error",error);
     }
+  }
+
+  // Avisa al padre cuando la URL del iframe ya está lista.
+  $: if (sportbookGameUrl && !readyDispatched) {
+    readyDispatched = true;
+    dispatch('ready');
   }
 
   onDestroy(async () => {

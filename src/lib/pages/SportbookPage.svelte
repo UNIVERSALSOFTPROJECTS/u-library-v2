@@ -23,6 +23,7 @@
   
 
   let sportbookGameUrl = '';
+  let readyDispatched = false;
   let guestLaunchResponse = null;
   let authenticatedLaunchResponse = null;
   let cmsWagerLaunchOptions = null;
@@ -271,6 +272,8 @@
     guestLaunchResponse = null;
     authenticatedLaunchResponse = null;
     cmsWagerLaunchOptions = null;
+    readyDispatched = false;
+    sportbookGameUrl = '';
 
     const isCmsWagerSportbook = options?.gameid == cmsw_id;
 
@@ -509,6 +512,12 @@ function RESELLER (params) {
     sportbookGameUrl = url;
     console.log("urlNovus", sportbookGameUrl);
   };
+
+  // Avisa al padre cuando la URL del iframe ya está lista.
+  $: if (sportbookGameUrl && !readyDispatched) {
+    readyDispatched = true;
+    dispatch('ready');
+  }
   
   onDestroy(async () => {
     if (user?.agregatorToken) {
