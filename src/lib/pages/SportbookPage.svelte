@@ -272,6 +272,7 @@
   };
 
   async function openSport() {
+    console.log(" OPEN SPORT");
     guestLaunchError = "";
     guestLaunchResponse = null;
     authenticatedLaunchResponse = null;
@@ -322,6 +323,7 @@
   }
 
   async function openGuestSportbook() {
+    console.log("GUEST LAUNCH START");
     try {
       const response = await backend.game.openGuestSportbook({
         clientCode: clientCode || CLIENT_CODE,
@@ -330,7 +332,7 @@
         mode,
         device: ut.isMobile() ? "mobile" : "desktop",
       });
-
+      console.log("GUEST LAUNCH RESPONSE");
       if (!response?.success || !response?.launchType) {
         throw new Error(response?.message || "Invalid guest sportbook response");
       }
@@ -360,6 +362,7 @@
   }
 
   async function openAuthenticatedSportbook() {
+    console.log("AUTH LAUNCH START");
     try {
       const sessionToken = options?.gameToken;
       if (!sessionToken) {
