@@ -22,6 +22,8 @@
     let dataType = configWithdrawal.dataType;
     let pendingWithdrawal;
     let typeView = configWithdrawal.typeView || "";
+    let acceptTerms = configWithdrawal.acceptTerms || false; // opcional: muestra checkbox TyC
+    let acceptedTerms = false;
     let amount;
     let loadWithdrawal = false;
     let infoUser = {};
@@ -279,7 +281,14 @@
                         <p class="schedulesWihtdrawals"><b>{t('withdrawal.time')}:</b> {infoUser.horarios}</p>
                     {/if}
 
-                    <a href="https://assets-usoft.universalsoft.net/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
+                    {#if acceptTerms}
+                        <label class="withdrawal__terms">
+                            <input type="checkbox" bind:checked={acceptedTerms} />
+                            <a href="https://assets-usoft.universalsoft.net/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
+                        </label>
+                    {:else}
+                        <a href="https://assets-usoft.universalsoft.net/{platform}/d&w.pdf" target="_blank">{@html t("withdrawal.termsConditions")}</a>
+                    {/if}
                     {#if formVerification}
                     <div class="withdrawal__note">{@html t('withdrawal.reminderCompleteVerification')}</div>
                     {/if}
@@ -304,7 +313,7 @@
                         </button>
                     </div>
                     {/if}
-                    <button class="btn withdrawal" on:click={validateWithdrawal} disabled={loadWithdrawal}> 
+                    <button class="btn withdrawal" on:click={validateWithdrawal} disabled={loadWithdrawal || (acceptTerms && !acceptedTerms)}> 
                     {#if loadWithdrawal}
                         <div class="loading"><p></p><p></p><p></p></div>
                     {:else}

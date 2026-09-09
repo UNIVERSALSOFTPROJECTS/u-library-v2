@@ -131,6 +131,7 @@
         id_ca: ["5558","15818"], //caja dentro de un distribuidor principal
         dataType: "",
         typeView: "",
+        acceptTerms: false, // true = checkbox TyC obligatorio para solicitar retiro
         messageOptional: "",
         formVerification: "",
         platform,

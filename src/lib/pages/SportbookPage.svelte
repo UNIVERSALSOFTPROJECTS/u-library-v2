@@ -226,10 +226,10 @@
       return guestURLbetw3XLIVLiveSKIN2;
     }
 
+    // Prioriza el mapping V2 del cliente (por skin) si existe, sin depender del gameid,
+    // para que clientes tipo ACBB/ACPE/ACEC/ACPB usen siempre su URL correcta.
     const v2Entry =
-      gameid == bw3_v2_id
-        ? betsw3V2GuestUrlsByClient[normalizedClientCode]?.[normalizedSkin]
-        : null;
+      betsw3V2GuestUrlsByClient[normalizedClientCode]?.[normalizedSkin];
     if (v2Entry) {
       return isLiveView ? v2Entry.live : v2Entry.default;
     }
@@ -272,6 +272,7 @@
   };
 
   async function openSport() {
+    console.log(" OPEN SPORT");
     guestLaunchError = "";
     guestLaunchResponse = null;
     authenticatedLaunchResponse = null;
@@ -322,6 +323,7 @@
   }
 
   async function openGuestSportbook() {
+    console.log("GUEST LAUNCH START");
     try {
       const response = await backend.game.openGuestSportbook({
         clientCode: clientCode || CLIENT_CODE,
@@ -330,7 +332,7 @@
         mode,
         device: ut.isMobile() ? "mobile" : "desktop",
       });
-
+      console.log("GUEST LAUNCH RESPONSE");
       if (!response?.success || !response?.launchType) {
         throw new Error(response?.message || "Invalid guest sportbook response");
       }
@@ -360,6 +362,7 @@
   }
 
   async function openAuthenticatedSportbook() {
+    console.log("AUTH LAUNCH START");
     try {
       const sessionToken = options?.gameToken;
       if (!sessionToken) {
