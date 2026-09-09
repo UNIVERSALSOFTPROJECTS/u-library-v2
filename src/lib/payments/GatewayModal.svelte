@@ -22,7 +22,9 @@
             data_payin.customerName = data.customerName ; 
             data_payin.customerLastname = data.customerLastname ; 
             data_payin.customerDocType = data.customerDocType ; 
-            data_payin.customerDocNumber = data.customerDocNumber ; 
+            data_payin.customerDocNumber = data.customerDocNumber;
+            //pruebas
+            data_payin.customerEmail = 'test@gmail.com' ;
             console.log("data_payin",data_payin); 
 
             window.NexoPay.render({
@@ -36,6 +38,8 @@
                 customerLastname: data_payin.customerLastname,
                 customerDocType: data_payin.customerDocType,
                 customerDocNumber: data_payin.customerDocNumber,
+                //pruebas
+                customerEmail: data_payin.customerEmail,
                 signature: data.signature,
                 timestamp: data.timestamp,
                 // customerPhoneCode: "+51",
