@@ -40,7 +40,7 @@
                 customerEmail: data_payin.customerEmail,
                 signature: data.signature,
                 timestamp: data.timestamp,
-                options: data_payin.options,
+                payinOptions: data_payin.payinOptions,
                 // customerPhoneCode: "+51",
                 // customerPhoneNumber: "999999999",
                 onSuccess: function (payin) {
