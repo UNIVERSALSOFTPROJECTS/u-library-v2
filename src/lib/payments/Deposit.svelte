@@ -96,14 +96,20 @@
         }
     }
 
-    async function parseDocType(doctype) {
-        if (doctype === "DNI") {
-            return "DNI";
-        } else if (doctype === "CC") {
-            return "CC";
-        } else {
-            return "DNI";
+    async function parseDocType(doctype, currency) {
+
+        if(currency=='COP'){
+            if (doctype === "DNI") {
+                return "CC";
+            } else if (doctype === " Cedula de Extrajeria") {
+                return "CC";
+            } else {
+                return "CC";
+            }
+        }else{
+            return doctype;
         }
+
     }
 
     async function validateDeposit(pay){
@@ -121,7 +127,7 @@
                 payinMethods: pay.payinMethods || "QR,TRANSFER",
                 customerName:user.username,
                 customerLastname: "Test",
-                customerDocType: parseDocType(doctype),
+                customerDocType: parseDocType(doctype, pay.currency),
                 customerDocNumber: document,
                 customerEmail: email,
                 customerPhoneCode: phone ? phone.substring(0, 3) : "",
