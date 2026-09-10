@@ -83,7 +83,9 @@
             const { data } = await ServerConnection.users.getMyAccount(user.token);
             return {
                 doctype: data.doctype || user.doctype || "DNI",
-                document: data.document || user.document || "12312312"
+                document: data.document || user.document || "12312312",
+                email: data.email || user.email || "",
+                phone: data.phone || user.phone || ""
             };
         } catch (error) {
             console.log(error);
@@ -98,7 +100,7 @@
         if(typeTranference == "GATEWAY_PAY"){
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
             else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
-            const { doctype, document } = await getAccountDoc();
+            const { doctype, document, email, phone } = await getAccountDoc();
             OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
@@ -108,7 +110,10 @@
                 customerName:user.username,
                 customerLastname: "Test",
                 customerDocType: doctype,
-                customerDocNumber: document
+                customerDocNumber: document,
+                customerEmail: email,
+                customerPhoneCode: phone ? phone.substring(0, 3) : "",
+                customerPhoneNumber: phone ? phone.substring(3) : ""
             };
             if(pay.payOptions) data_pay.payinOptions = pay.payOptions;
         }else{

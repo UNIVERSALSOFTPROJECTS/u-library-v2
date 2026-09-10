@@ -23,10 +23,13 @@
             data_payin.customerLastname = data.customerLastname ;
             data_payin.customerDocType = data.customerDocType ;
             data_payin.customerDocNumber = data.customerDocNumber;
-            data_payin.customerEmail = data.customerEmail;
+            if(data.customerEmail) data_payin.customerEmail = data.customerEmail ;
+            if(data.customerPhoneCode) data_payin.customerPhoneCode = data.customerPhoneCode ;
+            if(data.customerPhoneNumber) data_payin.customerPhoneNumber = data.customerPhoneNumber ;
+
             console.log("data_payin",data_payin);
 
-            window.NexoPay.render({
+            const nexoParams={
                 elementId: "pay-orchestrator-widget",
                 apiKey: data.merchantKey,
                 amount: data_payin.amount,
@@ -39,8 +42,18 @@
                 customerDocNumber: data_payin.customerDocNumber,
                 customerEmail: data_payin.customerEmail,
                 signature: data.signature,
-                timestamp: data.timestamp,
-                payinOptions: data_payin.payinOptions,
+                timestamp: data.timestamp
+            }
+            if(data_payin.payinOptions) {
+                nexoParams.payinOptions = data_payin.payinOptions;
+            }
+            if(data_payin.customerPhoneCode && data_payin.customerPhoneNumber) {
+                nexoParams.customerPhoneCode = data_payin.customerPhoneCode;
+                nexoParams.customerPhoneNumber = data_payin.customerPhoneNumber;
+            }
+
+            window.NexoPay.render({
+                ...nexoParams,
                 // customerPhoneCode: "+51",
                 // customerPhoneNumber: "999999999",
                 onSuccess: function (payin) {
