@@ -354,6 +354,7 @@
     };
         
     onMount(async() => {
+        console.log("config depo", configDeposit);
         detectLockedDeposit();
         if (!isLocked) await getPayMethods();
         if (payMethods.length===1)
