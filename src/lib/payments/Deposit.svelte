@@ -96,11 +96,23 @@
         }
     }
 
+    async function parseDocType(doctype) {
+        if (doctype === "DNI") {
+            return "DNI";
+        } else if (doctype === "CC") {
+            return "CC";
+        } else {
+            return "DNI";
+        }
+    }
+
     async function validateDeposit(pay){
         if(typeTranference == "GATEWAY_PAY"){
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
             else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
             const { doctype, document, email, phone } = await getAccountDoc();
+
+
             OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
@@ -109,7 +121,7 @@
                 payinMethods: pay.payinMethods || "QR,TRANSFER",
                 customerName:user.username,
                 customerLastname: "Test",
-                customerDocType: doctype,
+                customerDocType: parseDocType(doctype),
                 customerDocNumber: document,
                 customerEmail: email,
                 customerPhoneCode: phone ? phone.substring(0, 3) : "",
