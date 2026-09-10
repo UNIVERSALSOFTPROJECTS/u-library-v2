@@ -14,39 +14,36 @@
             if(!user) return ;
             data_payin.amount = data_payin.amount*100;
             let user_recharge = JSON.parse(user);
+            // el email debe ir antes de pedir la firma para que quede incluido en el body firmado
+            data_payin.customerEmail = 'test@gmail.com' ;
             let response = await ServerConnection.u_user.generateSignatureToOrderPayIn(data_payin,user_recharge.token+"_"+user_recharge.id+"_"+user_recharge.username);
             let data = response.data;
             await loadSdk();
             // si customerDocType es vacio enviar DNI , cuando es cedula enviar DNI
             // si customerDocNumber vacio o 0 enviar 12312312
-            data_payin.customerName = data.customerName ; 
-            data_payin.customerLastname = data.customerLastname ; 
-            data_payin.customerDocType = data.customerDocType ; 
+            data_payin.customerName = data.customerName ;
+            data_payin.customerLastname = data.customerLastname ;
+            data_payin.customerDocType = data.customerDocType ;
             data_payin.customerDocNumber = data.customerDocNumber;
-            //pruebas
-            data_payin.customerEmail = 'test@gmail.com' ;
-            console.log("data_payin",data_payin); 
+            console.log("data_payin",data_payin);
 
             window.NexoPay.render({
                 elementId: "pay-orchestrator-widget",
                 apiKey: data.merchantKey,
                 amount: data_payin.amount,
                 currency: data_payin.currency,
-                reference: data_payin.reference, 
+                reference: data_payin.reference,
                 payinMethods: data_payin.payinMethods,
                 customerName: data_payin.customerName,
                 customerLastname: data_payin.customerLastname,
                 customerDocType: data_payin.customerDocType,
                 customerDocNumber: data_payin.customerDocNumber,
-                //pruebas
                 customerEmail: data_payin.customerEmail,
                 signature: data.signature,
                 timestamp: data.timestamp,
                 // customerPhoneCode: "+51",
 
                 // customerPhoneNumber: "999999999",
-
-                // customerEmail: "comprador@gmail.com",
 
                 onSuccess: function (payin) {
 
