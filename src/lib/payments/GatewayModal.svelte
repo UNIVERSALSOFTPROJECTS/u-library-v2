@@ -40,14 +40,11 @@
                 customerEmail: data_payin.customerEmail,
                 signature: data.signature,
                 timestamp: data.timestamp,
+                options: data_payin.payOptions,
                 // customerPhoneCode: "+51",
-
                 // customerPhoneNumber: "999999999",
-
                 onSuccess: function (payin) {
-
                     console.log(payin);
-
                     open = false;
                     // recargar la pagina
                     window.location.reload();
