@@ -110,6 +110,7 @@
                 customerDocType: doctype,
                 customerDocNumber: document
             };
+            if(pay.payOptions) data_pay.payOptions = pay.payOptions;
         }else{
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
             else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
@@ -355,6 +356,7 @@
         
     onMount(async() => {
         console.log("config depo", configDeposit);
+        console.log("payMethods", payMethods);
         detectLockedDeposit();
         if (!isLocked) await getPayMethods();
         if (payMethods.length===1)
