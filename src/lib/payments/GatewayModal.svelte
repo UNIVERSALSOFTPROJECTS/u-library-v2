@@ -14,8 +14,6 @@
             if(!user) return ;
             data_payin.amount = data_payin.amount*100;
             let user_recharge = JSON.parse(user);
-            // el email debe ir antes de pedir la firma para que quede incluido en el body firmado
-            data_payin.customerEmail = 'test@gmail.com' ;
             let response = await ServerConnection.u_user.generateSignatureToOrderPayIn(data_payin,user_recharge.token+"_"+user_recharge.id+"_"+user_recharge.username);
             let data = response.data;
             await loadSdk();
@@ -25,6 +23,7 @@
             data_payin.customerLastname = data.customerLastname ;
             data_payin.customerDocType = data.customerDocType ;
             data_payin.customerDocNumber = data.customerDocNumber;
+            data_payin.customerEmail = data.customerEmail;
             console.log("data_payin",data_payin);
 
             window.NexoPay.render({
