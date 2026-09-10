@@ -86,7 +86,7 @@
     }
 
     onMount(() => {
-
+        console.log("data_payin",data_payin);
         loadGateway();
 
     });
