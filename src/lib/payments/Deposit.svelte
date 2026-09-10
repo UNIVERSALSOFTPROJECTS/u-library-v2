@@ -110,7 +110,7 @@
                 customerDocType: doctype,
                 customerDocNumber: document
             };
-            if(pay.payOptions) data_pay.payOptions = pay.payOptions;
+            if(pay.payOptions) data_pay.options = pay.payOptions;
         }else{
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
             else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
