@@ -120,14 +120,15 @@
 
 
             OPEN_MODAL_GATEWAY_PAY = true;
+            const currency = pay.currency || user.currency;
             data_pay = {
                 amount: amountDeposit,
-                currency: pay.currency || user.currency,
+                currency: currency,
                 reference: crypto.randomUUID().replaceAll("-","").substring(0,30),
                 payinMethods: pay.payinMethods || "QR,TRANSFER",
                 customerName:user.username,
                 customerLastname: "Test",
-                customerDocType: parseDocType(doctype, pay.currency),
+                customerDocType: parseDocType(doctype, currency),
                 customerDocNumber: document,
                 customerEmail: email,
                 customerPhoneCode: phone ? phone.substring(0, 3) : "",
