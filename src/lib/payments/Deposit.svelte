@@ -132,8 +132,8 @@
                 customerDocNumber: document,
                 customerEmail: email,
                 customerPhoneCode: phone ? phone.substring(0, 3) : "",
-                //customerPhoneNumber: phone ? phone.substring(3) : ""
-                customerPhoneNumber: "3185295353"
+                customerPhoneNumber: phone ? phone.substring(3) : ""
+                //customerPhoneNumber: "3185295353"
             };
             if(pay.payOptions) data_pay.payinOptions = pay.payOptions;
         }else{
