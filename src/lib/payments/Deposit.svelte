@@ -96,7 +96,7 @@
         }
     }
 
-    async function parseDocType(doctype, currency) {
+    function parseDocType(doctype, currency) {
 
         if(currency=='COP'){
             if (doctype === "DNI") {
