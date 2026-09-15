@@ -40,10 +40,13 @@
                 customerLastname: data_payin.customerLastname,
                 customerDocType: data_payin.customerDocType,
                 customerDocNumber: data_payin.customerDocNumber,
-                customerEmail: data_payin.customerEmail,
                 signature: data.signature,
                 timestamp: data.timestamp
             }
+            if(data_payin.customerEmail) {
+                nexoParams.customerEmail = data_payin.customerEmail;
+            }
+
             if(data_payin.payinOptions) {
                 nexoParams.payinOptions = data_payin.payinOptions;
             }
