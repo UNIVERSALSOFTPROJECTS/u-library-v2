@@ -19,35 +19,48 @@
             await loadSdk();
             // si customerDocType es vacio enviar DNI , cuando es cedula enviar DNI
             // si customerDocNumber vacio o 0 enviar 12312312
-            data_payin.customerName = data.customerName ; 
-            data_payin.customerLastname = data.customerLastname ; 
-            data_payin.customerDocType = data.customerDocType ; 
-            data_payin.customerDocNumber = data.customerDocNumber ; 
-            console.log("data_payin",data_payin); 
+            data_payin.customerName = data.customerName ;
+            data_payin.customerLastname = data.customerLastname ;
+            data_payin.customerDocType = data.customerDocType ;
+            data_payin.customerDocNumber = data.customerDocNumber;
+            if(data.customerEmail) data_payin.customerEmail = data.customerEmail ;
+            if(data.customerPhoneCode) data_payin.customerPhoneCode = data.customerPhoneCode ;
+            if(data.customerPhoneNumber) data_payin.customerPhoneNumber = data.customerPhoneNumber ;
 
-            window.NexoPay.render({
+            console.log("data_payin",data_payin);
+
+            const nexoParams={
                 elementId: "pay-orchestrator-widget",
                 apiKey: data.merchantKey,
                 amount: data_payin.amount,
                 currency: data_payin.currency,
-                reference: data_payin.reference, 
+                reference: data_payin.reference,
                 payinMethods: data_payin.payinMethods,
                 customerName: data_payin.customerName,
                 customerLastname: data_payin.customerLastname,
                 customerDocType: data_payin.customerDocType,
                 customerDocNumber: data_payin.customerDocNumber,
                 signature: data.signature,
-                timestamp: data.timestamp,
+                timestamp: data.timestamp
+            }
+            if(data_payin.customerEmail) {
+                nexoParams.customerEmail = data_payin.customerEmail;
+            }
+
+            if(data_payin.payinOptions) {
+                nexoParams.payinOptions = data_payin.payinOptions;
+            }
+            if(data_payin.customerPhoneCode && data_payin.customerPhoneNumber) {
+                nexoParams.customerPhoneCode = data_payin.customerPhoneCode;
+                nexoParams.customerPhoneNumber = data_payin.customerPhoneNumber;
+            }
+
+            window.NexoPay.render({
+                ...nexoParams,
                 // customerPhoneCode: "+51",
-
                 // customerPhoneNumber: "999999999",
-
-                // customerEmail: "comprador@gmail.com",
-
                 onSuccess: function (payin) {
-
                     console.log(payin);
-
                     open = false;
                     // recargar la pagina
                     window.location.reload();
@@ -89,7 +102,7 @@
     }
 
     onMount(() => {
-
+        console.log("data_payin",data_payin);
         loadGateway();
 
     });

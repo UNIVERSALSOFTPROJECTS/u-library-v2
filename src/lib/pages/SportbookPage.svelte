@@ -23,6 +23,7 @@
   
 
   let sportbookGameUrl = '';
+  let readyDispatched = false;
   let guestLaunchResponse = null;
   let authenticatedLaunchResponse = null;
   let cmsWagerLaunchOptions = null;
@@ -84,7 +85,25 @@
   const guestURLacpeLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
   const guestURLacec2 ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail2_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37b48bda1906f6e6a995&userMode=retail"
   const guestURLacecLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f35c28bda1906f6e6a992&template=retail2_premium#/?platformId=6a7f35c28bda1906f6e6a992&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f37b48bda1906f6e6a995&userMode=retail&view=live"
+  const guestURLacpb1 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail1_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e5a8bda1906f6e6a996&userMode=retail"
+  const guestURLacpbLive1 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail1_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e5a8bda1906f6e6a996&userMode=retail&view=live"
+  const guestURLacpb2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
+  const guestURLacpbLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail&view=live"
+  
+  const guestURLacbb1 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail1_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e5a8bda1906f6e6a996&userMode=retail"
+  const guestURLacbbLive1 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail1_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e5a8bda1906f6e6a996&view=live&userMode=retail"
+  const guestURLacbb2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&userMode=retail"
+  const guestURLacbbLive2 ="https://sports-frontend.jbets.online/?platformId=6a7f36588bda1906f6e6a993&template=retail2_premium#/?platformId=6a7f36588bda1906f6e6a993&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6a7f3e738bda1906f6e6a997&view=live&userMode=retail"
 
+  const guestURLgbpp1 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail1_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468a411cdcce2f3a13c5a&userMode=retail"
+  const guestURLgbppLive1 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail1_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468a411cdcce2f3a13c5a&view=live&userMode=retail"
+  const guestURLgbpp2 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail2_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468b611cdcce2f3a13c5b&userMode=retail"
+  const guestURLgbppLive2 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail2_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468b611cdcce2f3a13c5b&view=live&userMode=retail"
+
+  const guestURLgbeu1 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail1_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468a411cdcce2f3a13c5a&userMode=retail"
+  const guestURLgbeuLive1 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail1_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468a411cdcce2f3a13c5a&view=live&userMode=retail"
+  const guestURLgbeu2 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail2_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468b611cdcce2f3a13c5b&userMode=retail"
+  const guestURLgbeuLive2 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail2_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468b611cdcce2f3a13c5b&view=live&userMode=retail"
 
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
@@ -198,6 +217,22 @@
       "1": { live: guestURLacecLive1, default: guestURLacec1 },
       "2": { live: guestURLacecLive2, default: guestURLacec2 },
     },
+    ACPB: {
+      "1": { live: guestURLacpbLive1, default: guestURLacpb1 },
+      "2": { live: guestURLacpbLive2, default: guestURLacpb2 },
+    },
+    ACBB: {
+      "1": { live: guestURLacbbLive1, default: guestURLacbb1 },
+      "2": { live: guestURLacbbLive2, default: guestURLacbb2 },
+    },
+    GBPP: {
+      "1": { live: guestURLgbppLive1, default: guestURLgbpp1 },
+      "2": { live: guestURLgbppLive2, default: guestURLgbpp2 },
+    },
+    GBEU: {
+      "1": { live: guestURLgbeuLive1, default: guestURLgbeu1 },
+      "2": { live: guestURLgbeuLive2, default: guestURLgbeu2 },
+    },
   };
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
     const normalizedClientCode = String(clientCode ?? "").trim().toUpperCase();
@@ -208,10 +243,10 @@
       return guestURLbetw3XLIVLiveSKIN2;
     }
 
+    // Prioriza el mapping V2 del cliente (por skin) si existe, sin depender del gameid,
+    // para que clientes tipo ACBB/ACPE/ACEC/ACPB usen siempre su URL correcta.
     const v2Entry =
-      gameid == bw3_v2_id
-        ? betsw3V2GuestUrlsByClient[normalizedClientCode]?.[normalizedSkin]
-        : null;
+      betsw3V2GuestUrlsByClient[normalizedClientCode]?.[normalizedSkin];
     if (v2Entry) {
       return isLiveView ? v2Entry.live : v2Entry.default;
     }
@@ -254,10 +289,13 @@
   };
 
   async function openSport() {
+    console.log(" OPEN SPORT");
     guestLaunchError = "";
     guestLaunchResponse = null;
     authenticatedLaunchResponse = null;
     cmsWagerLaunchOptions = null;
+    readyDispatched = false;
+    sportbookGameUrl = '';
 
     const isCmsWagerSportbook = options?.gameid == cmsw_id;
 
@@ -302,6 +340,7 @@
   }
 
   async function openGuestSportbook() {
+    console.log("GUEST LAUNCH START");
     try {
       const response = await backend.game.openGuestSportbook({
         clientCode: clientCode || CLIENT_CODE,
@@ -310,7 +349,7 @@
         mode,
         device: ut.isMobile() ? "mobile" : "desktop",
       });
-
+      console.log("GUEST LAUNCH RESPONSE");
       if (!response?.success || !response?.launchType) {
         throw new Error(response?.message || "Invalid guest sportbook response");
       }
@@ -340,6 +379,7 @@
   }
 
   async function openAuthenticatedSportbook() {
+    console.log("AUTH LAUNCH START");
     try {
       const sessionToken = options?.gameToken;
       if (!sessionToken) {
@@ -496,6 +536,12 @@ function RESELLER (params) {
     sportbookGameUrl = url;
     console.log("urlNovus", sportbookGameUrl);
   };
+
+  // Avisa al padre cuando la URL del iframe ya está lista.
+  $: if (sportbookGameUrl && !readyDispatched) {
+    readyDispatched = true;
+    dispatch('ready');
+  }
   
   onDestroy(async () => {
     if (user?.agregatorToken) {

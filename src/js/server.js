@@ -1,5 +1,4 @@
 import axios from "axios"
-import utils from './util'
 
 let conf;
 let headers = {};
@@ -52,6 +51,10 @@ const ServerConnection = (() => {
             let url = conf.API_KS + "/wallet/bankDeposit";
             return await axios.post(url, payload, { headers });
         },
+        obtainPresignedURL: async (params) => {
+            headers.secret = conf.API_GUEST_SECRET;
+            return axios.post(`${conf.API_BO}/guest/presigned-url`,params,{ headers });
+        },
         getPayMethods: async (userToken) => {
             let url = "https://srv-prod.newapiusoft.com/game-api-nd/paymethods/" + userToken;
             return await axios.get(url, { headers });
@@ -59,6 +62,13 @@ const ServerConnection = (() => {
         getPayLink: async (token, amount, type) => {
             let url = conf.API_KS + "/getpaylink/";
             return await axios.post(url, { token, amount, type }, { headers });
+        },
+        isDirectDepositUploadFileMode: () => {
+            return typeof conf?.API_BO === "string" && conf.API_BO.trim().length > 0;
+        },
+        getPublicAssetUrl: (fileKey) => {
+            if (typeof conf?.ASSETS !== "string" || !conf.ASSETS.trim()) throw "ASSETS_MANDATORY";
+            return `${conf.ASSETS.replace(/\/+$/, "")}/${fileKey.replace(/^\/+/, "")}`;
         },
     }
     const users = {

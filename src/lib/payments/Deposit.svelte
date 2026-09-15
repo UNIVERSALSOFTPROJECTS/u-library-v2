@@ -20,10 +20,10 @@
     let loadRecharge = false;
     let iframeGateway;
     let paySelected;
-    let payMethods; 
+    let gateways = (configDeposit.gateways || []).map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
+    let payMethods = [...gateways];
     let bankPayments = [];
     let amountDeposit;
-    let typeTranference;
     let date = currentDate();
     let detailsTranference = true;
     let bankDeposit = {
@@ -42,20 +42,23 @@
     let viewTimeDeposit = configDeposit.viewTimeDeposit || false;
     let banksOrigin = configDeposit.banksOrigin || [];
     let originBankJustText = configDeposit.originBankJustText || false;
+    let typeView = configDeposit.typeView || "";
+    let typeTranference = "";
     let imgR4 = configDeposit.imgR4 || "";
-    let gateways = (configDeposit.gateways || []).map(gateway => ({ ...gateway, banco: "GATEWAY_PAY" }));
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
     let fileInput;
     let viewLinkSafari = false;
+    let copiedAccount = false;
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
+    let fileInfo;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
     const detectLockedDeposit = () => {
-        isLocked = gateways.length === 0 && !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
+        isLocked = !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
     }
 
     async function getPayMethods() {
@@ -75,21 +78,64 @@
     }
 
 
+    async function getAccountDoc() {
+        try {
+            const { data } = await ServerConnection.users.getMyAccount(user.token);
+            return {
+                doctype: data.doctype || user.doctype || "DNI",
+                document: data.document || user.document || "12312312",
+                email: data.email || user.email || "",
+                phone: data.phone || user.phone || ""
+            };
+        } catch (error) {
+            console.log(error);
+            return {
+                doctype: user.doctype || "DNI",
+                document: user.document || "12312312"
+            };
+        }
+    }
+
+    function parseDocType(doctype, currency) {
+
+        if(currency=='COP'){
+            if (doctype === "DNI") {
+                return "CC";
+            } else if (doctype === " Cedula de Extrajeria") {
+                return "CC";
+            } else {
+                return "CC";
+            }
+        }else{
+            return doctype;
+        }
+
+    }
+
     async function validateDeposit(pay){
         if(typeTranference == "GATEWAY_PAY"){
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
             else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
+            const { doctype, document, email, phone } = await getAccountDoc();
+
+
             OPEN_MODAL_GATEWAY_PAY = true;
+            const currency = pay.currency || user.currency;
             data_pay = {
                 amount: amountDeposit,
-                currency: pay.currency || user.currency,
+                currency: currency,
                 reference: crypto.randomUUID().replaceAll("-","").substring(0,30),
                 payinMethods: pay.payinMethods || "QR,TRANSFER",
                 customerName:user.username,
                 customerLastname: "Test",
-                customerDocType:"DNI",
-                customerDocNumber: "12312312"
+                customerDocType: parseDocType(doctype, currency),
+                customerDocNumber: document,
+                customerEmail: email,
+                customerPhoneCode: phone ? phone.substring(0, 3) : "",
+                customerPhoneNumber: phone ? phone.substring(3) : ""
+                //customerPhoneNumber: "3185295353"
             };
+            if(pay.payOptions) data_pay.payinOptions = pay.payOptions;
         }else{
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
             else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
@@ -154,6 +200,8 @@
             typeTranference = 'wallet';
         }else if((paySelected.banco || "").toLowerCase().includes("r4")){
             typeTranference = 'r4';
+        }else if((paySelected.banco || "").toLowerCase().includes("binance")){
+            typeView = 'minimal';
         }
         else{
             typeTranference = paySelected.virtual === 0 ?'bank':'gateway';
@@ -169,10 +217,27 @@
         bankDeposit.aditional='';
         bankDeposit.reference='';
         viewLinkSafari = false;
+        copiedAccount = false;
+        base64Image = undefined;
+        fileInfo = undefined;
+        if (fileInput) fileInput.value = "";
+    }
+
+    const copyAccountNumber = async () => {
+        const value = String(paySelected?.cta ?? "");
+        if (!value) return;
+        try {
+            await navigator.clipboard.writeText(value);
+            copiedAccount = true;
+            setTimeout(() => (copiedAccount = false), 1500);
+        } catch (error) {
+            onError(t("msg.contactSupport"));
+        }
     }
 
     async function validateDepositBank() {
         if(typeTranference == "GATEWAY_PAY"){
+            const { doctype, document } = await getAccountDoc();
             OPEN_MODAL_GATEWAY_PAY = true;
             data_pay = {
                 amount: amountDeposit,
@@ -180,26 +245,54 @@
                 reference: user.serial + "-"+Date.now(),
                 payinMethods: "QR,TRANSFER,CASH",
                 customerName:user.username,
-                customerDocType:"DNI",
-                customerDocNumber: "12312312"
+                customerDocType: doctype,
+                customerDocNumber: document
             };
         }else{
             if(typeTranference === 'wallet'){
                 bankDeposit.aditional = paySelected.banco;
                 bankDeposit.reference = paySelected.banco;
                 bankDeposit.targetBankId = paySelected.id;
+            }else if(typeView === 'minimal'){
+                bankDeposit.aditional = "";
+                bankDeposit.targetBankId = "";
+                if (!bankDeposit.reference || (isRequiredVoucher && !fileInfo?.file)) {
+                    return onError("Todos los campos son obligatorios");
+                }
+            }else if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !fileInfo?.file) {
+                return onError("Todos los campos son obligatorios");
             }
-            if (bankDeposit.targetBankId == 0 || bankDeposit.aditional == '' || bankDeposit.reference == '' || isRequiredVoucher && !base64Image) return onError("Todos los campos son obligatorios"); 
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
+
             try {
                 loadRecharge = true;
-                let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
-                if (data.msg === "DEPOSITO_OK") onOk(t("deposit.successDeposit"));
+                let response;
+                if (ServerConnection.wallet.isDirectDepositUploadFileMode()) {
+                    bankDeposit.imageUrl = fileInfo?.file ? await uploadFileRepo() : "";
+                    if(bankDeposit.imageUrl == null || bankDeposit.imageUrl === "") {
+                        return onError("Error al cargar el archivo");
+                    }
+                    response = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit);
+                } else {
+                    if (fileInfo?.file && !base64Image) {
+                        base64Image = await readFileAsDataURL(fileInfo.file);
+                    }
+                    response = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit, base64Image);
+                }
+                const { data } = response;
+                //let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
+                if (data.msg === "DEPOSITO_OK") {
+                    base64Image = undefined;
+                    fileInfo = undefined;
+                    if (fileInput) fileInput.value = "";
+                    onOk(t("deposit.successDeposit"));
+                }
                 else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
                 else onError(t('msg.contactSupport'));
             } catch (error) {
-                console.log(error);
+                console.error("Error registrando el depósito", error);
+                onError(t('msg.contactSupport'));
             } finally {
                 loadRecharge = false;
             }
@@ -221,18 +314,78 @@
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                base64Image = reader.result;
-            };
-            reader.readAsDataURL(file);
+
+        base64Image = undefined;
+        fileInfo = undefined;
+        if (!file) return;
+        
+        const maxSize = 1 * 1024 * 1024; // 1 MB
+        
+        const allowedTypes = ["image/jpeg", "image/png"];
+        if (!allowedTypes.includes(file.type)) {
+            event.target.value = "";
+            return onError("El archivo seleccionado debe ser una imagen");
         }
+    
+        if (file.size > maxSize) {
+            event.target.value = "";
+            return onError("La imagen no puede superar 1 MB");
+        }
+    
+        const extension = file.type === "image/png" ? "png" : "jpg";
+        fileInfo = {
+            file,
+            contentType: file.type,
+            fileName: file.name,
+            fileKey: `deposits/${crypto.randomUUID()}.${extension}`,
+        };
+
+        if (!ServerConnection.wallet.isDirectDepositUploadFileMode()) {
+            readFileAsDataURL(file).then((result) => {
+                if (fileInfo?.file === file) base64Image = result;
+            }).catch((error) => {
+                console.error("Error leyendo el comprobante", error);
+                fileInfo = undefined;
+                event.target.value = "";
+                onError(t('msg.contactSupport'));
+            });
+        }
+    };
+
+    const readFileAsDataURL = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(file);
+    });
+
+    const uploadFileRepo = async () => {
+        const uploadUrl = await getCredentialsURL(fileInfo.file, fileInfo.fileKey);
+        const response = await fetch(uploadUrl, {
+            method: "PUT",
+            body: fileInfo.file,
+        });
+
+        if (!response.ok) throw new Error(`Error subiendo imagen ${fileInfo.fileName}`);
+
+        return ServerConnection.wallet.getPublicAssetUrl(fileInfo.fileKey);
     }
+
+    const getCredentialsURL = async (file, key) => {
+        const url = await ServerConnection.wallet.obtainPresignedURL({
+            fileName: key,
+            contentType: file.type,
+        });
+        return url.data;
+    };
         
     onMount(async() => {
+        console.log("config depo", configDeposit);
+        console.log("payMethods", payMethods);
         detectLockedDeposit();
-        if (!isLocked) getPayMethods();
+        if (!isLocked) await getPayMethods();
+        if (payMethods.length===1)
+            openPayMethod(payMethods[0]);
     });
 </script>
 
@@ -250,7 +403,7 @@
     </Modal>
     
 {/if}
-{#if isLocked}
+{#if isLocked && gateways.length === 0}
     <div class="deposit__message">
         <div class="deposit__message--icon"></div>
         <div class="deposit__message--text">{t('deposit.cachierSupport')}.</div>
@@ -336,7 +489,37 @@
                     <b>{t('deposit.holder')}:</b>
                     <p>{paySelected.nombre}</p>
                     <b>{t('deposit.numBankAccount')}:</b>
-                    <p>{paySelected.cta}</p>
+                    <p class="deposit__cta-copy">
+                        <span>{paySelected.cta}</span>
+                        <button
+                            type="button"
+                            class="btn deposit__copy"
+                            on:click={copyAccountNumber}
+                            aria-label="Copiar número de cuenta"
+                            title={copiedAccount ? "Copiado" : "Copiar"}
+                        >
+                            {#if copiedAccount}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            {:else}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                <g clip-path="url(#clip0_410_15684)">
+                                  <path d="M14.75 3.5H5.25C5.05109 3.5 4.86032 3.57902 4.71967 3.71967C4.57902 3.86032 4.5 4.05109 4.5 4.25V16.25C4.5 16.4489 4.57902 16.6397 4.71967 16.7803C4.86032 16.921 5.05109 17 5.25 17H14.75C14.9489 17 15.1397 16.921 15.2803 16.7803C15.421 16.6397 15.5 16.4489 15.5 16.25V4.25C15.5 4.05109 15.421 3.86032 15.2803 3.71967C15.1397 3.57902 14.9489 3.5 14.75 3.5ZM14.5 16H5.5V4.5H14.5V16Z" fill="white"/>
+                                  <path d="M13 1.75C13 1.55109 12.921 1.36032 12.7803 1.21967C12.6397 1.07902 12.4489 1 12.25 1H2.75C2.55109 1 2.36032 1.07902 2.21967 1.21967C2.07902 1.36032 2 1.55109 2 1.75V13.75C2 13.9489 2.07902 14.1397 2.21967 14.2803C2.36032 14.421 2.55109 14.5 2.75 14.5H3V2H13V1.75Z" fill="white"/>
+                                </g>
+                                <defs>
+                                  <clipPath id="clip0_410_15684">
+                                    <rect width="18" height="18" fill="white"/>
+                                  </clipPath>
+                                </defs>
+                              </svg>
+                            {/if}
+                        </button>
+                        {#if copiedAccount}
+                            <small class="deposit__copied">Copiado</small>
+                        {/if}
+                    </p>
                 </div>
                 <img
                     src="{assetsPayments}{paySelected.banco}__{paySelected.cta.replace(/\+|\s/g, "")}.png"
@@ -347,6 +530,21 @@
                 >
                 <p>{t('deposit.step2')}.</p>
                 <div class="deposit__info">
+                    {#if typeView === 'minimal'}
+                    <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
+                    <p>{t('withdrawal.amount')}</p>
+                    <input type="text" class="ipt" bind:value={bankDeposit.reference}>
+                    <input type="text" class="ipt" bind:value={amountDeposit} disabled>
+                    <p>{t('deposit.transferDate')}</p>
+                    <p>{isRequiredVoucher ? "Subir Imagen de pago" : ""}</p>
+                    <input type="date" class="ipt" bind:value={bankDeposit.date}>
+                    {#if isRequiredVoucher}
+                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{fileInfo?.file?"Archivo seleccionado":"Seleccionar archivo"}</button>
+                        <input type="file" bind:this={fileInput} accept="image/jpeg,image/png" on:change={handleFileChange} hidden />
+                    {:else}
+                        <p></p>
+                    {/if}
+                    {:else}
                     {#if typeTranference != 'wallet'}
                     <p>{t('deposit.destinationBank')}</p>
                     <p>{t('deposit.originBank')}</p>
@@ -380,8 +578,9 @@
                     {#if isRequiredVoucher}
                         <p>Subir Imagen de pago</p>
                         <p></p>
-                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{base64Image?"Archivo subido":"Seleccionar archivo"}</button>
-                        <input type="file" bind:this={fileInput} accept="image/*" on:change={handleFileChange} hidden />
+                        <button class="slc icon--upload" on:click={()=> fileInput.click()}>{fileInfo?.file?"Archivo seleccionado":"Seleccionar archivo"}</button>
+                        <input type="file" bind:this={fileInput} accept="image/jpeg,image/png" on:change={handleFileChange} hidden />
+                    {/if}
                     {/if}
                 </div>
                 {#if isRequiredVoucher}
@@ -416,3 +615,33 @@
     {/if}
 {/if}
 </div>
+
+<style>
+    .deposit__cta-copy {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .deposit__copy {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        padding: 2px;
+        border: 0;
+        background: #1a1a1a;
+        color: #fff;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .deposit__copy:hover {
+        opacity: 0.9;
+    }
+
+    .deposit__copied {
+        color: #34b93d;
+        font-size: 0.75rem;
+    }
+</style>

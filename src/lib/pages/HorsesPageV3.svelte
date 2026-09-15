@@ -1,10 +1,14 @@
 <script>
-    import { onDestroy, onMount } from "svelte";
+    import { createEventDispatcher, onDestroy, onMount } from "svelte";
     import backend from '../../js/server.js';
+
+    const dispatch = createEventDispatcher();
 
     export let user;
     export let gameToken;
     export let GAMEAPI_URL;
+    export let visualCurrency = "";
+    export let hiddenBetTicket = false;
     let iframeUrl = '';
     let loading = true;
     let errorMsg = '';
@@ -20,7 +24,9 @@
             const launchUrl = `${GAMEAPI_URL}/launch?gameid=horses_2026&p=horses&b=UniversalRace&m=wb&sessionid=${gameToken}&r=url`;
             const response = await backend.game.getURL(launchUrl);
             if (response && response.status === "READY" && response.url) {
-                iframeUrl = response.url + '&theme=shopretail'	;
+                iframeUrl = response.url + '&theme=shopretail';
+                if (visualCurrency) iframeUrl += `&visualCurrency=${visualCurrency}`;
+                if (hiddenBetTicket) iframeUrl += '&hiddenBetTicket=true';
             } else {
                 errorMsg = "URL not received or status not READY";
             }
@@ -30,6 +36,10 @@
         } finally {
             loading = false;
         }
+    }
+    // Avisa al padre cuando termina el launch (éxito o error).
+    $: if (!loading && isRequestSent) {
+        dispatch('ready');
     }
     onDestroy(() => {
         document.body.style.overflow = "scroll";

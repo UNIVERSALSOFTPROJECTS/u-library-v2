@@ -1,6 +1,7 @@
 <script>
   import backend from "../../js/server";
   import util from "../../js/util";
+  import AltenarLanguageSelector from "../components/AltenarLanguageSelector.svelte";
   import SportbookAltenarPage from "./SportbookAltenarPage.svelte";
   import SportbookPage from "./SportbookPage.svelte";
 
@@ -14,6 +15,7 @@
   export let locale = "es";
 
   let sportbookGameUrl = "";
+  let sportbookProvider = "";
   let useLegacyFallback = false;
   let loading = false;
   let requestKey = "";
@@ -33,6 +35,31 @@
     return options?.legacyGameid?.includes("ank");
   }
 
+  function isAltenarProvider(provider) {
+    const normalizedProvider = `${provider || ""}`.trim().toLowerCase();
+    return (
+      normalizedProvider == "ank" ||
+      normalizedProvider == "anakatech" ||
+      normalizedProvider == "altenar"
+    );
+  }
+
+  function isAltenarLaunchUrl() {
+    const normalizedUrl = `${sportbookGameUrl || ""}`.toLowerCase();
+    return normalizedUrl.includes("anakatech") || normalizedUrl.includes("altenar");
+  }
+
+  function shouldShowAltenarLanguageSelector() {
+    return `${CLIENT_CODE || ""}`.trim().toUpperCase() == "BDBR";
+  }
+
+  function isAltenarSportbook() {
+    return (
+      shouldShowAltenarLanguageSelector() &&
+      (shouldUseLegacyAltenar() || isAltenarProvider(sportbookProvider) || isAltenarLaunchUrl())
+    );
+  }
+
   async function launchSportbook() {
     const hasPersistedUserSession =
       typeof sessionStorage !== "undefined" && !!sessionStorage.getItem("user");
@@ -46,6 +73,7 @@
     requestKey = nextKey;
 
     sportbookGameUrl = "";
+    sportbookProvider = "";
     useLegacyFallback = false;
     loading = true;
 
@@ -79,6 +107,8 @@
           response?.launchType == LAUNCH_HOSTED_VIEW_URL) &&
         response?.payload?.url
       ) {
+        sportbookProvider =
+          response.provider || response?.payload?.provider || response?.meta?.provider || "";
         sportbookGameUrl = response.payload.url;
         return;
       }
@@ -97,6 +127,9 @@
 
 {#if sportbookGameUrl}
   <div class="sportbook-content">
+    {#if isAltenarSportbook()}
+      <AltenarLanguageSelector />
+    {/if}
     <iframe
       class="sportbook-iframe"
       id="sportbook-iframe"
@@ -137,6 +170,7 @@
 
 <style>
   .sportbook-content {
+    position: relative;
     width: 100%;
   }
 

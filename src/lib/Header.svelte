@@ -131,6 +131,7 @@
         id_ca: ["5558","15818"], //caja dentro de un distribuidor principal
         dataType: "",
         typeView: "",
+        acceptTerms: false, // true = checkbox TyC obligatorio para solicitar retiro
         messageOptional: "",
         formVerification: "",
         platform,
@@ -205,6 +206,7 @@
         id_banca: ["2918","5628","5834"], //disitribidor - almacena otros cajeros
         id_ca: ["5558","15818"], //caja dentro de un distribuidor principal
         isRequiredVoucher: true,
+        typeView: "", // "minimal" para formulario acortado (Binance, etc.)
         banksOrigin:[
             { id: 1, name: "Banco Central de Venezuela" },
             { id: 2, name: "Banco de Venezuela (BDV)" },
