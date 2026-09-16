@@ -580,7 +580,7 @@ function RESELLER (params) {
   />
 {:else}
   <div class="sportbook-content">
-    <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
+    <iframe class="sportbook-iframe" id="sportbook-iframe" title="" allow="fullscreen; picture-in-picture" src={sportbookGameUrl} frameborder="0" />
   </div>
 {/if}
 
