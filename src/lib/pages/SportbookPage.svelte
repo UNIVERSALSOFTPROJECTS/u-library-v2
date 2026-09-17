@@ -15,11 +15,14 @@
   export let lang = 'es';
   export let CLIENT_CODE;
   export let clientCode;
+  /** Si true: Prematch/Live por postMessage sin recargar iframe solo para betsw3 */
+  export let usePostMessageSportViewBetsw3 = false;
 
   const dispatch = createEventDispatcher();
 
   let sportbookskin = localStorage.getItem("sportbookversion") || "";
   console.log(user,"sportbook");
+
   
 
   let sportbookGameUrl = '';
@@ -269,16 +272,34 @@
     console.log("receiveMessage:", receiveMessage);
   });
 
+  function changeBetsw3View(view) {
+  // view: "live" | "prematch"
+  const iframe = document.getElementById("sportbook-iframe");
+  if (!iframe?.contentWindow) return;
+
+  iframe.contentWindow.postMessage(
+    { action: "change_view", view },
+    "*"
+  );
+}
+
   $: if (options?.gameid) {
-    options?.gameid;
-    active_view;
-    userState;
-    CLIENT_CODE;
-    clientCode;
-    sportbookskin;
-    options?.gameToken;
-    openSport();
+  options?.gameid;
+  userState;
+  CLIENT_CODE;
+  clientCode;
+  sportbookskin;
+  options?.gameToken;
+  openSport(); // launch real
+}
+
+$: if (options?.gameid && isBetsw3GameId(options.gameid)) {
+  active_view;
+
+  if (usePostMessageSportViewBetsw3 && sportbookGameUrl && readyDispatched) {
+    changeBetsw3View(active_view === "sportbooklive" ? "live" : "prematch");
   }
+}
 
   const receiveMessage = (event) => {
     if (event.data == "onNologinBet") {
