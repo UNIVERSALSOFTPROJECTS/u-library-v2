@@ -303,6 +303,7 @@
     const win = sportbookIframeEl?.contentWindow;
     if (!win) return;
     win.postMessage({ action: "change_view", view }, "*");
+    console.log('[betsw3] postMessage', view);
   }
 
   // Primera carga / relanzamientos reales (token, login, gameid, skin…).
