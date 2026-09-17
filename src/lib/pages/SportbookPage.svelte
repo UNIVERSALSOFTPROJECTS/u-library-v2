@@ -409,13 +409,7 @@
 
       if (response.launchType == GUEST_LAUNCH_CMSWAGER) {
         sportbookGameUrl = "";
-        // avisar al padre ya, porque no habrá iframe on:load
-        queueMicrotask(() => {
-          if (!readyDispatched) {
-            readyDispatched = true;
-            dispatch('ready');
-          }
-        });
+        // ready lo emite ScreenGamesCmsWager (iframe onload o fin de bootstrap)
         return true;
       }
 
@@ -567,6 +561,7 @@ function RESELLER (params) {
     launchDescriptor={authenticatedLaunchResponse}
     updateBalance={() => {}}
     on:terminalEvent={handleCmsWagerTerminalEvent}
+    on:ready={onIframeLoad}
   />
 {:else if userState != "loggedIn" && guestLaunchResponse?.launchType == GUEST_LAUNCH_CMSWAGER}
   <ScreenGamesCmsWager
@@ -576,6 +571,7 @@ function RESELLER (params) {
     launchDescriptor={guestLaunchResponse}
     updateBalance={() => {}}
     on:terminalEvent={handleCmsWagerTerminalEvent}
+    on:ready={onIframeLoad}
   />
 {:else if cmsWagerLaunchOptions}
   <ScreenGamesCmsWager
@@ -584,6 +580,7 @@ function RESELLER (params) {
     options_launch={cmsWagerLaunchOptions}
     updateBalance={() => {}}
     on:terminalEvent={handleCmsWagerTerminalEvent}
+    on:ready={onIframeLoad}
   />
 {:else}
   <div class="sportbook-content">
