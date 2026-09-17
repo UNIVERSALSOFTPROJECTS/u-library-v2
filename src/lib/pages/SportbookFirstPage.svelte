@@ -110,7 +110,8 @@
   }
 
   // Avisa al padre cuando la URL del iframe ya está lista.
-  $: if (sportbookGameUrl && !readyDispatched) {
+
+  function onIframeLoad() {
     readyDispatched = true;
     dispatch('ready');
   }
@@ -130,7 +131,7 @@
 
 <div class="sportbook-content">
   {#if viewSportbook}
-  <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
+  <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" on:load={onIframeLoad}/>
   {/if}
 </div>
 

@@ -536,9 +536,9 @@ function RESELLER (params) {
     sportbookGameUrl = url;
     console.log("urlNovus", sportbookGameUrl);
   };
-
+  
   // Avisa al padre cuando la URL del iframe ya está lista.
-  $: if (sportbookGameUrl && !readyDispatched) {
+  function onIframeLoad() {
     readyDispatched = true;
     dispatch('ready');
   }
@@ -580,7 +580,7 @@ function RESELLER (params) {
   />
 {:else}
   <div class="sportbook-content">
-    <iframe class="sportbook-iframe" id="sportbook-iframe" title="" allow="fullscreen; picture-in-picture" src={sportbookGameUrl} frameborder="0" />
+    <iframe class="sportbook-iframe" id="sportbook-iframe" title="" allow="fullscreen; picture-in-picture" src={sportbookGameUrl} frameborder="0" on:load={onIframeLoad}/>
   </div>
 {/if}
 
