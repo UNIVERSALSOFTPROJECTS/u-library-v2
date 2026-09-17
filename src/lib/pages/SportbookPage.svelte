@@ -272,41 +272,72 @@
     console.log("receiveMessage:", receiveMessage);
   });
 
+  let sportbookIframeEl = null;
+  /** Evita postMessage duplicado y el sync justo tras el primer load. */
+  let lastPostedBetsw3View = '';
+  /** Solo relanza el iframe cuando cambian deps reales (no active_view en modo postMessage). */
+  let lastLaunchKey = '';
+
+  function getBetsw3ViewFromActive() {
+    return active_view === "sportbooklive" ? "live" : "prematch";
+  }
+
+  function getLaunchKey() {
+    return [
+      options?.gameid || "",
+      userState || "",
+      CLIENT_CODE || "",
+      clientCode || "",
+      sportbookskin || "",
+      options?.gameToken || "",
+      // En postMessage, Prematch/Live NO forman parte del launch.
+      usePostMessageSportViewBetsw3 ? "" : (active_view || ""),
+    ].join("|");
+  }
+
+  /**
+   * Cambia Prematch/Live dentro del iframe Betsw3 sin reiniciar la URL.
+   * @param {"live" | "prematch"} view
+   */
   function changeBetsw3View(view) {
-  // view: "live" | "prematch"
-  const iframe = document.getElementById("sportbook-iframe");
-  if (!iframe?.contentWindow) return;
+    const win = sportbookIframeEl?.contentWindow;
+    if (!win) return;
+    win.postMessage({ action: "change_view", view }, "*");
+  }
 
-  iframe.contentWindow.postMessage(
-    { action: "change_view", view },
-    "*"
-  );
-}
+  // Primera carga / relanzamientos reales (token, login, gameid, skin…).
+  $: if (options?.gameid) {
+    options?.gameid;
+    userState;
+    CLIENT_CODE;
+    clientCode;
+    sportbookskin;
+    options?.gameToken;
+    usePostMessageSportViewBetsw3;
+    if (!usePostMessageSportViewBetsw3) active_view;
 
-$: if (options?.gameid) {
-      options?.gameid;
-      userState;
-      CLIENT_CODE;
-      clientCode;
-      sportbookskin;
-      options?.gameToken;
-      // Con postMessage, active_view no debe relanzar el iframe.
-      if (!usePostMessageSportViewBetsw3) {
-        active_view;
-      }
+    const key = getLaunchKey();
+    if (key !== lastLaunchKey) {
+      lastLaunchKey = key;
       openSport();
     }
+  }
 
-    // Solo Betsw3 + flag: cambio de vista sin reload.
-    $: if (
-      usePostMessageSportViewBetsw3 &&
-      isBetsw3GameId(options?.gameid) &&
-      sportbookGameUrl &&
-      readyDispatched
-    ) {
-      active_view;
-      changeBetsw3View(active_view === "sportbooklive" ? "live" : "prematch");
+  // Solo Betsw3 + flag: cambio de vista sin reload (después del primer ready).
+  $: if (
+    usePostMessageSportViewBetsw3 &&
+    isBetsw3GameId(options?.gameid) &&
+    sportbookGameUrl &&
+    readyDispatched
+  ) {
+    active_view;
+    const view = getBetsw3ViewFromActive();
+    if (view !== lastPostedBetsw3View) {
+      const isFirstSync = lastPostedBetsw3View === "";
+      lastPostedBetsw3View = view;
+      if (!isFirstSync) changeBetsw3View(view);
     }
+  }
 
   const receiveMessage = (event) => {
     if (event.data == "onNologinBet") {
@@ -323,6 +354,7 @@ $: if (options?.gameid) {
     authenticatedLaunchResponse = null;
     cmsWagerLaunchOptions = null;
     readyDispatched = false;
+    lastPostedBetsw3View = "";
     sportbookGameUrl = '';
 
     const isCmsWagerSportbook = options?.gameid == cmsw_id;
@@ -612,7 +644,16 @@ function RESELLER (params) {
   />
 {:else}
   <div class="sportbook-content">
-    <iframe class="sportbook-iframe" id="sportbook-iframe" title="" allow="fullscreen; picture-in-picture" src={sportbookGameUrl} frameborder="0" on:load={onIframeLoad}/>
+    <iframe
+      class="sportbook-iframe"
+      id="sportbook-iframe"
+      bind:this={sportbookIframeEl}
+      title=""
+      allow="fullscreen; picture-in-picture"
+      src={sportbookGameUrl}
+      frameborder="0"
+      on:load={onIframeLoad}
+    />
   </div>
 {/if}
 
