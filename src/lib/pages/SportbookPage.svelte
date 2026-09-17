@@ -283,23 +283,30 @@
   );
 }
 
-  $: if (options?.gameid) {
-  options?.gameid;
-  userState;
-  CLIENT_CODE;
-  clientCode;
-  sportbookskin;
-  options?.gameToken;
-  openSport(); // launch real
-}
+$: if (options?.gameid) {
+      options?.gameid;
+      userState;
+      CLIENT_CODE;
+      clientCode;
+      sportbookskin;
+      options?.gameToken;
+      // Con postMessage, active_view no debe relanzar el iframe.
+      if (!usePostMessageSportViewBetsw3) {
+        active_view;
+      }
+      openSport();
+    }
 
-$: if (options?.gameid && isBetsw3GameId(options.gameid)) {
-  active_view;
-
-  if (usePostMessageSportViewBetsw3 && sportbookGameUrl && readyDispatched) {
-    changeBetsw3View(active_view === "sportbooklive" ? "live" : "prematch");
-  }
-}
+    // Solo Betsw3 + flag: cambio de vista sin reload.
+    $: if (
+      usePostMessageSportViewBetsw3 &&
+      isBetsw3GameId(options?.gameid) &&
+      sportbookGameUrl &&
+      readyDispatched
+    ) {
+      active_view;
+      changeBetsw3View(active_view === "sportbooklive" ? "live" : "prematch");
+    }
 
   const receiveMessage = (event) => {
     if (event.data == "onNologinBet") {
