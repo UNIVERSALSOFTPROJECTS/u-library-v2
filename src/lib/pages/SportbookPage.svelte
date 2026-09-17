@@ -409,6 +409,13 @@
 
       if (response.launchType == GUEST_LAUNCH_CMSWAGER) {
         sportbookGameUrl = "";
+        // avisar al padre ya, porque no habrá iframe on:load
+        queueMicrotask(() => {
+          if (!readyDispatched) {
+            readyDispatched = true;
+            dispatch('ready');
+          }
+        });
         return true;
       }
 
