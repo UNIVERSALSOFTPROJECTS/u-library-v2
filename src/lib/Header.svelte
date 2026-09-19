@@ -532,7 +532,7 @@
         {#if activeSession}
             <div class="header__userdata">
                 <img
-                    src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png"
+                    src="https://assets-usoft.universalsoft.net/latinosport21/usericon1.png"
                     alt=""
                 />
                 <div>
