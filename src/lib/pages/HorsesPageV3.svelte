@@ -9,6 +9,7 @@
     export let GAMEAPI_URL;
     export let visualCurrency = "";
     export let hiddenBetTicket = false;
+
     let iframeUrl = '';
     let loading = true;
     let errorMsg = '';
@@ -38,7 +39,7 @@
         }
     }
     // Avisa al padre cuando termina el launch (éxito o error).
-    $: if (!loading && isRequestSent) {
+    function onIframeLoad() {
         dispatch('ready');
     }
     onDestroy(() => {
@@ -64,6 +65,7 @@
                 src={iframeUrl}
                 frameborder="0"
                 allowfullscreen
+                on:load={onIframeLoad}
         ></iframe>
     {/if}
 </div>

@@ -41,10 +41,17 @@
     let appContent;
     let activeLaunchKey = "";
     let ifrContentTimer = null;
+    let readyEmitted = false;
     let terminalConfig = {
         exttoken: "",
         clientApi: "",
         logo: "",
+    };
+
+    const emitReady = () => {
+        if (readyEmitted) return;
+        readyEmitted = true;
+        dispatch("ready");
     };
 
     const resizeHeightModal = () => {
@@ -138,10 +145,12 @@
     function mountIframeLaunch(url) {
         if (!appContent) {
             console.warn("CMSWager iframe mount skipped: container not ready", { url });
+            emitReady();
             return;
         }
         clearContainer();
         const iframe = document.createElement("iframe");
+        iframe.onload = () => emitReady();
         iframe.src = url;
         iframe.setAttribute("frameborder", "0");
         iframe.setAttribute("allowfullscreen", "true");
@@ -253,6 +262,7 @@
         if (!descriptorParams && (!sessionToken || !gameId || !mode)) {
             errorMessage =
                 "No se pudo iniciar CMSWager: faltan sessionToken, gameId o mode.";
+            emitReady();
             return;
         }
 
@@ -276,6 +286,7 @@
 
         const currentRequest = ++requestVersion;
         loadCmsWager = true;
+        readyEmitted = false;
         errorMessage = "";
         clearContainer();
 
@@ -307,6 +318,7 @@
             ) {
                 console.error("Invalid CMSWager opengame response:", response);
                 errorMessage = "No fue posible obtener el descriptor de CMSWager.";
+                emitReady();
                 return;
             }
 
@@ -336,6 +348,7 @@
                 console.error("CMSWager script loaded without cmsSportbook.startSportbook");
                 errorMessage =
                     "CMSWager cargo el script, pero el bootstrap del proveedor no esta disponible.";
+                emitReady();
                 return;
             }
 
@@ -349,6 +362,8 @@
             );
             ensureBootstrapIframeExtToken(params.exttoken);
             startIfrContentStyleWatcher();
+            // Bootstrap no monta nuestro iframe: avisar ready al terminar el start.
+            emitReady();
 
             console.log("CMSWager sportbook started", {
                 gameId,
@@ -364,6 +379,7 @@
             errorMessage =
                 "Error al cargar CMSWager. Revisa la conexion o intenta nuevamente.";
             activeLaunchKey = "";
+            emitReady();
         } finally {
             if (currentRequest === requestVersion) {
                 loadCmsWager = false;

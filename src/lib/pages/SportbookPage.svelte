@@ -15,11 +15,14 @@
   export let lang = 'es';
   export let CLIENT_CODE;
   export let clientCode;
+  /** Si true: Prematch/Live por postMessage sin recargar iframe solo para betsw3 */
+  export let usePostMessageSportViewBetsw3 = false;
 
   const dispatch = createEventDispatcher();
 
   let sportbookskin = localStorage.getItem("sportbookversion") || "";
   console.log(user,"sportbook");
+
   
 
   let sportbookGameUrl = '';
@@ -269,15 +272,71 @@
     console.log("receiveMessage:", receiveMessage);
   });
 
+  let sportbookIframeEl = null;
+  /** Evita postMessage duplicado y el sync justo tras el primer load. */
+  let lastPostedBetsw3View = '';
+  /** Solo relanza el iframe cuando cambian deps reales (no active_view en modo postMessage). */
+  let lastLaunchKey = '';
+
+  function getBetsw3ViewFromActive() {
+    return active_view === "sportbooklive" ? "live" : "prematch";
+  }
+
+  function getLaunchKey() {
+    return [
+      options?.gameid || "",
+      userState || "",
+      CLIENT_CODE || "",
+      clientCode || "",
+      sportbookskin || "",
+      options?.gameToken || "",
+      // En postMessage, Prematch/Live NO forman parte del launch.
+      usePostMessageSportViewBetsw3 ? "" : (active_view || ""),
+    ].join("|");
+  }
+
+  /**
+   * Cambia Prematch/Live dentro del iframe Betsw3 sin reiniciar la URL.
+   * @param {"live" | "prematch"} view
+   */
+  function changeBetsw3View(view) {
+    const win = sportbookIframeEl?.contentWindow;
+    if (!win) return;
+    win.postMessage({ action: "change_view", view }, "*");
+  }
+
+  // Primera carga / relanzamientos reales (token, login, gameid, skin…).
   $: if (options?.gameid) {
     options?.gameid;
-    active_view;
     userState;
     CLIENT_CODE;
     clientCode;
     sportbookskin;
     options?.gameToken;
-    openSport();
+    usePostMessageSportViewBetsw3;
+    if (!usePostMessageSportViewBetsw3) active_view;
+
+    const key = getLaunchKey();
+    if (key !== lastLaunchKey) {
+      lastLaunchKey = key;
+      openSport();
+    }
+  }
+
+  // Solo Betsw3 + flag: cambio de vista sin reload (después del primer ready).
+  $: if (
+    usePostMessageSportViewBetsw3 &&
+    isBetsw3GameId(options?.gameid) &&
+    sportbookGameUrl &&
+    readyDispatched
+  ) {
+    active_view;
+    const view = getBetsw3ViewFromActive();
+    if (view !== lastPostedBetsw3View) {
+      const isFirstSync = lastPostedBetsw3View === "";
+      lastPostedBetsw3View = view;
+      if (!isFirstSync) changeBetsw3View(view);
+    }
   }
 
   const receiveMessage = (event) => {
@@ -295,6 +354,7 @@
     authenticatedLaunchResponse = null;
     cmsWagerLaunchOptions = null;
     readyDispatched = false;
+    lastPostedBetsw3View = "";
     sportbookGameUrl = '';
 
     const isCmsWagerSportbook = options?.gameid == cmsw_id;
@@ -409,6 +469,7 @@
 
       if (response.launchType == GUEST_LAUNCH_CMSWAGER) {
         sportbookGameUrl = "";
+        // ready lo emite ScreenGamesCmsWager (iframe onload o fin de bootstrap)
         return true;
       }
 
@@ -536,9 +597,9 @@ function RESELLER (params) {
     sportbookGameUrl = url;
     console.log("urlNovus", sportbookGameUrl);
   };
-
+  
   // Avisa al padre cuando la URL del iframe ya está lista.
-  $: if (sportbookGameUrl && !readyDispatched) {
+  function onIframeLoad() {
     readyDispatched = true;
     dispatch('ready');
   }
@@ -560,6 +621,7 @@ function RESELLER (params) {
     launchDescriptor={authenticatedLaunchResponse}
     updateBalance={() => {}}
     on:terminalEvent={handleCmsWagerTerminalEvent}
+    on:ready={onIframeLoad}
   />
 {:else if userState != "loggedIn" && guestLaunchResponse?.launchType == GUEST_LAUNCH_CMSWAGER}
   <ScreenGamesCmsWager
@@ -569,6 +631,7 @@ function RESELLER (params) {
     launchDescriptor={guestLaunchResponse}
     updateBalance={() => {}}
     on:terminalEvent={handleCmsWagerTerminalEvent}
+    on:ready={onIframeLoad}
   />
 {:else if cmsWagerLaunchOptions}
   <ScreenGamesCmsWager
@@ -577,10 +640,20 @@ function RESELLER (params) {
     options_launch={cmsWagerLaunchOptions}
     updateBalance={() => {}}
     on:terminalEvent={handleCmsWagerTerminalEvent}
+    on:ready={onIframeLoad}
   />
 {:else}
   <div class="sportbook-content">
-    <iframe class="sportbook-iframe" id="sportbook-iframe" title="" src={sportbookGameUrl} frameborder="0" />
+    <iframe
+      class="sportbook-iframe"
+      id="sportbook-iframe"
+      bind:this={sportbookIframeEl}
+      title=""
+      allow="fullscreen; picture-in-picture"
+      src={sportbookGameUrl}
+      frameborder="0"
+      on:load={onIframeLoad}
+    />
   </div>
 {/if}
 

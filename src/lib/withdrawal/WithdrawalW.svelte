@@ -33,6 +33,8 @@
     let id_ca  = configWithdrawal.id_ca;
     let isLocked = true;
     let loadWithdrawalW = false;
+    /** Se fija al cargar: si el documento llegó vacío, el input queda editable. */
+    let documentEditable = false;
 
     const inputJustText = inputUtils.justTextValidator;
     const inputJustNumbers = inputUtils.justNumbersValidator;
@@ -55,6 +57,7 @@
             const {data} = await ServerConnection.wallet.accountNumber(user.token);
             infoAccount = data.cuenta == null?infoAccount:data.cuenta[0];
             infoUser = data.data[0];
+            documentEditable = !String(infoUser.documento ?? "").trim();
             pendingWithdrawal = infoUser.bloqueo_fondos?true:false;
             loadWithdrawal = false;
             if(typeView === "payMobile"){// es para maquina y todos lausan por eso se limpia la data
@@ -217,8 +220,7 @@
                         <p>{t('profile.fullname')}</p>
                         <p>{t('profile.dni')}</p>
                         <input type="text" class="ipt" bind:value={infoUser.nombre} disabled>
-                        <!-- disabled={infoUser.documento} -->
-                        <input type="text" inputmode="numeric" class="ipt" bind:value={infoUser.documento} on:input={inputJustNumbers} disabled>
+                        <input type="text" inputmode="numeric" class="ipt" bind:value={infoUser.documento} on:input={inputJustNumbers} disabled={!documentEditable}>
                         <p>{t('deposit.bankName')}:</p>
                         {#if infoAccount.banco == "YAPE" || infoAccount.banco == "PLIN"}
                             <p>Número de celular</p>

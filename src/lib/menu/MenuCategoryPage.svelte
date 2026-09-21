@@ -114,7 +114,7 @@
         {:else}
         <div class="dropdown2">
           <button disabled={sportbookBtnIsDisabled || active_view=='sportbooklive'} on:click={toggleDropdown2} class="li-game in-d {active_view=='sportbooklive'?'u-category-select':''}">
-            <img class="u-menubar-icon re" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/sportbooktlive.png" alt="" style="margin: 0 auto;">
+            <img class="u-menubar-icon re" src="https://assets-usoft.universalsoft.net/latinosport21/sportbooktlive.png" alt="" style="margin: 0 auto;">
             <span class="u-span-li-games">En vivo</span>  
           </button>
         </div>

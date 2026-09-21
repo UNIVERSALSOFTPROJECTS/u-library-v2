@@ -89,16 +89,28 @@ const SocketConnector = (() => {
                     "/topic/cashier/" + `${conf.CLIENT_CODE}-${user.cashier}-${user.serialCashier}`,
                     message => {
                         let event_data = JSON.parse(message.body);
-                        if(event_data.event == "ONLINE") EventManager.publish("cashier_online", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
-                        else if(event_data.event == "OFFLINE") EventManager.publish("cashier_offline", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
+                        // if(event_data.event == "ONLINE") EventManager.publish("cashier_online", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
+                        // else if(event_data.event == "OFFLINE") EventManager.publish("cashier_offline", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
+                        if(event_data.event == "ONLINE"){
+                            console.log("----- CASHIER IS ONLINE")
+                        }
+                        else if(event_data.event == "OFFLINE") {
+                            console.log("----- CASHIER IS OFFLINE")
+                        }
                     }
                 );
                 stompClientCashier.subscribe(
                     "/user/queue/status",
                     message => {
                         let event_data = JSON.parse(message.body);
-                        if(event_data.event == "ONLINE") EventManager.publish("cashier_online", {cashierName: event_data.cashierId.split('-')[1] ,state: event_data.event})
-                        else if(event_data.event == "OFFLINE") EventManager.publish("cashier_offline", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
+                        // if(event_data.event == "ONLINE") EventManager.publish("cashier_online", {cashierName: event_data.cashierId.split('-')[1] ,state: event_data.event})
+                        // else if(event_data.event == "OFFLINE") EventManager.publish("cashier_offline", {cashierName: event_data.cashierId.split('-')[1],state: event_data.event })
+                        if(event_data.event == "ONLINE") {
+                            console.log("----- CASHIER IS ONLINE")
+                        }
+                        else if(event_data.event == "OFFLINE"){
+                            console.log("----- CASHIER IS OFFLINE")
+                        }
                     }
                 );
                 stompClientCashier.publish({

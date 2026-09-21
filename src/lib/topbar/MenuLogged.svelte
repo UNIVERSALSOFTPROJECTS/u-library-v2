@@ -20,7 +20,7 @@
 <div class="profile-content">
   <div class="u-user-profile">
     <div class="user-profile">
-      <img class="usericon1 s-pLY60ePxNKjT" src="https://d2zzz5z45zl95g.cloudfront.net/latinosport21/usericon1.png" alt=""/>
+      <img class="usericon1 s-pLY60ePxNKjT" src="https://assets-usoft.universalsoft.net/latinosport21/usericon1.png" alt=""/>
       <table class="user">
         <div class="user-content">
           <tr> <th class="codigo" style="color: white;" >{user.username}  <br>#{user?.serial ?? user.aggregator_token?.slice(0,13)}</th></tr>
