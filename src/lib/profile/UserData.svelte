@@ -87,7 +87,7 @@
         <input class="ipt" type="text" bind:value={accountUser.phone} disabled>
         {#if accountUser.isViewWeb}
             <!--{#if accountUser.doctype}-->
-            <input class="ipt" type="text" bind:value={accountUser.doctype} disabled>
+            <input class="ipt" type="text" bind:value={accountUser.doctype}>
 <!--            //{:else}-->
             <select class="slc" bind:value={selectDoctype}>
                 {#each doctypes as doctype}
