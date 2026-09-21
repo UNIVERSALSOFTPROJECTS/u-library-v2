@@ -86,9 +86,9 @@
         {#if !accountUser.isViewWeb}<p></p>{:else}<p>{t("profile.typeDoc")}</p>{/if}
         <input class="ipt" type="text" bind:value={accountUser.phone} disabled>
         {#if accountUser.isViewWeb}
-            {#if accountUser.doctype}
+            <!--{#if accountUser.doctype}-->
             <input class="ipt" type="text" bind:value={accountUser.doctype} disabled>
-            {:else}
+<!--            //{:else}-->
             <select class="slc" bind:value={selectDoctype}>
                 {#each doctypes as doctype}
                     <option value={doctype}>{doctype}</option>
