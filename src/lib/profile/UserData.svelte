@@ -103,7 +103,7 @@
             <div></div>
             <input class="ipt" type="text" bind:value={accountUser.city} disabled={isDataComplete}>
             <div></div>
-            {/if}
+            <!-- {/if} -->
         </form>
         {#if !isDataComplete && accountUser.isViewWeb}
             <button class="btn save" on:click={saveMyAccount} disabled={loadUserData}>
