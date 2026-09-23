@@ -8,6 +8,7 @@
     export let modalOpened = "";
     export let title = "";
     export let subModalOpened = "";
+    export let closable = true;
 
     let heightModal;
     
@@ -45,7 +46,11 @@
             <div class="modal-header">
                 <div />
                 <div>{title}</div>
-                <button class="btn close" on:click={() => (open = false)} />
+                {#if closable}
+                    <button class="btn close" on:click={() => (open = false)} />
+                {:else}
+                    <div />
+                {/if}
             </div>
             <slot />
         </div>

@@ -13,6 +13,7 @@
     export let onOk;
     export let amountsFav;
     export let configDeposit;
+    export let configProfile = {};
     export let t;
 
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
@@ -57,25 +58,41 @@
     let fileInfo;
     let requirePhoneModalOpen = false;
     let phoneNumberInput = "";
-    let savingPhone = false;
+    let documentInput = "";
+    let selectedDoctype = "";
+    let doctypes = configProfile.doctype || [];
+    let savingAccountData = false;
+    let pendingAccount = null;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
-    async function savePhone() {
-        const digits = phoneNumberInput.trim();
+    async function saveAccountData() {
+        const digits = phoneNumberInput.replace(/\D/g, "");
         if (!digits) return onError("Ingresa un número de teléfono válido");
+        if (!selectedDoctype) return onError("Selecciona un tipo de documento");
+        if (!documentInput.trim()) return onError("Ingresa tu número de documento");
         const phone = digits.startsWith("57") ? "+" + digits : "+57" + digits;
         try {
-            savingPhone = true;
-            await ServerConnection.users.saveMyAccount({ token: user.token, phone });
+            savingAccountData = true;
+            const accountUser = {
+                ...(pendingAccount || {}),
+                token: user.token,
+                phone,
+                doctype: selectedDoctype,
+                document: documentInput.trim(),
+            };
+            await ServerConnection.users.saveMyAccount(accountUser);
             requirePhoneModalOpen = false;
             phoneNumberInput = "";
+            documentInput = "";
+            selectedDoctype = "";
+            pendingAccount = null;
             await getPayMethods();
             if (payMethods.length===1) openPayMethod(payMethods[0]);
         } catch (error) {
-            onError("Error al guardar el teléfono");
+            onError("Error al guardar tus datos");
         } finally {
-            savingPhone = false;
+            savingAccountData = false;
         }
     }
 
@@ -409,8 +426,16 @@
         if (!isLocked) {
             if (requirePhone) {
                 loadDeposit = true;
-                const { phone } = await getAccountDoc();
-                if (!phone) {
+                let account = {};
+                try {
+                    const { data } = await ServerConnection.users.getMyAccount(user.token);
+                    account = data;
+                } catch (error) {
+                    console.log(error);
+                }
+                if (!account.phone || !account.document) {
+                    pendingAccount = account;
+                    selectedDoctype = account.doctype || doctypes[0] || "";
                     loadDeposit = false;
                     requirePhoneModalOpen = true;
                     return;
@@ -429,15 +454,22 @@
     <Modal
     bind:open={requirePhoneModalOpen}
     modalOpened={"require_phone"}
-    title="Completa tu teléfono"
+    title="Completa tus datos"
+    closable={false}
     >
         <div class="deposit__phone">
-            <p>Para continuar con tu recarga debes guardar tu número de teléfono.</p>
+            <p>Para continuar con tu recarga debes guardar tu teléfono y tu documento.</p>
             <div class="deposit__phone-ipt">
                 <input type="text" inputmode="numeric" class="ipt" placeholder="+57 3001234567" bind:value={phoneNumberInput} on:input={inputJustNumbers}>
             </div>
-            <button class="btn deposit" on:click={savePhone} disabled={savingPhone}>
-                {#if savingPhone}
+            <select class="slc" bind:value={selectedDoctype}>
+                {#each doctypes as doctype}
+                    <option value={doctype}>{doctype}</option>
+                {/each}
+            </select>
+            <input type="text" inputmode="numeric" class="ipt" placeholder="Número de documento" bind:value={documentInput} on:input={inputJustNumbers}>
+            <button class="btn deposit" on:click={saveAccountData} disabled={savingAccountData}>
+                {#if savingAccountData}
                     <div class="loading"><p /><p /><p /></div>
                 {:else}
                     Guardar
