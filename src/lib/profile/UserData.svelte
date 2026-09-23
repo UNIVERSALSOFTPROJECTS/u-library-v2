@@ -86,9 +86,9 @@
         {#if !accountUser.isViewWeb}<p></p>{:else}<p>{t("profile.typeDoc")}</p>{/if}
         <input class="ipt" type="text" bind:value={accountUser.phone} disabled ={isDataComplete}>
         {#if accountUser.isViewWeb}
-            <!--{#if accountUser.doctype}-->
+            {#if accountUser.doctype}
             <input class="ipt" type="text" bind:value={accountUser.doctype}>
-<!--            //{:else}-->
+            {:else}
             <select class="slc" bind:value={selectDoctype}>
                 {#each doctypes as doctype}
                     <option value={doctype}>{doctype}</option>
@@ -103,7 +103,7 @@
             <div></div>
             <input class="ipt" type="text" bind:value={accountUser.city} disabled={isDataComplete}>
             <div></div>
-            <!-- {/if} -->
+            {/if}
         </form>
         {#if !isDataComplete && accountUser.isViewWeb}
             <button class="btn save" on:click={saveMyAccount} disabled={loadUserData}>
