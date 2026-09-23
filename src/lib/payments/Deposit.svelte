@@ -58,20 +58,20 @@
     let requirePhoneModalOpen = false;
     let phoneNumberInput = "";
     let savingPhone = false;
-    let pendingPay = null;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
     async function savePhone() {
-        if (!phoneNumberInput.trim()) return onError("Ingresa un número de teléfono válido");
+        const digits = phoneNumberInput.trim();
+        if (!digits) return onError("Ingresa un número de teléfono válido");
+        const phone = digits.startsWith("57") ? "+" + digits : "+57" + digits;
         try {
             savingPhone = true;
-            await ServerConnection.users.saveMyAccount({ token: user.token, phone: "+57" + phoneNumberInput.trim() });
+            await ServerConnection.users.saveMyAccount({ token: user.token, phone });
             requirePhoneModalOpen = false;
             phoneNumberInput = "";
-            const pay = pendingPay;
-            pendingPay = null;
-            if (pay) await validateDeposit(pay);
+            await getPayMethods();
+            if (payMethods.length===1) openPayMethod(payMethods[0]);
         } catch (error) {
             onError("Error al guardar el teléfono");
         } finally {
@@ -139,12 +139,6 @@
             if (amountDeposit < pay.min) return onError(t("deposit.minDeposit")+" "+pay.min+" "+ pay.iso);
             else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
             const { doctype, document, email, phone } = await getAccountDoc();
-
-            if (requirePhone && !phone) {
-                pendingPay = pay;
-                requirePhoneModalOpen = true;
-                return;
-            }
 
             OPEN_MODAL_GATEWAY_PAY = true;
             const currency = pay.currency || user.currency;
@@ -412,7 +406,18 @@
         console.log("config depo", configDeposit);
         console.log("payMethods", payMethods);
         detectLockedDeposit();
-        if (!isLocked) await getPayMethods();
+        if (!isLocked) {
+            if (requirePhone) {
+                loadDeposit = true;
+                const { phone } = await getAccountDoc();
+                if (!phone) {
+                    loadDeposit = false;
+                    requirePhoneModalOpen = true;
+                    return;
+                }
+            }
+            await getPayMethods();
+        }
         if (payMethods.length===1)
             openPayMethod(payMethods[0]);
     });
@@ -429,8 +434,7 @@
         <div class="deposit__phone">
             <p>Para continuar con tu recarga debes guardar tu número de teléfono.</p>
             <div class="deposit__phone-ipt">
-                <span class="deposit__phone-prefix">+57</span>
-                <input type="text" inputmode="numeric" class="ipt" placeholder="3001234567" bind:value={phoneNumberInput} on:input={inputJustNumbers}>
+                <input type="text" inputmode="numeric" class="ipt" placeholder="+57 3001234567" bind:value={phoneNumberInput} on:input={inputJustNumbers}>
             </div>
             <button class="btn deposit" on:click={savePhone} disabled={savingPhone}>
                 {#if savingPhone}
@@ -454,7 +458,9 @@
     </Modal>
     
 {/if}
-{#if isLocked && gateways.length === 0}
+{#if requirePhoneModalOpen}
+    <!-- se pide el telefono antes de mostrar pasarelas/bancos -->
+{:else if isLocked && gateways.length === 0}
     <div class="deposit__message">
         <div class="deposit__message--icon"></div>
         <div class="deposit__message--text">{t('deposit.cachierSupport')}.</div>
@@ -680,9 +686,6 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-    }
-    .deposit__phone-prefix {
-        font-weight: 600;
     }
     .deposit__cta-copy {
         display: flex;
