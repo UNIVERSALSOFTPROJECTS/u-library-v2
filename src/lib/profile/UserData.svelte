@@ -84,7 +84,7 @@
         <input class="ipt" type="text" bind:value={accountUser.birthday} disabled>
         <p>{t("profile.phone")}</p>
         {#if !accountUser.isViewWeb}<p></p>{:else}<p>{t("profile.typeDoc")}</p>{/if}
-        <input class="ipt" type="text" bind:value={accountUser.phone} disabled>
+        <input class="ipt" type="text" bind:value={accountUser.phone} disabled ={isDataComplete}>
         {#if accountUser.isViewWeb}
             <!--{#if accountUser.doctype}-->
             <input class="ipt" type="text" bind:value={accountUser.doctype}>
