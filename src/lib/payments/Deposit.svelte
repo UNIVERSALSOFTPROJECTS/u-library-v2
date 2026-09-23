@@ -224,8 +224,10 @@
     }
 
     const copyAccountNumber = async () => {
-        const value = String(paySelected?.cta ?? "");
-        if (!value) return;
+        const holder = String(paySelected?.nombre ?? "").trim();
+        const account = String(paySelected?.cta ?? "").trim();
+        if (!holder && !account) return;
+        const value = [holder, account].filter(Boolean).join("\n");
         try {
             await navigator.clipboard.writeText(value);
             copiedAccount = true;
@@ -486,17 +488,19 @@
             {:else}
                 <p>{t('deposit.step1')}.</p>
                 <div class="deposit__details">
-                    <b>{t('deposit.holder')}:</b>
-                    <p>{paySelected.nombre}</p>
-                    <b>{t('deposit.numBankAccount')}:</b>
-                    <p class="deposit__cta-copy">
-                        <span>{paySelected.cta}</span>
+                    <div class="deposit__cta-copy">
+                        <div>
+                            <b>{t('deposit.holder')}:</b>
+                            <p>{paySelected.nombre}</p>
+                            <b>{t('deposit.numBankAccount')}:</b>
+                            <p>{paySelected.cta}</p>
+                        </div>
                         <button
                             type="button"
                             class="btn deposit__copy"
                             on:click={copyAccountNumber}
-                            aria-label="Copiar número de cuenta"
-                            title={copiedAccount ? "Copiado" : "Copiar"}
+                            aria-label="Copiar titular y número de cuenta"
+                            title={copiedAccount ? "Copiado" : "Copiar titular y cuenta"}
                         >
                             {#if copiedAccount}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -519,7 +523,7 @@
                         {#if copiedAccount}
                             <small class="deposit__copied">Copiado</small>
                         {/if}
-                    </p>
+                    </div>
                 </div>
                 <img
                     src="{assetsPayments}{paySelected.banco}__{paySelected.cta.replace(/\+|\s/g, "")}.png"
@@ -619,7 +623,7 @@
 <style>
     .deposit__cta-copy {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 0.5rem;
     }
     .deposit__copy {
