@@ -13,7 +13,6 @@
     export let onOk;
     export let amountsFav;
     export let configDeposit;
-    export let configProfile = {};
     export let t;
 
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
@@ -58,41 +57,35 @@
     let fileInfo;
     let requirePhoneModalOpen = false;
     let phoneNumberInput = "";
-    let documentInput = "";
-    let selectedDoctype = "";
-    let doctypes = configProfile.doctype || [];
-    let savingAccountData = false;
+    let savingPhone = false;
     let pendingAccount = null;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
 
-    async function saveAccountData() {
+    async function savePhone() {
         const digits = phoneNumberInput.replace(/\D/g, "");
         if (!digits) return onError("Ingresa un número de teléfono válido");
-        if (!selectedDoctype) return onError("Selecciona un tipo de documento");
-        if (!documentInput.trim()) return onError("Ingresa tu número de documento");
         const phone = digits.startsWith("57") ? "+" + digits : "+57" + digits;
         try {
-            savingAccountData = true;
+            savingPhone = true;
+            //se manda toda la cuenta, igual que en el perfil/retiro
             const accountUser = {
                 ...(pendingAccount || {}),
+                serial_api_casino: user.serial,
                 token: user.token,
+                agregatorToken: user.agregatorToken,
                 phone,
-                doctype: selectedDoctype,
-                document: documentInput.trim(),
             };
             await ServerConnection.users.saveMyAccount(accountUser);
             requirePhoneModalOpen = false;
             phoneNumberInput = "";
-            documentInput = "";
-            selectedDoctype = "";
             pendingAccount = null;
             await getPayMethods();
             if (payMethods.length===1) openPayMethod(payMethods[0]);
         } catch (error) {
-            onError("Error al guardar tus datos");
+            onError("Error al guardar el teléfono");
         } finally {
-            savingAccountData = false;
+            savingPhone = false;
         }
     }
 
@@ -433,9 +426,8 @@
                 } catch (error) {
                     console.log(error);
                 }
-                if (!account.phone || !account.document) {
+                if (!account.phone) {
                     pendingAccount = account;
-                    selectedDoctype = account.doctype || doctypes[0] || "";
                     loadDeposit = false;
                     requirePhoneModalOpen = true;
                     return;
@@ -454,22 +446,16 @@
     <Modal
     bind:open={requirePhoneModalOpen}
     modalOpened={"require_phone"}
-    title="Completa tus datos"
+    title="Completa tu teléfono"
     closable={false}
     >
         <div class="deposit__phone">
-            <p>Para continuar con tu recarga debes guardar tu teléfono y tu documento.</p>
+            <p>Para continuar con tu recarga debes guardar tu número de teléfono.</p>
             <div class="deposit__phone-ipt">
                 <input type="text" inputmode="numeric" class="ipt" placeholder="+57 3001234567" bind:value={phoneNumberInput} on:input={inputJustNumbers}>
             </div>
-            <select class="slc" bind:value={selectedDoctype}>
-                {#each doctypes as doctype}
-                    <option value={doctype}>{doctype}</option>
-                {/each}
-            </select>
-            <input type="text" inputmode="numeric" class="ipt" placeholder="Número de documento" bind:value={documentInput} on:input={inputJustNumbers}>
-            <button class="btn deposit" on:click={saveAccountData} disabled={savingAccountData}>
-                {#if savingAccountData}
+            <button class="btn deposit" on:click={savePhone} disabled={savingPhone}>
+                {#if savingPhone}
                     <div class="loading"><p /><p /><p /></div>
                 {:else}
                     Guardar
