@@ -81,7 +81,7 @@
         <p>{t("profile.email")}</p>
         <p>{t("profile.birthday")}</p>
         <input class="ipt" type="text" bind:value={accountUser.email} disabled>
-        <input class="ipt" type="text" bind:value={accountUser.birthday} disabled>
+        <input class="ipt" type="text" bind:value={accountUser.birthday} disabled ={isDataComplete}>
         <p>{t("profile.phone")}</p>
         {#if !accountUser.isViewWeb}<p></p>{:else}<p>{t("profile.typeDoc")}</p>{/if}
         <input class="ipt" type="text" bind:value={accountUser.phone} disabled ={isDataComplete}>
