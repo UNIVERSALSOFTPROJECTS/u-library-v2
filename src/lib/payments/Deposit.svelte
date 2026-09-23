@@ -56,6 +56,7 @@
     let data_pay ;
     let fileInfo;
     let requirePhoneModalOpen = false;
+    let phonePending = false;//si sigue en true no se muestran las pasarelas/bancos
     let phoneNumberInput = "";
     let savingPhone = false;
     let pendingAccount = null;
@@ -78,6 +79,7 @@
             };
             await ServerConnection.users.saveMyAccount(accountUser);
             requirePhoneModalOpen = false;
+            phonePending = false;
             phoneNumberInput = "";
             pendingAccount = null;
             await getPayMethods();
@@ -429,6 +431,7 @@
                 if (!account.phone) {
                     pendingAccount = account;
                     loadDeposit = false;
+                    phonePending = true;
                     requirePhoneModalOpen = true;
                     return;
                 }
@@ -447,7 +450,6 @@
     bind:open={requirePhoneModalOpen}
     modalOpened={"require_phone"}
     title="Completa tu teléfono"
-    closable={false}
     >
         <div class="deposit__phone">
             <p>Para continuar con tu recarga debes guardar tu número de teléfono.</p>
@@ -476,8 +478,12 @@
     </Modal>
     
 {/if}
-{#if requirePhoneModalOpen}
-    <!-- se pide el telefono antes de mostrar pasarelas/bancos -->
+{#if phonePending}
+    <div class="deposit__message">
+        <div class="deposit__message--icon"></div>
+        <div class="deposit__message--text">Para recargar debes guardar tu número de teléfono.</div>
+        <button class="btn deposit" on:click={()=> requirePhoneModalOpen = true}>Agregar teléfono</button>
+    </div>
 {:else if isLocked && gateways.length === 0}
     <div class="deposit__message">
         <div class="deposit__message--icon"></div>
