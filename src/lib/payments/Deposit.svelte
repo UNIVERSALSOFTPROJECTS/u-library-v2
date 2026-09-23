@@ -40,6 +40,7 @@
     let id_ca  = configDeposit.id_ca;
     let isRequiredVoucher  = configDeposit.isRequiredVoucher || "";
     let viewTimeDeposit = configDeposit.viewTimeDeposit || false;
+    let requirePhone = configDeposit.requirePhone || false;
     let banksOrigin = configDeposit.banksOrigin || [];
     let originBankJustText = configDeposit.originBankJustText || false;
     let typeView = configDeposit.typeView || "";
@@ -54,8 +55,29 @@
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
     let fileInfo;
+    let requirePhoneModalOpen = false;
+    let phoneNumberInput = "";
+    let savingPhone = false;
+    let pendingPay = null;
 
     const inputJustNumbers = inputUtils.justNumbersValidator;
+
+    async function savePhone() {
+        if (!phoneNumberInput.trim()) return onError("Ingresa un número de teléfono válido");
+        try {
+            savingPhone = true;
+            await ServerConnection.users.saveMyAccount({ token: user.token, phone: "+57" + phoneNumberInput.trim() });
+            requirePhoneModalOpen = false;
+            phoneNumberInput = "";
+            const pay = pendingPay;
+            pendingPay = null;
+            if (pay) await validateDeposit(pay);
+        } catch (error) {
+            onError("Error al guardar el teléfono");
+        } finally {
+            savingPhone = false;
+        }
+    }
 
     const detectLockedDeposit = () => {
         isLocked = !id_banca.includes(user.id_banca) && !id_ca.includes(user.id_ca);
@@ -118,6 +140,11 @@
             else if(amountDeposit > pay.max) return onError(t("deposit.maxDeposit")+" "+pay.max+" "+ pay.iso);
             const { doctype, document, email, phone } = await getAccountDoc();
 
+            if (requirePhone && !phone) {
+                pendingPay = pay;
+                requirePhoneModalOpen = true;
+                return;
+            }
 
             OPEN_MODAL_GATEWAY_PAY = true;
             const currency = pay.currency || user.currency;
@@ -393,6 +420,28 @@
 
 
 <div class="modal-body">
+{#if requirePhoneModalOpen}
+    <Modal
+    bind:open={requirePhoneModalOpen}
+    modalOpened={"require_phone"}
+    title="Completa tu teléfono"
+    >
+        <div class="deposit__phone">
+            <p>Para continuar con tu recarga debes guardar tu número de teléfono.</p>
+            <div class="deposit__phone-ipt">
+                <span class="deposit__phone-prefix">+57</span>
+                <input type="text" inputmode="numeric" class="ipt" placeholder="3001234567" bind:value={phoneNumberInput} on:input={inputJustNumbers}>
+            </div>
+            <button class="btn deposit" on:click={savePhone} disabled={savingPhone}>
+                {#if savingPhone}
+                    <div class="loading"><p /><p /><p /></div>
+                {:else}
+                    Guardar
+                {/if}
+            </button>
+        </div>
+    </Modal>
+{/if}
 {#if OPEN_MODAL_GATEWAY_PAY == true}
     <Modal
     bind:open={OPEN_MODAL_GATEWAY_PAY}
@@ -621,6 +670,20 @@
 </div>
 
 <style>
+    .deposit__phone {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+    }
+    .deposit__phone-ipt {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .deposit__phone-prefix {
+        font-weight: 600;
+    }
     .deposit__cta-copy {
         display: flex;
         align-items: flex-start;
