@@ -11,7 +11,6 @@ let showMainLoading = false;
 let loginModalOpen = false;
 let modalOpened;
 let platform = "DemoPlatform";
-let isOauth = true;
 let configsAllowed={billCollector:true};
 
 const onShowCustomConfig=()=>{
@@ -40,7 +39,7 @@ export const TopBarDemo = () => ({
   Component: TopBar,
   props: { 
     userGateway: 'universal', 
-    user, active_view, showLoginModal, modalOpened, loginModalOpen, showMainLoading, assetsUrl, platform, userState, onOk, onError, onLogin, isOauth, configsAllowed, onShowCustomConfig }
+    user, active_view, showLoginModal, modalOpened, loginModalOpen, showMainLoading, assetsUrl, platform, userState, onOk, onError, onLogin, configsAllowed, onShowCustomConfig }
 });
 
 

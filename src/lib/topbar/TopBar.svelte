@@ -35,7 +35,6 @@
   export let currencies = ["USD"];
   export let doctypes = ["DNI"];
   export let limitAmount = { min: 50, max: 2000 };
-  export let isOauth;
   export let configsAllowed;
   export let onShowCustomConfig;
 
@@ -270,7 +269,6 @@
       {platform}
       {onOpenRecoverPass}
       t={$t}
-      bind:isOauth
     />
   </Modal>
 
@@ -291,7 +289,6 @@
       bind:doctypes
       {onOkSingup}
       {onOpenConditions}
-      bind:isOauth
     />
   </Modal>
 
