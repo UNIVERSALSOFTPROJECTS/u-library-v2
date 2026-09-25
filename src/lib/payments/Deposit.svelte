@@ -135,7 +135,7 @@
         if(currency=='COP'){
             if (doctype === "DNI") {
                 return "CC";
-            } else if (doctype === " Cedula de Extrajeria") {
+            } else if (doctype === "Cedula de extranjeria") {
                 return "CC";
             } else {
                 return "CC";

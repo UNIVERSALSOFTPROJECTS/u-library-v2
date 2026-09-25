@@ -17,7 +17,7 @@
     // Ajusta estos patrones segun las reglas exactas de cada tipo de documento
     const documentValidators = {
         "Cédula": /^V-\d{6,10}$/i,
-        "Cedula de Extrajeria": /^E-\d{6,10}$/i,
+        "Cedula de extranjeria": /^E-\d{6,10}$/i,
         "Pasaporte": /^[A-Za-z0-9]{5,15}$/,
         "DNI": /^\d{8}$/,
         "CI": /^\d{6,10}$/,
@@ -25,7 +25,7 @@
 
     const documentExamples = {
         "Cédula": "Ejemplo: V-12345678",
-        "Cedula de Extrajeria": "Ejemplo: E-987654321",
+        "Cedula de extranjeria": "Ejemplo: E-987654321",
         // "Pasaporte": "Ejemplo: AB1234567",
         // "DNI": "Ejemplo: 47087611",
         // "CI": "Ejemplo: 1234567",
