@@ -11,27 +11,26 @@
 
     let loadUserData;
     let doctypes = configProfile.doctype;
-    // let exampleDoctype;
     let selectDoctype;
     let isDataComplete =  accountUser.dataComplete;
 
     // Ajusta estos patrones segun las reglas exactas de cada tipo de documento
     const documentValidators = {
-        "Cédula": /^\d{6,10}$/,
-        "Cedula de Extrajeria": /^\d{6,10}$/,
+        "Cédula": /^V-\d{6,10}$/i,
+        "Cedula de Extrajeria": /^E-\d{6,10}$/i,
         "Pasaporte": /^[A-Za-z0-9]{5,15}$/,
         "DNI": /^\d{8}$/,
         "CI": /^\d{6,10}$/,
     };
 
-    // const documentExamples = {
-    //     "Cédula": "Ejemplo: 12345678",
-    //     "Cedula de Extrajeria": "Ejemplo: 987654321",
-    //     "Pasaporte": "Ejemplo: AB1234567",
-    //     "DNI": "Ejemplo: 47087611",
-    //     "CI": "Ejemplo: 1234567",
-    //     "RUT": "Ejemplo: 15.363.225-1",
-    // };
+    const documentExamples = {
+        "Cédula": "Ejemplo: V-12345678",
+        "Cedula de Extrajeria": "Ejemplo: E-987654321",
+        // "Pasaporte": "Ejemplo: AB1234567",
+        // "DNI": "Ejemplo: 47087611",
+        // "CI": "Ejemplo: 1234567",
+        // "RUT": "Ejemplo: 15.363.225-1",
+    };
 
     const avoidSubmit = (e) =>{ e.preventDefault(); }
 
@@ -58,10 +57,6 @@
             loadUserData = false;
         }                                                                                        
     }
-    // const changeDoctype = () =>{
-    //     exampleDoctype = documentExamples[selectDoctype] || "";
-    // }
-
     onMount(async() => {
         if (accountUser.isViewWeb && !isDataComplete) {
             selectDoctype = doctypes[0];
@@ -69,6 +64,7 @@
     });
 
     $: fullName = [accountUser?.name, accountUser?.lastname].filter(Boolean).join(" ");
+    $: documentPlaceholder = documentExamples[selectDoctype || accountUser.doctype] || t("profile.enterOfficialDocument");
 
 </script>
 <div class="userdata">
@@ -97,7 +93,7 @@
             {/if}
             <p>{t("profile.numberDoc")}</p>
             <p>{t("profile.address")}</p>
-            <input class="ipt" type="text" placeholder={t("profile.enterOfficialDocument")} bind:value={accountUser.document} disabled={isDataComplete}>
+            <input class="ipt" type="text" placeholder={documentPlaceholder} bind:value={accountUser.document} disabled={isDataComplete}>
             <input class="ipt" type="text" bind:value={accountUser.address} disabled={isDataComplete}>
             <p>{t("profile.city")}</p>
             <div></div>
