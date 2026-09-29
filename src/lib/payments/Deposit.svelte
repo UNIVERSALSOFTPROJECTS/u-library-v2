@@ -542,7 +542,7 @@
                                     {/each}  
                                 </div>
                                 <div class="deposit__ipt">
-                                    <b>{paySelected.iso}</b>
+                                    <b>{t("deposit.amount")}</b>
                                     <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
                                     <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
                                 </div>
@@ -555,7 +555,7 @@
                                     {/each}  
                                 </div>
                                 <div class="deposit__ipt">
-                                    <b>{paySelected.iso}</b>
+                                    <b>{t("deposit.amount")}</b>
                                     <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
                                     <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
                                 </div>
