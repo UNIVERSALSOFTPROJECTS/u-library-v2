@@ -305,7 +305,8 @@
                 let response;
                 if (ServerConnection.wallet.isDirectDepositUploadFileMode()) {
                     bankDeposit.imageUrl = fileInfo?.file ? await uploadFileRepo() : "";
-                    if(bankDeposit.imageUrl == null || bankDeposit.imageUrl === "") {
+                    // Solo exigir voucher cuando isRequiredVoucher está activo (o si se intentó subir y falló)
+                    if (isRequiredVoucher && (bankDeposit.imageUrl == null || bankDeposit.imageUrl === "")) {
                         return onError("Error al cargar el archivo");
                     }
                     response = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit);
