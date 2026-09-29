@@ -108,6 +108,11 @@
   const guestURLgbeu2 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail2_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468b611cdcce2f3a13c5b&userMode=retail"
   const guestURLgbeuLive2 ="https://sports-frontend.jbets.online/?platformId=6aa4683611cdcce2f3a13c58&template=retail2_premium#/?platformId=6aa4683611cdcce2f3a13c58&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aa468b611cdcce2f3a13c5b&view=live&userMode=retail"
 
+  const guestURLdtpp1 ="https://sports-frontend.jbets.online/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&userMode=retail"
+  const guestURLdtppLive1 ="https://sports-frontend.jbets.online/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&view=live&userMode=retail"
+  const guestURLdtpp2 ="https://sports-frontend.jbets.online/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
+  const guestURLdtppLive2 ="https://sports-frontend.jbets.online/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&view=live&userMode=retail"
+
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${mode}`;
@@ -235,6 +240,10 @@
     GBEU: {
       "1": { live: guestURLgbeuLive1, default: guestURLgbeu1 },
       "2": { live: guestURLgbeuLive2, default: guestURLgbeu2 },
+    },
+    DTPP: {
+      "1": { live: guestURLdtppLive1, default: guestURLdtpp1 },
+      "2": { live: guestURLdtppLive2, default: guestURLdtpp2 },
     },
   };
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
