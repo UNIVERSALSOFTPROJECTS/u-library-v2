@@ -21,6 +21,7 @@
     let socials = configFooter.social;
     let email = configFooter.email;
     let isGCB = configFooter.isGCB || "";
+    let aditionalInfo = configFooter.aditionalInfo || "";
     let poweredByUS = configFooter.poweredByUS || false;
     let platform = configFooter.platform;
     let bonus = configFooter.bonus;
@@ -199,6 +200,9 @@
                 <img src="{assetsFooter}more18.png" alt="more18-img" loading="lazy">
             </div>
             <div class="footer__bottom">
+                {#if aditionalInfo}
+                    <p>{aditionalInfo}</p>
+                {/if}
                 <p>{platform} {t("footer.declaration")}</p>
                 <p>© {createdIn && createdIn != currentYear?`${createdIn+" - "+currentYear}`:currentYear} {platform}</p>
             </div>
