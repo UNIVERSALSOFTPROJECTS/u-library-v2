@@ -299,8 +299,10 @@
     const copyPagoMovilData = async () => {
         const phone = pagoMovilCtaParts[0] || "";
         const rif = pagoMovilCtaParts[1] || "";
-        const value = [rif, phone].filter(Boolean).join("\n");
-        await copyToClipboard(value, "pagomovil");
+        const lines = [];
+        if (rif) lines.push(`${t("deposit.rif")}\n${rif}`);
+        if (phone) lines.push(`${t("deposit.phoneNumber")}\n${phone}`);
+        await copyToClipboard(lines.join("\n"), "pagomovil");
     }
 
     async function validateDepositBank() {
@@ -602,7 +604,7 @@
                 {#if isPagoMovil(paySelected)}
                     <b class="deposit__pagomovil-title">{t('deposit.pagoMovilData')}</b>
                     <div class="deposit__details deposit__pagomovil">
-                        <div class="deposit__cta-copy">
+                        <div class="deposit__pagomovil-block deposit__cta-copy">
                             <div class="deposit__pagomovil-fields">
                                 <div class="deposit__pagomovil-row">
                                     <b>{t('deposit.rif')}</b>
@@ -611,10 +613,6 @@
                                 <div class="deposit__pagomovil-row">
                                     <b>{t('deposit.phoneNumber')}</b>
                                     <p>{pagoMovilCtaParts[0] || ""}</p>
-                                </div>
-                                <div class="deposit__pagomovil-row">
-                                    <b>{t('deposit.bank')}</b>
-                                    <p>{pagoMovilCtaParts[2] || ""}</p>
                                 </div>
                             </div>
                             {#if pagoMovilCtaParts[0] || pagoMovilCtaParts[1]}
@@ -647,6 +645,12 @@
                             {#if copiedField === "pagomovil"}
                                 <small class="deposit__copied">{t('deposit.copied')}</small>
                             {/if}
+                        </div>
+                        <div class="deposit__pagomovil-block">
+                            <div class="deposit__pagomovil-row">
+                                <b>{t('deposit.bank')}</b>
+                                <p>{pagoMovilCtaParts[2] || ""}</p>
+                            </div>
                         </div>
                     </div>
                     <p>{t('deposit.notifyPagoMovil')}</p>
@@ -829,6 +833,16 @@
     .deposit__pagomovil-title {
         display: block;
         margin-bottom: 0.5rem;
+    }
+
+    .deposit__pagomovil {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+    }
+
+    .deposit__pagomovil-block {
+        width: 100%;
     }
 
     .deposit__pagomovil-fields {
