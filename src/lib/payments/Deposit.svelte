@@ -52,6 +52,7 @@
     let fileInput;
     let viewLinkSafari = false;
     let copiedAccount = false;
+    let copiedField = "";
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
     let fileInfo;
@@ -251,9 +252,40 @@
         bankDeposit.reference='';
         viewLinkSafari = false;
         copiedAccount = false;
+        copiedField = "";
         base64Image = undefined;
         fileInfo = undefined;
         if (fileInput) fileInput.value = "";
+    }
+
+    const isPagoMovil = (pay = paySelected) =>
+        (pay?.banco || "") === "Pago Movil-A";
+
+    const getPagoMovilCtaParts = (cta = "") =>
+        String(cta)
+            .split("|")
+            .map((part) => part.trim())
+            .filter(Boolean);
+
+    $: pagoMovilCtaParts = isPagoMovil(paySelected)
+        ? getPagoMovilCtaParts(paySelected?.cta)
+        : [];
+
+    const copyToClipboard = async (value, field = "account") => {
+        const text = String(value ?? "").trim();
+        if (!text) return;
+        try {
+            await navigator.clipboard.writeText(text);
+            if (field === "account") {
+                copiedAccount = true;
+                setTimeout(() => (copiedAccount = false), 1500);
+            } else {
+                copiedField = field;
+                setTimeout(() => (copiedField = ""), 1500);
+            }
+        } catch (error) {
+            onError(t("msg.contactSupport"));
+        }
     }
 
     const copyAccountNumber = async () => {
@@ -261,13 +293,7 @@
         const account = String(paySelected?.cta ?? "").trim();
         if (!holder && !account) return;
         const value = [holder, account].filter(Boolean).join("\n");
-        try {
-            await navigator.clipboard.writeText(value);
-            copiedAccount = true;
-            setTimeout(() => (copiedAccount = false), 1500);
-        } catch (error) {
-            onError(t("msg.contactSupport"));
-        }
+        await copyToClipboard(value, "account");
     }
 
     async function validateDepositBank() {
@@ -566,6 +592,84 @@
                     {/if}
                 {/if}
             {:else}
+                {#if isPagoMovil(paySelected)}
+                    <b class="deposit__pagomovil-title">{t('deposit.pagoMovilData')}</b>
+                    <div class="deposit__details deposit__pagomovil">
+                        <div class="deposit__pagomovil-row">
+                            <div>
+                                <b>{t('deposit.rif')}</b>
+                                <p>{pagoMovilCtaParts[1] || ""}</p>
+                            </div>
+                            {#if pagoMovilCtaParts[1]}
+                                <button
+                                    type="button"
+                                    class="btn deposit__copy"
+                                    on:click={() => copyToClipboard(pagoMovilCtaParts[1], "rif")}
+                                    aria-label={t('deposit.copyRif')}
+                                    title={copiedField === "rif" ? t('deposit.copied') : t('deposit.copyRif')}
+                                >
+                                    {#if copiedField === "rif"}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                            <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    {:else}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                            <g clip-path="url(#clip_deposit_copy_rif)">
+                                              <path d="M14.75 3.5H5.25C5.05109 3.5 4.86032 3.57902 4.71967 3.71967C4.57902 3.86032 4.5 4.05109 4.5 4.25V16.25C4.5 16.4489 4.57902 16.6397 4.71967 16.7803C4.86032 16.921 5.05109 17 5.25 17H14.75C14.9489 17 15.1397 16.921 15.2803 16.7803C15.421 16.6397 15.5 16.4489 15.5 16.25V4.25C15.5 4.05109 15.421 3.86032 15.2803 3.71967C15.1397 3.57902 14.9489 3.5 14.75 3.5ZM14.5 16H5.5V4.5H14.5V16Z" fill="white"/>
+                                              <path d="M13 1.75C13 1.55109 12.921 1.36032 12.7803 1.21967C12.6397 1.07902 12.4489 1 12.25 1H2.75C2.55109 1 2.36032 1.07902 2.21967 1.21967C2.07902 1.36032 2 1.55109 2 1.75V13.75C2 13.9489 2.07902 14.1397 2.21967 14.2803C2.36032 14.421 2.55109 14.5 2.75 14.5H3V2H13V1.75Z" fill="white"/>
+                                            </g>
+                                            <defs>
+                                              <clipPath id="clip_deposit_copy_rif">
+                                                <rect width="18" height="18" fill="white"/>
+                                              </clipPath>
+                                            </defs>
+                                        </svg>
+                                    {/if}
+                                </button>
+                            {/if}
+                        </div>
+                        <div class="deposit__pagomovil-row">
+                            <div>
+                                <b>{t('deposit.phoneNumber')}</b>
+                                <p>{pagoMovilCtaParts[0] || ""}</p>
+                            </div>
+                            {#if pagoMovilCtaParts[0]}
+                                <button
+                                    type="button"
+                                    class="btn deposit__copy"
+                                    on:click={() => copyToClipboard(pagoMovilCtaParts[0], "phone")}
+                                    aria-label={t('deposit.copyPhone')}
+                                    title={copiedField === "phone" ? t('deposit.copied') : t('deposit.copyPhone')}
+                                >
+                                    {#if copiedField === "phone"}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                            <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    {:else}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                            <g clip-path="url(#clip_deposit_copy_phone)">
+                                              <path d="M14.75 3.5H5.25C5.05109 3.5 4.86032 3.57902 4.71967 3.71967C4.57902 3.86032 4.5 4.05109 4.5 4.25V16.25C4.5 16.4489 4.57902 16.6397 4.71967 16.7803C4.86032 16.921 5.05109 17 5.25 17H14.75C14.9489 17 15.1397 16.921 15.2803 16.7803C15.421 16.6397 15.5 16.4489 15.5 16.25V4.25C15.5 4.05109 15.421 3.86032 15.2803 3.71967C15.1397 3.57902 14.9489 3.5 14.75 3.5ZM14.5 16H5.5V4.5H14.5V16Z" fill="white"/>
+                                              <path d="M13 1.75C13 1.55109 12.921 1.36032 12.7803 1.21967C12.6397 1.07902 12.4489 1 12.25 1H2.75C2.55109 1 2.36032 1.07902 2.21967 1.21967C2.07902 1.36032 2 1.55109 2 1.75V13.75C2 13.9489 2.07902 14.1397 2.21967 14.2803C2.36032 14.421 2.55109 14.5 2.75 14.5H3V2H13V1.75Z" fill="white"/>
+                                            </g>
+                                            <defs>
+                                              <clipPath id="clip_deposit_copy_phone">
+                                                <rect width="18" height="18" fill="white"/>
+                                              </clipPath>
+                                            </defs>
+                                        </svg>
+                                    {/if}
+                                </button>
+                            {/if}
+                        </div>
+                        <div class="deposit__pagomovil-row">
+                            <div>
+                                <b>{t('deposit.bank')}</b>
+                                <p>{pagoMovilCtaParts[2] || ""}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>{t('deposit.notifyPagoMovil')}</p>
+                {:else}
                 <p>{t('deposit.step1')}.</p>
                 <div class="deposit__details">
                     <div class="deposit__cta-copy">
@@ -613,6 +717,7 @@
                     on:load={(e) => e.currentTarget.style.display = ""}
                 >
                 <p>{t('deposit.step2')}.</p>
+                {/if}
                 <div class="deposit__info">
                     {#if typeView === 'minimal'}
                     <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
@@ -738,5 +843,27 @@
     .deposit__copied {
         color: #34b93d;
         font-size: 0.75rem;
+    }
+
+    .deposit__pagomovil-title {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .deposit__pagomovil {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .deposit__pagomovil-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .deposit__pagomovil-row p {
+        margin: 0.15rem 0 0;
     }
 </style>
