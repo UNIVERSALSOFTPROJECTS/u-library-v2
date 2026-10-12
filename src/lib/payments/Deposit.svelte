@@ -308,6 +308,26 @@
         return { resp: trimmed, msg: trimmed };
     };
 
+    const getRejectedDepositMessage = (nota = "") => {
+        const text = String(nota).toLowerCase();
+        // status 2 / duplicidad → referencia ya existe
+        if (
+            text.includes("status 2") ||
+            text.includes("duplicidad") ||
+            text.includes("ya existe")
+        ) {
+            return t("deposit.rejectedReferenceExists");
+        }
+        // status 3 / no existe → referencia no encontrada en banco
+        if (
+            text.includes("status 3") ||
+            text.includes("no existe")
+        ) {
+            return t("deposit.rejectedReferenceNotFound");
+        }
+        return t("deposit.rejectedDeposit");
+    };
+
     const handleDepositResponse = (data, realtime) => {
         const payload = parseDepositPayload(data);
         const code = payload?.resp || payload?.msg || "";
@@ -336,7 +356,7 @@
         const saldo = payload?.saldo_actual;
 
         if (estatus === "RECHAZADO") {
-            return onError(payload?.nota || t("deposit.rejectedDeposit"));
+            return onError(getRejectedDepositMessage(payload?.nota));
         }
         if (efectivo || estatus === "PROCESADO") {
             const msg = saldo
