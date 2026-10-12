@@ -262,8 +262,13 @@
     const isPagoMovil = (pay = paySelected) =>
         (pay?.banco || "") === "Pago Movil-A";
 
+    const REALTIME_VALIDATE_BANKS = ["Pago Movil-A", "Banco Nacional de Credito-A"];
+
+    const supportsRealtimeValidation = (pay = paySelected) =>
+        REALTIME_VALIDATE_BANKS.includes(pay?.banco || "");
+
     const shouldValidateRealtime = (pay = paySelected) =>
-        isPagoMovil(pay) && !!String(valida).trim();
+        supportsRealtimeValidation(pay) && !!String(valida).trim();
 
     const getPagoMovilCtaParts = (cta = "") =>
         String(cta)
