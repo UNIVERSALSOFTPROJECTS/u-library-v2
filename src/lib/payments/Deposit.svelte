@@ -14,6 +14,7 @@
     export let amountsFav;
     export let configDeposit;
     export let t;
+    export let updateBalance = () => {};
 
     // cuando se hagan platillas tiene que dividir la logica principal de las variables que solo se usan para mostrar u ocultar bbloques de divs
     let loadDeposit = false;
@@ -341,6 +342,7 @@
             const msg = saldo
                 ? `${t("deposit.creditedOk")} ${saldo}`
                 : t("deposit.creditedOk");
+            updateBalance();
             return onOk(msg);
         }
         // EN PROCESO u otro no concluyente → queda para el cron
