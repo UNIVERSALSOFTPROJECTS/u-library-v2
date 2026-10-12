@@ -46,6 +46,7 @@
     let typeView = configDeposit.typeView || "";
     let typeTranference = "";
     let imgR4 = configDeposit.imgR4 || "";
+    let valida = configDeposit.valida || ""; // ej. "MULTISPORT" → validación síncrona (solo Pago Móvil)
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
@@ -261,6 +262,9 @@
     const isPagoMovil = (pay = paySelected) =>
         (pay?.banco || "") === "Pago Movil-A";
 
+    const shouldValidateRealtime = (pay = paySelected) =>
+        isPagoMovil(pay) && !!String(valida).trim();
+
     const getPagoMovilCtaParts = (cta = "") =>
         String(cta)
             .split("|")
@@ -270,6 +274,53 @@
     $: pagoMovilCtaParts = isPagoMovil(paySelected)
         ? getPagoMovilCtaParts(paySelected?.cta)
         : [];
+
+    $: isRealtimeValidation = shouldValidateRealtime(paySelected);
+
+    const clearDepositForm = () => {
+        base64Image = undefined;
+        fileInfo = undefined;
+        if (fileInput) fileInput.value = "";
+    };
+
+    const handleDepositResponse = (data, realtime) => {
+        const code = data?.msg || data?.resp || "";
+
+        if (code === "VARIOS_REGISTROS_DEPOSITOS") {
+            return onError(t("deposit.pendingRequest"));
+        }
+        if (code === "DEPOSITO_ERROR_NO_SESSION") {
+            return onError(t("deposit.sesionExpired"));
+        }
+        if (code === "DEPOSITO_ERROR") {
+            return onError(t("msg.contactSupport"));
+        }
+        if (code !== "DEPOSITO_OK") {
+            return onError(t("msg.contactSupport"));
+        }
+
+        clearDepositForm();
+
+        if (!realtime) {
+            return onOk(t("deposit.successDeposit"));
+        }
+
+        const estatus = String(data?.estatus || "").toUpperCase();
+        const efectivo = data?.efectivo === true || data?.efectivo === "true";
+        const saldo = data?.saldo_actual;
+
+        if (estatus === "RECHAZADO") {
+            return onError(data?.nota || t("deposit.rejectedDeposit"));
+        }
+        if (efectivo || estatus === "PROCESADO") {
+            const msg = saldo
+                ? `${t("deposit.creditedOk")} ${saldo}`
+                : t("deposit.creditedOk");
+            return onOk(msg);
+        }
+        // EN PROCESO u otro no concluyente → queda para el cron
+        return onOk(t("deposit.inProcessDeposit"));
+    };
 
     const copyToClipboard = async (value, field = "account") => {
         const text = String(value ?? "").trim();
@@ -336,6 +387,13 @@
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
 
+            const realtime = shouldValidateRealtime();
+            if (realtime) {
+                bankDeposit.valida = String(valida).trim();
+            } else {
+                delete bankDeposit.valida;
+            }
+
             try {
                 loadRecharge = true;
                 let response;
@@ -353,15 +411,7 @@
                     response = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit, base64Image);
                 }
                 const { data } = response;
-                //let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
-                if (data.msg === "DEPOSITO_OK") {
-                    base64Image = undefined;
-                    fileInfo = undefined;
-                    if (fileInput) fileInput.value = "";
-                    onOk(t("deposit.successDeposit"));
-                }
-                else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
-                else onError(t('msg.contactSupport'));
+                handleDepositResponse(data, realtime);
             } catch (error) {
                 console.error("Error registrando el depósito", error);
                 onError(t('msg.contactSupport'));
@@ -784,16 +834,24 @@
                     {/if}
                     {/if}
                 </div>
-                {#if isRequiredVoucher}
+                {#if isRequiredVoucher && !isRealtimeValidation}
                     <b>NOTA: ESPERAR DE 2 A 5 MINUTOS PARA VER REFLEJADO LA RECARGA DE SALDO EN TU CUENTA</b>
                 {/if}
-                <button class="btn deposit" disabled={loadRecharge} on:click={validateDepositBank}>
-                    {#if loadRecharge}
+                {#if loadRecharge && isRealtimeValidation}
+                    <div class="deposit__processing" role="status" aria-live="polite">
                         <div class="loading"><p /><p /><p /></div>
-                    {:else}
-                        {t("profile.recharge")}
-                    {/if}
-                </button>
+                        <b>{t("deposit.processingDeposit")}</b>
+                        <p>{t("deposit.processingDepositHint")}</p>
+                    </div>
+                {:else}
+                    <button class="btn deposit" disabled={loadRecharge} on:click={validateDepositBank}>
+                        {#if loadRecharge}
+                            <div class="loading"><p /><p /><p /></div>
+                        {:else}
+                            {t("profile.recharge")}
+                        {/if}
+                    </button>
+                {/if}
             {/if}
         {:else}
             <b>{t('deposit.choosePayMethod')}:</b>
@@ -877,5 +935,21 @@
 
     .deposit__pagomovil-row p {
         margin: 0.15rem 0 0;
+    }
+
+    .deposit__processing {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 1.5rem 1rem;
+        text-align: center;
+    }
+
+    .deposit__processing p {
+        margin: 0;
+        opacity: 0.85;
+        font-size: 0.9rem;
     }
 </style>
