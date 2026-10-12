@@ -283,8 +283,28 @@
         if (fileInput) fileInput.value = "";
     };
 
+    const parseDepositPayload = (data) => {
+        // Con valida, el BFF suele devolver msg como string JSON anidado:
+        // { msg: "{\"resp\":\"DEPOSITO_OK\",\"estatus\":\"RECHAZADO\",...}" }
+        const raw = data?.msg ?? data?.resp ?? data;
+        if (raw && typeof raw === "object") return raw;
+        if (typeof raw !== "string") return data || {};
+
+        const trimmed = raw.trim();
+        if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+            try {
+                return JSON.parse(trimmed);
+            } catch (error) {
+                console.error("Error parseando respuesta de depósito", error);
+                return { resp: trimmed, msg: trimmed };
+            }
+        }
+        return { resp: trimmed, msg: trimmed };
+    };
+
     const handleDepositResponse = (data, realtime) => {
-        const code = data?.msg || data?.resp || "";
+        const payload = parseDepositPayload(data);
+        const code = payload?.resp || payload?.msg || "";
 
         if (code === "VARIOS_REGISTROS_DEPOSITOS") {
             return onError(t("deposit.pendingRequest"));
@@ -305,12 +325,12 @@
             return onOk(t("deposit.successDeposit"));
         }
 
-        const estatus = String(data?.estatus || "").toUpperCase();
-        const efectivo = data?.efectivo === true || data?.efectivo === "true";
-        const saldo = data?.saldo_actual;
+        const estatus = String(payload?.estatus || "").toUpperCase();
+        const efectivo = payload?.efectivo === true || payload?.efectivo === "true";
+        const saldo = payload?.saldo_actual;
 
         if (estatus === "RECHAZADO") {
-            return onError(data?.nota || t("deposit.rejectedDeposit"));
+            return onError(payload?.nota || t("deposit.rejectedDeposit"));
         }
         if (efectivo || estatus === "PROCESADO") {
             const msg = saldo
