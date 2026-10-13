@@ -352,17 +352,13 @@
 
         const estatus = String(payload?.estatus || "").toUpperCase();
         const efectivo = payload?.efectivo === true || payload?.efectivo === "true";
-        const saldo = payload?.saldo_actual;
 
         if (estatus === "RECHAZADO") {
             return onError(getRejectedDepositMessage(payload?.nota));
         }
         if (efectivo || estatus === "PROCESADO") {
-            const msg = saldo
-                ? `${t("deposit.creditedOk")} ${saldo}`
-                : t("deposit.creditedOk");
-            onOk(msg);
-            setTimeout(() => window.location.reload(), 3000);   
+            onOk(t("deposit.successDeposit"));
+            setTimeout(() => window.location.reload(), 3000);
             return;
         }
         // EN PROCESO u otro no concluyente → queda para el cron
