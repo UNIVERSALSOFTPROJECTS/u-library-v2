@@ -362,7 +362,7 @@
                 ? `${t("deposit.creditedOk")} ${saldo}`
                 : t("deposit.creditedOk");
             onOk(msg);
-            window.location.reload();
+            setTimeout(() => window.location.reload(), 3000);   
             return;
         }
         // EN PROCESO u otro no concluyente → queda para el cron
