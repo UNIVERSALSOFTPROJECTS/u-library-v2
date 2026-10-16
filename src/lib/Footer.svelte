@@ -169,7 +169,7 @@
             {/if}
             {#if poweredByUS}
                <a href="https://universalsoft.net/" style="margin: 0 auto;" target="_blank" rel="noopener noreferrer">
-                   <img src="https://assets-usoft.universalsoft.net/generic_imgs/Power_bi/power_bi{country.flag == "br"?"_br":""}.png" alt="poweredbyus-img" loading="lazy">
+                   <img src="https://assets-usoft.universalsoft.net/generic_imgs/Power_bi/power_bi.png" alt="poweredbyus-img" loading="lazy">
                </a>
             {/if}
         </div>
@@ -197,7 +197,7 @@
 
         <div class="footer__container--sub">
             <div class="footer__imgs">
-                <img src="{assetsFooter}more18.png" alt="more18-img" loading="lazy">
+                <img src="{assetsFooter}more18{country.flag == "br"?"_br":""}.png" alt="more18-img" loading="lazy">
             </div>
             <div class="footer__bottom">
                 {#if aditionalInfo}
