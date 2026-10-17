@@ -969,7 +969,7 @@ export default {
     "profile.warning": "Lembre-se que para acessar o retiro, você deve preencher seus dados pessoais em “Meu perfil”.",
     "profile.myProfile": "Meu perfil",
     "profile.changePass": "Alteração de senha",
-    "profile.recordMovement": "História do movimento",
+    "profile.recordMovement": "Historico do movimento",
     "profile.withdrawal": "Cancelamento",
     "profile.recharge": "Recarregue",
     "profile.support": "Suporte",
