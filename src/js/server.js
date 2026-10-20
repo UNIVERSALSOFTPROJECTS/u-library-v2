@@ -56,7 +56,7 @@ const ServerConnection = (() => {
             return axios.post(`${conf.API_BO}/guest/presigned-url`,params,{ headers });
         },
         getPayMethods: async (userToken) => {
-            let url = "https://srv-prod.newapiusoft.com/game-api-nd/paymethods/" + userToken;
+            let url = "https://srv-prod.usoft-api88.net/game-api-nd/paymethods/" + userToken;
             return await axios.get(url, { headers });
         },
         getPayLink: async (token, amount, type) => {
@@ -104,7 +104,7 @@ const ServerConnection = (() => {
         },
         login: (username, password, userType, turnstileToken = null, orgMultiCurrency = "") => {
             let org = orgMultiCurrency == "" ? conf.org : orgMultiCurrency;
-            let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login" : "https://srv-prod.newapiusoft.com/lobby-bff-auth";
+            let url = conf.API_KS_AUTH != null ? conf.API_KS_AUTH + "/login" : "https://srv-prod.usoft-api88.net/lobby-bff-auth";
             let payload = { username, password, org, userType }
             headers['cf-turnstile-response'] = turnstileToken;
             return axios.post(url, payload, { headers });
