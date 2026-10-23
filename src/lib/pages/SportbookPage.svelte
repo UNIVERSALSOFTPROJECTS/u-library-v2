@@ -113,6 +113,11 @@
   const guestURLdtpp2 ="https://sports-frontend.jbets.online/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
   const guestURLdtppLive2 ="https://sports-frontend.jbets.online/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&view=live&userMode=retail"
 
+  const guestURLlaeu471 ="https://sports-frontend.jbets.online/?platformId=6ad67b07fc190bef8cb2b846&template=retail1_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67bd3fc190bef8cb2b847&userMode=retail"
+  const guestURLlaeu47Live1 ="https://sports-frontend.jbets.online/?platformId=6ad67b07fc190bef8cb2b846&template=retail1_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67bd3fc190bef8cb2b847&view=live&userMode=retail"
+  const guestURLlaeu472 ="https://sports-frontend.jbets.online/?platformId=6ad67b07fc190bef8cb2b846&template=retail2_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67be9fc190bef8cb2b848&userMode=retail"
+  const guestURLlaeu47Live2 ="https://sports-frontend.jbets.online/?platformId=6ad67b07fc190bef8cb2b846&template=retail2_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67be9fc190bef8cb2b848&view=live&userMode=retail"
+
   const guestURLdteu1 ="https://sports-frontend.jbets.online/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&userMode=retail"
   const guestURLdteuLive1 ="https://sports-frontend.jbets.online/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&view=live&userMode=retail"
   const guestURLdteu2 ="https://sports-frontend.jbets.online/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
@@ -249,6 +254,10 @@
     DTPP: {
       "1": { live: guestURLdtppLive1, default: guestURLdtpp1 },
       "2": { live: guestURLdtppLive2, default: guestURLdtpp2 },
+    },
+    LAEU47: {
+      "1": { live: guestURLlaeu47Live1, default: guestURLlaeu471 },
+      "2": { live: guestURLlaeu47Live2, default: guestURLlaeu472 },
     },
     DEEU37: {
       "1": { live: guestURLdteuLive1, default: guestURLdteu1 },
