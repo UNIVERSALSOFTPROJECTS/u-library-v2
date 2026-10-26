@@ -46,12 +46,14 @@
     let typeView = configDeposit.typeView || "";
     let typeTranference = "";
     let imgR4 = configDeposit.imgR4 || "";
+    let valida = configDeposit.valida || ""; // ej. "MULTISPORT" → validación síncrona (solo Pago Móvil)
     let isLocked = true;
     const detecMachine = window['chrome'] && window['chrome']['webview']?true:false;
     let base64Image;
     let fileInput;
     let viewLinkSafari = false;
     let copiedAccount = false;
+    let copiedField = "";
     let OPEN_MODAL_GATEWAY_PAY=false;
     let data_pay ;
     let fileInfo;
@@ -135,7 +137,7 @@
         if(currency=='COP'){
             if (doctype === "DNI") {
                 return "CC";
-            } else if (doctype === " Cedula de Extrajeria") {
+            } else if (doctype === "Cedula de extranjeria") {
                 return "CC";
             } else {
                 return "CC";
@@ -251,9 +253,133 @@
         bankDeposit.reference='';
         viewLinkSafari = false;
         copiedAccount = false;
+        copiedField = "";
         base64Image = undefined;
         fileInfo = undefined;
         if (fileInput) fileInput.value = "";
+    }
+
+    const isPagoMovil = (pay = paySelected) =>
+        (pay?.banco || "") === "Pago Movil-A";
+
+    const REALTIME_VALIDATE_BANKS = ["Pago Movil-A", "Banco Nacional de Credito-A"];
+
+    const supportsRealtimeValidation = (pay = paySelected) =>
+        REALTIME_VALIDATE_BANKS.includes(pay?.banco || "");
+
+    const shouldValidateRealtime = (pay = paySelected) =>
+        supportsRealtimeValidation(pay) && !!String(valida).trim();
+
+    const getPagoMovilCtaParts = (cta = "") =>
+        String(cta)
+            .split("|")
+            .map((part) => part.trim())
+            .filter(Boolean);
+
+    $: pagoMovilCtaParts = isPagoMovil(paySelected)
+        ? getPagoMovilCtaParts(paySelected?.cta)
+        : [];
+
+    $: isRealtimeValidation = shouldValidateRealtime(paySelected);
+
+    const clearDepositForm = () => {
+        base64Image = undefined;
+        fileInfo = undefined;
+        if (fileInput) fileInput.value = "";
+    };
+
+    const parseDepositPayload = (data) => {
+        // Con valida, el BFF suele devolver msg como string JSON anidado:
+        // { msg: "{\"resp\":\"DEPOSITO_OK\",\"estatus\":\"RECHAZADO\",...}" }
+        const raw = data?.msg ?? data?.resp ?? data;
+        if (raw && typeof raw === "object") return raw;
+        if (typeof raw !== "string") return data || {};
+
+        const trimmed = raw.trim();
+        if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+            try {
+                return JSON.parse(trimmed);
+            } catch (error) {
+                console.error("Error parseando respuesta de depósito", error);
+                return { resp: trimmed, msg: trimmed };
+            }
+        }
+        return { resp: trimmed, msg: trimmed };
+    };
+
+    const getRejectedDepositMessage = (nota = "") => {
+        const text = String(nota).toLowerCase();
+        // status 2 / duplicidad → referencia ya existe
+        if (
+            text.includes("status 2") ||
+            text.includes("duplicidad") ||
+            text.includes("ya existe")
+        ) {
+            return t("deposit.rejectedReferenceExists");
+        }
+        // status 3 / no existe → referencia no encontrada en banco
+        if (
+            text.includes("status 3") ||
+            text.includes("no existe")
+        ) {
+            return t("deposit.rejectedReferenceNotFound");
+        }
+        return t("deposit.rejectedDeposit");
+    };
+
+    const handleDepositResponse = (data, realtime) => {
+        const payload = parseDepositPayload(data);
+        const code = payload?.resp || payload?.msg || "";
+
+        if (code === "VARIOS_REGISTROS_DEPOSITOS") {
+            return onError(t("deposit.pendingRequest"));
+        }
+        if (code === "DEPOSITO_ERROR_NO_SESSION") {
+            return onError(t("deposit.sesionExpired"));
+        }
+        if (code === "DEPOSITO_ERROR") {
+            return onError(t("msg.contactSupport"));
+        }
+        if (code !== "DEPOSITO_OK") {
+            return onError(t("msg.contactSupport"));
+        }
+
+        clearDepositForm();
+
+        if (!realtime) {
+            return onOk(t("deposit.successDeposit"));
+        }
+
+        const estatus = String(payload?.estatus || "").toUpperCase();
+        const efectivo = payload?.efectivo === true || payload?.efectivo === "true";
+
+        if (estatus === "RECHAZADO") {
+            return onError(getRejectedDepositMessage(payload?.nota));
+        }
+        if (efectivo || estatus === "PROCESADO") {
+            onOk(t("deposit.successDeposit"));
+            setTimeout(() => window.location.reload(), 3000);
+            return;
+        }
+        // EN PROCESO u otro no concluyente → queda para el cron
+        return onOk(t("deposit.inProcessDeposit"));
+    };
+
+    const copyToClipboard = async (value, field = "account") => {
+        const text = String(value ?? "").trim();
+        if (!text) return;
+        try {
+            await navigator.clipboard.writeText(text);
+            if (field === "account") {
+                copiedAccount = true;
+                setTimeout(() => (copiedAccount = false), 1500);
+            } else {
+                copiedField = field;
+                setTimeout(() => (copiedField = ""), 1500);
+            }
+        } catch (error) {
+            onError(t("msg.contactSupport"));
+        }
     }
 
     const copyAccountNumber = async () => {
@@ -261,12 +387,16 @@
         const account = String(paySelected?.cta ?? "").trim();
         if (!holder && !account) return;
         const value = [holder, account].filter(Boolean).join("\n");
-        try {
-            await navigator.clipboard.writeText(value);
-            copiedAccount = true;
-            setTimeout(() => (copiedAccount = false), 1500);
-        } catch (error) {
-            onError(t("msg.contactSupport"));
+        await copyToClipboard(value, "account");
+    }
+
+    const copyPagoMovilField = async (field) => {
+        const phone = pagoMovilCtaParts[0] || "";
+        const rif = pagoMovilCtaParts[1] || "";
+        if (field === "rif" && rif) {
+            await copyToClipboard(`${t("deposit.rif")}\n${rif}`, "rif");
+        } else if (field === "phone" && phone) {
+            await copyToClipboard(`${t("deposit.phoneNumber")}\n${phone}`, "phone");
         }
     }
 
@@ -300,12 +430,20 @@
             bankDeposit.originBank = paySelected.id;
             bankDeposit.amount = amountDeposit;
 
+            const realtime = shouldValidateRealtime();
+            if (realtime) {
+                bankDeposit.valida = String(valida).trim();
+            } else {
+                delete bankDeposit.valida;
+            }
+
             try {
                 loadRecharge = true;
                 let response;
                 if (ServerConnection.wallet.isDirectDepositUploadFileMode()) {
                     bankDeposit.imageUrl = fileInfo?.file ? await uploadFileRepo() : "";
-                    if(bankDeposit.imageUrl == null || bankDeposit.imageUrl === "") {
+                    // Solo exigir voucher cuando isRequiredVoucher está activo (o si se intentó subir y falló)
+                    if (isRequiredVoucher && (bankDeposit.imageUrl == null || bankDeposit.imageUrl === "")) {
                         return onError("Error al cargar el archivo");
                     }
                     response = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit);
@@ -316,15 +454,7 @@
                     response = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit, base64Image);
                 }
                 const { data } = response;
-                //let {data} = await ServerConnection.wallet.bankDeposit(user.token, bankDeposit,base64Image);//siempre es STATUS 200, si hay errores del server colocar el try catch
-                if (data.msg === "DEPOSITO_OK") {
-                    base64Image = undefined;
-                    fileInfo = undefined;
-                    if (fileInput) fileInput.value = "";
-                    onOk(t("deposit.successDeposit"));
-                }
-                else if (data.msg === "VARIOS_REGISTROS_DEPOSITOS")  onError(t('deposit.pendingRequest'));
-                else onError(t('msg.contactSupport'));
+                handleDepositResponse(data, realtime);
             } catch (error) {
                 console.error("Error registrando el depósito", error);
                 onError(t('msg.contactSupport'));
@@ -541,7 +671,7 @@
                                     {/each}  
                                 </div>
                                 <div class="deposit__ipt">
-                                    <b>{paySelected.iso}</b>
+                                    <b>{t("deposit.amount")}</b>
                                     <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
                                     <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
                                 </div>
@@ -554,7 +684,7 @@
                                     {/each}  
                                 </div>
                                 <div class="deposit__ipt">
-                                    <b>{paySelected.iso}</b>
+                                    <b>{t("deposit.amount")}</b>
                                     <input type="number" min="1" class="ipt" bind:value={amountDeposit} on:input={inputJustNumbers} on:blur={openVirtualKeyboard}>
                                     <button class="btn deposit" on:click={() => validateDeposit(paySelected)} disabled={amountDeposit==undefined||amountDeposit<1}>{typeTranference == 'bank'?'Continuar': t("profile.recharge")}</button>
                                 </div>
@@ -565,6 +695,86 @@
                     {/if}
                 {/if}
             {:else}
+                {#if isPagoMovil(paySelected)}
+                    <b class="deposit__pagomovil-title">{t('deposit.pagoMovilData')}</b>
+                    <div class="deposit__details deposit__pagomovil">
+                        <div class="deposit__pagomovil-block">
+                            <div class="deposit__pagomovil-row deposit__cta-copy">
+                                <div>
+                                    <b>{t('deposit.rif')}</b>
+                                    <p>{pagoMovilCtaParts[1] || ""}</p>
+                                </div>
+                                {#if pagoMovilCtaParts[1]}
+                                    <button
+                                        type="button"
+                                        class="btn deposit__copy"
+                                        on:click={() => copyPagoMovilField("rif")}
+                                        aria-label={t('deposit.copyRif')}
+                                        title={copiedField === "rif" ? t('deposit.copied') : t('deposit.copyRif')}
+                                    >
+                                        {#if copiedField === "rif"}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                                <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        {:else}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                                <g clip-path="url(#clip_deposit_copy_rif)">
+                                                  <path d="M14.75 3.5H5.25C5.05109 3.5 4.86032 3.57902 4.71967 3.71967C4.57902 3.86032 4.5 4.05109 4.5 4.25V16.25C4.5 16.4489 4.57902 16.6397 4.71967 16.7803C4.86032 16.921 5.05109 17 5.25 17H14.75C14.9489 17 15.1397 16.921 15.2803 16.7803C15.421 16.6397 15.5 16.4489 15.5 16.25V4.25C15.5 4.05109 15.421 3.86032 15.2803 3.71967C15.1397 3.57902 14.9489 3.5 14.75 3.5ZM14.5 16H5.5V4.5H14.5V16Z" fill="white"/>
+                                                  <path d="M13 1.75C13 1.55109 12.921 1.36032 12.7803 1.21967C12.6397 1.07902 12.4489 1 12.25 1H2.75C2.55109 1 2.36032 1.07902 2.21967 1.21967C2.07902 1.36032 2 1.55109 2 1.75V13.75C2 13.9489 2.07902 14.1397 2.21967 14.2803C2.36032 14.421 2.55109 14.5 2.75 14.5H3V2H13V1.75Z" fill="white"/>
+                                                </g>
+                                                <defs>
+                                                  <clipPath id="clip_deposit_copy_rif">
+                                                    <rect width="18" height="18" fill="white"/>
+                                                  </clipPath>
+                                                </defs>
+                                            </svg>
+                                        {/if}
+                                    </button>
+                                {/if}
+                            </div>
+                            <div class="deposit__pagomovil-row deposit__cta-copy">
+                                <div>
+                                    <b>{t('deposit.phoneNumber')}</b>
+                                    <p>{pagoMovilCtaParts[0] || ""}</p>
+                                </div>
+                                {#if pagoMovilCtaParts[0]}
+                                    <button
+                                        type="button"
+                                        class="btn deposit__copy"
+                                        on:click={() => copyPagoMovilField("phone")}
+                                        aria-label={t('deposit.copyPhone')}
+                                        title={copiedField === "phone" ? t('deposit.copied') : t('deposit.copyPhone')}
+                                    >
+                                        {#if copiedField === "phone"}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                                <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        {:else}
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                                <g clip-path="url(#clip_deposit_copy_phone)">
+                                                  <path d="M14.75 3.5H5.25C5.05109 3.5 4.86032 3.57902 4.71967 3.71967C4.57902 3.86032 4.5 4.05109 4.5 4.25V16.25C4.5 16.4489 4.57902 16.6397 4.71967 16.7803C4.86032 16.921 5.05109 17 5.25 17H14.75C14.9489 17 15.1397 16.921 15.2803 16.7803C15.421 16.6397 15.5 16.4489 15.5 16.25V4.25C15.5 4.05109 15.421 3.86032 15.2803 3.71967C15.1397 3.57902 14.9489 3.5 14.75 3.5ZM14.5 16H5.5V4.5H14.5V16Z" fill="white"/>
+                                                  <path d="M13 1.75C13 1.55109 12.921 1.36032 12.7803 1.21967C12.6397 1.07902 12.4489 1 12.25 1H2.75C2.55109 1 2.36032 1.07902 2.21967 1.21967C2.07902 1.36032 2 1.55109 2 1.75V13.75C2 13.9489 2.07902 14.1397 2.21967 14.2803C2.36032 14.421 2.55109 14.5 2.75 14.5H3V2H13V1.75Z" fill="white"/>
+                                                </g>
+                                                <defs>
+                                                  <clipPath id="clip_deposit_copy_phone">
+                                                    <rect width="18" height="18" fill="white"/>
+                                                  </clipPath>
+                                                </defs>
+                                            </svg>
+                                        {/if}
+                                    </button>
+                                {/if}
+                            </div>
+                        </div>
+                        <div class="deposit__pagomovil-block">
+                            <div class="deposit__pagomovil-row">
+                                <b>{t('deposit.bank')}</b>
+                                <p>{pagoMovilCtaParts[2] || ""}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p>{t('deposit.notifyPagoMovil')}</p>
+                {:else}
                 <p>{t('deposit.step1')}.</p>
                 <div class="deposit__details">
                     <div class="deposit__cta-copy">
@@ -612,6 +822,7 @@
                     on:load={(e) => e.currentTarget.style.display = ""}
                 >
                 <p>{t('deposit.step2')}.</p>
+                {/if}
                 <div class="deposit__info">
                     {#if typeView === 'minimal'}
                     <p>{paySelected.iso == "ECU" ? t('deposit.codTransaction') : t('deposit.numReference')}</p>
@@ -666,16 +877,24 @@
                     {/if}
                     {/if}
                 </div>
-                {#if isRequiredVoucher}
+                {#if isRequiredVoucher && !isRealtimeValidation}
                     <b>NOTA: ESPERAR DE 2 A 5 MINUTOS PARA VER REFLEJADO LA RECARGA DE SALDO EN TU CUENTA</b>
                 {/if}
-                <button class="btn deposit" disabled={loadRecharge} on:click={validateDepositBank}>
-                    {#if loadRecharge}
+                {#if loadRecharge && isRealtimeValidation}
+                    <div class="deposit__processing" role="status" aria-live="polite">
                         <div class="loading"><p /><p /><p /></div>
-                    {:else}
-                        {t("profile.recharge")}
-                    {/if}
-                </button>
+                        <b>{t("deposit.processingDeposit")}</b>
+                        <p>{t("deposit.processingDepositHint")}</p>
+                    </div>
+                {:else}
+                    <button class="btn deposit" disabled={loadRecharge} on:click={validateDepositBank}>
+                        {#if loadRecharge}
+                            <div class="loading"><p /><p /><p /></div>
+                        {:else}
+                            {t("profile.recharge")}
+                        {/if}
+                    </button>
+                {/if}
             {/if}
         {:else}
             <b>{t('deposit.choosePayMethod')}:</b>
@@ -737,5 +956,43 @@
     .deposit__copied {
         color: #34b93d;
         font-size: 0.75rem;
+    }
+
+    .deposit__pagomovil-title {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .deposit__pagomovil {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+    }
+
+    .deposit__pagomovil-block {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .deposit__pagomovil-row p {
+        margin: 0.15rem 0 0;
+    }
+
+    .deposit__processing {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 1.5rem 1rem;
+        text-align: center;
+    }
+
+    .deposit__processing p {
+        margin: 0;
+        opacity: 0.85;
+        font-size: 0.9rem;
     }
 </style>

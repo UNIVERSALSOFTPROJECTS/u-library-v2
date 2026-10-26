@@ -207,6 +207,7 @@
         id_ca: ["5558","15818"], //caja dentro de un distribuidor principal
         isRequiredVoucher: true,
         typeView: "", // "minimal" para formulario acortado (Binance, etc.)
+        valida: "", // ej. "MULTISPORT" → validación síncrona solo en Pago Móvil; vacío = cron
         banksOrigin:[
             { id: 1, name: "Banco Central de Venezuela" },
             { id: 2, name: "Banco de Venezuela (BDV)" },
