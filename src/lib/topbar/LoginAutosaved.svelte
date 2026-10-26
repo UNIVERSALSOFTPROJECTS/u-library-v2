@@ -67,6 +67,10 @@
 		showPassword = !showPassword;
 	}
 
+	function updatePassword(event) {
+		password = event.currentTarget.value;
+	}
+
 	onMount(() => {
 		if (autoLogin) {
 			let userSaved = JSON.parse(localStorage.getItem('autoSaved'));
@@ -114,7 +118,8 @@
 				placeholder={t("login.password")}
 				autocomplete="current-password"
 				disabled={autoLogin}
-				bind:value={password}
+				value={password}
+				on:input={updatePassword}
 			>
 			<button
 				type="button"
