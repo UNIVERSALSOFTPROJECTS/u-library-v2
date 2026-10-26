@@ -14,8 +14,8 @@
 	const assetsUrl = configLogin.assetsUrl;
 	let  idioms = configLogin.idioms;
 	let typeView = localStorage.getItem('typeView') || "";
-	let password;
-	let username;
+	let password = "";
+	let username = "";
 	let loadLogin = false;
 	let showPassword = false;
 	let autoLogin = localStorage.getItem('autoSaved')?true:false;
