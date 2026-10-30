@@ -1137,7 +1137,7 @@ export default {
     "withdrawal.successful_recharge": "Recarga bem-sucedida",
     //---------------NAME CAT GAMES-----------------------------
     "categoryGame.home": "Home",
-    "categoryGame.slot": "Casino",
+    "categoryGame.slot": "Cassino",
     "categoryGame.slotlive": "Cassino ao vivo",
     "categoryGame.crash": "Crash games",
     "categoryGame.scratch": "Raspe e ganhe",
