@@ -14,9 +14,10 @@
 	const assetsUrl = configLogin.assetsUrl;
 	let  idioms = configLogin.idioms;
 	let typeView = localStorage.getItem('typeView') || "";
-	let password;
-	let username;
+	let password = "";
+	let username = "";
 	let loadLogin = false;
+	let showPassword = false;
 	let autoLogin = localStorage.getItem('autoSaved')?true:false;
 	let isAutoservice = autoLogin && typeView == "autoservice";
 	let isAutoserviceError = false;
@@ -62,6 +63,14 @@
 		}
 	}
 
+	function togglePasswordVisibility() {
+		showPassword = !showPassword;
+	}
+
+	function updatePassword(event) {
+		password = event.currentTarget.value;
+	}
+
 	onMount(() => {
 		if (autoLogin) {
 			let userSaved = JSON.parse(localStorage.getItem('autoSaved'));
@@ -102,7 +111,24 @@
     <div></div>
     <form class="login__form">
 		<input type="text" class="ipt" placeholder={t("login.user")} autocapitalize="off" disabled="{autoLogin}" bind:value={username}>
-		<input type="password" class="ipt" placeholder={t("login.password")} autocomplete="off" disabled="{autoLogin}" bind:value={password}>
+		<div class="login__ipt--pass">
+			<input
+				type={showPassword ? "text" : "password"}
+				class="ipt"
+				placeholder={t("login.password")}
+				autocomplete="current-password"
+				disabled={autoLogin}
+				value={password}
+				on:input={updatePassword}
+			>
+			<button
+				type="button"
+				class="btn {showPassword ? 'no-eye' : 'eye'}"
+				name="password"
+				disabled={autoLogin}
+				on:click={togglePasswordVisibility}
+			></button>
+		</div>
 		<div class="login__autosaved">
 			<input type="checkbox" id="autosaved" bind:checked={autoLogin}>
 			<label for="autosaved">{t("login.remember")}</label>

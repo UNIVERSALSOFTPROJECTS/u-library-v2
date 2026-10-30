@@ -21,6 +21,7 @@
             // si customerDocNumber vacio o 0 enviar 12312312
             data_payin.customerName = data.customerName ;
             data_payin.customerLastname = data.customerLastname ;
+            data_payin.customerId = data.customerId ;
             data_payin.customerDocType = data.customerDocType ;
             data_payin.customerDocNumber = data.customerDocNumber;
             if(data.customerEmail) data_payin.customerEmail = data.customerEmail ;
@@ -36,6 +37,7 @@
                 currency: data_payin.currency,
                 reference: data_payin.reference,
                 payinMethods: data_payin.payinMethods,
+                customerId: data_payin.customerId,
                 customerName: data_payin.customerName,
                 customerLastname: data_payin.customerLastname,
                 customerDocType: data_payin.customerDocType,
