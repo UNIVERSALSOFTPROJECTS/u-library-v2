@@ -1143,7 +1143,7 @@ export default {
     "categoryGame.scratch": "Raspe e ganhe",
     "categoryGame.sportbook": "Esportes",
     "categoryGame.sportbooklive": "Esportes ao vivo",
-    "categoryGame.horses": "Cavalgando",
+    "categoryGame.horses": "Turfe",
     "categoryGame.virtual": "Jogos virtuais",
     "categoryGame.providers": "Fornecedores",
     "categoryGame.estadisticR": "Estatísticas e resultados",
