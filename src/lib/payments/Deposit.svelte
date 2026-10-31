@@ -658,6 +658,7 @@
                             <p>Banco: Banco de Venezuela</p>
                             <p>Numero: 04241670598</p>
                             <p>Rif: 405427230</p>
+                            <p>Monto: El que desees recargar en tu cuenta.</p>
                         </div>
                     {:else}
                     <div class="deposit__info">
