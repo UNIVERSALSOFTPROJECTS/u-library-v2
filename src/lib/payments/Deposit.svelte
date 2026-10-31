@@ -235,6 +235,8 @@
             typeTranference = 'wallet';
         }else if((paySelected.banco || "").toLowerCase().includes("r4")){
             typeTranference = 'r4';
+        }else if((paySelected.banco || "") === "Banco de Venezuela P2C - BDV notificacion de pago"){
+            typeTranference = 'bdv_p2c';
         }else if((paySelected.banco || "").toLowerCase().includes("binance")){
             typeView = 'minimal';
         }
@@ -624,8 +626,8 @@
         <div class="loading"><p></p><p></p><p></p></div>
     {:else}
         {#if paySelected}
-            {#if typeTranference == 'r4'}
-                <img src={imgR4} width="100%" alt="gateway-r4">
+            {#if typeTranference == 'r4' || typeTranference == 'bdv_p2c'}
+                <img src={imgR4} width="100%" alt="gateway-{typeTranference}">
             {/if}
             <button class="btn deposit__type" on:click={closePayMethod}>
                 <img src="{assetsPayments}{paySelected.img}.png" alt="paymethod-{paySelected.img}">
@@ -651,6 +653,12 @@
                             <p>Teléfono: 04241670598</p>
                             <p>Monto: El que desees recargar en tu cuenta.</p>
                         </div>
+                    {:else if typeTranference == 'bdv_p2c'}
+                        <div class="deposit__info">
+                            <p>Banco: Banco de Venezuela</p>
+                            <p>Numero: 04241670598</p>
+                            <p>Rif: 405427230</p>
+                        </div>
                     {:else}
                     <div class="deposit__info">
                         {#if typeTranference == 'GATEWAY_PAY' }
@@ -662,7 +670,7 @@
                         {/if}
                     </div>
                     {/if}
-                    {#if typeTranference != 'r4' }
+                    {#if typeTranference != 'r4' && typeTranference != 'bdv_p2c' }
                         {#if typeTranference == 'GATEWAY_PAY' }
                             <div class="deposit__gateway">
                                 <div class="deposit__mounts">
