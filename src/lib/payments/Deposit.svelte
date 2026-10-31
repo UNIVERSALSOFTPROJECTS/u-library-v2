@@ -233,9 +233,9 @@
         //solo para peru
         if (paySelected.banco === "YAPE" || paySelected.banco === "PLIN" || paySelected.banco === "DE UNA") {
             typeTranference = 'wallet';
-        }else if((paySelected.banco || "").toLowerCase().includes("r4")){
+        }else if((paySelected.banco || "").toLowerCase().includes("r4") || (paySelected.nombre || "").toLowerCase().includes("r4")){
             typeTranference = 'r4';
-        }else if((paySelected.banco || "") === "Banco de Venezuela P2C - BDV notificacion de pago"){
+        }else if((paySelected.nombre || "") === "Banco de Venezuela P2C"){
             typeTranference = 'bdv_p2c';
         }else if((paySelected.banco || "").toLowerCase().includes("binance")){
             typeView = 'minimal';
