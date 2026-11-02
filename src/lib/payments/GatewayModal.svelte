@@ -13,8 +13,8 @@
             let user = sessionStorage.getItem("user");
             if(!user) return ;
             data_payin.amount = data_payin.amount*100;
-            data_payin.customerId = user.id;
             let user_recharge = JSON.parse(user);
+            data_payin.customerId = user_recharge.id;
             let response = await ServerConnection.u_user.generateSignatureToOrderPayIn(data_payin,user_recharge.token+"_"+user_recharge.id+"_"+user_recharge.username);
             let data = response.data;
             await loadSdk();
