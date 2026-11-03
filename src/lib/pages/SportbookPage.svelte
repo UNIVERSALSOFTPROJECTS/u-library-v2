@@ -125,6 +125,16 @@
   const guestURLdteu2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
   const guestURLdteuLive2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&view=live&userMode=retail"
 
+  const guestURLdecc1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&userMode=retail"
+  const guestURLdeccLive1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&view=live&userMode=retail"
+  const guestURLdecc2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
+  const guestURLdeccLive2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&view=live&userMode=retail"
+
+  const guestURLdemm1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&userMode=retail"
+  const guestURLdemmLive1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&view=live&userMode=retail"
+  const guestURLdemm2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
+  const guestURLdemmLive2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&view=live&userMode=retail"
+
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${mode}`;
@@ -265,6 +275,14 @@
     DEEU37: {
       "1": { live: guestURLdteuLive1, default: guestURLdteu1 },
       "2": { live: guestURLdteuLive2, default: guestURLdteu2 },
+    },
+    DECC35: {
+      "1": { live: guestURLdeccLive1, default: guestURLdecc1 },
+      "2": { live: guestURLdeccLive2, default: guestURLdecc2 },
+    },
+    DEMM36: {
+      "1": { live: guestURLdemmLive1, default: guestURLdemm1 },
+      "2": { live: guestURLdemmLive2, default: guestURLdemm2 },
     },
   };
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
