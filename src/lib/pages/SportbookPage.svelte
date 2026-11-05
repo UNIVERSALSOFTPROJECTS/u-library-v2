@@ -124,6 +124,8 @@
   const guestURLdteuLive1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&view=live&userMode=retail"
   const guestURLdteu2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
   const guestURLdteuLive2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&view=live&userMode=retail"
+  const guestURLdteu3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
+  const guestURLdteuLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
 
   const guestURLdecc1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&userMode=retail"
   const guestURLdeccLive1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&view=live&userMode=retail"
@@ -275,6 +277,7 @@
     DEEU37: {
       "1": { live: guestURLdteuLive1, default: guestURLdteu1 },
       "2": { live: guestURLdteuLive2, default: guestURLdteu2 },
+      "3": { live: guestURLdteuLive3, default: guestURLdteu3 },
     },
     DECC35: {
       "1": { live: guestURLdeccLive1, default: guestURLdecc1 },
