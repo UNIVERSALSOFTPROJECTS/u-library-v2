@@ -291,9 +291,11 @@
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
     const normalizedClientCode = String(clientCode ?? "").trim().toUpperCase();
     const isLiveView = view == "sportbooklive";
-    const normalizedSkin = String(skin ?? "").trim() == "2" ? "2" : "1";
+    const normalizedSkin = ["1", "2", "3"].includes(String(skin ?? "").trim())
+      ? String(skin).trim()
+      : "1";
 
-    if (normalizedClientCode == "XLIV" && skin == "2") {
+    if (normalizedClientCode == "XLIV" && normalizedSkin == "2") {
       return guestURLbetw3XLIVLiveSKIN2;
     }
 
