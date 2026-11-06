@@ -1232,7 +1232,8 @@ export default {
     "deposit.direct": "Direto",
     "deposit.paymentGateway": "Gateway de pagamento",
     "deposit.semiAutomatic": "Semiautomático",
-    "deposit.automatic": "Automático"
+    "deposit.automatic": "Automático",
+    "deposit.processingTime": "Tempo de processamento"
   },
   en: {
     "idiom": "en",
