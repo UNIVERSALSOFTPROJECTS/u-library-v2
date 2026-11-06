@@ -1,4 +1,5 @@
 import axios from "axios"
+import { normalizeGuestSportbookResponse } from "./guestSportbookUrl.js"
 
 let conf;
 let headers = {};
@@ -196,7 +197,7 @@ const ServerConnection = (() => {
                 device: payload.device,
             };
             const response = await axios.post(`${conf.API_KS}/sportbook/guest-launch`, request, { headers });
-            return response.data;
+            return normalizeGuestSportbookResponse(response.data);
         },
         getSportbookConfig: async (payload = {}) => {
             const response = await axios.get(`${conf.API_KS}/sportbook/config`, {
