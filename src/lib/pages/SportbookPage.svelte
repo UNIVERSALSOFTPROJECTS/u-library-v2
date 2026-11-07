@@ -601,7 +601,8 @@ function RESELLER (params) {
       }
       url = data.url;      
     } else  {
-      if(CLIENT_CODE == "DECC35" && !sportbookskin) sportbookskin = "3";
+      if(CLIENT_CODE == "DECC35" ) sportbookskin = "3";
+      console.log("CLIENT_CODE", CLIENT_CODE, "sportbookskin", sportbookskin);
       url = resolveBetsw3GuestUrl(options?.gameid, CLIENT_CODE, active_view, sportbookskin);
       if (CLIENT_CODE == "PRLS") RESELLER();
       console.log("url",url);
