@@ -588,6 +588,7 @@ function RESELLER (params) {
       url = ut.getGameURL(GAMEAPI_URL, getBetsw3Game(), options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
+      
       sportbookskin?url += `&skin=${sportbookskin}`: ""; // just for xlive365
       let data;
       if (clientCode === 'JU02') {
@@ -597,6 +598,7 @@ function RESELLER (params) {
       }
       url = data.url;      
     } else  {
+      if(CLIENT_CODE == "DECC35" && !sportbookskin) sportbookskin = "3";
       url = resolveBetsw3GuestUrl(options?.gameid, CLIENT_CODE, active_view, sportbookskin);
       if (CLIENT_CODE == "PRLS") RESELLER();
       console.log("url",url);
