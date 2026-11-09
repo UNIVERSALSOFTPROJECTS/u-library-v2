@@ -50,6 +50,7 @@
   let readyDispatched = false;
   let lastLaunchKey = "";
   let launchRequestId = 0;
+  let lastAppliedView = "";
 
   let normalizedClientCode = "";
   let isSupportedClient = false;
@@ -71,9 +72,9 @@
   });
 
   /**
-   * Identifica cuándo es necesario volver a cargar el iframe.
-   * Incluye active_view porque Altenar utiliza una URL diferente
-   * para Deportes y En Vivo.
+   * Identifica cuándo es necesario volver a ejecutar el launch.
+   * active_view no forma parte de esta clave porque el cambio
+   * entre Deportes y En Vivo se realiza mediante la ruta del iframe.
    */
   function getLaunchKey() {
     return [
@@ -84,7 +85,6 @@
       GAMEAPI_URL || "",
       lang || "",
       mode,
-      active_view || "",
     ].join("|");
   }
 
@@ -102,7 +102,7 @@
     options?.gameToken;
     GAMEAPI_URL;
     lang;
-    active_view;
+    mode;
 
     if (isSupportedClient && isBetsw3GameId(options.gameid)) {
       const key = getLaunchKey();
@@ -116,7 +116,44 @@
       launchRequestId++;
       sportbookGameUrl = "";
       readyDispatched = false;
+      lastAppliedView = "";
     }
+  }
+
+  /**
+   * Alterna entre Deportes y En Vivo modificando únicamente
+   * la ruta del hash y conservando los parámetros del jugador.
+   */
+  $: if (sportbookGameUrl && readyDispatched) {
+    active_view;
+
+    const view = active_view === "sportbooklive" ? "live" : "overview";
+
+    if (view !== lastAppliedView) {
+      changeBetsw3View(view);
+    }
+  }
+
+  function changeBetsw3View(view) {
+    if (!sportbookIframeEl) return;
+
+    const route = view === "live" ? "/live" : "/overview";
+    const hashIndex = sportbookGameUrl.indexOf("#");
+
+    if (hashIndex === -1) return;
+
+    const hash = sportbookGameUrl.substring(hashIndex);
+    const updatedHash = hash.replace(/^#\/[^?]*/, `#${route}`);
+
+    if (hash === updatedHash) {
+      lastAppliedView = view;
+      return;
+    }
+
+    sportbookIframeEl.contentWindow.location.hash =
+      updatedHash.substring(1);
+
+    lastAppliedView = view;
   }
 
   function receiveMessage(event) {
@@ -133,13 +170,12 @@
    * Abre BetsW3 skin 3.
    * - Usuario autenticado: obtiene la URL mediante backend.
    * - Invitado: utiliza la URL configurada para su organización.
-   *
-   * Cada cambio de active_view genera una nueva URL.
    */
   async function openBetsW3() {
     const requestId = ++launchRequestId;
 
     readyDispatched = false;
+    lastAppliedView = "";
     sportbookGameUrl = "";
 
     try {
@@ -151,10 +187,6 @@
           getBetsw3Game(),
           options.gameToken
         );
-
-        url += active_view === "sportbooklive"
-          ? "&sport_view=live"
-          : "&sport_view=sport";
 
         url += `&lang=${lang}&skin=${SPORTBOOK_SKIN}&r=url`;
 
