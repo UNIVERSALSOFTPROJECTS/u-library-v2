@@ -22,9 +22,6 @@
   const bw3_id = "betsw3_2024";
   const bw3_v2_id = "betsw3_v2";
 
-  const GUEST_LAUNCH_IFRAME_URL = "iframe_url";
-  const GUEST_LAUNCH_HOSTED_VIEW_URL = "hosted_view_url";
-
   const mode = ut.isMobile() ? "mb" : "wb";
 
   const games = {
@@ -51,8 +48,8 @@
   let sportbookIframeEl = null;
 
   let readyDispatched = false;
-  let lastPostedBetsw3View = "";
   let lastLaunchKey = "";
+  let launchRequestId = 0;
 
   let normalizedClientCode = "";
   let isSupportedClient = false;
@@ -62,9 +59,6 @@
     .toUpperCase();
 
   $: isSupportedClient = SUPPORTED_CLIENT_CODES.includes(normalizedClientCode);
-
-  const normalizeView = () =>
-    active_view === "sportbooklive" ? "live" : "prematch";
 
   const isBetsw3GameId = (gameid) =>
     [bw3_id, bw3_v2_id].includes(gameid);
@@ -78,8 +72,8 @@
 
   /**
    * Identifica cuándo es necesario volver a cargar el iframe.
-   * Prematch/Live no forma parte de esta clave porque se cambia
-   * mediante postMessage.
+   * Incluye active_view porque Altenar utiliza una URL diferente
+   * para Deportes y En Vivo.
    */
   function getLaunchKey() {
     return [
@@ -90,24 +84,8 @@
       GAMEAPI_URL || "",
       lang || "",
       mode,
+      active_view || "",
     ].join("|");
-  }
-
-  /**
-   * Cambia Prematch/Live dentro del iframe sin recargarlo.
-   */
-  function changeBetsw3View(view) {
-    const win = sportbookIframeEl?.contentWindow;
-
-    if (!win) return;
-
-    win.postMessage(
-      {
-        action: "change_view",
-        view,
-      },
-      "*"
-    );
   }
 
   /**
@@ -124,6 +102,7 @@
     options?.gameToken;
     GAMEAPI_URL;
     lang;
+    active_view;
 
     if (isSupportedClient && isBetsw3GameId(options.gameid)) {
       const key = getLaunchKey();
@@ -134,29 +113,9 @@
       }
     } else {
       lastLaunchKey = "";
+      launchRequestId++;
       sportbookGameUrl = "";
       readyDispatched = false;
-      lastPostedBetsw3View = "";
-    }
-  }
-
-  /**
-   * Alternancia Prematch/Live.
-   * Solo funciona para BetsW3 skin 3 y las organizaciones habilitadas.
-   */
-  $: if (
-    isSupportedClient &&
-    isBetsw3GameId(options?.gameid) &&
-    sportbookGameUrl &&
-    readyDispatched
-  ) {
-    active_view;
-
-    const view = normalizeView();
-
-    if (view !== lastPostedBetsw3View) {
-      lastPostedBetsw3View = view;
-      changeBetsw3View(view);
     }
   }
 
@@ -174,12 +133,13 @@
    * Abre BetsW3 skin 3.
    * - Usuario autenticado: obtiene la URL mediante backend.
    * - Invitado: utiliza la URL configurada para su organización.
+   *
+   * Cada cambio de active_view genera una nueva URL.
    */
   async function openBetsW3() {
-    console.log("OPEN BETSW3 SKIN 3");
+    const requestId = ++launchRequestId;
 
     readyDispatched = false;
-    lastPostedBetsw3View = "";
     sportbookGameUrl = "";
 
     try {
@@ -200,10 +160,14 @@
 
         const response = await backend.game.getURL(url);
 
+        if (requestId !== launchRequestId) return;
+
         url = response?.url || "";
       } else {
         url = betsw3GuestUrlsByClient[normalizedClientCode] || "";
       }
+
+      if (requestId !== launchRequestId) return;
 
       if (!url) {
         console.error(
@@ -217,6 +181,8 @@
 
       sportbookGameUrl = url;
     } catch (error) {
+      if (requestId !== launchRequestId) return;
+
       console.error("BetsW3 launch error:", error);
       sportbookGameUrl = "";
     }
@@ -231,6 +197,8 @@
   }
 
   onDestroy(async () => {
+    launchRequestId++;
+
     window.removeEventListener("message", receiveMessage);
 
     if (user?.agregatorToken) {
