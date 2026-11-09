@@ -53,6 +53,7 @@ export { default as GoldenRacePage } from './lib/pages/GoldenRacePage.svelte';
 export { default as HorsesPageV3 } from './lib/pages/HorsesPageV3.svelte';
 export { default as SportbookAltenarPage } from './lib/pages/SportbookAltenarPage.svelte';
 export { default as SportbookFirstPage } from './lib/pages/SportbookFirstPage.svelte';
+export { default as SportbookAAlternarPageRetail } from './lib/pages/SportbookAlternarPageRetail.svelte';
 export { default as SportbookBetsW3Page } from './lib/pages/SportbookBetsW3Page.svelte';
 export { default as SportbookNovusPage } from './lib/pages/SportbookNovusPage.svelte';
 export { default as ESportPage } from './lib/pages/ESportPage.svelte';
