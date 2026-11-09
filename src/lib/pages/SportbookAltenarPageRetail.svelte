@@ -51,6 +51,17 @@
   let lastLaunchKey = "";
   let launchRequestId = 0;
 
+  // URLs y estados de carga independientes para cada vista.
+  let sportbookUrls = {
+    sport: "",
+    live: "",
+  };
+
+  let loadingViews = {
+    sport: false,
+    live: false,
+  };
+
   let normalizedClientCode = "";
   let isSupportedClient = false;
 
@@ -70,6 +81,10 @@
       : games.BetW3.gameid,
   });
 
+  /**
+   * Identifica cuándo cambia la sesión y es necesario
+   * limpiar las URLs almacenadas.
+   */
   function getLaunchKey() {
     return [
       options?.gameid || "",
@@ -79,10 +94,12 @@
       GAMEAPI_URL || "",
       lang || "",
       mode,
-      active_view || "",
     ].join("|");
   }
 
+  /**
+   * Primera carga y cambios de sesión.
+   */
   $: if (options?.gameid) {
     options.gameid;
     userState;
@@ -93,45 +110,109 @@
     options?.gameToken;
     GAMEAPI_URL;
     lang;
-    active_view;
+    mode;
 
     if (isSupportedClient && isBetsw3GameId(options.gameid)) {
       const key = getLaunchKey();
 
       if (key !== lastLaunchKey) {
         lastLaunchKey = key;
-        openBetsW3();
+
+        // Limpiar las URLs de la sesión anterior.
+        sportbookUrls = {
+          sport: "",
+          live: "",
+        };
+
+        loadingViews = {
+          sport: false,
+          live: false,
+        };
+
+        readyDispatched = false;
+        sportbookGameUrl = "";
+
+        launchRequestId++;
+
+        // Cargar inicialmente la vista activa.
+        const initialView =
+          active_view === "sportbooklive" ? "live" : "sport";
+
+        openBetsW3(initialView);
       }
     } else {
       lastLaunchKey = "";
       launchRequestId++;
+
+      sportbookUrls = {
+        sport: "",
+        live: "",
+      };
+
+      loadingViews = {
+        sport: false,
+        live: false,
+      };
+
       sportbookGameUrl = "";
       readyDispatched = false;
     }
   }
 
-  function receiveMessage(event) {
-    if (event.data === "onNologinBet") {
-      loginModalOpen = true;
+  /**
+   * Detecta los cambios entre Deportes y En Vivo.
+   * Si la URL ya existe, la reutiliza.
+   * Si todavía no existe, ejecuta el launch correspondiente.
+   */
+  $: if (lastLaunchKey && isSupportedClient) {
+    active_view;
+
+    const view = active_view === "sportbooklive" ? "live" : "sport";
+
+    if (sportbookUrls[view]) {
+      if (sportbookGameUrl !== sportbookUrls[view]) {
+        readyDispatched = false;
+        sportbookGameUrl = sportbookUrls[view];
+      }
+    } else if (!loadingViews[view]) {
+      openBetsW3(view);
     }
   }
 
-  onMount(() => {
-    window.addEventListener("message", receiveMessage, false);
-  });
+  /**
+   * Obtiene la URL de invitados para la vista solicitada.
+   */
+  function getGuestUrl(view) {
+    const url = betsw3GuestUrlsByClient[normalizedClientCode] || "";
+
+    if (!url) return "";
+
+    const hashIndex = url.indexOf("#");
+
+    if (hashIndex === -1) return url;
+
+    const hash = url.substring(hashIndex);
+    const route = view === "live" ? "/live" : "/overview";
+
+    return (
+      url.substring(0, hashIndex) +
+      hash.replace(/^#\/[^?]*/, `#${route}`)
+    );
+  }
 
   /**
-   * Abre BetsW3 skin 3.
-   * - Usuario autenticado: obtiene la URL mediante backend.
-   * - Invitado: utiliza la URL configurada para su organización.
-   *
-   * Cada cambio de active_view genera una nueva URL.
+   * Ejecuta el launch únicamente si la vista todavía
+   * no tiene una URL almacenada.
    */
-  async function openBetsW3() {
-    const requestId = ++launchRequestId;
+  async function openBetsW3(view = "sport") {
+    if (loadingViews[view] || sportbookUrls[view]) return;
 
-    readyDispatched = false;
-    sportbookGameUrl = "";
+    const requestId = launchRequestId;
+
+    loadingViews = {
+      ...loadingViews,
+      [view]: true,
+    };
 
     try {
       let url = "";
@@ -143,7 +224,7 @@
           options.gameToken
         );
 
-        url += active_view === "sportbooklive"
+        url += view === "live"
           ? "&sport_view=live"
           : "&sport_view=sport";
 
@@ -155,7 +236,7 @@
 
         url = response?.url || "";
       } else {
-        url = betsw3GuestUrlsByClient[normalizedClientCode] || "";
+        url = getGuestUrl(view);
       }
 
       if (requestId !== launchRequestId) return;
@@ -168,16 +249,45 @@
         return;
       }
 
-      console.log("BetsW3 URL:", url);
+      console.log(`BetsW3 ${view} URL:`, url);
 
-      sportbookGameUrl = url;
+      // Guardar la URL para reutilizarla posteriormente.
+      sportbookUrls = {
+        ...sportbookUrls,
+        [view]: url,
+      };
+
+      // Mostrar la URL solamente si corresponde a la vista activa.
+      const currentView =
+        active_view === "sportbooklive" ? "live" : "sport";
+
+      if (currentView === view) {
+        readyDispatched = false;
+        sportbookGameUrl = url;
+      }
     } catch (error) {
       if (requestId !== launchRequestId) return;
 
-      console.error("BetsW3 launch error:", error);
-      sportbookGameUrl = "";
+      console.error(`BetsW3 ${view} launch error:`, error);
+    } finally {
+      if (requestId === launchRequestId) {
+        loadingViews = {
+          ...loadingViews,
+          [view]: false,
+        };
+      }
     }
   }
+
+  function receiveMessage(event) {
+    if (event.data === "onNologinBet") {
+      loginModalOpen = true;
+    }
+  }
+
+  onMount(() => {
+    window.addEventListener("message", receiveMessage, false);
+  });
 
   /**
    * Avisa al componente padre cuando el iframe terminó de cargar.
