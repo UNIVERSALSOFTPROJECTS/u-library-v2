@@ -588,6 +588,13 @@ function RESELLER (params) {
   const openBetsW3 = async () => { 
     let url;
     if (userState == "loggedIn") {
+       // Skin por defecto para DECC35 y DEEU37
+      if (
+        (CLIENT_CODE == "DECC35" || CLIENT_CODE == "DEEU37") &&
+        (!sportbookskin || sportbookskin == "")
+      ) {
+        sportbookskin = "3";
+      }
       url = ut.getGameURL(GAMEAPI_URL, getBetsw3Game(), options.gameToken); 
       url += active_view == "sportbooklive" ? "&sport_view=live" : "&sport_view=sport";
       url += `&lang=${lang}&r=url`;
