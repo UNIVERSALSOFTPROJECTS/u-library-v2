@@ -169,6 +169,9 @@
 
     const view = active_view === "sportbooklive" ? "live" : "sport";
 
+    console.log("ACTIVE_VIEW:", active_view);
+    console.log("CURRENT_VIEW:", view);
+    
     if (sportbookUrls[view]) {
       if (sportbookGameUrl !== sportbookUrls[view]) {
         readyDispatched = false;
