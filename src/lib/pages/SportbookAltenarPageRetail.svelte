@@ -35,16 +35,22 @@
   };
 
   // URL de invitados para BetsW3 skin 3.
-  const guestBetsw3Skin3Url =
-    "https://cdn-img.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail";
+  const guestURLdteu3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
+  const guestURLdteuLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
+  const guestURLdecc3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fco.deportetotal.bett&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
+  const guestURLdeccLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fco.deportetotal.bett&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
 
   // Organizaciones habilitadas para BetsW3 skin 3.
   const betsw3GuestUrlsByClient = {
-    DEEU37: guestBetsw3Skin3Url,
-    DECC35: guestBetsw3Skin3Url,
+    DEEU37: {
+      live: guestURLdteuLive3,
+      default: guestURLdteu3,
+    },
+    DECC35: {
+      live: guestURLdeccLive3,
+      default: guestURLdecc3,
+    },
   };
-
-  let sportbookGameUrl = "";
 
   let readyDispatched = false;
   let lastLaunchKey = "";
@@ -140,7 +146,6 @@
         };
 
         readyDispatched = false;
-        sportbookGameUrl = "";
 
         launchRequestId++;
 
@@ -169,7 +174,6 @@
         live: false,
       };
 
-      sportbookGameUrl = "";
       readyDispatched = false;
     }
   }
@@ -185,12 +189,7 @@
 
     const view = active_view === "sportbooklive" ? "live" : "sport";
 
-    if (sportbookUrls[view]) {
-      if (sportbookGameUrl !== sportbookUrls[view]) {
-        readyDispatched = false;
-        sportbookGameUrl = sportbookUrls[view];
-      }
-    } else if (!loadingViews[view] && !failedViews[view]) {
+    if (!sportbookUrls[view] && !loadingViews[view] && !failedViews[view]) {
       openBetsW3(view);
     }
   }
@@ -199,21 +198,13 @@
    * Obtiene la URL de invitados para la vista solicitada.
    */
   function getGuestUrl(view) {
-    const url = betsw3GuestUrlsByClient[normalizedClientCode] || "";
-
-    if (!url) return "";
-
-    const hashIndex = url.indexOf("#");
-
-    if (hashIndex === -1) return url;
-
-    const hash = url.substring(hashIndex);
-    const route = view === "live" ? "/live" : "/overview";
-
-    return (
-      url.substring(0, hashIndex) +
-      hash.replace(/^#\/[^?]*/, `#${route}`)
-    );
+    const clientUrls = betsw3GuestUrlsByClient[normalizedClientCode];
+    
+    if (!clientUrls) return "";
+    
+    return view === "live"
+      ? clientUrls.live
+      : clientUrls.default;
   }
 
   /**
@@ -282,14 +273,6 @@
         ...sportbookUrls,
         [view]: url,
       };
-
-      // Mostrar la URL solamente si corresponde a la vista activa.
-      const currentView = active_view === "sportbooklive" ? "live" : "sport";
-
-      if (currentView === view) {
-        readyDispatched = false;
-        sportbookGameUrl = url;
-      }
     } catch (error) {
       if (requestId !== launchRequestId) return;
 
@@ -323,7 +306,7 @@
    * Avisa al componente padre cuando el iframe terminó de cargar.
    */
   function onIframeLoad() {
-    if (sportbookGameUrl) {
+    if (!readyDispatched) {
       readyDispatched = true;
       dispatch("ready");
     }
