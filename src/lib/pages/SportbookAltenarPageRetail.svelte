@@ -351,15 +351,27 @@
 </script>
 
 <div class="sportbook-content">
-  {#if sportbookGameUrl}
+  {#if sportbookUrls.sport}
     <iframe
       class="sportbook-iframe"
-      id="sportbook-iframe"
-      title="BetsW3"
+      class:inactive-iframe={active_view !== "sportbook"}
+      title="BetsW3 Deportes"
       allow="fullscreen; picture-in-picture"
-      src={sportbookGameUrl}
+      src={sportbookUrls.sport}
       frameborder="0"
-      on:load={onIframeLoad}
+      on:load={() => onIframeLoad("sport")}
+    />
+  {/if}
+
+  {#if sportbookUrls.live}
+    <iframe
+      class="sportbook-iframe"
+      class:inactive-iframe={active_view !== "sportbooklive"}
+      title="BetsW3 En Vivo"
+      allow="fullscreen; picture-in-picture"
+      src={sportbookUrls.live}
+      frameborder="0"
+      on:load={() => onIframeLoad("live")}
     />
   {/if}
 </div>
@@ -367,23 +379,37 @@
 <style>
   @media only screen and (max-width: 1199px) {
     .sportbook-content {
+      position: relative;
       width: 100%;
-    }
-
-    .sportbook-iframe {
       height: 100vh;
+    }
+    
+    .sportbook-iframe {
       width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    
+    .inactive-iframe {
+      display: none !important;
     }
   }
 
   @media only screen and (min-width: 1200px) {
     .sportbook-content {
-      width: 98.9vw;
+      position: relative;
+      width: 100%;
+      height: 100vh;
     }
 
     .sportbook-iframe {
       width: 100%;
-      height: 100vh;
+      height: 100%;
+      border: 0;
+    }
+
+    .inactive-iframe {
+      display: none !important;
     }
   }
 </style>
