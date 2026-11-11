@@ -119,8 +119,8 @@
   const guestURLlaeu47Live1 ="https://sports-frontend.data-studio.life/?platformId=6ad67b07fc190bef8cb2b846&template=retail1_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67bd3fc190bef8cb2b847&view=live&userMode=retail"
   const guestURLlaeu472 ="https://sports-frontend.data-studio.life/?platformId=6ad67b07fc190bef8cb2b846&template=retail2_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67be9fc190bef8cb2b848&userMode=retail"
   const guestURLlaeu47Live2 ="https://sports-frontend.data-studio.life/?platformId=6ad67b07fc190bef8cb2b846&template=retail2_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67be9fc190bef8cb2b848&view=live&userMode=retail"
-  const guestURLLAEU47 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af4c4d1df2b76b76ef79b12&platformUrl=https%3A%2F%2Flatinosport.bet&url=latinosport.bet#/overview"
-  const guestURLLAEU47Live ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af4c4d1df2b76b76ef79b12&platformUrl=https%3A%2F%2Flatinosport.bet&url=latinosport.bet#/live"
+  const guestURLlaeu473 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af4c4d1df2b76b76ef79b12&platformUrl=https%3A%2F%2Flatinosport.bet&url=latinosport.bet#/overview"
+  const guestURLlaeu47Live3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af4c4d1df2b76b76ef79b12&platformUrl=https%3A%2F%2Flatinosport.bet&url=latinosport.bet#/live"
  
 
   const guestURLdteu1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&userMode=retail"
@@ -278,7 +278,7 @@
     LAEU47: {
       "1": { live: guestURLlaeu47Live1, default: guestURLlaeu471 },
       "2": { live: guestURLlaeu47Live2, default: guestURLlaeu472 },
-      "3": { live: guestURLLAEU47Live, default: guestURLLAEU47 },
+      "3": { live: guestURLlaeu47Live3, default: guestURLlaeu473 },
     },
     DEEU37: {
       "1": { live: guestURLdteuLive1, default: guestURLdteu1 },
@@ -614,7 +614,7 @@ function RESELLER (params) {
     } else  {
       if(CLIENT_CODE == "DECC35" || CLIENT_CODE == 'DEEU37' ) sportbookskin = "3";
       console.log("CLIENT_CODE", CLIENT_CODE, "sportbookskin", sportbookskin);
-      url = resolveBetsw3GuestUrl(options?.gameid, CLIENT_CODE, active_view, sportbookskin);
+      url = resolveBetsw3GuestUrl(options?.gameid, CLIENT_CODE, active_view,  );
       if (CLIENT_CODE == "PRLS") RESELLER();
       console.log("url",url);
       
