@@ -70,7 +70,6 @@ const SocketConnector = (() => {
             console.log("onConnect Socket success");
             stompClientCashier.subscribe('/user/queue/messages', (data) => {
                 const msg = data.body;
-                console.log("RAW_MSG_XLIVE:", msg);
                 if (data.body == "NEW_SESSION_OPENED") {
                     console.log("NEW_SESSION_OPENED");
                     EventManager.publish("duplicated_session", {})
