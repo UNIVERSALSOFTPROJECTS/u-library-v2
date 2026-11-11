@@ -119,6 +119,9 @@
   const guestURLlaeu47Live1 ="https://sports-frontend.data-studio.life/?platformId=6ad67b07fc190bef8cb2b846&template=retail1_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67bd3fc190bef8cb2b847&view=live&userMode=retail"
   const guestURLlaeu472 ="https://sports-frontend.data-studio.life/?platformId=6ad67b07fc190bef8cb2b846&template=retail2_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67be9fc190bef8cb2b848&userMode=retail"
   const guestURLlaeu47Live2 ="https://sports-frontend.data-studio.life/?platformId=6ad67b07fc190bef8cb2b846&template=retail2_premium#/?platformId=6ad67b07fc190bef8cb2b846&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6ad67be9fc190bef8cb2b848&view=live&userMode=retail"
+  const guestURLLAEU47 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af4c4d1df2b76b76ef79b12&platformUrl=https%3A%2F%2Flatinosport.bet&url=latinosport.bet#/overview"
+  const guestURLLAEU47Live ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af4c4d1df2b76b76ef79b12&platformUrl=https%3A%2F%2Flatinosport.bet&url=latinosport.bet#/live"
+ 
 
   const guestURLdteu1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&userMode=retail"
   const guestURLdteuLive1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&view=live&userMode=retail"
@@ -275,6 +278,7 @@
     LAEU47: {
       "1": { live: guestURLlaeu47Live1, default: guestURLlaeu471 },
       "2": { live: guestURLlaeu47Live2, default: guestURLlaeu472 },
+      "3": { live: guestURLLAEU47Live, default: guestURLLAEU47 },
     },
     DEEU37: {
       "1": { live: guestURLdteuLive1, default: guestURLdteu1 },
@@ -289,7 +293,7 @@
     DEMM36: {
       "1": { live: guestURLdemmLive1, default: guestURLdemm1 },
       "2": { live: guestURLdemmLive2, default: guestURLdemm2 },
-    },
+    }
   };
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
     const normalizedClientCode = String(clientCode ?? "").trim().toUpperCase();
