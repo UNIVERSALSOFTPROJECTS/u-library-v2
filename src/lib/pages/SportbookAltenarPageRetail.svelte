@@ -22,9 +22,6 @@
   const bw3_id = "betsw3_2024";
   const bw3_v2_id = "betsw3_v2";
 
-  const GUEST_LAUNCH_IFRAME_URL = "iframe_url";
-  const GUEST_LAUNCH_HOSTED_VIEW_URL = "hosted_view_url";
-
   const mode = ut.isMobile() ? "mb" : "wb";
 
   const games = {
@@ -38,21 +35,43 @@
   };
 
   // URL de invitados para BetsW3 skin 3.
-  const guestBetsw3Skin3Url =
-    "https://cdn-img.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail";
+  const guestURLdteu3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
+  const guestURLdteuLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
+  const guestURLdecc3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fco.deportetotal.bett&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
+  const guestURLdeccLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fco.deportetotal.bett&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
 
   // Organizaciones habilitadas para BetsW3 skin 3.
   const betsw3GuestUrlsByClient = {
-    DEEU37: guestBetsw3Skin3Url,
-    DECC35: guestBetsw3Skin3Url,
+    DEEU37: {
+      live: guestURLdteuLive3,
+      default: guestURLdteu3,
+    },
+    DECC35: {
+      live: guestURLdeccLive3,
+      default: guestURLdecc3,
+    },
   };
 
-  let sportbookGameUrl = "";
-  let sportbookIframeEl = null;
-
   let readyDispatched = false;
-  let lastPostedBetsw3View = "";
   let lastLaunchKey = "";
+  let launchRequestId = 0;
+
+  // Cada vista conserva su propia URL.
+  let sportbookUrls = {
+    sport: "",
+    live: "",
+  };
+
+  let loadingViews = {
+    sport: false,
+    live: false,
+  };
+
+  // Evita que una vista con error intente ejecutar el launch repetidamente.
+  let failedViews = {
+    sport: false,
+    live: false,
+  };
 
   let normalizedClientCode = "";
   let isSupportedClient = false;
@@ -62,9 +81,6 @@
     .toUpperCase();
 
   $: isSupportedClient = SUPPORTED_CLIENT_CODES.includes(normalizedClientCode);
-
-  const normalizeView = () =>
-    active_view === "sportbooklive" ? "live" : "prematch";
 
   const isBetsw3GameId = (gameid) =>
     [bw3_id, bw3_v2_id].includes(gameid);
@@ -77,9 +93,8 @@
   });
 
   /**
-   * Identifica cuándo es necesario volver a cargar el iframe.
-   * Prematch/Live no forma parte de esta clave porque se cambia
-   * mediante postMessage.
+   * Identifica cuándo cambia la sesión y es necesario
+   * limpiar las URLs almacenadas.
    */
   function getLaunchKey() {
     return [
@@ -94,25 +109,7 @@
   }
 
   /**
-   * Cambia Prematch/Live dentro del iframe sin recargarlo.
-   */
-  function changeBetsw3View(view) {
-    const win = sportbookIframeEl?.contentWindow;
-
-    if (!win) return;
-
-    win.postMessage(
-      {
-        action: "change_view",
-        view,
-      },
-      "*"
-    );
-  }
-
-  /**
-   * Primera carga y relanzamientos.
-   * Solo permite BetsW3 skin 3 para DEEU37 y DECC35.
+   * Primera carga y cambios de sesión.
    */
   $: if (options?.gameid) {
     options.gameid;
@@ -124,39 +121,174 @@
     options?.gameToken;
     GAMEAPI_URL;
     lang;
+    mode;
 
     if (isSupportedClient && isBetsw3GameId(options.gameid)) {
       const key = getLaunchKey();
 
       if (key !== lastLaunchKey) {
         lastLaunchKey = key;
-        openBetsW3();
+
+        // Limpiar las URLs de la sesión anterior.
+        sportbookUrls = {
+          sport: "",
+          live: "",
+        };
+
+        loadingViews = {
+          sport: false,
+          live: false,
+        };
+
+        failedViews = {
+          sport: false,
+          live: false,
+        };
+
+        readyDispatched = false;
+
+        launchRequestId++;
+
+        // Cargar inicialmente la vista activa.
+        const initialView =
+          active_view === "sportbooklive" ? "live" : "sport";
+
+        openBetsW3(initialView);
       }
-    } else {
+    } else if (lastLaunchKey) {
       lastLaunchKey = "";
-      sportbookGameUrl = "";
+      launchRequestId++;
+
+      sportbookUrls = {
+        sport: "",
+        live: "",
+      };
+
+      loadingViews = {
+        sport: false,
+        live: false,
+      };
+
+      failedViews = {
+        sport: false,
+        live: false,
+      };
+
       readyDispatched = false;
-      lastPostedBetsw3View = "";
     }
   }
 
   /**
-   * Alternancia Prematch/Live.
-   * Solo funciona para BetsW3 skin 3 y las organizaciones habilitadas.
+   * Detecta los cambios entre Deportes y En Vivo.
+   *
+   * Si la URL ya existe, la reutiliza.
+   * Si todavía no existe, ejecuta el launch correspondiente.
    */
-  $: if (
-    isSupportedClient &&
-    isBetsw3GameId(options?.gameid) &&
-    sportbookGameUrl &&
-    readyDispatched
-  ) {
+  $: if (lastLaunchKey && isSupportedClient) {
     active_view;
 
-    const view = normalizeView();
+    const view = active_view === "sportbooklive" ? "live" : "sport";
 
-    if (view !== lastPostedBetsw3View) {
-      lastPostedBetsw3View = view;
-      changeBetsw3View(view);
+    if (!sportbookUrls[view] && !loadingViews[view] && !failedViews[view]) {
+      openBetsW3(view);
+    }
+  }
+
+  /**
+   * Obtiene la URL de invitados para la vista solicitada.
+   */
+  function getGuestUrl(view) {
+    const clientUrls = betsw3GuestUrlsByClient[normalizedClientCode];
+    
+    if (!clientUrls) return "";
+    
+    return view === "live"
+      ? clientUrls.live
+      : clientUrls.default;
+  }
+
+  /**
+   * Ejecuta el launch únicamente si la vista todavía
+   * no tiene una URL almacenada.
+   */
+  async function openBetsW3(view = "sport") {
+    if (
+      loadingViews[view] ||
+      sportbookUrls[view] ||
+      failedViews[view]
+    ) {
+      return;
+    }
+
+    const requestId = launchRequestId;
+
+    loadingViews = {
+      ...loadingViews,
+      [view]: true,
+    };
+
+    try {
+      let url = "";
+
+      if (userState === "loggedIn") {
+        url = ut.getGameURL(
+          GAMEAPI_URL,
+          getBetsw3Game(),
+          options.gameToken
+        );
+
+        url += view === "live"
+          ? "&sport_view=live"
+          : "&sport_view=sport";
+
+        url += `&lang=${lang}&skin=${SPORTBOOK_SKIN}&r=url`;
+
+        const response = await backend.game.getURL(url);
+
+        if (requestId !== launchRequestId) return;
+
+        url = response?.url || "";
+      } else {
+        url = getGuestUrl(view);
+      }
+
+      if (requestId !== launchRequestId) return;
+
+      if (!url) {
+        console.error(
+          "No se encontró una URL de BetsW3 skin 3 para:",
+          normalizedClientCode
+        );
+
+        failedViews = {
+          ...failedViews,
+          [view]: true,
+        };
+
+        return;
+      }
+
+      // Guardar la URL para reutilizarla posteriormente.
+      sportbookUrls = {
+        ...sportbookUrls,
+        [view]: url,
+      };
+    } catch (error) {
+      if (requestId !== launchRequestId) return;
+
+      console.error(`BetsW3 ${view} launch error:`, error);
+
+      failedViews = {
+        ...failedViews,
+        [view]: true,
+      };
+    } finally {
+      if (requestId === launchRequestId) {
+        loadingViews = {
+          ...loadingViews,
+          [view]: false,
+        };
+      }
     }
   }
 
@@ -171,66 +303,18 @@
   });
 
   /**
-   * Abre BetsW3 skin 3.
-   * - Usuario autenticado: obtiene la URL mediante backend.
-   * - Invitado: utiliza la URL configurada para su organización.
-   */
-  async function openBetsW3() {
-    console.log("OPEN BETSW3 SKIN 3");
-
-    readyDispatched = false;
-    lastPostedBetsw3View = "";
-    sportbookGameUrl = "";
-
-    try {
-      let url = "";
-
-      if (userState === "loggedIn") {
-        url = ut.getGameURL(
-          GAMEAPI_URL,
-          getBetsw3Game(),
-          options.gameToken
-        );
-
-        url += active_view === "sportbooklive"
-          ? "&sport_view=live"
-          : "&sport_view=sport";
-
-        url += `&lang=${lang}&skin=${SPORTBOOK_SKIN}&r=url`;
-
-        const response = await backend.game.getURL(url);
-
-        url = response?.url || "";
-      } else {
-        url = betsw3GuestUrlsByClient[normalizedClientCode] || "";
-      }
-
-      if (!url) {
-        console.error(
-          "No se encontró una URL de BetsW3 skin 3 para:",
-          normalizedClientCode
-        );
-        return;
-      }
-
-      console.log("BetsW3 URL:", url);
-
-      sportbookGameUrl = url;
-    } catch (error) {
-      console.error("BetsW3 launch error:", error);
-      sportbookGameUrl = "";
-    }
-  }
-
-  /**
    * Avisa al componente padre cuando el iframe terminó de cargar.
    */
   function onIframeLoad() {
-    readyDispatched = true;
-    dispatch("ready");
+    if (!readyDispatched) {
+      readyDispatched = true;
+      dispatch("ready");
+    }
   }
 
   onDestroy(async () => {
+    launchRequestId++;
+
     window.removeEventListener("message", receiveMessage);
 
     if (user?.agregatorToken) {
@@ -250,38 +334,65 @@
 </script>
 
 <div class="sportbook-content">
-  <iframe
-    class="sportbook-iframe"
-    id="sportbook-iframe"
-    bind:this={sportbookIframeEl}
-    title="BetsW3"
-    allow="fullscreen; picture-in-picture"
-    src={sportbookGameUrl}
-    frameborder="0"
-    on:load={onIframeLoad}
-  />
+  {#if sportbookUrls.sport}
+    <iframe
+      class="sportbook-iframe"
+      class:inactive-iframe={active_view !== "sportbook"}
+      title="BetsW3 Deportes"
+      allow="fullscreen; picture-in-picture"
+      src={sportbookUrls.sport}
+      frameborder="0"
+      on:load={() => onIframeLoad("sport")}
+    />
+  {/if}
+
+  {#if sportbookUrls.live}
+    <iframe
+      class="sportbook-iframe"
+      class:inactive-iframe={active_view !== "sportbooklive"}
+      title="BetsW3 En Vivo"
+      allow="fullscreen; picture-in-picture"
+      src={sportbookUrls.live}
+      frameborder="0"
+      on:load={() => onIframeLoad("live")}
+    />
+  {/if}
 </div>
 
 <style>
   @media only screen and (max-width: 1199px) {
     .sportbook-content {
+      position: relative;
       width: 100%;
-    }
-
-    .sportbook-iframe {
       height: 100vh;
+    }
+    
+    .sportbook-iframe {
       width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    
+    .inactive-iframe {
+      display: none !important;
     }
   }
 
   @media only screen and (min-width: 1200px) {
     .sportbook-content {
-      width: 98.9vw;
+      position: relative;
+      width: 100%;
+      height: 100vh;
     }
 
     .sportbook-iframe {
       width: 100%;
-      height: 100vh;
+      height: 100%;
+      border: 0;
+    }
+
+    .inactive-iframe {
+      display: none !important;
     }
   }
 </style>
