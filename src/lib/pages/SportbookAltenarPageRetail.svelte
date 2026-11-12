@@ -379,7 +379,7 @@
       width: 100%;
       height: 100%;
       border: 0;
-      margin: 8px;
+      margin-top: 8px;
     }
     
     .inactive-iframe {
@@ -398,7 +398,7 @@
       width: 100%;
       height: 100%;
       border: 0;
-      margin: 8px;
+      margin-top: 8px;
     }
 
     .inactive-iframe {
