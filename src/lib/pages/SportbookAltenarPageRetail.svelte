@@ -35,10 +35,10 @@
   };
 
   // URL de invitados para BetsW3 skin 3.
-  const guestURLdteu3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
-  const guestURLdteuLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bett&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
-  const guestURLdecc3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fco.deportetotal.bett&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
-  const guestURLdeccLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fco.deportetotal.bett&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
+  const guestURLdteu3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bet&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
+  const guestURLdteuLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bet&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
+  const guestURLdecc3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fco.deportetotal.bet&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
+  const guestURLdeccLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fco.deportetotal.bet&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
 
 
   const guestURLLAEU47 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af4c4d1df2b76b76ef79b12&platformUrl=https%3A%2F%2Flatinosport.bet&url=latinosport.bet#/overview"
