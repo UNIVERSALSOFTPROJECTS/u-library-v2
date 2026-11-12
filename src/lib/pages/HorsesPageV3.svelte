@@ -25,7 +25,9 @@
             const launchUrl = `${GAMEAPI_URL}/launch?gameid=horses_2026&p=horses&b=UniversalRace&m=wb&sessionid=${gameToken}&r=url`;
             const response = await backend.game.getURL(launchUrl);
             if (response && response.status === "READY" && response.url) {
-                iframeUrl = response.url + '&theme=shopretail';
+                const host = (typeof window !== "undefined" ? window.location.hostname : "").toLowerCase();
+                const theme = host.includes("deportetotal") ? "deportetotal" : "shopretail";
+                iframeUrl = response.url + `&theme=${theme}`;
                 if (visualCurrency) iframeUrl += `&visualCurrency=${visualCurrency}`;
                 if (hiddenBetTicket) iframeUrl += '&hiddenBetTicket=true';
             } else {
