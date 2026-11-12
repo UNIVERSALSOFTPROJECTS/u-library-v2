@@ -17,7 +17,7 @@
   const dispatch = createEventDispatcher();
 
   const SPORTBOOK_SKIN = "3";
-  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35"];
+  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47"];
 
   const bw3_id = "betsw3_2024";
   const bw3_v2_id = "betsw3_v2";
