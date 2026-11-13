@@ -142,6 +142,13 @@
   const guestURLdemm2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
   const guestURLdemmLive2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&view=live&userMode=retail"
 
+  const guestURLDEDD411 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&userMode=retail"
+  const guestURLDEDD41Live1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&view=live&userMode=retail"
+  const guestURLDEDD412 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
+  const guestURLDEDD41Live2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&view=live&userMode=retail"
+  const guestURLDEDD413 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bet&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
+  const guestURLDEDD41Live3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bet&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
+
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
   const guestURLBBQ = `${GAME_JAVA_API_URL}/betbuq/opengame?gameid=${bbq_id}&m=${mode}`;
@@ -293,6 +300,11 @@
     DEMM36: {
       "1": { live: guestURLdemmLive1, default: guestURLdemm1 },
       "2": { live: guestURLdemmLive2, default: guestURLdemm2 },
+    },
+    DEDD41:{
+      "1": { live: guestURLDEDD41Live1, default: guestURLDEDD411 },
+      "2": { live: guestURLDEDD41Live2, default: guestURLDEDD412 },
+      "3": { live: guestURLDEDD41Live3, default: guestURLDEDD413 },
     }
   };
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {

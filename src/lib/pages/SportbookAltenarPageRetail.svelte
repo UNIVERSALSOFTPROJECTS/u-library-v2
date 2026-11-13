@@ -17,7 +17,7 @@
   const dispatch = createEventDispatcher();
 
   const SPORTBOOK_SKIN = "3";
-  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47"];
+  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47","DEDD41"];
 
   const bw3_id = "betsw3_2024";
   const bw3_v2_id = "betsw3_v2";
@@ -44,6 +44,9 @@
   const guestURLLAEU47 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af4c4d1df2b76b76ef79b12&platformUrl=https%3A%2F%2Flatinosport.bet&url=latinosport.bet#/overview"
   const guestURLLAEU47Live ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af4c4d1df2b76b76ef79b12&platformUrl=https%3A%2F%2Flatinosport.bet&url=latinosport.bet#/live"
  
+  const guestURLDEDD413 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bet&url=deportetotal.bet#/overview?playerToken=&playerId=&userMode=retail"
+  const guestURLDEDD41Live3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bet&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
+
   // Organizaciones habilitadas para BetsW3 skin 3.
   const betsw3GuestUrlsByClient = {
     DEEU37: {
@@ -58,6 +61,10 @@
       live: guestURLLAEU47Live,
       default: guestURLLAEU47,
     },
+    DEDD41:{
+      live: guestURLDEDD41Live3,
+      default: guestURLDEDD413,
+    }
   };
 
   let readyDispatched = false;
