@@ -141,6 +141,8 @@
   const guestURLdemmLive1 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail1_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a6ac3f618cc17c3f62f&view=live&userMode=retail"
   const guestURLdemm2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&userMode=retail"
   const guestURLdemmLive2 ="https://sports-frontend.data-studio.life/?platformId=6aba69b1c3f618cc17c3f62d&template=retail2_premium#/?platformId=6aba69b1c3f618cc17c3f62d&playerToken=&playerId=&userId=6a751396fe02c88d2ac8568f&language=es&platformSkinId=6aba6a7ec3f618cc17c3f630&view=live&userMode=retail"
+  const guestURLdemm3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fmxn.deportetotal.bet&url=mxn.deportetotal.bet#/overview"
+  const guestURLdemmLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fmxn.deportetotal.bet&url=mxn.deportetotal.bet#/overview"
 
   const guestURLpinnacle = "https://wngcxtx.oreo88.com/en/standard/home";
   const guestURLdigtain = `${GAMEAPI_URL}/e-digtain/init?t=-&gameid=${edg_id}&m=${mode}&skin=generic&`;
@@ -285,11 +287,6 @@
       "2": { live: guestURLdteuLive2, default: guestURLdteu2 },
       "3": { live: guestURLdteuLive3, default: guestURLdteu3 },
     },
-    DEMM36: {
-      "1": { live: guestURLdteuLive1, default: guestURLdteu1 },
-      "2": { live: guestURLdteuLive2, default: guestURLdteu2 },
-      "3": { live: guestURLdteuLive3, default: guestURLdteu3 },
-    },
     DECC35: {
       "1": { live: guestURLdeccLive1, default: guestURLdecc1 },
       "2": { live: guestURLdeccLive2, default: guestURLdecc2 },
@@ -298,6 +295,7 @@
     DEMM36: {
       "1": { live: guestURLdemmLive1, default: guestURLdemm1 },
       "2": { live: guestURLdemmLive2, default: guestURLdemm2 },
+      "3": { live: guestURLdemmLive3, default: guestURLdemm3 },
     }
   };
   const resolveBetsw3GuestUrl = (gameid, clientCode, view, skin) => {
