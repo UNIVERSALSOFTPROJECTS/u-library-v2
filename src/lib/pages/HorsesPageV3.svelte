@@ -26,7 +26,9 @@
             const response = await backend.game.getURL(launchUrl);
             if (response && response.status === "READY" && response.url) {
                 const host = (typeof window !== "undefined" ? window.location.hostname : "").toLowerCase();
-                const theme = host.includes("deportetotal") ? "deportetotal" : "shopretail";
+                let theme = "shopretail";
+                if (host.includes("deportetotal")) theme = "deportetotal";
+                else if (host.includes("latinsport21")) theme = "latinsport21_r";
                 iframeUrl = response.url + `&theme=${theme}`;
                 if (visualCurrency) iframeUrl += `&visualCurrency=${visualCurrency}`;
                 if (hiddenBetTicket) iframeUrl += '&hiddenBetTicket=true';
