@@ -285,6 +285,11 @@
       "2": { live: guestURLdteuLive2, default: guestURLdteu2 },
       "3": { live: guestURLdteuLive3, default: guestURLdteu3 },
     },
+    DEMM36: {
+      "1": { live: guestURLdteuLive1, default: guestURLdteu1 },
+      "2": { live: guestURLdteuLive2, default: guestURLdteu2 },
+      "3": { live: guestURLdteuLive3, default: guestURLdteu3 },
+    },
     DECC35: {
       "1": { live: guestURLdeccLive1, default: guestURLdecc1 },
       "2": { live: guestURLdeccLive2, default: guestURLdecc2 },
