@@ -54,7 +54,7 @@ const ServerConnection = (() => {
         },
         obtainPresignedURL: async (params) => {
             headers.secret = conf.API_GUEST_SECRET;
-            return axios.post(`${conf.API_BO}/guest/presigned-url`,params,{ headers });
+            return axios.post(`${conf.API_KS}/uploads/presigned-url`,params,{ headers });
         },
         getPayMethods: async (userToken) => {
             let url = "https://srv-prod.usoft-api88.net/game-api-nd/paymethods/" + userToken;
