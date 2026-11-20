@@ -75,11 +75,8 @@
   const guestURLpnec3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fplaynova.club&url=playnova.club#/overview"
   const guestURLpnecLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fplaynova.club&url=playnova.club#/live"
 
-<<<<<<< HEAD
   const guestURLpnbo3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fbob.playnova.club&url=bob.playnova.club#/overview"
   const guestURLpnboLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fbob.playnova.club&url=bob.playnova.club#/live"
-=======
->>>>>>> 2eda70e3c4c21ce1b074ea48ad2a960b9d2b0d10
   // Organizaciones habilitadas para BetsW3 skin 3.
   const betsw3GuestUrlsByClient = {
     DEEU37: {
@@ -116,13 +113,10 @@
       live: guestURLpnecLive3,
       default: guestURLpnec3,
     },
-<<<<<<< HEAD
     PNBO: {
       live: guestURLpnboLive3,
       default: guestURLpnbo3,
     },
-=======
->>>>>>> 2eda70e3c4c21ce1b074ea48ad2a960b9d2b0d10
   };
 
   let readyDispatched = false;
