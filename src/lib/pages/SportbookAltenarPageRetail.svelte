@@ -17,10 +17,24 @@
   const dispatch = createEventDispatcher();
 
   const SPORTBOOK_SKIN = "3";
-  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47","DEMM36","DEDD41"];
+  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47","DEMM36","DEDD41","DEPP57"];
+
+  // Vistas de Altenar: el active_view que la abre, su título y su sport_view en el launch.
+  const ALTENAR_VIEWS = {
+    sport: { activeView: "sportbook", title: "BetsW3 Deportes" },
+    live: { activeView: "sportbooklive", title: "BetsW3 En Vivo" },
+    virtual: { activeView: "virtual", title: "BetsW3 Virtuales" },
+    esports: { activeView: "esports", title: "BetsW3 E-Sports" },
+  };
+  const VIEW_NAMES = Object.keys(ALTENAR_VIEWS);
+  const viewsWith = (value) => Object.fromEntries(VIEW_NAMES.map((view) => [view, value]));
+  const viewOf = (activeView) =>
+    VIEW_NAMES.find((view) => ALTENAR_VIEWS[view].activeView === activeView) || "sport";
 
   const bw3_id = "betsw3_2024";
   const bw3_v2_id = "betsw3_v2";
+  const bw3_v2_virtuales_id = "betsw3_v2_virtuales";
+  const bw3_v2_esports_id = "betsw3_v2_esports";
 
   const mode = ut.isMobile() ? "mb" : "wb";
 
@@ -49,7 +63,12 @@
 
   const guestURLDEMM36 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fmxn.deportetotal.bet&url=mxn.deportetotal.bet#/overview"
   const guestURLDEMM36Live ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fmxn.deportetotal.bet&url=mxn.deportetotal.bet#/live"
- 
+
+  const guestURLDEPP57 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fpe.deportetotal.bet&url=pe.deportetotal.bet#/overview"
+  const guestURLDEPP57Live ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fpe.deportetotal.bet&url=pe.deportetotal.bet#/live"
+  const guestURLDEPP57Virtual ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fpe.deportetotal.bet&url=pe.deportetotal.bet#/virtual"
+  const guestURLDEPP57Esports ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fpe.deportetotal.bet&url=pe.deportetotal.bet#/esports"
+
   // Organizaciones habilitadas para BetsW3 skin 3.
   const betsw3GuestUrlsByClient = {
     DEEU37: {
@@ -72,6 +91,12 @@
       live: guestURLDEMM36Live,
       default: guestURLDEMM36,
     },
+    DEPP57: {
+      live: guestURLDEPP57Live,
+      default: guestURLDEPP57,
+      virtual: guestURLDEPP57Virtual,
+      esports: guestURLDEPP57Esports,
+    },
   };
 
   let readyDispatched = false;
@@ -79,21 +104,12 @@
   let launchRequestId = 0;
 
   // Cada vista conserva su propia URL.
-  let sportbookUrls = {
-    sport: "",
-    live: "",
-  };
+  let sportbookUrls = viewsWith("");
 
-  let loadingViews = {
-    sport: false,
-    live: false,
-  };
+  let loadingViews = viewsWith(false);
 
   // Evita que una vista con error intente ejecutar el launch repetidamente.
-  let failedViews = {
-    sport: false,
-    live: false,
-  };
+  let failedViews = viewsWith(false);
 
   let normalizedClientCode = "";
   let isSupportedClient = false;
@@ -105,7 +121,7 @@
   $: isSupportedClient = SUPPORTED_CLIENT_CODES.includes(normalizedClientCode);
 
   const isBetsw3GameId = (gameid) =>
-    [bw3_id, bw3_v2_id].includes(gameid);
+    [bw3_id, bw3_v2_id, bw3_v2_virtuales_id, bw3_v2_esports_id].includes(gameid);
 
   const getBetsw3Game = () => ({
     ...games.BetW3,
@@ -152,28 +168,16 @@
         lastLaunchKey = key;
 
         // Limpiar las URLs de la sesión anterior.
-        sportbookUrls = {
-          sport: "",
-          live: "",
-        };
-
-        loadingViews = {
-          sport: false,
-          live: false,
-        };
-
-        failedViews = {
-          sport: false,
-          live: false,
-        };
+        sportbookUrls = viewsWith("");
+        loadingViews = viewsWith(false);
+        failedViews = viewsWith(false);
 
         readyDispatched = false;
 
         launchRequestId++;
 
         // Cargar inicialmente la vista activa.
-        const initialView =
-          active_view === "sportbooklive" ? "live" : "sport";
+        const initialView = viewOf(active_view);
 
         openBetsW3(initialView);
       }
@@ -181,20 +185,9 @@
       lastLaunchKey = "";
       launchRequestId++;
 
-      sportbookUrls = {
-        sport: "",
-        live: "",
-      };
-
-      loadingViews = {
-        sport: false,
-        live: false,
-      };
-
-      failedViews = {
-        sport: false,
-        live: false,
-      };
+      sportbookUrls = viewsWith("");
+      loadingViews = viewsWith(false);
+      failedViews = viewsWith(false);
 
       readyDispatched = false;
     }
@@ -209,7 +202,7 @@
   $: if (lastLaunchKey && isSupportedClient) {
     active_view;
 
-    const view = active_view === "sportbooklive" ? "live" : "sport";
+    const view = viewOf(active_view);
 
     if (!sportbookUrls[view] && !loadingViews[view] && !failedViews[view]) {
       openBetsW3(view);
@@ -223,10 +216,8 @@
     const clientUrls = betsw3GuestUrlsByClient[normalizedClientCode];
     
     if (!clientUrls) return "";
-    
-    return view === "live"
-      ? clientUrls.live
-      : clientUrls.default;
+
+    return clientUrls[view === "sport" ? "default" : view] || "";
   }
 
   /**
@@ -259,9 +250,7 @@
           options.gameToken
         );
 
-        url += view === "live"
-          ? "&sport_view=live"
-          : "&sport_view=sport";
+        url += `&sport_view=${view}`;
 
         url += `&lang=${lang}&skin=${SPORTBOOK_SKIN}&r=url`;
 
@@ -356,29 +345,19 @@
 </script>
 
 <div class="sportbook-content">
-  {#if sportbookUrls.sport}
-    <iframe
-      class="sportbook-iframe"
-      class:inactive-iframe={active_view !== "sportbook"}
-      title="BetsW3 Deportes"
-      allow="fullscreen; picture-in-picture"
-      src={sportbookUrls.sport}
-      frameborder="0"
-      on:load={() => onIframeLoad("sport")}
-    />
-  {/if}
-
-  {#if sportbookUrls.live}
-    <iframe
-      class="sportbook-iframe"
-      class:inactive-iframe={active_view !== "sportbooklive"}
-      title="BetsW3 En Vivo"
-      allow="fullscreen; picture-in-picture"
-      src={sportbookUrls.live}
-      frameborder="0"
-      on:load={() => onIframeLoad("live")}
-    />
-  {/if}
+  {#each VIEW_NAMES as view (view)}
+    {#if sportbookUrls[view]}
+      <iframe
+        class="sportbook-iframe"
+        class:inactive-iframe={active_view !== ALTENAR_VIEWS[view].activeView}
+        title={ALTENAR_VIEWS[view].title}
+        allow="fullscreen; picture-in-picture"
+        src={sportbookUrls[view]}
+        frameborder="0"
+        on:load={() => onIframeLoad(view)}
+      />
+    {/if}
+  {/each}
 </div>
 
 <style>
