@@ -17,7 +17,7 @@
   const dispatch = createEventDispatcher();
 
   const SPORTBOOK_SKIN = "3";
-  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47","DEMM36","DEDD41"];
+  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47","DEMM36","DEDD41","PNCO"];
 
   const bw3_id = "betsw3_2024";
   const bw3_v2_id = "betsw3_v2";
@@ -50,6 +50,9 @@
   const guestURLDEMM36 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fmxn.deportetotal.bet&url=mxn.deportetotal.bet#/overview"
   const guestURLDEMM36Live ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fmxn.deportetotal.bet&url=mxn.deportetotal.bet#/live"
  
+
+  const guestURLdpncoLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bet&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
+
   // Organizaciones habilitadas para BetsW3 skin 3.
   const betsw3GuestUrlsByClient = {
     DEEU37: {
@@ -72,6 +75,10 @@
       live: guestURLDEMM36Live,
       default: guestURLDEMM36,
     },
+    PNCO: {
+      live: guestURLdpncoLive3,
+      default: guestURLdpncoLive3,
+    }
   };
 
   let readyDispatched = false;
