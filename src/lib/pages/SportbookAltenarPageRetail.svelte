@@ -51,8 +51,8 @@
   const guestURLDEMM36Live ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fmxn.deportetotal.bet&url=mxn.deportetotal.bet#/live"
  
 
-  const guestURLdpncoLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fec.deportetotal.bet&url=deportetotal.bet#/live?playerToken=&playerId=&userMode=retail"
-
+  const guestURLdpncoLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fco.playnova.club&url=mxn.playnova.club#/live"
+  const guestURLdpnco3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fco.playnova.club&url=mxn.playnova.club#/overview"
   // Organizaciones habilitadas para BetsW3 skin 3.
   const betsw3GuestUrlsByClient = {
     DEEU37: {
@@ -77,7 +77,7 @@
     },
     PNCO: {
       live: guestURLdpncoLive3,
-      default: guestURLdpncoLive3,
+      default: guestURLdpnco3,
     }
   };
 
