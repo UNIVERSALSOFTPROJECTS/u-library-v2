@@ -17,7 +17,7 @@
   const dispatch = createEventDispatcher();
 
   const SPORTBOOK_SKIN = "3";
-  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47","DEMM36","DEDD41","DEPP57"];
+  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47","DEMM36","DEDD41","PNCO","PNEC","DEPP57"];
 
   // Vistas de Altenar: el active_view que la abre, su título y su sport_view en el launch.
   const ALTENAR_VIEWS = {
@@ -69,6 +69,12 @@
   const guestURLDEPP57Virtual ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fpe.deportetotal.bet&url=pe.deportetotal.bet#/virtual"
   const guestURLDEPP57Esports ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6adbbc5d43044376a5c402a5&platformUrl=https%3A%2F%2Fpe.deportetotal.bet&url=pe.deportetotal.bet#/esports"
 
+  const guestURLdpncoLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fco.playnova.club&url=mxn.playnova.club#/live"
+  const guestURLdpnco3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fco.playnova.club&url=mxn.playnova.club#/overview"
+
+  const guestURLpnec3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fplaynova.club&url=playnova.club#/overview"
+  const guestURLpnecLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fplaynova.club&url=playnova.club#/live"
+
   // Organizaciones habilitadas para BetsW3 skin 3.
   const betsw3GuestUrlsByClient = {
     DEEU37: {
@@ -96,6 +102,14 @@
       default: guestURLDEPP57,
       virtual: guestURLDEPP57Virtual,
       esports: guestURLDEPP57Esports,
+    },
+    PNCO: {
+      live: guestURLdpncoLive3,
+      default: guestURLdpnco3,
+    },
+    PNEC: {
+      live: guestURLpnecLive3,
+      default: guestURLpnec3,
     },
   };
 
