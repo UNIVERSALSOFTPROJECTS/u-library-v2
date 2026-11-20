@@ -17,7 +17,7 @@
   const dispatch = createEventDispatcher();
 
   const SPORTBOOK_SKIN = "3";
-  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47","DEMM36","DEDD41","PNCO","PNEC"];
+  const SUPPORTED_CLIENT_CODES = ["DEEU37", "DECC35","LAEU47","DEMM36","DEDD41","PNCO","PNEC","PNBO"];
 
   const bw3_id = "betsw3_2024";
   const bw3_v2_id = "betsw3_v2";
@@ -56,6 +56,9 @@
 
   const guestURLpnec3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fplaynova.club&url=playnova.club#/overview"
   const guestURLpnecLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fplaynova.club&url=playnova.club#/live"
+
+  const guestURLpnbo3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fbob.playnova.club&url=bob.playnova.club#/overview"
+  const guestURLpnboLive3 ="https://biahosted.online/altenar_login.html?v=20260422-streaming-login-guard-inline&platformId=6af627b652faf6adbb72741d&platformUrl=https%3A%2F%2Fbob.playnova.club&url=bob.playnova.club#/live"
   // Organizaciones habilitadas para BetsW3 skin 3.
   const betsw3GuestUrlsByClient = {
     DEEU37: {
@@ -85,7 +88,11 @@
     PNEC: {
       live: guestURLpnecLive3,
       default: guestURLpnec3,
-    }
+    },
+    PNBO: {
+      live: guestURLpnboLive3,
+      default: guestURLpnbo3,
+    },
   };
 
   let readyDispatched = false;
