@@ -19,7 +19,7 @@
   const SPORTBOOK_SKIN = "3";
   const SUPPORTED_CLIENT_CODES = [
     // Producción
-    "DEEU37", "DECC35", "LAEU47", "DEMM36", "DEDD41", "PNCO", "PNEC", "PNBO",
+    "DEEU37", "DECC35", "LAEU47", "DEMM36", "DEDD41", "PNCO", "PNEC", "PNBO", "DTPP",
     // Staging
     "DEPP57", "DEEU53",
   ];
