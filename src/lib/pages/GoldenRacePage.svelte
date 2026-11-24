@@ -1,7 +1,6 @@
 <script>
     import { createEventDispatcher, onMount, onDestroy } from "svelte";
     import backend from '../../js/server.js';
-    import { getBffEndpoint } from '../../js/bffRoutes.js';
 
     const dispatch = createEventDispatcher();
 
@@ -68,7 +67,7 @@
     async function fetchGoldenRaceToken() {
         if (userState !== "loggedIn" || !gameToken) return null;
         try {
-            const launchUrl = `${getBffEndpoint("launch")}?gameid=grv_2026&p=grv&b=GoldenRace&m=wb&sessionid=${gameToken}&r=url`;
+            const launchUrl = `${GAMEAPI_URL}/launch?gameid=grv_2026&p=grv&b=GoldenRace&m=wb&sessionid=${gameToken}&r=url`;
             const launchData = await backend.game.getURL(launchUrl);
             if (launchData.status === "READY" && launchData.onlineHash) {
                 fetchedCashierUrl = launchData.cashierUrl;

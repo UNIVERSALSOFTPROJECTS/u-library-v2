@@ -20,6 +20,8 @@
   let sportbookGameUrl = "";
 
   const gameId = "67000_ank";
+  const GUEST_URL =
+    "https://srv-prod.usoft-api88.net/game-api-jv/api/anakatech/opengame";
 
   onMount(() => {
     console.log("lang", lang);
@@ -60,7 +62,7 @@
         const data = await backend.game.getURL(url + "&r=url");
         url = data.url;
       } else {
-        url = ut.getGameURLAltenar(GAMEAPI_URL, gameId, "123456789", lang, options?.page);
+        url = ut.getGameURLAltenar(GUEST_URL, gameId, "123456789", lang, options?.page);
         const data = await backend.game.getURL(url + "&r=url");
         url = data.url;
       }

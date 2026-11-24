@@ -1,9 +1,0 @@
-simulation: u-library-bff-connectors
-routing: path
-mocks:
-  - name: u-library lobby-bff contract
-    routeKey: lobby
-    path: ../mocks/consumer-bff/config.yaml
-  - name: u-library bff-service contract
-    routeKey: bff
-    path: ../mocks/consumer-bff/config.yaml

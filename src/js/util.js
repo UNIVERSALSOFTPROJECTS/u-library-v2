@@ -1,5 +1,3 @@
-import { getBffEndpoint, getGameLaunchEndpoint } from "./bffRoutes.js";
-
 const utils = (() => {
 
   const showNotify = async (type, message) => {
@@ -23,23 +21,23 @@ const utils = (() => {
   }
   const getGameURL = (gameapi_url, game, usertoken, idiom = "es") => {
     let lang = game.gameid == "first_2024" ? `&lang=${idiom}` : '';
-    let url = getGameLaunchEndpoint(gameapi_url, game.provider) + `?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}${lang}`;
+    let url = gameapi_url + `/launch?gameid=${game.gameid}&p=${game.provider}&b=${game.brand}&m=${game.mode}&sessionid=${usertoken}${lang}`;
     return url;
   }
   const getGameURLAltenar = (gameapi_url, gameid, usertoken, idiom = "es", page = "") => {
     let lang = `&lang=${idiom}`;
     let section = page === "live" ? "&section=live" : "";
     if (usertoken != "123456789") {
-      let url = getBffEndpoint("launch") + `?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&sessionid=${usertoken}${lang}${section}`;
+      let url = gameapi_url + `/launch?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&sessionid=${usertoken}${lang}${section}`;
       return url;
     } else {
-      let url = getBffEndpoint("altenarGuestLaunch") + `?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&t=${usertoken}&r=r${section}`;
+      let url = gameapi_url + `?gameid=${gameid}&p=${"ank"}&b=${"ANAAAAAA"}&m=md&t=${usertoken}&r=r${section}`;
       return url;
     }
 
   }
   const getGameURLTest = (gameapi_url, game, usertoken) => {
-    let url = getGameLaunchEndpoint(gameapi_url, game.provider) + `?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
+    let url = gameapi_url + `/launch?gameid=${game.id}&p=${game.provider}&m=${game.mode}&sessionid=${usertoken}`;
     return url;
   }
   const isMobile = () => {//tengo una manera mas reducida de hacer esto
