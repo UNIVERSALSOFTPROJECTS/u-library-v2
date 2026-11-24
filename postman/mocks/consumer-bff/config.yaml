@@ -1,0 +1,10 @@
+version: 1
+interceptRequests: true
+name: u-library-consumer-bff
+slug: u-library-consumer-bff
+protocol: http
+port: 4500
+scenarios:
+  - name: default
+    path: ./default.js
+    default: true

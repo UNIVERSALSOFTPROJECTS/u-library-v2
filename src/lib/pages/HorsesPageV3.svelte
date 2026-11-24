@@ -1,6 +1,7 @@
 <script>
     import { createEventDispatcher, onDestroy, onMount } from "svelte";
     import backend from '../../js/server.js';
+    import { getBffEndpoint } from '../../js/bffRoutes.js';
 
     const dispatch = createEventDispatcher();
 
@@ -22,7 +23,7 @@
         isRequestSent = true;
         try {
             loading = true;
-            const launchUrl = `${GAMEAPI_URL}/launch?gameid=horses_2026&p=horses&b=UniversalRace&m=wb&sessionid=${gameToken}&r=url`;
+            const launchUrl = `${getBffEndpoint("launch")}?gameid=horses_2026&p=horses&b=UniversalRace&m=wb&sessionid=${gameToken}&r=url`;
             const response = await backend.game.getURL(launchUrl);
             if (response && response.status === "READY" && response.url) {
                 const host = (typeof window !== "undefined" ? window.location.hostname : "").toLowerCase();

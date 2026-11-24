@@ -1,5 +1,6 @@
 import axios from "axios"
 import { normalizeGuestSportbookResponse } from "./guestSportbookUrl.js"
+import { configureBffRoutes, getBffEndpoint, getGameLaunchEndpoint } from "./bffRoutes.js"
 
 let conf;
 let headers = {};
@@ -9,6 +10,7 @@ const ServerConnection = (() => {
 
     const setConfig = (config) => {
         conf = config;
+        configureBffRoutes(config);
         const shouldSendTenantHeader = conf["x-tenant"] && conf.platform !== "DemoPlatform";
         headers = {
             "Content-Type": "application/json;charset=UTF-8",
@@ -57,7 +59,7 @@ const ServerConnection = (() => {
             return axios.post(`${conf.API_KS}/uploads/presigned-url`,params,{ headers });
         },
         getPayMethods: async (userToken) => {
-            let url = "https://srv-prod.usoft-api88.net/game-api-nd/paymethods/" + userToken;
+            let url = getBffEndpoint("payMethods") + encodeURIComponent(userToken);
             return await axios.get(url, { headers });
         },
         getPayLink: async (token, amount, type) => {
@@ -174,7 +176,7 @@ const ServerConnection = (() => {
             let mode = game.provider === "gr" || game.provider === "ptp" ? modeGame : game.mode;
             let isMultipleView = type_view === "multiple" ? "&game_multiple=true" : "";
             let queryUrl = game.provider === "pg" ? "&r=url" : "";
-            let url = `${gameapi_url}/launch?gameid=${game.gameid}&p=${game.provider}${queryUrl}&b=${game.brand}&m=${mode}&sessionid=${usertoken}${isMultipleView}`;
+            let url = `${getGameLaunchEndpoint(gameapi_url, game.provider)}?gameid=${game.gameid}&p=${game.provider}${queryUrl}&b=${game.brand}&m=${mode}&sessionid=${usertoken}${isMultipleView}`;
             let response = await axios.get(url, { headers });
             return response.data;
         },
@@ -215,12 +217,12 @@ const ServerConnection = (() => {
                 sport_view: payload.sportView || "sport",
                 lang: payload.lang || "es",
             });
-            const response = await axios.get(`${gameapi_url}/sportbook/launch?${params.toString()}`, { headers });
+            const response = await axios.get(`${getBffEndpoint("sportbookLaunch")}?${params.toString()}`, { headers });
             return response.data;
         },
         openCmsWagerGame: async (sessionToken, gameId, mode) => {
             const response = await axios.get(
-                `${conf.GAMEAPI_URL}/launch?gameid=${gameId}&p=cmsw&b=CMSWager&m=${mode}&sessionid=${sessionToken}&r=url&sport_view=sport&lang=es`,
+                `${getBffEndpoint("launch")}?gameid=${gameId}&p=cmsw&b=CMSWager&m=${mode}&sessionid=${sessionToken}&r=url&sport_view=sport&lang=es`,
                 { headers }
             );
             return response.data;
@@ -263,7 +265,7 @@ const ServerConnection = (() => {
             return response.data;
         },
         getGamesTypeSlot: () => {
-            let url = `${conf.API_GAMES_NODE}/lobby/gameTypesByClient?cat=slot&type=wb&client=${conf.CLIENT_ID}`;
+            let url = `${getBffEndpoint("gameTypes")}?cat=slot&type=wb&client=${conf.CLIENT_ID}`;
             return axios.get(url, { headers });
         }
         ,
@@ -449,7 +451,7 @@ const ServerConnection = (() => {
             return axios.post(conf.API + "/api/casino/forgotPassword", payload_)
         },
         generateSignatureToOrderPayIn:async (payload,usertoken_nc) => {
-            return await axios.post(conf.API_WALLET + "/webhooks/payment/nxpay/signature", payload,{
+            return await axios.post(getBffEndpoint("nexoSignature"), payload,{
                                                 headers: {
                                                 "Content-Type": "application/json;charset=UTF-8",
                                                 "x-token": usertoken_nc,
@@ -463,7 +465,7 @@ const ServerConnection = (() => {
     const u_game = {
         gameURLTest: async (game, usertoken) => {
             // Construir la URL básica
-            let url = `${conf.GAMEAPI_URL}/launch?gameid=${game.id}&m=wb&p=${game.provider}&sessionid=${usertoken}`;
+            let url = `${getGameLaunchEndpoint(conf.GAMEAPI_URL, game.provider)}?gameid=${game.id}&m=wb&p=${game.provider}&sessionid=${usertoken}`;
 
             // Agregar el parámetro &view=ESPORTS-HUB si game.provider es igual a "pnc"
             if (game.provider === "pnc") {
