@@ -9,7 +9,7 @@
   export let currentCategory = 'home';
   export let section = '';
   export let conf;
-  export let assets;
+  export let assetsBanners;
 
   let banners = [];
   let swiperInstance = [];
@@ -77,12 +77,12 @@
             <button class="no-btn" on:click={() =>onCategoryChange(banner.eventClick.match(/'([^']+)'/)[1].toLowerCase())} >
             {#if banner.imgUrl.endsWith(".mp4") || banner.imgUrl.endsWith(".webm")}
               <video autoplay muted loop>
-                <source src="{assets}{banner.imgUrl}" type="video/mp4"/>
+                <source src="{assetsBanners}{banner.imgUrl}" type="video/mp4"/>
                 Your browser does not support the video tag.
               </video>
             {:else}
               <img
-                src="{assets}{banner.imgUrl}"
+                src="{assetsBanners}{banner.imgUrl}"
                 alt="banner"
                 loading="lazy"
               />
