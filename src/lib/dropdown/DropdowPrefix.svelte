@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    let url_global = "https://assets-usoft.universalsoft.net/generic_imgs";
+    let url_global = "https://assets-8374-generic.universalsoft.net/generic_imgs";
 
     export let countries;
     export let country = countries[0].prefix;

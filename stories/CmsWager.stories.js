@@ -12,7 +12,7 @@ ServerConnection.setConfig({
   API_GAMES_NODE: 'https://prod-nd.apiusoft.com',
   ASSETS: 'https://assets-usoft.universalsoft.net',
   WS_URL: 'wss://lobby-bff-test.apiusoft.com/lobbybff',
-  ASSETS_GLOBAL: 'https://assets-usoft.universalsoft.net/generic_imgs',
+  ASSETS_GLOBAL: 'https://assets-8374-generic.universalsoft.net/generic_imgs',
   country: '+56',
   operatorId: '123',
   domain: 'https://demo-platform.test/',

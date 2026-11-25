@@ -127,7 +127,7 @@
                 <b>{t("withdrawal.amount")}</b>
                 <p>{pendingWithdrawal.monto} {user.currency}</p>
             </div>
-            <img class="barcode" src="https://assets-usoft.universalsoft.net/generic_imgs/utils/barcode.webp" alt="">
+            <img class="barcode" src="https://assets-8374-generic.universalsoft.net/generic_imgs/utils/barcode.webp" alt="">
         {:else}
             <p>Saldo total: {user.balance}</p>
             <p>{t("withdrawal.withdraw")}</p>
