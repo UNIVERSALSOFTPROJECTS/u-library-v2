@@ -52,6 +52,15 @@
     onMount(() => {
         document.body.style.overflow = "";
     });
+
+    const iframe = document.getElementById('horses-iframe');
+
+    iframe.addEventListener('load', function() {
+        iframe.contentWindow.postMessage({
+            accion: 'VALIDAR_DOMINIO',
+            hostname: window.location.hostname
+        }, '*');
+    });
 </script>
 
 <div class="horses-content">
