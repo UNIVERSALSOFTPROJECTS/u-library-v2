@@ -4,7 +4,7 @@ export const assetsFlags = "https://assets-8374-generic.universalsoft.net/generi
 export const assetsFooter = "https://assets-8374-generic.universalsoft.net/generic_imgs/footer/";
 export const assetsProviders = "https://assets-8374-generic.universalsoft.net/generic_imgs/providers/";
 export const assetsProvidersTop = "https://assets-8374-generic.universalsoft.net/generic_imgs/providers/top/";
-export const assetsBrands = "https://assets-usoft.universalsoft.net/us_img_brands/";
+export const assetsBrands = "https://assets-img98-brands.universalsoft.net/us_img_brands/";
 export const assetsPDF = (platform,route) =>{
     let url = assetsUrl+platform+"/"+route+"/pdf";
     return url;
