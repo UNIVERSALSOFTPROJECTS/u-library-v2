@@ -2,7 +2,7 @@
     import {register} from 'swiper/element/bundle';
     import { isMobile } from 'mobile-device-detect';
     import { onMount } from 'svelte';
-    import {assetsPayments, assetsFlags, assetsFooter,assetsPDF } from "../js/utils/assetsUtils";
+    import {assetsPayments, assetsFlags, assetsFooter, assetsPDF } from "../js/utils/assetsUtils";
     import { detectIdiomPage } from "../js/utils/formatUtils";
 
     export let onCategoryChange;
@@ -28,8 +28,9 @@
     let aditionalTerms = configFooter.aditionalTerms || "";
     let linksChats = configFooter.linksChats;
     let activePanel = null;
+    // Solo la URL principal viene del proyecto; las carpetas platform/idioma/pdf se arman igual que antes
     let route = detectIdiomPage(t("idiom"));
-    let routePDF = assetsPDF(platform,isJustDomain?country.cps:route);
+    let routePDF = assetsPDF(configFooter.assetsUrl, platform, isJustDomain ? country.cps : route);
    
     const currentYear = new Date().getFullYear();
     const slots = ["slot", "slotlive", "crash", "scratch"];

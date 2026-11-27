@@ -52,8 +52,9 @@
     let term_conditions;
     let currency;
     let channel = "email";
+    // Solo la URL principal viene del proyecto; carpetas platform/idioma/pdf igual que antes
     let route = detectIdiomPage(t("idiom"));
-    let routePDF = assetsPDF(platform,route);
+    let routePDF = assetsPDF(configSignup.assetsUrl, platform, route);
     let orgMultiCurrency;
     let currencyLocked = false;
 

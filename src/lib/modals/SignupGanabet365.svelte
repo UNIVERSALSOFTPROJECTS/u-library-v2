@@ -54,8 +54,9 @@
     let term_conditions;
     let currency;
     let channel = "sms"; // Ganabet365: solo verificación por SMS
+    // Solo la URL principal viene del proyecto; carpetas platform/idioma/pdf igual que antes
     let route = detectIdiomPage(t("idiom"));
-    let routePDF = assetsPDF(platform,route);
+    let routePDF = assetsPDF(configSignup.assetsUrl, platform, route);
     let orgMultiCurrency;
     let currencyLocked = false;
 

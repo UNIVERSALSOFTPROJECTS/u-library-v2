@@ -5,7 +5,8 @@ export const assetsFooter = "https://assets-8374-generic.universalsoft.net/gener
 export const assetsProviders = "https://assets-8374-generic.universalsoft.net/generic_imgs/providers/";
 export const assetsProvidersTop = "https://assets-8374-generic.universalsoft.net/generic_imgs/providers/top/";
 export const assetsBrands = "https://assets-img98-brands.universalsoft.net/us_img_brands/";
-export const assetsPDF = (platform,route) =>{
-    let url = assetsUrl+platform+"/"+route+"/pdf";
-    return url;
+/** baseUrl = URL principal enviada por el proyecto (sin carpetas). Carpetas: {platform}/{route}/pdf */
+export const assetsPDF = (baseUrl, platform, route) => {
+    const base = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
+    return `${base}${platform}/${route}/pdf`;
 }

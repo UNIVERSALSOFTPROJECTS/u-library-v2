@@ -20,6 +20,7 @@
             { prefix: "+56", flag: "chl" },
         ],
         // preRegister: false,
+        // assetsUrl: "https://assets-xxx-client.universalsoft.net/",
     };
 
     const onOk = (data) => {

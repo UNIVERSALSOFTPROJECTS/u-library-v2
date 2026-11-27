@@ -1,13 +1,14 @@
 <script>
     import { onDestroy, onMount } from "svelte";
     import { watchResize } from "svelte-watch-resize";
-    import { assetsUrl } from "../../js/utils/assetsUtils";
     import { isMobileSafari } from 'mobile-device-detect';
 
     export let open;
     export let platform;
     export let url_game;
     export let updateBalance;
+    /** URL principal de assets enviada por el proyecto (sin carpetas). Logos: {assetsUrl}{platform}/logo*.png */
+    export let assetsUrl = "";
 
     let loadIframe = true;
     let isFullscreen = false;

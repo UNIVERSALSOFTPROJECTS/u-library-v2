@@ -124,6 +124,8 @@
         agentCodeType: "nameAfiliated", //para el codigo agiiado de manera directa
         isCodeAgentSwitch: true, //para el codigo agiiado de manera directa
         // preRegister:false, //por defecto esta comentado, solo descomentar en caso falle el proveedor de sms
+        // Solo URL principal (sin carpetas). La lib arma platform/idioma/pdf
+        // assetsUrl: "https://assets-xxx-client.universalsoft.net/",
     };
 
     const configWithdrawal = {
@@ -176,6 +178,8 @@
         ],
         viewLogoUS: false,
         isGCB: "",
+        // Solo URL principal (sin carpetas). La lib arma platform/idioma|cps/pdf
+        // assetsUrl: "https://assets-xxx-client.universalsoft.net/",
         // aditionalTerms: [
         //     // {name: "new"}
         // ]
@@ -719,6 +723,7 @@
             bind:platform
             bind:url_game
             {updateBalance}
+            assetsUrl="{assetsUrl}/"
         />
         <Modal bind:open={expireSessionModalOpen} bind:subModalOpened>
             <ExpireSession {updateTimeSession} bind:platform  {onLogout} t={$t}/>

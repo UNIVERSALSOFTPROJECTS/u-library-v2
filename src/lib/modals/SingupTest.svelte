@@ -15,7 +15,8 @@
         ],
         countries: [
             {prefix:"+56",flag:"chl"},
-        ]
+        ],
+        // assetsUrl: "https://assets-xxx-client.universalsoft.net/",
     };
     const onOk=()=>{
     console.log("OK registro");
